@@ -1,2 +1,5 @@
 openaitoken.txt
 anthropictoken.txt
+
+__pycache__/
+temp/
