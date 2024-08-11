@@ -1,5 +1,8 @@
+from promptolution.tasks import Task
+
+
 class Optimizer:
-    def __init__(self):
+    def __init__(self, intial_prompts: list[str], task: Task):
         pass
 
     def step(self) -> str:
@@ -7,7 +10,7 @@ class Optimizer:
 
 
 class EvoPromptDE(Optimizer):
-    def __init__(self, initial_prompts, task):
+    def __init__(self, initial_prompts: list[str], task: Task):
         self.prompts = initial_prompts
         self.task = task
 
