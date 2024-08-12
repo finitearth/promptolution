@@ -28,14 +28,13 @@ class Predictor:
         return chain.invoke({"question": str(xs)})
 
 
-class DummyPredictor:
-    def __init__(self):
+class DummyPredictor(Predictor):
+    def __init__(self, model_id):
         self.model_id = "dummy"
-        self.prompt = "Dummy prompt"
 
     def predict(
         self,
-        prompt: Optional[str],
+        prompt: str,
         xs: np.ndarray,
-    ):
-        return "Dummy Answer"
+    ) -> np.ndarray:
+        return np.array(["Dummy Answer"])
