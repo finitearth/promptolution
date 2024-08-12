@@ -50,7 +50,7 @@ class Task:
         self.ys = np.array(ys)
 
     def evaluate(self, prompt: str, predictor: Predictor):
-        preds = self.predictor.predict(prompt, self.xs)
+        preds = predictor.predict(prompt, self.xs)
         return np.mean(preds == self.ys)
 
 
@@ -83,27 +83,27 @@ def parse_tasks(config: ConfigParser) -> List[Task]:
 
 def get_dataset_verbalizers(dataset: str) -> List[str]:
     if dataset in ["sst2", "mr", "cr"]:
-        verbalizers = ["\u0120negative", "\u0120positive"]  # num_classes
+        verbalizers = ["negative", "positive"]  # num_classes
     elif dataset == "agnews":
         verbalizers = ["World", "Sports", "Business", "Tech"]  # num_classes
     elif dataset == "sst-5":
         verbalizers = [
-            "\u0120terrible",
-            "\u0120bad",
-            "\u0120okay",
-            "\u0120good",
-            "\u0120great",
+            "terrible",
+            "bad",
+            "okay",
+            "good",
+            "great",
         ]  # num_classes
     elif dataset == "subj":
-        verbalizers = ["\u0120subjective", "\u0120objective"]
+        verbalizers = ["subjective", "objective"]
     elif dataset == "trec":
         verbalizers = [
-            "\u0120Description",
-            "\u0120Entity",
-            "\u0120Expression",
-            "\u0120Human",
-            "\u0120Location",
-            "\u0120Number",
+            "Description",
+            "Entity",
+            "Expression",
+            "Human",
+            "Location",
+            "Number",
         ]
     else:
         raise ValueError(f"Dataset {dataset} not found.")
