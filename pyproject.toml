@@ -7,6 +7,8 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
+langchain-anthropic = "^0.1.22"
+langchain-openai = "^0.1.21"
 
 
 [tool.poetry.group.dev.dependencies]
