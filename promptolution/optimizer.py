@@ -8,6 +8,14 @@ class Optimizer:
     def step(self) -> str:
         pass
 
+class DummyOptimizer(Optimizer):
+    def __init__(self, initial_prompts: list[str], task: Task):
+        self.prompts = initial_prompts
+        self.task = task
+
+    def step(self) -> list[str]:
+        return self.prompts
+    
 
 class EvoPromptDE(Optimizer):
     def __init__(self, initial_prompts: list[str], task: Task):
