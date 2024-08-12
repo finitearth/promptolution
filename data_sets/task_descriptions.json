@@ -1,0 +1,88 @@
+{
+    "sst2": {
+        "path": "data_sets/cls/sst2",
+        "seed": "seed5",
+        "split": "dev_500",
+        "init_prompts": "prompts.txt",
+        "description": "This is a test data set",
+        "classes": [
+            "negative",
+            "positive"
+        ]
+    },
+    "cr": {
+        "path": "data_sets/cls/cr",
+        "seed": "seed5",
+        "split": "dev_500",
+        "init_prompts": "prompts.txt",
+        "description": "This is a test data set",
+        "classes": [
+            "negative",
+            "positive"
+        ]
+    },
+    "mr": {
+        "path": "data_sets/cls/mr",
+        "seed": "seed5",
+        "split": "dev_500",
+        "init_prompts": "prompts.txt",
+        "description": "This is a test data set",
+        "classes": [
+            "negative",
+            "positive"
+        ]
+    },
+    "sst-5": {
+        "path": "data_sets/cls/sst-5",
+        "seed": "seed5",
+        "split": "dev_500",
+        "init_prompts": "prompts.txt",
+        "description": "This is a test data set",
+        "classes": [
+            "terrible",
+            "bad",
+            "okay",
+            "good",
+            "great"
+        ]
+    },
+    "agnews": {
+        "path": "data_sets/cls/agnews",
+        "seed": "seed5",
+        "split": "dev_500",
+        "init_prompts": "prompts.txt",
+        "description": "This is a test data set",
+        "classes": [
+            "World",
+            "Sports",
+            "Business",
+            "Tech"
+        ]
+    },
+    "trec": {
+        "path": "data_sets/cls/trec",
+        "seed": "seed5",
+        "split": "dev_500",
+        "init_prompts": "prompts.txt",
+        "description": "This is a test data set",
+        "classes": [
+            "Description",
+            "Entity",
+            "Expression",
+            "Human",
+            "Location",
+            "Number"
+        ]
+    },
+    "subj": {
+        "path": "data_sets/cls/subj",
+        "seed": "seed5",
+        "split": "dev_500",
+        "init_prompts": "prompts.txt",
+        "description": "This is a test data set",
+        "classes": [
+            "objective",
+            "subjective"
+        ]
+    }
+}
