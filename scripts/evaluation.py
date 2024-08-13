@@ -22,6 +22,6 @@ if __name__ == "__main__":
         callbacks = [LoggerCallback(logger)]
         prompt_template = open(config["optimizer"]["meta_prompt_path"], "r").read()
         meta_llm = DummyLLM()
-        optimizer = get_optimizer(config["optimizer"]["name"], meta_llm=meta_llm, task=task, initial_prompts=["Roaldn", "Dahl", "is", "a", "famous", "author"], callbacks=callbacks, prompt_template=prompt_template, predictor=predictor)
+        optimizer = get_optimizer(config["optimizer"]["name"], meta_llm=meta_llm, task=task, initial_prompts=["Roaldn", "Dahl", "is", "a", "famous", "author","mamamia"], callbacks=callbacks, prompt_template=prompt_template, predictor=predictor)
         for _ in range(int(config["tasks"]["steps"])):
             optimizer.step()

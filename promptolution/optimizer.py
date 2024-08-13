@@ -9,12 +9,8 @@ def get_optimizer(name, **args):
         return DummyOptimizer(**args)
     if name == "evopromptde":
         return EvoPromptDE(**args)
-    if name == "evopromptdet":
-        return EvoPrompDEtWithTaskDesc(**args)
     if name == "evopromptga":
         return EvoPromptGA(**args)
-    if name == "evoprompteat":
-        return EvoPrompEAtWithTaskDesc(**args)
     raise ValueError(f"Unknown optimizer: {name}")
 
 class Optimizer:
@@ -42,24 +38,6 @@ class DummyOptimizer(Optimizer):
     def _on_step_end(self):
         for callback in self.callbacks:
             callback.on_step_end(self)
-
-class EvoPromptDE(Optimizer):
-    def __init__(self, **args):
-        super().__init__(**args)
-
-    def step(self) -> List:
-        pass
-
-
-class EvoPrompDEtWithTaskDesc(Optimizer):
-    def __init__(self, initial_prompts, task, task_desc):
-        self.prompts = initial_prompts
-        self.task = task
-        self.task_desc = task_desc
-
-    def step(self) -> str:
-        pass
-
 
 class EvoPromptGA(Optimizer):
     def __init__(self, prompt_template, meta_llm, selection_mode="wheel", **args):
@@ -121,13 +99,49 @@ class EvoPromptGA(Optimizer):
 
         self._on_step_end()
         return self.prompts
+    
 
+class EvoPromptDE(Optimizer):
+    def __init__(self, prompt_template, meta_llm, donor_random=False, **args):
+        self.prompt_template = prompt_template
+        self.donor_random = donor_random
+        self.meta_llm = meta_llm
+        super().__init__(**args)
 
-class EvoPrompEAtWithTaskDesc(Optimizer):
-    def __init__(self, initial_prompts, task, task_desc):
-        self.prompts = initial_prompts
-        self.task = task
-        self.task_desc = task_desc
+    def step(self) -> List:
+        self.scores = [self.task.evaluate(prompt, self.predictor) for prompt in self.prompts]
+        self.prompts = [prompt for _, prompt in sorted(zip(self.scores, self.prompts), reverse=True)]
+        cur_best = self.prompts[0]
 
-    def step(self) -> str:
-        pass
+        for i in range(len(self.prompts)):
+            old_prompt = self.prompts[i]
+            old_score = self.scores[i]
+            
+            canidates = [prompt for prompt in self.prompts if prompt != old_prompt]
+            a, b, c = np.random.choice(canidates, size=3, replace=False)
+
+            if not self.donor_random:
+                c = cur_best
+
+            meta_prompt = (self.prompt_template
+                           .replace("<prompt0>", old_prompt)
+                           .replace("<prompt1>", a)
+                           .replace("<prompt2>", b)
+                           .replace("<prompt3>", c)
+            )
+
+            child_prompt = self.meta_llm.predict(meta_prompt)
+            child_prompt = (
+                child_prompt
+                .split("<prompt>")[-1].split("</prompt>")[0]
+                .strip()
+            )
+
+            child_score = self.task.evaluate(child_prompt, self.predictor)
+
+            if child_score > old_score:
+                self.prompts[i] = child_prompt
+                self.scores[i] = child_score
+
+        self._on_step_end()
+        return self.prompts
