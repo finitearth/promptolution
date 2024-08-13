@@ -1,28 +1,28 @@
 from promptolution.tasks import Task
-
+from typing import List
 
 class Optimizer:
-    def __init__(self, intial_prompts: list[str], task: Task):
+    def __init__(self, intial_prompts: List[str], task: Task):
         pass
 
-    def step(self) -> str:
+    def step(self) -> List[str]:
         pass
 
 class DummyOptimizer(Optimizer):
-    def __init__(self, initial_prompts: list[str], task: Task):
+    def __init__(self, initial_prompts: List[str], task: Task):
         self.prompts = initial_prompts
         self.task = task
 
-    def step(self) -> list[str]:
+    def step(self) -> List[str]:
         return self.prompts
     
 
 class EvoPromptDE(Optimizer):
-    def __init__(self, initial_prompts: list[str], task: Task):
+    def __init__(self, initial_prompts: List[str], task: Task):
         self.prompts = initial_prompts
         self.task = task
 
-    def step(self) -> str:
+    def step(self) -> List[str]:
         pass
 
 
@@ -32,7 +32,7 @@ class EvoPrompDEtWithTaskDesc(Optimizer):
         self.task = task
         self.task_desc = task_desc
 
-    def step(self) -> str:
+    def step(self) -> List[str]:
         pass
 
 
@@ -41,7 +41,7 @@ class EvoPromptEA(Optimizer):
         self.prompts = initial_prompts
         self.task = task
 
-    def step(self) -> str:
+    def step(self) -> List[str]:
         pass
 
 
@@ -51,5 +51,5 @@ class EvoPrompEAtWithTaskDesc(Optimizer):
         self.task = task
         self.task_desc = task_desc
 
-    def step(self) -> str:
+    def step(self) -> List[str]:
         pass
