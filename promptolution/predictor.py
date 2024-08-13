@@ -4,14 +4,20 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import PromptTemplate
 import numpy as np
 
-from promptolution.tasks import Task
+# from promptolution.tasks import Task
 
-OPENAI_API_KEY = open("openaitoken.txt", "r").read()
-ANTHROPIC_API_KEY = open("anthropictoken.txt", "r").read()
+def get_predictor(name: str, task):
+    if name == "dummy":
+        return DummyPredictor(name)
+    if "gpt" in name or "claude" in name:
+        return Predictor(name, task)
+    return Predictor(name, task)
 
 
 class Predictor:
-    def __init__(self, model_id: str, task: Task):
+    def __init__(self, model_id: str, task):
+        OPENAI_API_KEY = open("../openaitoken.txt", "r").read()
+        ANTHROPIC_API_KEY = open("../anthropictoken.txt", "r").read()
         if "claude" in model_id:
             self.model = AnthropicLLM(model=model_id, api_key=ANTHROPIC_API_KEY)
         elif "gpt" in model_id:
