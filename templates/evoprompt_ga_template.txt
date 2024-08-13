@@ -1,0 +1,16 @@
+Please follow the instruction step-by-step to generate a better prompt.
+1. Crossover the following prompts and generate a new prompt:
+Prompt 1: Rewrite the input text into simpler text.
+Prompt 2: Rewrite my complex sentence in simpler terms, but keep the meaning.
+2. Mutate the prompt generated in Step 1 and generate a final prompt bracketed with <prompt> and </prompt>.
+
+1. Crossover Prompt: Rewrite the complex text into simpler text while keeping its meaning.
+2. <prompt>Transform the provided text into simpler language, maintaining its essence.</prompt>
+
+Please follow the instruction step-by-step to generate a better prompt.
+1. Crossover the following prompts and generate a new prompt:
+Prompt 1: <prompt1>
+Prompt 2: <prompt2>
+2. Mutate the prompt generated in Step 1 and generate a final prompt bracketed with <prompt> and </prompt>.
+
+1. 

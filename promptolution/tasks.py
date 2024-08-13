@@ -65,16 +65,20 @@ class DummyTask(Task):
         self.classes = ["negative", "positive"]
 
     def evaluate(self, prompt: str, predictor: Predictor):
-        return 0.5
+        return np.random.rand()
 
 
-def parse_tasks(config: ConfigParser) -> List[Task]:
-    task_names = config.get("tasks", "task_names").split(",")
+def get_tasks(config: ConfigParser) -> List[Task]:
+    task_names = config["tasks"]["task_names"].split(",")
     task_descriptions_path = Path(config.get("tasks", "task_descriptions_path"))
     task_descriptions = json.loads(task_descriptions_path.read_text())
 
     task_list = []
     for task_name in task_names:
+        if task_name == "dummy":
+            task = DummyTask()
+            task_list.append(task)
+            continue
         task = Task(task_name, task_descriptions[task_name])
         task_list.append(task)
 
