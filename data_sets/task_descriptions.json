@@ -4,7 +4,7 @@
         "seed": "seed5",
         "split": "dev_500",
         "init_prompts": "prompts.txt",
-        "description": "This is a test data set",
+        "description": "The dataset consists of movie reviews with binary sentiment annotations. The task is to classify each movie review as either positive or negative.",
         "classes": [
             "negative",
             "positive"
@@ -15,7 +15,7 @@
         "seed": "seed5",
         "split": "dev_500",
         "init_prompts": "prompts.txt",
-        "description": "This is a test data set",
+        "description": "The dataset contains customer reviews of various products with sentiment annotations. The task is to classify each review as expressing either positive or negative sentiment.",
         "classes": [
             "negative",
             "positive"
@@ -26,7 +26,7 @@
         "seed": "seed5",
         "split": "dev_500",
         "init_prompts": "prompts.txt",
-        "description": "This is a test data set",
+        "description": "The dataset includes movie reviews with binary sentiment annotations. The task is to classify the sentiment of each review as either positive or negative.",
         "classes": [
             "negative",
             "positive"
@@ -37,7 +37,7 @@
         "seed": "seed5",
         "split": "dev_500",
         "init_prompts": "prompts.txt",
-        "description": "This is a test data set",
+        "description": "The dataset consists of movie reviews with five levels of sentiment labels: terrible, bad, neutral, okay, good, and great. The task is to classify each movie review into one of these five sentiment categories.",
         "classes": [
             "terrible",
             "bad",
@@ -51,7 +51,7 @@
         "seed": "seed5",
         "split": "dev_500",
         "init_prompts": "prompts.txt",
-        "description": "This is a test data set",
+        "description": "The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories.",
         "classes": [
             "World",
             "Sports",
@@ -64,7 +64,7 @@
         "seed": "seed5",
         "split": "dev_500",
         "init_prompts": "prompts.txt",
-        "description": "This is a test data set",
+        "description": "The dataset includes questions categorized into different types: Description, Entity, Expression, Human, Location, and Number. The task is to classify each question into one of these six question types.",
         "classes": [
             "Description",
             "Entity",
@@ -79,7 +79,7 @@
         "seed": "seed5",
         "split": "dev_500",
         "init_prompts": "prompts.txt",
-        "description": "This is a test data set",
+        "description": "The dataset contains sentences labeled as either subjective or objective. The task is to classify each sentence as either subjective or objective.",
         "classes": [
             "objective",
             "subjective"
