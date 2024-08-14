@@ -11,10 +11,21 @@ class Predictor:
         self,
         prompt: str,
         xs: np.ndarray,
+        classes: list[str] = ["Sports", "Tech", "Business", "World"] # TODO change this to be more general and read from config
     ) -> np.ndarray:
         response = []
         for x in xs:
-            response += self.llm.get_response(prompt + str(x))
+            pred = self.llm.get_response(prompt + "\n" + str(x))
+            predicted_class = ""
+            for word in pred.split(" "):
+                word = word.replace(".", "").replace(",", "").replace("!", "").replace("?", "")# remove punctuation
+                if word in classes:
+                    predicted_class = word
+                    break
+
+            response.append(predicted_class)
+            
+
         return np.array([response])
 
 

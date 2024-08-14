@@ -8,6 +8,9 @@ class LoggerCallback:
 
     def on_step_end(self, optimizer):
         self.logger.critical(f"Step ended - {optimizer.prompts}")
+        self.logger.critical(f"Step ended - {optimizer.scores}")
+        self.logger.critical(f"Best prompt - {optimizer.prompts[0]}")
+        self.logger.critical(f"Best score - {optimizer.scores[0]}")
 
     def on_epoch_end(self, epoch, logs=None):
         self.logger.critical(f"Epoch {epoch} - {logs}")

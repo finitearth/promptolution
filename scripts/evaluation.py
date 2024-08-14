@@ -2,9 +2,9 @@ from configparser import ConfigParser
 from logging import INFO, Logger
 
 from promptolution.callbacks import LoggerCallback
-from promptolution.llm import DummyLLM
+from promptolution.llm import DummyLLM, LLM
 from promptolution.optimizer import get_optimizer
-from promptolution.predictor import get_predictor
+from promptolution.predictor import Predictor
 from promptolution.tasks import get_tasks
 
 if __name__ == "__main__":
@@ -18,15 +18,15 @@ if __name__ == "__main__":
         logger.critical(f"Task: {task.description}")
         logger.critical("🚨🚨🚨HEREEE WEEEE GOOO🚨🚨🚨")
 
-        predictor = get_predictor("dummy", task)
+        predictor = Predictor(config["downstream_llms"]["names"])
         callbacks = [LoggerCallback(logger)]
         prompt_template = open(config["optimizer"]["meta_prompt_path"], "r").read()
-        meta_llm = DummyLLM()
+        meta_llm = LLM(config["meta_llms"]["names"])
         optimizer = get_optimizer(
             config["optimizer"]["name"],
             meta_llm=meta_llm,
             task=task,
-            initial_prompts=["Roaldn", "Dahl", "is", "a", "famous", "author", "mamamia"],
+            initial_prompts=task.initial_population,
             callbacks=callbacks,
             prompt_template=prompt_template,
             predictor=predictor,

@@ -72,6 +72,7 @@ class EvoPromptGA(Optimizer):
 
         # crossover
         for i in range(len(self.prompts)):
+            print("Crossover", i)
             new_pop = []
 
             if self.selection_mode in ["random", "wheel"]:
@@ -90,7 +91,7 @@ class EvoPromptGA(Optimizer):
             new_pop.append(child_prompt)
 
         # eliminate worst
-        prompts = new_pop + self.prompts
+        prompts = self.prompts + new_pop
         scores = self.scores + [self.task.evaluate(prompt, self.predictor) for prompt in new_pop]
         self.prompts = [prompt for _, prompt in sorted(zip(scores, prompts), reverse=True)][: len(self.prompts)]
 

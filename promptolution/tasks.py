@@ -50,7 +50,7 @@ class Task:
         self.xs = np.array(xs)
         self.ys = np.array(ys)
 
-    def evaluate(self, prompt: str, predictor: Predictor, n_samples: int = 200, seed: int = 42) -> float:
+    def evaluate(self, prompt: str, predictor: Predictor, n_samples: int = 5, seed: int = 42) -> float: # nsamples -> 200
         np.random.seed(seed)  # random seed for reproducibility
 
         # Randomly select a subsample of n_samples
@@ -60,7 +60,7 @@ class Task:
 
         # Make predictions on the subsample
         preds = predictor.predict(prompt, xs_subsample)
-
+        
         # Calculate and return the mean accuracy
         return np.mean(preds == ys_subsample)
 
