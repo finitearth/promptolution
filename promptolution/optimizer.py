@@ -30,18 +30,6 @@ class Optimizer:
             callback.on_step_end(self)
 
 
-class DummyOptimizer(Optimizer):
-    def __init__(self, initial_prompts: list[str], task: Task, callbacks: list[Callable] = []):
-        super().__init__(initial_prompts, task, callbacks)
-
-    def step(self) -> list[str]:
-        self._on_step_end()
-        return self.prompts
-
-    def _on_step_end(self):
-        for callback in self.callbacks:
-            callback.on_step_end(self)
-
 
 class EvoPromptGA(Optimizer):
     def __init__(self, prompt_template, meta_llm, selection_mode="wheel", **args):
@@ -139,3 +127,17 @@ class EvoPromptDE(Optimizer):
 
         self._on_step_end()
         return self.prompts
+
+
+class DummyOptimizer(Optimizer):
+    def __init__(self, initial_prompts: list[str], task: Task, callbacks: list[Callable] = []):
+        super().__init__(initial_prompts, task, callbacks)
+
+    def step(self) -> list[str]:
+        self._on_step_end()
+        return self.prompts
+
+    def _on_step_end(self):
+        for callback in self.callbacks:
+            callback.on_step_end(self)
+            

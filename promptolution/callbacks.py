@@ -17,3 +17,5 @@ class LoggerCallback:
 
     def on_train_end(self, logs=None):
         self.logger.critical(f"Training ended - {logs}")
+
+# TODO callbacks for CSV's, etc. of prompts as well as its scores! Also: Callback to save best prompt over iterations

@@ -11,10 +11,10 @@ ANTHROPIC_API_KEY = open("anthropictoken.txt", "r").read()
 # claude-3-opus-20240229, claude-3-haiku-20240307
 
 
-class LLM:
+class APILLM:
     def __init__(self, model_id: str):
         if "claude" in model_id:
-            self.model = ChatAnthropic(model=model_id, api_key=ANTHROPIC_API_KEY)
+            self.model = ChatAnthropic(model=model_id, api_key=ANTHROPIC_API_KEY) # TODO check if chat interface or other interface?
         elif "gpt" in model_id:
             # we may use the BatchAPI instead of the LangChain interface here so save some costs
             self.model = ChatOpenAI(model=model_id, api_key=OPENAI_API_KEY)
@@ -25,7 +25,10 @@ class LLM:
         return self.model.invoke([HumanMessage(content=prompt)]).content
 
 
-class DummyLLM(LLM):
+class LocalLLM:
+    pass # TODO implement
+
+class DummyLLM(APILLM):
     def get_response(self, prompt: str) -> str:
         r = np.random.rand()
         if r < 0.3:

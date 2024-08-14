@@ -50,7 +50,7 @@ class Task:
         self.xs = np.array(xs)
         self.ys = np.array(ys)
 
-    def evaluate(self, prompt: str, predictor: Predictor, n_samples: int = 5, seed: int = 42) -> float: # nsamples -> 200
+    def evaluate(self, prompt: str, predictor: Predictor, n_samples: int = 5, seed: int = 42) -> float: # nsamples -> 200 #TODO
         np.random.seed(seed)  # random seed for reproducibility
 
         # Randomly select a subsample of n_samples

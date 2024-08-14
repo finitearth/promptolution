@@ -1,11 +1,11 @@
 import numpy as np
 
-from promptolution.llm import LLM
+from promptolution.llm import APILLM
 
 
 class Predictor:
     def __init__(self, model_id: str):
-        self.llm = LLM(model_id)
+        self.llm = APILLM(model_id)
 
     def predict(
         self,
