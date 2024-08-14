@@ -1,7 +1,8 @@
-from typing import List, Dict, Optional
+import json
 from configparser import ConfigParser
 from pathlib import Path
-import json
+from typing import Dict, List, Optional
+
 import numpy as np
 
 from promptolution.predictor import Predictor
@@ -49,9 +50,19 @@ class Task:
         self.xs = np.array(xs)
         self.ys = np.array(ys)
 
-    def evaluate(self, prompt: str, predictor: Predictor):
-        preds = predictor.predict(prompt, self.xs)
-        return np.mean(preds == self.ys)
+    def evaluate(self, prompt: str, predictor: Predictor, n_samples: int = 200, seed: int = 42) -> float:
+        np.random.seed(seed)  # random seed for reproducibility
+
+        # Randomly select a subsample of n_samples
+        indices = np.random.choice(len(self.xs), n_samples, replace=False)
+        xs_subsample = self.xs[indices]
+        ys_subsample = self.ys[indices]
+
+        # Make predictions on the subsample
+        preds = predictor.predict(prompt, xs_subsample)
+
+        # Calculate and return the mean accuracy
+        return np.mean(preds == ys_subsample)
 
 
 class DummyTask(Task):
@@ -87,9 +98,9 @@ def get_tasks(config: ConfigParser) -> List[Task]:
 
 def get_dataset_verbalizers(dataset: str) -> List[str]:
     if dataset in ["sst2", "mr", "cr"]:
-        verbalizers = ["negative", "positive"]  # num_classes
+        verbalizers = ["negative", "positive"]
     elif dataset == "agnews":
-        verbalizers = ["World", "Sports", "Business", "Tech"]  # num_classes
+        verbalizers = ["World", "Sports", "Business", "Tech"]
     elif dataset == "sst-5":
         verbalizers = [
             "terrible",
@@ -97,7 +108,7 @@ def get_dataset_verbalizers(dataset: str) -> List[str]:
             "okay",
             "good",
             "great",
-        ]  # num_classes
+        ]
     elif dataset == "subj":
         verbalizers = ["subjective", "objective"]
     elif dataset == "trec":

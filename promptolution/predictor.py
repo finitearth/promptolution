@@ -14,7 +14,7 @@ class Predictor:
     ) -> np.ndarray:
         response = []
         for x in xs:
-            response += self.llm.get_response(prompt + str(x))  
+            response += self.llm.get_response(prompt + str(x))
         return np.array([response])
 
 
