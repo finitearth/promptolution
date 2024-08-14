@@ -84,7 +84,7 @@ class EvoPromptGA(Optimizer):
 
             meta_prompt = self.prompt_template.replace("<prompt1>", parent_1).replace("<prompt2>", parent_2)
 
-            child_prompt = self.meta_llm.predict(meta_prompt)
+            child_prompt = self.meta_llm.get_response(meta_prompt)
             child_prompt = child_prompt.split("<prompt>")[-1].split("</prompt>")[0].strip()
 
             new_pop.append(child_prompt)
@@ -127,7 +127,7 @@ class EvoPromptDE(Optimizer):
                 .replace("<prompt3>", c)
             )
 
-            child_prompt = self.meta_llm.predict(meta_prompt)
+            child_prompt = self.meta_llm.get_response(meta_prompt)
             child_prompt = child_prompt.split("<prompt>")[-1].split("</prompt>")[0].strip()
 
             child_score = self.task.evaluate(child_prompt, self.predictor)
