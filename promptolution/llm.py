@@ -1,7 +1,7 @@
-from langchain_anthropic import ChatAnthropic
-from langchain_openai import ChatOpenAI
-from langchain_core.messages import HumanMessage
 import numpy as np
+from langchain_anthropic import ChatAnthropic
+from langchain_core.messages import HumanMessage
+from langchain_openai import ChatOpenAI
 
 OPENAI_API_KEY = open("openaitoken.txt", "r").read()
 ANTHROPIC_API_KEY = open("anthropictoken.txt", "r").read()
@@ -11,7 +11,7 @@ ANTHROPIC_API_KEY = open("anthropictoken.txt", "r").read()
 # claude-3-opus-20240229, claude-3-haiku-20240307
 
 
-class LLM():
+class LLM:
     def __init__(self, model_id: str):
         if "claude" in model_id:
             self.model = ChatAnthropic(model=model_id, api_key=ANTHROPIC_API_KEY)
@@ -20,7 +20,7 @@ class LLM():
             self.model = ChatOpenAI(model=model_id, api_key=OPENAI_API_KEY)
         else:
             raise ValueError(f"Unknown model: {model_id}")
-    
+
     def get_response(self, prompt: str):
         return self.model.invoke([HumanMessage(content=prompt)]).content
 

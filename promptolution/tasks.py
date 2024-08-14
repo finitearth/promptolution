@@ -1,7 +1,8 @@
-from typing import List, Dict, Optional
+import json
 from configparser import ConfigParser
 from pathlib import Path
-import json
+from typing import Dict, List, Optional
+
 import numpy as np
 
 from promptolution.predictor import Predictor
