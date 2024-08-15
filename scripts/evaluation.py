@@ -2,9 +2,9 @@ from configparser import ConfigParser
 from logging import INFO, Logger
 
 from promptolution.callbacks import LoggerCallback
-from promptolution.llm import DummyLLM, APILLM
+from promptolution.llm import get_llm
 from promptolution.optimizer import get_optimizer
-from promptolution.predictor import Predictor
+from promptolution.predictor import get_predictor
 from promptolution.tasks import get_tasks
 
 if __name__ == "__main__":
@@ -18,10 +18,10 @@ if __name__ == "__main__":
         logger.critical(f"Task: {task.description}")
         logger.critical("🚨🚨🚨HEREEE WEEEE GOOO🚨🚨🚨")
 
-        predictor = Predictor(config["downstream_llms"]["names"])
+        predictor = get_predictor(config["downstream_llms"]["names"])#Predictor()
         callbacks = [LoggerCallback(logger)]
         prompt_template = open(config["optimizer"]["meta_prompt_path"], "r").read()
-        meta_llm = APILLM(config["meta_llms"]["names"])
+        meta_llm = get_llm(config["meta_llms"]["names"])#APILLM(config["meta_llms"]["names"])#APILLM(config["meta_llms"]["names"])
         optimizer = get_optimizer(
             config["optimizer"]["name"],
             meta_llm=meta_llm,
@@ -31,6 +31,8 @@ if __name__ == "__main__":
             prompt_template=prompt_template,
             predictor=predictor,
         )
-        for _ in range(int(config["tasks"]["steps"])):
-            optimizer.step()
+        optimizer.optimize(int(config["tasks"]["steps"]))
         # TODO evaluate final prompt on test data split
+        logger.critical(f"Final prompt: {optimizer.prompts[0]}")
+        # evaluation on test data
+        test_score = task.evaluate(optimizer.prompts[0], predictor, seed=42)

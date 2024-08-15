@@ -1,11 +1,17 @@
 import numpy as np
 
-from promptolution.llm import APILLM
+from promptolution.llm import get_llm
+
+def get_predictor(model_id: str):
+    if model_id == "dummy":
+        return DummyPredictor(model_id)
+    
+    return Predictor(model_id)
 
 
-class Predictor:
+class Predictor: # TODO function for initializing predictor from config
     def __init__(self, model_id: str):
-        self.llm = APILLM(model_id)
+        self.llm = get_llm(model_id)
 
     def predict(
         self,
@@ -38,4 +44,4 @@ class DummyPredictor(Predictor):
         prompt: str,
         xs: np.ndarray,
     ) -> np.ndarray:
-        return np.array(["Dummy Answer"])
+        return np.array(["Entity"])

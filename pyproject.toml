@@ -11,6 +11,7 @@ numpy = "^2.0.1"
 langchain-anthropic = "^0.1.22"
 langchain-openai = "^0.1.21"
 langchain-core = "^0.2.29"
+transformers = "^4.44.0"
 
 
 [tool.poetry.group.dev.dependencies]

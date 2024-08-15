@@ -50,7 +50,7 @@ class Task:
         self.xs = np.array(xs)
         self.ys = np.array(ys)
 
-    def evaluate(self, prompt: str, predictor: Predictor, n_samples: int = 5, seed: int = 42) -> float: # nsamples -> 200 #TODO
+    def evaluate(self, prompt: str, predictor: Predictor, n_samples: int = 10, seed: int = 42) -> float: # nsamples -> 200 #TODO
         np.random.seed(seed)  # random seed for reproducibility
 
         # Randomly select a subsample of n_samples
@@ -69,7 +69,7 @@ class DummyTask(Task):
     def __init__(self):
         self.task_id = "dummy"
         self.dataset_json = None
-        self.initial_population = ["Some", "initial", "prompts"]
+        self.initial_population = ["Some", "initial", "prompts", "that", "will", "do", "the", "trick"]
         self.description = "This is a dummy task for testing purposes."
         self.xs = np.array(["This is a test", "This is another test", "This is a third test"])
         self.ys = np.array(["positive", "negative", "positive"])
