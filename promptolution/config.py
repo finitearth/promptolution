@@ -13,6 +13,7 @@ class Config:
     meta_llms: str = ""
     downstream_llm: str = ""
     logging_dir: str = ""
+    include_task_desc: bool = False
 
     def __init__(self, config_path: str):
         self.config_path = config_path
@@ -29,6 +30,9 @@ class Config:
         self.meta_llm = self.config["meta_llm"]["name"]
         self.downstream_llm = self.config["downstream_llm"]["name"]
         self.logging_dir = self.config["logging"]["dir"]
+
+        if "include_task_desc" in self.config["task"]:
+            self.include_task_desc = self.config["task"]["include_task_desc"] == "True"
         
         if self.optimizer == "evopromptga":
             self.selection_mode = self.config["optimizer"]["selection_mode"]

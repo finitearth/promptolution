@@ -16,9 +16,7 @@ def parse_args():
     parser.add_argument("--config", type=str, default="configs/dummy.ini")
     return parser.parse_args()
 
-
-if __name__ == "__main__":
-    args = parse_args()
+def main(args):
     config = Config(args.config)
     task = get_tasks(config)[0]
     logger.critical(f"Task: {task.description}")
@@ -31,6 +29,8 @@ if __name__ == "__main__":
         best_prompt_callback
     ]
     prompt_template = open(config.meta_prompt_path, "r").read()
+    if config.include_task_desc:
+        prompt_template = prompt_template.replace("<task_desc>", task.description)
 
     if "local" in config.meta_llm:
         meta_llm = get_llm(config.meta_llm, batch_size=config.meta_bs)
@@ -56,3 +56,8 @@ if __name__ == "__main__":
     # evaluation on test data
     test_score = task.evaluate(best_prompt, predictor)
     logger.critical(f"Test score: {test_score}")
+
+
+if __name__ == "__main__":
+    args = parse_args()
+    main(args)

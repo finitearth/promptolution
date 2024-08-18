@@ -1,4 +1,4 @@
-Please follow the instruction step-by-step to generate a better prompt.
+Please follow the instruction step-by-step to generate a better prompt for the following task: <task_desc>.
 Identifying the different parts between Prompt 1 and Prompt 2:
 Prompt 1: Your task is to classify the comment as one of the following categories: terrible, bad, okay, good, great.
 Prompt 2: In this task, you are given sentences from movie reviews. The task is to classify a sentence as one of the following categories: terrible, bad, okay, good, great.

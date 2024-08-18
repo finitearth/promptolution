@@ -103,7 +103,7 @@ def get_tasks(config) -> List[Task]:
     return task_list
 
 
-def get_dataset_verbalizers(dataset: str) -> List[str]:
+def get_dataset_verbalizers(dataset: str) -> List[str]: #TODO move to task descriptions
     if dataset in ["sst2", "mr", "cr"]:
         verbalizers = ["negative", "positive"]
     elif dataset == "agnews":
