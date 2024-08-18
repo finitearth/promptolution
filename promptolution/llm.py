@@ -2,6 +2,8 @@ import numpy as np
 from langchain_anthropic import ChatAnthropic
 from langchain_core.messages import HumanMessage
 from langchain_openai import ChatOpenAI
+import torch
+import transformers
 
 
 OPENAI_API_KEY = open("openaitoken.txt", "r").read()
@@ -14,13 +16,13 @@ ANTHROPIC_API_KEY = open("anthropictoken.txt", "r").read()
 def get_llm(model_id: str, *args, **kwargs):
     if model_id == "dummy":
         return DummyLLM(*args, **kwargs)
-    if "gpt" or "claude" in model_id:
-        return APILLM(model_id, *args, **kwargs)
-    else:
+    if "local" in model_id:
+        model_id = "-".join(model_id.split("-")[1:])
         return LocalLLM(model_id, *args, **kwargs)
+    return APILLM(model_id, *args, **kwargs)
 
 
-class APILLM: # TODO function to read from config and initialize predictor
+class APILLM:
     def __init__(self, model_id: str):
         if "claude" in model_id:
             self.model = ChatAnthropic(model=model_id, api_key=ANTHROPIC_API_KEY) # TODO check if chat interface or other interface?
@@ -30,32 +32,52 @@ class APILLM: # TODO function to read from config and initialize predictor
         else:
             raise ValueError(f"Unknown model: {model_id}")
 
-    def get_response(self, prompt: str):
-        response = self.model.invoke([HumanMessage(content=prompt)]).content
-        return response
-
+    def get_response(self, prompts: list[str]) -> list[str]:
+        responses = []
+        for prompt in prompts:
+            response = self.model.invoke([HumanMessage(content=prompt)]).content
+            responses.append(response)
+        return responses
 
 class LocalLLM:
-    def __init__(self, model_id: str):
-        from transformers import AutoTokenizer, AutoModelForCausalLM
+    def __init__(self, model_id: str, batch_size=8):
+        self.pipeline = transformers.pipeline(
+            "text-generation", 
+            model=model_id,
+            model_kwargs={"torch_dtype": torch.bfloat16},
+            device_map="auto", 
+            max_new_tokens=256,
+            batch_size=batch_size,
+            num_return_sequences=1,
+            return_full_text=False,
+        )
+        self.pipeline.tokenizer.pad_token_id = self.pipeline.tokenizer.eos_token_id
 
-        self.tokenizer = AutoTokenizer.from_pretrained(model_id)
-        # set pad token to eos
-        self.tokenizer.pad_token = self.tokenizer.eos_token
-        self.model = AutoModelForCausalLM.from_pretrained(model_id)
+    @torch.no_grad()
+    def get_response(self, prompts: list[str]):
+        response = self.pipeline(prompts, pad_token_id=self.pipeline.tokenizer.eos_token_id)
 
-    def get_response(self, prompt: str):
-        x = self.tokenizer(prompt, return_tensors="pt")
-        output = self.model.generate(**x, max_length=1024, num_return_sequences=1, pad_token_id=self.tokenizer.eos_token_id)
-        return self.tokenizer.decode(output[0], skip_special_tokens=True)
+        if len(response) != 1:
+            response = [r[0] if isinstance(r, list) else r for r in response]
+
+        response = [r["generated_text"] for r in response]
+        return response
+
 
 class DummyLLM:
     def __init__(self, *args, **kwargs):
         pass
-    def get_response(self, prompt: str) -> str:
-        r = np.random.rand()
-        if r < 0.3:
-            return f"Joooo wazzuppp <prompt>hier gehts los {r} </prompt>"
-        if 0.3 <= r < 0.6:
-            return f"was das hier? <prompt>peter lustig{r}</prompt>"
-        return f"hier ist ein <prompt>test{r}</prompt>"
+    def get_response(self, prompts: str) -> str:
+        if isinstance(prompts, str):
+            prompts = [prompts]
+        results = []
+        for _ in prompts:
+            r = np.random.rand()
+            if r < 0.3:
+                results += [f"Joooo wazzuppp <prompt>hier gehts los {r} </prompt>"]
+            if 0.3 <= r < 0.6:
+                results += [f"was das hier? <prompt>peter lustig{r}</prompt>"]
+            else:
+                results += [f"hier ist ein <prompt>test{r}</prompt>"]
+
+        return results

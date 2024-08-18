@@ -1,5 +1,6 @@
 openaitoken.txt
 anthropictoken.txt
-
+rsync_exclude.txt
 __pycache__/
 temp/
+logs/

@@ -1,38 +1,58 @@
-from configparser import ConfigParser
 from logging import INFO, Logger
+import argparse
 
-from promptolution.callbacks import LoggerCallback
+from promptolution.callbacks import LoggerCallback, CSVCallback, BestPromptCallback
 from promptolution.llm import get_llm
+from promptolution.config import Config
 from promptolution.optimizer import get_optimizer
 from promptolution.predictor import get_predictor
 from promptolution.tasks import get_tasks
 
+logger = Logger(__name__)
+
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--config", type=str, default="configs/dummy.ini")
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
-    logger = Logger(__name__)
-    logger.setLevel(INFO)
+    args = parse_args()
+    config = Config(args.config)
+    task = get_tasks(config)[0]
+    logger.critical(f"Task: {task.description}")
 
-    config = ConfigParser()
-    config.read("configs/test.ini")
-    tasks = get_tasks(config)
-    for task in tasks:
-        logger.critical(f"Task: {task.description}")
-        logger.critical("🚨🚨🚨HEREEE WEEEE GOOO🚨🚨🚨")
+    predictor = get_predictor(config, classes=task.classes)
+    best_prompt_callback = BestPromptCallback()
+    callbacks = [
+        LoggerCallback(logger),
+        CSVCallback(config.logging_dir),
+        best_prompt_callback
+    ]
+    prompt_template = open(config.meta_prompt_path, "r").read()
 
-        predictor = get_predictor(config["downstream_llms"]["names"])#Predictor()
-        callbacks = [LoggerCallback(logger)]
-        prompt_template = open(config["optimizer"]["meta_prompt_path"], "r").read()
-        meta_llm = get_llm(config["meta_llms"]["names"])#APILLM(config["meta_llms"]["names"])#APILLM(config["meta_llms"]["names"])
-        optimizer = get_optimizer(
-            config["optimizer"]["name"],
-            meta_llm=meta_llm,
-            task=task,
-            initial_prompts=task.initial_population,
-            callbacks=callbacks,
-            prompt_template=prompt_template,
-            predictor=predictor,
-        )
-        optimizer.optimize(int(config["tasks"]["steps"]))
-        # TODO evaluate final prompt on test data split
-        logger.critical(f"Final prompt: {optimizer.prompts[0]}")
-        # evaluation on test data
-        test_score = task.evaluate(optimizer.prompts[0], predictor, seed=42)
+    if "local" in config.meta_llm:
+        meta_llm = get_llm(config.meta_llm, batch_size=config.meta_bs)
+    else:
+        meta_llm = get_llm(config.meta_llm)
+
+    optimizer = get_optimizer(
+        config,
+        meta_llm=meta_llm,
+        task=task,
+        initial_prompts=task.initial_population,
+        callbacks=callbacks,
+        prompt_template=prompt_template,
+        predictor=predictor,
+    )
+    
+    logger.critical("🚨🚨🚨HEREEE WEEEE GOOO🚨🚨🚨")
+    optimizer.optimize(config.n_steps)
+    logger.critical("🎉We did it🥳")
+    best_prompt, best_score = best_prompt_callback.get_best_prompt()
+    logger.critical(f"Final prompt: {best_prompt}, with score: {best_score}")
+    # TODO evaluate final prompt on test data split
+    # evaluation on test data
+    test_score = task.evaluate(best_prompt, predictor)
+    logger.critical(f"Test score: {test_score}")

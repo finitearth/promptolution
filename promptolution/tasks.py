@@ -9,7 +9,7 @@ from promptolution.predictor import Predictor
 
 
 class Task:
-    def __init__(self, task_id: str, dataset_json: Dict):
+    def __init__(self, task_id: str, dataset_json: Dict, seed: int = 42):
         self.task_id: str = task_id
         self.dataset_json: Dict = dataset_json
         self.description: Optional[str] = None
@@ -18,13 +18,15 @@ class Task:
         self.ys: Optional[np.ndarray] = None
         self.classes: Optional[List] = None
         self._parse_task()
+        self.reset_seed(seed)
+
 
     def __str__(self):
         return self.task_id
 
     def _parse_task(self):
         task_path = Path(self.dataset_json["path"])
-        self.description = self.dataset_json["description"]
+        self.description = self.dataset_json["description"] #TODO move descriptions to their respective task_dir
         self.classes = self.dataset_json["classes"]
 
         with open(task_path / Path(self.dataset_json["init_prompts"]), "r", encoding="utf-8") as file:
@@ -50,19 +52,24 @@ class Task:
         self.xs = np.array(xs)
         self.ys = np.array(ys)
 
-    def evaluate(self, prompt: str, predictor: Predictor, n_samples: int = 10, seed: int = 42) -> float: # nsamples -> 200 #TODO
-        np.random.seed(seed)  # random seed for reproducibility
-
+    def evaluate(self, prompts: List[str], predictor: Predictor, n_samples: int = 100) -> float: # nsamples -> 200 #TODO include in config
+        if isinstance(prompts, str):
+            prompts = [prompts]
         # Randomly select a subsample of n_samples
         indices = np.random.choice(len(self.xs), n_samples, replace=False)
         xs_subsample = self.xs[indices]
         ys_subsample = self.ys[indices]
 
         # Make predictions on the subsample
-        preds = predictor.predict(prompt, xs_subsample)
+        preds = predictor.predict(prompts, xs_subsample)
         
-        # Calculate and return the mean accuracy
-        return np.mean(preds == ys_subsample)
+        # Calculate accuracy: number of correct predictions / total number of predictions per prompt
+        return np.mean(preds == ys_subsample, axis=1)
+    
+    def reset_seed(self, seed: int = None):
+        if seed is not None:
+            self.seed = seed
+        np.random.seed(self.seed)
 
 
 class DummyTask(Task):
@@ -79,9 +86,9 @@ class DummyTask(Task):
         return np.random.rand()
 
 
-def get_tasks(config: ConfigParser) -> List[Task]:
-    task_names = config["tasks"]["task_names"].split(",")
-    task_descriptions_path = Path(config.get("tasks", "task_descriptions_path"))
+def get_tasks(config) -> List[Task]:
+    task_names = config.task_name.split(",")
+    task_descriptions_path = Path(config.task_descriptions_path)
     task_descriptions = json.loads(task_descriptions_path.read_text())
 
     task_list = []
