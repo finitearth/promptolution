@@ -6,7 +6,7 @@ def get_predictor(config, *args, **kwargs):
     if config.downstream_llm == "dummy":
         return DummyPredictor("", *args, **kwargs)
     
-    downstream_llm = get_llm(config.downstream_llm, batch_size=config.downstream_bs)
+    downstream_llm = get_llm(config.downstream_llm)#, batch_size=config.downstream_bs)
     
     return Predictor(downstream_llm, *args, **kwargs)
 
@@ -30,7 +30,7 @@ class Predictor:
         for pred in preds:
             predicted_class = ""
             for word in pred.split(" "):
-                word = word.replace(".", "").replace(",", "").replace("!", "").replace("?", "")# remove punctuation
+                word = "".join([c for c in word if c.isalpha()])
                 if word in self.classes:
                     predicted_class = word
                     break

@@ -116,8 +116,8 @@ class EvoPromptDE(Optimizer):
                 # create meta prompts
                 old_prompt = self.prompts[i]
 
-                canidates = [prompt for prompt in self.prompts if prompt != old_prompt]
-                a, b, c = np.random.choice(canidates, size=3, replace=False)
+                candidates = [prompt for prompt in self.prompts if prompt != old_prompt] 
+                a, b, c = np.random.choice(candidates, size=3, replace=False)
 
                 if not self.donor_random:
                     c = cur_best

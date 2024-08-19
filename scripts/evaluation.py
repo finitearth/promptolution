@@ -8,8 +8,8 @@ from promptolution.optimizer import get_optimizer
 from promptolution.predictor import get_predictor
 from promptolution.tasks import get_tasks
 
-logger = Logger(__name__)
 
+logger = Logger(__name__)
 
 def parse_args():
     parser = argparse.ArgumentParser()

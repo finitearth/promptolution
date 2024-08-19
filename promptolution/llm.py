@@ -2,12 +2,17 @@ import numpy as np
 from langchain_anthropic import ChatAnthropic
 from langchain_core.messages import HumanMessage
 from langchain_openai import ChatOpenAI
-import torch
-import transformers
+# from langchain_groq import ChatGroq
+from langchain_community.chat_models import ChatDeepInfra
+
+# import torch
+# import transformers
 
 
 OPENAI_API_KEY = open("openaitoken.txt", "r").read()
 ANTHROPIC_API_KEY = open("anthropictoken.txt", "r").read()
+GROQ_API_KEY = open("groqtoken.txt", "r").read()
+DEEPINFRA_API_KEY = open("deepinfratoken.txt", "r").read()
 
 # possible model names we'll use here are:
 # gpt-4o-2024-05-13, gpt-3.5-turbo-0125
@@ -16,9 +21,9 @@ ANTHROPIC_API_KEY = open("anthropictoken.txt", "r").read()
 def get_llm(model_id: str, *args, **kwargs):
     if model_id == "dummy":
         return DummyLLM(*args, **kwargs)
-    if "local" in model_id:
-        model_id = "-".join(model_id.split("-")[1:])
-        return LocalLLM(model_id, *args, **kwargs)
+    # if "local" in model_id:
+    #     model_id = "-".join(model_id.split("-")[1:])
+    #     return LocalLLM(model_id, *args, **kwargs)
     return APILLM(model_id, *args, **kwargs)
 
 
@@ -29,6 +34,9 @@ class APILLM:
         elif "gpt" in model_id:
             # we may use the BatchAPI instead of the LangChain interface here so save some costs
             self.model = ChatOpenAI(model=model_id, api_key=OPENAI_API_KEY)
+        elif "llama" in model_id:
+            # self.model = ChatGroq(model=model_id, api_key=GROQ_API_KEY)
+            self.model = ChatDeepInfra(model_id=model_id, deepinfra_api_token=DEEPINFRA_API_KEY)
         else:
             raise ValueError(f"Unknown model: {model_id}")
 
@@ -37,31 +45,33 @@ class APILLM:
         for prompt in prompts:
             response = self.model.invoke([HumanMessage(content=prompt)]).content
             responses.append(response)
+            print("oh oh!")
+            print(response)
         return responses
 
-class LocalLLM:
-    def __init__(self, model_id: str, batch_size=8):
-        self.pipeline = transformers.pipeline(
-            "text-generation", 
-            model=model_id,
-            model_kwargs={"torch_dtype": torch.bfloat16},
-            device_map="auto", 
-            max_new_tokens=256,
-            batch_size=batch_size,
-            num_return_sequences=1,
-            return_full_text=False,
-        )
-        self.pipeline.tokenizer.pad_token_id = self.pipeline.tokenizer.eos_token_id
+# class LocalLLM:
+#     def __init__(self, model_id: str, batch_size=8):
+#         self.pipeline = transformers.pipeline(
+#             "text-generation", 
+#             model=model_id,
+#             model_kwargs={"torch_dtype": torch.bfloat16},
+#             device_map="auto", 
+#             max_new_tokens=256,
+#             batch_size=batch_size,
+#             num_return_sequences=1,
+#             return_full_text=False,
+#         )
+#         self.pipeline.tokenizer.pad_token_id = self.pipeline.tokenizer.eos_token_id
 
-    @torch.no_grad()
-    def get_response(self, prompts: list[str]):
-        response = self.pipeline(prompts, pad_token_id=self.pipeline.tokenizer.eos_token_id)
+#     @torch.no_grad()
+#     def get_response(self, prompts: list[str]):
+#         response = self.pipeline(prompts, pad_token_id=self.pipeline.tokenizer.eos_token_id)
 
-        if len(response) != 1:
-            response = [r[0] if isinstance(r, list) else r for r in response]
+#         if len(response) != 1:
+#             response = [r[0] if isinstance(r, list) else r for r in response]
 
-        response = [r["generated_text"] for r in response]
-        return response
+#         response = [r["generated_text"] for r in response]
+#         return response
 
 
 class DummyLLM:
