@@ -1,11 +1,11 @@
 from logging import INFO, Logger
 import argparse
 
-from promptolution.callbacks import LoggerCallback, CSVCallback, BestPromptCallback
-from promptolution.llm import get_llm
+from promptolution.callbacks import LoggerCallback, CSVCallback, BestPromptCallback, ProgressBarCallback
+from promptolution.llms import get_llm
 from promptolution.config import Config
-from promptolution.optimizer import get_optimizer
-from promptolution.predictor import get_predictor
+from promptolution.optimizers import get_optimizer
+from promptolution.predictors import get_predictor
 from promptolution.tasks import get_tasks
 
 
@@ -26,7 +26,8 @@ def main(args):
     callbacks = [
         LoggerCallback(logger),
         CSVCallback(config.logging_dir),
-        best_prompt_callback
+        best_prompt_callback,
+        ProgressBarCallback(config.n_steps),
     ]
     prompt_template = open(config.meta_prompt_path, "r").read()
     if config.include_task_desc:

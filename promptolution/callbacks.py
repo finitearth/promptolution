@@ -1,5 +1,6 @@
 from logging import getLogger
 import os
+from tqdm import tqdm
 
 class Callback:
     def on_step_end(self, optimizer):
@@ -66,3 +67,14 @@ class BestPromptCallback(Callback):
 
     def get_best_prompt(self):
         return self.best_prompt, self.best_score        
+    
+
+class ProgressBarCallback(Callback):
+    def __init__(self, total_steps):
+        self.pbar = tqdm(total=total_steps)
+
+    def on_step_end(self, optimizer):
+        self.pbar.update(1)
+
+    def on_train_end(self, logs=None):
+        self.pbar.close()

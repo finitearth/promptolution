@@ -1,14 +1,13 @@
 import json
-from configparser import ConfigParser
 from pathlib import Path
 from typing import Dict, List, Optional
 
 import numpy as np
 
-from promptolution.predictor import Predictor
+from promptolution.predictors.base_predictor import BasePredictor
+from promptolution.tasks.base_task import BaseTask
 
-
-class Task:
+class ClassificationTask(BaseTask):
     def __init__(self, task_id: str, dataset_json: Dict, seed: int = 42):
         self.task_id: str = task_id
         self.dataset_json: Dict = dataset_json
@@ -52,7 +51,7 @@ class Task:
         self.xs = np.array(xs)
         self.ys = np.array(ys)
 
-    def evaluate(self, prompts: List[str], predictor: Predictor, n_samples: int = 20) -> float: # nsamples -> 200 #TODO include in config
+    def evaluate(self, prompts: List[str], predictor: BasePredictor, n_samples: int = 20) -> np.ndarray: # nsamples -> 200 #TODO include in config
         if isinstance(prompts, str):
             prompts = [prompts]
         # Randomly select a subsample of n_samples
@@ -70,37 +69,6 @@ class Task:
         if seed is not None:
             self.seed = seed
         np.random.seed(self.seed)
-
-
-class DummyTask(Task):
-    def __init__(self):
-        self.task_id = "dummy"
-        self.dataset_json = None
-        self.initial_population = ["Some", "initial", "prompts", "that", "will", "do", "the", "trick"]
-        self.description = "This is a dummy task for testing purposes."
-        self.xs = np.array(["This is a test", "This is another test", "This is a third test"])
-        self.ys = np.array(["positive", "negative", "positive"])
-        self.classes = ["negative", "positive"]
-
-    def evaluate(self, prompt: str, predictor: Predictor):
-        return np.random.rand()
-
-
-def get_tasks(config) -> List[Task]:
-    task_names = config.task_name.split(",")
-    task_descriptions_path = Path(config.task_descriptions_path)
-    task_descriptions = json.loads(task_descriptions_path.read_text())
-
-    task_list = []
-    for task_name in task_names:
-        if task_name == "dummy":
-            task = DummyTask()
-            task_list.append(task)
-            continue
-        task = Task(task_name, task_descriptions[task_name])
-        task_list.append(task)
-
-    return task_list
 
 
 def get_dataset_verbalizers(dataset: str) -> List[str]: #TODO move to task descriptions
