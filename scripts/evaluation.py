@@ -30,7 +30,7 @@ def main(args):
     ]
     prompt_template = open(config.meta_prompt_path, "r").read()
     if config.include_task_desc:
-        prompt_template = prompt_template.replace("<task_desc>", task.description)
+        prompt_template = prompt_template.replace("<task_desc>", task.description) # TODO how to predict in evaluate 
 
     if "local" in config.meta_llm:
         meta_llm = get_llm(config.meta_llm, batch_size=config.meta_bs)

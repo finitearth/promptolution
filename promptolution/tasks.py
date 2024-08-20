@@ -52,7 +52,7 @@ class Task:
         self.xs = np.array(xs)
         self.ys = np.array(ys)
 
-    def evaluate(self, prompts: List[str], predictor: Predictor, n_samples: int = 100) -> float: # nsamples -> 200 #TODO include in config
+    def evaluate(self, prompts: List[str], predictor: Predictor, n_samples: int = 20) -> float: # nsamples -> 200 #TODO include in config
         if isinstance(prompts, str):
             prompts = [prompts]
         # Randomly select a subsample of n_samples

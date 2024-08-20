@@ -4,7 +4,7 @@ from langchain_core.messages import HumanMessage
 from langchain_openai import ChatOpenAI
 # from langchain_groq import ChatGroq
 from langchain_community.chat_models import ChatDeepInfra
-
+import asyncio
 # import torch
 # import transformers
 
@@ -39,15 +39,36 @@ class APILLM:
             self.model = ChatDeepInfra(model_id=model_id, deepinfra_api_token=DEEPINFRA_API_KEY)
         else:
             raise ValueError(f"Unknown model: {model_id}")
-
+    
     def get_response(self, prompts: list[str]) -> list[str]:
-        responses = []
-        for prompt in prompts:
-            response = self.model.invoke([HumanMessage(content=prompt)]).content
-            responses.append(response)
-            print("oh oh!")
-            print(response)
+        responses = asyncio.run(self._get_response(prompts))
         return responses
+
+    async def _get_response(self, prompts: list[str], max_concurrent_calls=200) -> list[str]:
+        semaphore = asyncio.Semaphore(max_concurrent_calls)  # Limit the number of concurrent calls
+        tasks = []
+        
+        for prompt in prompts:
+            tasks.append(invoke_model(prompt, self.model, semaphore))
+        
+        responses = await asyncio.gather(*tasks)
+        return responses
+        
+
+async def invoke_model(prompt, model, semaphore):
+    async with semaphore:
+        response = await asyncio.to_thread(model.invoke, [HumanMessage(content=prompt)])
+        return response.content
+
+
+    # def get_response(self, prompts: list[str]) -> list[str]:
+    #     responses = []
+    #     for prompt in prompts:
+    #         response = self.model.invoke([HumanMessage(content=prompt)]).content
+    #         responses.append(response)
+    #         print("oh oh!")
+    #         print(response)
+    #     return responses
 
 # class LocalLLM:
 #     def __init__(self, model_id: str, batch_size=8):
