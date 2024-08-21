@@ -5,15 +5,16 @@ from typing import List
 
 @dataclass
 class Config:
-    task_name: str = ""
-    task_descriptions_path: str = ""
-    n_steps: int = 0
-    optimizer: str = ""
-    meta_prompt_path: str = ""
-    meta_llms: str = ""
-    downstream_llm: str = ""
-    logging_dir: str = ""
+    task_name: str
+    ds_path: str
+    n_steps: int
+    optimizer: str
+    meta_prompt_path: str
+    meta_llms: str
+    downstream_llm: str
+    logging_dir: str = "logs/run.csv"
     include_task_desc: bool = False
+    random_seed: int = 42
 
     def __init__(self, config_path: str):
         self.config_path = config_path
@@ -23,8 +24,9 @@ class Config:
 
     def _parse_config(self):
         self.task_name = self.config["task"]["task_name"]
-        self.task_descriptions_path = self.config["task"]["task_descriptions_path"]
+        self.ds_path = self.config["task"]["ds_path"]
         self.n_steps = int(self.config["task"]["steps"])
+        self.random_seed = int(self.config["task"]["random_seed"])
         self.optimizer = self.config["optimizer"]["name"]
         self.meta_prompt_path = self.config["optimizer"]["meta_prompt_path"]
         self.meta_llm = self.config["meta_llm"]["name"]

@@ -41,12 +41,11 @@ class ClassificationTask(BaseTask):
 
         xs = []
         ys = []
-        verbalizers = get_dataset_verbalizers(self.task_id)
 
         for line in lines:
             x, y = line.split("\t")
             xs.append(x)
-            ys.append(verbalizers[int(y)])
+            ys.append(self.classes[int(y)])
 
         self.xs = np.array(xs)
         self.ys = np.array(ys)
@@ -69,33 +68,3 @@ class ClassificationTask(BaseTask):
         if seed is not None:
             self.seed = seed
         np.random.seed(self.seed)
-
-
-def get_dataset_verbalizers(dataset: str) -> List[str]: #TODO move to task descriptions
-    if dataset in ["sst2", "mr", "cr"]:
-        verbalizers = ["negative", "positive"]
-    elif dataset == "agnews":
-        verbalizers = ["World", "Sports", "Business", "Tech"]
-    elif dataset == "sst-5":
-        verbalizers = [
-            "terrible",
-            "bad",
-            "okay",
-            "good",
-            "great",
-        ]
-    elif dataset == "subj":
-        verbalizers = ["subjective", "objective"]
-    elif dataset == "trec":
-        verbalizers = [
-            "Description",
-            "Entity",
-            "Expression",
-            "Human",
-            "Location",
-            "Number",
-        ]
-    else:
-        raise ValueError(f"Dataset {dataset} not found.")
-
-    return verbalizers

@@ -48,9 +48,10 @@ class CSVCallback(Callback):
         Save prompts and scores to csv
         """
         self.step += 1
-        for prompt, score in zip(optimizer.prompts, optimizer.scores):
+        for prompt, score in zip(optimizer.prompts, optimizer.scores): # TODO check if there is a better way to do this
             with open(self.path, "a") as f:
-                f.write(f"{self.step},{prompt},{score}\n")
+                prompt = prompt.replace('"', '""')
+                f.write(f'{self.step},"{prompt}",{score}')
 
     def on_train_end(self, logs=None):
         pass

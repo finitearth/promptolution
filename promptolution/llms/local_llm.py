@@ -26,6 +26,7 @@ class LocalLLM:
             return_full_text=False,
         )
         self.pipeline.tokenizer.pad_token_id = self.pipeline.tokenizer.eos_token_id
+        self.pipeline.tokenizer.padding_side = "left"
 
     def get_response(self, prompts: list[str]):
         with torch.no_grad():

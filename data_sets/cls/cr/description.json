@@ -1,0 +1,11 @@
+{
+    "path": "data_sets/cls/cr",
+    "seed": "seed5",
+    "split": "dev",
+    "init_prompts": "prompts.txt",
+    "description": "The dataset contains customer reviews of various products with sentiment annotations. The task is to classify each review as expressing either positive or negative sentiment. The one mentioned first in the response of the LLM will be the prediction.",
+    "classes": [
+        "negative",
+        "positive"
+    ]
+}
