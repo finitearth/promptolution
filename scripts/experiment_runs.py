@@ -30,7 +30,7 @@ def main():
                         for random_seed in [42, 47, 69]:
                             config = Config(
                                 task_name=task_name,
-                                ds_path="data",
+                                ds_path=f"data_sets/cls/{task_name}",
                                 n_steps=all_configs["task"]["steps"],
                                 optimizer=optimizer_name,
                                 meta_prompt_path=meta_prompt_path if not use_task_description else meta_prompt_path.split(".txt")[0] + "_task_desc.txt",
