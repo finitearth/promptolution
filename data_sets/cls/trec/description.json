@@ -3,7 +3,7 @@
     "seed": "seed5",
     "split": "dev",
     "init_prompts": "prompts.txt",
-    "description": "The dataset includes questions categorized into different types: Description, Entity, Expression, Human, Location, and Number. The task is to classify each question into one of these six question types. The one mentioned first in the response of the LLM will be the prediction.",
+    "description": "The dataset includes questions categorized into different types: Description, Entity, Expression, Human, Location, and Number. The task is to classify each question into one of these six question types. The class mentioned first in the response of the LLM will be the prediction.",
     "classes": [
         "Description",
         "Entity",

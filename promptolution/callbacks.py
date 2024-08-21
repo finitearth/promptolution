@@ -1,5 +1,6 @@
-from logging import getLogger
+from logging import getLogger, INFO
 import os
+import pandas as pd
 from tqdm import tqdm
 
 class Callback:
@@ -15,7 +16,7 @@ class Callback:
 class LoggerCallback(Callback):
     def __init__(self, logger):
         # TODO check up whats up with logging leves
-        self.logger = getLogger(__name__)
+        self.logger = logger
         self.step = 0
 
     def on_step_end(self, optimizer):
@@ -48,10 +49,8 @@ class CSVCallback(Callback):
         Save prompts and scores to csv
         """
         self.step += 1
-        for prompt, score in zip(optimizer.prompts, optimizer.scores): # TODO check if there is a better way to do this
-            with open(self.path, "a") as f:
-                prompt = prompt.replace('"', '""')
-                f.write(f'{self.step},"{prompt}",{score}')
+        df = pd.DataFrame({"step": [self.step]*len(optimizer.prompts), "prompt": optimizer.prompts, "score": optimizer.scores})
+        df.to_csv(self.path, mode='a', header=False, index=False)
 
     def on_train_end(self, logs=None):
         pass

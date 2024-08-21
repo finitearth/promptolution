@@ -27,12 +27,10 @@ async def invoke_model(prompt, model, semaphore):
 class APILLM:
     def __init__(self, model_id: str):
         if "claude" in model_id:
-            self.model = ChatAnthropic(model=model_id, api_key=ANTHROPIC_API_KEY) # TODO check if chat interface or other interface?
+            self.model = ChatAnthropic(model=model_id, api_key=ANTHROPIC_API_KEY)
         elif "gpt" in model_id:
-            # we may use the BatchAPI instead of the LangChain interface here so save some costs
             self.model = ChatOpenAI(model=model_id, api_key=OPENAI_API_KEY)
         elif "llama" in model_id:
-            # self.model = ChatGroq(model=model_id, api_key=GROQ_API_KEY)
             self.model = ChatDeepInfra(model_id=model_id, deepinfra_api_token=DEEPINFRA_API_KEY)
         else:
             raise ValueError(f"Unknown model: {model_id}")

@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Literal
 
 import numpy as np
 
@@ -8,7 +8,7 @@ from promptolution.predictors.base_predictor import BasePredictor
 from promptolution.tasks.base_task import BaseTask
 
 class ClassificationTask(BaseTask):
-    def __init__(self, task_id: str, dataset_json: Dict, seed: int = 42):
+    def __init__(self, task_id: str, dataset_json: Dict, seed: int = 42, split: Literal["dev", "test"] = "dev"):
         self.task_id: str = task_id
         self.dataset_json: Dict = dataset_json
         self.description: Optional[str] = None
@@ -16,6 +16,7 @@ class ClassificationTask(BaseTask):
         self.xs: Optional[np.ndarray] = np.array([])
         self.ys: Optional[np.ndarray] = None
         self.classes: Optional[List] = None
+        self.split: Literal["dev", "test"] = split
         self._parse_task()
         self.reset_seed(seed)
 
@@ -25,7 +26,7 @@ class ClassificationTask(BaseTask):
 
     def _parse_task(self):
         task_path = Path(self.dataset_json["path"])
-        self.description = self.dataset_json["description"] #TODO move descriptions to their respective task_dir
+        self.description = self.dataset_json["description"]
         self.classes = self.dataset_json["classes"]
 
         with open(task_path / Path(self.dataset_json["init_prompts"]), "r", encoding="utf-8") as file:
@@ -33,7 +34,7 @@ class ClassificationTask(BaseTask):
         self.initial_population = [line.strip() for line in lines]
 
         seed = Path(self.dataset_json["seed"])
-        split = Path(self.dataset_json["split"] + ".txt")
+        split = Path(self.split + ".txt")
 
         with open(task_path / seed / split, "r", encoding="utf-8") as file:
             lines = file.readlines()
@@ -50,11 +51,15 @@ class ClassificationTask(BaseTask):
         self.xs = np.array(xs)
         self.ys = np.array(ys)
 
-    def evaluate(self, prompts: List[str], predictor: BasePredictor, n_samples: int = 20) -> np.ndarray: # nsamples -> 200 #TODO include in config
+    def evaluate(self, prompts: List[str], predictor: BasePredictor, n_samples: int = 20, subsample: bool = True) -> np.ndarray: #TODO include in config
         if isinstance(prompts, str):
             prompts = [prompts]
         # Randomly select a subsample of n_samples
-        indices = np.random.choice(len(self.xs), n_samples, replace=False)
+        if subsample:
+            indices = np.random.choice(len(self.xs), n_samples, replace=False)
+        else:
+            indices = np.arange(len(self.xs))
+            
         xs_subsample = self.xs[indices]
         ys_subsample = self.ys[indices]
 
