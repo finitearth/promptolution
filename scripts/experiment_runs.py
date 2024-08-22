@@ -17,39 +17,35 @@ logger.setLevel(INFO)
 
 def main():
     # read experiments ini
+    i = 0
     all_configs = ConfigParser()
     all_configs.read("configs/experiments.ini")
     task_names = all_configs["task"]["task_name"].split(",")
-    optimizer_names = all_configs["optimizer"]["name"].split(",")
     meta_prompt_paths = all_configs["optimizer"]["meta_prompt_path"].split(",")
+    optimizer_names = all_configs["optimizer"]["name"].split(",")
     meta_llms = all_configs["meta_llm"]["name"].split(",")
     evaluator_llms = all_configs["evaluator_llm"]["name"].split(",")
+    downstream_llms = all_configs["downstream_llm"]["name"].split(",")
     for task_name in task_names:
         for optimizer_name, meta_prompt_path in zip(optimizer_names, meta_prompt_paths):
-            for use_task_description in [True, False]:
-                for evaluator_llm, meta_llm in zip(evaluator_llms, meta_llms):
-                    for downstream_llm in evaluator_llms:
-                        for random_seed in [42, 47, 69]:
-                            config = Config(
-                                task_name=task_name,
-                                ds_path=f"data_sets/cls/{task_name}",
-                                n_steps=all_configs["task"]["steps"],
-                                optimizer=optimizer_name,
-                                meta_prompt_path=(
-                                    meta_prompt_path
-                                    if not use_task_description
-                                    else meta_prompt_path.split(".txt")[0] + "_task_desc.txt"
-                                ),
-                                meta_llm=meta_llm,
-                                downstream_llm=downstream_llm,
-                                init_pop_size=all_configs["optimizer"]["init_population"],
-                                logging_dir=f"logs/experiment/{task_name}_{optimizer_name}_{use_task_description}_{meta_llm}_{evaluator_llm}_{random_seed}.csv",
-                                include_task_desc=use_task_description,
-                                random_seed=random_seed,
-                                evaluation_llm=evaluator_llm,
-                            )
-                            run_experiment(config)
-
+            for evaluator_llm, meta_llm in zip(evaluator_llms, meta_llms):
+                for downstream_llm in downstream_llms:
+                    for random_seed in [42, 47, 69]:
+                        config = Config(
+                            task_name=task_name,
+                            ds_path=f"data_sets/cls/{task_name}",
+                            n_steps=all_configs["task"]["steps"],
+                            optimizer=optimizer_name,
+                            meta_llm=meta_llm,
+                            downstream_llm=downstream_llm,
+                            meta_prompt_path=meta_prompt_path,
+                            init_pop_size=all_configs["optimizer"]["init_population"],
+                            logging_dir=f"logs/experiment/{task_name}_{optimizer_name}_{meta_llm}_{evaluator_llm}_{random_seed}.csv",
+                            include_task_desc=False,
+                            random_seed=random_seed,
+                            evaluation_llm=evaluator_llm,
+                        )
+                        run_experiment(config)
 
 def run_experiment(config):
     config = Config()
