@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import List
+
 import numpy as np
+
 
 class BaseLLM(ABC):
     def __init__(self, *args, **kwargs):
@@ -10,10 +12,11 @@ class BaseLLM(ABC):
     def get_response(self, prompts: List[str]) -> List[str]:
         pass
 
+
 class DummyLLM(BaseLLM):
     def __init__(self, *args, **kwargs):
         pass
-    
+
     def get_response(self, prompts: str) -> str:
         if isinstance(prompts, str):
             prompts = [prompts]

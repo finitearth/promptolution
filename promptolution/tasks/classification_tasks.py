@@ -1,11 +1,11 @@
-import json
 from pathlib import Path
-from typing import Dict, List, Optional, Literal
+from typing import Dict, List, Literal, Optional
 
 import numpy as np
 
 from promptolution.predictors.base_predictor import BasePredictor
 from promptolution.tasks.base_task import BaseTask
+
 
 class ClassificationTask(BaseTask):
     def __init__(self, task_id: str, dataset_json: Dict, seed: int = 42, split: Literal["dev", "test"] = "dev"):
@@ -19,7 +19,6 @@ class ClassificationTask(BaseTask):
         self.split: Literal["dev", "test"] = split
         self._parse_task()
         self.reset_seed(seed)
-
 
     def __str__(self):
         return self.task_id
@@ -51,7 +50,9 @@ class ClassificationTask(BaseTask):
         self.xs = np.array(xs)
         self.ys = np.array(ys)
 
-    def evaluate(self, prompts: List[str], predictor: BasePredictor, n_samples: int = 20, subsample: bool = True) -> np.ndarray: #TODO include in config
+    def evaluate(
+        self, prompts: List[str], predictor: BasePredictor, n_samples: int = 20, subsample: bool = True
+    ) -> np.ndarray:  # TODO include in config
         if isinstance(prompts, str):
             prompts = [prompts]
         # Randomly select a subsample of n_samples
@@ -59,16 +60,16 @@ class ClassificationTask(BaseTask):
             indices = np.random.choice(len(self.xs), n_samples, replace=False)
         else:
             indices = np.arange(len(self.xs))
-            
+
         xs_subsample = self.xs[indices]
         ys_subsample = self.ys[indices]
 
         # Make predictions on the subsample
         preds = predictor.predict(prompts, xs_subsample)
-        
+
         # Calculate accuracy: number of correct predictions / total number of predictions per prompt
         return np.mean(preds == ys_subsample, axis=1)
-    
+
     def reset_seed(self, seed: int = None):
         if seed is not None:
             self.seed = seed

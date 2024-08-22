@@ -1,7 +1,8 @@
-from logging import getLogger, INFO
 import os
+
 import pandas as pd
 from tqdm import tqdm
+
 
 class Callback:
     def on_step_end(self, optimizer):
@@ -12,6 +13,7 @@ class Callback:
 
     def on_train_end(self, logs=None):
         pass
+
 
 class LoggerCallback(Callback):
     def __init__(self, logger):
@@ -32,6 +34,7 @@ class LoggerCallback(Callback):
     def on_train_end(self, logs=None):
         self.logger.critical(f"Training ended - {logs}")
 
+
 class CSVCallback(Callback):
     def __init__(self, path):
         # if dir does not exist
@@ -49,11 +52,14 @@ class CSVCallback(Callback):
         Save prompts and scores to csv
         """
         self.step += 1
-        df = pd.DataFrame({"step": [self.step]*len(optimizer.prompts), "prompt": optimizer.prompts, "score": optimizer.scores})
-        df.to_csv(self.path, mode='a', header=False, index=False)
+        df = pd.DataFrame(
+            {"step": [self.step] * len(optimizer.prompts), "prompt": optimizer.prompts, "score": optimizer.scores}
+        )
+        df.to_csv(self.path, mode="a", header=False, index=False)
 
     def on_train_end(self, logs=None):
         pass
+
 
 class BestPromptCallback(Callback):
     def __init__(self):
@@ -66,8 +72,8 @@ class BestPromptCallback(Callback):
             self.best_prompt = optimizer.prompts[0]
 
     def get_best_prompt(self):
-        return self.best_prompt, self.best_score        
-    
+        return self.best_prompt, self.best_score
+
 
 class ProgressBarCallback(Callback):
     def __init__(self, total_steps):

@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import Callable, List
+
 from promptolution.tasks.base_task import BaseTask
+
 
 class BaseOptimizer(ABC):
     def __init__(self, initial_prompts: list[str], task: BaseTask, callbacks: list[Callable] = [], predictor=None):
@@ -12,7 +14,6 @@ class BaseOptimizer(ABC):
     @abstractmethod
     def optimize(self, n_steps: int) -> List[str]:
         raise NotImplementedError
-    
 
     def _on_step_end(self):
         for callback in self.callbacks:

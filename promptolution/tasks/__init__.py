@@ -1,9 +1,10 @@
-from typing import List
 import json
 from pathlib import Path
+from typing import List
 
-from promptolution.tasks.base_task import DummyTask, BaseTask
+from promptolution.tasks.base_task import BaseTask, DummyTask
 from promptolution.tasks.classification_tasks import ClassificationTask
+
 
 def get_tasks(config) -> List[BaseTask]:
     task_names = config.task_name.split(",")

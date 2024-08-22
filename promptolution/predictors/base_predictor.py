@@ -1,7 +1,8 @@
-import numpy as np
+from abc import abstractmethod
 from typing import List
-from promptolution.llms import get_llm
-from abc import ABC, abstractmethod
+
+import numpy as np
+
 
 class BasePredictor:
     def __init__(self, model_id, classes, *args, **kwargs):
@@ -15,6 +16,7 @@ class BasePredictor:
         xs: np.ndarray,
     ) -> np.ndarray:
         raise NotImplementedError
+
 
 class DummyPredictor(BasePredictor):
     def __init__(self, model_id, classes, *args, **kwargs):

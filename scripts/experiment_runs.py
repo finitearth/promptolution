@@ -1,13 +1,15 @@
+from configparser import ConfigParser
 from logging import INFO, Logger
-from promptolution.callbacks import LoggerCallback, CSVCallback, BestPromptCallback, ProgressBarCallback
-from promptolution.llms import get_llm
+
+import numpy as np
+
+from promptolution.callbacks import (BestPromptCallback, CSVCallback,
+                                     ProgressBarCallback)
 from promptolution.config import Config
+from promptolution.llms import get_llm
 from promptolution.optimizers import get_optimizer
 from promptolution.predictors import get_predictor
 from promptolution.tasks import get_tasks
-
-from configparser import ConfigParser
-import numpy as np
 
 logger = Logger(__name__)
 logger.setLevel(INFO)
@@ -33,7 +35,11 @@ def main():
                                 ds_path=f"data_sets/cls/{task_name}",
                                 n_steps=all_configs["task"]["steps"],
                                 optimizer=optimizer_name,
-                                meta_prompt_path=meta_prompt_path if not use_task_description else meta_prompt_path.split(".txt")[0] + "_task_desc.txt",
+                                meta_prompt_path=(
+                                    meta_prompt_path
+                                    if not use_task_description
+                                    else meta_prompt_path.split(".txt")[0] + "_task_desc.txt"
+                                ),
                                 meta_llm=meta_llm,
                                 downstream_llm=downstream_llm,
                                 init_pop_size=all_configs["optimizer"]["init_population"],
@@ -64,7 +70,7 @@ def run_experiment(config):
     ]
     prompt_template = open(config.meta_prompt_path, "r").read()
     if config.include_task_desc:
-        prompt_template = prompt_template.replace("<task_desc>", task.description) # TODO how to predict in evaluate 
+        prompt_template = prompt_template.replace("<task_desc>", task.description)  # TODO how to predict in evaluate
 
     if "local" in config.meta_llm:
         meta_llm = get_llm(config.meta_llm, batch_size=config.meta_bs)
@@ -80,7 +86,7 @@ def run_experiment(config):
         prompt_template=prompt_template,
         predictor=predictor,
     )
-    
+
     logger.critical("🚨🚨🚨HEREEE WEEEE GOOO🚨🚨🚨")
     optimizer.optimize(config.n_steps)
     logger.critical("🎉We did it🥳")
@@ -88,7 +94,7 @@ def run_experiment(config):
     logger.critical(f"Final prompt: {best_prompt}, with score: {best_score}")
     # TODO evaluate final prompt on test data split
     # evaluation on test data
-    
+
     eval_task = get_tasks(config, split="test")[0]
     eval_predictor = get_predictor(config.evaluation_llm, classes=eval_task.classes)
     test_score = eval_task.evaluate(best_prompt, eval_predictor, subsample=False)

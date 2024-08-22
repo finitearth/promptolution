@@ -1,8 +1,11 @@
 from typing import List
+
 import numpy as np
+
 from promptolution.predictors.base_predictor import BasePredictor
 
-class Classificator(BasePredictor): 
+
+class Classificator(BasePredictor):
     def __init__(self, llm, classes, *args, **kwargs):
         self.llm = llm
         self.classes = classes
@@ -14,9 +17,9 @@ class Classificator(BasePredictor):
     ) -> np.ndarray:
         if isinstance(prompts, str):
             prompts = [prompts]
-        
+
         preds = self.llm.get_response([prompt + "\n" + x for prompt in prompts for x in xs])
-        
+
         response = []
         for pred in preds:
             predicted_class = ""

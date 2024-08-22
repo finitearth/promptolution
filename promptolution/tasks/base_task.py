@@ -1,16 +1,17 @@
 from abc import ABC, abstractmethod
 from typing import List
+
 import numpy as np
 
 
 class BaseTask(ABC):
     def __init__(self, *args, **kwargs):
-        pass	
+        pass
 
     @abstractmethod
     def evaluate(self, prompts: List[str], predictor) -> np.ndarray:
         raise NotImplementedError
-    
+
 
 class DummyTask(BaseTask):
     def __init__(self):
@@ -23,4 +24,4 @@ class DummyTask(BaseTask):
         self.classes = ["negative", "positive"]
 
     def evaluate(self, prompts: List[str], predictor) -> np.ndarray:
-        return np.array([np.random.rand()]*len(prompts))
+        return np.array([np.random.rand()] * len(prompts))

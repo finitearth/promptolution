@@ -1,11 +1,12 @@
-
 try:
     import torch
     import transformers
 except ImportError as e:
     import logging
+
     logger = logging.getLogger(__name__)
     logger.warning(f"Could not import torch or transformers in local_llm.py: {e}")
+
 
 class LocalLLM:
     def __init__(self):
@@ -14,12 +15,11 @@ class LocalLLM:
 
 class LocalLLM:
     def __init__(self, model_id: str, batch_size=8):
-
         self.pipeline = transformers.pipeline(
-            "text-generation", 
+            "text-generation",
             model=model_id,
             model_kwargs={"torch_dtype": torch.bfloat16},
-            device_map="auto", 
+            device_map="auto",
             max_new_tokens=256,
             batch_size=batch_size,
             num_return_sequences=1,
@@ -37,4 +37,3 @@ class LocalLLM:
 
         response = [r["generated_text"] for r in response]
         return response
-    

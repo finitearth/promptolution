@@ -1,6 +1,6 @@
-from .local_llm import LocalLLM
 from .api_llm import APILLM
 from .base_llm import DummyLLM
+from .local_llm import LocalLLM
 
 
 def get_llm(model_id: str, *args, **kwargs):

@@ -1,5 +1,7 @@
-import numpy as np
 from typing import List
+
+import numpy as np
+
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 
 
@@ -22,7 +24,7 @@ class EvoPromptDE(BaseOptimizer):
                 # create meta prompts
                 old_prompt = self.prompts[i]
 
-                candidates = [prompt for prompt in self.prompts if prompt != old_prompt] 
+                candidates = [prompt for prompt in self.prompts if prompt != old_prompt]
                 a, b, c = np.random.choice(candidates, size=3, replace=False)
 
                 if not self.donor_random:
@@ -38,10 +40,7 @@ class EvoPromptDE(BaseOptimizer):
                 meta_prompts.append(meta_prompt)
 
             child_prompts = self.meta_llm.get_response(meta_prompts)
-            child_prompts = [
-                prompt.split("<prompt>")[-1].split("</prompt>")[0].strip() 
-                for prompt in child_prompts
-            ]
+            child_prompts = [prompt.split("<prompt>")[-1].split("</prompt>")[0].strip() for prompt in child_prompts]
 
             child_scores = self.task.evaluate(child_prompts, self.predictor)
 

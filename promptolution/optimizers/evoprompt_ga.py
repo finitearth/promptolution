@@ -1,8 +1,8 @@
-from promptolution.optimizers.base_optimizer import BaseOptimizer
 from typing import List
+
 import numpy as np
 
-# from promptolution.tasks.base_task import BaseTask
+from promptolution.optimizers.base_optimizer import BaseOptimizer
 
 
 class EvoPromptGA(BaseOptimizer):
@@ -26,8 +26,8 @@ class EvoPromptGA(BaseOptimizer):
             scores = self.scores + self.task.evaluate(new_prompts, self.predictor).tolist()
 
             # sort scores and prompts
-            self.prompts = [prompt for _, prompt in sorted(zip(scores, prompts), reverse=True)][:len(self.prompts)]
-            self.scores = sorted(scores, reverse=True)[:len(self.prompts)]
+            self.prompts = [prompt for _, prompt in sorted(zip(scores, prompts), reverse=True)][: len(self.prompts)]
+            self.scores = sorted(scores, reverse=True)[: len(self.prompts)]
 
             self._on_step_end()
         return self.prompts
@@ -62,9 +62,6 @@ class EvoPromptGA(BaseOptimizer):
             meta_prompts.append(meta_prompt)
 
         child_prompts = self.meta_llm.get_response(meta_prompts)
-        child_prompts = [
-            prompt.split("<prompt>")[-1].split("</prompt>")[0].strip() 
-            for prompt in child_prompts
-        ]
+        child_prompts = [prompt.split("<prompt>")[-1].split("</prompt>")[0].strip() for prompt in child_prompts]
 
         return child_prompts

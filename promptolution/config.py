@@ -1,6 +1,5 @@
-from dataclasses import dataclass
 from configparser import ConfigParser
-from typing import List
+from dataclasses import dataclass
 
 
 @dataclass
@@ -43,7 +42,7 @@ class Config:
 
         if "include_task_desc" in self.config["task"]:
             self.include_task_desc = self.config["task"]["include_task_desc"] == "True"
-        
+
         if self.optimizer == "evopromptga":
             self.selection_mode = self.config["optimizer"]["selection_mode"]
         elif self.optimizer == "evopromptde":
@@ -51,6 +50,6 @@ class Config:
 
         if "local" in self.meta_llm:
             self.meta_bs = int(self.config["meta_llm"]["batch_size"])
-            
+
         if "local" in self.downstream_llm:
             self.downstream_bs = int(self.config["downstream_llm"]["batch_size"])
