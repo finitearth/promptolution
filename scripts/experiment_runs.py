@@ -2,6 +2,7 @@ from configparser import ConfigParser
 from logging import INFO, Logger
 
 import numpy as np
+import pandas as pd
 
 from promptolution.callbacks import (BestPromptCallback, CSVCallback,
                                      ProgressBarCallback)
@@ -88,14 +89,24 @@ def run_experiment(config):
     logger.critical("🎉We did it🥳")
     best_prompt, best_score = best_prompt_callback.get_best_prompt()
     logger.critical(f"Final prompt: {best_prompt}, with score: {best_score}")
-    # TODO evaluate final prompt on test data split
-    # evaluation on test data
 
     eval_task = get_tasks(config, split="test")[0]
     eval_predictor = get_predictor(config.evaluation_llm, classes=eval_task.classes)
     test_score = eval_task.evaluate(best_prompt, eval_predictor, subsample=False)
-    logger.critical(f"Test score: {test_score}")
 
+    # save test score to csv
+    df = pd.DataFrame(
+        {
+            "task": config.task_name,
+            "optimizer": config.optimizer,
+            "meta_llm": config.meta_llm,
+            "downstream_llm": config.downstream_llm,
+            "evaluation_llm": config.evaluation_llm,
+            "random_seed": config.random_seed,
+            "test_score": test_score,
+        },
+    )
+    df.to_csv("logs/best_scores.csv", mode="a", header=False, index=False)
 
 if __name__ == "__main__":
     main()
