@@ -12,6 +12,7 @@ langchain-anthropic = "^0.1.22"
 langchain-openai = "^0.1.21"
 langchain-core = "^0.2.29"
 langchain-community = "^0.2.12"
+pandas = "^2.2.2"
 
 
 
