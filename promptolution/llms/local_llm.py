@@ -9,11 +9,6 @@ except ImportError as e:
 
 
 class LocalLLM:
-    def __init__(self):
-        self.model = torch.nn.Module()  # Safe to use torch since it's conditionally imported
-
-
-class LocalLLM:
     def __init__(self, model_id: str, batch_size=8):
         self.pipeline = transformers.pipeline(
             "text-generation",

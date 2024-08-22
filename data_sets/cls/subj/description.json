@@ -1,11 +1,10 @@
 {
     "path": "data_sets/cls/subj",
     "seed": "seed5",
-    "split": "dev",
     "init_prompts": "prompts.txt",
     "description": "The dataset contains sentences labeled as either subjective or objective. The task is to classify each sentence as either subjective or objective. The class mentioned first in the response of the LLM will be the prediction.",
     "classes": [
-        "objective",
-        "subjective"
+        "subjective",
+        "objective"
     ]
 }
