@@ -1,0 +1,344 @@
+. : File C:\Users\schla\OneDrive\Dokumente\WindowsPowerShell\profile.ps1 cannot be loaded because
+running scripts is disabled on this system. For more information, see about_Execution_Policies at
+running scripts is disabled on this system. For more information, see about_Execution_Policies at
+https:/go.microsoft.com/fwlink/?LinkID=135170.
+At line:1 char:3
++ . 'C:\Users\schla\OneDrive\Dokumente\WindowsPowerShell\profile.ps1'
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+https:/go.microsoft.com/fwlink/?LinkID=135170.
+At line:1 char:3
++ . 'C:\Users\schla\OneDrive\Dokumente\WindowsPowerShell\profile.ps1'
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+At line:1 char:3
++ . 'C:\Users\schla\OneDrive\Dokumente\WindowsPowerShell\profile.ps1'
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++ . 'C:\Users\schla\OneDrive\Dokumente\WindowsPowerShell\profile.ps1'
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : SecurityError: (:) [], PSSecurityException
+    + CategoryInfo          : SecurityError: (:) [], PSSecurityException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+    + FullyQualifiedErrorId : UnauthorizedAccess
+PS C:\Users\schla\git\promptolution> & C:/Users/schla/AppData/Local/pypoetry/Cache/virtualenvs/promptolution-BSFNTM07-py3.11/Scripts/python.exe c:/Users/schla/git/promptolution/scripts/experiment_runs.py
+Could not import torch or transformers in local_llm.py: No module named 'torch'
+Could not import torch or transformers in local_llm.py: No module named 'torch'
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                            | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|███████████████████████████████████████████████████████████████████| 12/12 [15:09<00:00, 68.43s/it]�WWe did it 🥳
+Final prompt: Determine the news article's primary category - World, Sports, Business, or Tech - by identifying its central theme or subject matter., with score: 1.0
+Traceback (most recent call last):
+  File "c:\Users\schla\git\promptolution\scripts\experiment_runs.py", line 112, in <module>
+    main()
+  File "c:\Users\schla\git\promptolution\scripts\experiment_runs.py", line 50, in main
+    run_experiment(config)
+  File "c:\Users\schla\git\promptolution\scripts\experiment_runs.py", line 93, in run_experiment
+    eval_task = get_tasks(config, split="test")[0]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: get_tasks() got an unexpected keyword argument 'split'
+100%|███████████████████████████████████████████████████████████████████| 12/12 [15:09<00:00, 75.80s/it]
+PS C:\Users\schla\git\promptolution> & C:/Users/schla/AppData/Local/pypoetry/Cache/virtualenvs/promptolution-BSFNTM07-py3.11/Scripts/python.exe c:/Users/schla/git/promptolution/scripts/experiment_runs.py
+Could not import torch or transformers in local_llm.py: No module named 'torch'
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [13:22<00:00, 55.66s/it]�WWe did it🥳
+Final prompt: Determine the primary topic of the provided news article, categorizing it as "World", "Sports", "Business", or "Tech" accordingly., with score: 1.0
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [13:55<00:00, 69.63s/it]
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [16:54<00:00, 55.80s/it]�WWe did it🥳
+Final prompt: Classify a news article into its corresponding category (World, Sports, Business, or Tech) based on its primary focus., with score: 0.95
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [17:28<00:00, 87.36s/it]
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [10:57<00:00, 66.01s/it]�WWe did it🥳
+Final prompt: Read the provided news article and categorize its main topic into one of the four categories: World, Sports, Business, or Tech., with score: 1.0
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [11:26<00:00, 57.24s/it]
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [11:49<00:00, 60.15s/it]�WWe did it🥳
+Final prompt: Categorize a news article into one of four areas - World, Sports, Business, or Tech - by identifying its primary subject or theme., with score: 1.0
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [12:33<00:00, 62.78s/it]
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [11:46<00:00, 60.78s/it]�WWe did it🥳
+Final prompt: Determine the primary theme of a given news article and classify it under one of the four categories: World, Sports, Tech, or Business., with score: 0.95
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [12:32<00:00, 62.74s/it]
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [13:15<00:00, 68.07s/it]�WWe did it🥳
+Final prompt: Determine the most suitable category (World, Sports, Business, or Tech) for a news article based on its dominant subject matter., with score: 1.0
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [14:07<00:00, 70.65s/it]
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "c:\Users\schla\git\promptolution\scripts\experiment_runs.py", line 112, in <module>
+    main()
+  File "c:\Users\schla\git\promptolution\scripts\experiment_runs.py", line 50, in main
+    run_experiment(config)
+, in get_optimizer
+    return EvoPromptDE(donor_random=config.donor_random, *args, **kwargs)
+                                    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Config' object has no attribute 'donor_random'. Did you mean: 'donar_random'?
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s] 
+PS C:\Users\schla\git\promptolution> & C:/Users/schla/AppData/Local/pypoetry/Cache/virtualenvs/promptolution-BSFNTM07-py3.11/Scripts/python.exe c:/Users/schla/git/promptolution/scripts/experiment_runs.py
+Could not import torch or transformers in local_llm.py: No module named 'torch'
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|█████████████████████████████████████████████████████████████████████████████| 12/12 [22:22<00:00, 111.85s/it] 
+🎉We did it🥳
+Final prompt: Your task is to classify the news item as "World", "Sports", "Tech" or "Business"., with score: 0.95
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|█████████████████████████████████████████████████████████████████████████████| 12/12 [25:59<00:00, 129.95s/it]
+🎉We did it🥳
+Final prompt: Your task is to classify the news item as "World", "Sports", "Tech" or "Business"., with score: 0.9   
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|█████████████████████████████████████████████████████████████████████████████| 12/12 [24:37<00:00, 123.10s/it]
+🎉We did it🥳
+Final prompt: Your objective is to classify a news article into one of four themes: World, Sports, Business and Tech., with score: 0.85
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|█████████████████████████████████████████████████████████████████████████████| 12/12 [26:31<00:00, 132.65s/it]
+🎉We did it🥳
+Final prompt: Classify the topic of the following news as "World", "Sports", "Tech" or "Business"., with score: 1.0 
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|█████████████████████████████████████████████████████████████████████████████| 12/12 [25:51<00:00, 129.26s/it]
+🎉We did it🥳
+Final prompt: Your task is to classify the news item as "World", "Sports", "Tech" or "Business"., with score: 0.9   
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+ 17%|█████████████                                                                 | 2/12 [03:44<18:56, 113.62s/it]Traceback (most recent call last):
+  File "C:\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\base_events.py", line 653, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\schla\git\promptolution\promptolution\llms\api_llm.py", line 67, in _get_response
+    responses = await asyncio.gather(*tasks)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\schla\git\promptolution\promptolution\llms\api_llm.py", line 28, in invoke_model
+    response = await asyncio.to_thread(model.invoke, [HumanMessage(content=prompt)])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\schla\git\promptolution\scripts\experiment_runs.py", line 116, in <module>
+    main()
+  File "c:\Users\schla\git\promptolution\scripts\experiment_runs.py", line 54, in main
+    run_experiment(config)
+  File "c:\Users\schla\git\promptolution\scripts\experiment_runs.py", line 92, in run_experiment
+    optimizer.optimize(config.n_steps)
+  File "C:\Users\schla\git\promptolution\promptolution\optimizers\evoprompt_de.py", line 45, in optimize
+    child_scores = self.task.evaluate(child_prompts, self.predictor)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\schla\git\promptolution\promptolution\tasks\classification_tasks.py", line 68, in evaluate
+    preds = predictor.predict(prompts, xs_subsample)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\schla\git\promptolution\promptolution\predictors\classificator.py", line 21, in predict
+    preds = self.llm.get_response([prompt + "\n" + x for prompt in prompts for x in xs])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\schla\git\promptolution\promptolution\llms\api_llm.py", line 50, in get_response
+    responses = asyncio.run(self._get_response(prompts))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\runners.py", line 189, in run
+    with Runner(debug=debug) as runner:
+  File "C:\Python311\Lib\asyncio\runners.py", line 63, in __exit__
+    self.close()
+  File "C:\Python311\Lib\asyncio\runners.py", line 73, in close
+    loop.run_until_complete(loop.shutdown_default_executor())
+  File "C:\Python311\Lib\asyncio\base_events.py", line 640, in run_until_complete
+    self.run_forever()
+  File "C:\Python311\Lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Python311\Lib\asyncio\base_events.py", line 607, in run_forever
+    self._run_once()
+  File "C:\Python311\Lib\asyncio\base_events.py", line 1884, in _run_once
+    event_list = self._selector.select(timeout)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\windows_events.py", line 444, in select
+    self._poll(timeout)
+  File "C:\Python311\Lib\asyncio\windows_events.py", line 817, in _poll
+
+
+
+  . : File C:\Users\schla\OneDrive\Dokumente\WindowsPowerShell\profile.ps1 cannot be loaded because        
+running scripts is disabled on this system. For more information, see about_Execution_Policies at        
+https:/go.microsoft.com/fwlink/?LinkID=135170.
+At line:1 char:3
++ . 'C:\Users\schla\OneDrive\Dokumente\WindowsPowerShell\profile.ps1'
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : SecurityError: (:) [], PSSecurityException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+PS C:\Users\schla\git\promptolution> & C:/Users/schla/AppData/Local/pypoetry/Cache/virtualenvs/promptolution-BSFNTM07-py3.11/Scripts/python.exe c:/Users/schla/git/promptolution/scripts/experiment_runs.py
+Could not import torch or transformers in local_llm.py: No module named 'torch'
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                            | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+ 67%|████████████████████████████████████████████▋                      | 8/12 [18:18<09:20, 140.23s/it]EX DeepInfra Server: Error 500
+Traceback (most recent call last):
+  File "c:\Users\schla\git\promptolution\scripts\experiment_runs.py", line 116, in <module>
+    main()
+  File "c:\Users\schla\git\promptolution\scripts\experiment_runs.py", line 54, in main
+    run_experiment(config)
+  File "c:\Users\schla\git\promptolution\scripts\experiment_runs.py", line 92, in run_experiment
+    optimizer.optimize(config.n_steps)
+  File "C:\Users\schla\git\promptolution\promptolution\optimizers\evoprompt_de.py", line 45, in optimize 
+    child_scores = self.task.evaluate(child_prompts, self.predictor)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\schla\git\promptolution\promptolution\tasks\classification_tasks.py", line 68, in evaluate
+    preds = predictor.predict(prompts, xs_subsample)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\schla\git\promptolution\promptolution\predictors\classificator.py", line 21, in predict 
+    preds = self.llm.get_response([prompt + "\n" + x for prompt in prompts for x in xs])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\schla\git\promptolution\promptolution\llms\api_llm.py", line 50, in get_response        
+    responses = asyncio.run(self._get_response(prompts))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\base_events.py", line 653, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\schla\git\promptolution\promptolution\llms\api_llm.py", line 67, in _get_response       
+    responses = await asyncio.gather(*tasks)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\schla\git\promptolution\promptolution\llms\api_llm.py", line 28, in invoke_model        
+    response = await asyncio.to_thread(model.invoke, [HumanMessage(content=prompt)])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\concurrent\futures\thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\schla\AppData\Local\pypoetry\Cache\virtualenvs\promptolution-BSFNTM07-py3.11\Lib\site-packages\langchain_core\language_models\chat_models.py", line 276, in invoke
+    self.generate_prompt(
+  File "C:\Users\schla\AppData\Local\pypoetry\Cache\virtualenvs\promptolution-BSFNTM07-py3.11\Lib\site-packages\langchain_core\language_models\chat_models.py", line 776, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\schla\AppData\Local\pypoetry\Cache\virtualenvs\promptolution-BSFNTM07-py3.11\Lib\site-packages\langchain_core\language_models\chat_models.py", line 633, in generate
+    raise e
+  File "C:\Users\schla\AppData\Local\pypoetry\Cache\virtualenvs\promptolution-BSFNTM07-py3.11\Lib\site-packages\langchain_core\language_models\chat_models.py", line 623, in generate
+    self._generate_with_cache(
+  File "C:\Users\schla\AppData\Local\pypoetry\Cache\virtualenvs\promptolution-BSFNTM07-py3.11\Lib\site-packages\langchain_core\language_models\chat_models.py", line 845, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "C:\Users\schla\AppData\Local\pypoetry\Cache\virtualenvs\promptolution-BSFNTM07-py3.11\Lib\site-packages\langchain_community\chat_models\deepinfra.py", line 338, in _generate
+    response = self.completion_with_retry(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\schla\AppData\Local\pypoetry\Cache\virtualenvs\promptolution-BSFNTM07-py3.11\Lib\site-packages\langchain_community\chat_models\deepinfra.py", line 264, in completion_with_retry
+    return _completion_with_retry(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\schla\AppData\Local\pypoetry\Cache\virtualenvs\promptolution-BSFNTM07-py3.11\Lib\site-packages\tenacity\__init__.py", line 336, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\schla\AppData\Local\pypoetry\Cache\virtualenvs\promptolution-BSFNTM07-py3.11\Lib\site-packages\tenacity\__init__.py", line 475, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\schla\AppData\Local\pypoetry\Cache\virtualenvs\promptolution-BSFNTM07-py3.11\Lib\site-packages\tenacity\__init__.py", line 376, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\schla\AppData\Local\pypoetry\Cache\virtualenvs\promptolution-BSFNTM07-py3.11\Lib\site-packages\tenacity\__init__.py", line 418, in exc_check
+    raise retry_exc.reraise()
+          ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\schla\AppData\Local\pypoetry\Cache\virtualenvs\promptolution-BSFNTM07-py3.11\Lib\site-packages\tenacity\__init__.py", line 185, in reraise
+    raise self.last_attempt.result()
+  File "C:\Python311\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+  File "C:\Python311\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\schla\AppData\Local\pypoetry\Cache\virtualenvs\promptolution-BSFNTM07-py3.11\Lib\site-packages\tenacity\__init__.py", line 478, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\schla\AppData\Local\pypoetry\Cache\virtualenvs\promptolution-BSFNTM07-py3.11\Lib\site-packages\langchain_community\chat_models\deepinfra.py", line 257, in _completion_with_retry
+    self._handle_status(response.status_code, response.text)
+  File "C:\Users\schla\AppData\Local\pypoetry\Cache\virtualenvs\promptolution-BSFNTM07-py3.11\Lib\site-packages\langchain_community\chat_models\deepinfra.py", line 452, in _handle_status
+    raise ChatDeepInfraException(f"DeepInfra Server: Error {code}")
+langchain_community.chat_models.deepinfra.ChatDeepInfraException: DeepInfra Server: Error 500
+ 67%|████████████████████████████████& C:/Users/schla/AppData/Local/pypoetry/Cache/virtualenvs/promptolution-BSFNTM07-py3.11/Scripts/python.exe c:/Users/schla/git/promptolution/scripts/experiment_runs.py
+Could not import torch or transformers in local_llm.py: No module named 'torch'
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                                                                         | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [27:24<00:00, 137.03s/it]
+🎉We did it🥳
+Final prompt: Your task is to classify the news item as "World", "Sports", "Tech" or "Business"., with score: 0.8
+Task: The dataset contains customer reviews of various products with sentiment annotations. The task is to classify each review as expressing either positive or negative sentiment. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                                                                         | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [19:00<00:00, 93.85s/it]�WWe did it🥳
+Final prompt: Determine the sentiment of the provided text, labeling it as either "positive" or "negative"., with score: 1.0
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [19:55<00:00, 99.65s/it]
+Task: The dataset contains customer reviews of various products with sentiment annotations. The task is to classify each review as expressing either positive or negative sentiment. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                                                                         | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [21:27<00:00, 110.89s/it]�WWe did it🥳
+Final prompt: Classify the sentiment expressed in the provided review as either "positive" or "negative", indicating the reviewer's attitude towards the product., with score: 1.0
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [22:25<00:00, 112.12s/it]
+Task: The dataset contains customer reviews of various products with sentiment annotations. The task is to classify each review as expressing either positive or negative sentiment. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                                                                         | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [19:50<00:00, 97.67s/it]�WWe did it🥳
+Final prompt: Determine the emotional tone of a given text and categorize it as either 'positive' or 'negative'., with score: 1.0
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [21:28<00:00, 107.37s/it]
+Task: The dataset contains customer reviews of various products with sentiment annotations. The task is to classify each review as expressing either positive or negative sentiment. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                                                                         | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [19:40<00:00, 91.27s/it]�WWe did it🥳
+Final prompt: Label the provided sentence with either "positive" or "negative" sentiment., with score: 1.0
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [20:51<00:00, 104.28s/it]
+Task: The dataset contains customer reviews of various products with sentiment annotations. The task is to classify each review as expressing either positive or negative sentiment. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                                                                         | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [21:52<00:00, 104.30s/it]�WWe did it🥳
+Final prompt: Given a sentence, classify it as either positive or negative sentiment., with score: 1.0
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [23:03<00:00, 115.29s/it]
+Task: The dataset contains customer reviews of various products with sentiment annotations. The task is to classify each review as expressing either positive or negative sentiment. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                                                                         | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [20:07<00:00, 95.31s/it]�WWe did it🥳
+Final prompt: Classify the sentiment of the provided sentence as either "positive" or "negative"., with score: 1.0
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [21:05<00:00, 105.45s/it]
+Task: The dataset contains customer reviews of various products with sentiment annotations. The task is to classify each review as expressing either positive or negative sentiment. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                                                                         | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [28:33<00:00, 142.77s/it]
+🎉We did it🥳
+Final prompt: Your task is to classify the comment "positive" or "negative"., with score: 0.9
+Task: The dataset contains customer reviews of various products with sentiment annotations. The task is to classify each review as expressing either positive or negative sentiment. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                                                                         | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [33:13<00:00, 166.14s/it]
+🎉We did it🥳
+Final prompt: Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text., with score: 0.9
+Task: The dataset contains customer reviews of various products with sentiment annotations. The task is to classify each review as expressing either positive or negative sentiment. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                                                                         | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [35:31<00:00, 177.60s/it]
+🎉We did it🥳
+Final prompt: Your task is to classify the comment "positive" or "negative"., with score: 0.9
+Task: The dataset contains customer reviews of various products with sentiment annotations. The task is to classify each review as expressing either positive or negative sentiment. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                                                                         | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [35:08<00:00, 175.73s/it]
+🎉We did it🥳
+Final prompt: Your task is to classify the comment "positive" or "negative"., with score: 0.9
+Task: The dataset contains customer reviews of various products with sentiment annotations. The task is to classify each review as expressing either positive or negative sentiment. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                                                                         | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [37:05<00:00, 185.43s/it]
+🎉We did it🥳
+Final prompt: Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text., with score: 0.95
+Task: The dataset contains customer reviews of various products with sentiment annotations. The task is to classify each review as expressing either positive or negative sentiment. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                                                                         | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨

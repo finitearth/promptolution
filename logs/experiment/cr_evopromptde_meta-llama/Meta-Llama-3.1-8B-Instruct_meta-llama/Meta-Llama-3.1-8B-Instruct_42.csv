@@ -1,0 +1,175 @@
+step,prompt,score
+1,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+1,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.9
+1,"Please label the sentiment towards the product of the given product review. The sentiment label should be ""positive"" or ""negative"".",0.85
+1,"Given a tweet, classify it as having a positive or negative sentiment.",0.85
+1,"Given a sentence, classify it as either positive or negative sentiment.",0.85
+1,Classify a sentence as expressing optimism or pessimism.,0.75
+1,"Given text, classify whether it is positive or negative.",0.7
+1,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.55
+1,"When given an English sentence, your task is to analyze it and generate a sentiment word to describe the original text, such as positive or negative.",0.55
+1,"You need to determine the sentiment of the post, classify it as a sentiment of positive, negative, based on the text provided.",0.65
+2,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+2,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.9
+2,"Please label the sentiment towards the product of the given product review. The sentiment label should be ""positive"" or ""negative"".",0.85
+2,"Given a tweet, classify it as having a positive or negative sentiment.",0.85
+2,"Given a sentence, classify it as either positive or negative sentiment.",0.85
+2,Assign a sentiment score to the item in the customer feedback into one,0.9
+2,"Analyze the text and classify whether it expresses a hopeful or gloomy tone, determining its positivity or negativity.",0.85
+2,"Let's follow the instructions step-by-step.
+
+**1. Identify the different parts between Prompt 1 and Prompt 2:**
+
+Prompt 1: Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.
+Prompt 2: Please label the sentiment towards the product of the given product review. The sentiment label should be ""positive"" or ""negative"".
+
+Different parts:
+""Please perform Sentiment Classification task"" vs ""Please label the sentiment towards the product of the given product review""
+""Given the sentence"" vs ""of the given product review""
+""assign a sentiment label from ['negative', 'positive']"" vs ""The sentiment label should be 'positive' or 'negative'""
+""Return label only without any other text"" is not present in Prompt 2
+
+**2. Randomly mutate the different parts:**
+
+""Please perform Sentiment Classification task"" -> ""You are required to evaluate the sentiment of""
+""Given the sentence"" -> ""in the provided review""
+""assign a sentiment label from ['negative', 'positive']"" -> ""classify as either 'negative' or 'positive'""
+""Return label only without any other text"" -> ""provide the sentiment label only""",0.6
+2,"When given an English sentence, your task is to analyze it and generate a sentiment word to describe the original text, such as positive or negative.",0.55
+2,"You need to determine the sentiment of the post, classify it as a sentiment of positive, negative, based on the text provided.",0.65
+3,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+3,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.9
+3,"Please label the sentiment towards the product of the given product review. The sentiment label should be ""positive"" or ""negative"".",0.85
+3,"Given a tweet, classify it as having a positive or negative sentiment.",0.85
+3,"Given a sentence, classify it as either positive or negative sentiment.",0.85
+3,Assign a sentiment score to the item in the customer feedback into one,0.9
+3,"Analyze the text and classify whether it expresses a hopeful or gloomy tone, determining its positivity or negativity.",0.85
+3,"Let's follow the instructions step-by-step.
+
+**1. Identify the different parts between Prompt 1 and Prompt 2:**
+
+Prompt 1: Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.
+Prompt 2: Please label the sentiment towards the product of the given product review. The sentiment label should be ""positive"" or ""negative"".
+
+Different parts:
+""Please perform Sentiment Classification task"" vs ""Please label the sentiment towards the product of the given product review""
+""Given the sentence"" vs ""of the given product review""
+""assign a sentiment label from ['negative', 'positive']"" vs ""The sentiment label should be 'positive' or 'negative'""
+""Return label only without any other text"" is not present in Prompt 2
+
+**2. Randomly mutate the different parts:**
+
+""Please perform Sentiment Classification task"" -> ""You are required to evaluate the sentiment of""
+""Given the sentence"" -> ""in the provided review""
+""assign a sentiment label from ['negative', 'positive']"" -> ""classify as either 'negative' or 'positive'""
+""Return label only without any other text"" -> ""provide the sentiment label only""",0.6
+3,"When given an English sentence, your task is to analyze it and generate a sentiment word to describe the original text, such as positive or negative.",0.55
+3,"You need to determine the sentiment of the post, classify it as a sentiment of positive, negative, based on the text provided.",0.65
+4,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+4,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.9
+4,"Please label the sentiment towards the product of the given product review. The sentiment label should be ""positive"" or ""negative"".",0.85
+4,"Given a tweet, classify it as having a positive or negative sentiment.",0.85
+4,"Given a sentence, classify it as either positive or negative sentiment.",0.85
+4,Assign a sentiment score to the item in the customer feedback into one,0.9
+4,"Analyze the text and classify whether it expresses a hopeful or gloomy tone, determining its positivity or negativity.",0.85
+4,"Let's follow the instructions step-by-step.
+
+**1. Identify the different parts between Prompt 1 and Prompt 2:**
+
+Prompt 1: Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.
+Prompt 2: Please label the sentiment towards the product of the given product review. The sentiment label should be ""positive"" or ""negative"".
+
+Different parts:
+""Please perform Sentiment Classification task"" vs ""Please label the sentiment towards the product of the given product review""
+""Given the sentence"" vs ""of the given product review""
+""assign a sentiment label from ['negative', 'positive']"" vs ""The sentiment label should be 'positive' or 'negative'""
+""Return label only without any other text"" is not present in Prompt 2
+
+**2. Randomly mutate the different parts:**
+
+""Please perform Sentiment Classification task"" -> ""You are required to evaluate the sentiment of""
+""Given the sentence"" -> ""in the provided review""
+""assign a sentiment label from ['negative', 'positive']"" -> ""classify as either 'negative' or 'positive'""
+""Return label only without any other text"" -> ""provide the sentiment label only""",0.6
+4,"When given an English sentence, your task is to analyze it and generate a sentiment word to describe the original text, such as positive or negative.",0.55
+4,"You are required to evaluate the sentence and determine its sentiment, classifying it as a favorable or unfavorable sentiment, based on the text provided",0.75
+5,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+5,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.9
+5,"Please label the sentiment towards the product of the given product review. The sentiment label should be ""positive"" or ""negative"".",0.85
+5,"Given a tweet, classify it as having a positive or negative sentiment.",0.85
+5,"Given a sentence, classify it as either positive or negative sentiment.",0.85
+5,Assign a sentiment score to the item in the customer feedback into one,0.9
+5,"Analyze the text and classify whether it expresses a hopeful or gloomy tone, determining its positivity or negativity.",0.85
+5,"You are required to evaluate the sentiment of in the provided review and classify as either 'negative' or 'positive', provide the sentiment label only.",0.65
+5,"When given an English sentence, your task is to analyze it and generate a sentiment word to describe the original text, such as positive or negative.",0.55
+5,"You are required to evaluate the sentence and determine its sentiment, classifying it as a favorable or unfavorable sentiment, based on the text provided",0.75
+6,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+6,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.9
+6,"Please label the sentiment towards the product of the given product review. The sentiment label should be ""positive"" or ""negative"".",0.85
+6,"Given a tweet, classify it as having a positive or negative sentiment.",0.85
+6,"Given a sentence, classify it as either positive or negative sentiment.",0.85
+6,Assign a sentiment score to the item in the customer feedback into one,0.9
+6,"Analyze the text and classify whether it expresses a hopeful or gloomy tone, determining its positivity or negativity.",0.85
+6,"You are required to evaluate the sentiment of in the provided review and classify as either 'negative' or 'positive', provide the sentiment label only.",0.65
+6,"When given an English sentence, your task is to analyze it and generate a sentiment word to describe the original text, such as positive or negative.",0.55
+6,"You are required to evaluate the sentence and determine its sentiment, classifying it as a favorable or unfavorable sentiment, based on the text provided",0.75
+7,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+7,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.9
+7,"Please label the sentiment towards the product of the given product review. The sentiment label should be ""positive"" or ""negative"".",0.85
+7,"Given a tweet, classify it as having a positive or negative sentiment.",0.85
+7,Evaluate the customer review and categorize it as either positive or negative sentiment based on its emotional,0.95
+7,Assign a sentiment score to the item in the customer feedback into one,0.9
+7,"Analyze the text and classify whether it expresses a hopeful or gloomy tone, determining its positivity or negativity.",0.85
+7,"You are required to evaluate the sentiment of in the provided review and classify as either 'negative' or 'positive', provide the sentiment label only.",0.65
+7,"When given an English sentence, your task is to analyze it and generate a sentiment word to describe the original text, such as positive or negative.",0.55
+7,"You are required to evaluate the sentence and determine its sentiment, classifying it as a favorable or unfavorable sentiment, based on the text provided",0.75
+8,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+8,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.9
+8,"Please label the sentiment towards the product of the given product review. The sentiment label should be ""positive"" or ""negative"".",0.85
+8,"Given a tweet, classify it as having a positive or negative sentiment.",0.85
+8,Evaluate the customer review and categorize it as either positive or negative sentiment based on its emotional,0.95
+8,Assign a sentiment score to the item in the customer feedback into one,0.9
+8,"Analyze the text and classify whether it expresses a hopeful or gloomy tone, determining its positivity or negativity.",0.85
+8,Evaluate the emotional tone of the item from the,0.75
+8,"When given an English sentence, your task is to analyze it and generate a sentiment word to describe the original text, such as positive or negative.",0.55
+8,"You are required to evaluate the sentence and determine its sentiment, classifying it as a favorable or unfavorable sentiment, based on the text provided",0.75
+9,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+9,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.9
+9,"Please label the sentiment towards the product of the given product review. The sentiment label should be ""positive"" or ""negative"".",0.85
+9,"Given a tweet, classify it as having a positive or negative sentiment.",0.85
+9,Evaluate the customer review and categorize it as either positive or negative sentiment based on its emotional,0.95
+9,Assign a sentiment score to the item in the customer feedback into one,0.9
+9,"Analyze the text and classify whether it expresses a hopeful or gloomy tone, determining its positivity or negativity.",0.85
+9,Evaluate the emotional tone of the item from the,0.75
+9,"When given a customer review, evaluate the emotional tone of",0.65
+9,You are expected to conduct sentiment analysis based on the customer,0.8
+10,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+10,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.9
+10,"Please label the sentiment towards the product of the given product review. The sentiment label should be ""positive"" or ""negative"".",0.85
+10,"Given a tweet, classify it as having a positive or negative sentiment.",0.85
+10,Evaluate the customer review and categorize it as either positive or negative sentiment based on its emotional,0.95
+10,Assign a sentiment score to the item in the customer feedback into one,0.9
+10,"Analyze the text and classify whether it expresses a hopeful or gloomy tone, determining its positivity or negativity.",0.85
+10,Evaluate the emotional tone of the item from the,0.75
+10,"When given customer feedback, perform emotional assessment and categorize it as either positive or negative sentiment, considering the emotional tone of the review.",0.75
+10,You are expected to conduct sentiment analysis based on the customer,0.8
+11,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+11,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.9
+11,"Please label the sentiment towards the product of the given product review. The sentiment label should be ""positive"" or ""negative"".",0.85
+11,"Given a tweet, classify it as having a positive or negative sentiment.",0.85
+11,Evaluate the customer review and categorize it as either positive or negative sentiment based on its emotional,0.95
+11,Assign a sentiment score to the item in the customer feedback into one,0.9
+11,"Analyze the text and classify whether it expresses a hopeful or gloomy tone, determining its positivity or negativity.",0.85
+11,Evaluate the emotional tone of the item from the,0.75
+11,"When given customer feedback, perform emotional assessment and categorize it as either positive or negative sentiment, considering the emotional tone of the review.",0.75
+11,"You need to assess the customer's review and conduct sentiment analysis based on the customer, categorizing it as favorable, unfavorable, or neutral.",0.95
+12,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+12,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.9
+12,"Please label the sentiment towards the product of the given product review. The sentiment label should be ""positive"" or ""negative"".",0.85
+12,"Given a tweet, classify it as having a positive or negative sentiment.",0.85
+12,Evaluate the customer review and categorize it as either positive or negative sentiment based on its emotional,0.95
+12,Assign a sentiment score to the item in the customer feedback into one,0.9
+12,"Analyze the text and classify whether it expresses a hopeful or gloomy tone, determining its positivity or negativity.",0.85
+12,Evaluate the emotional tone of the item from the,0.75
+12,"When assessing user opinion, perform emotional assessment and categorize it as either positive or negative sentiment, considering the emotional tone,",0.8
+12,"You need to assess the customer's review and conduct sentiment analysis based on the customer, categorizing it as favorable, unfavorable, or neutral.",0.95

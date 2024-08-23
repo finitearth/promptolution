@@ -10,3 +10,15 @@ agnews,evopromptde,meta-llama/Meta-Llama-3.1-8B-Instruct,meta-llama/Meta-Llama-3
 agnews,evopromptde,meta-llama/Meta-Llama-3.1-8B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-8B-Instruct,69,0.87
 agnews,evopromptde,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,42,0.87
 agnews,evopromptde,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,47,0.865
+agnews,evopromptde,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,69,0.865
+cr,evopromptga,meta-llama/Meta-Llama-3.1-8B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-8B-Instruct,42,0.885
+cr,evopromptga,meta-llama/Meta-Llama-3.1-8B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-8B-Instruct,47,0.92
+cr,evopromptga,meta-llama/Meta-Llama-3.1-8B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-8B-Instruct,69,0.82
+cr,evopromptga,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,42,0.92
+cr,evopromptga,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,47,0.9
+cr,evopromptga,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,69,0.875
+cr,evopromptde,meta-llama/Meta-Llama-3.1-8B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-8B-Instruct,42,0.91
+cr,evopromptde,meta-llama/Meta-Llama-3.1-8B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-8B-Instruct,47,0.935
+cr,evopromptde,meta-llama/Meta-Llama-3.1-8B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-8B-Instruct,69,0.925
+cr,evopromptde,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,42,0.91
+cr,evopromptde,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,meta-llama/Meta-Llama-3.1-70B-Instruct,47,0.925

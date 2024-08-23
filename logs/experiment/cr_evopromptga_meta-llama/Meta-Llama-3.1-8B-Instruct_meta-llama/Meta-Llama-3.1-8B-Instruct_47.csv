@@ -1,0 +1,121 @@
+step,prompt,score
+1,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+1,Classify the given sentence as either 'negative' or 'positive' sentiment.,0.95
+1,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.9
+1,Determine whether the provided sentence conveys a positive and optimistic tone or a negative and pessimistic tone.,0.9
+1,"Please label the sentiment towards the product of the given product review. The sentiment label should be ""positive"" or ""negative"".",0.85
+1,"Given a tweet, classify it as having a positive or negative sentiment.",0.85
+1,"Given a statement, classify it as expressing a positive or negative opinion.",0.85
+1,Determine whether a provided statement conveys a positive or negative sentiment.,0.85
+1,"Determine the sentiment of a provided sentence, categorizing it as either positive or negative.",0.85
+1,"Determine the sentiment of a product review sentence, labeling it as either positive or negative.",0.85
+2,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+2,Classify the given sentence as either 'negative' or 'positive' sentiment.,0.95
+2,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.9
+2,Determine whether the provided sentence conveys a positive and optimistic tone or a negative and pessimistic tone.,0.9
+2,"Determine the sentiment of a provided text, labeling it as either positive or negative.",0.9
+2,"Please label the sentiment towards the product of the given product review. The sentiment label should be ""positive"" or ""negative"".",0.85
+2,"Given a tweet, classify it as having a positive or negative sentiment.",0.85
+2,"Given a statement, classify it as expressing a positive or negative opinion.",0.85
+2,Determine whether a provided statement conveys a positive or negative sentiment.,0.85
+2,"Determine the sentiment of the provided text, categorizing it as either ""positive"" or ""negative"".",0.85
+3,"Classify the sentiment expressed in the provided review as either ""positive"" or ""negative"", indicating the reviewer's attitude towards the product.",1.0
+3,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+3,Classify the given sentence as either 'negative' or 'positive' sentiment.,0.95
+3,"Assign a sentiment label to the provided product review, categorizing it as either ""positive"" or ""negative"" based on the expressed opinion.",0.95
+3,"Analyze the given sentence to identify its sentiment, categorizing it as either positive (conveying optimism) or negative (conveying pessimism).",0.95
+3,"Analyze the given sentence and categorize it as having a positive, optimistic outlook or a negative, pessimistic attitude.",0.95
+3,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.9
+3,Determine whether the provided sentence conveys a positive and optimistic tone or a negative and pessimistic tone.,0.9
+3,"Determine the sentiment of the provided comment or sentence, categorizing it as either 'positive' or 'negative'.",0.9
+3,"Determine the sentiment of a provided text, labeling it as either positive or negative.",0.9
+4,"Classify the sentiment expressed in the provided review as either ""positive"" or ""negative"", indicating the reviewer's attitude towards the product.",1.0
+4,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+4,"Determine the emotional tone of the provided text, labeling it as either ""positive"" (optimistic) or ""negative"" (pessimistic).",0.95
+4,"Classify the given text as either 'positive' or 'negative' in terms of its sentiment, and return the corresponding label.",0.95
+4,Classify the given sentence as either 'negative' or 'positive' sentiment.,0.95
+4,"Assign a sentiment label to the provided product review, categorizing it as either ""positive"" or ""negative"" based on the expressed opinion.",0.95
+4,Analyze the provided sentence to identify its emotional tone and categorize it as either 'positive' or 'negative'.,0.95
+4,"Analyze the provided comment and label its sentiment as ""positive"" or ""negative"" according to the expressed viewpoint.",0.95
+4,"Analyze the given sentence to identify its sentiment, categorizing it as either positive (conveying optimism) or negative (conveying pessimism).",0.95
+4,"Analyze the given sentence and categorize it as having a positive, optimistic outlook or a negative, pessimistic attitude.",0.95
+5,"Determine the sentiment of the given text, labeling it as ""positive"" or ""negative"" according to the emotional tone and viewpoint conveyed.",1.0
+5,"Determine the sentiment of the given text, categorizing it as either 'positive' or 'negative'.",1.0
+5,"Determine the emotional tone of the given text, categorizing it as either 'positive' or 'negative' to understand the underlying sentiment.",1.0
+5,"Classify the sentiment expressed in the provided review as either ""positive"" or ""negative"", indicating the reviewer's attitude towards the product.",1.0
+5,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+5,"Determine the sentiment of the given text, labeling it as either ""positive"" or ""negative"" based on the expressed emotional tone.",0.95
+5,"Determine the emotional tone of the provided text, labeling it as either ""positive"" (optimistic) or ""negative"" (pessimistic).",0.95
+5,"Detect the sentiment of the provided text, labeling it as 'positive' or 'negative' to reflect its emotional tone.",0.95
+5,"Classify the given text as either 'positive' or 'negative' in terms of its sentiment, and return the corresponding label.",0.95
+5,Classify the given sentence as either 'negative' or 'positive' sentiment.,0.95
+6,"Determine the sentiment of the given text, labeling it as ""positive"" or ""negative"" according to the emotional tone and viewpoint conveyed.",1.0
+6,"Determine the sentiment of the given text, categorizing it as either 'positive' or 'negative'.",1.0
+6,"Determine the emotional tone of the given text, categorizing it as either 'positive' or 'negative' to understand the underlying sentiment.",1.0
+6,"Classify the sentiment expressed in the provided review as either ""positive"" or ""negative"", indicating the reviewer's attitude towards the product.",1.0
+6,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+6,"Determine the sentiment of the given text, labeling it as either ""positive"" or ""negative"" based on the expressed emotional tone.",0.95
+6,"Determine the emotional tone of the provided text, labeling it as either ""positive"" (optimistic) or ""negative"" (pessimistic).",0.95
+6,"Detect the sentiment of the provided text, labeling it as 'positive' or 'negative' to reflect its emotional tone.",0.95
+6,"Classify the given text as either 'positive' or 'negative' in terms of its sentiment, and return the corresponding label.",0.95
+6,Classify the given sentence as either 'negative' or 'positive' sentiment.,0.95
+7,"Determine the sentiment of the given text, labeling it as ""positive"" or ""negative"" according to the emotional tone and viewpoint conveyed.",1.0
+7,"Determine the sentiment of the given text, categorizing it as either 'positive' or 'negative'.",1.0
+7,"Determine the emotional tone of the given text, categorizing it as either 'positive' or 'negative' to understand the underlying sentiment.",1.0
+7,"Classify the sentiment expressed in the provided review as either ""positive"" or ""negative"", indicating the reviewer's attitude towards the product.",1.0
+7,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+7,"Determine the sentiment of the given text, labeling it as either ""positive"" or ""negative"" based on the expressed emotional tone.",0.95
+7,"Determine the emotional tone of the provided text, labeling it as either ""positive"" (optimistic) or ""negative"" (pessimistic).",0.95
+7,"Detect the sentiment of the provided text, labeling it as 'positive' or 'negative' to reflect its emotional tone.",0.95
+7,"Classify the given text as either 'positive' or 'negative' in terms of its sentiment, and return the corresponding label.",0.95
+7,Classify the given sentence as either 'negative' or 'positive' sentiment.,0.95
+8,"Determine the sentiment of the given text, labeling it as ""positive"" or ""negative"" according to the emotional tone and viewpoint conveyed.",1.0
+8,"Determine the sentiment of the given text, categorizing it as either 'positive' or 'negative'.",1.0
+8,"Determine the emotional tone of the given text, categorizing it as either 'positive' or 'negative' to understand the underlying sentiment.",1.0
+8,"Classify the sentiment expressed in the provided review as either ""positive"" or ""negative"", indicating the reviewer's attitude towards the product.",1.0
+8,"Analyze the textual content and categorize its sentiment as ""positive"" or ""negative"", capturing the underlying emotional tone or viewpoint.",1.0
+8,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+8,"Determine the sentiment of the given text, labeling it as either ""positive"" or ""negative"" based on the expressed emotional tone.",0.95
+8,"Determine the emotional tone of the provided text, labeling it as either ""positive"" (optimistic) or ""negative"" (pessimistic).",0.95
+8,"Determine the emotional tone of the provided text, categorizing it as either ""positive"" or ""negative"" based on the sentiment conveyed.",0.95
+8,"Detect the sentiment of the provided text, labeling it as 'positive' or 'negative' to reflect its emotional tone.",0.95
+9,"Determine the sentiment of the given text, labeling it as ""positive"" or ""negative"" according to the emotional tone and viewpoint conveyed.",1.0
+9,"Determine the sentiment of the given text, categorizing it as either 'positive' or 'negative'.",1.0
+9,"Determine the emotional tone of the given text, categorizing it as either 'positive' or 'negative' to understand the underlying sentiment.",1.0
+9,"Classify the sentiment of the given text as ""positive"" or ""negative"", identifying the emotional tone and underlying perspective it conveys.",1.0
+9,"Classify the sentiment expressed in the provided review as either ""positive"" or ""negative"", indicating the reviewer's attitude towards the product.",1.0
+9,"Analyze the textual content and categorize its sentiment as ""positive"" or ""negative"", capturing the underlying emotional tone or viewpoint.",1.0
+9,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+9,"Determine the sentiment of the given text, labeling it as either ""positive"" or ""negative"" based on the expressed emotional tone.",0.95
+9,"Determine the emotional tone of the provided text, labeling it as either ""positive"" (optimistic) or ""negative"" (pessimistic).",0.95
+9,"Determine the emotional tone of the provided text, categorizing it as either ""positive"" or ""negative"" based on the sentiment conveyed.",0.95
+10,"Determine the sentiment of the given text, labeling it as ""positive"" or ""negative"" according to the emotional tone and viewpoint conveyed.",1.0
+10,"Determine the sentiment of the given text, categorizing it as either 'positive' or 'negative'.",1.0
+10,"Determine the emotional tone of the given text, categorizing it as either 'positive' or 'negative' to understand the underlying sentiment.",1.0
+10,"Classify the sentiment of the given text as ""positive"" or ""negative"", identifying the emotional tone and underlying perspective it conveys.",1.0
+10,"Classify the sentiment expressed in the provided review as either ""positive"" or ""negative"", indicating the reviewer's attitude towards the product.",1.0
+10,"Analyze the textual content and categorize its sentiment as ""positive"" or ""negative"", capturing the underlying emotional tone or viewpoint.",1.0
+10,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+10,"Determine the sentiment of the given text, labeling it as either ""positive"" or ""negative"" based on the expressed emotional tone.",0.95
+10,"Determine the emotional tone of the provided text, labeling it as either ""positive"" (optimistic) or ""negative"" (pessimistic).",0.95
+10,"Determine the emotional tone of the provided text, categorizing it as either ""positive"" or ""negative"" based on the sentiment conveyed.",0.95
+11,"Determine the sentiment of the given text, labeling it as ""positive"" or ""negative"" according to the emotional tone and viewpoint conveyed.",1.0
+11,"Determine the sentiment of the given text, categorizing it as either 'positive' or 'negative'.",1.0
+11,"Determine the emotional tone of the given text, categorizing it as either 'positive' or 'negative' to understand the underlying sentiment.",1.0
+11,"Classify the sentiment of the given text as ""positive"" or ""negative"", identifying the emotional tone and underlying perspective it conveys.",1.0
+11,"Classify the sentiment expressed in the provided review as either ""positive"" or ""negative"", indicating the reviewer's attitude towards the product.",1.0
+11,"Analyze the textual content and categorize its sentiment as ""positive"" or ""negative"", capturing the underlying emotional tone or viewpoint.",1.0
+11,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+11,"Determine the sentiment of the given text, labeling it as either ""positive"" or ""negative"" based on the expressed emotional tone.",0.95
+11,"Determine the emotional tone of the provided text, labeling it as either ""positive"" (optimistic) or ""negative"" (pessimistic).",0.95
+11,"Determine the emotional tone of the provided text, categorizing it as either ""positive"" or ""negative"" based on the sentiment conveyed.",0.95
+12,"Determine the sentiment of the given text, labeling it as ""positive"" or ""negative"" according to the emotional tone and viewpoint conveyed.",1.0
+12,"Determine the sentiment of the given text, categorizing it as either 'positive' or 'negative'.",1.0
+12,"Determine the emotional tone of the given text, categorizing it as either 'positive' or 'negative' to understand the underlying sentiment.",1.0
+12,"Classify the sentiment of the given text as ""positive"" or ""negative"", identifying the emotional tone and underlying perspective it conveys.",1.0
+12,"Classify the sentiment expressed in the provided review as either ""positive"" or ""negative"", indicating the reviewer's attitude towards the product.",1.0
+12,"Analyze the textual content and categorize its sentiment as ""positive"" or ""negative"", capturing the underlying emotional tone or viewpoint.",1.0
+12,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+12,"Determine the sentiment of the given text, labeling it as either ""positive"" or ""negative"" based on the expressed emotional tone.",0.95
+12,"Determine the emotional tone of the provided text, labeling it as either ""positive"" (optimistic) or ""negative"" (pessimistic).",0.95
+12,"Determine the emotional tone of the provided text, categorizing it as either ""positive"" or ""negative"" based on the sentiment conveyed.",0.95
