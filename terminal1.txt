@@ -1,0 +1,177 @@
+. : File C:\Users\schla\OneDrive\Dokumente\WindowsPowerShell\profile.ps1 cannot be loaded because
+running scripts is disabled on this system. For more information, see about_Execution_Policies at
+running scripts is disabled on this system. For more information, see about_Execution_Policies at
+https:/go.microsoft.com/fwlink/?LinkID=135170.
+At line:1 char:3
++ . 'C:\Users\schla\OneDrive\Dokumente\WindowsPowerShell\profile.ps1'
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+https:/go.microsoft.com/fwlink/?LinkID=135170.
+At line:1 char:3
++ . 'C:\Users\schla\OneDrive\Dokumente\WindowsPowerShell\profile.ps1'
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+At line:1 char:3
++ . 'C:\Users\schla\OneDrive\Dokumente\WindowsPowerShell\profile.ps1'
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++ . 'C:\Users\schla\OneDrive\Dokumente\WindowsPowerShell\profile.ps1'
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : SecurityError: (:) [], PSSecurityException
+    + CategoryInfo          : SecurityError: (:) [], PSSecurityException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+    + FullyQualifiedErrorId : UnauthorizedAccess
+PS C:\Users\schla\git\promptolution> & C:/Users/schla/AppData/Local/pypoetry/Cache/virtualenvs/promptolution-BSFNTM07-py3.11/Scripts/python.exe c:/Users/schla/git/promptolution/scripts/experiment_runs.py
+Could not import torch or transformers in local_llm.py: No module named 'torch'
+Could not import torch or transformers in local_llm.py: No module named 'torch'
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                            | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|███████████████████████████████████████████████████████████████████| 12/12 [15:09<00:00, 68.43s/it]�WWe did it 🥳
+Final prompt: Determine the news article's primary category - World, Sports, Business, or Tech - by identifying its central theme or subject matter., with score: 1.0
+Traceback (most recent call last):
+  File "c:\Users\schla\git\promptolution\scripts\experiment_runs.py", line 112, in <module>
+    main()
+  File "c:\Users\schla\git\promptolution\scripts\experiment_runs.py", line 50, in main
+    run_experiment(config)
+  File "c:\Users\schla\git\promptolution\scripts\experiment_runs.py", line 93, in run_experiment
+    eval_task = get_tasks(config, split="test")[0]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: get_tasks() got an unexpected keyword argument 'split'
+100%|███████████████████████████████████████████████████████████████████| 12/12 [15:09<00:00, 75.80s/it]
+PS C:\Users\schla\git\promptolution> & C:/Users/schla/AppData/Local/pypoetry/Cache/virtualenvs/promptolution-BSFNTM07-py3.11/Scripts/python.exe c:/Users/schla/git/promptolution/scripts/experiment_runs.py
+Could not import torch or transformers in local_llm.py: No module named 'torch'
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [13:22<00:00, 55.66s/it]�WWe did it🥳
+Final prompt: Determine the primary topic of the provided news article, categorizing it as "World", "Sports", "Business", or "Tech" accordingly., with score: 1.0
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [13:55<00:00, 69.63s/it]
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [16:54<00:00, 55.80s/it]�WWe did it🥳
+Final prompt: Classify a news article into its corresponding category (World, Sports, Business, or Tech) based on its primary focus., with score: 0.95
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [17:28<00:00, 87.36s/it]
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [10:57<00:00, 66.01s/it]�WWe did it🥳
+Final prompt: Read the provided news article and categorize its main topic into one of the four categories: World, Sports, Business, or Tech., with score: 1.0
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [11:26<00:00, 57.24s/it]
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [11:49<00:00, 60.15s/it]�WWe did it🥳
+Final prompt: Categorize a news article into one of four areas - World, Sports, Business, or Tech - by identifying its primary subject or theme., with score: 1.0
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [12:33<00:00, 62.78s/it]
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [11:46<00:00, 60.78s/it]�WWe did it🥳
+Final prompt: Determine the primary theme of a given news article and classify it under one of the four categories: World, Sports, Tech, or Business., with score: 0.95
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [12:32<00:00, 62.74s/it]
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [13:15<00:00, 68.07s/it]�WWe did it🥳
+Final prompt: Determine the most suitable category (World, Sports, Business, or Tech) for a news article based on its dominant subject matter., with score: 1.0
+100%|██████████████████████████████████████████████████████████████████████████████| 12/12 [14:07<00:00, 70.65s/it]
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "c:\Users\schla\git\promptolution\scripts\experiment_runs.py", line 112, in <module>
+    main()
+  File "c:\Users\schla\git\promptolution\scripts\experiment_runs.py", line 50, in main
+    run_experiment(config)
+, in get_optimizer
+    return EvoPromptDE(donor_random=config.donor_random, *args, **kwargs)
+                                    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Config' object has no attribute 'donor_random'. Did you mean: 'donar_random'?
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s] 
+PS C:\Users\schla\git\promptolution> & C:/Users/schla/AppData/Local/pypoetry/Cache/virtualenvs/promptolution-BSFNTM07-py3.11/Scripts/python.exe c:/Users/schla/git/promptolution/scripts/experiment_runs.py
+Could not import torch or transformers in local_llm.py: No module named 'torch'
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|█████████████████████████████████████████████████████████████████████████████| 12/12 [22:22<00:00, 111.85s/it] 
+🎉We did it🥳
+Final prompt: Your task is to classify the news item as "World", "Sports", "Tech" or "Business"., with score: 0.95
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|█████████████████████████████████████████████████████████████████████████████| 12/12 [25:59<00:00, 129.95s/it]
+🎉We did it🥳
+Final prompt: Your task is to classify the news item as "World", "Sports", "Tech" or "Business"., with score: 0.9   
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|█████████████████████████████████████████████████████████████████████████████| 12/12 [24:37<00:00, 123.10s/it]
+🎉We did it🥳
+Final prompt: Your objective is to classify a news article into one of four themes: World, Sports, Business and Tech., with score: 0.85
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|█████████████████████████████████████████████████████████████████████████████| 12/12 [26:31<00:00, 132.65s/it]
+🎉We did it🥳
+Final prompt: Classify the topic of the following news as "World", "Sports", "Tech" or "Business"., with score: 1.0 
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+100%|█████████████████████████████████████████████████████████████████████████████| 12/12 [25:51<00:00, 129.26s/it]
+🎉We did it🥳
+Final prompt: Your task is to classify the news item as "World", "Sports", "Tech" or "Business"., with score: 0.9   
+Task: The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.
+  0%|                                                                                       | 0/12 [00:00<?, ?it/s]�🚨🚨HHEREEE WEEEE GOOO🚨🚨🚨
+ 17%|█████████████                                                                 | 2/12 [03:44<18:56, 113.62s/it]Traceback (most recent call last):
+  File "C:\Python311\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\base_events.py", line 653, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\schla\git\promptolution\promptolution\llms\api_llm.py", line 67, in _get_response
+    responses = await asyncio.gather(*tasks)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\schla\git\promptolution\promptolution\llms\api_llm.py", line 28, in invoke_model
+    response = await asyncio.to_thread(model.invoke, [HumanMessage(content=prompt)])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python311\Lib\asyncio\runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\runners.py", line 123, in run
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\schla\git\promptolution\scripts\experiment_runs.py", line 116, in <module>
+    main()
+  File "c:\Users\schla\git\promptolution\scripts\experiment_runs.py", line 54, in main
+    run_experiment(config)
+  File "c:\Users\schla\git\promptolution\scripts\experiment_runs.py", line 92, in run_experiment
+    optimizer.optimize(config.n_steps)
+  File "C:\Users\schla\git\promptolution\promptolution\optimizers\evoprompt_de.py", line 45, in optimize
+    child_scores = self.task.evaluate(child_prompts, self.predictor)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\schla\git\promptolution\promptolution\tasks\classification_tasks.py", line 68, in evaluate
+    preds = predictor.predict(prompts, xs_subsample)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\schla\git\promptolution\promptolution\predictors\classificator.py", line 21, in predict
+    preds = self.llm.get_response([prompt + "\n" + x for prompt in prompts for x in xs])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\schla\git\promptolution\promptolution\llms\api_llm.py", line 50, in get_response
+    responses = asyncio.run(self._get_response(prompts))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\runners.py", line 189, in run
+    with Runner(debug=debug) as runner:
+  File "C:\Python311\Lib\asyncio\runners.py", line 63, in __exit__
+    self.close()
+  File "C:\Python311\Lib\asyncio\runners.py", line 73, in close
+    loop.run_until_complete(loop.shutdown_default_executor())
+  File "C:\Python311\Lib\asyncio\base_events.py", line 640, in run_until_complete
+    self.run_forever()
+  File "C:\Python311\Lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Python311\Lib\asyncio\base_events.py", line 607, in run_forever
+    self._run_once()
+  File "C:\Python311\Lib\asyncio\base_events.py", line 1884, in _run_once
+    event_list = self._selector.select(timeout)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\windows_events.py", line 444, in select
+    self._poll(timeout)
+  File "C:\Python311\Lib\asyncio\windows_events.py", line 817, in _poll

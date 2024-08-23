@@ -1,0 +1,121 @@
+step,prompt,score
+1,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.9
+1,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.9
+1,"Your objective is to classify a news article into one of four themes: World, Sports, Business and Tech.",0.9
+1,"You will be required to classify a news article as World, Sports, Business, or Tech based on its primary topic.",0.9
+1,"In this task, you are given a news article. Your task is to classify the article to one out of the four topics ""World"", ""Sports"", ""Business"", ""Tech"" if the article""s main topic is relevant to the world, sports, business, and technology, correspondingly. If you are not sure about the topic, choose the closest option.",0.9
+1,"Give the main topic of the news article and then choose from World, Sports, Tech and Business.",0.9
+1,"Determine the theme of the news item. Choose from World, Sports, Business and Tech.",0.9
+1,"Classify the news article into its relevant category - World, Sports, Business, or Tech - based on its main theme.",0.9
+1,"Categorize the news article into one of the four categories (World, Sports, Business, or Tech) based on its central theme or main idea.",0.9
+1,"Categorize the news article into one of four categories: World, Sports, Business, or Tech, based on its content.",0.9
+2,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.9
+2,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.9
+2,"Your objective is to classify a news article into one of four themes: World, Sports, Business and Tech.",0.9
+2,"You will be required to classify a news article as World, Sports, Business, or Tech based on its primary topic.",0.9
+2,"In this task, you are given a news article. Your task is to classify the article to one out of the four topics ""World"", ""Sports"", ""Business"", ""Tech"" if the article""s main topic is relevant to the world, sports, business, and technology, correspondingly. If you are not sure about the topic, choose the closest option.",0.9
+2,"Give the main topic of the news article and then choose from World, Sports, Tech and Business.",0.9
+2,"Determine the theme of the news item. Choose from World, Sports, Business and Tech.",0.9
+2,"Classify the news article into its relevant category - World, Sports, Business, or Tech - based on its main theme.",0.9
+2,"Classify the news article into its most relevant category - World, Sports, Business, or Tech - based on its overarching topic or theme.",0.9
+2,"Classify the given news article into one of the four categories - World, Sports, Business, or Tech - based on its content and main theme.",0.9
+3,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.9
+3,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.9
+3,"Your objective is to classify a news article into one of four themes: World, Sports, Business and Tech.",0.9
+3,"You will be required to classify a news article as World, Sports, Business, or Tech based on its primary topic.",0.9
+3,"In this task, you are given a news article. Your task is to classify the article to one out of the four topics ""World"", ""Sports"", ""Business"", ""Tech"" if the article""s main topic is relevant to the world, sports, business, and technology, correspondingly. If you are not sure about the topic, choose the closest option.",0.9
+3,"Identify the primary category of a given news article, selecting from World, Sports, Business, or Tech, according to its dominant theme or content.",0.9
+3,"Identify the most fitting category (World, Sports, Business, or Tech) for the given news article by analyzing its main topic and theme.",0.9
+3,"Give the main topic of the news article and then choose from World, Sports, Tech and Business.",0.9
+3,"Determine the theme of the news item. Choose from World, Sports, Business and Tech.",0.9
+3,"Determine the main category of the given news article, selecting from World, Sports, Business, or Tech, based on its primary subject matter.",0.9
+4,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.9
+4,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.9
+4,"Your objective is to classify a news article into one of four themes: World, Sports, Business and Tech.",0.9
+4,"You will be required to classify a news article as World, Sports, Business, or Tech based on its primary topic.",0.9
+4,"In this task, you are given a news article. Your task is to classify the article to one out of the four topics ""World"", ""Sports"", ""Business"", ""Tech"" if the article""s main topic is relevant to the world, sports, business, and technology, correspondingly. If you are not sure about the topic, choose the closest option.",0.9
+4,"Identify the primary category of a given news article, selecting from World, Sports, Business, or Tech, according to its dominant theme or content.",0.9
+4,"Identify the most fitting category (World, Sports, Business, or Tech) for the given news article by analyzing its main topic and theme.",0.9
+4,"Give the main topic of the news article and then choose from World, Sports, Tech and Business.",0.9
+4,"Determine the theme of the news item. Choose from World, Sports, Business and Tech.",0.9
+4,"Determine the main category of the given news article, selecting from World, Sports, Business, or Tech, based on its primary subject matter.",0.9
+5,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.9
+5,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.9
+5,"Your objective is to classify a news article into one of four themes: World, Sports, Business and Tech.",0.9
+5,"You will be required to classify a news article as World, Sports, Business, or Tech based on its primary topic.",0.9
+5,"In this task, you are given a news article. Your task is to classify the article to one out of the four topics ""World"", ""Sports"", ""Business"", ""Tech"" if the article""s main topic is relevant to the world, sports, business, and technology, correspondingly. If you are not sure about the topic, choose the closest option.",0.9
+5,"Identify the primary category of a given news article, selecting from World, Sports, Business, or Tech, according to its dominant theme or content.",0.9
+5,"Identify the most fitting category (World, Sports, Business, or Tech) for the given news article by analyzing its main topic and theme.",0.9
+5,"Give the main topic of the news article and then choose from World, Sports, Tech and Business.",0.9
+5,"Determine the theme of the news item. Choose from World, Sports, Business and Tech.",0.9
+5,"Determine the primary topic of the news article and assign it to one of the following categories: World, Sports, Business, or Tech.",0.9
+6,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.9
+6,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.9
+6,"Your objective is to classify a news article into one of four themes: World, Sports, Business and Tech.",0.9
+6,"You will be required to classify a news article as World, Sports, Business, or Tech based on its primary topic.",0.9
+6,"In this task, you are given a news article. Your task is to classify the article to one out of the four topics ""World"", ""Sports"", ""Business"", ""Tech"" if the article""s main topic is relevant to the world, sports, business, and technology, correspondingly. If you are not sure about the topic, choose the closest option.",0.9
+6,"Identify the primary category of a given news article, selecting from World, Sports, Business, or Tech, according to its dominant theme or content.",0.9
+6,"Identify the most fitting category (World, Sports, Business, or Tech) for the given news article by analyzing its main topic and theme.",0.9
+6,"Give the main topic of the news article and then choose from World, Sports, Tech and Business.",0.9
+6,"Determine the theme of the news item. Choose from World, Sports, Business and Tech.",0.9
+6,"Determine the primary topic of the news article and assign it to one of the following categories: World, Sports, Business, or Tech.",0.9
+7,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.9
+7,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.9
+7,"Your objective is to classify a news article into one of four themes: World, Sports, Business and Tech.",0.9
+7,"You will be required to classify a news article as World, Sports, Business, or Tech based on its primary topic.",0.9
+7,"In this task, you are given a news article. Your task is to classify the article to one out of the four topics ""World"", ""Sports"", ""Business"", ""Tech"" if the article""s main topic is relevant to the world, sports, business, and technology, correspondingly. If you are not sure about the topic, choose the closest option.",0.9
+7,"Identify the primary category of a given news article, selecting from World, Sports, Business, or Tech, according to its dominant theme or content.",0.9
+7,"Identify the most fitting category (World, Sports, Business, or Tech) for the given news article by analyzing its main topic and theme.",0.9
+7,"Give the main topic of the news article and then choose from World, Sports, Tech and Business.",0.9
+7,"Determine the theme of the news item. Choose from World, Sports, Business and Tech.",0.9
+7,"Determine the primary topic of the news article and assign it to one of the following categories: World, Sports, Business, or Tech.",0.9
+8,"Determine the primary theme of a given news article and classify it under one of the four categories: World, Sports, Tech, or Business.",0.95
+8,"Category a news article into one of four main topics - ""World"", ""Sports"", ""Business"", or ""Tech"" - by determining which one aligns most closely with its primary subject matter.",0.95
+8,"Categorize the news article into its respective domain - World, Sports, Business, or Tech - by identifying its central theme.",0.95
+8,"Categorize a news article into one of four categories - World, Sports, Business, or Tech - by identifying the topic that best aligns with its content.",0.95
+8,"Categorize a news article into its respective theme, choosing from World, Sports, Business, or Tech.",0.95
+8,"Categorize a given news article into one of the four categories: World, Sports, Business, or Tech based on its main theme.",0.95
+8,"Categorize a given news article into one of the four categories - World, Sports, Business, or Tech - by identifying its main topic, or choose the closest option if uncertain.",0.95
+8,"Categorize a given news article into its respective theme, choosing from World, Sports, Business, or Tech.",0.95
+8,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.9
+8,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.9
+9,"Determine the primary theme of a given news article and classify it under one of the four categories: World, Sports, Tech, or Business.",0.95
+9,"Category a news article into one of four main topics - ""World"", ""Sports"", ""Business"", or ""Tech"" - by determining which one aligns most closely with its primary subject matter.",0.95
+9,"Categorize the news article into its respective domain - World, Sports, Business, or Tech - by identifying its central theme.",0.95
+9,"Categorize a news article into one of four categories - World, Sports, Business, or Tech - by identifying the topic that best aligns with its content.",0.95
+9,"Categorize a news article into its respective theme, choosing from World, Sports, Business, or Tech.",0.95
+9,"Categorize a given news article into one of the four categories: World, Sports, Business, or Tech based on its main theme.",0.95
+9,"Categorize a given news article into one of the four categories - World, Sports, Business, or Tech - by identifying its main topic, or choose the closest option if uncertain.",0.95
+9,"Categorize a given news article into its respective theme, choosing from World, Sports, Business, or Tech.",0.95
+9,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.9
+9,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.9
+10,"Determine the primary theme of a given news article and classify it under one of the four categories: World, Sports, Tech, or Business.",0.95
+10,"Category a news article into one of four main topics - ""World"", ""Sports"", ""Business"", or ""Tech"" - by determining which one aligns most closely with its primary subject matter.",0.95
+10,"Categorize the news article into its respective domain - World, Sports, Business, or Tech - by identifying its central theme.",0.95
+10,"Categorize a news article into one of four categories - World, Sports, Business, or Tech - by identifying the topic that best aligns with its content.",0.95
+10,"Categorize a news article into its respective theme, choosing from World, Sports, Business, or Tech.",0.95
+10,"Categorize a given news article into one of the four categories: World, Sports, Business, or Tech based on its main theme.",0.95
+10,"Categorize a given news article into one of the four categories - World, Sports, Business, or Tech - by identifying its main topic, or choose the closest option if uncertain.",0.95
+10,"Categorize a given news article into its respective theme, choosing from World, Sports, Business, or Tech.",0.95
+10,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.9
+10,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.9
+11,"Determine the primary theme of a given news article and classify it under one of the four categories: World, Sports, Tech, or Business.",0.95
+11,"Category a news article into one of four main topics - ""World"", ""Sports"", ""Business"", or ""Tech"" - by determining which one aligns most closely with its primary subject matter.",0.95
+11,"Categorize the news article into its respective domain - World, Sports, Business, or Tech - by identifying its central theme.",0.95
+11,"Categorize a news article into one of four categories - World, Sports, Business, or Tech - by identifying the topic that best aligns with its content.",0.95
+11,"Categorize a news article into its respective theme, choosing from World, Sports, Business, or Tech.",0.95
+11,"Categorize a given news article into one of the four categories: World, Sports, Business, or Tech based on its main theme.",0.95
+11,"Categorize a given news article into one of the four categories - World, Sports, Business, or Tech - by identifying its main topic, or choose the closest option if uncertain.",0.95
+11,"Categorize a given news article into its respective theme, choosing from World, Sports, Business, or Tech.",0.95
+11,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.9
+11,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.9
+12,"Determine the primary theme of a given news article and classify it under one of the four categories: World, Sports, Tech, or Business.",0.95
+12,"Category a news article into one of four main topics - ""World"", ""Sports"", ""Business"", or ""Tech"" - by determining which one aligns most closely with its primary subject matter.",0.95
+12,"Categorize the news article into its respective domain - World, Sports, Business, or Tech - by identifying its central theme.",0.95
+12,"Categorize a news article into one of four categories - World, Sports, Business, or Tech - by identifying the topic that best aligns with its content.",0.95
+12,"Categorize a news article into its respective theme, choosing from World, Sports, Business, or Tech.",0.95
+12,"Categorize a given news article into one of the four categories: World, Sports, Business, or Tech based on its main theme.",0.95
+12,"Categorize a given news article into one of the four categories - World, Sports, Business, or Tech - by identifying its main topic, or choose the closest option if uncertain.",0.95
+12,"Categorize a given news article into its respective theme, choosing from World, Sports, Business, or Tech.",0.95
+12,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.9
+12,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.9

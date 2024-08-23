@@ -1,17 +1,17 @@
 import json
 from pathlib import Path
-from typing import List
+from typing import Dict, List, Literal, Optional
 
 from promptolution.tasks.base_task import BaseTask, DummyTask
 from promptolution.tasks.classification_tasks import ClassificationTask
 
 
-def get_tasks(config) -> List[BaseTask]:
+def get_tasks(config, split: Literal["dev", "test"] = "dev") -> List[BaseTask]:
     task_names = config.task_name.split(",")
 
     task_list = []
     for task_name in task_names:
-        task_description_path = Path(config.ds_path) / Path(task_name) / Path("description.json")
+        task_description_path = Path(config.ds_path) / Path("description.json")
         task_description = json.loads(task_description_path.read_text())
         if task_name == "dummy":
             task = DummyTask()

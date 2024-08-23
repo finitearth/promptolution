@@ -1,5 +1,6 @@
 from configparser import ConfigParser
 from logging import INFO, Logger
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -18,7 +19,6 @@ logger.setLevel(INFO)
 
 def main():
     # read experiments ini
-    i = 0
     all_configs = ConfigParser()
     all_configs.read("configs/experiments.ini")
     task_names = all_configs["task"]["task_name"].split(",")
@@ -35,21 +35,25 @@ def main():
                         config = Config(
                             task_name=task_name,
                             ds_path=f"data_sets/cls/{task_name}",
-                            n_steps=all_configs["task"]["steps"],
+                            n_steps=int(all_configs["task"]["steps"]),
                             optimizer=optimizer_name,
                             meta_llm=meta_llm,
                             downstream_llm=downstream_llm,
                             meta_prompt_path=meta_prompt_path,
-                            init_pop_size=all_configs["optimizer"]["init_population"],
+                            init_pop_size=int(all_configs["optimizer"]["init_population"]),
                             logging_dir=f"logs/experiment/{task_name}_{optimizer_name}_{meta_llm}_{evaluator_llm}_{random_seed}.csv",
                             include_task_desc=False,
                             random_seed=random_seed,
                             evaluation_llm=evaluator_llm,
+                            selection_mode="random",
+                            donor_random=False,
                         )
+                        # skip already performed experiments
+                        if Path(config.logging_dir).exists():
+                            continue
                         run_experiment(config)
 
-def run_experiment(config):
-    config = Config()
+def run_experiment(config: Config):
     task = get_tasks(config)[0]
     init_populations = task.initial_population
     # subsample using random seed

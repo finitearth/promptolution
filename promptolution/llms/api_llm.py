@@ -1,4 +1,8 @@
 import asyncio
+import requests
+import time
+from logging import INFO, Logger
+
 
 from langchain_anthropic import ChatAnthropic
 from langchain_community.chat_models import ChatDeepInfra
@@ -8,6 +12,9 @@ from langchain_openai import ChatOpenAI
 # possible model names we'll use here are:
 # gpt-4o-2024-05-13, gpt-3.5-turbo-0125
 # claude-3-opus-20240229, claude-3-haiku-20240307
+
+logger = Logger(__name__)
+logger.setLevel(INFO)
 
 
 OPENAI_API_KEY = open("openaitoken.txt", "r").read()
@@ -34,8 +41,21 @@ class APILLM:
             raise ValueError(f"Unknown model: {model_id}")
 
     def get_response(self, prompts: list[str]) -> list[str]:
-        responses = asyncio.run(self._get_response(prompts))
-        return responses
+        max_retries = 100
+        delay = 3 
+        attempts = 0
+        
+        while attempts < max_retries:
+            try:
+                responses = asyncio.run(self._get_response(prompts))
+                return responses
+            except requests.exceptions.ConnectionError as e:
+                attempts += 1
+                logger.critical(f"Connection error: {e}. Attempt {attempts}/{max_retries}. Retrying in {delay} seconds...")
+                time.sleep(delay)
+        
+        # If the loop exits, it means max retries were reached
+        raise requests.exceptions.ConnectionError("Max retries exceeded. Connection could not be established.")
 
     async def _get_response(self, prompts: list[str], max_concurrent_calls=200) -> list[str]:
         semaphore = asyncio.Semaphore(max_concurrent_calls)  # Limit the number of concurrent calls
