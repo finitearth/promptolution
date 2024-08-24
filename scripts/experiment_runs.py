@@ -47,7 +47,6 @@ def main():
                             init_pop_size=int(all_configs["optimizer"]["init_population"]),
                             logging_dir=f"logs/{experiment_name}/{task_name}_{optimizer_name}_{meta_llm}_{evaluator_llm}_{random_seed}.csv",
                             experiment_name=experiment_name,
-                            include_task_desc=False,
                             random_seed=random_seed,
                             evaluation_llm=evaluator_llm,
                             selection_mode="random",
@@ -76,8 +75,7 @@ def run_experiment(config: Config):
         ProgressBarCallback(config.n_steps),
     ]
     prompt_template = open(config.meta_prompt_path, "r").read()
-    if config.include_task_desc:
-        prompt_template = prompt_template.replace("<task_desc>", task.description)  # TODO how to predict in evaluate
+    prompt_template = prompt_template.replace("<task_desc>", task.description)
 
     if "local" in config.meta_llm:
         meta_llm = get_llm(config.meta_llm, batch_size=config.meta_bs)
@@ -112,7 +110,7 @@ def run_experiment(config: Config):
             "meta_llm": config.meta_llm,
             "downstream_llm": config.downstream_llm,
             "evaluation_llm": config.evaluation_llm,
-            "task_description": config.include_task_desc,
+            "meta_prompt_path": config.meta_prompt_path,
             "random_seed": config.random_seed,
             "test_score": test_score,
         },
