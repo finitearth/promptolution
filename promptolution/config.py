@@ -14,6 +14,7 @@ class Config:
     evaluation_llm: str
     init_pop_size: int = 10
     logging_dir: str = "logs/run.csv"
+    experiment_name: str = "experiment"
     include_task_desc: bool = False
     random_seed: int = 42
 
@@ -39,6 +40,7 @@ class Config:
         self.evaluation_llm = self.config["evaluator_llm"]["name"]
         self.init_pop_size = int(self.config["optimizer"]["init_pop_size"])
         self.logging_dir = self.config["logging"]["dir"]
+        self.experiment_name = self.config["experiment"]["name"]
 
         if "include_task_desc" in self.config["task"]:
             self.include_task_desc = self.config["task"]["include_task_desc"] == "True"
