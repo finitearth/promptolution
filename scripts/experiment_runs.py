@@ -1,12 +1,12 @@
 from configparser import ConfigParser
+from argparse import ArgumentParser
 from logging import INFO, Logger
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
-from promptolution.callbacks import (BestPromptCallback, CSVCallback,
-                                     ProgressBarCallback)
+from promptolution.callbacks import BestPromptCallback, CSVCallback, ProgressBarCallback
 from promptolution.config import Config
 from promptolution.llms import get_llm
 from promptolution.optimizers import get_optimizer
@@ -19,8 +19,12 @@ logger.setLevel(INFO)
 
 def main():
     # read experiments ini
+    arg_parser = ArgumentParser()
+    arg_parser.add_argument('-e', '--experiment', type=str, help='Experiment Config Filepath')
+    args = arg_parser.parse_args()
     all_configs = ConfigParser()
-    all_configs.read("configs/experiments.ini")
+    all_configs.read(args.experiment)
+    experiment_name = all_configs["experiment"]["name"]
     task_names = all_configs["task"]["task_name"].split(",")
     meta_prompt_paths = all_configs["optimizer"]["meta_prompt_path"].split(",")
     optimizer_names = all_configs["optimizer"]["name"].split(",")
@@ -41,7 +45,7 @@ def main():
                             downstream_llm=downstream_llm,
                             meta_prompt_path=meta_prompt_path,
                             init_pop_size=int(all_configs["optimizer"]["init_population"]),
-                            logging_dir=f"logs/experiment/{task_name}_{optimizer_name}_{meta_llm}_{evaluator_llm}_{random_seed}.csv",
+                            logging_dir=f"logs/{experiment_name}/{task_name}_{optimizer_name}_{meta_llm}_{evaluator_llm}_{random_seed}.csv",
                             include_task_desc=False,
                             random_seed=random_seed,
                             evaluation_llm=evaluator_llm,
@@ -52,6 +56,7 @@ def main():
                         if Path(config.logging_dir).exists():
                             continue
                         run_experiment(config)
+
 
 def run_experiment(config: Config):
     task = get_tasks(config)[0]
@@ -111,6 +116,7 @@ def run_experiment(config: Config):
         },
     )
     df.to_csv("logs/best_scores.csv", mode="a", header=False, index=False)
+
 
 if __name__ == "__main__":
     main()

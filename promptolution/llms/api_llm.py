@@ -3,26 +3,16 @@ import requests
 import time
 from logging import INFO, Logger
 
-
 from langchain_anthropic import ChatAnthropic
 from langchain_community.chat_models.deepinfra import ChatDeepInfraException
 from langchain_core.messages import HumanMessage
 from langchain_openai import ChatOpenAI
-# from langchain_community.chat_models.deepinfra import ChatDeepInfra
 
 from promptolution.llms.deepinfra import ChatDeepInfra
-# possible model names we'll use here are:
-# gpt-4o-2024-05-13, gpt-3.5-turbo-0125
-# claude-3-opus-20240229, claude-3-haiku-20240307
+
 
 logger = Logger(__name__)
 logger.setLevel(INFO)
-
-
-OPENAI_API_KEY = open("openaitoken.txt", "r").read()
-ANTHROPIC_API_KEY = open("anthropictoken.txt", "r").read()
-GROQ_API_KEY = open("groqtoken.txt", "r").read()
-DEEPINFRA_API_KEY = open("deepinfratoken.txt", "r").read()
 
 
 async def invoke_model(prompt, model, semaphore):
@@ -44,10 +34,13 @@ async def invoke_model(prompt, model, semaphore):
 class APILLM:
     def __init__(self, model_id: str):
         if "claude" in model_id:
+            ANTHROPIC_API_KEY = open("anthropictoken.txt", "r").read()
             self.model = ChatAnthropic(model=model_id, api_key=ANTHROPIC_API_KEY)
         elif "gpt" in model_id:
+            OPENAI_API_KEY = open("openaitoken.txt", "r").read()
             self.model = ChatOpenAI(model=model_id, api_key=OPENAI_API_KEY)
         elif "llama" in model_id:
+            DEEPINFRA_API_KEY = open("deepinfratoken.txt", "r").read()
             self.model = ChatDeepInfra(model_name=model_id, deepinfra_api_token=DEEPINFRA_API_KEY)
         else:
             raise ValueError(f"Unknown model: {model_id}")
