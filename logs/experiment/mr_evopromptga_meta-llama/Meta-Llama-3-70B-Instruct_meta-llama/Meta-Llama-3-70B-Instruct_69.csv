@@ -1,0 +1,121 @@
+step,prompt,score
+1,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",1.0
+1,"Given a statement, classify it as expressing a positive or negative opinion.",1.0
+1,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+1,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+1,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+1,Classify the sentiment of a provided text as either positive or negative.,0.9
+1,"Determine the sentiment of the provided text by understanding its context and meaning, and then label it as either positive or negative.",0.85
+1,"Determine the sentiment of a provided sentence or comment, categorizing it as either ""positive"" or ""negative"".",0.85
+1,Analyze the provided text to identify its sentiment as either positive or negative.,0.8
+1,"Now you are a classifier, your task is to determine the sentiment polarity of the given text, whether positive or negative.",0.75
+2,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",1.0
+2,"Given a statement, classify it as expressing a positive or negative opinion.",1.0
+2,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+2,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+2,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+2,"Classify the sentiment of a provided text, tweet, or comment as either positive or negative, based on its content.",0.9
+2,Classify the sentiment of a provided text as either positive or negative.,0.9
+2,"Assign a sentiment label (""positive"" or ""negative"") to the given sentence or comment, indicating its emotional tone.",0.9
+2,Analyze the provided sentence and label its sentiment as either positive or negative.,0.9
+2,"Examine the provided text carefully to identify its sentiment, classifying it as either positive or negative based on its underlying tone and meaning.",0.85
+3,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",1.0
+3,"Given a statement, classify it as expressing a positive or negative opinion.",1.0
+3,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+3,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+3,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+3,"Determine the sentiment of a given text, categorizing it as either positive or negative.",0.9
+3,"Determine the emotional tone of the given text, categorizing it as either positive or negative based on a thorough analysis of its content and underlying meaning.",0.9
+3,"Classify the sentiment of a provided text, tweet, or comment as either positive or negative, based on its content.",0.9
+3,Classify the sentiment of a provided text as either positive or negative.,0.9
+3,"Assign a sentiment label (""positive"" or ""negative"") to the given sentence or comment, indicating its emotional tone.",0.9
+4,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",1.0
+4,"Given a statement, classify it as expressing a positive or negative opinion.",1.0
+4,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+4,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+4,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+4,"Determine the sentiment of a given text, categorizing it as either positive or negative.",0.9
+4,"Determine the emotional tone of the given text, categorizing it as either positive or negative based on a thorough analysis of its content and underlying meaning.",0.9
+4,"Classify the sentiment of a provided text, tweet, or comment as either positive or negative, based on its content.",0.9
+4,Classify the sentiment of a provided text as either positive or negative.,0.9
+4,"Assign a sentiment label (""positive"" or ""negative"") to the given sentence or comment, indicating its emotional tone.",0.9
+5,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",1.0
+5,"Given a statement, classify it as expressing a positive or negative opinion.",1.0
+5,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+5,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+5,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+5,"Evaluate the provided text and classify its sentiment as positive or negative, taking into account the nuances of its language and tone.",0.95
+5,"Determine the sentiment of a provided statement, tweet, or comment as either positive or negative by analyzing its content.",0.95
+5,"Determine the sentiment of a given text, categorizing it as either positive or negative.",0.9
+5,"Determine the emotional tone of the provided sentence or comment, labeling it as either ""positive"" or ""negative"".",0.9
+5,"Determine the emotional tone of the provided sentence or comment and label it as either ""positive"" or ""negative"" sentiment.",0.9
+6,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",1.0
+6,"Given a statement, classify it as expressing a positive or negative opinion.",1.0
+6,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+6,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+6,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+6,"Evaluate the provided text and classify its sentiment as positive or negative, taking into account the nuances of its language and tone.",0.95
+6,"Determine the sentiment of a provided statement, tweet, or comment as either positive or negative by analyzing its content.",0.95
+6,Analyze the tone and language of the provided text to determine whether it conveys a positive or negative sentiment.,0.95
+6,"Analyze the provided text to identify its sentiment as positive or negative, taking into account the subtleties of language and tone.",0.95
+6,"Determine the sentiment of a given text, categorizing it as either positive or negative.",0.9
+7,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",1.0
+7,"Given a statement, classify it as expressing a positive or negative opinion.",1.0
+7,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+7,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+7,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+7,"Evaluate the provided text and classify its sentiment as positive or negative, taking into account the nuances of its language and tone.",0.95
+7,"Determine the sentiment of the provided statement, either positive or negative, by carefully examining the language nuances and tone.",0.95
+7,"Determine the sentiment of a provided statement, tweet, or comment as either positive or negative by analyzing its content.",0.95
+7,Analyze the tone and language of the provided text to determine whether it conveys a positive or negative sentiment.,0.95
+7,"Analyze the provided text to identify its sentiment as positive or negative, taking into account the subtleties of language and tone.",0.95
+8,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",1.0
+8,"Given a statement, classify it as expressing a positive or negative opinion.",1.0
+8,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+8,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+8,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+8,"Evaluate the provided text and classify its sentiment as positive or negative, taking into account the nuances of its language and tone.",0.95
+8,"Determine the sentiment of the provided statement, either positive or negative, by carefully examining the language nuances and tone.",0.95
+8,"Determine the sentiment of a provided statement, tweet, or comment as either positive or negative by analyzing its content.",0.95
+8,Analyze the tone and language of the provided text to determine whether it conveys a positive or negative sentiment.,0.95
+8,"Analyze the provided text to identify its sentiment as positive or negative, taking into account the subtleties of language and tone.",0.95
+9,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",1.0
+9,"Given a statement, classify it as expressing a positive or negative opinion.",1.0
+9,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+9,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+9,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+9,"Evaluate the provided text and classify its sentiment as positive or negative, taking into account the nuances of its language and tone.",0.95
+9,"Determine the sentiment of the provided statement, either positive or negative, by carefully examining the language nuances and tone.",0.95
+9,"Determine the sentiment of a provided statement, tweet, or comment as either positive or negative by analyzing its content.",0.95
+9,Assess the tone and language nuances of the given text to categorize its sentiment as positive or negative.,0.95
+9,Analyze the tone and language of the provided text to determine whether it conveys a positive or negative sentiment.,0.95
+10,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",1.0
+10,"Given a statement, classify it as expressing a positive or negative opinion.",1.0
+10,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+10,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+10,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+10,"Evaluate the provided text and classify its sentiment as positive or negative, taking into account the nuances of its language and tone.",0.95
+10,"Determine the sentiment of the provided statement, either positive or negative, by carefully examining the language nuances and tone.",0.95
+10,"Determine the sentiment of a provided statement, tweet, or comment as either positive or negative by analyzing its content.",0.95
+10,Classify the sentiment of the provided text as 'positive' or 'negative' based on its content.,0.95
+10,Assess the tone and language nuances of the given text to categorize its sentiment as positive or negative.,0.95
+11,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",1.0
+11,"Given a statement, classify it as expressing a positive or negative opinion.",1.0
+11,"Analyze the given text to identify its sentiment as positive or negative, paying attention to the subtleties of language and tone.",1.0
+11,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+11,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+11,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+11,"Evaluate the provided text and classify its sentiment as positive or negative, taking into account the nuances of its language and tone.",0.95
+11,"Determine the sentiment of the provided text as positive or negative, taking into account its linguistic tone and subtleties.",0.95
+11,"Determine the sentiment of the provided statement, either positive or negative, by carefully examining the language nuances and tone.",0.95
+11,"Determine the sentiment of a provided statement, tweet, or comment as either positive or negative by analyzing its content.",0.95
+12,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",1.0
+12,"Given a statement, classify it as expressing a positive or negative opinion.",1.0
+12,"Analyze the given text to identify its sentiment as positive or negative, paying attention to the subtleties of language and tone.",1.0
+12,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+12,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+12,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+12,"Evaluate the provided text and classify its sentiment as positive or negative, taking into account the nuances of its language and tone.",0.95
+12,"Determine the sentiment of the provided text as positive or negative, taking into account its linguistic tone and subtleties.",0.95
+12,"Determine the sentiment of the provided statement, either positive or negative, by carefully examining the language nuances and tone.",0.95
+12,"Determine the sentiment of a provided statement, tweet, or comment as either positive or negative by analyzing its content.",0.95

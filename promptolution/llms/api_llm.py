@@ -5,10 +5,12 @@ from logging import INFO, Logger
 
 
 from langchain_anthropic import ChatAnthropic
-from langchain_community.chat_models import ChatDeepInfra
+from langchain_community.chat_models.deepinfra import ChatDeepInfraException
 from langchain_core.messages import HumanMessage
 from langchain_openai import ChatOpenAI
+# from langchain_community.chat_models.deepinfra import ChatDeepInfra
 
+from promptolution.llms.deepinfra import ChatDeepInfra
 # possible model names we'll use here are:
 # gpt-4o-2024-05-13, gpt-3.5-turbo-0125
 # claude-3-opus-20240229, claude-3-haiku-20240307
@@ -25,8 +27,18 @@ DEEPINFRA_API_KEY = open("deepinfratoken.txt", "r").read()
 
 async def invoke_model(prompt, model, semaphore):
     async with semaphore:
-        response = await asyncio.to_thread(model.invoke, [HumanMessage(content=prompt)])
-        return response.content
+        max_retries = 100
+        delay = 3
+        attempts = 0
+
+        while attempts < max_retries:
+            try:
+                response = await asyncio.to_thread(model.invoke, [HumanMessage(content=prompt)])
+                return response.content
+            except ChatDeepInfraException as e:
+                print(f"DeepInfra error: {e}. Attempt {attempts}/{max_retries}. Retrying in {delay} seconds...")
+                attempts += 1
+                time.sleep(delay)
 
 
 class APILLM:
@@ -36,24 +48,26 @@ class APILLM:
         elif "gpt" in model_id:
             self.model = ChatOpenAI(model=model_id, api_key=OPENAI_API_KEY)
         elif "llama" in model_id:
-            self.model = ChatDeepInfra(model_id=model_id, deepinfra_api_token=DEEPINFRA_API_KEY)
+            self.model = ChatDeepInfra(model_name=model_id, deepinfra_api_token=DEEPINFRA_API_KEY)
         else:
             raise ValueError(f"Unknown model: {model_id}")
 
     def get_response(self, prompts: list[str]) -> list[str]:
         max_retries = 100
-        delay = 3 
+        delay = 3
         attempts = 0
-        
+
         while attempts < max_retries:
             try:
                 responses = asyncio.run(self._get_response(prompts))
                 return responses
             except requests.exceptions.ConnectionError as e:
                 attempts += 1
-                logger.critical(f"Connection error: {e}. Attempt {attempts}/{max_retries}. Retrying in {delay} seconds...")
+                logger.critical(
+                    f"Connection error: {e}. Attempt {attempts}/{max_retries}. Retrying in {delay} seconds..."
+                )
                 time.sleep(delay)
-        
+
         # If the loop exits, it means max retries were reached
         raise requests.exceptions.ConnectionError("Max retries exceeded. Connection could not be established.")
 

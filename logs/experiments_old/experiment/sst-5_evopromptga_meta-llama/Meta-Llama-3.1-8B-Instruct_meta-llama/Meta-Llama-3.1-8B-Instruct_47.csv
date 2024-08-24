@@ -1,0 +1,121 @@
+step,prompt,score
+1,"Categorize the provided text according to its sentiment, choosing from: terrible, bad, okay, good, or great.",0.8
+1,"Assign a sentiment label from the options - terrible, bad, okay, good, or great - to the provided comment.",0.8
+1,"Assess the given text and rate its sentiment on a scale of terrible, bad, okay, good, or great.",0.75
+1,"Assess the sentiment of the provided movie review and classify it into one of five categories: terrible, bad, okay, good, or great.",0.65
+1,"Categorize the provided movie review as one of the following: terrible, bad, okay, good, or great, based on its content.",0.6
+1,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.55
+1,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.55
+1,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+1,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.5
+1,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.5
+2,"Categorize the provided text according to its sentiment, choosing from: terrible, bad, okay, good, or great.",0.8
+2,"Assign a sentiment label from the options - terrible, bad, okay, good, or great - to the provided comment.",0.8
+2,"Assess the given text and rate its sentiment on a scale of terrible, bad, okay, good, or great.",0.75
+2,"Assess the sentiment of the provided movie review and classify it into one of five categories: terrible, bad, okay, good, or great.",0.65
+2,"Categorize the provided movie review as one of the following: terrible, bad, okay, good, or great, based on its content.",0.6
+2,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.55
+2,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.55
+2,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+2,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.5
+2,"Classify the sentiment of the provided text as terrible, bad, okay, good, or great, analyzing its tone and language.",0.5
+3,"Categorize the provided text according to its sentiment, choosing from: terrible, bad, okay, good, or great.",0.8
+3,"Assign a sentiment label from the options - terrible, bad, okay, good, or great - to the provided comment.",0.8
+3,"Assess the given text and rate its sentiment on a scale of terrible, bad, okay, good, or great.",0.75
+3,"Assess the sentiment of the provided movie review and classify it into one of five categories: terrible, bad, okay, good, or great.",0.65
+3,"Categorize the provided movie review as one of the following: terrible, bad, okay, good, or great, based on its content.",0.6
+3,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.55
+3,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.55
+3,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+3,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.5
+3,"Classify the sentiment of the provided text as terrible, bad, okay, good, or great, analyzing its tone and language.",0.5
+4,"Categorize the provided text according to its sentiment, choosing from: terrible, bad, okay, good, or great.",0.8
+4,"Assign a sentiment label from the options - terrible, bad, okay, good, or great - to the provided comment.",0.8
+4,"Assess the given text and rate its sentiment on a scale of terrible, bad, okay, good, or great.",0.75
+4,"Assess the sentiment of the provided movie review and classify it into one of five categories: terrible, bad, okay, good, or great.",0.65
+4,"Categorize the provided movie review as one of the following: terrible, bad, okay, good, or great, based on its content.",0.6
+4,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.55
+4,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.55
+4,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+4,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.5
+4,"Classify the sentiment of the provided text as terrible, bad, okay, good, or great, analyzing its tone and language.",0.5
+5,"Categorize the provided text according to its sentiment, choosing from: terrible, bad, okay, good, or great.",0.8
+5,"Assign a sentiment label from the options - terrible, bad, okay, good, or great - to the provided comment.",0.8
+5,"Classify the given text into one of the following sentiment categories: terrible, bad, okay, good, or great, based on its tone and content.",0.75
+5,"Assess the given text and rate its sentiment on a scale of terrible, bad, okay, good, or great.",0.75
+5,"Rate the sentiment of the given text, whether it's a movie review or other forms of writing, on a scale of terrible, bad, okay, good, or great.",0.65
+5,"Classify the sentiment of the given movie review into one of the following categories: terrible, bad, okay, good, or great, solely based on the review's content.",0.65
+5,"Assess the sentiment of the provided movie review and classify it into one of five categories: terrible, bad, okay, good, or great.",0.65
+5,"Evaluate the given text and categorize its sentiment as terrible, bad, okay, good, or great, examining its language and emotional tone.",0.6
+5,"Classify the sentiment of the provided movie review into one of five categories: terrible, bad, okay, good, or great, to determine its overall quality.",0.6
+5,"Classify the provided movie review into a sentiment category: terrible, bad, okay, good, or great.",0.6
+6,"Categorize the provided text according to its sentiment, choosing from: terrible, bad, okay, good, or great.",0.8
+6,"Assign a sentiment label from the options - terrible, bad, okay, good, or great - to the provided comment.",0.8
+6,"Classify the given text into one of the following sentiment categories: terrible, bad, okay, good, or great, based on its tone and content.",0.75
+6,"Assess the given text and rate its sentiment on a scale of terrible, bad, okay, good, or great.",0.75
+6,"Rate the sentiment of the given text, whether it's a movie review or other forms of writing, on a scale of terrible, bad, okay, good, or great.",0.65
+6,"Classify the sentiment of the given movie review into one of the following categories: terrible, bad, okay, good, or great, solely based on the review's content.",0.65
+6,"Categorize the provided movie review as terrible, bad, okay, good, or great based on its sentiment.",0.65
+6,"Assess the sentiment of the provided movie review and classify it into one of five categories: terrible, bad, okay, good, or great.",0.65
+6,"Evaluate the given text and categorize its sentiment as terrible, bad, okay, good, or great, examining its language and emotional tone.",0.6
+6,"Classify the sentiment of the provided movie review into one of five categories: terrible, bad, okay, good, or great, to determine its overall quality.",0.6
+7,"Categorize the provided text according to its sentiment, choosing from: terrible, bad, okay, good, or great.",0.8
+7,"Assign a sentiment label from the options - terrible, bad, okay, good, or great - to the provided comment.",0.8
+7,"Classify the given text into one of the following sentiment categories: terrible, bad, okay, good, or great, based on its tone and content.",0.75
+7,"Assess the given text and rate its sentiment on a scale of terrible, bad, okay, good, or great.",0.75
+7,"Rate the sentiment of the given text, whether it's a movie review or other forms of writing, on a scale of terrible, bad, okay, good, or great.",0.65
+7,"Classify the sentiment of the given movie review into one of the following categories: terrible, bad, okay, good, or great, solely based on the review's content.",0.65
+7,"Categorize the provided movie review as terrible, bad, okay, good, or great based on its sentiment.",0.65
+7,"Assess the sentiment of the provided movie review and classify it into one of five categories: terrible, bad, okay, good, or great.",0.65
+7,"Evaluate the given text and categorize its sentiment as terrible, bad, okay, good, or great, examining its language and emotional tone.",0.6
+7,"Classify the sentiment of the provided movie review into one of five categories: terrible, bad, okay, good, or great, to determine its overall quality.",0.6
+8,"Categorize the provided text according to its sentiment, choosing from: terrible, bad, okay, good, or great.",0.8
+8,"Assign a sentiment label from the options - terrible, bad, okay, good, or great - to the provided comment.",0.8
+8,"Classify the given text into one of the following sentiment categories: terrible, bad, okay, good, or great, based on its tone and content.",0.75
+8,"Assess the given text and rate its sentiment on a scale of terrible, bad, okay, good, or great.",0.75
+8,"Rate the sentiment of the given text, whether it's a movie review or other forms of writing, on a scale of terrible, bad, okay, good, or great.",0.65
+8,"Evaluate the sentiment of the provided text on a scale of terrible, bad, okay, good, or great, considering its tone and language.",0.65
+8,"Classify the sentiment of the given movie review into one of the following categories: terrible, bad, okay, good, or great, solely based on the review's content.",0.65
+8,"Categorize the provided movie review as terrible, bad, okay, good, or great based on its sentiment.",0.65
+8,"Assess the sentiment of the provided movie review and classify it into one of five categories: terrible, bad, okay, good, or great.",0.65
+8,"Evaluate the given text and categorize its sentiment as terrible, bad, okay, good, or great, examining its language and emotional tone.",0.6
+9,"Categorize the provided text according to its sentiment, choosing from: terrible, bad, okay, good, or great.",0.8
+9,"Assign a sentiment label from the options - terrible, bad, okay, good, or great - to the provided comment.",0.8
+9,"Classify the given text into one of the following sentiment categories: terrible, bad, okay, good, or great, based on its tone and content.",0.75
+9,"Assess the given text and rate its sentiment on a scale of terrible, bad, okay, good, or great.",0.75
+9,"Rate the sentiment of the given text, whether it's a movie review or other forms of writing, on a scale of terrible, bad, okay, good, or great.",0.65
+9,"Evaluate the sentiment of the provided text on a scale of terrible, bad, okay, good, or great, considering its tone and language.",0.65
+9,"Classify the sentiment of the given movie review into one of the following categories: terrible, bad, okay, good, or great, solely based on the review's content.",0.65
+9,"Categorize the provided movie review as terrible, bad, okay, good, or great based on its sentiment.",0.65
+9,"Assess the sentiment of the provided movie review and classify it into one of five categories: terrible, bad, okay, good, or great.",0.65
+9,"Evaluate the given text and categorize its sentiment as terrible, bad, okay, good, or great, examining its language and emotional tone.",0.6
+10,"Categorize the provided text according to its sentiment, choosing from: terrible, bad, okay, good, or great.",0.8
+10,"Assign a sentiment label from the options - terrible, bad, okay, good, or great - to the provided comment.",0.8
+10,"Classify the given text into one of the following sentiment categories: terrible, bad, okay, good, or great, based on its tone and content.",0.75
+10,"Assess the given text and rate its sentiment on a scale of terrible, bad, okay, good, or great.",0.75
+10,"Rate the sentiment of the given text, whether it's a movie review or other forms of writing, on a scale of terrible, bad, okay, good, or great.",0.65
+10,"Evaluate the sentiment of the provided text on a scale of terrible, bad, okay, good, or great, considering its tone and language.",0.65
+10,"Classify the sentiment of the given movie review into one of the following categories: terrible, bad, okay, good, or great, solely based on the review's content.",0.65
+10,"Categorize the provided movie review as terrible, bad, okay, good, or great based on its sentiment.",0.65
+10,"Assess the sentiment of the provided movie review and classify it into one of five categories: terrible, bad, okay, good, or great.",0.65
+10,"Label the sentiment of the provided text as terrible, bad, okay, good, or great, relying solely on the language and tone used.",0.6
+11,"Categorize the provided text according to its sentiment, choosing from: terrible, bad, okay, good, or great.",0.8
+11,"Assign a sentiment label from the options - terrible, bad, okay, good, or great - to the provided comment.",0.8
+11,"Classify the given text into one of the following sentiment categories: terrible, bad, okay, good, or great, based on its tone and content.",0.75
+11,"Assess the given text and rate its sentiment on a scale of terrible, bad, okay, good, or great.",0.75
+11,"Rate the sentiment of the given text, whether it's a movie review or other forms of writing, on a scale of terrible, bad, okay, good, or great.",0.65
+11,"Evaluate the sentiment of the provided text on a scale of terrible, bad, okay, good, or great, considering its tone and language.",0.65
+11,"Classify the sentiment of the given movie review into one of the following categories: terrible, bad, okay, good, or great, solely based on the review's content.",0.65
+11,"Categorize the provided movie review as terrible, bad, okay, good, or great based on its sentiment.",0.65
+11,"Assess the sentiment of the provided movie review and classify it into one of five categories: terrible, bad, okay, good, or great.",0.65
+11,"Label the sentiment of the provided text as terrible, bad, okay, good, or great, relying solely on the language and tone used.",0.6
+12,"Categorize the provided text according to its sentiment, choosing from: terrible, bad, okay, good, or great.",0.8
+12,"Assign a sentiment label from the options - terrible, bad, okay, good, or great - to the provided comment.",0.8
+12,"Classify the given text into one of the following sentiment categories: terrible, bad, okay, good, or great, based on its tone and content.",0.75
+12,"Assess the given text and rate its sentiment on a scale of terrible, bad, okay, good, or great.",0.75
+12,"Rate the sentiment of the given text, whether it's a movie review or other forms of writing, on a scale of terrible, bad, okay, good, or great.",0.65
+12,"Evaluate the sentiment of the provided text on a scale of terrible, bad, okay, good, or great, considering its tone and language.",0.65
+12,"Classify the sentiment of the given movie review into one of the following categories: terrible, bad, okay, good, or great, solely based on the review's content.",0.65
+12,"Categorize the provided movie review as terrible, bad, okay, good, or great based on its sentiment.",0.65
+12,"Assess the sentiment of the provided movie review and classify it into one of five categories: terrible, bad, okay, good, or great.",0.65
+12,"Label the sentiment of the provided text as terrible, bad, okay, good, or great, relying solely on the language and tone used.",0.6
