@@ -53,6 +53,7 @@ def main():
                             continue
                         run_experiment(config)
 
+
 def run_experiment(config: Config):
     task = get_tasks(config)[0]
     init_populations = task.initial_population
@@ -61,7 +62,7 @@ def run_experiment(config: Config):
     init_population = np.random.choice(init_populations, config.init_pop_size, replace=False)
     logger.critical(f"Task: {task.description}")
 
-    predictor = get_predictor(config.downstream_llm, classes=task.classes)
+    predictor = get_predictor(config.evaluation_llm, classes=task.classes)
     best_prompt_callback = BestPromptCallback()
     callbacks = [
         # LoggerCallback(logger),
@@ -94,9 +95,9 @@ def run_experiment(config: Config):
     best_prompt, best_score = best_prompt_callback.get_best_prompt()
     logger.critical(f"Final prompt: {best_prompt}, with score: {best_score}")
 
-    eval_task = get_tasks(config, split="test")[0]
-    eval_predictor = get_predictor(config.evaluation_llm, classes=eval_task.classes)
-    test_score = eval_task.evaluate(best_prompt, eval_predictor, subsample=False)
+    test_task = get_tasks(config, split="test")[0]
+    test_predictor = get_predictor(config.downstream_llm, classes=test_task.classes)
+    test_score = test_task.evaluate(best_prompt, test_predictor, subsample=False)
 
     # save test score to csv
     df = pd.DataFrame(
