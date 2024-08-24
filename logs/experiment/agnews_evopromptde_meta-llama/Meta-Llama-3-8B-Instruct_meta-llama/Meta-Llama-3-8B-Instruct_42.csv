@@ -1,0 +1,121 @@
+step,prompt,score
+1,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+1,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.95
+1,"Your objective is to classify a news article into one of four themes: World, Sports, Business and Tech.",0.95
+1,"You will be given a news article and asked to classify it as World, Sports, Business and Tech, depending on its main topic.",0.95
+1,"In this task, you are given a news article. Your task is to classify the article to one out of the four topics ""World"", ""Sports"", ""Business"", ""Tech"" if the article""s main topic is relevant to the world, sports, business, and technology, correspondingly. If you are not sure about the topic, choose the closest option.",0.95
+1,"Give the main topic of the news article and then choose from World, Sports, Tech and Business.",0.95
+1,"Determine the theme of the news item. Choose from World, Sports, Business and Tech.",0.95
+1,"Classify the topic of the following news as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+1,"Choose a word from World, Sports, Business and Tech to categorize the given text.",0.95
+1,"The objective is to categorize headlines in a report as World, Sports, Business, Tech by identifying the topic of the report.",1.0
+2,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+2,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.95
+2,"Your objective is to classify a news article into one of four themes: World, Sports, Business and Tech.",0.95
+2,"You will be given a news article and asked to classify it as World, Sports, Business and Tech, depending on its main topic.",0.95
+2,"In this task, you are given a news article. Your task is to classify the article to one out of the four topics ""World"", ""Sports"", ""Business"", ""Tech"" if the article""s main topic is relevant to the world, sports, business, and technology, correspondingly. If you are not sure about the topic, choose the closest option.",0.95
+2,"Give the main topic of the news article and then choose from World, Sports, Tech and Business.",0.95
+2,"Determine the theme of the news item. Choose from World, Sports, Business and Tech.",0.95
+2,"Classify the topic of the following news as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+2,"Choose a word from World, Sports, Business and Tech to categorize the given text.",0.95
+2,"The objective is to categorize headlines in a report as World, Sports, Business, Tech by identifying the topic of the report.",1.0
+3,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+3,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.95
+3,"Your objective is to classify a news article into one of four themes: World, Sports, Business and Tech.",0.95
+3,"You will be given a news article and asked to classify it as World, Sports, Business and Tech, depending on its main topic.",0.95
+3,"In this task, you are given a news article. Your task is to classify the article to one out of the four topics ""World"", ""Sports"", ""Business"", ""Tech"" if the article""s main topic is relevant to the world, sports, business, and technology, correspondingly. If you are not sure about the topic, choose the closest option.",0.95
+3,"Give the main topic of the news article and then choose from World, Sports, Tech and Business.",0.95
+3,"Determine the theme of the news item. Choose from World, Sports, Business and Tech.",0.95
+3,"Classify the topic of the following news as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+3,"Choose a word from World, Sports, Business and Tech to categorize the given text.",0.95
+3,"The objective is to categorize headlines in a report as World, Sports, Business, Tech by identifying the topic of the report.",1.0
+4,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+4,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.95
+4,"Your objective is to classify a news article into one of four themes: World, Sports, Business and Tech.",0.95
+4,"You will be given a news article and asked to classify it as World, Sports, Business and Tech, depending on its main topic.",0.95
+4,"In this task, you are given a news article. Your task is to classify the article to one out of the four topics ""World"", ""Sports"", ""Business"", ""Tech"" if the article""s main topic is relevant to the world, sports, business, and technology, correspondingly. If you are not sure about the topic, choose the closest option.",0.95
+4,"Give the main topic of the news article and then choose from World, Sports, Tech and Business.",0.95
+4,"Determine the theme of the news item. Choose from World, Sports, Business and Tech.",0.95
+4,"Classify the topic of the following news as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+4,"Choose a word from World, Sports, Business and Tech to categorize the given text.",0.95
+4,"The objective is to categorize headlines in a report as World, Sports, Business, Tech by identifying the topic of the report.",1.0
+5,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+5,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.95
+5,"Your objective is to classify a news article into one of four themes: World, Sports, Business and Tech.",0.95
+5,"You will be given a news article and asked to classify it as World, Sports, Business and Tech, depending on its main topic.",0.95
+5,"In this task, you are given a news article. Your task is to classify the article to one out of the four topics ""World"", ""Sports"", ""Business"", ""Tech"" if the article""s main topic is relevant to the world, sports, business, and technology, correspondingly. If you are not sure about the topic, choose the closest option.",0.95
+5,"Give the main topic of the news article and then choose from World, Sports, Tech and Business.",0.95
+5,"Determine the theme of the news item. Choose from World, Sports, Business and Tech.",0.95
+5,"Classify the topic of the following news as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+5,"Choose a word from World, Sports, Business and Tech to categorize the given text.",0.95
+5,"The objective is to categorize headlines in a report as World, Sports, Business, Tech by identifying the topic of the report.",1.0
+6,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+6,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.95
+6,"Your objective is to classify a news article into one of four themes: World, Sports, Business and Tech.",0.95
+6,"You will be given a news article and asked to classify it as World, Sports, Business and Tech, depending on its main topic.",0.95
+6,"In this task, you are given a news article. Your task is to classify the article to one out of the four topics ""World"", ""Sports"", ""Business"", ""Tech"" if the article""s main topic is relevant to the world, sports, business, and technology, correspondingly. If you are not sure about the topic, choose the closest option.",0.95
+6,"Give the main topic of the news article and then choose from World, Sports, Tech and Business.",0.95
+6,"Determine the theme of the news item. Choose from World, Sports, Business and Tech.",0.95
+6,"Classify the topic of the following news as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+6,"Choose a word from World, Sports, Business and Tech to categorize the given text.",0.95
+6,"The objective is to categorize headlines in a report as World, Sports, Business, Tech by identifying the topic of the report.",1.0
+7,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+7,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.95
+7,"Your objective is to classify a news article into one of four themes: World, Sports, Business and Tech.",0.95
+7,"You will be given a news article and asked to classify it as World, Sports, Business and Tech, depending on its main topic.",0.95
+7,"In this task, you are given a news article. Your task is to classify the article to one out of the four topics ""World"", ""Sports"", ""Business"", ""Tech"" if the article""s main topic is relevant to the world, sports, business, and technology, correspondingly. If you are not sure about the topic, choose the closest option.",0.95
+7,"Give the main topic of the news article and then choose from World, Sports, Tech and Business.",0.95
+7,"Determine the theme of the news item. Choose from World, Sports, Business and Tech.",0.95
+7,"Classify the topic of the following news as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+7,"Choose a word from World, Sports, Business and Tech to categorize the given text.",0.95
+7,"The objective is to categorize headlines in a report as World, Sports, Business, Tech by identifying the topic of the report.",1.0
+8,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+8,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.95
+8,"Your objective is to classify a news article into one of four themes: World, Sports, Business and Tech.",0.95
+8,"You will be given a news article and asked to classify it as World, Sports, Business and Tech, depending on its main topic.",0.95
+8,"In this task, you are given a news article. Your task is to classify the article to one out of the four topics ""World"", ""Sports"", ""Business"", ""Tech"" if the article""s main topic is relevant to the world, sports, business, and technology, correspondingly. If you are not sure about the topic, choose the closest option.",0.95
+8,"Give the main topic of the news article and then choose from World, Sports, Tech and Business.",0.95
+8,"Determine the theme of the news item. Choose from World, Sports, Business and Tech.",0.95
+8,"Classify the topic of the following news as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+8,"Choose a word from World, Sports, Business and Tech to categorize the given text.",0.95
+8,"The objective is to categorize headlines in a report as World, Sports, Business, Tech by identifying the topic of the report.",1.0
+9,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+9,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.95
+9,"Your objective is to classify a news article into one of four themes: World, Sports, Business and Tech.",0.95
+9,"You will be given a news article and asked to classify it as World, Sports, Business and Tech, depending on its main topic.",0.95
+9,"In this task, you are given a news article. Your task is to classify the article to one out of the four topics ""World"", ""Sports"", ""Business"", ""Tech"" if the article""s main topic is relevant to the world, sports, business, and technology, correspondingly. If you are not sure about the topic, choose the closest option.",0.95
+9,"Give the main topic of the news article and then choose from World, Sports, Tech and Business.",0.95
+9,"Determine the theme of the news item. Choose from World, Sports, Business and Tech.",0.95
+9,"Classify the topic of the following news as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+9,"Choose a word from World, Sports, Business and Tech to categorize the given text.",0.95
+9,"The objective is to categorize headlines in a report as World, Sports, Business, Tech by identifying the topic of the report.",1.0
+10,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+10,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.95
+10,"Your objective is to classify a news article into one of four themes: World, Sports, Business and Tech.",0.95
+10,"You will be given a news article and asked to classify it as World, Sports, Business and Tech, depending on its main topic.",0.95
+10,"In this task, you are given a news article. Your task is to classify the article to one out of the four topics ""World"", ""Sports"", ""Business"", ""Tech"" if the article""s main topic is relevant to the world, sports, business, and technology, correspondingly. If you are not sure about the topic, choose the closest option.",0.95
+10,"Give the main topic of the news article and then choose from World, Sports, Tech and Business.",0.95
+10,"Select a topic from World, Sports, Business, Tech and categorize articles accordingly, based on their theme.",1.0
+10,"Classify the topic of the following news as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+10,"Choose a word from World, Sports, Business and Tech to categorize the given text.",0.95
+10,"The objective is to categorize headlines in a report as World, Sports, Business, Tech by identifying the topic of the report.",1.0
+11,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+11,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.95
+11,"Your objective is to classify a news article into one of four themes: World, Sports, Business and Tech.",0.95
+11,"You will be given a news article and asked to classify it as World, Sports, Business and Tech, depending on its main topic.",0.95
+11,"In this task, you are given a news article. Your task is to classify the article to one out of the four topics ""World"", ""Sports"", ""Business"", ""Tech"" if the article""s main topic is relevant to the world, sports, business, and technology, correspondingly. If you are not sure about the topic, choose the closest option.",0.95
+11,"Give the main topic of the news article and then choose from World, Sports, Tech and Business.",0.95
+11,"Select a topic from World, Sports, Business, Tech and categorize articles accordingly, based on their theme.",1.0
+11,"Classify the topic of the following news as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+11,"Choose a word from World, Sports, Business and Tech to categorize the given text.",0.95
+11,"The objective is to categorize headlines in a report as World, Sports, Business, Tech by identifying the topic of the report.",1.0
+12,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+12,"Your responsibility is to assign a news article to one of four categories: World, Sports, Business, or Tech, based on its main idea.",0.95
+12,"Your objective is to classify a news article into one of four themes: World, Sports, Business and Tech.",0.95
+12,"You will be given a news article and asked to classify it as World, Sports, Business and Tech, depending on its main topic.",0.95
+12,"In this task, you are given a news article. Your task is to classify the article to one out of the four topics ""World"", ""Sports"", ""Business"", ""Tech"" if the article""s main topic is relevant to the world, sports, business, and technology, correspondingly. If you are not sure about the topic, choose the closest option.",0.95
+12,"Give the main topic of the news article and then choose from World, Sports, Tech and Business.",0.95
+12,"Select a topic from World, Sports, Business, Tech and categorize articles accordingly, based on their theme.",1.0
+12,"Classify the topic of the following news as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.95
+12,"Choose a word from World, Sports, Business and Tech to categorize the given text.",0.95
+12,"The objective is to categorize headlines in a report as World, Sports, Business, Tech by identifying the topic of the report.",1.0

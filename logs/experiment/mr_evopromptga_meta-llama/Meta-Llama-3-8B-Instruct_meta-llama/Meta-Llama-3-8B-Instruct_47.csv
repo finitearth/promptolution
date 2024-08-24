@@ -1,0 +1,241 @@
+step,prompt,score
+1,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+1,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+1,"I'd be happy to help! Here are the steps:
+
+1. Crossover Prompt:
+Prompt 1: Given a statement, classify it as expressing a positive or negative opinion.
+Prompt 2: In this task, you are given sentences from movie reviews. The task is to classify a sentence as positive or as negative.
+
+Crossover Prompt: Given sentences about movie reviews, classify them as expressing a positive or negative opinion.
+
+2. Mutate the prompt generated in Step 1:
+
+<Mutated Prompt>Classify movie review sentences as either expressing a positive or negative sentiment.",0.95
+1,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.9
+1,"Given a tweet, classify it as having a positive or negative sentiment.",0.9
+1,"Classify the given text from movie reviews as either ""positive"" or ""negative"", highlighting your judgment.",0.9
+1,"Assess the emotional tone of the provided text, determining whether it is inclined towards a positive or negative perspective.",0.9
+1,"In this task, you are given sentences from movie reviews. The task is to classify a sentence as  positive or as negative.",0.85
+1,"Given a statement, classify it as expressing a positive or negative opinion.",0.85
+1,Classify short textual snippets (extracted from movie reviews or social media posts) as expressing a positive or negative emotional tone.,0.85
+2,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+2,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+2,"I'd be happy to help! Here are the steps:
+
+1. Crossover Prompt:
+Prompt 1: Given a statement, classify it as expressing a positive or negative opinion.
+Prompt 2: In this task, you are given sentences from movie reviews. The task is to classify a sentence as positive or as negative.
+
+Crossover Prompt: Given sentences about movie reviews, classify them as expressing a positive or negative opinion.
+
+2. Mutate the prompt generated in Step 1:
+
+<Mutated Prompt>Classify movie review sentences as either expressing a positive or negative sentiment.",0.95
+2,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.9
+2,"Given a tweet, classify it as having a positive or negative sentiment.",0.9
+2,"Classify the given text from movie reviews as either ""positive"" or ""negative"", highlighting your judgment.",0.9
+2,"Assess the emotional tone of the provided text, determining whether it is inclined towards a positive or negative perspective.",0.9
+2,"In this task, you are given sentences from movie reviews. The task is to classify a sentence as  positive or as negative.",0.85
+2,"Given a statement, classify it as expressing a positive or negative opinion.",0.85
+2,"Classify the sentiment of a movie review as ""positive"" or ""negative"", and justify your classification.",0.85
+3,"Analyze the provided movie review and categorize its sentiment as ""positive"" or ""negative"", providing logical reasoning for the classification.",1.0
+3,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+3,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+3,"I'd be happy to help! Here are the steps:
+
+1. Crossover Prompt:
+Prompt 1: Given a statement, classify it as expressing a positive or negative opinion.
+Prompt 2: In this task, you are given sentences from movie reviews. The task is to classify a sentence as positive or as negative.
+
+Crossover Prompt: Given sentences about movie reviews, classify them as expressing a positive or negative opinion.
+
+2. Mutate the prompt generated in Step 1:
+
+<Mutated Prompt>Classify movie review sentences as either expressing a positive or negative sentiment.",0.95
+3,"Classify a movie review as having a positive or negative sentiment, while providing a clear explanation for your categorization.",0.95
+3,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.9
+3,"Given a tweet, classify it as having a positive or negative sentiment.",0.9
+3,"Classify the tweet's sentiment as either 'positive' or 'negative', returning only the sentiment label.",0.9
+3,"Classify the given text from movie reviews as either ""positive"" or ""negative"", highlighting your judgment.",0.9
+3,"Assess the emotional tone of the provided text, determining whether it is inclined towards a positive or negative perspective.",0.9
+4,"Analyze the provided movie review and categorize its sentiment as ""positive"" or ""negative"", providing logical reasoning for the classification.",1.0
+4,"Analyze the emotional tone of the provided text or movie review, and categorize its sentiment as either positive or negative, supported by your reasoning.",1.0
+4,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+4,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+4,"I'd be happy to help! Here are the steps:
+
+1. Crossover Prompt:
+Prompt 1: Given a statement, classify it as expressing a positive or negative opinion.
+Prompt 2: In this task, you are given sentences from movie reviews. The task is to classify a sentence as positive or as negative.
+
+Crossover Prompt: Given sentences about movie reviews, classify them as expressing a positive or negative opinion.
+
+2. Mutate the prompt generated in Step 1:
+
+<Mutated Prompt>Classify movie review sentences as either expressing a positive or negative sentiment.",0.95
+4,"Determine the sentiment of the provided movie review by categorizing it as ""positive"" or ""negative"", and provide a detailed justification for your decision.",0.95
+4,"Classify a movie review as having a positive or negative sentiment, while providing a clear explanation for your categorization.",0.95
+4,"Analyze the movie review's emotional tone and classify it as ""positive"" or ""negative"", providing a logical justification for the categorization.",0.95
+4,"Analyze a given text-based piece (review, tweet, or other) and determine whether it has a positive or negative sentiment, providing detailed reasoning behind your classification.",0.95
+4,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.9
+5,"Analyze the provided movie review and categorize its sentiment as ""positive"" or ""negative"", providing logical reasoning for the classification.",1.0
+5,"Analyze the emotional tone of the provided text or movie review, and categorize its sentiment as either positive or negative, supported by your reasoning.",1.0
+5,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+5,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+5,"I'd be happy to help! Here are the steps:
+
+1. Crossover Prompt:
+Prompt 1: Given a statement, classify it as expressing a positive or negative opinion.
+Prompt 2: In this task, you are given sentences from movie reviews. The task is to classify a sentence as positive or as negative.
+
+Crossover Prompt: Given sentences about movie reviews, classify them as expressing a positive or negative opinion.
+
+2. Mutate the prompt generated in Step 1:
+
+<Mutated Prompt>Classify movie review sentences as either expressing a positive or negative sentiment.",0.95
+5,"Determine the sentiment of the provided movie review by categorizing it as ""positive"" or ""negative"", and provide a detailed justification for your decision.",0.95
+5,"Classify the provided text-based review or statement as having a positive or negative sentiment, and provide a clear explanation for your classification.",0.95
+5,"Classify a provided movie review as having a positive or negative sentiment, providing a clear explanation for your categorization and logical justification for the emotional tone.",0.95
+5,"Classify a movie review's sentiment by identifying whether it's positive or negative, and transparently justify your decision with logical reasoning.",0.95
+5,"Classify a movie review as having a positive or negative sentiment, while providing a clear explanation for your categorization.",0.95
+6,"Analyze the provided movie review and categorize its sentiment as ""positive"" or ""negative"", providing logical reasoning for the classification.",1.0
+6,"Analyze the emotional tone of the provided text or movie review, and categorize its sentiment as either positive or negative, supported by your reasoning.",1.0
+6,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+6,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+6,"I'd be happy to help! Here are the steps:
+
+1. Crossover Prompt:
+Prompt 1: Given a statement, classify it as expressing a positive or negative opinion.
+Prompt 2: In this task, you are given sentences from movie reviews. The task is to classify a sentence as positive or as negative.
+
+Crossover Prompt: Given sentences about movie reviews, classify them as expressing a positive or negative opinion.
+
+2. Mutate the prompt generated in Step 1:
+
+<Mutated Prompt>Classify movie review sentences as either expressing a positive or negative sentiment.",0.95
+6,"Evaluate the sentiment of the given movie review, categorizing it as ""positive"" or ""negative"" while providing transparent rationalizations for your classification.",0.95
+6,"Determine the sentiment of the provided movie review by categorizing it as ""positive"" or ""negative"", and provide a detailed justification for your decision.",0.95
+6,"Classify the provided text-based review or statement as having a positive or negative sentiment, and provide a clear explanation for your classification.",0.95
+6,"Classify a provided movie review as having a positive or negative sentiment, providing a clear explanation for your categorization and logical justification for the emotional tone.",0.95
+6,"Classify a movie review's sentiment by identifying whether it's positive or negative, and transparently justify your decision with logical reasoning.",0.95
+7,"Determine the emotional tone and sentiment of the given text, justifying your classification with logical reasoning and evidence.",1.0
+7,"Analyze the provided movie review and categorize its sentiment as ""positive"" or ""negative"", providing logical reasoning for the classification.",1.0
+7,"Analyze the emotional tone of the provided text or movie review, and categorize its sentiment as either positive or negative, supported by your reasoning.",1.0
+7,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+7,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+7,"I'd be happy to help! Here are the steps:
+
+1. Crossover Prompt:
+Prompt 1: Given a statement, classify it as expressing a positive or negative opinion.
+Prompt 2: In this task, you are given sentences from movie reviews. The task is to classify a sentence as positive or as negative.
+
+Crossover Prompt: Given sentences about movie reviews, classify them as expressing a positive or negative opinion.
+
+2. Mutate the prompt generated in Step 1:
+
+<Mutated Prompt>Classify movie review sentences as either expressing a positive or negative sentiment.",0.95
+7,"Evaluate the sentiment of the given movie review, categorizing it as ""positive"" or ""negative"" while providing transparent rationalizations for your classification.",0.95
+7,"Distinguish the sentiment in the provided movie review as positive or negative, providing detailed and transparent justifications for your classification.",0.95
+7,"Determine the sentiment of the provided movie review by categorizing it as ""positive"" or ""negative"", and provide a detailed justification for your decision.",0.95
+7,"Classify the provided text-based review or statement as having a positive or negative sentiment, and provide a clear explanation for your classification.",0.95
+8,"Determine the emotional tone and sentiment of the given text, justifying your classification with logical reasoning and evidence.",1.0
+8,"Analyze the provided movie review and categorize its sentiment as ""positive"" or ""negative"", providing logical reasoning for the classification.",1.0
+8,"Analyze the emotional tone of the provided text or movie review, and categorize its sentiment as either positive or negative, supported by your reasoning.",1.0
+8,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+8,"Review a movie summary to determine if its sentiment is positive or negative, and provide a clear explanation for your judgment.",0.95
+8,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+8,"Identify the sentiment of the movie review, breaking it down into a clear decision of ""positive"" or ""negative"" with supporting evidence and transparent reasoning.",0.95
+8,"I'd be happy to help! Here are the steps:
+
+1. Crossover Prompt:
+Prompt 1: Given a statement, classify it as expressing a positive or negative opinion.
+Prompt 2: In this task, you are given sentences from movie reviews. The task is to classify a sentence as positive or as negative.
+
+Crossover Prompt: Given sentences about movie reviews, classify them as expressing a positive or negative opinion.
+
+2. Mutate the prompt generated in Step 1:
+
+<Mutated Prompt>Classify movie review sentences as either expressing a positive or negative sentiment.",0.95
+8,"Evaluate the sentiment of the given movie review, categorizing it as ""positive"" or ""negative"" while providing transparent rationalizations for your classification.",0.95
+8,"Distinguish the sentiment in the provided movie review as positive or negative, providing detailed and transparent justifications for your classification.",0.95
+9,"Determine the emotional tone and sentiment of the given text, justifying your classification with logical reasoning and evidence.",1.0
+9,"Analyze the provided movie review and categorize its sentiment as ""positive"" or ""negative"", providing logical reasoning for the classification.",1.0
+9,"Analyze the emotional tone of the provided text or movie review, and categorize its sentiment as either positive or negative, supported by your reasoning.",1.0
+9,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+9,"Review a movie summary to determine if its sentiment is positive or negative, and provide a clear explanation for your judgment.",0.95
+9,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+9,"Identify the sentiment of the movie review, breaking it down into a clear decision of ""positive"" or ""negative"" with supporting evidence and transparent reasoning.",0.95
+9,"I'd be happy to help! Here are the steps:
+
+1. Crossover Prompt:
+Prompt 1: Given a statement, classify it as expressing a positive or negative opinion.
+Prompt 2: In this task, you are given sentences from movie reviews. The task is to classify a sentence as positive or as negative.
+
+Crossover Prompt: Given sentences about movie reviews, classify them as expressing a positive or negative opinion.
+
+2. Mutate the prompt generated in Step 1:
+
+<Mutated Prompt>Classify movie review sentences as either expressing a positive or negative sentiment.",0.95
+9,"Evaluate the sentiment of the given movie review, categorizing it as ""positive"" or ""negative"" while providing transparent rationalizations for your classification.",0.95
+9,"Distinguish the sentiment in the provided movie review as positive or negative, providing detailed and transparent justifications for your classification.",0.95
+10,"Determine the emotional tone and sentiment of the given text, justifying your classification with logical reasoning and evidence.",1.0
+10,"Analyze the provided movie review and categorize its sentiment as ""positive"" or ""negative"", providing logical reasoning for the classification.",1.0
+10,"Analyze the emotional tone of the provided text or movie review, and categorize its sentiment as either positive or negative, supported by your reasoning.",1.0
+10,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+10,"Review a movie summary to determine if its sentiment is positive or negative, and provide a clear explanation for your judgment.",0.95
+10,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+10,"Identify the sentiment of the movie review, breaking it down into a clear decision of ""positive"" or ""negative"" with supporting evidence and transparent reasoning.",0.95
+10,"I'd be happy to help! Here are the steps:
+
+1. Crossover Prompt:
+Prompt 1: Given a statement, classify it as expressing a positive or negative opinion.
+Prompt 2: In this task, you are given sentences from movie reviews. The task is to classify a sentence as positive or as negative.
+
+Crossover Prompt: Given sentences about movie reviews, classify them as expressing a positive or negative opinion.
+
+2. Mutate the prompt generated in Step 1:
+
+<Mutated Prompt>Classify movie review sentences as either expressing a positive or negative sentiment.",0.95
+10,"Evaluate the sentiment of the movie review by pinpointing the key phrases, sentences, or sections that lead you to categorize it as either ""overwhelmingly positive"" or ""strongly negative,"" supported by logical and transparent criteria.",0.95
+10,"Evaluate the sentiment of the given movie review, categorizing it as ""positive"" or ""negative"" while providing transparent rationalizations for your classification.",0.95
+11,"Examine the movie summary to identify its emotional tone and classify its sentiment as either positive or negative, supported by a clear rationale.",1.0
+11,"Determine the emotional tone and sentiment of the given text, justifying your classification with logical reasoning and evidence.",1.0
+11,"Analyze the provided movie review and categorize its sentiment as ""positive"" or ""negative"", providing logical reasoning for the classification.",1.0
+11,"Analyze the emotional tone of the provided text or movie review, and categorize its sentiment as either positive or negative, supported by your reasoning.",1.0
+11,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+11,"Review a movie summary to determine if its sentiment is positive or negative, and provide a clear explanation for your judgment.",0.95
+11,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+11,"Identify the sentiment of the movie review, breaking it down into a clear decision of ""positive"" or ""negative"" with supporting evidence and transparent reasoning.",0.95
+11,"I'd be happy to help! Here are the steps:
+
+1. Crossover Prompt:
+Prompt 1: Given a statement, classify it as expressing a positive or negative opinion.
+Prompt 2: In this task, you are given sentences from movie reviews. The task is to classify a sentence as positive or as negative.
+
+Crossover Prompt: Given sentences about movie reviews, classify them as expressing a positive or negative opinion.
+
+2. Mutate the prompt generated in Step 1:
+
+<Mutated Prompt>Classify movie review sentences as either expressing a positive or negative sentiment.",0.95
+11,"Examine the feeling conveyed in the movie review, determining its sentiment as either overwhelmingly positive or overwhelmingly negative, and provide clear explanations for your assessment, utilizing evidence from the review to justify your classification.",0.95
+12,"Examine the movie summary to identify its emotional tone and classify its sentiment as either positive or negative, supported by a clear rationale.",1.0
+12,"Determine the emotional tone and sentiment of the given text, justifying your classification with logical reasoning and evidence.",1.0
+12,"Analyze the provided movie review and categorize its sentiment as ""positive"" or ""negative"", providing logical reasoning for the classification.",1.0
+12,"Analyze the emotional tone of the provided text or movie review, and categorize its sentiment as either positive or negative, supported by your reasoning.",1.0
+12,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+12,"Review a movie summary to determine if its sentiment is positive or negative, and provide a clear explanation for your judgment.",0.95
+12,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+12,"Identify the sentiment of the movie review, breaking it down into a clear decision of ""positive"" or ""negative"" with supporting evidence and transparent reasoning.",0.95
+12,"I'd be happy to help! Here are the steps:
+
+1. Crossover Prompt:
+Prompt 1: Given a statement, classify it as expressing a positive or negative opinion.
+Prompt 2: In this task, you are given sentences from movie reviews. The task is to classify a sentence as positive or as negative.
+
+Crossover Prompt: Given sentences about movie reviews, classify them as expressing a positive or negative opinion.
+
+2. Mutate the prompt generated in Step 1:
+
+<Mutated Prompt>Classify movie review sentences as either expressing a positive or negative sentiment.",0.95
+12,"Examine the feeling conveyed in the movie review, determining its sentiment as either overwhelmingly positive or overwhelmingly negative, and provide clear explanations for your assessment, utilizing evidence from the review to justify your classification.",0.95

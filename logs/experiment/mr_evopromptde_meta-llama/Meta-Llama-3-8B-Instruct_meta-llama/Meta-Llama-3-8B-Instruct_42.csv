@@ -1,0 +1,121 @@
+step,prompt,score
+1,"Your task is to classify the comment ""positive"" or ""negative"".",1.0
+1,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.95
+1,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+1,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+1,"Given text, classify whether it is positive or negative.",0.85
+1,"Given a tweet, classify it as having a positive or negative sentiment.",0.8
+1,"When given an English sentence, your task is to analyze it and generate a sentiment word to describe the original text, such as positive or negative.",0.75
+1,"As you analyze presented statements, identify the emotional tone of social media posts and determine the emotional connotation, categorizing it as having a positive or negative emotional tone.",0.9
+1,"As a sentiment classifier, complete the sentiment classification task and determine the sentiment of",0.8
+1,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.5
+2,"Your task is to classify the comment ""positive"" or ""negative"".",1.0
+2,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.95
+2,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+2,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+2,"Given text, classify whether it is positive or negative.",0.85
+2,"Given a tweet, classify it as having a positive or negative sentiment.",0.8
+2,"Analyzed sentence, classify as having a positive or negative sentiment when taken as a social media post and consider the message conveyed in the online statement.",0.85
+2,"As you analyze presented statements, identify the emotional tone of social media posts and determine the emotional connotation, categorizing it as having a positive or negative emotional tone.",0.9
+2,"As a sentiment classifier, complete the sentiment classification task and determine the sentiment of",0.8
+2,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.5
+3,"Your task is to classify the comment ""positive"" or ""negative"".",1.0
+3,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.95
+3,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+3,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+3,"Given text, classify whether it is positive or negative.",0.85
+3,"Given a tweet, classify it as having a positive or negative sentiment.",0.8
+3,"Analyzed sentence, classify as having a positive or negative sentiment when taken as a social media post and consider the message conveyed in the online statement.",0.85
+3,"As you analyze presented statements, identify the emotional tone of social media posts and determine the emotional connotation, categorizing it as having a positive or negative emotional tone.",0.9
+3,"As a sentiment classifier, analyze a phrase from a review and classify the sentiment as positive or negative.",0.9
+3,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.5
+4,"Your task is to classify the comment ""positive"" or ""negative"".",1.0
+4,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.95
+4,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+4,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+4,"Given text, classify whether it is positive or negative.",0.85
+4,"Given a tweet, classify it as having a positive or negative sentiment.",0.8
+4,"Analyzed sentence, classify as having a positive or negative sentiment when taken as a social media post and consider the message conveyed in the online statement.",0.85
+4,"As you analyze presented statements, identify the emotional tone of social media posts and determine the emotional connotation, categorizing it as having a positive or negative emotional tone.",0.9
+4,"As a sentiment classifier, analyze a phrase from a review and classify the sentiment as positive or negative.",0.9
+4,"The goal is to categorize tweets in social media updates based on the emotions expressed, and consider the meaning and context, while classifying them as positive or negative sentiment.",0.65
+5,"Your task is to classify the comment ""positive"" or ""negative"".",1.0
+5,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.95
+5,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+5,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+5,"Given text, classify whether it is positive or negative.",0.85
+5,"Given a tweet, classify it as having a positive or negative sentiment.",0.8
+5,"Analyzed sentence, classify as having a positive or negative sentiment when taken as a social media post and consider the message conveyed in the online statement.",0.85
+5,"As you analyze presented statements, identify the emotional tone of social media posts and determine the emotional connotation, categorizing it as having a positive or negative emotional tone.",0.9
+5,"As a sentiment classifier, analyze a phrase from a review and classify the sentiment as positive or negative.",0.9
+5,"Analyze the emotional tone of the social media post and categorize it as having a positive or negative sentiment, considering the emotions expressed and the context.",0.85
+6,"Your task is to classify the comment ""positive"" or ""negative"".",1.0
+6,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.95
+6,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+6,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+6,"Given text, classify whether it is positive or negative.",0.85
+6,"Given a tweet, classify it as having a positive or negative sentiment.",0.8
+6,"Analyzed sentence, classify as having a positive or negative sentiment when taken as a social media post and consider the message conveyed in the online statement.",0.85
+6,"As you analyze presented statements, examine the critique of a movie and categorize it as having a positive or negative emotional tone.",0.95
+6,"As a sentiment classifier, analyze a phrase from a review and classify the sentiment as positive or negative.",0.9
+6,"Analyze the emotional tone of the social media post and categorize it as having a positive or negative sentiment, considering the emotions expressed and the context.",0.85
+7,"Your task is to classify the comment ""positive"" or ""negative"".",1.0
+7,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.95
+7,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+7,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+7,"Given text, classify whether it is positive or negative.",0.85
+7,"Given a tweet, classify it as having a positive or negative sentiment.",0.8
+7,"Analyzed sentence, classify as having a positive or negative sentiment when taken as a social media post and consider the message conveyed in the online statement.",0.85
+7,"As you analyze presented statements, examine the critique of a movie and categorize it as having a positive or negative emotional tone.",0.95
+7,"As a sentiment classifier, analyze a phrase from a review and classify the sentiment as positive or negative.",0.9
+7,"Analyze the emotional tone of the social media post and categorize it as having a positive or negative sentiment, considering the emotions expressed and the context.",0.85
+8,"Your task is to classify the comment ""positive"" or ""negative"".",1.0
+8,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.95
+8,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+8,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+8,"Given text, classify whether it is positive or negative.",0.85
+8,"Given a tweet, classify it as having a positive or negative sentiment.",0.8
+8,"Analyzed sentence, classify as having a positive or negative sentiment when taken as a social media post and consider the message conveyed in the online statement.",0.85
+8,"As you analyze presented statements, examine the critique of a movie and categorize it as having a positive or negative emotional tone.",0.95
+8,"As a sentiment classifier, analyze a phrase from a review and classify the sentiment as positive or negative.",0.9
+8,"Analyze the emotional tone of the social media post and categorize it as having a positive or negative sentiment, considering the emotions expressed and the context.",0.85
+9,"Your task is to classify the comment ""positive"" or ""negative"".",1.0
+9,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.95
+9,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+9,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+9,"Given text, classify whether it is positive or negative.",0.85
+9,"Given a tweet, classify it as having a positive or negative sentiment.",0.8
+9,"Analyzed sentence, classify as having a positive or negative sentiment when taken as a social media post and consider the message conveyed in the online statement.",0.85
+9,"As you analyze presented statements, examine the critique of a movie and categorize it as having a positive or negative emotional tone.",0.95
+9,"As a sentiment classifier, analyze a phrase from a review and classify the sentiment as positive or negative.",0.9
+9,"Analyze the emotional tone of the social media post and categorize it as having a positive or negative sentiment, considering the emotions expressed and the context.",0.85
+10,"Your task is to classify the comment ""positive"" or ""negative"".",1.0
+10,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.95
+10,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+10,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+10,"Given text, classify whether it is positive or negative.",0.85
+10,"Given a tweet, classify it as having a positive or negative sentiment.",0.8
+10,"Analyzed sentence, classify as having a positive or negative sentiment when taken as a social media post and consider the message conveyed in the online statement.",0.85
+10,"As you analyze presented statements, examine the critique of a movie and categorize it as having a positive or negative emotional tone.",0.95
+10,"As a sentiment classifier, analyze a phrase from a review and classify the sentiment as positive or negative.",0.9
+10,"Analyze the emotional tone of the social media post and categorize it as having a positive or negative sentiment, considering the emotions expressed and the context.",0.85
+11,"Your task is to classify the comment ""positive"" or ""negative"".",1.0
+11,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.95
+11,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+11,Examine the emotional undertone of the review and classify the sentiment as positive or negative while considering the emotions expressed and the context of user-generated content on a social media platform.,1.0
+11,"Given text, classify whether it is positive or negative.",0.85
+11,"Given a tweet, classify it as having a positive or negative sentiment.",0.8
+11,"Analyzed sentence, classify as having a positive or negative sentiment when taken as a social media post and consider the message conveyed in the online statement.",0.85
+11,"As you analyze presented statements, examine the critique of a movie and categorize it as having a positive or negative emotional tone.",0.95
+11,"As a sentiment classifier, analyze a phrase from a review and classify the sentiment as positive or negative.",0.9
+11,"You need to label posts critiquing movies and categorize them as having a favourable or unfavourable emotional tone, while considering the sentiments expressed and the context.",0.9
+12,"Your task is to classify the comment ""positive"" or ""negative"".",1.0
+12,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.95
+12,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+12,Examine the emotional undertone of the review and classify the sentiment as positive or negative while considering the emotions expressed and the context of user-generated content on a social media platform.,1.0
+12,"Given text, classify whether it is positive or negative.",0.85
+12,"Given a tweet, classify it as having a positive or negative sentiment.",0.8
+12,"Analyzed sentence, classify as having a positive or negative sentiment when taken as a social media post and consider the message conveyed in the online statement.",0.85
+12,"As you analyze presented statements, examine the critique of a movie and categorize it as having a positive or negative emotional tone.",0.95
+12,"As a sentiment classifier, analyze a phrase from a review and classify the sentiment as positive or negative.",0.9
+12,"You need to label posts critiquing movies and categorize them as having a favourable or unfavourable emotional tone, while considering the sentiments expressed and the context.",0.9

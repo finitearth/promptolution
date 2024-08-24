@@ -1,0 +1,121 @@
+step,prompt,score
+1,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+1,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+1,Analyze a tweet-like statement and determine its sentiment as either positive or negative.,0.95
+1,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.9
+1,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.9
+1,"Classify the input text as having a positive or negative sentiment, accurately assessing its emotional tone.",0.9
+1,"Assess the emotional tone of a sentence, determining whether it conveys optimism or pessimism in terms of positive or negative sentiment.",0.9
+1,"Given a tweet, classify it as having a positive or negative sentiment.",0.85
+1,"When given an English sentence, your task is to analyze it and generate a sentiment word to describe the original text, such as positive or negative.",0.8
+1,"Identify the tone of the sentence as optimistic, pessimistic, or neutral.",0.8
+2,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+2,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+2,Automatically determine whether the provided text expresses a positive or negative sentiment.,0.95
+2,Analyze a tweet-like statement and determine its sentiment as either positive or negative.,0.95
+2,"Accurately categorize the given text as having a ""positive"" or ""negative"" sentiment, reflecting its emotional tone.",0.95
+2,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.9
+2,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.9
+2,"Determine the emotional tone and sentiment of the given sentence, categorized as positive/negative and optimistic/pessimistic/neutral",0.9
+2,"Classify the sentiment in the given text as either ""positive"" or ""negative"", highlighting the reviewer's emotions towards the movie.",0.9
+2,"Classify the input text as having a positive or negative sentiment, accurately assessing its emotional tone.",0.9
+3,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+3,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+3,Automatically determine whether the provided text expresses a positive or negative sentiment.,0.95
+3,Analyze a tweet-like statement and determine its sentiment as either positive or negative.,0.95
+3,"Accurately categorize the given text as having a ""positive"" or ""negative"" sentiment, reflecting its emotional tone.",0.95
+3,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.9
+3,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.9
+3,"Determine the emotional tone and sentiment of the given sentence, categorized as positive/negative and optimistic/pessimistic/neutral",0.9
+3,"Classify the sentiment in the given text as either ""positive"" or ""negative"", highlighting the reviewer's emotions towards the movie.",0.9
+3,"Classify the input text as having a positive or negative sentiment, accurately assessing its emotional tone.",0.9
+4,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+4,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+4,Automatically determine whether the provided text expresses a positive or negative sentiment.,0.95
+4,Analyze a tweet-like statement and determine its sentiment as either positive or negative.,0.95
+4,"Accurately categorize the given text as having a ""positive"" or ""negative"" sentiment, reflecting its emotional tone.",0.95
+4,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.9
+4,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.9
+4,"Determine the sentiment of the input text, accurately assessing whether it has a positive or negative emotional tone and provide a nuanced classification.",0.9
+4,"Determine the emotional tone and sentiment of the given sentence, categorized as positive/negative and optimistic/pessimistic/neutral",0.9
+4,"Classify the sentiment in the given text as either ""positive"" or ""negative"", highlighting the reviewer's emotions towards the movie.",0.9
+5,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+5,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+5,Automatically determine whether the provided text expresses a positive or negative sentiment.,0.95
+5,Analyze a tweet-like statement and determine its sentiment as either positive or negative.,0.95
+5,"Accurately categorize the given text as having a ""positive"" or ""negative"" sentiment, reflecting its emotional tone.",0.95
+5,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.9
+5,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.9
+5,"Determine the sentiment of the input text, accurately assessing whether it has a positive or negative emotional tone and provide a nuanced classification.",0.9
+5,"Determine the emotional tone and sentiment of the given sentence, categorized as positive/negative and optimistic/pessimistic/neutral",0.9
+5,"Classify the sentiment in the given text as either ""positive"" or ""negative"", highlighting the reviewer's emotions towards the movie.",0.9
+6,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+6,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+6,Automatically determine whether the provided text expresses a positive or negative sentiment.,0.95
+6,Analyze a tweet-like statement and determine its sentiment as either positive or negative.,0.95
+6,"Accurately categorize the given text as having a ""positive"" or ""negative"" sentiment, reflecting its emotional tone.",0.95
+6,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.9
+6,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.9
+6,"Determine the sentiment of the input text, accurately assessing whether it has a positive or negative emotional tone and provide a nuanced classification.",0.9
+6,"Determine the emotional tone of the concise text, categorizing it as either positive or negative.",0.9
+6,"Determine the emotional tone and sentiment of the given sentence, categorized as positive/negative and optimistic/pessimistic/neutral",0.9
+7,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+7,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+7,Automatically determine whether the provided text expresses a positive or negative sentiment.,0.95
+7,Analyze a tweet-like statement and determine its sentiment as either positive or negative.,0.95
+7,"Accurately categorize the given text as having a ""positive"" or ""negative"" sentiment, reflecting its emotional tone.",0.95
+7,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.9
+7,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.9
+7,"Determine the sentiment of the input text, accurately assessing whether it has a positive or negative emotional tone and provide a nuanced classification.",0.9
+7,"Determine the emotional tone of the concise text, categorizing it as either positive or negative.",0.9
+7,"Determine the emotional tone and sentiment of the given sentence, categorized as positive/negative and optimistic/pessimistic/neutral",0.9
+8,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+8,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+8,Automatically determine whether the provided text expresses a positive or negative sentiment.,0.95
+8,Analyze a tweet-like statement and determine its sentiment as either positive or negative.,0.95
+8,"Accurately categorize the given text as having a ""positive"" or ""negative"" sentiment, reflecting its emotional tone.",0.95
+8,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.9
+8,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.9
+8,"Determine the sentiment of the input text, accurately assessing whether it has a positive or negative emotional tone and provide a nuanced classification.",0.9
+8,"Determine the emotional tone of the concise text, categorizing it as either positive or negative.",0.9
+8,"Determine the emotional tone and sentiment of the given sentence, categorized as positive/negative and optimistic/pessimistic/neutral",0.9
+9,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+9,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+9,Automatically determine whether the provided text expresses a positive or negative sentiment.,0.95
+9,Analyze a tweet-like statement and determine its sentiment as either positive or negative.,0.95
+9,"Accurately categorize the given text as having a ""positive"" or ""negative"" sentiment, reflecting its emotional tone.",0.95
+9,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.9
+9,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.9
+9,"Determine the sentiment of the input text, accurately assessing whether it has a positive or negative emotional tone and provide a nuanced classification.",0.9
+9,"Determine the emotional tone of the concise text, categorizing it as either positive or negative.",0.9
+9,"Determine the emotional tone and sentiment of the given sentence, categorized as positive/negative and optimistic/pessimistic/neutral",0.9
+10,"Accurately detect the emotional tone of the provided text, classifying it as positive, negative, or nuanced in its sentiment.",1.0
+10,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+10,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+10,"Classify the text as having a sentiment of ""positive"" or ""negative"".",0.95
+10,Automatically determine whether the provided text expresses a positive or negative sentiment.,0.95
+10,Analyze a tweet-like statement and determine its sentiment as either positive or negative.,0.95
+10,"Accurately categorize the given text as having a ""positive"" or ""negative"" sentiment, reflecting its emotional tone.",0.95
+10,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.9
+10,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.9
+10,"Determine the sentiment of the input text, accurately assessing whether it has a positive or negative emotional tone and provide a nuanced classification.",0.9
+11,"Accurately detect the emotional tone of the provided text, classifying it as positive, negative, or nuanced in its sentiment.",1.0
+11,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+11,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+11,"Classify the text as having a sentiment of ""positive"" or ""negative"".",0.95
+11,Automatically determine whether the provided text expresses a positive or negative sentiment.,0.95
+11,Analyze a tweet-like statement and determine its sentiment as either positive or negative.,0.95
+11,"Accurately categorize the given text as having a ""positive"" or ""negative"" sentiment, reflecting its emotional tone.",0.95
+11,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.9
+11,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.9
+11,"Determine the sentiment of the input text, accurately assessing whether it has a positive or negative emotional tone and provide a nuanced classification.",0.9
+12,"Accurately detect the emotional tone of the provided text, classifying it as positive, negative, or nuanced in its sentiment.",1.0
+12,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+12,"Given a sentence, classify it as either positive or negative sentiment.",0.95
+12,"Classify the text as having a sentiment of ""positive"" or ""negative"".",0.95
+12,Automatically determine whether the provided text expresses a positive or negative sentiment.,0.95
+12,Analyze a tweet-like statement and determine its sentiment as either positive or negative.,0.95
+12,"Accurately categorize the given text as having a ""positive"" or ""negative"" sentiment, reflecting its emotional tone.",0.95
+12,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.9
+12,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.9
+12,"Determine the sentiment of the input text, accurately assessing whether it has a positive or negative emotional tone and provide a nuanced classification.",0.9
