@@ -46,6 +46,7 @@ def main():
                             meta_prompt_path=meta_prompt_path,
                             init_pop_size=int(all_configs["optimizer"]["init_population"]),
                             logging_dir=f"logs/{experiment_name}/{task_name}_{optimizer_name}_{meta_llm}_{evaluator_llm}_{random_seed}.csv",
+                            experiment_name=experiment_name,
                             include_task_desc=False,
                             random_seed=random_seed,
                             evaluation_llm=evaluator_llm,
@@ -111,11 +112,12 @@ def run_experiment(config: Config):
             "meta_llm": config.meta_llm,
             "downstream_llm": config.downstream_llm,
             "evaluation_llm": config.evaluation_llm,
+            "task_description": config.include_task_desc,
             "random_seed": config.random_seed,
             "test_score": test_score,
         },
     )
-    df.to_csv("logs/best_scores.csv", mode="a", header=False, index=False)
+    df.to_csv(f"logs/{config.experiment_name}/best_scores.csv", mode="a", header=False, index=False)
 
 
 if __name__ == "__main__":
