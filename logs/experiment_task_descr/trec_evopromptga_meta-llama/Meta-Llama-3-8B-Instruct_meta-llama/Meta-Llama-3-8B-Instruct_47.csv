@@ -1,0 +1,121 @@
+step,prompt,score
+1,"Classify the question into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.5
+1,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+1,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.4
+1,"Identify the category that best fits this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+1,"Classify the question into its relevant category: Description, Entity, Expression, Human, Location, or Number.",0.3
+1,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.25
+1,"Classify the given question under one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.25
+1,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.2
+1,"Classify this sentence into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.2
+1,"Classify the given sentence into one of the categories below: Description, Entity, Expression, Human, Location, or Number.",0.2
+2,"Classify the question into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.5
+2,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+2,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.4
+2,"Identify the primary category of the question, selecting from the options: Description, Entity, Expression, Human, Location, or Number.",0.35
+2,"Identify the category that best fits this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+2,"Classify the question into its relevant category: Description, Entity, Expression, Human, Location, or Number.",0.3
+2,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.25
+2,"Classify the given question under one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.25
+2,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.2
+2,"Identify the category that best suits each question, choosing from: Description, Entity, Expression, Human, Location, or Number.",0.2
+3,"Classify the question into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.5
+3,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+3,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.4
+3,"Classify each question into its most fitting category, choosing from Description, Entity, Expression, Human, Location, or Number.",0.4
+3,"Identify the primary category of the question, selecting from the options: Description, Entity, Expression, Human, Location, or Number.",0.35
+3,"Identify the category that best fits this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+3,"Classify the question into its relevant category: Description, Entity, Expression, Human, Location, or Number.",0.3
+3,"For each question, determine its corresponding category: Description, Entity, Expression, Human, Location, or Number.",0.25
+3,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.25
+3,"Determine the most suitable category for each question from the options: Description, Entity, Expression, Human, Location, or Number.",0.25
+4,"Classify the question into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.5
+4,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+4,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.4
+4,"Make a categorization for each question, selecting the best fit from the options: Description, Entity, Expression, Human, Location, or Number.",0.4
+4,"Classify each question into its most fitting category, choosing from Description, Entity, Expression, Human, Location, or Number.",0.4
+4,"Assign each question to its most suitable category (Description, Entity, Expression, Human, Location, or Number).",0.4
+4,"Identify the primary category of the question, selecting from the options: Description, Entity, Expression, Human, Location, or Number.",0.35
+4,"Identify the category that best fits this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+4,"Classify the question into its relevant category: Description, Entity, Expression, Human, Location, or Number.",0.3
+4,"Classify the provided question into one of the following categories: Description, Entity, Expression, Human, Location, or Number. Please respond with the primary category that best describes the question.",0.3
+5,"Classify the question into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.5
+5,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+5,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.4
+5,"Make a categorization for each question, selecting the best fit from the options: Description, Entity, Expression, Human, Location, or Number.",0.4
+5,"Classify each question into its most fitting category, choosing from Description, Entity, Expression, Human, Location, or Number.",0.4
+5,"Assign each question to its most suitable category (Description, Entity, Expression, Human, Location, or Number).",0.4
+5,"Identify the primary category of the question, selecting from the options: Description, Entity, Expression, Human, Location, or Number.",0.35
+5,"Identify the category that best fits this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+5,"Determine the primary classification of the question, choosing from the list: Description, Entity, Expression, Human, Location, or Number.",0.3
+5,"Classify the question into its relevant category: Description, Entity, Expression, Human, Location, or Number.",0.3
+6,"Classify the question into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.5
+6,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+6,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.4
+6,"Make a categorization for each question, selecting the best fit from the options: Description, Entity, Expression, Human, Location, or Number.",0.4
+6,"Identify the most accurate category for each question, filtering options to Description, Entity, Expression, Human, Location, or Number.",0.4
+6,"Classify each question into its primary category: Description, Entity, Expression, Human, Location, or Number, selecting the most suitable option.",0.4
+6,"Classify each question into its most fitting category, choosing from Description, Entity, Expression, Human, Location, or Number.",0.4
+6,"Assign each question to its most suitable category (Description, Entity, Expression, Human, Location, or Number).",0.4
+6,"Identify the primary category of the question, selecting from the options: Description, Entity, Expression, Human, Location, or Number.",0.35
+6,"Identify the category that best fits this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+7,"Classify each question into one of six categories: Description, Entity, Expression, Human, Location, or Number, and respond with the primary category.",0.55
+7,"Classify the question into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.5
+7,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+7,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.4
+7,"Make a categorization for each question, selecting the best fit from the options: Description, Entity, Expression, Human, Location, or Number.",0.4
+7,"Identify the most accurate category for each question, filtering options to Description, Entity, Expression, Human, Location, or Number.",0.4
+7,"Detect the primary category of the given question: Description, Entity, Expression, Human, Location, or Number.",0.4
+7,"Classify each question into its primary category: Description, Entity, Expression, Human, Location, or Number, selecting the most suitable option.",0.4
+7,"Classify each question into its primary category, selecting the most fitting option from Description, Entity, Expression, Human, Location, or Number.",0.4
+7,"Classify each question into its most relevant category by filtering the options to Description, Entity, Expression, Human, Location, or Number.",0.4
+8,"For each question, select the primary category (Description, Entity, Expression, Human, Location, or Number).",0.55
+8,"Classify each question into one of six categories: Description, Entity, Expression, Human, Location, or Number, and respond with the primary category.",0.55
+8,"Classify the question into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.5
+8,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+8,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.4
+8,"Make a categorization for each question, selecting the best fit from the options: Description, Entity, Expression, Human, Location, or Number.",0.4
+8,"Identify the most relevant category for each question from the options: Description, Entity, Expression, Human, Location, or Number.",0.4
+8,"Identify the most accurate category for each question, filtering options to Description, Entity, Expression, Human, Location, or Number.",0.4
+8,"Detect the primary category of the given question: Description, Entity, Expression, Human, Location, or Number.",0.4
+8,"Classify the question by selecting the most fitting category from ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", or ""Number",0.4
+9,"For each question, select the primary category (Description, Entity, Expression, Human, Location, or Number).",0.55
+9,"Classify each question into one of six categories: Description, Entity, Expression, Human, Location, or Number, and respond with the primary category.",0.55
+9,"Classify the question into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.5
+9,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+9,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.4
+9,"Make a categorization for each question, selecting the best fit from the options: Description, Entity, Expression, Human, Location, or Number.",0.4
+9,"Identify the most relevant category for each question from the options: Description, Entity, Expression, Human, Location, or Number.",0.4
+9,"Identify the most accurate category for each question, filtering options to Description, Entity, Expression, Human, Location, or Number.",0.4
+9,"Detect the primary category of the given question: Description, Entity, Expression, Human, Location, or Number.",0.4
+9,"Classify the question by selecting the most fitting category from ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", or ""Number",0.4
+10,"For each question, select the primary category (Description, Entity, Expression, Human, Location, or Number).",0.55
+10,"Classify each question into one of six categories: Description, Entity, Expression, Human, Location, or Number, and respond with the primary category.",0.55
+10,"Classify the question into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.5
+10,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+10,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.4
+10,"Make a categorization for each question, selecting the best fit from the options: Description, Entity, Expression, Human, Location, or Number.",0.4
+10,"Identify the primary category for each question, selecting from the options: Description, Entity, Expression, Human, Location, or Number.",0.4
+10,"Identify the most relevant category for each question from the options: Description, Entity, Expression, Human, Location, or Number.",0.4
+10,"Identify the most accurate category for each question, filtering options to Description, Entity, Expression, Human, Location, or Number.",0.4
+10,"Detect the primary category of the given question: Description, Entity, Expression, Human, Location, or Number.",0.4
+11,"For each question, select the primary category (Description, Entity, Expression, Human, Location, or Number).",0.55
+11,"Classify each question into one of six categories: Description, Entity, Expression, Human, Location, or Number, and respond with the primary category.",0.55
+11,"Classify the question into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.5
+11,"Categorize a given question into one of the six categories (Description, Entity, Expression, Human, Location, or Number) that best describes it.",0.45
+11,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+11,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.4
+11,"Make a categorization for each question, selecting the best fit from the options: Description, Entity, Expression, Human, Location, or Number.",0.4
+11,"Identify the primary category for each question, selecting from the options: Description, Entity, Expression, Human, Location, or Number.",0.4
+11,"Identify the most relevant category for each question from the options: Description, Entity, Expression, Human, Location, or Number.",0.4
+11,"Identify the most accurate category for each question, filtering options to Description, Entity, Expression, Human, Location, or Number.",0.4
+12,"For each question, select the primary category (Description, Entity, Expression, Human, Location, or Number).",0.55
+12,"Classify each question into one of six categories: Description, Entity, Expression, Human, Location, or Number, and respond with the primary category.",0.55
+12,"Classify the question into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.5
+12,"Categorize a given question into one of the six categories (Description, Entity, Expression, Human, Location, or Number) that best describes it.",0.45
+12,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+12,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.4
+12,"Pinpoint the primary category for each question, selecting from the options: Description, Entity, Expression, Human, Location, or Number.",0.4
+12,"Make a categorization for each question, selecting the best fit from the options: Description, Entity, Expression, Human, Location, or Number.",0.4
+12,"Identify the primary category of each question, choosing from Description, Entity, Expression, Human, Location, and Number.",0.4
+12,"Identify the primary category for each question, selecting from the options: Description, Entity, Expression, Human, Location, or Number.",0.4

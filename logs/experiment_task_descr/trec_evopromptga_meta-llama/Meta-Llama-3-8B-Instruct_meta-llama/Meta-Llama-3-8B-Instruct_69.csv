@@ -1,0 +1,147 @@
+step,prompt,score
+1,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+1,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+1,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.3
+1,"Analyze an English question and identify which category it belongs to: Description, Entity, Expression, Human, Location, or Number.",0.3
+1,"Classify this sentence into one of the six question categories: Description, Entity, Expression, Human, Location, or Number.",0.25
+1,"Classify this question: Description, Entity, Expression, Human, Location, or Number",0.25
+1,"Classify this question into one of the following categories: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Please return the corresponding category as a single word.",0.25
+1,"Categorize the question into one of the following categories: 'Description', 'Entity",0.25
+1,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.2
+1,"Classify the given question by assigning a single label from the categories: Description, Entity, Expression, Human, Location, Number.",0.2
+2,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+2,"Classify the question into one of the six categories: 'Description', Entity, Expression, Human, Location, or Number.",0.4
+2,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+2,"Identify the type of question: Description, Entity, Expression, Human, Location, or Number, based on the given text.",0.35
+2,"Identify the dominant category of the question from the options: Description, Entity, Expression, Human, Location, Number, selecting the most fitting label.",0.35
+2,"Here's the step-by-step process to generate a better prompt:
+
+1. Crossover the following prompts:
+
+Prompt 1: Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.
+Prompt 2: Classify the given question by assigning a single label from the categories: Description, Entity, Expression, Human, Location, Number.
+
+Crossover Prompt: Classify the text as one of the following categories: Description, Entity, Expression, Human, Location, Number.
+
+2. Mutate the prompt generated in Step 1:
+
+Mutated Prompt: Identify the category that the given question best fits into from the options: Description, Entity, Expression, Human, Location, Number.
+
+Final Prompt: [Identify the category that the given question best fits into from the options: Description, Entity, Expression, Human, Location, Number.]",0.35
+2,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.3
+2,"Identify the category that best describes this sentence, selecting one of the six question types: Description, Entity, Expression, Human, Location, or Number.",0.3
+2,"Classify the given question into one of the six categories: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'.",0.3
+2,"Based on the provided question, categorize it into one of the six types: Description, Entity, Expression, Human, Location, or Number. Select the most suitable category from the options.",0.3
+3,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+3,"Classify the question into one of the six categories: 'Description', Entity, Expression, Human, Location, or Number.",0.4
+3,"Classify the given question as one of ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] and return the corresponding label.",0.4
+3,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+3,"Identify the type of question: Description, Entity, Expression, Human, Location, or Number, based on the given text.",0.35
+3,"Identify the dominant category of the question from the options: Description, Entity, Expression, Human, Location, Number, selecting the most fitting label.",0.35
+3,"Here's the step-by-step process to generate a better prompt:
+
+1. Crossover the following prompts:
+
+Prompt 1: Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.
+Prompt 2: Classify the given question by assigning a single label from the categories: Description, Entity, Expression, Human, Location, Number.
+
+Crossover Prompt: Classify the text as one of the following categories: Description, Entity, Expression, Human, Location, Number.
+
+2. Mutate the prompt generated in Step 1:
+
+Mutated Prompt: Identify the category that the given question best fits into from the options: Description, Entity, Expression, Human, Location, Number.
+
+Final Prompt: [Identify the category that the given question best fits into from the options: Description, Entity, Expression, Human, Location, Number.]",0.35
+3,"Given a question, categorize it into one of the following categories: 'Description', Entity, Expression, Human, Location, or Number, and return the corresponding label.",0.35
+3,"Determine the most suitable question type from the options: Description, Entity, Expression, Human, Location, Number, for the given text.",0.35
+3,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.3
+4,"For a given question, identify its type by matching it to one of the categories: Description, Entity, Expression, Human, Location, or Number.",0.55
+4,"Classify the given question into one of the six categories: Description, Entity, Expression, Human, Location, or Number, by selecting the primary label.",0.5
+4,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+4,"Classify the question as either 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number' and return the correct label.",0.45
+4,"Determine the category of the given question, selecting one from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].",0.4
+4,"Classify the question into one of the six categories: 'Description', Entity, Expression, Human, Location, or Number.",0.4
+4,"Classify the given question as one of ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] and return the corresponding label.",0.4
+4,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+4,"Identify the type of question: Description, Entity, Expression, Human, Location, or Number, based on the given text.",0.35
+4,"Identify the dominant category of the question from the options: Description, Entity, Expression, Human, Location, Number, selecting the most fitting label.",0.35
+5,"Identify the question type by assigning a category label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].",0.55
+5,"For a given question, identify its type by matching it to one of the categories: Description, Entity, Expression, Human, Location, or Number.",0.55
+5,"Classify the given question into one of the six categories: Description, Entity, Expression, Human, Location, or Number, by selecting the primary label.",0.5
+5,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+5,"Classify the question: [insert question here] into one of the six categories (Description, Entity, Expression, Human, Location, or Number) and select the primary label that best matches.",0.45
+5,"Classify the question as either 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number' and return the correct label.",0.45
+5,"Determine the category of the given question, selecting one from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].",0.4
+5,"Classify the question into one of the six categories: 'Description', Entity, Expression, Human, Location, or Number.",0.4
+5,"Classify the question as one of ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].",0.4
+5,"Classify the given question as one of ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] and return the corresponding label.",0.4
+6,"Identify the question type by assigning a category label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].",0.55
+6,"For a given question, identify its type by matching it to one of the categories: Description, Entity, Expression, Human, Location, or Number.",0.55
+6,"Classify the provided question into one of the categories ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] based on its content, and respond with the corresponding label.",0.5
+6,"Classify the given question into one of the six categories: Description, Entity, Expression, Human, Location, or Number, by selecting the primary label.",0.5
+6,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+6,"Classify the question: [insert question here] into one of the six categories (Description, Entity, Expression, Human, Location, or Number) and select the primary label that best matches.",0.45
+6,"Classify the question as either 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number' and return the correct label.",0.45
+6,"Identify the dominant category of the given question, selecting from the six categories: Description, Entity, Expression, Human, Location, or Number.",0.4
+6,"Determine the category of the given question, selecting one from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].",0.4
+6,"Determine the category of the given question, choosing from the six options: Description, Entity, Expression, Human, Location, or Number.",0.4
+7,"Recognize the primary category of each question, choosing from Description, Entity, Expression, Human, Location, or Number, and return the most fitting label.",0.7
+7,"Decipher the question's category by selecting one of the predefined labels: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].",0.7
+7,"Classify the question into one of the following six categories: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'; return the corresponding label.",0.65
+7,"Identify the question type by assigning a category label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].",0.55
+7,"For a given question, identify its type by matching it to one of the categories: Description, Entity, Expression, Human, Location, or Number.",0.55
+7,"Transform the input question into one of the dominant categories: Description, Entity, Expression, Human, Location, or Number.",0.5
+7,"Classify the provided question into one of the categories ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] based on its content, and respond with the corresponding label.",0.5
+7,"Classify the given question into one of the six categories: Description, Entity, Expression, Human, Location, or Number, by selecting the primary label.",0.5
+7,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+7,"Classify the question: [insert question here] into one of the six categories (Description, Entity, Expression, Human, Location, or Number) and select the primary label that best matches.",0.45
+8,"Recognize the primary category of each question, choosing from Description, Entity, Expression, Human, Location, or Number, and return the most fitting label.",0.7
+8,"Decipher the question's category by selecting one of the predefined labels: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].",0.7
+8,"Classify the question into one of the following six categories: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'; return the corresponding label.",0.65
+8,"Identify the question type: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'",0.6
+8,"Choose the category that best matches the given question from the list: Description, Entity, Expression, Human, Location, or Number.</prompt",0.6
+8,"Identify the question type by assigning a category label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].",0.55
+8,"For a given question, identify its type by matching it to one of the categories: Description, Entity, Expression, Human, Location, or Number.",0.55
+8,"Transform the input question into one of the dominant categories: Description, Entity, Expression, Human, Location, or Number.",0.5
+8,"Classify the provided question into one of the categories ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] based on its content, and respond with the corresponding label.",0.5
+8,"Classify the given question into one of the six categories: Description, Entity, Expression, Human, Location, or Number, by selecting the primary label.",0.5
+9,"Recognize the primary category of each question, choosing from Description, Entity, Expression, Human, Location, or Number, and return the most fitting label.",0.7
+9,"Decipher the question's category by selecting one of the predefined labels: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].",0.7
+9,"Determine the category that best fits a given question, selecting from the options: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'.",0.65
+9,"Classify the question into one of the following six categories: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'; return the corresponding label.",0.65
+9,"Predict the category label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] that best matches the given question.",0.6
+9,"Identify the question type: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'",0.6
+9,"Choose the category that best matches the given question from the list: Description, Entity, Expression, Human, Location, or Number.</prompt",0.6
+9,"Identify the question type by assigning a category label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].",0.55
+9,"For a given question, identify its type by matching it to one of the categories: Description, Entity, Expression, Human, Location, or Number.",0.55
+9,"Classify the question into one of the six categories: Description, Entity, Expression, Human, Location, or Number, taking into account its thematic and semantic properties.",0.55
+10,"Recognize the primary category of each question, choosing from Description, Entity, Expression, Human, Location, or Number, and return the most fitting label.",0.7
+10,"Decipher the question's category by selecting one of the predefined labels: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].",0.7
+10,"Determine the category that best fits a given question, selecting from the options: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'.",0.65
+10,"Classify the question into one of the following six categories: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'; return the corresponding label.",0.65
+10,"Predict the category label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] that best matches the given question.",0.6
+10,"Identify the question type: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'",0.6
+10,"Choose the category that best matches the given question from the list: Description, Entity, Expression, Human, Location, or Number.</prompt",0.6
+10,"Identify the question type by assigning a category label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].",0.55
+10,"For a given question, identify its type by matching it to one of the categories: Description, Entity, Expression, Human, Location, or Number.",0.55
+10,"Classify the question into one of the six categories: Description, Entity, Expression, Human, Location, or Number, taking into account its thematic and semantic properties.",0.55
+11,"Recognize the primary category of each question, choosing from Description, Entity, Expression, Human, Location, or Number, and return the most fitting label.",0.7
+11,"Decipher the question's category by selecting one of the predefined labels: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].",0.7
+11,"Determine the category that best fits a given question, selecting from the options: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'.",0.65
+11,"Classify the question into one of the following six categories: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'; return the corresponding label.",0.65
+11,"Predict the category label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] that best matches the given question.",0.6
+11,"Identify the question type: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'",0.6
+11,"Choose the category that best matches the given question from the list: Description, Entity, Expression, Human, Location, or Number.</prompt",0.6
+11,"Identify the question type by assigning a category label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].",0.55
+11,"Identify the primary category of a given question, selecting from the options: Description, Entity, Expression, Human, Location, or Number, while returning the matching label.",0.55
+11,"For a given question, identify its type by matching it to one of the categories: Description, Entity, Expression, Human, Location, or Number.",0.55
+12,"Recognize the primary category of each question, choosing from Description, Entity, Expression, Human, Location, or Number, and return the most fitting label.",0.7
+12,"Decipher the question's category by selecting one of the predefined labels: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].",0.7
+12,"Determine the category that best fits a given question, selecting from the options: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'.",0.65
+12,"Classify the question into one of the following six categories: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'; return the corresponding label.",0.65
+12,"Predict the category label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] that best matches the given question.",0.6
+12,"Identify the question type: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'",0.6
+12,"Choose the category that best matches the given question from the list: Description, Entity, Expression, Human, Location, or Number.</prompt",0.6
+12,"Identify the question type by assigning a category label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].",0.55
+12,"Identify the primary category of a given question, selecting from the options: Description, Entity, Expression, Human, Location, or Number, while returning the matching label.",0.55
+12,"For a given question, identify its type by matching it to one of the categories: Description, Entity, Expression, Human, Location, or Number.",0.55

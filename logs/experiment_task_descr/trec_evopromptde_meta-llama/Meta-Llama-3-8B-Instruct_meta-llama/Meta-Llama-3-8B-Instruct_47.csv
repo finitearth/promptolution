@@ -1,0 +1,747 @@
+step,prompt,score
+1,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.55
+1,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+1,"Analyze the provided statement to identify the question type, categorizing it as Description, Entity, Expression, Human, Location, or Number.",0.2
+1,"Classify this sentence based on the categories in the following list, including Description, Entity, Expression, Human, Location, or Number,",0.2
+1,"Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.",0.1
+1,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.1
+1,"Classify this sentence by choosing one of the following options: Description, Entity, Expression, Human, Location, or Number.",0.1
+1,"Classify each question according to its type: Description, Entity, Expression, Human, Location, or Number, and consider the meaning and context.",0.25
+1,"As a classification model, classify the input query into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.15
+1,"As a classification model, classify the given questions into one of the following categories: Description, Entity, Expression, Human, Location, or Number, taking into account the meaning and context of each question.",0.3
+2,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.55
+2,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+2,"Analyze the provided statement to identify the question type, categorizing it as Description, Entity, Expression, Human, Location, or Number.",0.2
+2,"Classify this sentence based on the categories in the following list, including Description, Entity, Expression, Human, Location, or Number,",0.2
+2,"Analyze the provided question and categorize it into one of the following categories: Description, Entity, Expression, Human, Location, or Number, while considering the context and",0.15
+2,"Here are the steps to generate a better prompt:
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.
+Prompt 2: As a classification model, classify the given questions into one of the following categories: Description, Entity, Expression, Human, Location, or Number, taking into account the meaning and context of each question.
+
+Different parts:
+""Please select the correct classification"" vs ""As a classification model""
+""This sentence"" vs ""the given questions""
+""Ignore the meaning and context"" vs ""taking into account the meaning and context""
+
+2. Randomly mutate the different parts:
+
+""Please select the correct classification"" -> ""The objective is to identify the type of""
+""This sentence"" -> ""the provided questions""
+""Ignore the meaning and context"" -> ""considering the nuances and context""
+
+Here are the mutanted parts:
+
+* ""The objective is to identify the type of"" instead of ""Please select the correct classification""
+* ""the provided questions"" instead of ""This sentence""
+* ""considering the nuances"" instead of ""taking into account the meaning and context""
+
+3. Crossover the different parts with",0.2
+2,"Determine the categorization of the query by selecting one of the following options: Description, Entity, Expression, Human, Location, or Number, while thoroughly examining the question.",0.15
+2,"Classify each question according to its type: Description, Entity, Expression, Human, Location, or Number, and consider the meaning and context.",0.25
+2,"As a classification model, classify the input query into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.15
+2,"As a classification model, classify the given questions into one of the following categories: Description, Entity, Expression, Human, Location, or Number, taking into account the meaning and context of each question.",0.3
+3,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.55
+3,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+3,"Analyze the provided statement to identify the question type, categorizing it as Description, Entity, Expression, Human, Location, or Number.",0.2
+3,"Classify this sentence based on the categories in the following list, including Description, Entity, Expression, Human, Location, or Number,",0.2
+3,"Study the given inquiry and classify it into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context",0.2
+3,"Here are the steps to generate a better prompt:
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.
+Prompt 2: As a classification model, classify the given questions into one of the following categories: Description, Entity, Expression, Human, Location, or Number, taking into account the meaning and context of each question.
+
+Different parts:
+""Please select the correct classification"" vs ""As a classification model""
+""This sentence"" vs ""the given questions""
+""Ignore the meaning and context"" vs ""taking into account the meaning and context""
+
+2. Randomly mutate the different parts:
+
+""Please select the correct classification"" -> ""The objective is to identify the type of""
+""This sentence"" -> ""the provided questions""
+""Ignore the meaning and context"" -> ""considering the nuances and context""
+
+Here are the mutanted parts:
+
+* ""The objective is to identify the type of"" instead of ""Please select the correct classification""
+* ""the provided questions"" instead of ""This sentence""
+* ""considering the nuances"" instead of ""taking into account the meaning and context""
+
+3. Crossover the different parts with",0.2
+3,"Determine the categorization of the query by selecting one of the following options: Description, Entity, Expression, Human, Location, or Number, while thoroughly examining the question.",0.15
+3,"Classify each question according to its type: Description, Entity, Expression, Human, Location, or Number, and consider the meaning and context.",0.25
+3,"As a classification model, classify the input query into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.15
+3,"As a classification model, classify questions in the dataset and categorize them into one of the following categories: Description, Entity, Expression, Human, Location, or Number, while considering the meaning and context of each inquiry.",0.35
+4,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.55
+4,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+4,"Analyze the provided statement to identify the question type, categorizing it as Description, Entity, Expression, Human, Location, or Number.",0.2
+4,"Classify this sentence based on the categories in the following list, including Description, Entity, Expression, Human, Location, or Number,",0.2
+4,"Study the given inquiry and classify it into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context",0.2
+4,"Here are the steps to generate a better prompt:
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.
+Prompt 2: As a classification model, classify the given questions into one of the following categories: Description, Entity, Expression, Human, Location, or Number, taking into account the meaning and context of each question.
+
+Different parts:
+""Please select the correct classification"" vs ""As a classification model""
+""This sentence"" vs ""the given questions""
+""Ignore the meaning and context"" vs ""taking into account the meaning and context""
+
+2. Randomly mutate the different parts:
+
+""Please select the correct classification"" -> ""The objective is to identify the type of""
+""This sentence"" -> ""the provided questions""
+""Ignore the meaning and context"" -> ""considering the nuances and context""
+
+Here are the mutanted parts:
+
+* ""The objective is to identify the type of"" instead of ""Please select the correct classification""
+* ""the provided questions"" instead of ""This sentence""
+* ""considering the nuances"" instead of ""taking into account the meaning and context""
+
+3. Crossover the different parts with",0.2
+4,"Determine the categorization of the query by selecting one of the following options: Description, Entity, Expression, Human, Location, or Number, while thoroughly examining the question.",0.15
+4,"Classify each question according to its type: Description, Entity, Expression, Human, Location, or Number, and consider the meaning and context.",0.25
+4,"As a classification model, classify the input query into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.15
+4,"As a classification model, classify questions in the dataset and categorize them into one of the following categories: Description, Entity, Expression, Human, Location, or Number, while considering the meaning and context of each inquiry.",0.35
+5,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.55
+5,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+5,"Analyze the provided statement to identify the question type, categorizing it as Description, Entity, Expression, Human, Location, or Number.",0.2
+5,"Classify this sentence based on the categories in the following list, including Description, Entity, Expression, Human, Location, or Number,",0.2
+5,"Study the given inquiry and classify it into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context",0.2
+5,"Here are the steps to generate a better prompt:
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.
+Prompt 2: As a classification model, classify the given questions into one of the following categories: Description, Entity, Expression, Human, Location, or Number, taking into account the meaning and context of each question.
+
+Different parts:
+""Please select the correct classification"" vs ""As a classification model""
+""This sentence"" vs ""the given questions""
+""Ignore the meaning and context"" vs ""taking into account the meaning and context""
+
+2. Randomly mutate the different parts:
+
+""Please select the correct classification"" -> ""The objective is to identify the type of""
+""This sentence"" -> ""the provided questions""
+""Ignore the meaning and context"" -> ""considering the nuances and context""
+
+Here are the mutanted parts:
+
+* ""The objective is to identify the type of"" instead of ""Please select the correct classification""
+* ""the provided questions"" instead of ""This sentence""
+* ""considering the nuances"" instead of ""taking into account the meaning and context""
+
+3. Crossover the different parts with",0.2
+5,"Determine the categorization of the query by selecting one of the following options: Description, Entity, Expression, Human, Location, or Number, while thoroughly examining the question.",0.15
+5,"Classify each question according to its type: Description, Entity, Expression, Human, Location, or Number, and consider the meaning and context.",0.25
+5,"As a classification model, classify the input query into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.15
+5,"As a classification model, classify questions in the dataset and categorize them into one of the following categories: Description, Entity, Expression, Human, Location, or Number, while considering the meaning and context of each inquiry.",0.35
+6,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.55
+6,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+6,"I'd be happy to help you generate a better prompt. Let's follow the instructions step-by-step.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: Study the given inquiry and classify it into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context
+
+Different parts:
+
+* ""Your task is to choose a type of the question"" vs ""Study the given inquiry and classify it""
+* ""from Description, Entity, Expression, Human, Location and Number"" vs ""into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context""
+
+2. Randomly mutate the different parts:
+
+* ""Your task is to choose a type of the question"" -> ""Determine the classification of the inquiry""
+* ""from Description, Entity, Expression, Human, Location and Number"" -> ""categories of Description, Entity, Expression, Human, Location, Number""
+
+Let me know if you'd like me to generate more mutations!
+
+3. Crossover the different parts with Prompt 3 and generate a",0.3
+6,"Classify this sentence based on the categories in the following list, including Description, Entity, Expression, Human, Location, or Number,",0.2
+6,"Study the given inquiry and classify it into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context",0.2
+6,"Here are the steps to generate a better prompt:
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to classify each question into one of the six categories: Description, Entity, Expression, Human, Location, and Number.
+Prompt 2: The dataset includes questions categorized into different types: Description, Entity, Expression, Human, Location, and Number. The task is to classify each question into one of these six question types. The class mentioned first in the response of the LLM will be the prediction..
+
+Different parts:
+""Your task is to classify each question"" vs ""The dataset includes questions""
+""into one of the six categories"" vs ""categorized into different types""
+""The six categories"" vs ""Description, Entity, Expression, Human, Location, and Number""
+
+2. Randomly mutate the different parts:
+
+""Your task is to classify each question"" -> ""Analyze the provided questions to determine the type""
+""The dataset includes questions"" -> ""The questions are categorized into different types""
+""into one of the six categories"" -> ""from the following categories""
+""The six categories"" -> ""Description, Entity, Expression, Human, Location, and Number"" -> ""the six distinct types""
+
+Here are",0.25
+6,"Analyze the query and categorize it into one of the following categories: Description, Entity",0.2
+6,"Classify each question according to its type: Description, Entity, Expression, Human, Location, or Number, and consider the meaning and context.",0.25
+6,"As a classification model, classify the input query into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.15
+6,"As a classification model, classify questions in the dataset and categorize them into one of the following categories: Description, Entity, Expression, Human, Location, or Number, while considering the meaning and context of each inquiry.",0.35
+7,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.55
+7,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+7,"I'd be happy to help you generate a better prompt. Let's follow the instructions step-by-step.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: Study the given inquiry and classify it into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context
+
+Different parts:
+
+* ""Your task is to choose a type of the question"" vs ""Study the given inquiry and classify it""
+* ""from Description, Entity, Expression, Human, Location and Number"" vs ""into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context""
+
+2. Randomly mutate the different parts:
+
+* ""Your task is to choose a type of the question"" -> ""Determine the classification of the inquiry""
+* ""from Description, Entity, Expression, Human, Location and Number"" -> ""categories of Description, Entity, Expression, Human, Location, Number""
+
+Let me know if you'd like me to generate more mutations!
+
+3. Crossover the different parts with Prompt 3 and generate a",0.3
+7,"Classify this sentence based on the categories in the following list, including Description, Entity, Expression, Human, Location, or Number,",0.2
+7,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+Prompt 1: Your task is to classify each question into one of the six categories: Description, Entity, Expression, Human, Location, and Number.
+Prompt 2: The dataset includes questions categorized into different types: Description, Entity, Expression, Human, Location, and Number. The task is to classify each question into one of these six question types. The class mentioned first in the response of the LLM will be the prediction..
+
+Different parts:
+""Your task is to classify each question"" vs ""The dataset includes questions""
+""into one of the six categories"" vs ""categorized into different types""
+""The six categories"" vs ""Description, Entity, Expression, Human, Location, and Number""
+
+2. Randomly mutate the different parts:
+
+""Your task is to classify each question"" -> ""Examine the prompts to identify the relevant type""
+""The dataset includes questions"" -> ""The questions are organized by category""
+""into one of the six categories"" -> ""from the following list""
+""The six categories"" -> ""Description, Entity, Expression, Human, Location, and Number"" -> ""the six distinct types""",0.25
+7,"Here are the steps to generate a better prompt:
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to classify each question into one of the six categories: Description, Entity, Expression, Human, Location, and Number.
+Prompt 2: The dataset includes questions categorized into different types: Description, Entity, Expression, Human, Location, and Number. The task is to classify each question into one of these six question types. The class mentioned first in the response of the LLM will be the prediction..
+
+Different parts:
+""Your task is to classify each question"" vs ""The dataset includes questions""
+""into one of the six categories"" vs ""categorized into different types""
+""The six categories"" vs ""Description, Entity, Expression, Human, Location, and Number""
+
+2. Randomly mutate the different parts:
+
+""Your task is to classify each question"" -> ""Analyze the provided questions to determine the type""
+""The dataset includes questions"" -> ""The questions are categorized into different types""
+""into one of the six categories"" -> ""from the following categories""
+""The six categories"" -> ""Description, Entity, Expression, Human, Location, and Number"" -> ""the six distinct types""
+
+Here are",0.25
+7,"Analyze the query and categorize it into one of the following categories: Description, Entity",0.2
+7,"Classify each question according to its type: Description, Entity, Expression, Human, Location, or Number, and consider the meaning and context.",0.25
+7,"The goal is to identify the nature of the inquiry based on a text passage, and categorize it into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.35
+7,"As a classification model, classify questions in the dataset and categorize them into one of the following categories: Description, Entity, Expression, Human, Location, or Number, while considering the meaning and context of each inquiry.",0.35
+8,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.55
+8,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+8,"I'd be happy to help you generate a better prompt. Let's follow the instructions step-by-step.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: Study the given inquiry and classify it into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context
+
+Different parts:
+
+* ""Your task is to choose a type of the question"" vs ""Study the given inquiry and classify it""
+* ""from Description, Entity, Expression, Human, Location and Number"" vs ""into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context""
+
+2. Randomly mutate the different parts:
+
+* ""Your task is to choose a type of the question"" -> ""Determine the classification of the inquiry""
+* ""from Description, Entity, Expression, Human, Location and Number"" -> ""categories of Description, Entity, Expression, Human, Location, Number""
+
+Let me know if you'd like me to generate more mutations!
+
+3. Crossover the different parts with Prompt 3 and generate a",0.3
+8,"Classify this sentence based on the categories in the following list, including Description, Entity, Expression, Human, Location, or Number,",0.2
+8,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+Prompt 1: Your task is to classify each question into one of the six categories: Description, Entity, Expression, Human, Location, and Number.
+Prompt 2: The dataset includes questions categorized into different types: Description, Entity, Expression, Human, Location, and Number. The task is to classify each question into one of these six question types. The class mentioned first in the response of the LLM will be the prediction..
+
+Different parts:
+""Your task is to classify each question"" vs ""The dataset includes questions""
+""into one of the six categories"" vs ""categorized into different types""
+""The six categories"" vs ""Description, Entity, Expression, Human, Location, and Number""
+
+2. Randomly mutate the different parts:
+
+""Your task is to classify each question"" -> ""Examine the prompts to identify the relevant type""
+""The dataset includes questions"" -> ""The questions are organized by category""
+""into one of the six categories"" -> ""from the following list""
+""The six categories"" -> ""Description, Entity, Expression, Human, Location, and Number"" -> ""the six distinct types""",0.25
+8,"Here are the steps to generate a better prompt:
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to classify each question into one of the six categories: Description, Entity, Expression, Human, Location, and Number.
+Prompt 2: The dataset includes questions categorized into different types: Description, Entity, Expression, Human, Location, and Number. The task is to classify each question into one of these six question types. The class mentioned first in the response of the LLM will be the prediction..
+
+Different parts:
+""Your task is to classify each question"" vs ""The dataset includes questions""
+""into one of the six categories"" vs ""categorized into different types""
+""The six categories"" vs ""Description, Entity, Expression, Human, Location, and Number""
+
+2. Randomly mutate the different parts:
+
+""Your task is to classify each question"" -> ""Analyze the provided questions to determine the type""
+""The dataset includes questions"" -> ""The questions are categorized into different types""
+""into one of the six categories"" -> ""from the following categories""
+""The six categories"" -> ""Description, Entity, Expression, Human, Location, and Number"" -> ""the six distinct types""
+
+Here are",0.25
+8,"Analyze the query and categorize it into one of the following categories: Description, Entity",0.2
+8,"Classify each question according to its type: Description, Entity, Expression, Human, Location, or Number, and consider the meaning and context.",0.25
+8,"The goal is to identify the nature of the inquiry based on a text passage, and categorize it into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.35
+8,"As a classification model, classify questions in the dataset and categorize them into one of the following categories: Description, Entity, Expression, Human, Location, or Number, while considering the meaning and context of each inquiry.",0.35
+9,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.55
+9,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+9,"I'd be happy to help you generate a better prompt. Let's follow the instructions step-by-step.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: Study the given inquiry and classify it into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context
+
+Different parts:
+
+* ""Your task is to choose a type of the question"" vs ""Study the given inquiry and classify it""
+* ""from Description, Entity, Expression, Human, Location and Number"" vs ""into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context""
+
+2. Randomly mutate the different parts:
+
+* ""Your task is to choose a type of the question"" -> ""Determine the classification of the inquiry""
+* ""from Description, Entity, Expression, Human, Location and Number"" -> ""categories of Description, Entity, Expression, Human, Location, Number""
+
+Let me know if you'd like me to generate more mutations!
+
+3. Crossover the different parts with Prompt 3 and generate a",0.3
+9,"Classify this sentence based on the categories in the following list, including Description, Entity, Expression, Human, Location, or Number,",0.2
+9,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+Prompt 1: Your task is to classify each question into one of the six categories: Description, Entity, Expression, Human, Location, and Number.
+Prompt 2: The dataset includes questions categorized into different types: Description, Entity, Expression, Human, Location, and Number. The task is to classify each question into one of these six question types. The class mentioned first in the response of the LLM will be the prediction..
+
+Different parts:
+""Your task is to classify each question"" vs ""The dataset includes questions""
+""into one of the six categories"" vs ""categorized into different types""
+""The six categories"" vs ""Description, Entity, Expression, Human, Location, and Number""
+
+2. Randomly mutate the different parts:
+
+""Your task is to classify each question"" -> ""Examine the prompts to identify the relevant type""
+""The dataset includes questions"" -> ""The questions are organized by category""
+""into one of the six categories"" -> ""from the following list""
+""The six categories"" -> ""Description, Entity, Expression, Human, Location, and Number"" -> ""the six distinct types""",0.25
+9,"Here are the steps to generate a better prompt:
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to classify each question into one of the six categories: Description, Entity, Expression, Human, Location, and Number.
+Prompt 2: The dataset includes questions categorized into different types: Description, Entity, Expression, Human, Location, and Number. The task is to classify each question into one of these six question types. The class mentioned first in the response of the LLM will be the prediction..
+
+Different parts:
+""Your task is to classify each question"" vs ""The dataset includes questions""
+""into one of the six categories"" vs ""categorized into different types""
+""The six categories"" vs ""Description, Entity, Expression, Human, Location, and Number""
+
+2. Randomly mutate the different parts:
+
+""Your task is to classify each question"" -> ""Analyze the provided questions to determine the type""
+""The dataset includes questions"" -> ""The questions are categorized into different types""
+""into one of the six categories"" -> ""from the following categories""
+""The six categories"" -> ""Description, Entity, Expression, Human, Location, and Number"" -> ""the six distinct types""
+
+Here are",0.25
+9,"Analyze the query and categorize it into one of the following categories: Description, Entity",0.2
+9,"Classify each question according to its type: Description, Entity, Expression, Human, Location, or Number, and consider the meaning and context.",0.25
+9,"The goal is to identify the nature of the inquiry based on a text passage, and categorize it into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.35
+9,"As a classification model, classify questions in the dataset and categorize them into one of the following categories: Description, Entity, Expression, Human, Location, or Number, while considering the meaning and context of each inquiry.",0.35
+10,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.55
+10,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+10,"I'd be happy to help you generate a better prompt. Let's follow the instructions step-by-step.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: Study the given inquiry and classify it into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context
+
+Different parts:
+
+* ""Your task is to choose a type of the question"" vs ""Study the given inquiry and classify it""
+* ""from Description, Entity, Expression, Human, Location and Number"" vs ""into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context""
+
+2. Randomly mutate the different parts:
+
+* ""Your task is to choose a type of the question"" -> ""Determine the classification of the inquiry""
+* ""from Description, Entity, Expression, Human, Location and Number"" -> ""categories of Description, Entity, Expression, Human, Location, Number""
+
+Let me know if you'd like me to generate more mutations!
+
+3. Crossover the different parts with Prompt 3 and generate a",0.35
+10,"Understand the sentence and identify the corresponding category of a question in the dataset, from the six options: Description, Entity, Expression, Human, Location, and Number.",0.25
+10,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+Prompt 1: Your task is to classify each question into one of the six categories: Description, Entity, Expression, Human, Location, and Number.
+Prompt 2: The dataset includes questions categorized into different types: Description, Entity, Expression, Human, Location, and Number. The task is to classify each question into one of these six question types. The class mentioned first in the response of the LLM will be the prediction..
+
+Different parts:
+""Your task is to classify each question"" vs ""The dataset includes questions""
+""into one of the six categories"" vs ""categorized into different types""
+""The six categories"" vs ""Description, Entity, Expression, Human, Location, and Number""
+
+2. Randomly mutate the different parts:
+
+""Your task is to classify each question"" -> ""Examine the prompts to identify the relevant type""
+""The dataset includes questions"" -> ""The questions are organized by category""
+""into one of the six categories"" -> ""from the following list""
+""The six categories"" -> ""Description, Entity, Expression, Human, Location, and Number"" -> ""the six distinct types""",0.25
+10,"Here are the steps to generate a better prompt:
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to classify each question into one of the six categories: Description, Entity, Expression, Human, Location, and Number.
+Prompt 2: The dataset includes questions categorized into different types: Description, Entity, Expression, Human, Location, and Number. The task is to classify each question into one of these six question types. The class mentioned first in the response of the LLM will be the prediction..
+
+Different parts:
+""Your task is to classify each question"" vs ""The dataset includes questions""
+""into one of the six categories"" vs ""categorized into different types""
+""The six categories"" vs ""Description, Entity, Expression, Human, Location, and Number""
+
+2. Randomly mutate the different parts:
+
+""Your task is to classify each question"" -> ""Analyze the provided questions to determine the type""
+""The dataset includes questions"" -> ""The questions are categorized into different types""
+""into one of the six categories"" -> ""from the following categories""
+""The six categories"" -> ""Description, Entity, Expression, Human, Location, and Number"" -> ""the six distinct types""
+
+Here are",0.25
+10,"I'd be happy to help you generate a better prompt! Let's follow the instructions step-by-step.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: Study the given inquiry and classify it into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context
+
+Different parts:
+
+* ""Your task is to choose a type of the question"" vs ""Study the given inquiry and classify it""
+* ""from Description, Entity, Expression, Human, Location and Number"" vs ""into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context""
+
+2. Randomly mutate the different parts:
+
+* ""Your task is to choose a type of the question"" -> ""Determine the classification of the inquiry""
+* ""from Description, Entity, Expression, Human, Location and Number"" -> ""categories of Description, Entity, Expression, Human, Location, Number""
+
+Let me know if you'd like me to generate more mutations!
+
+3. Crossover the different parts with Prompt 3 and generate",0.5
+10,"Here are the instructions followed step-by-step:
+
+**1. Identify the different parts between the Prompt 1 and Prompt 2:**
+
+Prompt 1: Your task is to classify each question into one of the six categories: Description, Entity, Expression, Human, Location, and Number.
+Prompt 2: The dataset includes questions categorized into different types: Description, Entity, Expression, Human, Location, and Number. The task is to classify each question into one of these six question types. The class mentioned first in the response of the LLM will be the prediction..
+
+Different parts:
+""Your task is to classify each question"" vs ""The dataset includes questions""
+""into one of the six categories"" vs ""categorized into different types""
+""The six categories"" vs ""Description, Entity, Expression, Human, Location, and Number""
+
+**2. Randomly mutate the different parts:**
+
+""Your task is to classify each question"" -> ""Analyze the provided questions to determine the type""
+""The dataset includes questions"" -> ""The questions are categorized into different types""
+""into one of the six categories"" -> ""from the following categories""
+""The six categories"" -> ""Description, Entity, Expression, Human, Location, and Number"" -> ""the six distinct types",0.4
+10,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".
+Prompt 2: Classify each question according to its type: Description, Entity, Expression, Human, Location, or Number, and consider the meaning and context.
+
+Different parts:
+
+""You are given a question"" vs ""Classify each question""
+""detect which category better describes the question"" vs ""classify each question according to its type""
+""Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number""""
+
+2. Randomly mutate the different parts:
+
+""You are given a question"" -> ""Analyze a query""
+""detect which category better describes the question"" -> ""identify the nature of the inquiry""
+""Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"""" -> ""indicate one of the following categories: Description, Entity, Expression, Human, Location, or Number""
+
+3. Crossover the different parts with",0.5
+10,"As a classification model, classify questions in the dataset and categorize them into one of the following categories: Description, Entity, Expression, Human, Location, or Number, while considering the meaning and context of each inquiry.",0.35
+11,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.55
+11,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+11,"I'd be happy to help you generate a better prompt. Let's follow the instructions step-by-step.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: Study the given inquiry and classify it into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context
+
+Different parts:
+
+* ""Your task is to choose a type of the question"" vs ""Study the given inquiry and classify it""
+* ""from Description, Entity, Expression, Human, Location and Number"" vs ""into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context""
+
+2. Randomly mutate the different parts:
+
+* ""Your task is to choose a type of the question"" -> ""Determine the classification of the inquiry""
+* ""from Description, Entity, Expression, Human, Location and Number"" -> ""categories of Description, Entity, Expression, Human, Location, Number""
+
+Let me know if you'd like me to generate more mutations!
+
+3. Crossover the different parts with Prompt 3 and generate a",0.35
+11,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: As a classification model, classify questions in the dataset and categorize them into one of the following categories: Description, Entity, Expression, Human, Location, or Number, while considering the meaning and context of each inquiry.
+Prompt 2: I'd be happy to help you generate a better prompt! Let's follow the instructions step-by-step.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: Study the given inquiry and classify it into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context
+
+Different parts:
+
+* ""Your task is to choose a type of the question"" vs ""Study the given inquiry and classify it""
+* ""from Description, Entity, Expression, Human, Location and Number"" vs ""into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context""
+
+2. Randomly mutate the different",0.3
+11,"Examine the prompts to identify the relevant type from the following list: Description, Entity, Expression, Human, Location, and Number, and predict the category mentioned first in the response, considering the context.",0.55
+11,"Here are the steps to generate a better prompt:
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to classify each question into one of the six categories: Description, Entity, Expression, Human, Location, and Number.
+Prompt 2: The dataset includes questions categorized into different types: Description, Entity, Expression, Human, Location, and Number. The task is to classify each question into one of these six question types. The class mentioned first in the response of the LLM will be the prediction..
+
+Different parts:
+""Your task is to classify each question"" vs ""The dataset includes questions""
+""into one of the six categories"" vs ""categorized into different types""
+""The six categories"" vs ""Description, Entity, Expression, Human, Location, and Number""
+
+2. Randomly mutate the different parts:
+
+""Your task is to classify each question"" -> ""Analyze the provided questions to determine the type""
+""The dataset includes questions"" -> ""The questions are categorized into different types""
+""into one of the six categories"" -> ""from the following categories""
+""The six categories"" -> ""Description, Entity, Expression, Human, Location, and Number"" -> ""the six distinct types""
+
+Here are",0.25
+11,"I'd be happy to help you generate a better prompt! Let's follow the instructions step-by-step.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: Study the given inquiry and classify it into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context
+
+Different parts:
+
+* ""Your task is to choose a type of the question"" vs ""Study the given inquiry and classify it""
+* ""from Description, Entity, Expression, Human, Location and Number"" vs ""into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context""
+
+2. Randomly mutate the different parts:
+
+* ""Your task is to choose a type of the question"" -> ""Determine the classification of the inquiry""
+* ""from Description, Entity, Expression, Human, Location and Number"" -> ""categories of Description, Entity, Expression, Human, Location, Number""
+
+Let me know if you'd like me to generate more mutations!
+
+3. Crossover the different parts with Prompt 3 and generate",0.5
+11,"Here are the instructions followed step-by-step:
+
+**1. Identify the different parts between the Prompt 1 and Prompt 2:**
+
+Prompt 1: Your task is to classify each question into one of the six categories: Description, Entity, Expression, Human, Location, and Number.
+Prompt 2: The dataset includes questions categorized into different types: Description, Entity, Expression, Human, Location, and Number. The task is to classify each question into one of these six question types. The class mentioned first in the response of the LLM will be the prediction..
+
+Different parts:
+""Your task is to classify each question"" vs ""The dataset includes questions""
+""into one of the six categories"" vs ""categorized into different types""
+""The six categories"" vs ""Description, Entity, Expression, Human, Location, and Number""
+
+**2. Randomly mutate the different parts:**
+
+""Your task is to classify each question"" -> ""Analyze the provided questions to determine the type""
+""The dataset includes questions"" -> ""The questions are categorized into different types""
+""into one of the six categories"" -> ""from the following categories""
+""The six categories"" -> ""Description, Entity, Expression, Human, Location, and Number"" -> ""the six distinct types",0.4
+11,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".
+Prompt 2: Classify each question according to its type: Description, Entity, Expression, Human, Location, or Number, and consider the meaning and context.
+
+Different parts:
+
+""You are given a question"" vs ""Classify each question""
+""detect which category better describes the question"" vs ""classify each question according to its type""
+""Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number""""
+
+2. Randomly mutate the different parts:
+
+""You are given a question"" -> ""Analyze a query""
+""detect which category better describes the question"" -> ""identify the nature of the inquiry""
+""Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"""" -> ""indicate one of the following categories: Description, Entity, Expression, Human, Location, or Number""
+
+3. Crossover the different parts with",0.5
+11,"As a classification model, classify questions in the dataset and categorize them into one of the following categories: Description, Entity, Expression, Human, Location, or Number, while considering the meaning and context of each inquiry.",0.35
+12,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.55
+12,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+12,"I'd be happy to help you generate a better prompt. Let's follow the instructions step-by-step.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: Study the given inquiry and classify it into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context
+
+Different parts:
+
+* ""Your task is to choose a type of the question"" vs ""Study the given inquiry and classify it""
+* ""from Description, Entity, Expression, Human, Location and Number"" vs ""into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context""
+
+2. Randomly mutate the different parts:
+
+* ""Your task is to choose a type of the question"" -> ""Determine the classification of the inquiry""
+* ""from Description, Entity, Expression, Human, Location and Number"" -> ""categories of Description, Entity, Expression, Human, Location, Number""
+
+Let me know if you'd like me to generate more mutations!
+
+3. Crossover the different parts with Prompt 3 and generate a",0.35
+12,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: As a classification model, classify questions in the dataset and categorize them into one of the following categories: Description, Entity, Expression, Human, Location, or Number, while considering the meaning and context of each inquiry.
+Prompt 2: I'd be happy to help you generate a better prompt! Let's follow the instructions step-by-step.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: Study the given inquiry and classify it into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context
+
+Different parts:
+
+* ""Your task is to choose a type of the question"" vs ""Study the given inquiry and classify it""
+* ""from Description, Entity, Expression, Human, Location and Number"" vs ""into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context""
+
+2. Randomly mutate the different",0.3
+12,"Examine the prompts to identify the relevant type from the following list: Description, Entity, Expression, Human, Location, and Number, and predict the category mentioned first in the response, considering the context.",0.55
+12,"I can help you with that.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to classify each question into one of the six categories: Description, Entity, Expression, Human, Location, and Number.
+Prompt 2: The dataset includes questions categorized into different types: Description, Entity, Expression, Human, Location, and Number. The task is to classify each question into one of these six question types. The class mentioned first in the response of the LLM will be the prediction..
+
+Different parts:
+
+* ""Your task is to classify each question"" vs ""The dataset includes questions""
+* ""into one of the six categories"" vs ""categorized into different types""
+* ""The six categories"" vs ""Description, Entity, Expression, Human, Location, and Number""
+
+2. Randomly mutate the different parts:
+
+""Your task is to classify each question"" -> ""Determine the type of inquiry""
+""The dataset includes questions"" -> ""The questions are received""
+""into one of the six categories"" -> ""from the given categories""
+""The six categories"" -> ""Description, Entity, Expression, Human, Location, Number"" -> ""the six categorized types""
+
+Let me know if you'd",0.45
+12,"I'd be happy to help you generate a better prompt! Let's follow the instructions step-by-step.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: Study the given inquiry and classify it into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context
+
+Different parts:
+
+* ""Your task is to choose a type of the question"" vs ""Study the given inquiry and classify it""
+* ""from Description, Entity, Expression, Human, Location and Number"" vs ""into one of the following categories: Description, Entity, Expression, Human, Location, or Number, considering the context""
+
+2. Randomly mutate the different parts:
+
+* ""Your task is to choose a type of the question"" -> ""Determine the classification of the inquiry""
+* ""from Description, Entity, Expression, Human, Location and Number"" -> ""categories of Description, Entity, Expression, Human, Location, Number""
+
+Let me know if you'd like me to generate more mutations!
+
+3. Crossover the different parts with Prompt 3 and generate",0.5
+12,"Here are the instructions followed step-by-step:
+
+**1. Identify the different parts between the Prompt 1 and Prompt 2:**
+
+Prompt 1: Your task is to classify each question into one of the six categories: Description, Entity, Expression, Human, Location, and Number.
+Prompt 2: The dataset includes questions categorized into different types: Description, Entity, Expression, Human, Location, and Number. The task is to classify each question into one of these six question types. The class mentioned first in the response of the LLM will be the prediction..
+
+Different parts:
+""Your task is to classify each question"" vs ""The dataset includes questions""
+""into one of the six categories"" vs ""categorized into different types""
+""The six categories"" vs ""Description, Entity, Expression, Human, Location, and Number""
+
+**2. Randomly mutate the different parts:**
+
+""Your task is to classify each question"" -> ""Analyze the provided questions to determine the type""
+""The dataset includes questions"" -> ""The questions are categorized into different types""
+""into one of the six categories"" -> ""from the following categories""
+""The six categories"" -> ""Description, Entity, Expression, Human, Location, and Number"" -> ""the six distinct types",0.4
+12,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".
+Prompt 2: Classify each question according to its type: Description, Entity, Expression, Human, Location, or Number, and consider the meaning and context.
+
+Different parts:
+
+""You are given a question"" vs ""Classify each question""
+""detect which category better describes the question"" vs ""classify each question according to its type""
+""Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number""""
+
+2. Randomly mutate the different parts:
+
+""You are given a question"" -> ""Analyze a query""
+""detect which category better describes the question"" -> ""identify the nature of the inquiry""
+""Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"""" -> ""indicate one of the following categories: Description, Entity, Expression, Human, Location, or Number""
+
+3. Crossover the different parts with",0.5
+12,"As a classification model, classify questions in the dataset and categorize them into one of the following categories: Description, Entity, Expression, Human, Location, or Number, while considering the meaning and context of each inquiry.",0.35

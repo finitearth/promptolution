@@ -1,0 +1,121 @@
+step,prompt,score
+1,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+1,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.9
+1,"Given a tweet, classify it as having a positive or negative sentiment.",0.9
+1,"For the purpose of sentiment analysis, take this review and determine the emotional tone of a text snippet as either expressing a positive or negative opinion.",0.95
+1,"When given an English sentence, your task is to analyze it and generate a sentiment word to describe the original text, such as positive or negative.",0.8
+1,Analyze the sentiment behind movie review summaries and determine their classification as either positive or negative sentiment.,0.95
+1,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.65
+1,"As a sentiment analyst, examine movie reviews and determine the sentiment, revealing the underlying sentiment behind the review, either expressing a positive or",0.8
+1,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.55
+1,"In this task, you are given sentences from movie reviews. The task is to classify a sentence as  positive or as negative.",0.45
+2,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+2,"To categorize the sentiment of text snippets in a movie review, classify the sentiment as either 'negative' or 'positive', taking into consideration",0.95
+2,"Given a tweet, classify it as having a positive or negative sentiment.",0.9
+2,"For the purpose of sentiment analysis, take this review and determine the emotional tone of a text snippet as either expressing a positive or negative opinion.",0.95
+2,"When given an English sentence, your task is to analyze it and generate a sentiment word to describe the original text, such as positive or negative.",0.8
+2,Analyze the sentiment behind movie review summaries and determine their classification as either positive or negative sentiment.,0.95
+2,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.65
+2,"As a sentiment analyst, examine movie reviews and determine the sentiment, revealing the underlying sentiment behind the review, either expressing a positive or",0.8
+2,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.55
+2,"In this task, you are given sentences from movie reviews. The task is to classify a sentence as  positive or as negative.",0.45
+3,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+3,"To categorize the sentiment of text snippets in a movie review, classify the sentiment as either 'negative' or 'positive', taking into consideration",0.95
+3,"Given a tweet, classify it as having a positive or negative sentiment.",0.9
+3,"For the purpose of sentiment analysis, take this review and determine the emotional tone of a text snippet as either expressing a positive or negative opinion.",0.95
+3,"When given an English sentence, your task is to analyze it and generate a sentiment word to describe the original text, such as positive or negative.",0.8
+3,Analyze the sentiment behind movie review summaries and determine their classification as either positive or negative sentiment.,0.95
+3,"As a sentiment classifier, read and analyze the sentence and identify its sentiment as either positive or negative, using the context to inform your decision.",0.85
+3,"As a sentiment analyst, examine movie reviews and determine the sentiment, revealing the underlying sentiment behind the review, either expressing a positive or",0.8
+3,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.55
+3,"In this task, you are given sentences from movie reviews. The task is to classify a sentence as  positive or as negative.",0.45
+4,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+4,"To categorize the sentiment of text snippets in a movie review, classify the sentiment as either 'negative' or 'positive', taking into consideration",0.95
+4,"Given a tweet, classify it as having a positive or negative sentiment.",0.9
+4,"For the purpose of sentiment analysis, take this review and determine the emotional tone of a text snippet as either expressing a positive or negative opinion.",0.95
+4,"As a sentiment classifier, study the opinions in film critiquing and determine their classification as either positive or negative sentiment, while considering the meaning and context behind film opinions.",0.95
+4,Analyze the sentiment behind movie review summaries and determine their classification as either positive or negative sentiment.,0.95
+4,"As a sentiment classifier, read and analyze the sentence and identify its sentiment as either positive or negative, using the context to inform your decision.",0.85
+4,"As a sentiment analyst, examine movie reviews and determine the sentiment, revealing the underlying sentiment behind the review, either expressing a positive or",0.8
+4,"Analyze the phrase in a movie review to determine its sentiment, considering the relevant context, and classify it as either ""positive"" or ""negative"".",0.8
+4,"In this task, you are given sentences from movie reviews. The task is to classify a sentence as  positive or as negative.",0.45
+5,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+5,"To categorize the sentiment of text snippets in a movie review, classify the sentiment as either 'negative' or 'positive', taking into consideration",0.95
+5,"Given a tweet, classify it as having a positive or negative sentiment.",0.9
+5,"For the purpose of sentiment analysis, take this review and determine the emotional tone of a text snippet as either expressing a positive or negative opinion.",0.95
+5,"As a sentiment classifier, study the opinions in film critiquing and determine their classification as either positive or negative sentiment, while considering the meaning and context behind film opinions.",0.95
+5,Analyze the sentiment behind movie review summaries and determine their classification as either positive or negative sentiment.,0.95
+5,"As a sentiment classifier, read and analyze the sentence and identify its sentiment as either positive or negative, using the context to inform your decision.",0.85
+5,"As a sentiment analyst, examine movie reviews and determine the sentiment, revealing the underlying sentiment behind the review, either expressing a positive or",0.8
+5,"Analyze the phrase in a movie review to determine its sentiment, considering the relevant context, and classify it as either ""positive"" or ""negative"".",0.8
+5,"In this task, you are given sentences from movie reviews. The task is to classify a sentence as  positive or as negative.",0.45
+6,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+6,"To categorize the sentiment of text snippets in a movie review, classify the sentiment as either 'negative' or 'positive', taking into consideration",0.95
+6,"Given a tweet, classify it as having a positive or negative sentiment.",0.9
+6,"For the purpose of sentiment analysis, take this review and determine the emotional tone of a text snippet as either expressing a positive or negative opinion.",0.95
+6,"As a sentiment classifier, study the opinions in film critiquing and determine their classification as either positive or negative sentiment, while considering the meaning and context behind film opinions.",0.95
+6,Analyze the sentiment behind movie review summaries and determine their classification as either positive or negative sentiment.,0.95
+6,"As a sentiment classifier, read and analyze the sentence and identify its sentiment as either positive or negative, using the context to inform your decision.",0.85
+6,"As a sentiment analyst, examine movie reviews and determine the sentiment, revealing the underlying sentiment behind the review, either expressing a positive or",0.8
+6,"Analyze the phrase in a movie review to determine its sentiment, considering the relevant context, and classify it as either ""positive"" or ""negative"".",0.8
+6,"In this task, you are given sentences from movie reviews. The task is to classify a sentence as  positive or as negative.",0.45
+7,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+7,"To categorize the sentiment of text snippets in a movie review, classify the sentiment as either 'negative' or 'positive', taking into consideration",0.95
+7,"Given a tweet, classify it as having a positive or negative sentiment.",0.9
+7,"For the purpose of sentiment analysis, take this review and determine the emotional tone of a text snippet as either expressing a positive or negative opinion.",0.95
+7,"As a sentiment classifier, study the opinions in film critiquing and determine their classification as either positive or negative sentiment, while considering the meaning and context behind film opinions.",0.95
+7,Analyze the sentiment behind movie review summaries and determine their classification as either positive or negative sentiment.,0.95
+7,"As a sentiment classifier, read and analyze the sentence and identify its sentiment as either positive or negative, using the context to inform your decision.",0.85
+7,"As a sentiment analyst, examine movie reviews and determine the sentiment, revealing the underlying sentiment behind the review, either expressing a positive or",0.8
+7,"Analyze the phrase in a movie review to determine its sentiment, considering the relevant context, and classify it as either ""positive"" or ""negative"".",0.8
+7,"In this task, you are given sentences from movie reviews. The task is to classify a sentence as  positive or as negative.",0.45
+8,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+8,"To categorize the sentiment of text snippets in a movie review, classify the sentiment as either 'negative' or 'positive', taking into consideration",0.95
+8,"Given a tweet, classify it as having a positive or negative sentiment.",0.9
+8,"For the purpose of sentiment analysis, take this review and determine the emotional tone of a text snippet as either expressing a positive or negative opinion.",0.95
+8,"As a sentiment classifier, study the opinions in film critiquing and determine their classification as either positive or negative sentiment, while considering the meaning and context behind film opinions.",0.95
+8,Analyze the sentiment behind movie review summaries and determine their classification as either positive or negative sentiment.,0.95
+8,"As a sentiment classifier, read and analyze the sentence and identify its sentiment as either positive or negative, using the context to inform your decision.",0.85
+8,"As a sentiment analyst, examine movie reviews and determine the sentiment, revealing the underlying sentiment behind the review, either expressing a positive or",0.8
+8,"Analyze the phrase in a movie review to determine its sentiment, considering the relevant context, and classify it as either ""positive"" or ""negative"".",0.8
+8,"As a sentiment classifier, analyze sentences in movie reviews, and categorize them as one of the following: either positive or negative, taking into consideration the sentiment behind the review.",0.85
+9,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+9,"To categorize the sentiment of text snippets in a movie review, classify the sentiment as either 'negative' or 'positive', taking into consideration",0.95
+9,"Given a tweet, classify it as having a positive or negative sentiment.",0.9
+9,"For the purpose of sentiment analysis, take this review and determine the emotional tone of a text snippet as either expressing a positive or negative opinion.",0.95
+9,"As a sentiment classifier, study the opinions in film critiquing and determine their classification as either positive or negative sentiment, while considering the meaning and context behind film opinions.",0.95
+9,Analyze the sentiment behind movie review summaries and determine their classification as either positive or negative sentiment.,0.95
+9,"As a sentiment classifier, read and analyze the sentence and identify its sentiment as either positive or negative, using the context to inform your decision.",0.85
+9,"As a sentiment analyst, examine phrases within film critiques and determine the sentiment, uncovering the underlying sentiment behind Movie critique statements, either expressing a positive or negative sentiment.",0.9
+9,"Analyze the phrase in a movie review to determine its sentiment, considering the relevant context, and classify it as either ""positive"" or ""negative"".",0.8
+9,"As a sentiment classifier, analyze sentences in movie reviews, and categorize them as one of the following: either positive or negative, taking into consideration the sentiment behind the review.",0.85
+10,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+10,"To categorize the sentiment of text snippets in a movie review, classify the sentiment as either 'negative' or 'positive', taking into consideration",0.95
+10,"Given a tweet, classify it as having a positive or negative sentiment.",0.9
+10,"For the purpose of sentiment analysis, take this review and determine the emotional tone of a text snippet as either expressing a positive or negative opinion.",0.95
+10,"As a sentiment classifier, study the opinions in film critiquing and determine their classification as either positive or negative sentiment, while considering the meaning and context behind film opinions.",0.95
+10,Analyze the sentiment behind movie review summaries and determine their classification as either positive or negative sentiment.,0.95
+10,"In this task, you are presented with movie reviews and asked to classify them as having a positive or negative sentiment, taking into account the overall context of the review.",0.9
+10,"As a sentiment analyst, examine phrases within film critiques and determine the sentiment, uncovering the underlying sentiment behind Movie critique statements, either expressing a positive or negative sentiment.",0.9
+10,"Analyze the phrase in a movie review to determine its sentiment, considering the relevant context, and classify it as either ""positive"" or ""negative"".",0.8
+10,"As a sentiment classifier, analyze sentences in movie reviews, and categorize them as one of the following: either positive or negative, taking into consideration the sentiment behind the review.",0.85
+11,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+11,"To categorize the sentiment of text snippets in a movie review, classify the sentiment as either 'negative' or 'positive', taking into consideration",0.95
+11,"Given a tweet, classify it as having a positive or negative sentiment.",0.9
+11,"For the purpose of sentiment analysis, take this review and determine the emotional tone of a text snippet as either expressing a positive or negative opinion.",0.95
+11,"As a sentiment classifier, study the opinions in film critiquing and determine their classification as either positive or negative sentiment, while considering the meaning and context behind film opinions.",0.95
+11,Analyze the sentiment behind movie review summaries and determine their classification as either positive or negative sentiment.,0.95
+11,"In this task, you are presented with movie reviews and asked to classify them as having a positive or negative sentiment, taking into account the overall context of the review.",0.9
+11,"As a sentiment analyst, examine phrases within film critiques and determine the sentiment, uncovering the underlying sentiment behind Movie critique statements, either expressing a positive or negative sentiment.",0.9
+11,"Analyze the phrase in a movie review to determine its sentiment, considering the relevant context, and classify it as either ""positive"" or ""negative"".",0.8
+11,"As a sentiment classifier, analyze sentences in movie reviews, and categorize them as one of the following: either positive or negative, taking into consideration the sentiment behind the review.",0.85
+12,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+12,"To categorize the sentiment of text snippets in a movie review, classify the sentiment as either 'negative' or 'positive', taking into consideration",0.95
+12,"Given a tweet, classify it as having a positive or negative sentiment.",0.9
+12,"For the purpose of sentiment analysis, take this review and determine the emotional tone of a text snippet as either expressing a positive or negative opinion.",0.95
+12,"As a sentiment classifier, study the opinions in film critiquing and determine their classification as either positive or negative sentiment, while considering the meaning and context behind film opinions.",0.95
+12,Analyze the sentiment behind movie review summaries and determine their classification as either positive or negative sentiment.,0.95
+12,"In this task, you are presented with movie reviews and asked to classify them as having a positive or negative sentiment, taking into account the overall context of the review.",0.9
+12,"As a sentiment analyst, examine phrases within film critiques and determine the sentiment, uncovering the underlying sentiment behind Movie critique statements, either expressing a positive or negative sentiment.",0.9
+12,"Analyze the phrase in a movie review to determine its sentiment, considering the relevant context, and classify it as either ""positive"" or ""negative"".",0.8
+12,"As a sentiment classifier, analyze sentences in movie reviews, and categorize them as one of the following: either positive or negative, taking into consideration the sentiment behind the review.",0.85

@@ -1,0 +1,121 @@
+step,prompt,score
+1,"As a sentiment classifier, review the passage and assign a sentiment label from ['negative', 'positive'] to the text, while considering the meaning and relevant context.",0.9
+1,"Given a statement, classify it as expressing a positive or negative opinion.",0.8
+1,"Given a sentence, classify it as either positive or negative sentiment.",0.8
+1,"Given a tweet, classify it as having a positive or negative sentiment.",0.75
+1,Classify a sentence as expressing optimism or pessimism.,0.75
+1,"Your task is to classify the comment ""positive"" or ""negative"".",0.7
+1,"In this task, you are given sentences from product reviews. The task is to classify a sentence as  positive or as negative.",0.7
+1,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.65
+1,Analyze the text to determine the sentiment of customer reviews and categorize them as either positive or negative.,0.7
+1,"Please label the sentiment towards the product of the given product review. The sentiment label should be ""positive"" or ""negative"".",0.4
+2,"As a sentiment classifier, review the passage and assign a sentiment label from ['negative', 'positive'] to the text, while considering the meaning and relevant context.",0.9
+2,"Given a statement, classify it as expressing a positive or negative opinion.",0.8
+2,"As a sentiment classifier, analyze the statement and classify it as either expressing positive or negative sentiment, while considering the meaning and relevant context.",0.85
+2,"The task is to analyze phrases in the dataset with a negative or positive tone, considering their meaning and context, and predict whether the sentiment is positive or negative.",0.8
+2,"As a sentiment classifier, analyze phrases from product reviews and examine a statement expressing positive",0.8
+2,Analyze the text to determine the sentiment towards the product and categorize it as affirmative or negative.,0.8
+2,"In this task, you are given sentences from product reviews. The task is to classify a sentence as  positive or as negative.",0.7
+2,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.65
+2,"Determine the sentiment towards the given customer review and categorize it as either positive or negative, considering the text and its context.",0.8
+2,"As a sentiment classifier, read a product review with sentiment indicating and label the sentiment towards the product as either positive or negative.",0.95
+3,"As a sentiment classifier, review the passage and assign a sentiment label from ['negative', 'positive'] to the text, while considering the meaning and relevant context.",0.9
+3,"As a sentiment classifier, examine the text passage for sentiment in customer reviews, by assessing the overall emotional direction, and classify the expression as either positive or negative.",0.95
+3,"As a sentiment classifier, analyze the statement and classify it as either expressing positive or negative sentiment, while considering the meaning and relevant context.",0.85
+3,"The task is to analyze phrases in the dataset with a negative or positive tone, considering their meaning and context, and predict whether the sentiment is positive or negative.",0.8
+3,"As a sentiment classifier, analyze phrases from product reviews and examine a statement expressing positive",0.8
+3,Analyze the text to determine the sentiment towards the product and categorize it as affirmative or negative.,0.8
+3,"In this task, you are given sentences from product reviews. The task is to classify a sentence as  positive or as negative.",0.7
+3,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.65
+3,"Evaluate phrases from customer reviews and determine the sentiment towards a customer review, categorizing it as either positive",0.85
+3,"As a sentiment classifier, read a product review with sentiment indicating and label the sentiment towards the product as either positive or negative.",0.95
+4,"As a sentiment classifier, review the passage and assign a sentiment label from ['negative', 'positive'] to the text, while considering the meaning and relevant context.",0.9
+4,"As a sentiment classifier, examine the text passage for sentiment in customer reviews, by assessing the overall emotional direction, and classify the expression as either positive or negative.",0.95
+4,"As a sentiment classifier, analyze the statement and classify it as either expressing positive or negative sentiment, while considering the meaning and relevant context.",0.85
+4,"The task is to analyze phrases in the dataset with a negative or positive tone, considering their meaning and context, and predict whether the sentiment is positive or negative.",0.8
+4,"As a sentiment classifier, analyze phrases from product reviews and examine a statement expressing positive",0.8
+4,Analyze the text to determine the sentiment towards the product and categorize it as affirmative or negative.,0.8
+4,"In this task, you are given sentences from product reviews. The task is to classify a sentence as  positive or as negative.",0.7
+4,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.65
+4,"Evaluate phrases from customer reviews and determine the sentiment towards a customer review, categorizing it as either positive",0.85
+4,"As a sentiment classifier, read a product review with sentiment indicating and label the sentiment towards the product as either positive or negative.",0.95
+5,"As a sentiment classifier, review the passage and assign a sentiment label from ['negative', 'positive'] to the text, while considering the meaning and relevant context.",0.9
+5,"As a sentiment classifier, examine the text passage for sentiment in customer reviews, by assessing the overall emotional direction, and classify the expression as either positive or negative.",0.95
+5,"As a sentiment classifier, analyze the statement and classify it as either expressing positive or negative sentiment, while considering the meaning and relevant context.",0.85
+5,"The task is to analyze phrases in the dataset with a negative or positive tone, considering their meaning and context, and predict whether the sentiment is positive or negative.",0.8
+5,"As a sentiment classifier, examine a statement expressing review sentiment and categorize it as either positive or negative.",0.85
+5,Analyze the text to determine the sentiment towards the product and categorize it as affirmative or negative.,0.8
+5,"In this task, you are given sentences from product reviews. The task is to classify a sentence as  positive or as negative.",0.7
+5,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.65
+5,"Evaluate phrases from customer reviews and determine the sentiment towards a customer review, categorizing it as either positive",0.85
+5,"As a sentiment classifier, read a product review with sentiment indicating and label the sentiment towards the product as either positive or negative.",0.95
+6,"As a sentiment classifier, review the passage and assign a sentiment label from ['negative', 'positive'] to the text, while considering the meaning and relevant context.",0.9
+6,"As a sentiment classifier, examine the text passage for sentiment in customer reviews, by assessing the overall emotional direction, and classify the expression as either positive or negative.",0.95
+6,"As a sentiment classifier, analyze the statement and classify it as either expressing positive or negative sentiment, while considering the meaning and relevant context.",0.85
+6,"The task is to analyze phrases in the dataset with a negative or positive tone, considering their meaning and context, and predict whether the sentiment is positive or negative.",0.8
+6,"As a sentiment classifier, examine a statement expressing review sentiment and categorize it as either positive or negative.",0.85
+6,Analyze the text to determine the sentiment towards the product and categorize it as affirmative or negative.,0.8
+6,"In this task, you are given sentences from product reviews. The task is to classify a sentence as  positive or as negative.",0.7
+6,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.65
+6,"Evaluate phrases from customer reviews and determine the sentiment towards a customer review, categorizing it as either positive",0.85
+6,"As a sentiment classifier, read a product review with sentiment indicating and label the sentiment towards the product as either positive or negative.",0.95
+7,"As a sentiment classifier, review the passage and assign a sentiment label from ['negative', 'positive'] to the text, while considering the meaning and relevant context.",0.9
+7,"As a sentiment classifier, examine the text passage for sentiment in customer reviews, by assessing the overall emotional direction, and classify the expression as either positive or negative.",0.95
+7,"As a sentiment classifier, analyze the statement and classify it as either expressing positive or negative sentiment, while considering the meaning and relevant context.",0.85
+7,"The task is to analyze phrases in the dataset with a negative or positive tone, considering their meaning and context, and predict whether the sentiment is positive or negative.",0.8
+7,"As a sentiment classifier, examine a statement expressing review sentiment and categorize it as either positive or negative.",0.85
+7,Analyze the text to determine the sentiment towards the product and categorize it as affirmative or negative.,0.8
+7,"In this task, you are given sentences from product reviews. The task is to classify a sentence as  positive or as negative.",0.7
+7,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.65
+7,"Evaluate phrases from customer reviews and determine the sentiment towards a customer review, categorizing it as either positive",0.85
+7,"As a sentiment classifier, read a product review with sentiment indicating and label the sentiment towards the product as either positive or negative.",0.95
+8,"As a sentiment classifier, review the passage and assign a sentiment label from ['negative', 'positive'] to the text, while considering the meaning and relevant context.",0.9
+8,"As a sentiment classifier, examine the text passage for sentiment in customer reviews, by assessing the overall emotional direction, and classify the expression as either positive or negative.",0.95
+8,"As a sentiment classifier, analyze the statement and classify it as either expressing positive or negative sentiment, while considering the meaning and relevant context.",0.85
+8,"The task is to analyze phrases in the dataset with a negative or positive tone, considering their meaning and context, and predict whether the sentiment is positive or negative.",0.8
+8,"As a sentiment classifier, examine a statement expressing review sentiment and categorize it as either positive or negative.",0.85
+8,Analyze the text to determine the sentiment towards the product and categorize it as affirmative or negative.,0.8
+8,"Evaluate customer feedback with sentimental undertones from product reviews and classify them as either expressing positive or negative sentiment, considering their meaning and context.",0.85
+8,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.65
+8,"Evaluate phrases from customer reviews and determine the sentiment towards a customer review, categorizing it as either positive",0.85
+8,"As a sentiment classifier, read a product review with sentiment indicating and label the sentiment towards the product as either positive or negative.",0.95
+9,"As a sentiment classifier, review the passage and assign a sentiment label from ['negative', 'positive'] to the text, while considering the meaning and relevant context.",0.9
+9,"As a sentiment classifier, examine the text passage for sentiment in customer reviews, by assessing the overall emotional direction, and classify the expression as either positive or negative.",0.95
+9,"As a sentiment classifier, analyze the statement and classify it as either expressing positive or negative sentiment, while considering the meaning and relevant context.",0.85
+9,"The task is to analyze phrases in the dataset with a negative or positive tone, considering their meaning and context, and predict whether the sentiment is positive or negative.",0.8
+9,"As a sentiment classifier, examine a statement expressing review sentiment and categorize it as either positive or negative.",0.85
+9,"As a sentiment classifier, classify customer statements from products' feedback, determine the sentiment towards feedback, and categorize it as either positive or negative, considering the meaning and relevant context.",0.85
+9,"Evaluate customer feedback with sentimental undertones from product reviews and classify them as either expressing positive or negative sentiment, considering their meaning and context.",0.85
+9,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.65
+9,"Evaluate phrases from customer reviews and determine the sentiment towards a customer review, categorizing it as either positive",0.85
+9,"As a sentiment classifier, read a product review with sentiment indicating and label the sentiment towards the product as either positive or negative.",0.95
+10,"As a sentiment classifier, review the passage and assign a sentiment label from ['negative', 'positive'] to the text, while considering the meaning and relevant context.",0.9
+10,"As a sentiment classifier, examine the text passage for sentiment in customer reviews, by assessing the overall emotional direction, and classify the expression as either positive or negative.",0.95
+10,"As a sentiment classifier, analyze the statement and classify it as either expressing positive or negative sentiment, while considering the meaning and relevant context.",0.85
+10,"The task is to analyze phrases in the dataset with a negative or positive tone, considering their meaning and context, and predict whether the sentiment is positive or negative.",0.8
+10,"As a sentiment classifier, examine a statement expressing review sentiment and categorize it as either positive or negative.",0.85
+10,"As a sentiment classifier, classify customer statements from products' feedback, determine the sentiment towards feedback, and categorize it as either positive or negative, considering the meaning and relevant context.",0.85
+10,"Evaluate customer feedback with sentimental undertones from product reviews and classify them as either expressing positive or negative sentiment, considering their meaning and context.",0.85
+10,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.65
+10,"Evaluate phrases from customer reviews and determine the sentiment towards a customer review, categorizing it as either positive",0.85
+10,"As a sentiment classifier, read a product review with sentiment indicating and label the sentiment towards the product as either positive or negative.",0.95
+11,"As a sentiment classifier, review the passage and assign a sentiment label from ['negative', 'positive'] to the text, while considering the meaning and relevant context.",0.9
+11,"As a sentiment classifier, examine the text passage for sentiment in customer reviews, by assessing the overall emotional direction, and classify the expression as either positive or negative.",0.95
+11,"As a sentiment classifier, analyze the statement and classify it as either expressing positive or negative sentiment, while considering the meaning and relevant context.",0.85
+11,"The task is to analyze phrases in the dataset with a negative or positive tone, considering their meaning and context, and predict whether the sentiment is positive or negative.",0.8
+11,"As a sentiment classifier, examine a statement expressing review sentiment and categorize it as either positive or negative.",0.85
+11,"As a sentiment classifier, classify customer statements from products' feedback, determine the sentiment towards feedback, and categorize it as either positive or negative, considering the meaning and relevant context.",0.85
+11,"Evaluate customer feedback with sentimental undertones from product reviews and classify them as either expressing positive or negative sentiment, considering their meaning and context.",0.85
+11,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.65
+11,"Evaluate phrases from customer reviews and determine the sentiment towards a customer review, categorizing it as either positive",0.85
+11,"As a sentiment classifier, read a product review with sentiment indicating and label the sentiment towards the product as either positive or negative.",0.95
+12,"As a sentiment classifier, review the passage and assign a sentiment label from ['negative', 'positive'] to the text, while considering the meaning and relevant context.",0.9
+12,"As a sentiment classifier, examine the text passage for sentiment in customer reviews, by assessing the overall emotional direction, and classify the expression as either positive or negative.",0.95
+12,"As a sentiment classifier, analyze the statement and classify it as either expressing positive or negative sentiment, while considering the meaning and relevant context.",0.85
+12,"The task is to analyze phrases in the dataset with a negative or positive tone, considering their meaning and context, and predict whether the sentiment is positive or negative.",0.8
+12,"As a sentiment classifier, examine a statement expressing review sentiment and categorize it as either positive or negative.",0.85
+12,"As a sentiment classifier, classify customer statements from products' feedback, determine the sentiment towards feedback, and categorize it as either positive or negative, considering the meaning and relevant context.",0.85
+12,"Evaluate customer feedback with sentimental undertones from product reviews and classify them as either expressing positive or negative sentiment, considering their meaning and context.",0.85
+12,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.65
+12,"Evaluate phrases from customer reviews and determine the sentiment towards a customer review, categorizing it as either positive",0.85
+12,"As a sentiment classifier, read a product review with sentiment indicating and label the sentiment towards the product as either positive or negative.",0.95
