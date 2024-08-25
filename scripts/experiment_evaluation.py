@@ -60,8 +60,7 @@ def evaluate_best_prompts(
     test_task = get_tasks(config, split="test")[0]
     test_predictor = get_predictor(downstream_llm, classes=test_task.classes)
 
-    # evaluate the best prompt
-    # TODO: subsample the test set to 200 samples
+    # evaluate the best prompt on the test set
     test_score = test_task.evaluate(best_prompt, test_predictor, subsample=True, n_samples=n_samples)
 
     # save the test score to a csv file
