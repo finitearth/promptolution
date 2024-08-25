@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from typing import Dict, List, Literal, Optional
+from typing import List, Literal
 
 from promptolution.tasks.base_task import BaseTask, DummyTask
 from promptolution.tasks.classification_tasks import ClassificationTask
@@ -17,7 +17,7 @@ def get_tasks(config, split: Literal["dev", "test"] = "dev") -> List[BaseTask]:
             task = DummyTask()
             task_list.append(task)
             continue
-        task = ClassificationTask(task_name, task_description, seed=config.random_seed)
+        task = ClassificationTask(task_name, task_description, split=split, seed=config.random_seed)
         task_list.append(task)
 
     return task_list

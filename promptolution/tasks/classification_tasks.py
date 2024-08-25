@@ -8,7 +8,8 @@ from promptolution.tasks.base_task import BaseTask
 
 
 class ClassificationTask(BaseTask):
-    def __init__(self, task_id: str, dataset_json: Dict, seed: int = 42, split: Literal["dev", "test"] = "dev"):
+    def __init__(self, task_id: str, dataset_json: Dict, seed: int = 42, split: Literal["dev", "test"] = "dev"): 
+        # TODO fix seed handling to be more clear (currently seed != seed)
         self.task_id: str = task_id
         self.dataset_json: Dict = dataset_json
         self.description: Optional[str] = None

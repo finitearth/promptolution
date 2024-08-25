@@ -64,7 +64,7 @@ class APILLM:
         # If the loop exits, it means max retries were reached
         raise requests.exceptions.ConnectionError("Max retries exceeded. Connection could not be established.")
 
-    async def _get_response(self, prompts: list[str], max_concurrent_calls=200) -> list[str]:
+    async def _get_response(self, prompts: list[str], max_concurrent_calls=200) -> list[str]:  #TODO change name of method
         semaphore = asyncio.Semaphore(max_concurrent_calls)  # Limit the number of concurrent calls
         tasks = []
 
