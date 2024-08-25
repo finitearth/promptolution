@@ -39,11 +39,10 @@ def evaluate_best_prompts(
     """
     Evaluate the best prompts from a csv file
     """
-    best_prompt, best_score = get_best_prompt_from_csv(logging_dir)
-
     # convert the logging directory to a string
     logging_dir = str(logging_dir)
 
+    best_prompt, best_score = get_best_prompt_from_csv(logging_dir)
     # extract information about the experiment from the filename
     logging_dir = logging_dir.replace(f"logs\\{target_experiment}\\", "")
     logging_dir = logging_dir.replace(".csv", "")
