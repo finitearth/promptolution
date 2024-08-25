@@ -10,3 +10,7 @@ Here we document all design decision we made during setting up our experiment, w
 We decided to do two sepearate experiments both aiming to answer different research questions:
 1.) Can we use a small LLM during optimization (cost efficiency)
 2.) Can an additional Task description help the overall performance? (we only test this for small LLMs to save costs)
+
+# Limitations
+- we consider the score a prompt gained in the step it was created as its "true" value. We do not reevaluate that prompt, meaning "it could have been lucky" in getting 20 easy down stream examples.
+- once a prompt hits 100% in a test metric, it will be chosen as the final prompt. --> no exploration no more (especially in the case of having large llm as evaluator)

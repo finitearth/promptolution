@@ -1,0 +1,497 @@
+step,prompt,score
+1,"Given a statement, classify it as expressing a subjective or objective opinion.",0.7
+1,identify whether the given sentence was expressing an objective or a subjective opinion.,0.65
+1,"Assess the given sentence and determine whether it is into subjective or objective opinion, evaluating the given sentences and their sentiment.",0.8
+1,"Your task is to classify the comment ""subjective"" or ""objective"".",0.65
+1,"Please perform Subjectivity Classification task. Given the sentence, assign a label from ['subjective', 'objective']. Return label only without any other text.",0.6
+1,"Given a sentence, classify it as either subjective or objective category.",0.6
+1,"Considering a given text, determine the nature of the sentence or phrase into objective or subjective categories, and evaluate it accordingly.",0.65
+1,"Determine the category of a movie review based on a given text, subjective or objective.",0.55
+1,"classify each sentence as either ""objective"" or ""subjective"".",0.5
+1,evaluate each statement as either subjective or objective.,0.45
+2,"Given a statement, classify it as expressing a subjective or objective opinion.",0.7
+2,identify whether the given sentence was expressing an objective or a subjective opinion.,0.65
+2,"Assess the given sentence and determine whether it is into subjective or objective opinion, evaluating the given sentences and their sentiment.",0.8
+2,"Your task is to classify the comment ""subjective"" or ""objective"".",0.65
+2,"Please perform Subjectivity Classification task. Given the sentence, assign a label from ['subjective', 'objective']. Return label only without any other text.",0.6
+2,"Given a sentence, classify it as either subjective or objective category.",0.6
+2,"Considering a given text, determine the nature of the sentence or phrase into objective or subjective categories, and evaluate it accordingly.",0.65
+2,"Determine the category of a movie review based on a given text, subjective or objective.",0.55
+2,"classify each sentence as either ""objective"" or ""subjective"".",0.5
+2,Your goal is to evaluate every statement as either subjective or objective by categorizing a message according to its tone.,0.55
+3,"Given a statement, classify it as expressing a subjective or objective opinion.",0.7
+3,identify whether the given sentence was expressing an objective or a subjective opinion.,0.65
+3,"Assess the given sentence and determine whether it is into subjective or objective opinion, evaluating the given sentences and their sentiment.",0.8
+3,"Your task is to classify the comment ""subjective"" or ""objective"".",0.65
+3,"Please perform Subjectivity Classification task. Given the sentence, assign a label from ['subjective', 'objective']. Return label only without any other text.",0.6
+3,"Analyze the provided text to decide whether it falls under subjective or objective category, considering the expressed opinion and its sentiment.",0.75
+3,"Considering a given text, determine the nature of the sentence or phrase into objective or subjective categories, and evaluate it accordingly.",0.65
+3,"Determine the category of a movie review based on a given text, subjective or objective.",0.55
+3,"classify each sentence as either ""objective"" or ""subjective"".",0.5
+3,Your goal is to evaluate every statement as either subjective or objective by categorizing a message according to its tone.,0.55
+4,"Given a statement, classify it as expressing a subjective or objective opinion.",0.7
+4,identify whether the given sentence was expressing an objective or a subjective opinion.,0.65
+4,"Assess the given sentence and determine whether it is into subjective or objective opinion, evaluating the given sentences and their sentiment.",0.8
+4,"Your task is to classify the comment ""subjective"" or ""objective"".",0.65
+4,"Please perform Subjectivity Classification task. Given the sentence, assign a label from ['subjective', 'objective']. Return label only without any other text.",0.6
+4,"Analyze the provided text to decide whether it falls under subjective or objective category, considering the expressed opinion and its sentiment.",0.75
+4,"Considering a given text, determine the nature of the sentence or phrase into objective or subjective categories, and evaluate it accordingly.",0.65
+4,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**Step 1: Identify the different parts between Prompt 1 and Prompt 2**
+
+Prompt 1: Given a statement, classify it as expressing a subjective or objective opinion.
+Prompt 2: Considering a given text, determine the nature of the sentence or phrase into objective or subjective categories, and evaluate it accordingly.
+
+Different parts:
+""Given a statement"" vs ""Considering a given text""
+""classify it"" vs ""determine the nature... and evaluate it accordingly""
+""expressing a subjective or objective opinion"" vs ""into objective or subjective categories""
+
+**Step 2: Randomly mutate the different parts**
+
+""Given a statement"" -> ""Analyzing a passage""
+""classify it"" -> ""assess the tone""
+""expressing a subjective or objective opinion"" -> ""as either subjective or objective""
+
+""Considering a given text"" -> ""Examining a piece of writing""
+""determine the nature... and evaluate it accordingly"" -> ""categorize and judge the sentiment""
+""into objective or subjective categories"" -> ""according to its subjective or objective tone""
+
+**Step 3: Crossover the different parts with Prompt 3 and generate a final prompt**
+
+Prompt 3: Determine the",0.6
+4,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**Step 1: Identify the different parts between Prompt 1 and Prompt 2**
+
+Prompt 1: Considering a given text, determine the nature of the sentence or phrase into objective or subjective categories, and evaluate it accordingly.
+Prompt 2: Your goal is to evaluate every statement as either subjective or objective by categorizing a message according to its tone.
+
+Different parts:
+""Considering a given text"" vs ""Your goal is to evaluate every statement""
+""determine the nature of the sentence or phrase"" vs ""categorizing a message""
+""text"" vs ""statement""
+""sentence or phrase"" vs ""message""
+""into objective or subjective categories, and evaluate it accordingly"" vs ""as either subjective or objective by categorizing... its tone""
+
+**Step 2: Randomly mutate the different parts**
+
+Mutated parts:
+""Considering a given text"" -> ""Analyzing a provided passage""
+""determine the nature of the sentence or phrase"" -> ""assess the type of expression""
+""text"" -> ""entry""
+""sentence or phrase"" -> ""piece of writing""
+""into objective or subjective categories, and evaluate it accordingly"" -> ""based on their subjective or objective tone, classify them""
+""",0.55
+4,Your goal is to evaluate every statement as either subjective or objective by categorizing a message according to its tone.,0.55
+5,"Given a statement, classify it as expressing a subjective or objective opinion.",0.7
+5,identify whether the given sentence was expressing an objective or a subjective opinion.,0.65
+5,"Assess the given sentence and determine whether it is into subjective or objective opinion, evaluating the given sentences and their sentiment.",0.8
+5,"Your task is to classify the comment ""subjective"" or ""objective"".",0.65
+5,"Please perform Subjectivity Classification task. Given the sentence, assign a label from ['subjective', 'objective']. Return label only without any other text.",0.6
+5,"Analyze the provided text to decide whether it falls under subjective or objective category, considering the expressed opinion and its sentiment.",0.75
+5,"Considering a given text, determine the nature of the sentence or phrase into objective or subjective categories, and evaluate it accordingly.",0.65
+5,Determine the sentiment of a given text by examining a piece of writing and assess the tone as either subjective or objective.,0.7
+5,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**Step 1: Identify the different parts between Prompt 1 and Prompt 2**
+
+Prompt 1: Considering a given text, determine the nature of the sentence or phrase into objective or subjective categories, and evaluate it accordingly.
+Prompt 2: Your goal is to evaluate every statement as either subjective or objective by categorizing a message according to its tone.
+
+Different parts:
+""Considering a given text"" vs ""Your goal is to evaluate every statement""
+""determine the nature of the sentence or phrase"" vs ""categorizing a message""
+""text"" vs ""statement""
+""sentence or phrase"" vs ""message""
+""into objective or subjective categories, and evaluate it accordingly"" vs ""as either subjective or objective by categorizing... its tone""
+
+**Step 2: Randomly mutate the different parts**
+
+Mutated parts:
+""Considering a given text"" -> ""Analyzing a provided passage""
+""determine the nature of the sentence or phrase"" -> ""assess the type of expression""
+""text"" -> ""entry""
+""sentence or phrase"" -> ""piece of writing""
+""into objective or subjective categories, and evaluate it accordingly"" -> ""based on their subjective or objective tone, classify them""
+""",0.55
+5,"You need to determine the nature of the sentence by categorizing it as having a subjective or objective tone, evaluating every message according to its tone.</",0.75
+6,"Given a statement, classify it as expressing a subjective or objective opinion.",0.7
+6,identify whether the given sentence was expressing an objective or a subjective opinion.,0.65
+6,"Assess the given sentence and determine whether it is into subjective or objective opinion, evaluating the given sentences and their sentiment.",0.8
+6,"Your task is to classify the comment ""subjective"" or ""objective"".",0.65
+6,"Let's follow the instructions step-by-step.
+
+**1. Identify the different parts between Prompt 1 and Prompt 2:**
+
+Prompt 1: identify whether the given sentence was expressing an objective or a subjective opinion.
+Prompt 2: You need to determine the nature of the sentence by categorizing it as having a subjective or objective tone, evaluating every message according to its tone.
+
+Different parts:
+""identify whether the given sentence"" vs ""You need to determine the nature of the sentence""
+""was expressing an objective or a subjective opinion"" vs ""by categorizing it as having a subjective or objective tone""
+""opinion"" vs ""tone""
+""given sentence"" vs ""every message""
+
+**2. Randomly mutate the different parts:**
+
+""identify whether the given sentence"" -> ""recognize how the statement""
+""was expressing an objective or a subjective opinion"" -> ""holds an objective or subjective viewpoint""
+""opinion"" -> ""perspective""
+""given sentence"" -> ""provided messages""
+
+**3. Crossover the different parts with Prompt 3 and generate a final prompt:**
+
+Prompt 3: Please perform Subjectivity Classification task. Given the sentence, assign a label from ['subjective', 'objective']. Return label only without any other text.",0.65
+6,"Analyze the provided text to decide whether it falls under subjective or objective category, considering the expressed opinion and its sentiment.",0.75
+6,"Considering a given text, determine the nature of the sentence or phrase into objective or subjective categories, and evaluate it accordingly.",0.65
+6,Determine the sentiment of a given text by examining a piece of writing and assess the tone as either subjective or objective.,0.7
+6,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**Step 1: Identify the different parts between Prompt 1 and Prompt 2**
+
+Prompt 1: Considering a given text, determine the nature of the sentence or phrase into objective or subjective categories, and evaluate it accordingly.
+Prompt 2: Your goal is to evaluate every statement as either subjective or objective by categorizing a message according to its tone.
+
+Different parts:
+""Considering a given text"" vs ""Your goal is to evaluate every statement""
+""determine the nature of the sentence or phrase"" vs ""categorizing a message""
+""text"" vs ""statement""
+""sentence or phrase"" vs ""message""
+""into objective or subjective categories, and evaluate it accordingly"" vs ""as either subjective or objective by categorizing... its tone""
+
+**Step 2: Randomly mutate the different parts**
+
+Mutated parts:
+""Considering a given text"" -> ""Analyzing a provided passage""
+""determine the nature of the sentence or phrase"" -> ""assess the type of expression""
+""text"" -> ""entry""
+""sentence or phrase"" -> ""piece of writing""
+""into objective or subjective categories, and evaluate it accordingly"" -> ""based on their subjective or objective tone, classify them""
+""",0.55
+6,"You need to determine the nature of the sentence by categorizing it as having a subjective or objective tone, evaluating every message according to its tone.</",0.75
+7,"Given a statement, classify it as expressing a subjective or objective opinion.",0.7
+7,identify whether the given sentence was expressing an objective or a subjective opinion.,0.65
+7,"Assess the given sentence and determine whether it is into subjective or objective opinion, evaluating the given sentences and their sentiment.",0.8
+7,"Your task is to classify the comment ""subjective"" or ""objective"".",0.65
+7,"Let's follow the instructions step-by-step.
+
+**1. Identify the different parts between Prompt 1 and Prompt 2:**
+
+Prompt 1: identify whether the given sentence was expressing an objective or a subjective opinion.
+Prompt 2: You need to determine the nature of the sentence by categorizing it as having a subjective or objective tone, evaluating every message according to its tone.
+
+Different parts:
+""identify whether the given sentence"" vs ""You need to determine the nature of the sentence""
+""was expressing an objective or a subjective opinion"" vs ""by categorizing it as having a subjective or objective tone""
+""opinion"" vs ""tone""
+""given sentence"" vs ""every message""
+
+**2. Randomly mutate the different parts:**
+
+""identify whether the given sentence"" -> ""recognize how the statement""
+""was expressing an objective or a subjective opinion"" -> ""holds an objective or subjective viewpoint""
+""opinion"" -> ""perspective""
+""given sentence"" -> ""provided messages""
+
+**3. Crossover the different parts with Prompt 3 and generate a final prompt:**
+
+Prompt 3: Please perform Subjectivity Classification task. Given the sentence, assign a label from ['subjective', 'objective']. Return label only without any other text.",0.65
+7,"Analyze the provided text to decide whether it falls under subjective or objective category, considering the expressed opinion and its sentiment.",0.75
+7,"Considering a given text, determine the nature of the sentence or phrase into objective or subjective categories, and evaluate it accordingly.",0.65
+7,Determine the sentiment of a given text by examining a piece of writing and assess the tone as either subjective or objective.,0.7
+7,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**Step 1: Identify the different parts between Prompt 1 and Prompt 2**
+
+Prompt 1: Considering a given text, determine the nature of the sentence or phrase into objective or subjective categories, and evaluate it accordingly.
+Prompt 2: Your goal is to evaluate every statement as either subjective or objective by categorizing a message according to its tone.
+
+Different parts:
+""Considering a given text"" vs ""Your goal is to evaluate every statement""
+""determine the nature of the sentence or phrase"" vs ""categorizing a message""
+""text"" vs ""statement""
+""sentence or phrase"" vs ""message""
+""into objective or subjective categories, and evaluate it accordingly"" vs ""as either subjective or objective by categorizing... its tone""
+
+**Step 2: Randomly mutate the different parts**
+
+Mutated parts:
+""Considering a given text"" -> ""Analyzing a provided passage""
+""determine the nature of the sentence or phrase"" -> ""assess the type of expression""
+""text"" -> ""entry""
+""sentence or phrase"" -> ""piece of writing""
+""into objective or subjective categories, and evaluate it accordingly"" -> ""based on their subjective or objective tone, classify them""
+""",0.55
+7,"You need to determine the nature of the sentence by categorizing it as having a subjective or objective tone, evaluating every message according to its tone.</",0.75
+8,"Given a statement, classify it as expressing a subjective or objective opinion.",0.7
+8,identify whether the given sentence was expressing an objective or a subjective opinion.,0.65
+8,"Assess the given sentence and determine whether it is into subjective or objective opinion, evaluating the given sentences and their sentiment.",0.8
+8,"Your task is to classify the comment ""subjective"" or ""objective"".",0.65
+8,"Let's follow the instructions step-by-step.
+
+**1. Identify the different parts between Prompt 1 and Prompt 2:**
+
+Prompt 1: identify whether the given sentence was expressing an objective or a subjective opinion.
+Prompt 2: You need to determine the nature of the sentence by categorizing it as having a subjective or objective tone, evaluating every message according to its tone.
+
+Different parts:
+""identify whether the given sentence"" vs ""You need to determine the nature of the sentence""
+""was expressing an objective or a subjective opinion"" vs ""by categorizing it as having a subjective or objective tone""
+""opinion"" vs ""tone""
+""given sentence"" vs ""every message""
+
+**2. Randomly mutate the different parts:**
+
+""identify whether the given sentence"" -> ""recognize how the statement""
+""was expressing an objective or a subjective opinion"" -> ""holds an objective or subjective viewpoint""
+""opinion"" -> ""perspective""
+""given sentence"" -> ""provided messages""
+
+**3. Crossover the different parts with Prompt 3 and generate a final prompt:**
+
+Prompt 3: Please perform Subjectivity Classification task. Given the sentence, assign a label from ['subjective', 'objective']. Return label only without any other text.",0.65
+8,"Analyze the provided text to decide whether it falls under subjective or objective category, considering the expressed opinion and its sentiment.",0.75
+8,"Considering a given text, determine the nature of the sentence or phrase into objective or subjective categories, and evaluate it accordingly.",0.65
+8,Determine the sentiment of a given text by examining a piece of writing and assess the tone as either subjective or objective.,0.7
+8,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**Step 1: Identify the different parts between Prompt 1 and Prompt 2**
+
+Prompt 1: Considering a given text, determine the nature of the sentence or phrase into objective or subjective categories, and evaluate it accordingly.
+Prompt 2: Your goal is to evaluate every statement as either subjective or objective by categorizing a message according to its tone.
+
+Different parts:
+""Considering a given text"" vs ""Your goal is to evaluate every statement""
+""determine the nature of the sentence or phrase"" vs ""categorizing a message""
+""text"" vs ""statement""
+""sentence or phrase"" vs ""message""
+""into objective or subjective categories, and evaluate it accordingly"" vs ""as either subjective or objective by categorizing... its tone""
+
+**Step 2: Randomly mutate the different parts**
+
+Mutated parts:
+""Considering a given text"" -> ""Analyzing a provided passage""
+""determine the nature of the sentence or phrase"" -> ""assess the type of expression""
+""text"" -> ""entry""
+""sentence or phrase"" -> ""piece of writing""
+""into objective or subjective categories, and evaluate it accordingly"" -> ""based on their subjective or objective tone, classify them""
+""",0.55
+8,"You need to determine the nature of the sentence by categorizing it as having a subjective or objective tone, evaluating every message according to its tone.</",0.75
+9,"Given a statement, classify it as expressing a subjective or objective opinion.",0.7
+9,identify whether the given sentence was expressing an objective or a subjective opinion.,0.65
+9,"Assess the given sentence and determine whether it is into subjective or objective opinion, evaluating the given sentences and their sentiment.",0.8
+9,"Your task is to classify the comment ""subjective"" or ""objective"".",0.65
+9,"Let's follow the instructions step-by-step.
+
+**1. Identify the different parts between Prompt 1 and Prompt 2:**
+
+Prompt 1: identify whether the given sentence was expressing an objective or a subjective opinion.
+Prompt 2: You need to determine the nature of the sentence by categorizing it as having a subjective or objective tone, evaluating every message according to its tone.
+
+Different parts:
+""identify whether the given sentence"" vs ""You need to determine the nature of the sentence""
+""was expressing an objective or a subjective opinion"" vs ""by categorizing it as having a subjective or objective tone""
+""opinion"" vs ""tone""
+""given sentence"" vs ""every message""
+
+**2. Randomly mutate the different parts:**
+
+""identify whether the given sentence"" -> ""recognize how the statement""
+""was expressing an objective or a subjective opinion"" -> ""holds an objective or subjective viewpoint""
+""opinion"" -> ""perspective""
+""given sentence"" -> ""provided messages""
+
+**3. Crossover the different parts with Prompt 3 and generate a final prompt:**
+
+Prompt 3: Please perform Subjectivity Classification task. Given the sentence, assign a label from ['subjective', 'objective']. Return label only without any other text.",0.65
+9,"Analyze the provided text to decide whether it falls under subjective or objective category, considering the expressed opinion and its sentiment.",0.75
+9,"Considering a given text, determine the nature of the sentence or phrase into objective or subjective categories, and evaluate it accordingly.",0.65
+9,Determine the sentiment of a given text by examining a piece of writing and assess the tone as either subjective or objective.,0.7
+9,"I'll follow the instructions step-by-step to generate a better prompt.
+
+**Step 1: Identify the different parts between Prompt 1 and Prompt 2**
+
+Prompt 1: identify whether the given sentence was expressing an objective or a subjective opinion.
+Prompt 2: You need to determine the nature of the sentence by categorizing it as having a subjective or objective tone, evaluating every message according to its tone.
+
+Different parts:
+""identify whether the given sentence"" vs ""You need to determine the nature of the sentence""
+""was expressing an objective or a subjective opinion"" vs ""by categorizing it as having a subjective or objective tone""
+""opinion"" vs ""tone""
+""given sentence"" vs ""every message""
+
+**Step 2: Randomly mutate the different parts**
+
+""identify whether the given sentence"" -> ""recognize how the statement""
+""was expressing an objective or a subjective opinion"" -> ""holds an objective or subjective viewpoint""
+""opinion"" -> ""perspective""
+""given sentence"" -> ""provided messages""
+
+**Step 3: Crossover the different parts with Prompt 3 and generate a final prompt**
+
+Prompt 3: Please perform Subjectivity Classification task. Given the sentence, assign a label from ['subjective', 'objective'].",0.6
+9,"You need to determine the nature of the sentence by categorizing it as having a subjective or objective tone, evaluating every message according to its tone.</",0.75
+10,"Given a statement, classify it as expressing a subjective or objective opinion.",0.7
+10,identify whether the given sentence was expressing an objective or a subjective opinion.,0.65
+10,"Assess the given sentence and determine whether it is into subjective or objective opinion, evaluating the given sentences and their sentiment.",0.8
+10,"Your task is to classify the comment ""subjective"" or ""objective"".",0.65
+10,"Let's follow the instructions step-by-step.
+
+**1. Identify the different parts between Prompt 1 and Prompt 2:**
+
+Prompt 1: identify whether the given sentence was expressing an objective or a subjective opinion.
+Prompt 2: You need to determine the nature of the sentence by categorizing it as having a subjective or objective tone, evaluating every message according to its tone.
+
+Different parts:
+""identify whether the given sentence"" vs ""You need to determine the nature of the sentence""
+""was expressing an objective or a subjective opinion"" vs ""by categorizing it as having a subjective or objective tone""
+""opinion"" vs ""tone""
+""given sentence"" vs ""every message""
+
+**2. Randomly mutate the different parts:**
+
+""identify whether the given sentence"" -> ""recognize how the statement""
+""was expressing an objective or a subjective opinion"" -> ""holds an objective or subjective viewpoint""
+""opinion"" -> ""perspective""
+""given sentence"" -> ""provided messages""
+
+**3. Crossover the different parts with Prompt 3 and generate a final prompt:**
+
+Prompt 3: Please perform Subjectivity Classification task. Given the sentence, assign a label from ['subjective', 'objective']. Return label only without any other text.",0.65
+10,"Analyze the provided text to decide whether it falls under subjective or objective category, considering the expressed opinion and its sentiment.",0.75
+10,"Considering a given text, determine the nature of the sentence or phrase into objective or subjective categories, and evaluate it accordingly.",0.65
+10,Determine the sentiment of a given text by examining a piece of writing and assess the tone as either subjective or objective.,0.7
+10,"I'll follow the instructions step-by-step to generate a better prompt.
+
+**Step 1: Identify the different parts between Prompt 1 and Prompt 2**
+
+Prompt 1: identify whether the given sentence was expressing an objective or a subjective opinion.
+Prompt 2: You need to determine the nature of the sentence by categorizing it as having a subjective or objective tone, evaluating every message according to its tone.
+
+Different parts:
+""identify whether the given sentence"" vs ""You need to determine the nature of the sentence""
+""was expressing an objective or a subjective opinion"" vs ""by categorizing it as having a subjective or objective tone""
+""opinion"" vs ""tone""
+""given sentence"" vs ""every message""
+
+**Step 2: Randomly mutate the different parts**
+
+""identify whether the given sentence"" -> ""recognize how the statement""
+""was expressing an objective or a subjective opinion"" -> ""holds an objective or subjective viewpoint""
+""opinion"" -> ""perspective""
+""given sentence"" -> ""provided messages""
+
+**Step 3: Crossover the different parts with Prompt 3 and generate a final prompt**
+
+Prompt 3: Please perform Subjectivity Classification task. Given the sentence, assign a label from ['subjective', 'objective'].",0.6
+10,"You need to determine the nature of the sentence by categorizing it as having a subjective or objective tone, evaluating every message according to its tone.</",0.75
+11,"Given a statement, classify it as expressing a subjective or objective opinion.",0.7
+11,identify whether the given sentence was expressing an objective or a subjective opinion.,0.65
+11,"Assess the given sentence and determine whether it is into subjective or objective opinion, evaluating the given sentences and their sentiment.",0.8
+11,"Your task is to classify the comment ""subjective"" or ""objective"".",0.65
+11,"Let's follow the instructions step-by-step.
+
+**1. Identify the different parts between Prompt 1 and Prompt 2:**
+
+Prompt 1: identify whether the given sentence was expressing an objective or a subjective opinion.
+Prompt 2: You need to determine the nature of the sentence by categorizing it as having a subjective or objective tone, evaluating every message according to its tone.
+
+Different parts:
+""identify whether the given sentence"" vs ""You need to determine the nature of the sentence""
+""was expressing an objective or a subjective opinion"" vs ""by categorizing it as having a subjective or objective tone""
+""opinion"" vs ""tone""
+""given sentence"" vs ""every message""
+
+**2. Randomly mutate the different parts:**
+
+""identify whether the given sentence"" -> ""recognize how the statement""
+""was expressing an objective or a subjective opinion"" -> ""holds an objective or subjective viewpoint""
+""opinion"" -> ""perspective""
+""given sentence"" -> ""provided messages""
+
+**3. Crossover the different parts with Prompt 3 and generate a final prompt:**
+
+Prompt 3: Please perform Subjectivity Classification task. Given the sentence, assign a label from ['subjective', 'objective']. Return label only without any other text.",0.65
+11,"Analyze the provided text to decide whether it falls under subjective or objective category, considering the expressed opinion and its sentiment.",0.75
+11,"Considering a given text, determine the nature of the sentence or phrase into objective or subjective categories, and evaluate it accordingly.",0.65
+11,Determine the sentiment of a given text by examining a piece of writing and assess the tone as either subjective or objective.,0.7
+11,"I'll follow the instructions step-by-step to generate a better prompt.
+
+**Step 1: Identify the different parts between Prompt 1 and Prompt 2**
+
+Prompt 1: identify whether the given sentence was expressing an objective or a subjective opinion.
+Prompt 2: You need to determine the nature of the sentence by categorizing it as having a subjective or objective tone, evaluating every message according to its tone.
+
+Different parts:
+""identify whether the given sentence"" vs ""You need to determine the nature of the sentence""
+""was expressing an objective or a subjective opinion"" vs ""by categorizing it as having a subjective or objective tone""
+""opinion"" vs ""tone""
+""given sentence"" vs ""every message""
+
+**Step 2: Randomly mutate the different parts**
+
+""identify whether the given sentence"" -> ""recognize how the statement""
+""was expressing an objective or a subjective opinion"" -> ""holds an objective or subjective viewpoint""
+""opinion"" -> ""perspective""
+""given sentence"" -> ""provided messages""
+
+**Step 3: Crossover the different parts with Prompt 3 and generate a final prompt**
+
+Prompt 3: Please perform Subjectivity Classification task. Given the sentence, assign a label from ['subjective', 'objective'].",0.6
+11,"You need to determine the nature of the sentence by categorizing it as having a subjective or objective tone, evaluating every message according to its tone.</",0.75
+12,"Given a statement, classify it as expressing a subjective or objective opinion.",0.7
+12,identify whether the given sentence was expressing an objective or a subjective opinion.,0.65
+12,"Assess the given sentence and determine whether it is into subjective or objective opinion, evaluating the given sentences and their sentiment.",0.8
+12,"Your task is to classify the comment ""subjective"" or ""objective"".",0.65
+12,"Let's follow the instructions step-by-step.
+
+**1. Identify the different parts between Prompt 1 and Prompt 2:**
+
+Prompt 1: identify whether the given sentence was expressing an objective or a subjective opinion.
+Prompt 2: You need to determine the nature of the sentence by categorizing it as having a subjective or objective tone, evaluating every message according to its tone.
+
+Different parts:
+""identify whether the given sentence"" vs ""You need to determine the nature of the sentence""
+""was expressing an objective or a subjective opinion"" vs ""by categorizing it as having a subjective or objective tone""
+""opinion"" vs ""tone""
+""given sentence"" vs ""every message""
+
+**2. Randomly mutate the different parts:**
+
+""identify whether the given sentence"" -> ""recognize how the statement""
+""was expressing an objective or a subjective opinion"" -> ""holds an objective or subjective viewpoint""
+""opinion"" -> ""perspective""
+""given sentence"" -> ""provided messages""
+
+**3. Crossover the different parts with Prompt 3 and generate a final prompt:**
+
+Prompt 3: Please perform Subjectivity Classification task. Given the sentence, assign a label from ['subjective', 'objective']. Return label only without any other text.",0.65
+12,"Analyze the provided text to decide whether it falls under subjective or objective category, considering the expressed opinion and its sentiment.",0.75
+12,"Considering a given text, determine the nature of the sentence or phrase into objective or subjective categories, and evaluate it accordingly.",0.65
+12,Determine the sentiment of a given text by examining a piece of writing and assess the tone as either subjective or objective.,0.7
+12,"I'll follow the instructions step-by-step to generate a better prompt.
+
+**Step 1: Identify the different parts between Prompt 1 and Prompt 2**
+
+Prompt 1: identify whether the given sentence was expressing an objective or a subjective opinion.
+Prompt 2: You need to determine the nature of the sentence by categorizing it as having a subjective or objective tone, evaluating every message according to its tone.
+
+Different parts:
+""identify whether the given sentence"" vs ""You need to determine the nature of the sentence""
+""was expressing an objective or a subjective opinion"" vs ""by categorizing it as having a subjective or objective tone""
+""opinion"" vs ""tone""
+""given sentence"" vs ""every message""
+
+**Step 2: Randomly mutate the different parts**
+
+""identify whether the given sentence"" -> ""recognize how the statement""
+""was expressing an objective or a subjective opinion"" -> ""holds an objective or subjective viewpoint""
+""opinion"" -> ""perspective""
+""given sentence"" -> ""provided messages""
+
+**Step 3: Crossover the different parts with Prompt 3 and generate a final prompt**
+
+Prompt 3: Please perform Subjectivity Classification task. Given the sentence, assign a label from ['subjective', 'objective'].",0.6
+12,"You need to determine the nature of the sentence by categorizing it as having a subjective or objective tone, evaluating every message according to its tone.</",0.75

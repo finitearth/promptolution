@@ -1,0 +1,121 @@
+step,prompt,score
+1,"Given a tweet, classify it as having a positive or negative sentiment.",1.0
+1,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.95
+1,Classify the sentiment of the given text as 'positive' or 'negative',0.95
+1,"Assess the sentiment of a given sentence, categorizing it as positive or negative by returning a label from ['negative', 'positive'].",0.95
+1,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+1,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+1,"Determine the sentiment of the provided text, assigning it a label of ""positive"" or ""negative""",0.9
+1,"Classify the sentiment of the given review as either ""positive"" or ""negative"" while exploring its tone and emotional resonance",0.9
+1,Classify and categorize the given sentence sentiment as either positive ('positive') or negative ('negative').,0.9
+1,"Identify the sentiment of the provided sentence, outputting either 'positive' or 'negative'.",0.85
+2,"Given a tweet, classify it as having a positive or negative sentiment.",1.0
+2,"Evaluate the emotional tone and categorize the text as 'positive' or 'negative,' incorporating its undertones and emotional resonance.",1.0
+2,"Determine the sentiment of the provided text, classifying it as 'positive' or 'negative'.",1.0
+2,"Classify the given text's sentiment as either ""positive"" or ""negative"", analyzing its tone and emotional undertones, while considering the nuances of language.",1.0
+2,Assign a sentiment label ('positive' or 'negative') to the provided sentence.,1.0
+2,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.95
+2,"Determine the sentiment of the provided comment, designating it as 'positive' or 'negative'.",0.95
+2,"Determine the emotional tone of a given text - sentence, tweet, or otherwise - by categorizing it as either positive or negative.",0.95
+2,Classify the sentiment of the given text as 'positive' or 'negative',0.95
+2,Classify the given text as positive or negative in sentiment,0.95
+3,"Given a tweet, classify it as having a positive or negative sentiment.",1.0
+3,"Evaluate the emotional tone and categorize the text as 'positive' or 'negative,' incorporating its undertones and emotional resonance.",1.0
+3,"Determine the sentiment of the provided text, classifying it as 'positive' or 'negative'.",1.0
+3,"Classify the given text's sentiment as either ""positive"" or ""negative"", analyzing its tone and emotional undertones, while considering the nuances of language.",1.0
+3,Assign a sentiment label ('positive' or 'negative') to the provided sentence.,1.0
+3,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.95
+3,"Determine the sentiment of the provided text, classifying it as either 'positive' or 'negative'",0.95
+3,"Determine the sentiment of the provided comment, designating it as 'positive' or 'negative'.",0.95
+3,"Determine the emotional tone of the text, categorizing it as 'positive', 'negative', or 'neutral', and consider its subtle undertones and emotional essence in your assessment.",0.95
+3,"Determine the emotional tone of a given text - sentence, tweet, or otherwise - by categorizing it as either positive or negative.",0.95
+4,"Given a tweet, classify it as having a positive or negative sentiment.",1.0
+4,"Evaluate the emotional tone and categorize the text as 'positive' or 'negative,' incorporating its undertones and emotional resonance.",1.0
+4,"Determine the text's emotional tone, categorizing it as 'positive', 'negative', or 'neutral', considering subtle undertones, and then refine your assessment to determine a positive or negative emotional resonance.",1.0
+4,"Determine the sentiment of the provided text, classifying it as 'positive' or 'negative'.",1.0
+4,"Classify the given text's sentiment as either ""positive"" or ""negative"", analyzing its tone and emotional undertones, while considering the nuances of language.",1.0
+4,Assign a sentiment label ('positive' or 'negative') to the provided sentence.,1.0
+4,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.95
+4,"Determine the sentiment of the provided text, classifying it as either 'positive' or 'negative'",0.95
+4,"Determine the sentiment of the provided comment, designating it as 'positive' or 'negative'.",0.95
+4,"Determine the emotional tone of the text, categorizing it as 'positive', 'negative', or 'neutral', and consider its subtle undertones and emotional essence in your assessment.",0.95
+5,"Given a tweet, classify it as having a positive or negative sentiment.",1.0
+5,"Evaluate the emotional tone and categorize the text as 'positive' or 'negative,' incorporating its undertones and emotional resonance.",1.0
+5,"Determine the text's emotional tone, categorizing it as 'positive', 'negative', or 'neutral', considering subtle undertones, and then refine your assessment to determine a positive or negative emotional resonance.",1.0
+5,"Determine the sentiment of the provided text, classifying it as 'positive' or 'negative'.",1.0
+5,Classify the sentiment of the given text as 'positive' or 'negative',1.0
+5,"Classify the given text's sentiment as either ""positive"" or ""negative"", analyzing its tone and emotional undertones, while considering the nuances of language.",1.0
+5,Assign a sentiment label ('positive' or 'negative') to the provided sentence.,1.0
+5,"Uncover the emotional undertones of the text and categorize its sentiment as 'positive' or 'negative,' taking into account its emotional resonance and subtle cues.",0.95
+5,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.95
+5,"Determine the sentiment of the provided text, classifying it as either 'positive' or 'negative'",0.95
+6,"Given a tweet, classify it as having a positive or negative sentiment.",1.0
+6,"Evaluate the emotional tone and categorize the text as 'positive' or 'negative,' incorporating its undertones and emotional resonance.",1.0
+6,"Determine the text's emotional tone, categorizing it as 'positive', 'negative', or 'neutral', considering subtle undertones, and then refine your assessment to determine a positive or negative emotional resonance.",1.0
+6,"Determine the sentiment of the provided text, classifying it as 'positive' or 'negative'.",1.0
+6,Classify the sentiment of the given text as 'positive' or 'negative',1.0
+6,"Classify the given text's sentiment as either ""positive"" or ""negative"", analyzing its tone and emotional undertones, while considering the nuances of language.",1.0
+6,Assign a sentiment label ('positive' or 'negative') to the provided sentence.,1.0
+6,"Uncover the emotional undertones of the text and categorize its sentiment as 'positive' or 'negative,' taking into account its emotional resonance and subtle cues.",0.95
+6,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.95
+6,"Determine the sentiment of the provided text, classifying it as either 'positive' or 'negative'",0.95
+7,"Given a tweet, classify it as having a positive or negative sentiment.",1.0
+7,"Extract the emotional tone and sentiment of a digital text, such as a tweet or an online post, and determine whether it expresses a positive or negative emotional resonance.",1.0
+7,"Evaluate the emotional tone and categorize the text as 'positive' or 'negative,' incorporating its undertones and emotional resonance.",1.0
+7,"Determine the text's emotional tone, categorizing it as 'positive', 'negative', or 'neutral', considering subtle undertones, and then refine your assessment to determine a positive or negative emotional resonance.",1.0
+7,"Determine the sentiment of the provided text, classifying it as 'positive' or 'negative'.",1.0
+7,Classify the sentiment of the given text as 'positive' or 'negative',1.0
+7,"Classify the given text's sentiment as either ""positive"" or ""negative"", analyzing its tone and emotional undertones, while considering the nuances of language.",1.0
+7,Assign a sentiment label ('positive' or 'negative') to the provided sentence.,1.0
+7,"Uncover the emotional undertones of the text and categorize its sentiment as 'positive' or 'negative,' taking into account its emotional resonance and subtle cues.",0.95
+7,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.95
+8,"Given a tweet, classify it as having a positive or negative sentiment.",1.0
+8,"Extract the emotional tone and sentiment of a digital text, such as a tweet or an online post, and determine whether it expresses a positive or negative emotional resonance.",1.0
+8,"Evaluate the emotional tone and sentiment of the text, determining whether it's predominantly positive, negative, or exhibits a subtle balance of both, taking into account the linguistic subtleties and emotional undertones.",1.0
+8,"Evaluate the emotional tone and categorize the text as 'positive' or 'negative,' incorporating its undertones and emotional resonance.",1.0
+8,"Determine the text's emotional tone, categorizing it as 'positive', 'negative', or 'neutral', considering subtle undertones, and then refine your assessment to determine a positive or negative emotional resonance.",1.0
+8,"Determine the sentiment of the provided text, classifying it as 'positive' or 'negative'.",1.0
+8,Classify the sentiment of the given text as 'positive' or 'negative',1.0
+8,"Classify the given text's sentiment as either ""positive"" or ""negative"", analyzing its tone and emotional undertones, while considering the nuances of language.",1.0
+8,Assign a sentiment label ('positive' or 'negative') to the provided sentence.,1.0
+8,"Uncover the emotional undertones of the text and categorize its sentiment as 'positive' or 'negative,' taking into account its emotional resonance and subtle cues.",0.95
+9,"Given a tweet, classify it as having a positive or negative sentiment.",1.0
+9,"Extract the emotional tone and sentiment of a digital text, such as a tweet or an online post, and determine whether it expresses a positive or negative emotional resonance.",1.0
+9,"Evaluate the emotional tone of the given text, categorizing it as 'positive', 'negative', or 'neutral', considering the nuanced undertones and overall emotional resonance while refining the assessment for a more precise interpretation.",1.0
+9,"Evaluate the emotional tone and sentiment of the text, determining whether it's predominantly positive, negative, or exhibits a subtle balance of both, taking into account the linguistic subtleties and emotional undertones.",1.0
+9,"Evaluate the emotional tone and categorize the text as 'positive' or 'negative,' incorporating its undertones and emotional resonance.",1.0
+9,"Determine the text's emotional tone, categorizing it as 'positive', 'negative', or 'neutral', considering subtle undertones, and then refine your assessment to determine a positive or negative emotional resonance.",1.0
+9,"Determine the sentiment of the provided text, classifying it as 'positive' or 'negative'.",1.0
+9,Classify the sentiment of the given text as 'positive' or 'negative',1.0
+9,"Classify the given text's sentiment as either ""positive"" or ""negative"", analyzing its tone and emotional undertones, while considering the nuances of language.",1.0
+9,Assign a sentiment label ('positive' or 'negative') to the provided sentence.,1.0
+10,"Given a tweet, classify it as having a positive or negative sentiment.",1.0
+10,"Extract the emotional tone and sentiment of a digital text, such as a tweet or an online post, and determine whether it expresses a positive or negative emotional resonance.",1.0
+10,"Evaluate the emotional tone of the given text, categorizing it as 'positive', 'negative', or 'neutral', considering the nuanced undertones and overall emotional resonance while refining the assessment for a more precise interpretation.",1.0
+10,"Evaluate the emotional tone and sentiment of the text, determining whether it's predominantly positive, negative, or exhibits a subtle balance of both, taking into account the linguistic subtleties and emotional undertones.",1.0
+10,"Evaluate the emotional tone and categorize the text as 'positive' or 'negative,' incorporating its undertones and emotional resonance.",1.0
+10,"Determine the text's emotional tone, categorizing it as 'positive', 'negative', or 'neutral', considering subtle undertones, and then refine your assessment to determine a positive or negative emotional resonance.",1.0
+10,"Determine the sentiment of the provided text, classifying it as 'positive' or 'negative'.",1.0
+10,Classify the sentiment of the given text as 'positive' or 'negative',1.0
+10,"Classify the given text's sentiment as either ""positive"" or ""negative"", analyzing its tone and emotional undertones, while considering the nuances of language.",1.0
+10,Assign a sentiment label ('positive' or 'negative') to the provided sentence.,1.0
+11,"Given a tweet, classify it as having a positive or negative sentiment.",1.0
+11,"Extract the emotional tone and sentiment of a digital text, such as a tweet or an online post, and determine whether it expresses a positive or negative emotional resonance.",1.0
+11,"Evaluate the emotional tone of the given text, categorizing it as 'positive', 'negative', or 'neutral', considering the nuanced undertones and overall emotional resonance while refining the assessment for a more precise interpretation.",1.0
+11,"Evaluate the emotional tone and sentiment of the text, determining whether it's predominantly positive, negative, or exhibits a subtle balance of both, taking into account the linguistic subtleties and emotional undertones.",1.0
+11,"Evaluate the emotional tone and categorize the text as 'positive' or 'negative,' incorporating its undertones and emotional resonance.",1.0
+11,"Determine the text's emotional tone, categorizing it as 'positive', 'negative', or 'neutral', considering subtle undertones, and then refine your assessment to determine a positive or negative emotional resonance.",1.0
+11,"Determine the sentiment of the provided text, classifying it as 'positive' or 'negative'.",1.0
+11,Classify the sentiment of the given text as 'positive' or 'negative',1.0
+11,"Classify the given text's sentiment as either ""positive"" or ""negative"", analyzing its tone and emotional undertones, while considering the nuances of language.",1.0
+11,Assign a sentiment label ('positive' or 'negative') to the provided sentence.,1.0
+12,"Given a tweet, classify it as having a positive or negative sentiment.",1.0
+12,"Extract the emotional tone and sentiment of a digital text, such as a tweet or an online post, and determine whether it expresses a positive or negative emotional resonance.",1.0
+12,"Evaluate the emotional tone of the given text, categorizing it as 'positive', 'negative', or 'neutral', considering the nuanced undertones and overall emotional resonance while refining the assessment for a more precise interpretation.",1.0
+12,"Evaluate the emotional tone and sentiment of the text, determining whether it's predominantly positive, negative, or exhibits a subtle balance of both, taking into account the linguistic subtleties and emotional undertones.",1.0
+12,"Evaluate the emotional tone and categorize the text as 'positive' or 'negative,' incorporating its undertones and emotional resonance.",1.0
+12,"Determine the text's emotional tone, categorizing it as 'positive', 'negative', or 'neutral', considering subtle undertones, and then refine your assessment to determine a positive or negative emotional resonance.",1.0
+12,"Determine the sentiment of the provided text, classifying it as 'positive' or 'negative'.",1.0
+12,Classify the sentiment of the given text as 'positive' or 'negative',1.0
+12,"Classify the given text's sentiment as either ""positive"" or ""negative"", analyzing its tone and emotional undertones, while considering the nuances of language.",1.0
+12,Assign a sentiment label ('positive' or 'negative') to the provided sentence.,1.0

@@ -1,0 +1,121 @@
+step,prompt,score
+1,"Given an expression, you need to judge whether it represents subjective or objective opinion by assessing the context and meaning.",0.9
+1,"Analyzing a sentence, determine if the provided text conveys a neutral or emotional viewpoint, and evaluate whether it is subjective or objective.",0.7
+1,"Your task is to classify the comment ""subjective"" or ""objective"".",0.6
+1,"Examine the provided passage about a film and assign a label to it as either subjective or objective, identifying whether the author's perspective is objective",0.6
+1,"Classify each passage into one of two categories: subjective or objective, by assessing whether it is expressing an objective or a subjective opinion.",0.55
+1,Examine the provided text and perform Subjectivity Classification task to determine whether it is,0.65
+1,Analyze a text and evaluate each input statement as either subjective or objective label.,0.65
+1,"Identify the classification of a film critique from a provided statement, and classify it as either subjective or objective category by assessing the presented phrase.",0.7
+1,"Assess every statement in a movie review and categorize it into one of the following categories: subjective or objective, based on the given text.",0.55
+1,"Considering a given remark, assess the opinion of each phrase and determine its nature as either objective viewpoint or subjective viewpoint.",0.6
+2,"Given an expression, you need to judge whether it represents subjective or objective opinion by assessing the context and meaning.",0.9
+2,"Analyzing a sentence, determine if the provided text conveys a neutral or emotional viewpoint, and evaluate whether it is subjective or objective.",0.7
+2,"Your task is to classify the comment ""subjective"" or ""objective"".",0.6
+2,"Examine the provided passage about a film and assign a label to it as either subjective or objective, identifying whether the author's perspective is objective",0.6
+2,"Classify each passage into one of two categories: subjective or objective, by assessing whether it is expressing an objective or a subjective opinion.",0.55
+2,Examine the provided text and perform Subjectivity Classification task to determine whether it is,0.65
+2,Analyze a text and evaluate each input statement as either subjective or objective label.,0.65
+2,"Identify the classification of a film critique from a provided statement, and classify it as either subjective or objective category by assessing the presented phrase.",0.7
+2,"Assess every statement in a movie review and categorize it into one of the following categories: subjective or objective, based on the given text.",0.55
+2,"Considering a given remark, assess the opinion of each phrase and determine its nature as either objective viewpoint or subjective viewpoint.",0.6
+3,"Given an expression, you need to judge whether it represents subjective or objective opinion by assessing the context and meaning.",0.9
+3,"Analyzing a sentence, determine if the provided text conveys a neutral or emotional viewpoint, and evaluate whether it is subjective or objective.",0.7
+3,"Your task is to classify the comment ""subjective"" or ""objective"".",0.6
+3,"Examine the provided passage about a film and assign a label to it as either subjective or objective, identifying whether the author's perspective is objective",0.6
+3,"Evaluate the textual input to determine whether it represents a subjective or objective opinion, based on the context and inherent",0.75
+3,Examine the provided text and perform Subjectivity Classification task to determine whether it is,0.65
+3,Analyze a text and evaluate each input statement as either subjective or objective label.,0.65
+3,"Identify the classification of a film critique from a provided statement, and classify it as either subjective or objective category by assessing the presented phrase.",0.7
+3,"Assess every statement in a movie review and categorize it into one of the following categories: subjective or objective, based on the given text.",0.55
+3,"Considering a given remark, assess the opinion of each phrase and determine its nature as either objective viewpoint or subjective viewpoint.",0.6
+4,"Given an expression, you need to judge whether it represents subjective or objective opinion by assessing the context and meaning.",0.9
+4,"Analyzing a sentence, determine if the provided text conveys a neutral or emotional viewpoint, and evaluate whether it is subjective or objective.",0.7
+4,"Your task is to classify the comment ""subjective"" or ""objective"".",0.6
+4,"Examine the provided passage about a film and assign a label to it as either subjective or objective, identifying whether the author's perspective is objective",0.6
+4,"Evaluate the textual input to determine whether it represents a subjective or objective opinion, based on the context and inherent",0.75
+4,Examine the provided text and perform Subjectivity Classification task to determine whether it is,0.65
+4,Analyze a text and evaluate each input statement as either subjective or objective label.,0.65
+4,"Identify the classification of a film critique from a provided statement, and classify it as either subjective or objective category by assessing the presented phrase.",0.7
+4,"Assess every statement in a movie review and categorize it into one of the following categories: subjective or objective, based on the given text.",0.55
+4,"Considering a given remark, assess the opinion of each phrase and determine its nature as either objective viewpoint or subjective viewpoint.",0.6
+5,"Given an expression, you need to judge whether it represents subjective or objective opinion by assessing the context and meaning.",0.9
+5,"Analyzing a sentence, determine if the provided text conveys a neutral or emotional viewpoint, and evaluate whether it is subjective or objective.",0.7
+5,"Your task is to classify the comment ""subjective"" or ""objective"".",0.6
+5,"Examine the provided passage about a film and assign a label to it as either subjective or objective, identifying whether the author's perspective is objective",0.6
+5,"Evaluate the textual input to determine whether it represents a subjective or objective opinion, based on the context and inherent",0.75
+5,Examine the provided text and perform Subjectivity Classification task to determine whether it is,0.65
+5,Analyze a text and evaluate each input statement as either subjective or objective label.,0.65
+5,"Identify the classification of a film critique from a provided statement, and classify it as either subjective or objective category by assessing the presented phrase.",0.7
+5,"Assess every statement in a movie review and categorize it into one of the following categories: subjective or objective, based on the given text.",0.55
+5,"Considering a given remark, assess the opinion of each phrase and determine its nature as either objective viewpoint or subjective viewpoint.",0.6
+6,"Given an expression, you need to judge whether it represents subjective or objective opinion by assessing the context and meaning.",0.9
+6,"Analyzing a sentence, determine if the provided text conveys a neutral or emotional viewpoint, and evaluate whether it is subjective or objective.",0.7
+6,"Your task is to classify the comment ""subjective"" or ""objective"".",0.6
+6,"Examine the provided passage about a film and assign a label to it as either subjective or objective, identifying whether the author's perspective is objective",0.6
+6,"Evaluate the textual input to determine whether it represents a subjective or objective opinion, based on the context and inherent",0.75
+6,Examine the provided text and perform Subjectivity Classification task to determine whether it is,0.65
+6,Analyze a text and evaluate each input statement as either subjective or objective label.,0.65
+6,"Identify the classification of a film critique from a provided statement, and classify it as either subjective or objective category by assessing the presented phrase.",0.7
+6,"Assess every statement in a movie review and categorize it into one of the following categories: subjective or objective, based on the given text.",0.55
+6,"Considering a given remark, assess the opinion of each phrase and determine its nature as either objective viewpoint or subjective viewpoint.",0.6
+7,"Given an expression, you need to judge whether it represents subjective or objective opinion by assessing the context and meaning.",0.9
+7,"Analyzing a sentence, determine if the provided text conveys a neutral or emotional viewpoint, and evaluate whether it is subjective or objective.",0.7
+7,"Your task is to classify the comment ""subjective"" or ""objective"".",0.6
+7,"Examine the provided passage about a film and assign a label to it as either subjective or objective, identifying whether the author's perspective is objective",0.6
+7,"Evaluate the textual input to determine whether it represents a subjective or objective opinion, based on the context and inherent",0.75
+7,Examine the provided text and perform Subjectivity Classification task to determine whether it is,0.65
+7,Analyze a text and evaluate each input statement as either subjective or objective label.,0.65
+7,"Identify the classification of a film critique from a provided statement, and classify it as either subjective or objective category by assessing the presented phrase.",0.7
+7,"Assess every statement in a movie review and categorize it into one of the following categories: subjective or objective, based on the given text.",0.55
+7,"Considering a given remark, assess the opinion of each phrase and determine its nature as either objective viewpoint or subjective viewpoint.",0.6
+8,"Given an expression, you need to judge whether it represents subjective or objective opinion by assessing the context and meaning.",0.9
+8,"Analyzing a sentence, determine if the provided text conveys a neutral or emotional viewpoint, and evaluate whether it is subjective or objective.",0.7
+8,"Your task is to classify the comment ""subjective"" or ""objective"".",0.6
+8,"Examine the provided passage about a film and assign a label to it as either subjective or objective, identifying whether the author's perspective is objective",0.6
+8,"Evaluate the textual input to determine whether it represents a subjective or objective opinion, based on the context and inherent",0.75
+8,Examine the provided text and perform Subjectivity Classification task to determine whether it is,0.65
+8,Analyze a text and evaluate each input statement as either subjective or objective label.,0.65
+8,Analyze the given piece of text to categorize it as either subjective or objective by making,0.75
+8,"Assess every statement in a movie review and categorize it into one of the following categories: subjective or objective, based on the given text.",0.55
+8,"Considering a given remark, assess the opinion of each phrase and determine its nature as either objective viewpoint or subjective viewpoint.",0.6
+9,"Given an expression, you need to judge whether it represents subjective or objective opinion by assessing the context and meaning.",0.9
+9,"Analyzing a sentence, determine if the provided text conveys a neutral or emotional viewpoint, and evaluate whether it is subjective or objective.",0.7
+9,"Your task is to classify the comment ""subjective"" or ""objective"".",0.6
+9,"Examine the provided passage about a film and assign a label to it as either subjective or objective, identifying whether the author's perspective is objective",0.6
+9,"Evaluate the textual input to determine whether it represents a subjective or objective opinion, based on the context and inherent",0.75
+9,Examine the provided text and perform Subjectivity Classification task to determine whether it is,0.65
+9,Analyze a text and evaluate each input statement as either subjective or objective label.,0.65
+9,Analyze the given piece of text to categorize it as either subjective or objective by making,0.75
+9,"Assess every statement in a movie review and categorize it into one of the following categories: subjective or objective, based on the given text.",0.55
+9,"Considering a given remark, assess the opinion of each phrase and determine its nature as either objective viewpoint or subjective viewpoint.",0.6
+10,"Given an expression, you need to judge whether it represents subjective or objective opinion by assessing the context and meaning.",0.9
+10,"Analyzing a sentence, determine if the provided text conveys a neutral or emotional viewpoint, and evaluate whether it is subjective or objective.",0.7
+10,"Your task is to classify the comment ""subjective"" or ""objective"".",0.6
+10,"Examine the provided passage about a film and assign a label to it as either subjective or objective, identifying whether the author's perspective is objective",0.6
+10,"Examine the text snippet to determine whether it represents a subjective or objective opinion, considering the semantic context and",0.85
+10,Examine the provided text and perform Subjectivity Classification task to determine whether it is,0.65
+10,Analyze a text and evaluate each input statement as either subjective or objective label.,0.65
+10,Analyze the given piece of text to categorize it as either subjective or objective by making,0.75
+10,"Assess every statement in a movie review and categorize it into one of the following categories: subjective or objective, based on the given text.",0.55
+10,"Considering a given remark, assess the opinion of each phrase and determine its nature as either objective viewpoint or subjective viewpoint.",0.6
+11,"Given an expression, you need to judge whether it represents subjective or objective opinion by assessing the context and meaning.",0.9
+11,"Analyzing a sentence, determine if the provided text conveys a neutral or emotional viewpoint, and evaluate whether it is subjective or objective.",0.7
+11,"Your task is to classify the comment ""subjective"" or ""objective"".",0.6
+11,"Examine the provided passage about a film and assign a label to it as either subjective or objective, identifying whether the author's perspective is objective",0.6
+11,"Examine the text snippet to determine whether it represents a subjective or objective opinion, considering the semantic context and",0.85
+11,Examine the provided text and perform Subjectivity Classification task to determine whether it is,0.65
+11,Analyze a text and evaluate each input statement as either subjective or objective label.,0.65
+11,Analyze the given piece of text to categorize it as either subjective or objective by making,0.75
+11,"Assess every statement in a movie review and categorize it into one of the following categories: subjective or objective, based on the given text.",0.55
+11,"Considering a given remark, assess the opinion of each phrase and determine its nature as either objective viewpoint or subjective viewpoint.",0.6
+12,"Given an expression, you need to judge whether it represents subjective or objective opinion by assessing the context and meaning.",0.9
+12,"Analyzing a sentence, determine if the provided text conveys a neutral or emotional viewpoint, and evaluate whether it is subjective or objective.",0.7
+12,"Your task is to classify the comment ""subjective"" or ""objective"".",0.6
+12,"Examine the provided passage about a film and assign a label to it as either subjective or objective, identifying whether the author's perspective is objective",0.6
+12,"Examine the text snippet to determine whether it represents a subjective or objective opinion, considering the semantic context and",0.85
+12,Examine the provided text and perform Subjectivity Classification task to determine whether it is,0.65
+12,Analyze a text and evaluate each input statement as either subjective or objective label.,0.65
+12,Analyze the given piece of text to categorize it as either subjective or objective by making,0.75
+12,"Assess every statement in a movie review and categorize it into one of the following categories: subjective or objective, based on the given text.",0.55
+12,"Considering a given remark, assess the opinion of each phrase and determine its nature as either objective viewpoint or subjective viewpoint.",0.6

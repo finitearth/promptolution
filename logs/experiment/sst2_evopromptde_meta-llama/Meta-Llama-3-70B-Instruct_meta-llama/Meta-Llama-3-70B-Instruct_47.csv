@@ -1,0 +1,121 @@
+step,prompt,score
+1,"Given a sentence, classify it as either positive or negative sentiment.",1.0
+1,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+1,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.95
+1,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+1,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+1,"Given a statement, classify it as expressing a positive or negative opinion.",0.9
+1,Classify a sentence as expressing optimism or pessimism.,0.85
+1,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.8
+1,"When given a social media post, determine whether it contains a positive or negative sentiment by analyzing it and generating a sentiment word to describe the original text.",0.85
+1,"In this task, you are given sentences from movie reviews. The task is to classify a sentence as  positive or as negative.",0.75
+2,"Given a sentence, classify it as either positive or negative sentiment.",1.0
+2,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+2,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.95
+2,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+2,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+2,"Given a statement, classify it as expressing a positive or negative opinion.",0.9
+2,Classify a sentence as expressing optimism or pessimism.,0.85
+2,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.8
+2,"When given a social media post, determine whether it contains a positive or negative sentiment by analyzing it and generating a sentiment word to describe the original text.",0.85
+2,"In this task, you are given text snippets from movie reviews. You need to categorize them as either negative or positive",0.85
+3,"Given a sentence, classify it as either positive or negative sentiment.",1.0
+3,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+3,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.95
+3,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+3,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+3,"Given a statement, classify it as expressing a positive or negative opinion.",0.9
+3,Classify a sentence as expressing optimism or pessimism.,0.85
+3,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.8
+3,"When given a social media post, determine whether it contains a positive or negative sentiment by analyzing it and generating a sentiment word to describe the original text.",0.85
+3,"In this task, you are given text snippets from movie reviews. You need to categorize them as either negative or positive",0.85
+4,"Given a sentence, classify it as either positive or negative sentiment.",1.0
+4,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+4,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.95
+4,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+4,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+4,"Given a statement, classify it as expressing a positive or negative opinion.",0.9
+4,Classify a sentence as expressing optimism or pessimism.,0.85
+4,"As a sentiment classifier, evaluate the text and determine the tone of a statement as expressing emotions of joy or sadness, by first understanding its meaning",0.85
+4,"When given a social media post, determine whether it contains a positive or negative sentiment by analyzing it and generating a sentiment word to describe the original text.",0.85
+4,"In this task, you are given text snippets from movie reviews. You need to categorize them as either negative or positive",0.85
+5,"Given a sentence, classify it as either positive or negative sentiment.",1.0
+5,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+5,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.95
+5,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+5,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+5,"Given a statement, classify it as expressing a positive or negative opinion.",0.9
+5,Classify a sentence as expressing optimism or pessimism.,0.85
+5,"As a sentiment classifier, evaluate the text and determine the tone of a statement as expressing emotions of joy or sadness, by first understanding its meaning",0.85
+5,"Provided with a post, examine the message and determine the sentiment as favorable or unfavorable",0.9
+5,"In this task, you are given text snippets from movie reviews. You need to categorize them as either negative or positive",0.85
+6,"Given a sentence, classify it as either positive or negative sentiment.",1.0
+6,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+6,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.95
+6,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+6,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+6,"Given a statement, classify it as expressing a positive or negative opinion.",0.9
+6,Classify a sentence as expressing optimism or pessimism.,0.85
+6,"As a sentiment classifier, evaluate the text and determine the tone of a statement as expressing emotions of joy or sadness, by first understanding its meaning",0.85
+6,"Analyzing a social media post, examine the message and determine the attitude as hopeful or despairing, favorable or unfavorable.",0.95
+6,"In this task, you are given text snippets from movie reviews. You need to categorize them as either negative or positive",0.85
+7,"Given a sentence, classify it as either positive or negative sentiment.",1.0
+7,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+7,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.95
+7,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+7,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+7,"Given a statement, classify it as expressing a positive or negative opinion.",0.9
+7,Classify a sentence as expressing optimism or pessimism.,0.85
+7,"As a sentiment classifier, evaluate the text and determine the tone of a statement as expressing emotions of joy or sadness, by first understanding its meaning",0.85
+7,"Analyzing a social media post, examine the message and determine the attitude as hopeful or despairing, favorable or unfavorable.",0.95
+7,"In this task, you are given text snippets from movie reviews. You need to categorize them as either negative or positive",0.85
+8,"Given a sentence, classify it as either positive or negative sentiment.",1.0
+8,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+8,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.95
+8,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+8,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+8,"Given a statement, classify it as expressing a positive or negative opinion.",0.9
+8,Classify a sentence as expressing optimism or pessimism.,0.85
+8,"As a sentiment classifier, evaluate the text and determine the tone of a statement as expressing emotions of joy or sadness, by first understanding its meaning",0.85
+8,"Analyzing a social media post, examine the message and determine the attitude as hopeful or despairing, favorable or unfavorable.",0.95
+8,"In this task, you are given text snippets from movie reviews. You need to categorize them as either negative or positive",0.85
+9,"Given a sentence, classify it as either positive or negative sentiment.",1.0
+9,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+9,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.95
+9,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+9,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+9,"Given a statement, classify it as expressing a positive or negative opinion.",0.9
+9,Classify a sentence as expressing optimism or pessimism.,0.85
+9,"As a sentiment classifier, evaluate the text and determine the tone of a statement as expressing emotions of joy or sadness, by first understanding its meaning",0.85
+9,"Analyzing a social media post, examine the message and determine the attitude as hopeful or despairing, favorable or unfavorable.",0.95
+9,"In this task, you are given text snippets from movie reviews. You need to categorize them as either negative or positive",0.85
+10,"Given a sentence, classify it as either positive or negative sentiment.",1.0
+10,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+10,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.95
+10,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+10,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+10,"Given a statement, classify it as expressing a positive or negative opinion.",0.9
+10,Classify a sentence as expressing optimism or pessimism.,0.85
+10,"As a sentiment classifier, evaluate the text and determine the tone of a statement as expressing emotions of joy or sadness, by first understanding its meaning",0.85
+10,"Analyzing a social media post, examine the message and determine the attitude as hopeful or despairing, favorable or unfavorable.",0.95
+10,"In this task, you are given text snippets from movie reviews. You need to categorize them as either negative or positive",0.85
+11,"Given a sentence, classify it as either positive or negative sentiment.",1.0
+11,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+11,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.95
+11,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+11,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+11,"Given a statement, classify it as expressing a positive or negative opinion.",0.9
+11,Classify a sentence as expressing optimism or pessimism.,0.85
+11,"As a sentiment classifier, evaluate the text and determine the tone of a statement as expressing emotions of joy or sadness, by first understanding its meaning",0.85
+11,"Analyzing a social media post, examine the message and determine the attitude as hopeful or despairing, favorable or unfavorable.",0.95
+11,"In this task, you are given text snippets from movie reviews. You need to categorize them as either negative or positive",0.85
+12,"Given a sentence, classify it as either positive or negative sentiment.",1.0
+12,"Your task is to classify the comment ""positive"" or ""negative"".",0.95
+12,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.95
+12,"Please label the sentiment towards the movie of the given movie review. The sentiment label should be ""positive"" or ""negative"".",0.95
+12,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+12,"Given a statement, classify it as expressing a positive or negative opinion.",0.9
+12,Classify a sentence as expressing optimism or pessimism.,0.85
+12,"As a sentiment classifier, evaluate the text and determine the tone of a statement as expressing emotions of joy or sadness, by first understanding its meaning",0.85
+12,"Analyzing a social media post, examine the message and determine the attitude as hopeful or despairing, favorable or unfavorable.",0.95
+12,"In this task, you are given text snippets from movie reviews. You need to categorize them as either negative or positive",0.85

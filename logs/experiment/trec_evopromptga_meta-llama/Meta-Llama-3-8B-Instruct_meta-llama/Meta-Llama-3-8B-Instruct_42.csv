@@ -1,0 +1,209 @@
+step,prompt,score
+1,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.45
+1,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+1,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.4
+1,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.4
+1,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+1,"Assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] to the provided sentence based on its classification.",0.25
+1,"Determine the category that best describes this sentence: Description, Entity, Expression, Human, Location, or Number.",0.15
+1,"Classify this sentence by choosing one of the following options: Description, Entity, Expression, Human, Location, or Number.",0.15
+1,"Classify the given sentence into one of the six categories: Description, Entity, Expression, Human, Location, or Number.",0.15
+1,"Identify the category that best fits the description of this sentence: Select one: Description, Entity, Expression, Human, Location, or Number.",0.1
+2,"Assign the given sentence to one of the six categories (Description, Entity, Expression, Human, Location, or Number) and indicate the corresponding question type.",0.5
+2,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.45
+2,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+2,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.4
+2,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.4
+2,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+2,"Classify the given question into a specific category by assigning a label from the predefined set: Description, Entity, Expression, Human, Location, Number",0.3
+2,"Classify the following questions by their corresponding categories ('Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number').",0.3
+2,"I'll follow the instructions step-by-step to generate a better prompt.
+
+**Step 1: Crossover the prompts**
+
+Prompt 1: Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.
+Prompt 2: Classify the given sentence into one of the six categories: Description, Entity, Expression, Human, Location, or Number.
+
+Crossover Prompt: Identify the category that matches the given sentence: Description, Entity, Expression, Human, Location, or Number.
+
+**Step 2: Mutate the prompt and generate the final prompt**
+
+Mutated Prompt: [Identify the category that best fits the provided sentence: Description, Entity, Expression, Human, Location, or Number]",0.25
+2,"Classify the sentence into one of six categories: Description, Entity, Expression, Human, Location, or Number. Choose the question type accordingly.",0.25
+3,"Assign the given sentence to one of the six categories (Description, Entity, Expression, Human, Location, or Number) and indicate the corresponding question type.",0.5
+3,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.45
+3,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+3,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.4
+3,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.4
+3,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+3,"Identify the categorical type of the question among Description, Entity, Expression, Human, Location, or Number, and specify the category for each question.",0.3
+3,"Classify the given question into a specific category by assigning a label from the predefined set: Description, Entity, Expression, Human, Location, Number",0.3
+3,"Classify the following questions by their corresponding categories ('Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number').",0.3
+3,"Assign a category label (Description, Entity, Expression, Human, Location, or Number) to the provided question, ensuring accurate classification.",0.3
+4,"Assign the given sentence to one of the six categories (Description, Entity, Expression, Human, Location, or Number) and indicate the corresponding question type.",0.5
+4,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.45
+4,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+4,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.4
+4,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.4
+4,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+4,"Classify the given question according to its category, selecting one of the predefined labels: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number""]. Return the assigned label.",0.35
+4,"Identify the categorical type of the question among Description, Entity, Expression, Human, Location, or Number, and specify the category for each question.",0.3
+4,"Classify the given question into a specific category by assigning a label from the predefined set: Description, Entity, Expression, Human, Location, Number",0.3
+4,"Classify the following questions by their corresponding categories ('Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number').",0.3
+5,"Assign the given sentence to one of the six categories (Description, Entity, Expression, Human, Location, or Number) and indicate the corresponding question type.",0.5
+5,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.45
+5,"Classify the question type of each statement into Description, Entity, Expression, Human, Location, or Number.",0.45
+5,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+5,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.4
+5,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.4
+5,"Classify the given question's categorical type from a predetermined set of labels, including 'Description', 'Entity', 'Expression', 'Human', 'Location', and 'Number'",0.4
+5,"Assign the most relevant category from Description, Entity, Expression, Human, Location, or Number to a given sentence, with the goal of accurately classifying its nature and aiding in understanding.",0.4
+5,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+5,"Classify the given question according to its category, selecting one of the predefined labels: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number""]. Return the assigned label.",0.35
+6,"Assign the given sentence to one of the six categories (Description, Entity, Expression, Human, Location, or Number) and indicate the corresponding question type.",0.5
+6,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.45
+6,"Classify the question type of each statement into Description, Entity, Expression, Human, Location, or Number.",0.45
+6,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+6,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.4
+6,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**Step 1: Crossover the prompts**
+
+Prompt 1: Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.
+Prompt 2: Classify the given question according to its category, selecting one of the predefined labels: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return the assigned label.
+
+Crossover Prompt: Classify the given sentence into one of the predefined categories: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].
+
+**Step 2: Mutate the prompt**
+
+Mutated Prompt: [Find the appropriate label from the category list: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] and categorize the given sentence.]",0.4
+6,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.4
+6,"Classify the given question's categorical type from a predetermined set of labels, including 'Description', 'Entity', 'Expression', 'Human', 'Location', and 'Number'",0.4
+6,"Assign the most relevant category from Description, Entity, Expression, Human, Location, or Number to a given sentence, with the goal of accurately classifying its nature and aiding in understanding.",0.4
+6,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+7,"Assign the given sentence to one of the six categories (Description, Entity, Expression, Human, Location, or Number) and indicate the corresponding question type.",0.5
+7,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.45
+7,"Classify the question type of each statement into Description, Entity, Expression, Human, Location, or Number.",0.45
+7,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+7,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.4
+7,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**Step 1: Crossover the prompts**
+
+Prompt 1: Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.
+Prompt 2: Classify the given question according to its category, selecting one of the predefined labels: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return the assigned label.
+
+Crossover Prompt: Classify the given sentence into one of the predefined categories: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].
+
+**Step 2: Mutate the prompt**
+
+Mutated Prompt: [Find the appropriate label from the category list: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] and categorize the given sentence.]",0.4
+7,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.4
+7,"Classify the given question's categorical type from a predetermined set of labels, including 'Description', 'Entity', 'Expression', 'Human', 'Location', and 'Number'",0.4
+7,"Assign the most relevant category from Description, Entity, Expression, Human, Location, or Number to a given sentence, with the goal of accurately classifying its nature and aiding in understanding.",0.4
+7,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+8,"Assign the given sentence to one of the six categories (Description, Entity, Expression, Human, Location, or Number) and indicate the corresponding question type.",0.5
+8,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.45
+8,"Classify the question type of each statement into Description, Entity, Expression, Human, Location, or Number.",0.45
+8,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+8,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.4
+8,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**Step 1: Crossover the prompts**
+
+Prompt 1: Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.
+Prompt 2: Classify the given question according to its category, selecting one of the predefined labels: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return the assigned label.
+
+Crossover Prompt: Classify the given sentence into one of the predefined categories: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].
+
+**Step 2: Mutate the prompt**
+
+Mutated Prompt: [Find the appropriate label from the category list: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] and categorize the given sentence.]",0.4
+8,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.4
+8,"Classify the given question's categorical type from a predetermined set of labels, including 'Description', 'Entity', 'Expression', 'Human', 'Location', and 'Number'",0.4
+8,"Assign the most relevant category from Description, Entity, Expression, Human, Location, or Number to a given sentence, with the goal of accurately classifying its nature and aiding in understanding.",0.4
+8,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+9,"Assign the given sentence to one of the six categories (Description, Entity, Expression, Human, Location, or Number) and indicate the corresponding question type.",0.5
+9,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.45
+9,"Classify the type of question by selecting one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.45
+9,"Classify the question type of each statement into Description, Entity, Expression, Human, Location, or Number.",0.45
+9,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+9,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.4
+9,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**Step 1: Crossover the prompts**
+
+Prompt 1: Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.
+Prompt 2: Classify the given question according to its category, selecting one of the predefined labels: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return the assigned label.
+
+Crossover Prompt: Classify the given sentence into one of the predefined categories: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].
+
+**Step 2: Mutate the prompt**
+
+Mutated Prompt: [Find the appropriate label from the category list: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] and categorize the given sentence.]",0.4
+9,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.4
+9,"Classify the given question's categorical type from a predetermined set of labels, including 'Description', 'Entity', 'Expression', 'Human', 'Location', and 'Number'",0.4
+9,"Assign the most relevant category from Description, Entity, Expression, Human, Location, or Number to a given sentence, with the goal of accurately classifying its nature and aiding in understanding.",0.4
+10,"Assign the given sentence to one of the six categories (Description, Entity, Expression, Human, Location, or Number) and indicate the corresponding question type.",0.5
+10,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.45
+10,"Classify the type of question by selecting one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.45
+10,"Classify the question type of each statement into Description, Entity, Expression, Human, Location, or Number.",0.45
+10,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+10,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.4
+10,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**Step 1: Crossover the prompts**
+
+Prompt 1: Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.
+Prompt 2: Classify the given question according to its category, selecting one of the predefined labels: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return the assigned label.
+
+Crossover Prompt: Classify the given sentence into one of the predefined categories: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].
+
+**Step 2: Mutate the prompt**
+
+Mutated Prompt: [Find the appropriate label from the category list: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] and categorize the given sentence.]",0.4
+10,"Identify the category (<Description>, <Entity>, <Expression>, <Human>, <Location>, or <Number>) that best matches the sentence, along with the corresponding question type.",0.4
+10,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.4
+10,"Classify the given question's categorical type from a predetermined set of labels, including 'Description', 'Entity', 'Expression', 'Human', 'Location', and 'Number'",0.4
+11,"Assign the given sentence to one of the six categories (Description, Entity, Expression, Human, Location, or Number) and indicate the corresponding question type.",0.5
+11,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.45
+11,"Classify the type of question by selecting one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.45
+11,"Classify the question type of each statement into Description, Entity, Expression, Human, Location, or Number.",0.45
+11,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+11,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.4
+11,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**Step 1: Crossover the prompts**
+
+Prompt 1: Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.
+Prompt 2: Classify the given question according to its category, selecting one of the predefined labels: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return the assigned label.
+
+Crossover Prompt: Classify the given sentence into one of the predefined categories: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].
+
+**Step 2: Mutate the prompt**
+
+Mutated Prompt: [Find the appropriate label from the category list: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] and categorize the given sentence.]",0.4
+11,"Identify the category (<Description>, <Entity>, <Expression>, <Human>, <Location>, or <Number>) that best matches the sentence, along with the corresponding question type.",0.4
+11,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.4
+11,"Classify the given question's categorical type from a predetermined set of labels, including 'Description', 'Entity', 'Expression', 'Human', 'Location', and 'Number'",0.4
+12,"Assign the given sentence to one of the six categories (Description, Entity, Expression, Human, Location, or Number) and indicate the corresponding question type.",0.5
+12,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.45
+12,"Indicate the type of question, selecting from: Description, Entity, Expression, Human, Location, or Number",0.45
+12,"Classify the type of question by selecting one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.45
+12,"Classify the question type of each statement into Description, Entity, Expression, Human, Location, or Number.",0.45
+12,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.4
+12,"Transform the given instructions into a category label, selecting one of the predefined options: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Follow the sequence of actions to reach the correct categorization.",0.4
+12,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.4
+12,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**Step 1: Crossover the prompts**
+
+Prompt 1: Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.
+Prompt 2: Classify the given question according to its category, selecting one of the predefined labels: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return the assigned label.
+
+Crossover Prompt: Classify the given sentence into one of the predefined categories: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].
+
+**Step 2: Mutate the prompt**
+
+Mutated Prompt: [Find the appropriate label from the category list: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] and categorize the given sentence.]",0.4
+12,"Identify the category (<Description>, <Entity>, <Expression>, <Human>, <Location>, or <Number>) that best matches the sentence, along with the corresponding question type.",0.4

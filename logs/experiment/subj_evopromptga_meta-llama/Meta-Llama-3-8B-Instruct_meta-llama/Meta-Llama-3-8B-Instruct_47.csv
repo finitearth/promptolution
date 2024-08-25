@@ -1,0 +1,143 @@
+step,prompt,score
+1,"Classify the provided sentences into objective or subjective categories, highlighting their respective natures.",0.75
+1,evaluate the given sentences and determine whether they are subjective or objective.,0.7
+1,"Determine and categorize each piece of text as objective or subjective, with a specific focus on movie reviews distinguishing between objective and subjective opinions.",0.7
+1,identify whether the given sentence was expressing an objective or a subjective opinion.,0.65
+1,"Classify a given movie review as subjective or objective, identifying and distinguishing between individual statements.",0.65
+1,"Please perform Subjectivity Classification task. Given the sentence, assign a label from ['subjective', 'objective']. Return label only without any other text.",0.6
+1,"Offers clarity on the nature of the sentence, distinguishing between objective statements and subjective opinions.",0.6
+1,"Classify a sentence or text as subjective or objective, considering it as a review, and determine its tone, leaning towards either opinionated or informative.",0.6
+1,evaluate each statement as either subjective or objective.,0.55
+1,"Determine the category of a movie review based on a given text, subjective or objective.",0.55
+2,"Classify the provided sentences into objective or subjective categories, highlighting their respective natures.",0.75
+2,evaluate the given sentences and determine whether they are subjective or objective.,0.7
+2,"Determine and categorize each piece of text as objective or subjective, with a specific focus on movie reviews distinguishing between objective and subjective opinions.",0.7
+2,identify whether the given sentence was expressing an objective or a subjective opinion.,0.65
+2,"Evaluate the provided statements or texts for their level of subjectivity or objectivity, incorporating consideration of tone and bias, distinguishing between informative and opinionated perspectives.",0.65
+2,"Classify a given movie review as subjective or objective, identifying and distinguishing between individual statements.",0.65
+2,"Please perform Subjectivity Classification task. Given the sentence, assign a label from ['subjective', 'objective']. Return label only without any other text.",0.6
+2,"Offers clarity on the nature of the sentence, distinguishing between objective statements and subjective opinions.",0.6
+2,"Distinguish between objective and subjective elements in movie reviews, identifying and categorizing individual statements as objective or subjective.",0.6
+2,"Classify the given sentences as 'subjective' or 'objective', providing the corresponding label for each sentence.",0.6
+3,"Assess the tone and bias of the given text to detect whether it presents an objective or subjective perspective, distinguishing informative from opinionated statements.",0.8
+3,"Assess the given sentences, categorizing them as objective or subjective and highlighting their distinct characteristics.",0.8
+3,"Classify the provided sentences into objective or subjective categories, highlighting their respective natures.",0.75
+3,evaluate the given sentences and determine whether they are subjective or objective.,0.7
+3,Determine the neutrality or bias of movie reviews by categorizing them as objective or subjective.,0.7
+3,"Determine and categorize each piece of text as objective or subjective, with a specific focus on movie reviews distinguishing between objective and subjective opinions.",0.7
+3,identify whether the given sentence was expressing an objective or a subjective opinion.,0.65
+3,"Evaluate the provided statements or texts for their level of subjectivity or objectivity, incorporating consideration of tone and bias, distinguishing between informative and opinionated perspectives.",0.65
+3,"Determine the objectivity or subjectivity of the provided sentences, labeling each statement as 'subjective' or 'objective'.",0.65
+3,"Determine the objective or subjective nature of each sentence provided, ensuring accurate categorization and clarity.",0.65
+4,"Examiner, categorize movie reviews as objective or subjective, pinpointing their level of neutrality, and provide a detailed breakdown of each category, highlighting its distinct characteristics.",0.85
+4,"Assess the tone and bias of the given text to detect whether it presents an objective or subjective perspective, distinguishing informative from opinionated statements.",0.8
+4,"Assess the given sentences, categorizing them as objective or subjective and highlighting their distinct characteristics.",0.8
+4,"Classify the provided sentences into objective or subjective categories, highlighting their respective natures.",0.75
+4,evaluate the given sentences and determine whether they are subjective or objective.,0.7
+4,Determine the neutrality or bias of movie reviews by categorizing them as objective or subjective.,0.7
+4,"Determine and categorize each piece of text as objective or subjective, with a specific focus on movie reviews distinguishing between objective and subjective opinions.",0.7
+4,identify whether the given sentence was expressing an objective or a subjective opinion.,0.65
+4,"Evaluate the provided statements or texts for their level of subjectivity or objectivity, incorporating consideration of tone and bias, distinguishing between informative and opinionated perspectives.",0.65
+4,"Determine the objectivity or subjectivity of the provided sentences, labeling each statement as 'subjective' or 'objective'.",0.65
+5,"Examiner, categorize movie reviews as objective or subjective, pinpointing their level of neutrality, and provide a detailed breakdown of each category, highlighting its distinct characteristics.",0.85
+5,"Assess the tone and bias of the given text to detect whether it presents an objective or subjective perspective, distinguishing informative from opinionated statements.",0.8
+5,"Assess the given sentences, categorizing them as objective or subjective and highlighting their distinct characteristics.",0.8
+5,"Classify the provided sentences into objective or subjective categories, highlighting their respective natures.",0.75
+5,evaluate the given sentences and determine whether they are subjective or objective.,0.7
+5,Determine the neutrality or bias of movie reviews by categorizing them as objective or subjective.,0.7
+5,"Determine and categorize each piece of text as objective or subjective, with a specific focus on movie reviews distinguishing between objective and subjective opinions.",0.7
+5,"Classify each sentence as either an objective statement or a subjective opinion, providing detailed explanations for your labeling decisions.",0.7
+5,identify whether the given sentence was expressing an objective or a subjective opinion.,0.65
+5,"Evaluate the provided statements or texts for their level of subjectivity or objectivity, incorporating consideration of tone and bias, distinguishing between informative and opinionated perspectives.",0.65
+6,"Examiner, categorize movie reviews as objective or subjective, pinpointing their level of neutrality, and provide a detailed breakdown of each category, highlighting its distinct characteristics.",0.85
+6,"Assess the tone and bias of the given text to detect whether it presents an objective or subjective perspective, distinguishing informative from opinionated statements.",0.8
+6,"Assess the given sentences, categorizing them as objective or subjective and highlighting their distinct characteristics.",0.8
+6,"Identify and categorize the sentences as either objective statements or subjective opinions, justifying your classifications and highlighting their characteristic features.",0.75
+6,"Classify the provided sentences into objective or subjective categories, highlighting their respective natures.",0.75
+6,evaluate the given sentences and determine whether they are subjective or objective.,0.7
+6,Determine the neutrality or bias of movie reviews by categorizing them as objective or subjective.,0.7
+6,"Determine the category of the provided sentences as either objective (fact-based) or subjective (opinion-based), highlighting the distinction between the two.",0.7
+6,"Determine and categorize each piece of text as objective or subjective, with a specific focus on movie reviews distinguishing between objective and subjective opinions.",0.7
+6,"Classify each sentence as either an objective statement or a subjective opinion, providing detailed explanations for your labeling decisions.",0.7
+7,"Examiner, categorize movie reviews as objective or subjective, pinpointing their level of neutrality, and provide a detailed breakdown of each category, highlighting its distinct characteristics.",0.85
+7,"Assess the tone and bias of the given text to detect whether it presents an objective or subjective perspective, distinguishing informative from opinionated statements.",0.8
+7,"Assess the given sentences, categorizing them as objective or subjective and highlighting their distinct characteristics.",0.8
+7,"Identify and categorize the sentences as either objective statements or subjective opinions, justifying your classifications and highlighting their characteristic features.",0.75
+7,"Classify the provided sentences into objective or subjective categories, highlighting their respective natures.",0.75
+7,evaluate the given sentences and determine whether they are subjective or objective.,0.7
+7,Determine the neutrality or bias of movie reviews by categorizing them as objective or subjective.,0.7
+7,"Determine the category of the provided sentences as either objective (fact-based) or subjective (opinion-based), highlighting the distinction between the two.",0.7
+7,"Determine and categorize each piece of text as objective or subjective, with a specific focus on movie reviews distinguishing between objective and subjective opinions.",0.7
+7,"Classify each sentence as either an objective statement or a subjective opinion, providing detailed explanations for your labeling decisions.",0.7
+8,"Examiner, categorize movie reviews as objective or subjective, pinpointing their level of neutrality, and provide a detailed breakdown of each category, highlighting its distinct characteristics.",0.85
+8,"Assess the tone and bias of the given text to detect whether it presents an objective or subjective perspective, distinguishing informative from opinionated statements.",0.8
+8,"Assess the given sentences, categorizing them as objective or subjective and highlighting their distinct characteristics.",0.8
+8,"Identify and categorize the sentences as either objective statements or subjective opinions, justifying your classifications and highlighting their characteristic features.",0.75
+8,"Classify the provided sentences into objective or subjective categories, highlighting their respective natures.",0.75
+8,evaluate the given sentences and determine whether they are subjective or objective.,0.7
+8,Determine the neutrality or bias of movie reviews by categorizing them as objective or subjective.,0.7
+8,"Determine the category of the provided sentences as either objective (fact-based) or subjective (opinion-based), highlighting the distinction between the two.",0.7
+8,"Determine and categorize each piece of text as objective or subjective, with a specific focus on movie reviews distinguishing between objective and subjective opinions.",0.7
+8,"Classify each sentence as either an objective statement or a subjective opinion, providing detailed explanations for your labeling decisions.",0.7
+9,"Examiner, categorize movie reviews as objective or subjective, pinpointing their level of neutrality, and provide a detailed breakdown of each category, highlighting its distinct characteristics.",0.85
+9,"Assess the tone and bias of the given text to detect whether it presents an objective or subjective perspective, distinguishing informative from opinionated statements.",0.8
+9,"Assess the given sentences, categorizing them as objective or subjective and highlighting their distinct characteristics.",0.8
+9,"Identify and categorize the sentences as either objective statements or subjective opinions, justifying your classifications and highlighting their characteristic features.",0.75
+9,"Classify the provided sentences into objective or subjective categories, highlighting their respective natures.",0.75
+9,"Assess the language and tone of movie reviews to categorize them as objective or subjective, identifying the key indicators of neutrality and distinct features of each classification, with a focus on achieving precise and dependable results.",0.75
+9,evaluate the given sentences and determine whether they are subjective or objective.,0.7
+9,Determine the neutrality or bias of movie reviews by categorizing them as objective or subjective.,0.7
+9,"Determine the category of the provided sentences as either objective (fact-based) or subjective (opinion-based), highlighting the distinction between the two.",0.7
+9,"Determine and categorize each piece of text as objective or subjective, with a specific focus on movie reviews distinguishing between objective and subjective opinions.",0.7
+10,"Examiner, categorize movie reviews as objective or subjective, pinpointing their level of neutrality, and provide a detailed breakdown of each category, highlighting its distinct characteristics.",0.85
+10,"Distinguish and categorize the given sentences into objective (fact-based) or subjective (opinion-based) types, accurately identifying the characteristics that define each group.",0.85
+10,"Classify and justify the classification of the provided sentences as objective statements or subjective opinions, emphasizing the characteristic features of each type",0.8
+10,"Assess the tone and bias of the given text to detect whether it presents an objective or subjective perspective, distinguishing informative from opinionated statements.",0.8
+10,"Assess the given sentences, categorizing them as objective or subjective and highlighting their distinct characteristics.",0.8
+10,"Identify and categorize the sentences as either objective statements or subjective opinions, justifying your classifications and highlighting their characteristic features.",0.75
+10,"Classify the provided sentences into objective or subjective categories, highlighting their respective natures.",0.75
+10,"Assess the language and tone of movie reviews to categorize them as objective or subjective, identifying the key indicators of neutrality and distinct features of each classification, with a focus on achieving precise and dependable results.",0.75
+10,evaluate the given sentences and determine whether they are subjective or objective.,0.7
+10,"Evaluate movie reviews' sentences for their level of subjectivity, categorizing them as objective or subjective to determine neutrality or bias.",0.7
+11,"Examiner, categorize movie reviews as objective or subjective, pinpointing their level of neutrality, and provide a detailed breakdown of each category, highlighting its distinct characteristics.",0.85
+11,"Distinguish and categorize the given sentences into objective (fact-based) or subjective (opinion-based) types, accurately identifying the characteristics that define each group.",0.85
+11,"Classify and justify the classification of the provided sentences as objective statements or subjective opinions, emphasizing the characteristic features of each type",0.8
+11,"Assess the tone and bias of the given text to detect whether it presents an objective or subjective perspective, distinguishing informative from opinionated statements.",0.8
+11,"Assess the given sentences, categorizing them as objective or subjective and highlighting their distinct characteristics.",0.8
+11,"Let's follow the instructions!
+
+1. Crossover the prompts:
+Prompt 1: Assess the given sentences, categorizing them as objective or subjective and highlighting their distinct characteristics.
+Prompt 2: Classify the provided sentences into objective or subjective categories, highlighting their respective natures.
+
+Crossover Prompt: Assess the given sentences to categorize them as objective or subjective, emphasizing the unique characteristics of each category.
+
+2. Mutate the prompt:
+
+[Mutated Prompt]
+<Assess and categorize the given sentences as objective or subjective, identifying the key features that distinguish each type.",0.75
+11,"Identify and categorize the sentences as either objective statements or subjective opinions, justifying your classifications and highlighting their characteristic features.",0.75
+11,"Distinguish between objective and subjective sentences, categorizing them based on their inherent characteristics.",0.75
+11,"Classify the provided sentences into objective or subjective categories, highlighting their respective natures.",0.75
+11,"Assess the language and tone of movie reviews to categorize them as objective or subjective, identifying the key indicators of neutrality and distinct features of each classification, with a focus on achieving precise and dependable results.",0.75
+12,"Examiner, categorize movie reviews as objective or subjective, pinpointing their level of neutrality, and provide a detailed breakdown of each category, highlighting its distinct characteristics.",0.85
+12,"Distinguish and categorize the given sentences into objective (fact-based) or subjective (opinion-based) types, accurately identifying the characteristics that define each group.",0.85
+12,"Classify a set of movie reviews or sentences as objective (fact-based) or subjective (opinion-based), highlighting the underlying characteristics that define each category and providing a nuanced breakdown of their neutrality levels.",0.85
+12,"Classify and justify the classification of the provided sentences as objective statements or subjective opinions, emphasizing the characteristic features of each type",0.8
+12,"Assess the tone and bias of the given text to detect whether it presents an objective or subjective perspective, distinguishing informative from opinionated statements.",0.8
+12,"Assess the given sentences, categorizing them as objective or subjective and highlighting their distinct characteristics.",0.8
+12,"Let's follow the instructions!
+
+1. Crossover the prompts:
+Prompt 1: Assess the given sentences, categorizing them as objective or subjective and highlighting their distinct characteristics.
+Prompt 2: Classify the provided sentences into objective or subjective categories, highlighting their respective natures.
+
+Crossover Prompt: Assess the given sentences to categorize them as objective or subjective, emphasizing the unique characteristics of each category.
+
+2. Mutate the prompt:
+
+[Mutated Prompt]
+<Assess and categorize the given sentences as objective or subjective, identifying the key features that distinguish each type.",0.75
+12,"Identify and categorize the sentences as either objective statements or subjective opinions, justifying your classifications and highlighting their characteristic features.",0.75
+12,"Distinguish between objective and subjective sentences, categorizing them based on their inherent characteristics.",0.75
+12,"Classify the provided sentences into objective or subjective categories, highlighting their respective natures.",0.75

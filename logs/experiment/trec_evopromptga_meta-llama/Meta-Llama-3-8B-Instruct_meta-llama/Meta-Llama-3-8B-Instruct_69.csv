@@ -1,0 +1,168 @@
+step,prompt,score
+1,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+1,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.35
+1,"Classify the input as a question and assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] based on its category.",0.35
+1,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.3
+1,"Let's follow the instructions step-by-step.
+
+1. Crossover the prompts:
+Prompt 1: Classify this sentence into one of these categories: Description, Entity, Expression, Human, Location, or Number.
+Prompt 2: Using the following categories, classify this sentence: Description, Entity, Expression, Human, Location, or Number.
+
+Generated Prompt: Classify the given sentence into one of the following categories: Description, Entity, Expression, Human, Location, or Number.
+
+2. Mutate the prompt:
+
+[prompt] Categorize the sentence into one of the categories: Description, Entity, Expression, Human, Location, or Number. [/prompt]
+
+The final prompt is: [prompt] Categorize the sentence into one of the categories: Description, Entity, Expression, Human, Location, or Number. [/prompt]",0.3
+1,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.25
+1,"Classify the input text into a specific category: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'.",0.25
+1,"Classify this sentence based on the provided categories: Description, Entity, Expression, Human, Location, or Number.",0.2
+1,"Classify an English question into one of six categories: Description, Entity, Expression, Human, Location, or Number.",0.2
+1,"Analyze an English question and identify which category it belongs to: Description, Entity, Expression, Human, Location, or Number.",0.2
+2,"Classify an English question into its corresponding category from the list ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] without providing additional information.",0.6
+2,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+2,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.35
+2,"Classify the input as a question and assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] based on its category.",0.35
+2,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.3
+2,"Let's follow the instructions step-by-step.
+
+1. Crossover the prompts:
+Prompt 1: Classify this sentence into one of these categories: Description, Entity, Expression, Human, Location, or Number.
+Prompt 2: Using the following categories, classify this sentence: Description, Entity, Expression, Human, Location, or Number.
+
+Generated Prompt: Classify the given sentence into one of the following categories: Description, Entity, Expression, Human, Location, or Number.
+
+2. Mutate the prompt:
+
+[prompt] Categorize the sentence into one of the categories: Description, Entity, Expression, Human, Location, or Number. [/prompt]
+
+The final prompt is: [prompt] Categorize the sentence into one of the categories: Description, Entity, Expression, Human, Location, or Number. [/prompt]",0.3
+2,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.25
+2,"Classify the sentence into the most relevant category: Description, Entity, Expression, Human, Location, or Number.",0.25
+2,"Classify the input text into a specific category: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'.",0.25
+2,"Classify the given question into one of the following categories: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'. </",0.25
+3,"Classify an English question into its corresponding category from the list ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] without providing additional information.",0.6
+3,"Classify the input question into the most suitable category (Description, Entity, Expression, Human, Location, or Number) and return the assigned label.",0.4
+3,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+3,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.35
+3,"Identify the topic of the input, categorize it as one of the following: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'.",0.35
+3,"Classify the input as a question and assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] based on its category.",0.35
+3,"Categorize the input text into one of the following labels: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'",0.35
+3,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.3
+3,"Let's follow the instructions step-by-step.
+
+1. Crossover the prompts:
+Prompt 1: Classify this sentence into one of these categories: Description, Entity, Expression, Human, Location, or Number.
+Prompt 2: Using the following categories, classify this sentence: Description, Entity, Expression, Human, Location, or Number.
+
+Generated Prompt: Classify the given sentence into one of the following categories: Description, Entity, Expression, Human, Location, or Number.
+
+2. Mutate the prompt:
+
+[prompt] Categorize the sentence into one of the categories: Description, Entity, Expression, Human, Location, or Number. [/prompt]
+
+The final prompt is: [prompt] Categorize the sentence into one of the categories: Description, Entity, Expression, Human, Location, or Number. [/prompt]",0.3
+3,"Classify the given question as per its primary characteristic, which can be 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number', and return only the assigned category label.",0.3
+4,"Classify an English question into its corresponding category from the list ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] without providing additional information.",0.6
+4,"Classify the input question into the most suitable category (Description, Entity, Expression, Human, Location, or Number) and return the assigned label.",0.4
+4,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+4,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.35
+4,"Identify the topic of the input, categorize it as one of the following: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'.",0.35
+4,"Classify the provided question into the most relevant category from the set ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].",0.35
+4,"Classify the input as a question and assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] based on its category.",0.35
+4,"Characterize the input by labeling it as one of ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] based on its underlying topic.",0.35
+4,"Categorize the input text into one of the following labels: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'",0.35
+4,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.3
+5,"Classify an English question into its corresponding category from the list ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] without providing additional information.",0.6
+5,"Classify the input text into one of the predefined categories ('Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number') based on its inherent subject matter.",0.5
+5,"Identify the question's topic, labeling it as 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number', while considering its category.",0.45
+5,"Classify the input text into one of the following categories: Description, Entity, Expression, Human, Location, or Number, and provide the corresponding label.",0.4
+5,"Classify the input question into the most suitable category (Description, Entity, Expression, Human, Location, or Number) and return the assigned label.",0.4
+5,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+5,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.35
+5,"Identify the topic of the input, categorize it as one of the following: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'.",0.35
+5,"Classify the provided question into the most relevant category from the set ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].",0.35
+5,"Classify the input as a question and assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] based on its category.",0.35
+6,"Classify an English question into its corresponding category from the list ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] without providing additional information.",0.6
+6,"Classify the input text into one of the predefined categories ('Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number') based on its inherent subject matter.",0.5
+6,"Identify the question's topic, labeling it as 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number', while considering its category.",0.45
+6,"Classify the input text into one of the following categories: Description, Entity, Expression, Human, Location, or Number, and provide the corresponding label.",0.4
+6,"Classify the input text into a category: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number', and respond with the matching category.",0.4
+6,"Classify the input question into the most suitable category (Description, Entity, Expression, Human, Location, or Number) and return the assigned label.",0.4
+6,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+6,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.35
+6,"Identify the topic of the input, categorize it as one of the following: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'.",0.35
+6,"I'll follow the instructions step-by-step to generate a better prompt.
+
+**Step 1: Crossover the prompts**
+
+Prompt 1: Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text
+Prompt 2: Identify the question's topic, labeling it as 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number', while considering its category.
+
+Crossover Prompt: Categorize the given question into one of the following labels: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number', without providing additional information.
+
+**Step 2: Mutate the prompt**
+
+<(prompt>Classify the question into a specific category: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number', and produce the corresponding label only.",0.35
+7,"Classify an English question into its corresponding category from the list ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] without providing additional information.",0.6
+7,"Classify a given question into one of the following categories based on its topic: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'. Provide the matching category for the question, allowing accurate identification of its categorization.",0.55
+7,"Classify the input text into one of the predefined categories ('Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number') based on its inherent subject matter.",0.5
+7,"Identify the question's topic, labeling it as 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number', while considering its category.",0.45
+7,"Identify the category for the given sentence: Description, Entity, Expression, Human, Location, or Number",0.45
+7,"Classify the input text into one of the following categories: Description, Entity, Expression, Human, Location, or Number, and provide the corresponding label.",0.4
+7,"Classify the input text into a category: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number', and respond with the matching category.",0.4
+7,"Classify the input question into the most suitable category (Description, Entity, Expression, Human, Location, or Number) and return the assigned label.",0.4
+7,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+7,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.35
+8,"Classify an English question into its corresponding category from the list ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] without providing additional information.",0.6
+8,"Classify a given question into one of the following categories based on its topic: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'. Provide the matching category for the question, allowing accurate identification of its categorization.",0.55
+8,"Classify the input text into one of the predefined categories ('Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number') based on its inherent subject matter.",0.5
+8,"Identify the question's topic, labeling it as 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number', while considering its category.",0.45
+8,"Identify the category for the given sentence: Description, Entity, Expression, Human, Location, or Number",0.45
+8,"Classify the input text into one of the following categories: Description, Entity, Expression, Human, Location, or Number, and provide the corresponding label.",0.4
+8,"Classify the input text into a category: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number', and respond with the matching category.",0.4
+8,"Classify the input question into the most suitable category (Description, Entity, Expression, Human, Location, or Number) and return the assigned label.",0.4
+8,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+8,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.35
+9,"Classify an English question into its corresponding category from the list ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] without providing additional information.",0.6
+9,"Classify a given question into one of the following categories based on its topic: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'. Provide the matching category for the question, allowing accurate identification of its categorization.",0.55
+9,"Classify the input text into one of the predefined categories ('Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number') based on its inherent subject matter.",0.5
+9,"Identify the question's topic, labeling it as 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number', while considering its category.",0.45
+9,"Identify the category for the given sentence: Description, Entity, Expression, Human, Location, or Number",0.45
+9,"Classify the input text into one of the following categories: Description, Entity, Expression, Human, Location, or Number, and provide the corresponding label.",0.4
+9,"Classify the input text into a category: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number', and respond with the matching category.",0.4
+9,"Classify the input question into the most suitable category (Description, Entity, Expression, Human, Location, or Number) and return the assigned label.",0.4
+9,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+9,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.35
+10,"Classify an English question into its corresponding category from the list ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] without providing additional information.",0.6
+10,"Classify a given question into one of the following categories based on its topic: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'. Provide the matching category for the question, allowing accurate identification of its categorization.",0.55
+10,"Classify the input text into one of the predefined categories ('Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number') based on its inherent subject matter.",0.5
+10,"Identify the question's topic, labeling it as 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number', while considering its category.",0.45
+10,"Identify the category for the given sentence: Description, Entity, Expression, Human, Location, or Number",0.45
+10,"Classify the input text into one of the following categories: Description, Entity, Expression, Human, Location, or Number, and provide the corresponding label.",0.4
+10,"Classify the input text into a category: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number', and respond with the matching category.",0.4
+10,"Classify the input question into the most suitable category (Description, Entity, Expression, Human, Location, or Number) and return the assigned label.",0.4
+10,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+10,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.35
+11,"Classify an English question into its corresponding category from the list ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] without providing additional information.",0.6
+11,"Classify a given question into one of the following categories based on its topic: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'. Provide the matching category for the question, allowing accurate identification of its categorization.",0.55
+11,"Classify the input text into one of the predefined categories ('Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number') based on its inherent subject matter.",0.5
+11,"Identify the question's topic, labeling it as 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number', while considering its category.",0.45
+11,"Identify the category for the given sentence: Description, Entity, Expression, Human, Location, or Number",0.45
+11,"Classify the input text into one of the following categories: Description, Entity, Expression, Human, Location, or Number, and provide the corresponding label.",0.4
+11,"Classify the input text into a category: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number', and respond with the matching category.",0.4
+11,"Classify the input question into the most suitable category (Description, Entity, Expression, Human, Location, or Number) and return the assigned label.",0.4
+11,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+11,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.35
+12,"Classify an English question into its corresponding category from the list ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'] without providing additional information.",0.6
+12,"Classify a given question into one of the following categories based on its topic: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number'. Provide the matching category for the question, allowing accurate identification of its categorization.",0.55
+12,"Classify the input text into one of the predefined categories ('Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number') based on its inherent subject matter.",0.5
+12,"Identify the question's topic, labeling it as 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number', while considering its category.",0.45
+12,"Identify the category for the given sentence: Description, Entity, Expression, Human, Location, or Number",0.45
+12,"Classify the input text into one of the following categories: Description, Entity, Expression, Human, Location, or Number, and provide the corresponding label.",0.4
+12,"Classify the input text into a category: 'Description', 'Entity', 'Expression', 'Human', 'Location', or 'Number', and respond with the matching category.",0.4
+12,"Classify the input question into the most suitable category (Description, Entity, Expression, Human, Location, or Number) and return the assigned label.",0.4
+12,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.35
+12,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.35

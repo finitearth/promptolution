@@ -1,0 +1,267 @@
+step,prompt,score
+1,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.95
+1,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.85
+1,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.75
+1,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.6
+1,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.55
+1,"Assign this sentence to one of these categories: Description, Entity, Expression, Human, Location, or Number.",0.4
+1,"Identify the category that corresponds to the given sentence, and categorize it according to one of the following: Description, Entity, Expression, Human, Location, or Number.",0.45
+1,"Classify this sentence based on the provided categories: Description, Entity, Expression, Human, Location, or Number.",0.35
+1,"Classify this sentence by choosing one of the following options: Description, Entity, Expression, Human, Location, or Number.",0.25
+1,"Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.",0.2
+2,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.95
+2,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.85
+2,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.75
+2,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.6
+2,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.55
+2,"Assign this sentence to one of these categories: Description, Entity, Expression, Human, Location, or Number.",0.4
+2,"Identify the category that corresponds to the given sentence, and categorize it according to one of the following: Description, Entity, Expression, Human, Location, or Number.",0.45
+2,"Classify this sentence based on the provided categories: Description, Entity, Expression, Human, Location, or Number.",0.35
+2,"Classify this sentence by choosing one of the following options: Description, Entity, Expression, Human, Location, or Number.",0.25
+2,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**1. Identify the different parts between Prompt 1 and Prompt 2:**
+
+Prompt 1: Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text
+Prompt 2: Identify the category that corresponds to the given sentence, and categorize it according to one of the following: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+""Please perform Question Classification task"" vs ""Identify the category that corresponds to the given sentence, and categorize it""
+""Given the question"" vs ""the given sentence""
+""assign a label from"" vs ""categorize it according to one of the following""
+""Return label only without any other text"" is missing in Prompt 2
+
+**2. Randomly mutate the different parts:**
+
+""Please perform Question Classification task"" -> ""Classify the sentence according to its type""
+""Given the question"" -> ""analyze the sentence""
+""assign a label from"" -> ""choose a category from the options""
+""Return label only without any other text"" -> ""provide the classification",0.25
+3,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.95
+3,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.85
+3,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.75
+3,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.6
+3,"Please categorize this sentence into one of the listed categories: Description, Entity, Expression, Human, Location, or Number,",0.6
+3,"Assign this sentence to one of these categories: Description, Entity, Expression, Human, Location, or Number.",0.4
+3,"Identify the category that corresponds to the given sentence, and categorize it according to one of the following: Description, Entity, Expression, Human, Location, or Number.",0.45
+3,"Classify this sentence based on the provided categories: Description, Entity, Expression, Human, Location, or Number.",0.35
+3,"Classify this sentence by choosing one of the following options: Description, Entity, Expression, Human, Location, or Number.",0.25
+3,"Classify the sentence according to its type by analyzing the sentence and choose a category from the options: Description, Entity, Expression, Human, Location, or Number, and provide the classification.",0.4
+4,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.95
+4,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.85
+4,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.75
+4,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.6
+4,"Please categorize this sentence into one of the listed categories: Description, Entity, Expression, Human, Location, or Number,",0.6
+4,"Assign this sentence to one of these categories: Description, Entity, Expression, Human, Location, or Number.",0.4
+4,"Identify the category that corresponds to the given sentence, and categorize it according to one of the following: Description, Entity, Expression, Human, Location, or Number.",0.45
+4,"Classify this sentence based on the provided categories: Description, Entity, Expression, Human, Location, or Number.",0.35
+4,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**Step 1: Identify the different parts between Prompt 1 and Prompt 2:**
+
+Prompt 1: Please categorize this sentence into one of the listed categories: Description, Entity, Expression, Human, Location, or Number,
+Prompt 2: Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.
+
+Different parts:
+""Please categorize this sentence into one of the listed categories"" vs ""Your task is to choose a type of the question""
+""this sentence"" vs ""the question""
+""into one of the listed categories"" vs ""from""
+
+**Step 2: Randomly mutate the different parts:**
+
+""Please categorize this sentence into one of the listed categories"" -> ""Identify the class of the given sentence among the following options""
+""this sentence"" -> ""the provided sentence""
+""into one of the listed categories"" -> ""according to the provided list""
+
+**Step 3: Crossover the different parts with Prompt 3 and generate a final prompt:**
+
+Prompt 3: Classify this sentence by choosing one of the following options: Description, Entity, Expression, Human, Location, or Number",0.3
+4,"Classify the sentence according to its type by analyzing the sentence and choose a category from the options: Description, Entity, Expression, Human, Location, or Number, and provide the classification.",0.4
+5,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.95
+5,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.85
+5,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.75
+5,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.6
+5,"Please categorize this sentence into one of the listed categories: Description, Entity, Expression, Human, Location, or Number,",0.6
+5,"Let's go through the steps to generate a better prompt.
+
+**Step 1: Identify the different parts between Prompt 1 and Prompt 2**
+
+Prompt 1: Classify this sentence based on the provided categories: Description, Entity, Expression, Human, Location, or Number.
+Prompt 2: Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text
+
+Different parts:
+""Classify this sentence"" vs ""Please perform Question Classification task. Given the question, assign a label""
+""based on the provided categories"" vs ""from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']""
+""categories"" vs ""label""
+""sentence"" vs ""question""
+
+**Step 2: Randomly mutate the different parts**
+
+""Classify this sentence"" -> ""Categorize the given text""
+""Please perform Question Classification task. Given the question, assign a label"" -> ""Your task involves labeling a question""
+""based on the provided categories"" -> ""according to the specified classes""
+""categories"" -> ""classes""
+""sentence"" -> ""query""
+""question"" -> ""query""",0.45
+5,"Identify the category that corresponds to the given sentence, and categorize it according to one of the following: Description, Entity, Expression, Human, Location, or Number.",0.45
+5,"Let's follow the instructions.
+
+1. Identifying the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Classify the sentence according to its type by analyzing the sentence and choose a category from the options: Description, Entity, Expression, Human, Location, or Number, and provide the classification.
+Prompt 2: Identify the category that corresponds to the given sentence, and categorize it according to one of the following: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+""Classify the sentence according to its type by analyzing the sentence"" vs ""Identify the category that corresponds to the given sentence""
+""and choose a category from the options"" vs ""and categorize it according to one of the following""
+""and provide the classification"" -> (no equivalent part in Prompt 2)
+
+2. Randomly mutate the different parts:
+
+""Classify the sentence according to its type by analyzing the sentence"" -> ""Determine the classification of the given sentence""
+""and choose a category from the options"" -> ""from the available categories""
+""and provide the classification"" -> ""with an explanation"" (added a new mutation)
+""Identify the category that corresponds to the given sentence"" -> ""Recognize the category",0.45
+5,"Identify the class of the provided sentence among the following options according to the provided list: Description, Entity, Expression, Human, Location, or Number.",0.35
+5,"Classify the sentence according to its type by analyzing the sentence and choose a category from the options: Description, Entity, Expression, Human, Location, or Number, and provide the classification.",0.4
+6,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.95
+6,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.85
+6,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.75
+6,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.6
+6,"Please categorize this sentence into one of the listed categories: Description, Entity, Expression, Human, Location, or Number,",0.6
+6,"Let's go through the steps to generate a better prompt.
+
+**Step 1: Identify the different parts between Prompt 1 and Prompt 2**
+
+Prompt 1: Classify this sentence based on the provided categories: Description, Entity, Expression, Human, Location, or Number.
+Prompt 2: Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text
+
+Different parts:
+""Classify this sentence"" vs ""Please perform Question Classification task. Given the question, assign a label""
+""based on the provided categories"" vs ""from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']""
+""categories"" vs ""label""
+""sentence"" vs ""question""
+
+**Step 2: Randomly mutate the different parts**
+
+""Classify this sentence"" -> ""Categorize the given text""
+""Please perform Question Classification task. Given the question, assign a label"" -> ""Your task involves labeling a question""
+""based on the provided categories"" -> ""according to the specified classes""
+""categories"" -> ""classes""
+""sentence"" -> ""query""
+""question"" -> ""query""",0.45
+6,"Identify the category that corresponds to the given sentence, and categorize it according to one of the following: Description, Entity, Expression, Human, Location, or Number.",0.45
+6,"Let's follow the instructions.
+
+1. Identifying the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Classify the sentence according to its type by analyzing the sentence and choose a category from the options: Description, Entity, Expression, Human, Location, or Number, and provide the classification.
+Prompt 2: Identify the category that corresponds to the given sentence, and categorize it according to one of the following: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+""Classify the sentence according to its type by analyzing the sentence"" vs ""Identify the category that corresponds to the given sentence""
+""and choose a category from the options"" vs ""and categorize it according to one of the following""
+""and provide the classification"" -> (no equivalent part in Prompt 2)
+
+2. Randomly mutate the different parts:
+
+""Classify the sentence according to its type by analyzing the sentence"" -> ""Determine the classification of the given sentence""
+""and choose a category from the options"" -> ""from the available categories""
+""and provide the classification"" -> ""with an explanation"" (added a new mutation)
+""Identify the category that corresponds to the given sentence"" -> ""Recognize the category",0.45
+6,"Identify the class of the provided sentence among the following options according to the provided list: Description, Entity, Expression, Human, Location, or Number.",0.35
+6,"By analyzing the given query, categorize it according to its type by choosing a category from the specified classes: Description, Entity, Expression, Human, Location, or Number, and provide the classification.",0.6
+7,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.95
+7,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.85
+7,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.75
+7,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.6
+7,"Please categorize this sentence into one of the listed categories: Description, Entity, Expression, Human, Location, or Number,",0.6
+7,"Your task involves labeling a query according to the specified classes from the following options: Description, Entity, Expression, Human, Location, and Number. Categorize the given text by determining the correct type.",0.55
+7,"Identify the category that corresponds to the given sentence, and categorize it according to one of the following: Description, Entity, Expression, Human, Location, or Number.",0.45
+7,"Let's follow the instructions.
+
+1. Identifying the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Classify the sentence according to its type by analyzing the sentence and choose a category from the options: Description, Entity, Expression, Human, Location, or Number, and provide the classification.
+Prompt 2: Identify the category that corresponds to the given sentence, and categorize it according to one of the following: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+""Classify the sentence according to its type by analyzing the sentence"" vs ""Identify the category that corresponds to the given sentence""
+""and choose a category from the options"" vs ""and categorize it according to one of the following""
+""and provide the classification"" -> (no equivalent part in Prompt 2)
+
+2. Randomly mutate the different parts:
+
+""Classify the sentence according to its type by analyzing the sentence"" -> ""Determine the classification of the given sentence""
+""and choose a category from the options"" -> ""from the available categories""
+""and provide the classification"" -> ""with an explanation"" (added a new mutation)
+""Identify the category that corresponds to the given sentence"" -> ""Recognize the category",0.45
+7,"Identify the class of the provided sentence among the following options according to the provided list: Description, Entity, Expression, Human, Location, or Number.",0.35
+7,"By analyzing the given query, categorize it according to its type by choosing a category from the specified classes: Description, Entity, Expression, Human, Location, or Number, and provide the classification.",0.6
+8,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.95
+8,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.85
+8,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.75
+8,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.6
+8,"Please categorize this sentence into one of the listed categories: Description, Entity, Expression, Human, Location, or Number,",0.6
+8,"Your task involves labeling a query according to the specified classes from the following options: Description, Entity, Expression, Human, Location, and Number. Categorize the given text by determining the correct type.",0.55
+8,"Identify the category that corresponds to the given sentence, and categorize it according to one of the following: Description, Entity, Expression, Human, Location, or Number.",0.45
+8,"Let's follow the instructions.
+
+1. Identifying the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Classify the sentence according to its type by analyzing the sentence and choose a category from the options: Description, Entity, Expression, Human, Location, or Number, and provide the classification.
+Prompt 2: Identify the category that corresponds to the given sentence, and categorize it according to one of the following: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+""Classify the sentence according to its type by analyzing the sentence"" vs ""Identify the category that corresponds to the given sentence""
+""and choose a category from the options"" vs ""and categorize it according to one of the following""
+""and provide the classification"" -> (no equivalent part in Prompt 2)
+
+2. Randomly mutate the different parts:
+
+""Classify the sentence according to its type by analyzing the sentence"" -> ""Determine the classification of the given sentence""
+""and choose a category from the options"" -> ""from the available categories""
+""and provide the classification"" -> ""with an explanation"" (added a new mutation)
+""Identify the category that corresponds to the given sentence"" -> ""Recognize the category",0.45
+8,"Identify the class of the provided sentence among the following options according to the provided list: Description, Entity, Expression, Human, Location, or Number.",0.35
+8,"By analyzing the given query, categorize it according to its type by choosing a category from the specified classes: Description, Entity, Expression, Human, Location, or Number, and provide the classification.",0.6
+9,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.95
+9,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.85
+9,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.75
+9,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.6
+9,"Please categorize this sentence into one of the listed categories: Description, Entity, Expression, Human, Location, or Number,",0.6
+9,"Your task involves labeling a query according to the specified classes from the following options: Description, Entity, Expression, Human, Location, and Number. Categorize the given text by determining the correct type.",0.55
+9,"Examine the provided sentence and determine its classification based on the following categories: Description, Entity, Expression, Human, Location, or Number, where you identify the category that corresponds to the given sentence.",0.55
+9,"Recognize the category of the given sentence, determine the classification of the sentence, and categorize it from the available categories: Description, Entity, Expression, Human, Location, or Number, with an explanation.",0.5
+9,"Identify the class of the provided sentence among the following options according to the provided list: Description, Entity, Expression, Human, Location, or Number.",0.35
+9,"By analyzing the given query, categorize it according to its type by choosing a category from the specified classes: Description, Entity, Expression, Human, Location, or Number, and provide the classification.",0.6
+10,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.95
+10,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.85
+10,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.75
+10,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.6
+10,"Please categorize this sentence into one of the listed categories: Description, Entity, Expression, Human, Location, or Number,",0.6
+10,"Your task involves labeling a query according to the specified classes from the following options: Description, Entity, Expression, Human, Location, and Number. Categorize the given text by determining the correct type.",0.55
+10,"Examine the provided sentence and determine its classification based on the following categories: Description, Entity, Expression, Human, Location, or Number, where you identify the category that corresponds to the given sentence.",0.55
+10,"Recognize the category of the given sentence, determine the classification of the sentence, and categorize it from the available categories: Description, Entity, Expression, Human, Location, or Number, with an explanation.",0.5
+10,"Identify the class of the provided sentence among the following options according to the provided list: Description, Entity, Expression, Human, Location, or Number.",0.35
+10,"By analyzing the given query, categorize it according to its type by choosing a category from the specified classes: Description, Entity, Expression, Human, Location, or Number, and provide the classification.",0.6
+11,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.95
+11,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.85
+11,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.75
+11,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.6
+11,"Please categorize this sentence into one of the listed categories: Description, Entity, Expression, Human, Location, or Number,",0.6
+11,"Your task involves labeling a query according to the specified classes from the following options: Description, Entity, Expression, Human, Location, and Number. Categorize the given text by determining the correct type.",0.55
+11,"Examine the provided sentence and determine its classification based on the following categories: Description, Entity, Expression, Human, Location, or Number, where you identify the category that corresponds to the given sentence.",0.55
+11,"Recognize the category of the given sentence, determine the classification of the sentence, and categorize it from the available categories: Description, Entity, Expression, Human, Location, or Number, with an explanation.",0.5
+11,"Identify the class of the provided sentence among the following options according to the provided list: Description, Entity, Expression, Human, Location, or Number.",0.35
+11,"By analyzing the given query, categorize it according to its type by choosing a category from the specified classes: Description, Entity, Expression, Human, Location, or Number, and provide the classification.",0.6
+12,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.95
+12,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.85
+12,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.75
+12,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.6
+12,"Please categorize this sentence into one of the listed categories: Description, Entity, Expression, Human, Location, or Number,",0.6
+12,"Your task involves labeling a query according to the specified classes from the following options: Description, Entity, Expression, Human, Location, and Number. Categorize the given text by determining the correct type.",0.55
+12,"Examine the provided sentence and determine its classification based on the following categories: Description, Entity, Expression, Human, Location, or Number, where you identify the category that corresponds to the given sentence.",0.55
+12,"Recognize the category of the given sentence, determine the classification of the sentence, and categorize it from the available categories: Description, Entity, Expression, Human, Location, or Number, with an explanation.",0.5
+12,"Identify the class of the provided sentence among the following options according to the provided list: Description, Entity, Expression, Human, Location, or Number.",0.35
+12,"By analyzing the given query, categorize it according to its type by choosing a category from the specified classes: Description, Entity, Expression, Human, Location, or Number, and provide the classification.",0.6

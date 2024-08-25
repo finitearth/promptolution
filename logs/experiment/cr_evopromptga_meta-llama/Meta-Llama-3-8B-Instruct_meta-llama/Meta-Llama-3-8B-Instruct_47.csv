@@ -1,0 +1,121 @@
+step,prompt,score
+1,"Your task is to classify the comment ""positive"" or ""negative"".",0.85
+1,"Given a tweet, classify it as having a positive or negative sentiment.",0.85
+1,"Given a statement, classify it as expressing a positive or negative opinion.",0.85
+1,"Assess the sentiment of a sentence, categorizing it as either optimistic, pessimistic, or neutral.",0.85
+1,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.8
+1,Assess the provided sentence as either optimistic or possessing a positive sentiment.,0.8
+1,"Assess the emotional tone of a given sentence, categorizing it as positive, negative, or neutral.",0.8
+1,"Analyze the sentiment of a given text, classifying it as either positive or negative.",0.8
+1,"Identify the sentiment of the product review as either ""positive"" or ""negative"" by deciphering its meaning and context.",0.75
+1,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.7
+2,"Your task is to classify the comment ""positive"" or ""negative"".",0.85
+2,"Sentiment Analysis Task: Classify the input sentence as either 'negative' or 'positive', indicating its emotional tone.",0.85
+2,Perform sentiment analysis on the input text and assign a sentiment label ('positive' or 'negative').,0.85
+2,"Given a tweet, classify it as having a positive or negative sentiment.",0.85
+2,"Given a statement, classify it as expressing a positive or negative opinion.",0.85
+2,"Assess the sentiment of a sentence, categorizing it as either optimistic, pessimistic, or neutral.",0.85
+2,"Analyze and categorize the provided statement or comment as holding either a positive or negative opinion, ensuring accuracy.",0.85
+2,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.8
+2,Assess the provided sentence as either optimistic or possessing a positive sentiment.,0.8
+2,"Assess the emotional tone of a given sentence, categorizing it as positive, negative, or neutral.",0.8
+3,"Evaluate the emotional tone of a sentence, labeling it as optimistic, negative, or neutral, and provide a detailed analysis of the sentiment.",0.95
+3,"Classify the provided statement as conveying either an opinion or sentiment, and determine its undertone as positive, negative, or neutral.",0.9
+3,Classify the input sentence as 'positive' or 'negative' according to its emotional tone and return the corresponding sentiment label.,0.9
+3,"Classify a sentence as positive, negative, optimistic, pessimistic, or neutral.",0.9
+3,"Analyze the provided text to identify its sentiment as positive or negative, returning the appropriate label.",0.9
+3,"Your task is to classify the comment ""positive"" or ""negative"".",0.85
+3,"Sentiment Analysis Task: Classify the input sentence as either 'negative' or 'positive', indicating its emotional tone.",0.85
+3,Perform sentiment analysis on the input text and assign a sentiment label ('positive' or 'negative').,0.85
+3,"Given a tweet, classify it as having a positive or negative sentiment.",0.85
+3,"Given a statement, classify it as expressing a positive or negative opinion.",0.85
+4,"Identify the sentiment of the given text as 'positive' or 'negative', considering its emotional undertone",0.95
+4,"Evaluate the emotional tone of a sentence, labeling it as optimistic, negative, or neutral, and provide a detailed analysis of the sentiment.",0.95
+4,Classify the input text's emotional tone as either 'positive' or 'negative' through sentiment analysis.,0.95
+4,"Determine the emotional tone of the input text and label it as either 'positive' or 'negative', effectively identifying its sentiment.",0.9
+4,"Classify the provided statement as conveying either an opinion or sentiment, and determine its undertone as positive, negative, or neutral.",0.9
+4,Classify the input sentence as 'positive' or 'negative' according to its emotional tone and return the corresponding sentiment label.,0.9
+4,"Classify a sentence as positive, negative, optimistic, pessimistic, or neutral.",0.9
+4,"Analyze the provided text to identify its sentiment as positive or negative, returning the appropriate label.",0.9
+4,"Analyze the given text to identify its sentiment by classifying it as either 'positive', 'negative', or 'neutral', while also determining the emotional tone it conveys.",0.9
+4,"Your task is to classify the comment ""positive"" or ""negative"".",0.85
+5,"Determine the sentiment of the input text, categorizing it as positive, negative, optimistic, pessimistic, or neutral.",1.0
+5,"Determine the sentiment of the given text by categorizing it as positive, negative, optimistic, pessimistic, or neutral",1.0
+5,"Identify the sentiment of the given text as 'positive' or 'negative', considering its emotional undertone",0.95
+5,"Evaluate the emotional tone of a sentence, labeling it as optimistic, negative, or neutral, and provide a detailed analysis of the sentiment.",0.95
+5,Classify the input text's emotional tone as either 'positive' or 'negative' through sentiment analysis.,0.95
+5,"Assess the given statement for its sentiment, classifying it as 'positive', 'negative', or 'neutral', and identify the emotional tone it conveys, distinguishing between genuine opinions and perceived sentiments.",0.95
+5,"Identify the sentiment and emotional tone of the provided text, categorizing it as 'positive', 'negative', or 'neutral', and provide a detailed analysis of its emotional resonance",0.9
+5,"Evaluate the sentiment of the provided text, labeling it as positive, negative, optimistic, pessimistic, or neutral while considering its tone and emotional connotation.",0.9
+5,"Determine the emotional tone of the input text and label it as either 'positive' or 'negative', effectively identifying its sentiment.",0.9
+5,"Classify the provided statement as conveying either an opinion or sentiment, and determine its undertone as positive, negative, or neutral.",0.9
+6,"Determine the sentiment of the input text, categorizing it as positive, negative, optimistic, pessimistic, or neutral.",1.0
+6,"Determine the sentiment of the given text by categorizing it as positive, negative, optimistic, pessimistic, or neutral",1.0
+6,"Identify the sentiment of the given text as 'positive' or 'negative', considering its emotional undertone",0.95
+6,"Evaluate the emotional tone of a sentence, labeling it as optimistic, negative, or neutral, and provide a detailed analysis of the sentiment.",0.95
+6,Classify the input text's emotional tone as either 'positive' or 'negative' through sentiment analysis.,0.95
+6,"Assess the given statement for its sentiment, classifying it as 'positive', 'negative', or 'neutral', and identify the emotional tone it conveys, distinguishing between genuine opinions and perceived sentiments.",0.95
+6,"Identify the sentiment and emotional tone of the provided text, categorizing it as 'positive', 'negative', or 'neutral', and provide a detailed analysis of its emotional resonance",0.9
+6,"Evaluate the sentiment of the provided text, labeling it as positive, negative, optimistic, pessimistic, or neutral while considering its tone and emotional connotation.",0.9
+6,"Determine the emotional tone of the input text and label it as either 'positive' or 'negative', effectively identifying its sentiment.",0.9
+6,"Determine the emotional tone of the given text by categorizing it into one of three sentiment categories: positive, negative, or neutral.",0.9
+7,"Determine the sentiment of the input text, categorizing it as positive, negative, optimistic, pessimistic, or neutral.",1.0
+7,"Determine the sentiment of the given text by categorizing it as positive, negative, optimistic, pessimistic, or neutral",1.0
+7,"Identify the sentiment of the given text as 'positive' or 'negative', considering its emotional undertone",0.95
+7,"Evaluate the emotional tone of a sentence, labeling it as optimistic, negative, or neutral, and provide a detailed analysis of the sentiment.",0.95
+7,Classify the input text's emotional tone as either 'positive' or 'negative' through sentiment analysis.,0.95
+7,"Assess the given statement for its sentiment, classifying it as 'positive', 'negative', or 'neutral', and identify the emotional tone it conveys, distinguishing between genuine opinions and perceived sentiments.",0.95
+7,"Identify the sentiment and emotional tone of the provided text, categorizing it as 'positive', 'negative', or 'neutral', and provide a detailed analysis of its emotional resonance",0.9
+7,"Evaluate the sentiment of the provided text, labeling it as positive, negative, optimistic, pessimistic, or neutral while considering its tone and emotional connotation.",0.9
+7,"Determine the emotional tone of the input text and label it as either 'positive' or 'negative', effectively identifying its sentiment.",0.9
+7,"Determine the emotional tone of the given text by categorizing it into one of three sentiment categories: positive, negative, or neutral.",0.9
+8,"Determine the sentiment of the input text, categorizing it as positive, negative, optimistic, pessimistic, or neutral.",1.0
+8,"Determine the sentiment of the given text by categorizing it as positive, negative, optimistic, pessimistic, or neutral",1.0
+8,"Identify the sentiment of the given text as 'positive' or 'negative', considering its emotional undertone",0.95
+8,"Evaluate the emotional tone of a sentence, labeling it as optimistic, negative, or neutral, and provide a detailed analysis of the sentiment.",0.95
+8,Classify the input text's emotional tone as either 'positive' or 'negative' through sentiment analysis.,0.95
+8,"Assess the given statement for its sentiment, classifying it as 'positive', 'negative', or 'neutral', and identify the emotional tone it conveys, distinguishing between genuine opinions and perceived sentiments.",0.95
+8,"Identify the sentiment and emotional tone of the provided text, categorizing it as 'positive', 'negative', or 'neutral', and provide a detailed analysis of its emotional resonance",0.9
+8,"Evaluate the sentiment of the provided text, labeling it as positive, negative, optimistic, pessimistic, or neutral while considering its tone and emotional connotation.",0.9
+8,"Determine the emotional tone of the input text and label it as either 'positive' or 'negative', effectively identifying its sentiment.",0.9
+8,"Determine the emotional tone of the given text by categorizing it into one of three sentiment categories: positive, negative, or neutral.",0.9
+9,"Determine the sentiment of the input text, categorizing it as positive, negative, optimistic, pessimistic, or neutral.",1.0
+9,"Determine the sentiment of the given text by categorizing it as positive, negative, optimistic, pessimistic, or neutral",1.0
+9,"Identify the sentiment of the given text as 'positive' or 'negative', considering its emotional undertone",0.95
+9,"Evaluate the emotional tone of the provided text, classifying it as either 'positive' or 'negative', while distinguishing between authentic sentiments and perceived emotions.",0.95
+9,"Evaluate the emotional tone of a sentence, labeling it as optimistic, negative, or neutral, and provide a detailed analysis of the sentiment.",0.95
+9,"Determine the text's sentiment by categorizing it into either positive, negative, or neutral tones and identify the most dominant emotional tone.",0.95
+9,"Determine the sentiment of the given text by identifying its emotional undertone, categorizing it as either positive or negative, or neutral.",0.95
+9,Classify the input text's emotional tone as either 'positive' or 'negative' through sentiment analysis.,0.95
+9,"Assess the given statement for its sentiment, classifying it as 'positive', 'negative', or 'neutral', and identify the emotional tone it conveys, distinguishing between genuine opinions and perceived sentiments.",0.95
+9,"Identify the sentiment and emotional tone of the provided text, categorizing it as 'positive', 'negative', or 'neutral', and provide a detailed analysis of its emotional resonance",0.9
+10,"Determine the sentiment of the input text, categorizing it as positive, negative, optimistic, pessimistic, or neutral.",1.0
+10,"Determine the sentiment of the given text by categorizing it as positive, negative, optimistic, pessimistic, or neutral",1.0
+10,"Identify the sentiment of the given text as 'positive' or 'negative', considering its emotional undertone",0.95
+10,"Evaluate the emotional tone of the provided text, classifying it as either 'positive' or 'negative', while distinguishing between authentic sentiments and perceived emotions.",0.95
+10,"Evaluate the emotional tone of a sentence, labeling it as optimistic, negative, or neutral, and provide a detailed analysis of the sentiment.",0.95
+10,"Determine the text's sentiment by categorizing it into either positive, negative, or neutral tones and identify the most dominant emotional tone.",0.95
+10,"Determine the sentiment of the given text by identifying its emotional undertone, categorizing it as either positive or negative, or neutral.",0.95
+10,Classify the input text's emotional tone as either 'positive' or 'negative' through sentiment analysis.,0.95
+10,"Assess the given statement for its sentiment, classifying it as 'positive', 'negative', or 'neutral', and identify the emotional tone it conveys, distinguishing between genuine opinions and perceived sentiments.",0.95
+10,"Identify the sentiment and emotional tone of the provided text, categorizing it as 'positive', 'negative', or 'neutral', and provide a detailed analysis of its emotional resonance",0.9
+11,"Determine the sentiment of the input text, categorizing it as positive, negative, optimistic, pessimistic, or neutral.",1.0
+11,"Determine the sentiment of the given text by categorizing it as positive, negative, optimistic, pessimistic, or neutral",1.0
+11,"Identify the sentiment of the given text as 'positive' or 'negative', considering its emotional undertone",0.95
+11,"Evaluate the emotional tone of the provided text, classifying it as either 'positive' or 'negative', while distinguishing between authentic sentiments and perceived emotions.",0.95
+11,"Evaluate the emotional tone of a sentence, labeling it as optimistic, negative, or neutral, and provide a detailed analysis of the sentiment.",0.95
+11,"Determine the text's sentiment by categorizing it into either positive, negative, or neutral tones and identify the most dominant emotional tone.",0.95
+11,"Determine the sentiment of the given text by identifying its emotional undertone, categorizing it as either positive or negative, or neutral.",0.95
+11,Classify the input text's emotional tone as either 'positive' or 'negative' through sentiment analysis.,0.95
+11,"Assess the given statement for its sentiment, classifying it as 'positive', 'negative', or 'neutral', and identify the emotional tone it conveys, distinguishing between genuine opinions and perceived sentiments.",0.95
+11,"Investigate the primary emotional undertone of a text, classifying it as optimistic, pessimistic, or neutral, and provide a comprehensive breakdown of the sentiment.",0.9
+12,"Determine the sentiment of the input text, categorizing it as positive, negative, optimistic, pessimistic, or neutral.",1.0
+12,"Determine the sentiment of the given text by categorizing it as positive, negative, optimistic, pessimistic, or neutral",1.0
+12,"Identify the sentiment of the given text as 'positive' or 'negative', considering its emotional undertone",0.95
+12,"Evaluate the emotional tone of the provided text, classifying it as either 'positive' or 'negative', while distinguishing between authentic sentiments and perceived emotions.",0.95
+12,"Evaluate the emotional tone of a sentence, labeling it as optimistic, negative, or neutral, and provide a detailed analysis of the sentiment.",0.95
+12,"Determine the text's sentiment by categorizing it into either positive, negative, or neutral tones and identify the most dominant emotional tone.",0.95
+12,"Determine the sentiment of the given text by identifying its emotional undertone, categorizing it as either positive or negative, or neutral.",0.95
+12,Classify the input text's emotional tone as either 'positive' or 'negative' through sentiment analysis.,0.95
+12,"Assess the given statement for its sentiment, classifying it as 'positive', 'negative', or 'neutral', and identify the emotional tone it conveys, distinguishing between genuine opinions and perceived sentiments.",0.95
+12,"Investigate the primary emotional undertone of a text, classifying it as optimistic, pessimistic, or neutral, and provide a comprehensive breakdown of the sentiment.",0.9

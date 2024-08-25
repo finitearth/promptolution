@@ -1,0 +1,129 @@
+step,prompt,score
+1,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+1,"Categorize the movie review provided into one of five degrees based on the sentiment: terrible, bad, okay, good, or great.",0.45
+1,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.45
+1,"Analyze the sentence and categorize it into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.45
+1,"Your job is to evaluate the review and classify it as one of five classes: terrible, bad, okay, good, or great.",0.4
+1,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.4
+1,"Categorize the provided movie reviews based on their quality, allocating them to a scale from ""terrible"" to ""great"". Ensure that the classification accurately reflects the reviewer's opinion.",0.4
+1,"In this task, you are given movie reviews. Based on it, classify it to one of the ﬁve classes: (1) terrible, (2) bad, (3) okay, (4) good, and (5) great.",0.35
+1,"Examine the comment provided and classify it into one of five categories: terrible, bad, okay, good, or great.",0.35
+1,"Identify the sentiment of the provided movie review and categorize it into one of five degrees, ranging from 'terrible' to 'great'",0.3
+2,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+2,"Classify the provided text according to its sentiment, categorizing it as terrible, bad, okay, good, or great.",0.45
+2,"Categorize the movie review provided into one of five degrees based on the sentiment: terrible, bad, okay, good, or great.",0.45
+2,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.45
+2,"Analyze the sentence and categorize it into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.45
+2,"Your job is to evaluate the review and classify it as one of five classes: terrible, bad, okay, good, or great.",0.4
+2,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.4
+2,"Identify and categorize the provided movie reviews into one of five predefined sentiments: terrible, bad, okay, good, or great, based on their tone and language.",0.4
+2,"Classify the text as either 'terrible', 'bad', 'okay', 'good', or 'great' while returning the sentiment label only",0.4
+2,"Classify the provided movie review according to its quality, categorizing it as one of five distinct ratings: terrible, bad, okay, good, or great.",0.4
+3,"Identify the sentiment of the given text and categorize it as 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone and language, outputting the corresponding sentiment label.",0.65
+3,"Classify the input text as 'terrible', 'bad', 'okay', 'good', or 'great' based on its sentiment, returning a sentiment label.",0.55
+3,"Classify the input sentence and categorize its sentiment into one of the following labels: terrible, bad, okay, good, or great. Return the sentiment label as the output without any additional text.",0.55
+3,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+3,"Classify the given review as 'terrible', 'bad', 'okay', 'good', or 'great', and return the sentiment label.",0.5
+3,"Classify the given movie reviews into one of the five sentiment categories: terrible, bad, okay, good, or great, using linguistic features to assess their tone and convey the viewer's emotional response.",0.5
+3,"&lt;Classify the movie review into one of five categories (terrible, bad, okay, good, or great) based on both its sentiment and overall quality&lt;/prompt>
+
+The final prompt aims to clarify the task and provide a more comprehensive understanding of what the classifier should focus on.",0.5
+3,"Classify the provided text according to its sentiment, categorizing it as terrible, bad, okay, good, or great.",0.45
+3,"Categorize the movie review provided into one of five degrees based on the sentiment: terrible, bad, okay, good, or great.",0.45
+3,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.45
+4,"Identify the sentiment of the given text and categorize it as 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone and language, outputting the corresponding sentiment label.",0.65
+4,"Classify the input text as 'terrible', 'bad', 'okay', 'good', or 'great' based on its sentiment, returning a sentiment label.",0.55
+4,"Classify the input sentence and categorize its sentiment into one of the following labels: terrible, bad, okay, good, or great. Return the sentiment label as the output without any additional text.",0.55
+4,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+4,"Classify the given review as 'terrible', 'bad', 'okay', 'good', or 'great', and return the sentiment label.",0.5
+4,"Classify the given movie reviews into one of the five sentiment categories: terrible, bad, okay, good, or great, using linguistic features to assess their tone and convey the viewer's emotional response.",0.5
+4,"Assess the movie review based on its sentiment and overall quality, categorizing it into one of five levels: terrible, bad, okay, good, or great, considering both emotional tone and objective value.",0.5
+4,"&lt;Classify the movie review into one of five categories (terrible, bad, okay, good, or great) based on both its sentiment and overall quality&lt;/prompt>
+
+The final prompt aims to clarify the task and provide a more comprehensive understanding of what the classifier should focus on.",0.5
+4,"Classify the provided text according to its sentiment, categorizing it as terrible, bad, okay, good, or great.",0.45
+4,"Categorize the movie review provided into one of five degrees based on the sentiment: terrible, bad, okay, good, or great.",0.45
+5,"Identify the sentiment of the given text and categorize it as 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone and language, outputting the corresponding sentiment label.",0.65
+5,"Classify the input text as 'terrible', 'bad', 'okay', 'good', or 'great' based on its sentiment, returning a sentiment label.",0.55
+5,"Classify the input sentence and categorize its sentiment into one of the following labels: terrible, bad, okay, good, or great. Return the sentiment label as the output without any additional text.",0.55
+5,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+5,"Classify the given review as 'terrible', 'bad', 'okay', 'good', or 'great', and return the sentiment label.",0.5
+5,"Classify the given movie reviews into one of the five sentiment categories: terrible, bad, okay, good, or great, using linguistic features to assess their tone and convey the viewer's emotional response.",0.5
+5,"Assess the movie review based on its sentiment and overall quality, categorizing it into one of five levels: terrible, bad, okay, good, or great, considering both emotional tone and objective value.",0.5
+5,"&lt;Classify the movie review into one of five categories (terrible, bad, okay, good, or great) based on both its sentiment and overall quality&lt;/prompt>
+
+The final prompt aims to clarify the task and provide a more comprehensive understanding of what the classifier should focus on.",0.5
+5,"Classify the provided text according to its sentiment, categorizing it as terrible, bad, okay, good, or great.",0.45
+5,"Categorize the movie review provided into one of five degrees based on the sentiment: terrible, bad, okay, good, or great.",0.45
+6,"Identify the sentiment of the given text and categorize it as 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone and language, outputting the corresponding sentiment label.",0.65
+6,"Determine the emotional tone of the provided text and categorize it as either 'terrible', 'bad', 'okay', 'good', or 'great' based on its linguistic characteristics.",0.6
+6,"Classify the input text as 'terrible', 'bad', 'okay', 'good', or 'great' based on its sentiment, returning a sentiment label.",0.55
+6,"Classify the input sentence and categorize its sentiment into one of the following labels: terrible, bad, okay, good, or great. Return the sentiment label as the output without any additional text.",0.55
+6,"Classify the sentiment of the given text into one of five categories - 'terrible', 'bad', 'okay', 'good', or 'great' - based on its tone and linguistic characteristics.",0.5
+6,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+6,"Classify the given review as 'terrible', 'bad', 'okay', 'good', or 'great', and return the sentiment label.",0.5
+6,"Classify the given movie reviews into one of the five sentiment categories: terrible, bad, okay, good, or great, using linguistic features to assess their tone and convey the viewer's emotional response.",0.5
+6,"Assess the movie review based on its sentiment and overall quality, categorizing it into one of five levels: terrible, bad, okay, good, or great, considering both emotional tone and objective value.",0.5
+6,"&lt;Classify the movie review into one of five categories (terrible, bad, okay, good, or great) based on both its sentiment and overall quality&lt;/prompt>
+
+The final prompt aims to clarify the task and provide a more comprehensive understanding of what the classifier should focus on.",0.5
+7,"Identify the sentiment of the given text and categorize it as 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone and language, outputting the corresponding sentiment label.",0.65
+7,"Determine the emotional tone of the provided text and categorize it as either 'terrible', 'bad', 'okay', 'good', or 'great' based on its linguistic characteristics.",0.6
+7,"Assess the sentiment of the text, categorizing it as 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone and linguistic qualities.",0.6
+7,"Classify the input text as 'terrible', 'bad', 'okay', 'good', or 'great' based on its sentiment, returning a sentiment label.",0.55
+7,"Classify the input sentence and categorize its sentiment into one of the following labels: terrible, bad, okay, good, or great. Return the sentiment label as the output without any additional text.",0.55
+7,"Evaluate the sentiment of the provided text and categorize it as 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone, linguistic features, and overall emotional impact.",0.5
+7,"Evaluate the sentiment of the given text and categorize it as 'terrible', 'bad', 'okay', 'good', or 'great'",0.5
+7,"Determine the sentiment of the provided text by classifying it into 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone and language, and output the relevant sentiment label.",0.5
+7,"Classify the sentiment of the given text into one of five categories - 'terrible', 'bad', 'okay', 'good', or 'great' - based on its tone and linguistic characteristics.",0.5
+7,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+8,"Identify the sentiment of the given text and categorize it as 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone and language, outputting the corresponding sentiment label.",0.65
+8,"Determine the emotional tone of the provided text and categorize it as either 'terrible', 'bad', 'okay', 'good', or 'great' based on its linguistic characteristics.",0.6
+8,"Assess the sentiment of the text, categorizing it as 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone and linguistic qualities.",0.6
+8,"Evaluate the sentiment of the provided text and determine its relevance as 'terrible', 'bad', 'okay', 'good', or 'great', returning the corresponding label.",0.55
+8,"Evaluate the emotional tone of the provided text, identifying its sentiment as 'terrible', 'bad', 'okay', 'good', or 'great' based on linguistic features, and categorize it accordingly.",0.55
+8,"Classify the input text as 'terrible', 'bad', 'okay', 'good', or 'great' based on its sentiment, returning a sentiment label.",0.55
+8,"Classify the input sentence and categorize its sentiment into one of the following labels: terrible, bad, okay, good, or great. Return the sentiment label as the output without any additional text.",0.55
+8,"Evaluate the sentiment of the provided text and categorize it as 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone, linguistic features, and overall emotional impact.",0.5
+8,"Evaluate the sentiment of the given text and categorize it as 'terrible', 'bad', 'okay', 'good', or 'great'",0.5
+8,"Determine the sentiment of the provided text by classifying it into 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone and language, and output the relevant sentiment label.",0.5
+9,"Identify the sentiment of the given text and categorize it as 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone and language, outputting the corresponding sentiment label.",0.65
+9,"Determine the emotional tone of the provided text and categorize it as either 'terrible', 'bad', 'okay', 'good', or 'great' based on its linguistic characteristics.",0.6
+9,"Assess the sentiment of the text, categorizing it as 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone and linguistic qualities.",0.6
+9,"Evaluate the sentiment of the provided text and determine its relevance as 'terrible', 'bad', 'okay', 'good', or 'great', returning the corresponding label.",0.55
+9,"Evaluate the emotional tone of the provided text, identifying its sentiment as 'terrible', 'bad', 'okay', 'good', or 'great' based on linguistic features, and categorize it accordingly.",0.55
+9,"Classify the input text as 'terrible', 'bad', 'okay', 'good', or 'great' based on its sentiment, returning a sentiment label.",0.55
+9,"Classify the input sentence and categorize its sentiment into one of the following labels: terrible, bad, okay, good, or great. Return the sentiment label as the output without any additional text.",0.55
+9,"Evaluate the sentiment of the provided text and categorize it as 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone, linguistic features, and overall emotional impact.",0.5
+9,"Evaluate the sentiment of the given text and categorize it as 'terrible', 'bad', 'okay', 'good', or 'great'",0.5
+9,"Determine the sentiment of the provided text by classifying it into 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone and language, and output the relevant sentiment label.",0.5
+10,"Identify the sentiment of the given text and categorize it as 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone and language, outputting the corresponding sentiment label.",0.65
+10,"Determine the emotional tone of the provided text and categorize it as either 'terrible', 'bad', 'okay', 'good', or 'great' based on its linguistic characteristics.",0.6
+10,"Assess the sentiment of the text, categorizing it as 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone and linguistic qualities.",0.6
+10,"Evaluate the sentiment of the provided text and determine its relevance as 'terrible', 'bad', 'okay', 'good', or 'great', returning the corresponding label.",0.55
+10,"Evaluate the emotional tone of the provided text, identifying its sentiment as 'terrible', 'bad', 'okay', 'good', or 'great' based on linguistic features, and categorize it accordingly.",0.55
+10,"Classify the input text as 'terrible', 'bad', 'okay', 'good', or 'great' based on its sentiment, returning a sentiment label.",0.55
+10,"Classify the input sentence and categorize its sentiment into one of the following labels: terrible, bad, okay, good, or great. Return the sentiment label as the output without any additional text.",0.55
+10,"Evaluate the sentiment of the provided text and categorize it as 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone, linguistic features, and overall emotional impact.",0.5
+10,"Evaluate the sentiment of the given text and categorize it as 'terrible', 'bad', 'okay', 'good', or 'great'",0.5
+10,"Determine the sentiment of the provided text by classifying it into 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone and language, and output the relevant sentiment label.",0.5
+11,"Identify the sentiment of the given text and categorize it as 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone and language, outputting the corresponding sentiment label.",0.65
+11,"Determine the emotional tone of the provided text and categorize it as either 'terrible', 'bad', 'okay', 'good', or 'great' based on its linguistic characteristics.",0.6
+11,"Assess the sentiment of the text, categorizing it as 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone and linguistic qualities.",0.6
+11,"Evaluate the sentiment of the provided text and determine its relevance as 'terrible', 'bad', 'okay', 'good', or 'great', returning the corresponding label.",0.55
+11,"Evaluate the emotional tone of the provided text, identifying its sentiment as 'terrible', 'bad', 'okay', 'good', or 'great' based on linguistic features, and categorize it accordingly.",0.55
+11,"Classify the input text as 'terrible', 'bad', 'okay', 'good', or 'great' based on its sentiment, returning a sentiment label.",0.55
+11,"Classify the input sentence and categorize its sentiment into one of the following labels: terrible, bad, okay, good, or great. Return the sentiment label as the output without any additional text.",0.55
+11,"Evaluate the sentiment of the provided text and categorize it as 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone, linguistic features, and overall emotional impact.",0.5
+11,"Evaluate the sentiment of the given text and categorize it as 'terrible', 'bad', 'okay', 'good', or 'great'",0.5
+11,"Determine the sentiment of the provided text by classifying it into 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone and language, and output the relevant sentiment label.",0.5
+12,"Identify the sentiment of the given text and categorize it as 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone and language, outputting the corresponding sentiment label.",0.65
+12,"Determine the emotional tone of the provided text and categorize it as either 'terrible', 'bad', 'okay', 'good', or 'great' based on its linguistic characteristics.",0.6
+12,"Assess the sentiment of the text, categorizing it as 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone and linguistic qualities.",0.6
+12,"Evaluate the sentiment of the provided text and determine its relevance as 'terrible', 'bad', 'okay', 'good', or 'great', returning the corresponding label.",0.55
+12,"Evaluate the emotional tone of the provided text, identifying its sentiment as 'terrible', 'bad', 'okay', 'good', or 'great' based on linguistic features, and categorize it accordingly.",0.55
+12,"Classify the input text as 'terrible', 'bad', 'okay', 'good', or 'great' based on its sentiment, returning a sentiment label.",0.55
+12,"Classify the input sentence and categorize its sentiment into one of the following labels: terrible, bad, okay, good, or great. Return the sentiment label as the output without any additional text.",0.55
+12,"Assess the emotional tone and sentiment of the input text, and evaluate its linguistic characteristics to categorize it as 'terrible', 'bad', 'okay', 'good', or 'great' in terms of its overall emotional impact.",0.55
+12,"Evaluate the sentiment of the provided text and categorize it as 'terrible', 'bad', 'okay', 'good', or 'great' based on its tone, linguistic features, and overall emotional impact.",0.5
+12,"Evaluate the sentiment of the given text and categorize it as 'terrible', 'bad', 'okay', 'good', or 'great'",0.5

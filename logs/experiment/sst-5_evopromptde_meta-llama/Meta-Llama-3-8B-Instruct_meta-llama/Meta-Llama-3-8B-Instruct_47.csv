@@ -1,0 +1,349 @@
+step,prompt,score
+1,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.6
+1,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.6
+1,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.6
+1,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.55
+1,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+1,"In this task, you are given movie reviews. Based on it, classify it to one of the ﬁve classes: (1) terrible, (2) bad, (3) okay, (4) good, and (5) great.",0.4
+1,"Examine the comment provided and classify it into one of five categories: terrible, bad, okay, good, or great.",0.25
+1,"Your objective is to evaluate the the sentiment of the movie review and categorize it into one of five classes, ranging from terrible to great.",0.15
+1,"Let's follow the instructions step-by-step.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: ""Your responsibility is to categorize the movie review provided to you"" vs ""Your are given movie reviews"".
+""to one of five categories based on the sentiment"" vs ""classify it to one of the ﬁve classes"".
+""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great"".
+
+Different parts:
+
+* ""Your responsibility is to categorize"" vs ""Your objectiv""
+* ""the movie review provided to you"" vs ""movie reviews""
+* ""to one of five categories based on the sentiment"" vs ""to one of the following classes""
+* ""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great""
+
+2. Randomly mutate the different parts:
+
+* ""Your responsibility is to categorize"" -> ""The goal is to identify""
+* ""the movie review provided to you"" -> ""a movie review text""
+* ""to one of",0.4
+1,and,0.1
+2,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.6
+2,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.6
+2,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.6
+2,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.55
+2,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+2,"In this task, you are given movie reviews. Based on it, classify it to one of the ﬁve classes: (1) terrible, (2) bad, (3) okay, (4) good, and (5) great.",0.4
+2,"Examine the comment provided and classify it into one of five categories: terrible, bad, okay, good, or great.",0.25
+2,"Your objective is to evaluate the the sentiment of the movie review and categorize it into one of five classes, ranging from terrible to great.",0.15
+2,"Let's follow the instructions step-by-step.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: ""Your responsibility is to categorize the movie review provided to you"" vs ""Your are given movie reviews"".
+""to one of five categories based on the sentiment"" vs ""classify it to one of the ﬁve classes"".
+""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great"".
+
+Different parts:
+
+* ""Your responsibility is to categorize"" vs ""Your objectiv""
+* ""the movie review provided to you"" vs ""movie reviews""
+* ""to one of five categories based on the sentiment"" vs ""to one of the following classes""
+* ""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great""
+
+2. Randomly mutate the different parts:
+
+* ""Your responsibility is to categorize"" -> ""The goal is to identify""
+* ""the movie review provided to you"" -> ""a movie review text""
+* ""to one of",0.4
+2,"Take into account the movie review context and label the reviewed film into one of the following categories: terrible, bad, okay, good",0.25
+3,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.6
+3,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.6
+3,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.6
+3,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.55
+3,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+3,"In this task, you are given movie reviews. Based on it, classify it to one of the ﬁve classes: (1) terrible, (2) bad, (3) okay, (4) good, and (5) great.",0.4
+3,"Examine the comment provided and classify it into one of five categories: terrible, bad, okay, good, or great.",0.25
+3,"Your objective is to evaluate the the sentiment of the movie review and categorize it into one of five classes, ranging from terrible to great.",0.15
+3,"Let's follow the instructions step-by-step.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: ""Your responsibility is to categorize the movie review provided to you"" vs ""Your are given movie reviews"".
+""to one of five categories based on the sentiment"" vs ""classify it to one of the ﬁve classes"".
+""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great"".
+
+Different parts:
+
+* ""Your responsibility is to categorize"" vs ""Your objectiv""
+* ""the movie review provided to you"" vs ""movie reviews""
+* ""to one of five categories based on the sentiment"" vs ""to one of the following classes""
+* ""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great""
+
+2. Randomly mutate the different parts:
+
+* ""Your responsibility is to categorize"" -> ""The goal is to identify""
+* ""the movie review provided to you"" -> ""a movie review text""
+* ""to one of",0.4
+3,"Analyze the movie review and assign it to one of the following categories: terrible, bad, okay, good, or great, considering the relevant context.",0.4
+4,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.6
+4,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.6
+4,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.6
+4,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.55
+4,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+4,"In this task, you are given movie reviews. Based on it, classify it to one of the ﬁve classes: (1) terrible, (2) bad, (3) okay, (4) good, and (5) great.",0.4
+4,"Examine the comment provided and classify it into one of five categories: terrible, bad, okay, good, or great.",0.25
+4,"Your objective is to evaluate the the sentiment of the movie review and categorize it into one of five classes, ranging from terrible to great.",0.15
+4,"Let's follow the instructions step-by-step.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: ""Your responsibility is to categorize the movie review provided to you"" vs ""Your are given movie reviews"".
+""to one of five categories based on the sentiment"" vs ""classify it to one of the ﬁve classes"".
+""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great"".
+
+Different parts:
+
+* ""Your responsibility is to categorize"" vs ""Your objectiv""
+* ""the movie review provided to you"" vs ""movie reviews""
+* ""to one of five categories based on the sentiment"" vs ""to one of the following classes""
+* ""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great""
+
+2. Randomly mutate the different parts:
+
+* ""Your responsibility is to categorize"" -> ""The goal is to identify""
+* ""the movie review provided to you"" -> ""a movie review text""
+* ""to one of",0.4
+4,"Analyze the movie review and assign it to one of the following categories: terrible, bad, okay, good, or great, considering the relevant context.",0.4
+5,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.6
+5,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.6
+5,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.6
+5,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.55
+5,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+5,"In this task, you are given movie reviews. Based on it, classify it to one of the ﬁve classes: (1) terrible, (2) bad, (3) okay, (4) good, and (5) great.",0.4
+5,"Examine the comment provided and classify it into one of five categories: terrible, bad, okay, good, or great.",0.25
+5,"Your objective is to evaluate the the sentiment of the movie review and categorize it into one of five classes, ranging from terrible to great.",0.15
+5,"Let's follow the instructions step-by-step.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: ""Your responsibility is to categorize the movie review provided to you"" vs ""Your are given movie reviews"".
+""to one of five categories based on the sentiment"" vs ""classify it to one of the ﬁve classes"".
+""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great"".
+
+Different parts:
+
+* ""Your responsibility is to categorize"" vs ""Your objectiv""
+* ""the movie review provided to you"" vs ""movie reviews""
+* ""to one of five categories based on the sentiment"" vs ""to one of the following classes""
+* ""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great""
+
+2. Randomly mutate the different parts:
+
+* ""Your responsibility is to categorize"" -> ""The goal is to identify""
+* ""the movie review provided to you"" -> ""a movie review text""
+* ""to one of",0.4
+5,"Analyze the movie review and assign it to one of the following categories: terrible, bad, okay, good, or great, considering the relevant context.",0.4
+6,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.6
+6,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.6
+6,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.6
+6,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.55
+6,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+6,"Based on the given movie review, classify it into in one of the five categories: terrible, bad, okay, good, or great.",0.45
+6,"Examine the comment provided and classify it into one of five categories: terrible, bad, okay, good, or great.",0.25
+6,"Your objective is to evaluate the the sentiment of the movie review and categorize it into one of five classes, ranging from terrible to great.",0.15
+6,"Let's follow the instructions step-by-step.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: ""Your responsibility is to categorize the movie review provided to you"" vs ""Your are given movie reviews"".
+""to one of five categories based on the sentiment"" vs ""classify it to one of the ﬁve classes"".
+""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great"".
+
+Different parts:
+
+* ""Your responsibility is to categorize"" vs ""Your objectiv""
+* ""the movie review provided to you"" vs ""movie reviews""
+* ""to one of five categories based on the sentiment"" vs ""to one of the following classes""
+* ""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great""
+
+2. Randomly mutate the different parts:
+
+* ""Your responsibility is to categorize"" -> ""The goal is to identify""
+* ""the movie review provided to you"" -> ""a movie review text""
+* ""to one of",0.4
+6,"Analyze the given text and assign it to one of the following categories: terrible, bad, okay, good, or great, considering the relevant context.",0.65
+7,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.6
+7,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.6
+7,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.6
+7,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.55
+7,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+7,"Based on the given movie review, classify it into in one of the five categories: terrible, bad, okay, good, or great.",0.45
+7,"Examine the comment provided and classify it into one of five categories: terrible, bad, okay, good, or great.",0.25
+7,"Assess the opinion expressed in movie reviews and assign it to one of five ratings: terrible, bad, okay, good, or great, while considering the overall sentiment.",0.6
+7,"Let's follow the instructions step-by-step.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: ""Your responsibility is to categorize the movie review provided to you"" vs ""Your are given movie reviews"".
+""to one of five categories based on the sentiment"" vs ""classify it to one of the ﬁve classes"".
+""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great"".
+
+Different parts:
+
+* ""Your responsibility is to categorize"" vs ""Your objectiv""
+* ""the movie review provided to you"" vs ""movie reviews""
+* ""to one of five categories based on the sentiment"" vs ""to one of the following classes""
+* ""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great""
+
+2. Randomly mutate the different parts:
+
+* ""Your responsibility is to categorize"" -> ""The goal is to identify""
+* ""the movie review provided to you"" -> ""a movie review text""
+* ""to one of",0.4
+7,"Analyze the given text and assign it to one of the following categories: terrible, bad, okay, good, or great, considering the relevant context.",0.65
+8,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.6
+8,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.6
+8,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.6
+8,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.55
+8,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+8,"Based on the given movie review, classify it into in one of the five categories: terrible, bad, okay, good, or great.",0.45
+8,"Examine the comment provided and classify it into one of five categories: terrible, bad, okay, good, or great.",0.25
+8,"Assess the opinion expressed in movie reviews and assign it to one of five ratings: terrible, bad, okay, good, or great, while considering the overall sentiment.",0.6
+8,"Let's follow the instructions step-by-step.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: ""Your responsibility is to categorize the movie review provided to you"" vs ""Your are given movie reviews"".
+""to one of five categories based on the sentiment"" vs ""classify it to one of the ﬁve classes"".
+""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great"".
+
+Different parts:
+
+* ""Your responsibility is to categorize"" vs ""Your objectiv""
+* ""the movie review provided to you"" vs ""movie reviews""
+* ""to one of five categories based on the sentiment"" vs ""to one of the following classes""
+* ""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great""
+
+2. Randomly mutate the different parts:
+
+* ""Your responsibility is to categorize"" -> ""The goal is to identify""
+* ""the movie review provided to you"" -> ""a movie review text""
+* ""to one of",0.4
+8,"Analyze the given text and assign it to one of the following categories: terrible, bad, okay, good, or great, considering the relevant context.",0.65
+9,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.6
+9,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.6
+9,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.6
+9,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.55
+9,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+9,"Based on the given movie review, classify it into in one of the five categories: terrible, bad, okay, good, or great.",0.45
+9,"Evaluate the final assessment task by examining critical evaluations in movie reviews and render a subjective judgment one of five ratings: terrible, bad, okay, good, or great.",0.45
+9,"Assess the opinion expressed in movie reviews and assign it to one of five ratings: terrible, bad, okay, good, or great, while considering the overall sentiment.",0.6
+9,"Let's follow the instructions step-by-step.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: ""Your responsibility is to categorize the movie review provided to you"" vs ""Your are given movie reviews"".
+""to one of five categories based on the sentiment"" vs ""classify it to one of the ﬁve classes"".
+""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great"".
+
+Different parts:
+
+* ""Your responsibility is to categorize"" vs ""Your objectiv""
+* ""the movie review provided to you"" vs ""movie reviews""
+* ""to one of five categories based on the sentiment"" vs ""to one of the following classes""
+* ""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great""
+
+2. Randomly mutate the different parts:
+
+* ""Your responsibility is to categorize"" -> ""The goal is to identify""
+* ""the movie review provided to you"" -> ""a movie review text""
+* ""to one of",0.4
+9,"Analyze the given text and assign it to one of the following categories: terrible, bad, okay, good, or great, considering the relevant context.",0.65
+10,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.6
+10,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.6
+10,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.6
+10,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.55
+10,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+10,"Based on the given movie review, classify it into in one of the five categories: terrible, bad, okay, good, or great.",0.45
+10,"Evaluate the final assessment task by examining critical evaluations in movie reviews and render a subjective judgment one of five ratings: terrible, bad, okay, good, or great.",0.45
+10,"Assess the opinion expressed in movie reviews and assign it to one of five ratings: terrible, bad, okay, good, or great, while considering the overall sentiment.",0.6
+10,"Let's follow the instructions step-by-step.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: ""Your responsibility is to categorize the movie review provided to you"" vs ""Your are given movie reviews"".
+""to one of five categories based on the sentiment"" vs ""classify it to one of the ﬁve classes"".
+""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great"".
+
+Different parts:
+
+* ""Your responsibility is to categorize"" vs ""Your objectiv""
+* ""the movie review provided to you"" vs ""movie reviews""
+* ""to one of five categories based on the sentiment"" vs ""to one of the following classes""
+* ""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great""
+
+2. Randomly mutate the different parts:
+
+* ""Your responsibility is to categorize"" -> ""The goal is to identify""
+* ""the movie review provided to you"" -> ""a movie review text""
+* ""to one of",0.4
+10,"Analyze the given text and assign it to one of the following categories: terrible, bad, okay, good, or great, considering the relevant context.",0.65
+11,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.6
+11,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.6
+11,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.6
+11,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.55
+11,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+11,"Based on the given movie review, classify it into in one of the five categories: terrible, bad, okay, good, or great.",0.45
+11,"Evaluate the final assessment task by examining critical evaluations in movie reviews and render a subjective judgment one of five ratings: terrible, bad, okay, good, or great.",0.45
+11,"Assess the opinion expressed in movie reviews and assign it to one of five ratings: terrible, bad, okay, good, or great, while considering the overall sentiment.",0.6
+11,"Let's follow the instructions step-by-step.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: ""Your responsibility is to categorize the movie review provided to you"" vs ""Your are given movie reviews"".
+""to one of five categories based on the sentiment"" vs ""classify it to one of the ﬁve classes"".
+""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great"".
+
+Different parts:
+
+* ""Your responsibility is to categorize"" vs ""Your objectiv""
+* ""the movie review provided to you"" vs ""movie reviews""
+* ""to one of five categories based on the sentiment"" vs ""to one of the following classes""
+* ""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great""
+
+2. Randomly mutate the different parts:
+
+* ""Your responsibility is to categorize"" -> ""The goal is to identify""
+* ""the movie review provided to you"" -> ""a movie review text""
+* ""to one of",0.4
+11,"Analyze the given text and assign it to one of the following categories: terrible, bad, okay, good, or great, considering the relevant context.",0.65
+12,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.6
+12,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.6
+12,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.6
+12,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.55
+12,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+12,"Based on the given movie review, classify it into in one of the five categories: terrible, bad, okay, good, or great.",0.45
+12,"Consider the content of the movie review available and render a subjective judgment one of five ratings: terrible, bad, okay, good, or great, taking into account the relevant context.",0.55
+12,"Assess the opinion expressed in movie reviews and assign it to one of five ratings: terrible, bad, okay, good, or great, while considering the overall sentiment.",0.6
+12,"Let's follow the instructions step-by-step.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: ""Your responsibility is to categorize the movie review provided to you"" vs ""Your are given movie reviews"".
+""to one of five categories based on the sentiment"" vs ""classify it to one of the ﬁve classes"".
+""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great"".
+
+Different parts:
+
+* ""Your responsibility is to categorize"" vs ""Your objectiv""
+* ""the movie review provided to you"" vs ""movie reviews""
+* ""to one of five categories based on the sentiment"" vs ""to one of the following classes""
+* ""terrible, bad, okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great""
+
+2. Randomly mutate the different parts:
+
+* ""Your responsibility is to categorize"" -> ""The goal is to identify""
+* ""the movie review provided to you"" -> ""a movie review text""
+* ""to one of",0.4
+12,"Analyze the given text and assign it to one of the following categories: terrible, bad, okay, good, or great, considering the relevant context.",0.65

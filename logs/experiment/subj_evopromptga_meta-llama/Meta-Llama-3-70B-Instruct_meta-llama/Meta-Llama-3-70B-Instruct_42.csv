@@ -1,0 +1,121 @@
+step,prompt,score
+1,Determine whether a given sentence expresses an objective fact or a subjective opinion.,0.65
+1,"Classify the provided statement as either objective or subjective, distinguishing between factual information and personal viewpoint.",0.65
+1,"Your task is to classify the comment ""subjective"" or ""objective"".",0.6
+1,Determine whether a given sentence is subjective or objective in nature.,0.6
+1,"Determine the category of a provided sentence as either subjective or objective, assessing its tone and perspective.",0.6
+1,evaluate each statement as either subjective or objective.,0.55
+1,"Given a statement, classify it as expressing a subjective or objective opinion.",0.55
+1,Determine whether the provided sentence is subjective or objective and return the appropriate label.,0.55
+1,"Determine the category of a movie review based on a given text, subjective or objective.",0.55
+1,"Categorize the provided sentence or comment as subjective or objective, based on its nature.",0.55
+2,"Classify a given sentence as subjective or objective by examining its tone, perspective, and underlying bias.",0.8
+2,"Analyze the provided sentence to categorize it as either subjective or objective, taking into account its underlying tone and point of view.",0.8
+2,"Classify the given statement as either subjective or objective, identifying its inherent bias or factual nature.",0.7
+2,"Categorize the given text as objective (fact-based) or subjective (personal opinion), considering the distinction between factual information and personal perspective.",0.7
+2,"Analyze the provided sentence to categorize it as objective (fact-based) or subjective (opinion-based), considering its tone, perspective, and factual content.",0.7
+2,"Identify the nature of the given sentence or comment, labeling it as either objective (fact-based) or subjective (opinion-based).",0.65
+2,Determine whether a given sentence expresses an objective fact or a subjective opinion.,0.65
+2,"Classify the provided statement as either objective or subjective, distinguishing between factual information and personal viewpoint.",0.65
+2,"Your task is to classify the comment ""subjective"" or ""objective"".",0.6
+2,Determine whether a given sentence is subjective or objective in nature.,0.6
+3,"Determine whether the provided statement is objective, conveying factual information, or subjective, expressing a personal viewpoint or bias.",0.9
+3,"Examine the provided sentence and categorize it as subjective or objective, considering its language, viewpoint, and potential emotional influence.",0.85
+3,"Determine whether the provided statement is objective, conveying factual information, or subjective, reflecting a personal perspective, by analyzing its tone, language, and potential biases.",0.85
+3,"Determine whether the provided sentence is objective, conveying a factual account, or subjective, expressing a personal opinion or bias.",0.85
+3,"Classify a given sentence as subjective or objective by examining its tone, perspective, and underlying bias.",0.8
+3,"Analyze the provided statement to categorize it as subjective or objective, pinpointing any underlying bias or factual basis.",0.8
+3,"Analyze the provided sentence to categorize it as either subjective or objective, taking into account its underlying tone and point of view.",0.8
+3,"Examine the tone, perspective, and underlying bias of the provided sentence to categorize it as either subjective or objective.",0.75
+3,"Classify the given statement as either subjective or objective, identifying its inherent bias or factual nature.",0.7
+3,"Categorize the given text as objective (fact-based) or subjective (personal opinion), considering the distinction between factual information and personal perspective.",0.7
+4,"Determine whether the provided statement is objective, conveying factual information, or subjective, expressing a personal viewpoint or bias.",0.9
+4,"Examine the provided sentence and categorize it as subjective or objective, considering its language, viewpoint, and potential emotional influence.",0.85
+4,"Determine whether the provided statement is objective, conveying factual information, or subjective, reflecting a personal perspective, by analyzing its tone, language, and potential biases.",0.85
+4,"Determine whether the provided sentence is objective, conveying a factual account, or subjective, expressing a personal opinion or bias.",0.85
+4,"Classify a given sentence as subjective or objective by examining its tone, perspective, and underlying bias.",0.8
+4,"Analyze the provided statement to categorize it as subjective or objective, pinpointing any underlying bias or factual basis.",0.8
+4,"Analyze the provided sentence to categorize it as either subjective or objective, taking into account its underlying tone and point of view.",0.8
+4,"Examine the tone, perspective, and underlying bias of the provided sentence to categorize it as either subjective or objective.",0.75
+4,"Classify the given sentence as subjective or objective, taking into account its language, perspective, and potential emotional impact to distinguish between personal opinion and factual information.",0.75
+4,"Classify the given sentence as subjective or objective by examining its language, tone, viewpoint, and potential emotional bias.",0.75
+5,"Determine whether the provided statement is objective, conveying factual information, or subjective, expressing a personal viewpoint or bias.",0.9
+5,"Examine the provided sentence and categorize it as subjective or objective, considering its language, viewpoint, and potential emotional influence.",0.85
+5,"Determine whether the provided statement is objective, conveying factual information, or subjective, reflecting a personal perspective, by analyzing its tone, language, and potential biases.",0.85
+5,"Determine whether the provided sentence is objective, conveying a factual account, or subjective, expressing a personal opinion or bias.",0.85
+5,"Analyze the given text to identify whether it presents objective facts or subjective opinions, considering tone, language, and potential biases.",0.85
+5,"Determine whether the provided sentence expresses a personal viewpoint or presents factual information by examining its language, tone, and perspective.",0.8
+5,"Classify a given sentence as subjective or objective by examining its tone, perspective, and underlying bias.",0.8
+5,"Analyze the provided statement to categorize it as subjective or objective, pinpointing any underlying bias or factual basis.",0.8
+5,"Analyze the provided sentence to categorize it as either subjective or objective, taking into account its underlying tone and point of view.",0.8
+5,"Examine the tone, perspective, and underlying bias of the provided sentence to categorize it as either subjective or objective.",0.75
+6,"Determine whether the provided statement is objective, conveying factual information, or subjective, expressing a personal viewpoint or bias.",0.9
+6,"Examine the provided sentence and categorize it as subjective or objective, considering its language, viewpoint, and potential emotional influence.",0.85
+6,"Determine whether the provided statement is objective, conveying factual information, or subjective, reflecting a personal perspective, by analyzing its tone, language, and potential biases.",0.85
+6,"Determine whether the provided sentence is objective, conveying a factual account, or subjective, expressing a personal opinion or bias.",0.85
+6,"Analyze the given text to identify whether it presents objective facts or subjective opinions, considering tone, language, and potential biases.",0.85
+6,"Determine whether the provided sentence expresses a personal viewpoint or presents factual information by examining its language, tone, and perspective.",0.8
+6,"Classify the given sentence or statement as either objective, presenting facts, or subjective, reflecting personal opinion or prejudice.",0.8
+6,"Classify the given sentence as subjective or objective by evaluating its tone, perspective, and language to distinguish between personal opinions and factual statements.",0.8
+6,"Classify a given sentence as subjective or objective by examining its tone, perspective, and underlying bias.",0.8
+6,"Analyze the provided statement to categorize it as subjective or objective, pinpointing any underlying bias or factual basis.",0.8
+7,"Determine whether the provided statement is objective, conveying factual information, or subjective, expressing a personal viewpoint or bias.",0.9
+7,"Examine the provided sentence and categorize it as subjective or objective, considering its language, viewpoint, and potential emotional influence.",0.85
+7,"Determine whether the provided statement is objective, conveying factual information, or subjective, reflecting a personal perspective, by analyzing its tone, language, and potential biases.",0.85
+7,"Determine whether the provided sentence is objective, conveying a factual account, or subjective, expressing a personal opinion or bias.",0.85
+7,"Analyze the given text to identify whether it presents objective facts or subjective opinions, considering tone, language, and potential biases.",0.85
+7,"Determine whether the provided sentence expresses a personal viewpoint or presents factual information by examining its language, tone, and perspective.",0.8
+7,"Classify the given sentence or statement as either objective, presenting facts, or subjective, reflecting personal opinion or prejudice.",0.8
+7,"Classify the given sentence as subjective or objective by evaluating its tone, perspective, and language to distinguish between personal opinions and factual statements.",0.8
+7,"Classify a given sentence as subjective or objective by examining its tone, perspective, and underlying bias.",0.8
+7,"Analyze the provided statement to categorize it as subjective or objective, pinpointing any underlying bias or factual basis.",0.8
+8,"Determine whether the provided statement is objective, conveying factual information, or subjective, expressing a personal viewpoint or bias.",0.9
+8,"Examine the provided sentence and categorize it as subjective or objective, considering its language, viewpoint, and potential emotional influence.",0.85
+8,"Determine whether the provided statement is objective, conveying factual information, or subjective, reflecting a personal perspective, by analyzing its tone, language, and potential biases.",0.85
+8,"Determine whether the provided sentence is objective, conveying a factual account, or subjective, expressing a personal opinion or bias.",0.85
+8,"Analyze the provided statement to categorize it as either objective, presenting factual information, or subjective, expressing personal opinions or biases.",0.85
+8,"Analyze the given text to identify whether it presents objective facts or subjective opinions, considering tone, language, and potential biases.",0.85
+8,"Distinguish between objective and subjective tones in the given sentence, and specify the underlying facts or biases that support this classification.",0.8
+8,"Determine whether the provided sentence expresses a personal viewpoint or presents factual information by examining its language, tone, and perspective.",0.8
+8,"Classify the given sentence or statement as either objective, presenting facts, or subjective, reflecting personal opinion or prejudice.",0.8
+8,"Classify the given sentence as subjective or objective by evaluating its tone, perspective, and language to distinguish between personal opinions and factual statements.",0.8
+9,"Determine whether the provided statement is objective, conveying factual information, or subjective, expressing a personal viewpoint or bias.",0.9
+9,"Examine the provided sentence and categorize it as subjective or objective, considering its language, viewpoint, and potential emotional influence.",0.85
+9,"Determine whether the provided statement is objective, conveying factual information, or subjective, reflecting a personal perspective, by analyzing its tone, language, and potential biases.",0.85
+9,"Determine whether the provided sentence is objective, conveying a factual account, or subjective, expressing a personal opinion or bias.",0.85
+9,"Analyze the provided statement to categorize it as either objective, presenting factual information, or subjective, expressing personal opinions or biases.",0.85
+9,"Analyze the given text to identify whether it presents objective facts or subjective opinions, considering tone, language, and potential biases.",0.85
+9,"Distinguish between objective and subjective tones in the given sentence, and specify the underlying facts or biases that support this classification.",0.8
+9,"Determine whether the provided sentence expresses a personal viewpoint or presents factual information by examining its language, tone, and perspective.",0.8
+9,"Classify the given sentence or statement as either objective, presenting facts, or subjective, reflecting personal opinion or prejudice.",0.8
+9,"Classify the given sentence as subjective or objective by evaluating its tone, perspective, and language to distinguish between personal opinions and factual statements.",0.8
+10,"Determine whether the provided statement is objective, conveying factual information, or subjective, expressing a personal viewpoint or bias.",0.9
+10,"Examine the provided sentence and categorize it as subjective or objective, considering its language, viewpoint, and potential emotional influence.",0.85
+10,"Determine whether the provided statement is objective, conveying factual information, or subjective, reflecting a personal perspective, by analyzing its tone, language, and potential biases.",0.85
+10,"Determine whether the provided sentence is objective, conveying a factual account, or subjective, expressing a personal opinion or bias.",0.85
+10,"Analyze the provided statement to categorize it as either objective, presenting factual information, or subjective, expressing personal opinions or biases.",0.85
+10,"Analyze the given text to identify whether it presents objective facts or subjective opinions, considering tone, language, and potential biases.",0.85
+10,"Distinguish between objective and subjective tones in the given sentence, and specify the underlying facts or biases that support this classification.",0.8
+10,"Determine whether the provided sentence expresses a personal viewpoint or presents factual information by examining its language, tone, and perspective.",0.8
+10,"Classify the given sentence or statement as either objective, presenting facts, or subjective, reflecting personal opinion or prejudice.",0.8
+10,"Classify the given sentence as subjective or objective by evaluating its tone, perspective, and language to distinguish between personal opinions and factual statements.",0.8
+11,"Determine whether the provided statement is objective, conveying factual information, or subjective, expressing a personal viewpoint or bias.",0.9
+11,"Examine the provided sentence and categorize it as subjective or objective, considering its language, viewpoint, and potential emotional influence.",0.85
+11,"Determine whether the provided statement is objective, conveying factual information, or subjective, reflecting a personal perspective, by analyzing its tone, language, and potential biases.",0.85
+11,"Determine whether the provided sentence is objective, conveying a factual account, or subjective, expressing a personal opinion or bias.",0.85
+11,"Analyze the provided statement to categorize it as either objective, presenting factual information, or subjective, expressing personal opinions or biases.",0.85
+11,"Analyze the given text to identify whether it presents objective facts or subjective opinions, considering tone, language, and potential biases.",0.85
+11,"Distinguish between objective and subjective tones in the given sentence, and specify the underlying facts or biases that support this classification.",0.8
+11,"Determine whether the provided text conveys objective facts or subjective opinions by assessing its language, tone, viewpoint, emotional tone, and potential biases.",0.8
+11,"Determine whether the provided sentence expresses a personal viewpoint or presents factual information by examining its language, tone, and perspective.",0.8
+11,"Classify the given sentence or statement as either objective, presenting facts, or subjective, reflecting personal opinion or prejudice.",0.8
+12,"Determine whether the provided statement is objective, conveying factual information, or subjective, expressing a personal viewpoint or bias.",0.9
+12,"Examine the provided sentence and categorize it as subjective or objective, considering its language, viewpoint, and potential emotional influence.",0.85
+12,"Determine whether the provided statement is objective, conveying factual information, or subjective, reflecting a personal perspective, by analyzing its tone, language, and potential biases.",0.85
+12,"Determine whether the provided sentence is objective, conveying a factual account, or subjective, expressing a personal opinion or bias.",0.85
+12,"Analyze the provided statement to categorize it as either objective, presenting factual information, or subjective, expressing personal opinions or biases.",0.85
+12,"Analyze the given text to identify whether it presents objective facts or subjective opinions, considering tone, language, and potential biases.",0.85
+12,"Distinguish between objective and subjective tones in the given sentence, and specify the underlying facts or biases that support this classification.",0.8
+12,"Determine whether the provided text conveys objective facts or subjective opinions by assessing its language, tone, viewpoint, emotional tone, and potential biases.",0.8
+12,"Determine whether the provided sentence expresses a personal viewpoint or presents factual information by examining its language, tone, and perspective.",0.8
+12,"Classify the given sentence or statement as either objective, presenting facts, or subjective, reflecting personal opinion or prejudice.",0.8

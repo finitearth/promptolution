@@ -1,0 +1,121 @@
+step,prompt,score
+1,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.7
+1,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.6
+1,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.6
+1,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.4
+1,"You are required to categorize the given statement into its correct category: Description, Entity, Expression, Human, Location, or Number.",0.75
+1,"Determine the category that best describes this sentence: Description, Entity, Expression, Human, Location, or Number.",0.3
+1,"Identify the category of the phrase by assigning it to one of the following options: Description, Entity, Expression, Human, Location, or Number.",0.4
+1,"Assign this sentence to one of these categories: Description, Entity, Expression, Human, Location, or Number.",0.2
+1,"Identify the suitable label for this sentence by recognizing the most fitting class from the following options: Description, Entity, Expression, Human, Location, or Number.",0.4
+1,"Select the correct label to the given text from the following categories: Description, Entity, Expression, Human, Location, or Number.",0.45
+2,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.7
+2,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.6
+2,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.6
+2,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.4
+2,"You are required to categorize the given statement into its correct category: Description, Entity, Expression, Human, Location, or Number.",0.75
+2,"Determine the category that best describes this sentence: Description, Entity, Expression, Human, Location, or Number.",0.3
+2,"Identify the category of the phrase by assigning it to one of the following options: Description, Entity, Expression, Human, Location, or Number.",0.4
+2,"Assign this sentence to one of these categories: Description, Entity, Expression, Human, Location, or Number.",0.2
+2,"Identify the suitable label for this sentence by recognizing the most fitting class from the following options: Description, Entity, Expression, Human, Location, or Number.",0.4
+2,"Select the correct label to the given text from the following categories: Description, Entity, Expression, Human, Location, or Number.",0.45
+3,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.7
+3,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.6
+3,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.6
+3,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.4
+3,"You are required to categorize the given statement into its correct category: Description, Entity, Expression, Human, Location, or Number.",0.75
+3,"Determine the category that best describes this sentence: Description, Entity, Expression, Human, Location, or Number.",0.3
+3,"Identify the category of the phrase by assigning it to one of the following options: Description, Entity, Expression, Human, Location, or Number.",0.4
+3,"Assign this sentence to one of these categories: Description, Entity, Expression, Human, Location, or Number.",0.2
+3,"Identify the suitable label for this sentence by recognizing the most fitting class from the following options: Description, Entity, Expression, Human, Location, or Number.",0.4
+3,"Select the correct label to the given text from the following categories: Description, Entity, Expression, Human, Location, or Number.",0.45
+4,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.7
+4,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.6
+4,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.6
+4,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.4
+4,"You are required to categorize the given statement into its correct category: Description, Entity, Expression, Human, Location, or Number.",0.75
+4,"Determine the category that best describes this sentence: Description, Entity, Expression, Human, Location, or Number.",0.3
+4,"Identify the category of the phrase by assigning it to one of the following options: Description, Entity, Expression, Human, Location, or Number.",0.4
+4,"Determine the classification of the sentence fragment by assigning it to one of these categories: Description, Entity, Expression, Human, Location, or Number.",0.6
+4,"Identify the suitable label for this sentence by recognizing the most fitting class from the following options: Description, Entity, Expression, Human, Location, or Number.",0.4
+4,"Select the correct label to the given text from the following categories: Description, Entity, Expression, Human, Location, or Number.",0.45
+5,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.7
+5,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.6
+5,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.6
+5,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.4
+5,"You are required to categorize the given statement into its correct category: Description, Entity, Expression, Human, Location, or Number.",0.75
+5,"Determine the category that best describes this sentence: Description, Entity, Expression, Human, Location, or Number.",0.3
+5,"Identify the category of the phrase by assigning it to one of the following options: Description, Entity, Expression, Human, Location, or Number.",0.4
+5,"Determine the classification of the sentence fragment by assigning it to one of these categories: Description, Entity, Expression, Human, Location, or Number.",0.6
+5,"Identify the suitable label for this sentence by recognizing the most fitting class from the following options: Description, Entity, Expression, Human, Location, or Number.",0.4
+5,"Select the correct label to the given text from the following categories: Description, Entity, Expression, Human, Location, or Number.",0.45
+6,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.7
+6,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.6
+6,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.6
+6,"Classify the category of the provided sentence by selecting among Description, Entity, Expression, Human, Location, or Number that best corresponds",0.55
+6,"You are required to categorize the given statement into its correct category: Description, Entity, Expression, Human, Location, or Number.",0.75
+6,"Determine the category that best describes this sentence: Description, Entity, Expression, Human, Location, or Number.",0.3
+6,"Identify the category of the phrase by assigning it to one of the following options: Description, Entity, Expression, Human, Location, or Number.",0.4
+6,"Determine the classification of the sentence fragment by assigning it to one of these categories: Description, Entity, Expression, Human, Location, or Number.",0.6
+6,"You need to classify the provided sentence by recognizing the most fitting class from the following options: Description, Entity, Expression, Human, Location, or Number.",0.55
+6,"Select the correct label to the given text from the following categories: Description, Entity, Expression, Human, Location, or Number.",0.45
+7,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.7
+7,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.6
+7,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.6
+7,"Classify the category of the provided sentence by selecting among Description, Entity, Expression, Human, Location, or Number that best corresponds",0.55
+7,"You are required to categorize the given statement into its correct category: Description, Entity, Expression, Human, Location, or Number.",0.75
+7,"Determine the category that best describes this sentence: Description, Entity, Expression, Human, Location, or Number.",0.3
+7,"Identify the category of the phrase by assigning it to one of the following options: Description, Entity, Expression, Human, Location, or Number.",0.4
+7,"Determine the classification of the sentence fragment by assigning it to one of these categories: Description, Entity, Expression, Human, Location, or Number.",0.6
+7,"You need to classify the provided sentence by recognizing the most fitting class from the following options: Description, Entity, Expression, Human, Location, or Number.",0.55
+7,"Classify the provided input into its appropriate label from the following categories: Description, Entity, Expression, Human, Location, or Number, by selecting the correct type.",0.55
+8,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.7
+8,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.6
+8,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.6
+8,"Classify the category of the provided sentence by selecting among Description, Entity, Expression, Human, Location, or Number that best corresponds",0.55
+8,"You are required to categorize the given statement into its correct category: Description, Entity, Expression, Human, Location, or Number.",0.75
+8,"Determine the category that best describes this sentence: Description, Entity, Expression, Human, Location, or Number.",0.3
+8,"Identify the category of the phrase by assigning it to one of the following options: Description, Entity, Expression, Human, Location, or Number.",0.4
+8,"Determine the classification of the sentence fragment by assigning it to one of these categories: Description, Entity, Expression, Human, Location, or Number.",0.6
+8,"You need to classify the provided sentence by recognizing the most fitting class from the following options: Description, Entity, Expression, Human, Location, or Number.",0.55
+8,"Classify the provided input into its appropriate label from the following categories: Description, Entity, Expression, Human, Location, or Number, by selecting the correct type.",0.55
+9,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.7
+9,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.6
+9,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.6
+9,"Classify the category of the provided sentence by selecting among Description, Entity, Expression, Human, Location, or Number that best corresponds",0.55
+9,"You are required to categorize the given statement into its correct category: Description, Entity, Expression, Human, Location, or Number.",0.75
+9,"Determine the category that best describes this sentence: Description, Entity, Expression, Human, Location, or Number.",0.3
+9,"Identify the category of the phrase by assigning it to one of the following options: Description, Entity, Expression, Human, Location, or Number.",0.4
+9,"Determine the classification of the sentence fragment by assigning it to one of these categories: Description, Entity, Expression, Human, Location, or Number.",0.6
+9,"You need to classify the provided sentence by recognizing the most fitting class from the following options: Description, Entity, Expression, Human, Location, or Number.",0.55
+9,"Classify the provided input into its appropriate label from the following categories: Description, Entity, Expression, Human, Location, or Number, by selecting the correct type.",0.55
+10,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.7
+10,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.6
+10,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.6
+10,"Classify the category of the provided sentence by selecting among Description, Entity, Expression, Human, Location, or Number that best corresponds",0.55
+10,"You are required to categorize the given statement into its correct category: Description, Entity, Expression, Human, Location, or Number.",0.75
+10,"Determine the category that best describes this sentence: Description, Entity, Expression, Human, Location, or Number.",0.3
+10,"Classify the attribute of the posed inquiry by identifying the category it belongs to, which can be one of the following options: Description, Entity",0.6
+10,"Determine the classification of the sentence fragment by assigning it to one of these categories: Description, Entity, Expression, Human, Location, or Number.",0.6
+10,"You need to classify the provided sentence by recognizing the most fitting class from the following options: Description, Entity, Expression, Human, Location, or Number.",0.55
+10,"Classify the provided input into its appropriate label from the following categories: Description, Entity, Expression, Human, Location, or Number, by selecting the correct type.",0.55
+11,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.7
+11,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.6
+11,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.6
+11,"Classify the category of the provided sentence by selecting among Description, Entity, Expression, Human, Location, or Number that best corresponds",0.55
+11,"You are required to categorize the given statement into its correct category: Description, Entity, Expression, Human, Location, or Number.",0.75
+11,"Determine the category that best describes this sentence: Description, Entity, Expression, Human, Location, or Number.",0.3
+11,"Classify the attribute of the posed inquiry by identifying the category it belongs to, which can be one of the following options: Description, Entity",0.6
+11,"Determine the classification of the sentence fragment by assigning it to one of these categories: Description, Entity, Expression, Human, Location, or Number.",0.6
+11,"You need to classify the provided sentence by recognizing the most fitting class from the following options: Description, Entity, Expression, Human, Location, or Number.",0.55
+11,"Classify the provided input into its appropriate label from the following categories: Description, Entity, Expression, Human, Location, or Number, by selecting the correct type.",0.55
+12,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.7
+12,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.6
+12,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.6
+12,"Classify the category of the provided sentence by selecting among Description, Entity, Expression, Human, Location, or Number that best corresponds",0.55
+12,"You are required to categorize the given statement into its correct category: Description, Entity, Expression, Human, Location, or Number.",0.75
+12,"Determine the category that best describes this sentence: Description, Entity, Expression, Human, Location, or Number.",0.3
+12,"Classify the attribute of the posed inquiry by identifying the category it belongs to, which can be one of the following options: Description, Entity",0.6
+12,"Determine the classification of the sentence fragment by assigning it to one of these categories: Description, Entity, Expression, Human, Location, or Number.",0.6
+12,"You need to classify the provided sentence by recognizing the most fitting class from the following options: Description, Entity, Expression, Human, Location, or Number.",0.55
+12,"Classify the provided input into its appropriate label from the following categories: Description, Entity, Expression, Human, Location, or Number, by selecting the correct type.",0.55

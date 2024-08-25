@@ -1,0 +1,886 @@
+step,prompt,score
+1,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+1,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.35
+1,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.25
+1,"Using the following categories, classify this sentence: Description, Entity, Expression, Human, Location, or Number.",0.2
+1,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.2
+1,"Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.",0.15
+1,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: Determine the category that best describes this sentence: Description, Entity, Expression, Human, Location, or Number.
+
+The different parts are:
+
+""Your task is to choose a type of the question"" vs ""Determine the category that best describes this sentence""
+""from Description, Entity, Expression, Human, Location and Number"" vs no equivalent part in Prompt 2
+=torch= ""from Description, Entity, Expression, Human, Location and Number"" vs ""Description, Entity, Expression, Human, Location, or Number""
+
+2. Randomly mutate the different parts:
+
+""Your task is to choose a type of the question"" -> ""The objective is to categorize a sentence""
+""from Description, Entity, Expression, Human, Location and Number"" -> ""by selecting one of the following categories: Description, Entity, Expression, Human, Location, Number""
+ Torch="" includes"" -> ""includes""
+
+3. Crossover the different parts with the following Prompt 3",0.2
+1,"Identify the nature of the provided statement based on the options - Description, Entity, Expression, Human, Location, or Number",0.2
+1,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**1. Identify the different parts between the Prompt 1 and Prompt 2:**
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location, and Number.
+
+Prompt 2: Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""Please select the correct classification for this sentence""
+""choose from"" vs ""Description, Entity, Expression, Human, Location, or Number""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Classify the given statement""
+""choose from"" -> ""options from the list""
+
+Let's mutate the parts and generate a new prompt:
+
+**New Prompt 1:** Classify the given statement and respond with one of the options from the list.
+
+Please wait for further instructions to proceed with the next steps.",0.2
+1,"Assign an annotation to the given sentence based on the following options: Description, Entity, Expression, Human, Location, or Number.",0.45
+2,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+2,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.35
+2,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.25
+2,"Categorize those questions as one of the following: Description, Entity, Expression, Human, Location, or Number.",0.35
+2,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.2
+2,"Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.",0.15
+2,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: Determine the category that best describes this sentence: Description, Entity, Expression, Human, Location, or Number.
+
+The different parts are:
+
+""Your task is to choose a type of the question"" vs ""Determine the category that best describes this sentence""
+""from Description, Entity, Expression, Human, Location and Number"" vs no equivalent part in Prompt 2
+=torch= ""from Description, Entity, Expression, Human, Location and Number"" vs ""Description, Entity, Expression, Human, Location, or Number""
+
+2. Randomly mutate the different parts:
+
+""Your task is to choose a type of the question"" -> ""The objective is to categorize a sentence""
+""from Description, Entity, Expression, Human, Location and Number"" -> ""by selecting one of the following categories: Description, Entity, Expression, Human, Location, Number""
+ Torch="" includes"" -> ""includes""
+
+3. Crossover the different parts with the following Prompt 3",0.2
+2,"Identify the nature of the provided statement based on the options - Description, Entity, Expression, Human, Location, or Number",0.2
+2,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**1. Identify the different parts between the Prompt 1 and Prompt 2:**
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location, and Number.
+
+Prompt 2: Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""Please select the correct classification for this sentence""
+""choose from"" vs ""Description, Entity, Expression, Human, Location, or Number""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Classify the given statement""
+""choose from"" -> ""options from the list""
+
+Let's mutate the parts and generate a new prompt:
+
+**New Prompt 1:** Classify the given statement and respond with one of the options from the list.
+
+Please wait for further instructions to proceed with the next steps.",0.2
+2,"Assign an annotation to the given sentence based on the following options: Description, Entity, Expression, Human, Location, or Number.",0.45
+3,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+3,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.35
+3,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.25
+3,"Categorize those questions as one of the following: Description, Entity, Expression, Human, Location, or Number.",0.35
+3,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.2
+3,"Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.",0.15
+3,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: Determine the category that best describes this sentence: Description, Entity, Expression, Human, Location, or Number.
+
+The different parts are:
+
+""Your task is to choose a type of the question"" vs ""Determine the category that best describes this sentence""
+""from Description, Entity, Expression, Human, Location and Number"" vs no equivalent part in Prompt 2
+=torch= ""from Description, Entity, Expression, Human, Location and Number"" vs ""Description, Entity, Expression, Human, Location, or Number""
+
+2. Randomly mutate the different parts:
+
+""Your task is to choose a type of the question"" -> ""The objective is to categorize a sentence""
+""from Description, Entity, Expression, Human, Location and Number"" -> ""by selecting one of the following categories: Description, Entity, Expression, Human, Location, Number""
+ Torch="" includes"" -> ""includes""
+
+3. Crossover the different parts with the following Prompt 3",0.2
+3,"Identify the nature of the provided statement based on the options - Description, Entity, Expression, Human, Location, or Number",0.2
+3,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**1. Identify the different parts between the Prompt 1 and Prompt 2:**
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location, and Number.
+
+Prompt 2: Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""Please select the correct classification for this sentence""
+""choose from"" vs ""Description, Entity, Expression, Human, Location, or Number""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Classify the given statement""
+""choose from"" -> ""options from the list""
+
+Let's mutate the parts and generate a new prompt:
+
+**New Prompt 1:** Classify the given statement and respond with one of the options from the list.
+
+Please wait for further instructions to proceed with the next steps.",0.2
+3,"Assign an annotation to the given sentence based on the following options: Description, Entity, Expression, Human, Location, or Number.",0.45
+4,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+4,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.35
+4,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.25
+4,"Categorize those questions as one of the following: Description, Entity, Expression, Human, Location, or Number.",0.35
+4,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.2
+4,"Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.",0.15
+4,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: Determine the category that best describes this sentence: Description, Entity, Expression, Human, Location, or Number.
+
+The different parts are:
+
+""Your task is to choose a type of the question"" vs ""Determine the category that best describes this sentence""
+""from Description, Entity, Expression, Human, Location and Number"" vs no equivalent part in Prompt 2
+=torch= ""from Description, Entity, Expression, Human, Location and Number"" vs ""Description, Entity, Expression, Human, Location, or Number""
+
+2. Randomly mutate the different parts:
+
+""Your task is to choose a type of the question"" -> ""The objective is to categorize a sentence""
+""from Description, Entity, Expression, Human, Location and Number"" -> ""by selecting one of the following categories: Description, Entity, Expression, Human, Location, Number""
+ Torch="" includes"" -> ""includes""
+
+3. Crossover the different parts with the following Prompt 3",0.2
+4,"Identify the nature of the provided statement based on the options - Description, Entity, Expression, Human, Location, or Number",0.2
+4,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**1. Identify the different parts between the Prompt 1 and Prompt 2:**
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location, and Number.
+
+Prompt 2: Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""Please select the correct classification for this sentence""
+""choose from"" vs ""Description, Entity, Expression, Human, Location, or Number""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Classify the given statement""
+""choose from"" -> ""options from the list""
+
+Let's mutate the parts and generate a new prompt:
+
+**New Prompt 1:** Classify the given statement and respond with one of the options from the list.
+
+Please wait for further instructions to proceed with the next steps.",0.2
+4,"Assign an annotation to the given sentence based on the following options: Description, Entity, Expression, Human, Location, or Number.",0.45
+5,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+5,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.35
+5,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.25
+5,"Categorize those questions as one of the following: Description, Entity, Expression, Human, Location, or Number.",0.35
+5,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.2
+5,"Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.",0.15
+5,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: Determine the category that best describes this sentence: Description, Entity, Expression, Human, Location, or Number.
+
+The different parts are:
+
+""Your task is to choose a type of the question"" vs ""Determine the category that best describes this sentence""
+""from Description, Entity, Expression, Human, Location and Number"" vs no equivalent part in Prompt 2
+=torch= ""from Description, Entity, Expression, Human, Location and Number"" vs ""Description, Entity, Expression, Human, Location, or Number""
+
+2. Randomly mutate the different parts:
+
+""Your task is to choose a type of the question"" -> ""The objective is to categorize a sentence""
+""from Description, Entity, Expression, Human, Location and Number"" -> ""by selecting one of the following categories: Description, Entity, Expression, Human, Location, Number""
+ Torch="" includes"" -> ""includes""
+
+3. Crossover the different parts with the following Prompt 3",0.2
+5,"As a categorization expert, define the category of the text and classify it as one of the following options: Description, Entity, Expression, Human, Location, or Number.",0.25
+5,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**1. Identify the different parts between the Prompt 1 and Prompt 2:**
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location, and Number.
+
+Prompt 2: Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""Please select the correct classification for this sentence""
+""choose from"" vs ""Description, Entity, Expression, Human, Location, or Number""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Classify the given statement""
+""choose from"" -> ""options from the list""
+
+Let's mutate the parts and generate a new prompt:
+
+**New Prompt 1:** Classify the given statement and respond with one of the options from the list.
+
+Please wait for further instructions to proceed with the next steps.",0.2
+5,"Assign an annotation to the given sentence based on the following options: Description, Entity, Expression, Human, Location, or Number.",0.45
+6,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+6,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.35
+6,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.25
+6,"Categorize those questions as one of the following: Description, Entity, Expression, Human, Location, or Number.",0.35
+6,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.2
+6,"Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.",0.15
+6,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: Determine the category that best describes this sentence: Description, Entity, Expression, Human, Location, or Number.
+
+The different parts are:
+
+""Your task is to choose a type of the question"" vs ""Determine the category that best describes this sentence""
+""from Description, Entity, Expression, Human, Location and Number"" vs no equivalent part in Prompt 2
+=torch= ""from Description, Entity, Expression, Human, Location and Number"" vs ""Description, Entity, Expression, Human, Location, or Number""
+
+2. Randomly mutate the different parts:
+
+""Your task is to choose a type of the question"" -> ""The objective is to categorize a sentence""
+""from Description, Entity, Expression, Human, Location and Number"" -> ""by selecting one of the following categories: Description, Entity, Expression, Human, Location, Number""
+ Torch="" includes"" -> ""includes""
+
+3. Crossover the different parts with the following Prompt 3",0.2
+6,"As a categorization expert, define the category of the text and classify it as one of the following options: Description, Entity, Expression, Human, Location, or Number.",0.25
+6,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**1. Identify the different parts between the Prompt 1 and Prompt 2:**
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location, and Number.
+
+Prompt 2: Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""Please select the correct classification for this sentence""
+""choose from"" vs ""Description, Entity, Expression, Human, Location, or Number""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Classify the given statement""
+""choose from"" -> ""options from the list""
+
+Let's mutate the parts and generate a new prompt:
+
+**New Prompt 1:** Classify the given statement and respond with one of the options from the list.
+
+Please wait for further instructions to proceed with the next steps.",0.2
+6,"Assign an annotation to the given sentence based on the following options: Description, Entity, Expression, Human, Location, or Number.",0.45
+7,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+7,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.35
+7,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.25
+7,"Categorize those questions as one of the following: Description, Entity, Expression, Human, Location, or Number.",0.35
+7,"Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.",0.2
+7,"Let's follow the instruction step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: As a categorization expert, define the category of the text and classify it as one of the following options: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""As a categorization expert, define the category of the text""
+""Description, Entity, Expression, Human, Location and Number"" vs ""Description, Entity, Expression, Human, Location, or Number""
+""choose from"" vs ""classify it as one of the following options""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Analyze the categorical nature of the information""
+""Description, Entity, Expression, Human, Location and Number"" -> ""categories such as Description, Entity, or Expression""
+""choose from"" -> ""select from""
+""classify it as one of the following options"" -> ""assign to one of the specified categories""
+
+3. Crossover the different parts with the",0.3
+7,"The objective is to categorize a sentence by selecting one of the following categories: Description, Entity, Expression, Human, Location, Number. This includes classifying each sentence and subsequently create a trainable text classification model.",0.3
+7,"As a categorization expert, define the category of the text and classify it as one of the following options: Description, Entity, Expression, Human, Location, or Number.",0.25
+7,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**1. Identify the different parts between the Prompt 1 and Prompt 2:**
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location, and Number.
+
+Prompt 2: Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""Please select the correct classification for this sentence""
+""choose from"" vs ""Description, Entity, Expression, Human, Location, or Number""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Classify the given statement""
+""choose from"" -> ""options from the list""
+
+Let's mutate the parts and generate a new prompt:
+
+**New Prompt 1:** Classify the given statement and respond with one of the options from the list.
+
+Please wait for further instructions to proceed with the next steps.",0.2
+7,"Assign an annotation to the given sentence based on the following options: Description, Entity, Expression, Human, Location, or Number.",0.45
+8,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+8,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.35
+8,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.25
+8,"Categorize those questions as one of the following: Description, Entity, Expression, Human, Location, or Number.",0.35
+8,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: Let's follow the instruction step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: As a categorization expert, define the category of the text and classify it as one of the following options: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""As a categorization expert, define the category of the text""
+""Description, Entity, Expression, Human, Location and Number"" vs ""Description, Entity, Expression, Human, Location, or Number""
+""choose from"" vs ""classify it as one of the following options""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Analyze the categorical nature of the information""
+""Description, Entity",0.25
+8,"Let's follow the instruction step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: As a categorization expert, define the category of the text and classify it as one of the following options: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""As a categorization expert, define the category of the text""
+""Description, Entity, Expression, Human, Location and Number"" vs ""Description, Entity, Expression, Human, Location, or Number""
+""choose from"" vs ""classify it as one of the following options""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Analyze the categorical nature of the information""
+""Description, Entity, Expression, Human, Location and Number"" -> ""categories such as Description, Entity, or Expression""
+""choose from"" -> ""select from""
+""classify it as one of the following options"" -> ""assign to one of the specified categories""
+
+3. Crossover the different parts with the",0.3
+8,"The objective is to categorize a sentence by selecting one of the following categories: Description, Entity, Expression, Human, Location, Number. This includes classifying each sentence and subsequently create a trainable text classification model.",0.3
+8,"As a categorization expert, define the category of the text and classify it as one of the following options: Description, Entity, Expression, Human, Location, or Number.",0.25
+8,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**1. Identify the different parts between the Prompt 1 and Prompt 2:**
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location, and Number.
+
+Prompt 2: Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""Please select the correct classification for this sentence""
+""choose from"" vs ""Description, Entity, Expression, Human, Location, or Number""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Classify the given statement""
+""choose from"" -> ""options from the list""
+
+Let's mutate the parts and generate a new prompt:
+
+**New Prompt 1:** Classify the given statement and respond with one of the options from the list.
+
+Please wait for further instructions to proceed with the next steps.",0.2
+8,"Assign an annotation to the given sentence based on the following options: Description, Entity, Expression, Human, Location, or Number.",0.45
+9,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+9,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.35
+9,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.25
+9,"Categorize those questions as one of the following: Description, Entity, Expression, Human, Location, or Number.",0.35
+9,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: Let's follow the instruction step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: As a categorization expert, define the category of the text and classify it as one of the following options: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""As a categorization expert, define the category of the text""
+""Description, Entity, Expression, Human, Location and Number"" vs ""Description, Entity, Expression, Human, Location, or Number""
+""choose from"" vs ""classify it as one of the following options""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Analyze the categorical nature of the information""
+""Description, Entity",0.25
+9,"Let's follow the instruction step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: As a categorization expert, define the category of the text and classify it as one of the following options: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""As a categorization expert, define the category of the text""
+""Description, Entity, Expression, Human, Location and Number"" vs ""Description, Entity, Expression, Human, Location, or Number""
+""choose from"" vs ""classify it as one of the following options""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Analyze the categorical nature of the information""
+""Description, Entity, Expression, Human, Location and Number"" -> ""categories such as Description, Entity, or Expression""
+""choose from"" -> ""select from""
+""classify it as one of the following options"" -> ""assign to one of the specified categories""
+
+3. Crossover the different parts with the",0.3
+9,"The objective is to categorize a sentence by selecting one of the following categories: Description, Entity, Expression, Human, Location, Number. This includes classifying each sentence and subsequently create a trainable text classification model.",0.3
+9,"As a categorization expert, define the category of the text and classify it as one of the following options: Description, Entity, Expression, Human, Location, or Number.",0.25
+9,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**1. Identify the different parts between the Prompt 1 and Prompt 2:**
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location, and Number.
+
+Prompt 2: Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""Please select the correct classification for this sentence""
+""choose from"" vs ""Description, Entity, Expression, Human, Location, or Number""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Classify the given statement""
+""choose from"" -> ""options from the list""
+
+Let's mutate the parts and generate a new prompt:
+
+**New Prompt 1:** Classify the given statement and respond with one of the options from the list.
+
+Please wait for further instructions to proceed with the next steps.",0.2
+9,"Assign an annotation to the given sentence based on the following options: Description, Entity, Expression, Human, Location, or Number.",0.45
+10,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+10,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.35
+10,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".
+
+Different parts:
+
+* ""Your task is to choose"" vs ""You are given a question and need to detect""
+* ""a type of the question"" vs ""which category""
+* ""Description, Entity, Expression, Human, Location and Number"" vs not changed
+
+2. Randomly mutate the different parts:
+
+* ""Your task is to choose"" -> ""The goal is to determine""
+* ""a type of the question"" -> ""the nature of the inquiry""
+* ""Description, Entity, Expression, Human, Location and Number"" -> ""categories: Description, Entity, Expression, Human, Location, and Number Type""
+
+3. Crossover the different parts with Prompt 3 and generate a final prompt:
+
+Prompt 3: Identify the category that corresponds to this sentence:",0.5
+10,"Categorize those questions as one of the following: Description, Entity, Expression, Human, Location, or Number.",0.35
+10,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: Let's follow the instruction step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: As a categorization expert, define the category of the text and classify it as one of the following options: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""As a categorization expert, define the category of the text""
+""Description, Entity, Expression, Human, Location and Number"" vs ""Description, Entity, Expression, Human, Location, or Number""
+""choose from"" vs ""classify it as one of the following options""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Analyze the categorical nature of the information""
+""Description, Entity",0.25
+10,"Let's follow the instruction step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: As a categorization expert, define the category of the text and classify it as one of the following options: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""As a categorization expert, define the category of the text""
+""Description, Entity, Expression, Human, Location and Number"" vs ""Description, Entity, Expression, Human, Location, or Number""
+""choose from"" vs ""classify it as one of the following options""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Analyze the categorical nature of the information""
+""Description, Entity, Expression, Human, Location and Number"" -> ""categories such as Description, Entity, or Expression""
+""choose from"" -> ""select from""
+""classify it as one of the following options"" -> ""assign to one of the specified categories""
+
+3. Crossover the different parts with the",0.3
+10,"The objective is to categorize a sentence by selecting one of the following categories: Description, Entity, Expression, Human, Location, Number. This includes classifying each sentence and subsequently create a trainable text classification model.",0.3
+10,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+Prompt 1: Let's follow the instruction step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Let's follow the instruction step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: As a categorization expert, define the category of the text and classify it as one of the following options: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""As a categorization expert, define the category of the text""
+""Description, Entity, Expression, Human, Location and Number"" vs ""Description, Entity, Expression, Human, Location, or Number""
+""choose from"" vs ""classify it as one of the following options""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Analyze the categorical nature",0.4
+10,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**1. Identify the different parts between the Prompt 1 and Prompt 2:**
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location, and Number.
+
+Prompt 2: Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""Please select the correct classification for this sentence""
+""choose from"" vs ""Description, Entity, Expression, Human, Location, or Number""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Classify the given statement""
+""choose from"" -> ""options from the list""
+
+Let's mutate the parts and generate a new prompt:
+
+**New Prompt 1:** Classify the given statement and respond with one of the options from the list.
+
+Please wait for further instructions to proceed with the next steps.",0.2
+10,"Let's follow the instructions step-by-step.
+
+**1. Identify the different parts between Prompt 1 and Prompt 2**
+
+Prompt 1: Categorize those questions as one of the following: Description, Entity, Expression, Human, Location, or Number.
+Prompt 2: You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".
+
+Different parts:
+
+* ""Categorize those questions"" vs ""You are given a question""
+* ""Description, Entity, Expression, Human, Location, or Number"" vs ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number""
+
+**2. Randomly mutate the different parts**
+
+* ""Categorize those questions"" -> ""Determine the type of the inquiry""
+* ""You are given a question"" -> ""An inquiry is presented""
+* ""Description, Entity, Expression, Human, Location, or Number"" -> ""Entity, Expression, Number""
+* ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"" -> ""an Entity"", ""a Description"", ""a Number""
+
+**3. Crossover the different parts",0.5
+11,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+11,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.35
+11,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".
+
+Different parts:
+
+* ""Your task is to choose"" vs ""You are given a question and need to detect""
+* ""a type of the question"" vs ""which category""
+* ""Description, Entity, Expression, Human, Location and Number"" vs not changed
+
+2. Randomly mutate the different parts:
+
+* ""Your task is to choose"" -> ""The goal is to determine""
+* ""a type of the question"" -> ""the nature of the inquiry""
+* ""Description, Entity, Expression, Human, Location and Number"" -> ""categories: Description, Entity, Expression, Human, Location, and Number Type""
+
+3. Crossover the different parts with Prompt 3 and generate a final prompt:
+
+Prompt 3: Identify the category that corresponds to this sentence:",0.5
+11,"Categorize those questions as one of the following: Description, Entity, Expression, Human, Location, or Number.",0.35
+11,"I'd be happy to help you generate a better prompt!
+
+Based on the instructions, I identified the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: As a categorization expert, define the category of the text and classify it as one of the following options: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+* ""Determine the type of the given question"" vs ""As a categorization expert, define the category of the text""
+* ""Description, Entity, Expression, Human, Location and Number"" vs ""Description, Entity, Expression, Human, Location, or Number""
+* ""choose from"" vs ""classify it as one of the following options""
+
+I randomly mutated these parts as follows:
+
+* ""Determine the type of the given question"" -> ""Analyze the categorical nature of the information""
+* ""Description, Entity, Expression, Human, Location and Number"" -> ""categories: Description, Entity, Expression, Human, Location, or Number Type""
+* ""choose from"" -> ""identify within""
+
+I then crossed the mutated parts with Prompt 3 to generate a final",0.3
+11,"Let's follow the instruction step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: As a categorization expert, define the category of the text and classify it as one of the following options: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""As a categorization expert, define the category of the text""
+""Description, Entity, Expression, Human, Location and Number"" vs ""Description, Entity, Expression, Human, Location, or Number""
+""choose from"" vs ""classify it as one of the following options""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Analyze the categorical nature of the information""
+""Description, Entity, Expression, Human, Location and Number"" -> ""categories such as Description, Entity, or Expression""
+""choose from"" -> ""select from""
+""classify it as one of the following options"" -> ""assign to one of the specified categories""
+
+3. Crossover the different parts with the",0.3
+11,"The objective is to categorize a sentence by selecting one of the following categories: Description, Entity, Expression, Human, Location, Number. This includes classifying each sentence and subsequently create a trainable text classification model.",0.3
+11,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+Prompt 1: Let's follow the instruction step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Let's follow the instruction step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: As a categorization expert, define the category of the text and classify it as one of the following options: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""As a categorization expert, define the category of the text""
+""Description, Entity, Expression, Human, Location and Number"" vs ""Description, Entity, Expression, Human, Location, or Number""
+""choose from"" vs ""classify it as one of the following options""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Analyze the categorical nature",0.4
+11,"Let's follow the instructions step-by-step to generate a better prompt.
+
+**1. Identify the different parts between the Prompt 1 and Prompt 2:**
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location, and Number.
+
+Prompt 2: Please select the correct classification for this sentence: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""Please select the correct classification for this sentence""
+""choose from"" vs ""Description, Entity, Expression, Human, Location, or Number""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Classify the given statement""
+""choose from"" -> ""options from the list""
+
+Let's mutate the parts and generate a new prompt:
+
+**New Prompt 1:** Classify the given statement and respond with one of the options from the list.
+
+Please wait for further instructions to proceed with the next steps.",0.2
+11,"Let's follow the instructions step-by-step.
+
+**1. Identify the different parts between Prompt 1 and Prompt 2**
+
+Prompt 1: Categorize those questions as one of the following: Description, Entity, Expression, Human, Location, or Number.
+Prompt 2: You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".
+
+Different parts:
+
+* ""Categorize those questions"" vs ""You are given a question""
+* ""Description, Entity, Expression, Human, Location, or Number"" vs ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number""
+
+**2. Randomly mutate the different parts**
+
+* ""Categorize those questions"" -> ""Determine the type of the inquiry""
+* ""You are given a question"" -> ""An inquiry is presented""
+* ""Description, Entity, Expression, Human, Location, or Number"" -> ""Entity, Expression, Number""
+* ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"" -> ""an Entity"", ""a Description"", ""a Number""
+
+**3. Crossover the different parts",0.5
+12,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.45
+12,"You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".",0.35
+12,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".
+
+Different parts:
+
+* ""Your task is to choose"" vs ""You are given a question and need to detect""
+* ""a type of the question"" vs ""which category""
+* ""Description, Entity, Expression, Human, Location and Number"" vs not changed
+
+2. Randomly mutate the different parts:
+
+* ""Your task is to choose"" -> ""The goal is to determine""
+* ""a type of the question"" -> ""the nature of the inquiry""
+* ""Description, Entity, Expression, Human, Location and Number"" -> ""categories: Description, Entity, Expression, Human, Location, and Number Type""
+
+3. Crossover the different parts with Prompt 3 and generate a final prompt:
+
+Prompt 3: Identify the category that corresponds to this sentence:",0.5
+12,"Categorize those questions as one of the following: Description, Entity, Expression, Human, Location, or Number.",0.35
+12,"Analyze the categorical nature of the information and identify the category within categories: Description, Entity, Expression, Human, Location, or Number Type, as a categorization expert, while considering the context and meaning of the text.",0.45
+12,"Let's follow the instruction step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: As a categorization expert, define the category of the text and classify it as one of the following options: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""As a categorization expert, define the category of the text""
+""Description, Entity, Expression, Human, Location and Number"" vs ""Description, Entity, Expression, Human, Location, or Number""
+""choose from"" vs ""classify it as one of the following options""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Analyze the categorical nature of the information""
+""Description, Entity, Expression, Human, Location and Number"" -> ""categories such as Description, Entity, or Expression""
+""choose from"" -> ""select from""
+""classify it as one of the following options"" -> ""assign to one of the specified categories""
+
+3. Crossover the different parts with the",0.3
+12,"The objective is to categorize a sentence by selecting one of the following categories: Description, Entity, Expression, Human, Location, Number. This includes classifying each sentence and subsequently create a trainable text classification model.",0.3
+12,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+Prompt 1: Let's follow the instruction step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Let's follow the instruction step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location and Number.
+Prompt 2: As a categorization expert, define the category of the text and classify it as one of the following options: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""As a categorization expert, define the category of the text""
+""Description, Entity, Expression, Human, Location and Number"" vs ""Description, Entity, Expression, Human, Location, or Number""
+""choose from"" vs ""classify it as one of the following options""
+
+2. Randomly mutate the different parts:
+
+""Determine the type of the given question"" -> ""Analyze the categorical nature",0.4
+12,"Based on the instructions, I will proceed with the next steps.
+
+**1. Identify the different parts between the Prompt 1 and Prompt 2:**
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location, and Number.
+
+Prompt 2: As a categorization expert, define the category of the text and classify it as one of the following options: Description, Entity, Expression, Human, Location, or Number.
+
+Different parts:
+
+""Determine the type of the given question"" vs ""As a categorization expert, define the category of the text""
+""Description, Entity, Expression, Human, Location and Number"" vs ""Description, Entity, Expression, Human, Location, or Number""
+""choose from"" vs ""classify it as one of the following options""
+
+**2. Randomly mutate the different parts:**
+
+""Determine the type of the given question"" -> ""Analyze the categorical nature of the information""
+""Description, Entity, Expression, Human, Location and Number"" -> ""categories such as Description, Entity, or Expression""
+""choose from"" -> ""select from""
+""classify it as one of the following options"" -> ""assign to one of the specified categories""
+
+**3. C",0.3
+12,"Let's follow the instructions step-by-step.
+
+**1. Identify the different parts between Prompt 1 and Prompt 2**
+
+Prompt 1: Categorize those questions as one of the following: Description, Entity, Expression, Human, Location, or Number.
+Prompt 2: You are given a question. You need to detect which category better describes the question. Answer with ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"".
+
+Different parts:
+
+* ""Categorize those questions"" vs ""You are given a question""
+* ""Description, Entity, Expression, Human, Location, or Number"" vs ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number""
+
+**2. Randomly mutate the different parts**
+
+* ""Categorize those questions"" -> ""Determine the type of the inquiry""
+* ""You are given a question"" -> ""An inquiry is presented""
+* ""Description, Entity, Expression, Human, Location, or Number"" -> ""Entity, Expression, Number""
+* ""Description"", ""Entity"", ""Expression"", ""Human"", ""Location"", and ""Number"" -> ""an Entity"", ""a Description"", ""a Number""
+
+**3. Crossover the different parts",0.5

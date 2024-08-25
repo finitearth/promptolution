@@ -1,0 +1,1226 @@
+step,prompt,score
+1,"Given a statement, classify it as expressing a subjective or objective opinion.",0.55
+1,"Examine claims and assess whether they express a subjective or objective opinion, given the information provided.",0.65
+1,"Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.",0.7
+1,Consider the assessment and determine the stance of each sentence as either subjective or objective.,0.55
+1,Task is to identify the sentence and determine whether it is either objective or subjective.,0.6
+1,"Please perform Subjectivity Classification task. Given the sentence, assign a label from ['subjective', 'objective']. Return label only without any other text.",0.45
+1,"Your task is to classify the comment ""subjective"" or ""objective"".",0.4
+1,"Determine the category of a movie review based on a given text, subjective or objective.",0.4
+1,"Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.",0.55
+1,Analyze the declaration and assign a label of 'subjective' or 'objective' based on the sentiment expressed.,0.4
+2,"Given a statement, classify it as expressing a subjective or objective opinion.",0.55
+2,"Examine claims and assess whether they express a subjective or objective opinion, given the information provided.",0.65
+2,"Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.",0.7
+2,Consider the assessment and determine the stance of each sentence as either subjective or objective.,0.55
+2,Task is to identify the sentence and determine whether it is either objective or subjective.,0.6
+2,"Please perform Subjectivity Classification task. Given the sentence, assign a label from ['subjective', 'objective']. Return label only without any other text.",0.45
+2,"Your task is to classify the comment ""subjective"" or ""objective"".",0.4
+2,"Determine the category of a movie review based on a given text, subjective or objective.",0.4
+2,"Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.",0.55
+2,Analyze the declaration and assign a label of 'subjective' or 'objective' based on the sentiment expressed.,0.4
+3,"Given a statement, classify it as expressing a subjective or objective opinion.",0.55
+3,"Examine claims and assess whether they express a subjective or objective opinion, given the information provided.",0.65
+3,"Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.",0.7
+3,Consider the assessment and determine the stance of each sentence as either subjective or objective.,0.55
+3,Task is to identify the sentence and determine whether it is either objective or subjective.,0.6
+3,"Examine the statement and identify the emotions conveyed in the text, then classify it as 'neutral', 'bias', based on the presence of subjective or objective tone.</",0.5
+3,"Your task is to classify the comment ""subjective"" or ""objective"".",0.4
+3,"I'd be happy to help you generate a better prompt!
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+""Assess the given phrase"" -> ""Analyze the given statement""
+""topic-neutral or opinion-based"" -> ""either objective or subjective""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+""perceptual or factual"" -> ""either concrete or abstract""
+""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following Prompt 3 and generate a final prompt bracketed with",0.5
+3,"Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.",0.55
+3,Analyze the declaration and assign a label of 'subjective' or 'objective' based on the sentiment expressed.,0.4
+4,"Given a statement, classify it as expressing a subjective or objective opinion.",0.55
+4,"Examine claims and assess whether they express a subjective or objective opinion, given the information provided.",0.65
+4,"Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.",0.7
+4,Consider the assessment and determine the stance of each sentence as either subjective or objective.,0.55
+4,Task is to identify the sentence and determine whether it is either objective or subjective.,0.6
+4,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+""Assess the given phrase"" -> ""Analyze the statement""
+""topic-neutral or opinion-based"" -> ""either objective or subjective""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+""perceptual or factual"" -> ""either concrete or abstract""
+""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following Prompt 3 and generate a final prompt bracketed",0.55
+4,"I'm happy to help! Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+""Assess the given phrase"" -> ""Analyze the provided language""
+""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+""perceptual or factual"" -> ""concrete or abstract information""
+""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with the following Prompt",0.55
+4,"Here are the results of following the instructions:
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Analyze the given statement""
+* ""topic-neutral or opinion-based"" -> ""either objective or subjective""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+* ""perceptual or factual"" -> ""either concrete or abstract""
+* ""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following Prompt 3 and",0.55
+4,"Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.",0.55
+4,Analyze the declaration and assign a label of 'subjective' or 'objective' based on the sentiment expressed.,0.4
+5,"Given a statement, classify it as expressing a subjective or objective opinion.",0.55
+5,"Examine claims and assess whether they express a subjective or objective opinion, given the information provided.",0.65
+5,"Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.",0.7
+5,Consider the assessment and determine the stance of each sentence as either subjective or objective.,0.55
+5,Task is to identify the sentence and determine whether it is either objective or subjective.,0.6
+5,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+""Assess the given phrase"" -> ""Analyze the statement""
+""topic-neutral or opinion-based"" -> ""either objective or subjective""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+""perceptual or factual"" -> ""either concrete or abstract""
+""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following Prompt 3 and generate a final prompt bracketed",0.55
+5,"I'm happy to help! Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+""Assess the given phrase"" -> ""Analyze the provided language""
+""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+""perceptual or factual"" -> ""concrete or abstract information""
+""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with the following Prompt",0.55
+5,"Here are the results of following the instructions:
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Analyze the given statement""
+* ""topic-neutral or opinion-based"" -> ""either objective or subjective""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+* ""perceptual or factual"" -> ""either concrete or abstract""
+* ""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following Prompt 3 and",0.55
+5,"Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.",0.55
+5,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+""Assess the given phrase"" -> ""Analyze the provided language""
+""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+""perceptual or factual"" -> ""concrete or abstract information""
+""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with Prompt 3 to generate a final prompt:
+
+Prompt",0.5
+6,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Evaluate the statement""
+* ""topic-neutral or opinion-based"" -> ""either objective or subjective""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+* ""perceptual or factual"" -> ""either concrete or abstract""
+* ""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following Prompt",0.6
+6,"Examine claims and assess whether they express a subjective or objective opinion, given the information provided.",0.65
+6,"Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.",0.7
+6,Consider the assessment and determine the stance of each sentence as either subjective or objective.,0.55
+6,Task is to identify the sentence and determine whether it is either objective or subjective.,0.6
+6,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+""Assess the given phrase"" -> ""Analyze the statement""
+""topic-neutral or opinion-based"" -> ""either objective or subjective""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+""perceptual or factual"" -> ""either concrete or abstract""
+""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following Prompt 3 and generate a final prompt bracketed",0.55
+6,"I'm happy to help! Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+""Assess the given phrase"" -> ""Analyze the provided language""
+""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+""perceptual or factual"" -> ""concrete or abstract information""
+""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with the following Prompt",0.55
+6,"I'll follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Analyze the statement""
+* ""topic-neutral or opinion-based"" -> ""either objective or subjective""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+* ""perceptual or factual"" -> ""either concrete or abstract""
+* ""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following",0.6
+6,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Analyze the provided language""
+* ""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+* ""perceptual or factual"" -> ""concrete or abstract information""
+* ""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with",0.6
+6,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+""Assess the given phrase"" -> ""Analyze the provided language""
+""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+""perceptual or factual"" -> ""concrete or abstract information""
+""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with Prompt 3 to generate a final prompt:
+
+Prompt",0.5
+7,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Evaluate the statement""
+* ""topic-neutral or opinion-based"" -> ""either objective or subjective""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+* ""perceptual or factual"" -> ""either concrete or abstract""
+* ""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following Prompt",0.6
+7,"Examine claims and assess whether they express a subjective or objective opinion, given the information provided.",0.65
+7,"Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.",0.7
+7,Consider the assessment and determine the stance of each sentence as either subjective or objective.,0.55
+7,Task is to identify the sentence and determine whether it is either objective or subjective.,0.6
+7,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+""Assess the given phrase"" -> ""Analyze the statement""
+""topic-neutral or opinion-based"" -> ""either objective or subjective""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+""perceptual or factual"" -> ""either concrete or abstract""
+""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following Prompt 3 and generate a final prompt bracketed",0.55
+7,"I'm happy to help! Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+""Assess the given phrase"" -> ""Analyze the provided language""
+""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+""perceptual or factual"" -> ""concrete or abstract information""
+""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with the following Prompt",0.55
+7,"I'll follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Analyze the statement""
+* ""topic-neutral or opinion-based"" -> ""either objective or subjective""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+* ""perceptual or factual"" -> ""either concrete or abstract""
+* ""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following",0.6
+7,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Analyze the provided language""
+* ""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+* ""perceptual or factual"" -> ""concrete or abstract information""
+* ""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with",0.6
+7,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+""Assess the given phrase"" -> ""Analyze the provided language""
+""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+""perceptual or factual"" -> ""concrete or abstract information""
+""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with Prompt 3 to generate a final prompt:
+
+Prompt",0.5
+8,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Evaluate the statement""
+* ""topic-neutral or opinion-based"" -> ""either objective or subjective""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+* ""perceptual or factual"" -> ""either concrete or abstract""
+* ""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following Prompt",0.6
+8,"Examine claims and assess whether they express a subjective or objective opinion, given the information provided.",0.65
+8,"Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.",0.7
+8,Consider the assessment and determine the stance of each sentence as either subjective or objective.,0.55
+8,"Evaluate the evaluation and categorize the nature of the information in the given sentence as either objective or impression, considering whether it falls under",0.65
+8,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+""Assess the given phrase"" -> ""Analyze the statement""
+""topic-neutral or opinion-based"" -> ""either objective or subjective""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+""perceptual or factual"" -> ""either concrete or abstract""
+""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following Prompt 3 and generate a final prompt bracketed",0.55
+8,"I'm happy to help! Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+""Assess the given phrase"" -> ""Analyze the provided language""
+""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+""perceptual or factual"" -> ""concrete or abstract information""
+""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with the following Prompt",0.55
+8,"I'll follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Analyze the statement""
+* ""topic-neutral or opinion-based"" -> ""either objective or subjective""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+* ""perceptual or factual"" -> ""either concrete or abstract""
+* ""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following",0.6
+8,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Analyze the provided language""
+* ""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+* ""perceptual or factual"" -> ""concrete or abstract information""
+* ""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with",0.6
+8,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+""Assess the given phrase"" -> ""Analyze the provided language""
+""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+""perceptual or factual"" -> ""concrete or abstract information""
+""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with Prompt 3 to generate a final prompt:
+
+Prompt",0.5
+9,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Evaluate the statement""
+* ""topic-neutral or opinion-based"" -> ""either objective or subjective""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+* ""perceptual or factual"" -> ""either concrete or abstract""
+* ""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following Prompt",0.6
+9,"Examine claims and assess whether they express a subjective or objective opinion, given the information provided.",0.65
+9,"Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.",0.7
+9,Consider the assessment and determine the stance of each sentence as either subjective or objective.,0.55
+9,"Evaluate the evaluation and categorize the nature of the information in the given sentence as either objective or impression, considering whether it falls under",0.65
+9,"I'd be happy to help you generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Analyze the statement""
+* ""topic-neutral or opinion-based"" -> ""either objective or subjective""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+* ""perceptual or factual"" -> ""either concrete or abstract""
+* ""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following Prompt:
+
+Prompt",0.6
+9,"I'm happy to help! Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+""Assess the given phrase"" -> ""Analyze the provided language""
+""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+""perceptual or factual"" -> ""concrete or abstract information""
+""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with the following Prompt",0.55
+9,"I'll follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Analyze the statement""
+* ""topic-neutral or opinion-based"" -> ""either objective or subjective""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+* ""perceptual or factual"" -> ""either concrete or abstract""
+* ""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following",0.6
+9,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Analyze the provided language""
+* ""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+* ""perceptual or factual"" -> ""concrete or abstract information""
+* ""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with",0.6
+9,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+""Assess the given phrase"" -> ""Analyze the provided language""
+""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+""perceptual or factual"" -> ""concrete or abstract information""
+""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with Prompt 3 to generate a final prompt:
+
+Prompt",0.5
+10,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Evaluate the statement""
+* ""topic-neutral or opinion-based"" -> ""either objective or subjective""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+* ""perceptual or factual"" -> ""either concrete or abstract""
+* ""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following Prompt",0.6
+10,"Examine claims and assess whether they express a subjective or objective opinion, given the information provided.",0.65
+10,"Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.",0.7
+10,Consider the assessment and determine the stance of each sentence as either subjective or objective.,0.55
+10,"Evaluate the evaluation and categorize the nature of the information in the given sentence as either objective or impression, considering whether it falls under",0.65
+10,"I'd be happy to help you generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Analyze the statement""
+* ""topic-neutral or opinion-based"" -> ""either objective or subjective""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+* ""perceptual or factual"" -> ""either concrete or abstract""
+* ""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following Prompt:
+
+Prompt",0.6
+10,"I'm happy to help! Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+""Assess the given phrase"" -> ""Analyze the provided language""
+""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+""perceptual or factual"" -> ""concrete or abstract information""
+""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with the following Prompt",0.55
+10,"I'll follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Analyze the statement""
+* ""topic-neutral or opinion-based"" -> ""either objective or subjective""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+* ""perceptual or factual"" -> ""either concrete or abstract""
+* ""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following",0.6
+10,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Analyze the provided language""
+* ""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+* ""perceptual or factual"" -> ""concrete or abstract information""
+* ""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with",0.6
+10,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+""Assess the given phrase"" -> ""Analyze the provided language""
+""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+""perceptual or factual"" -> ""concrete or abstract information""
+""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with Prompt 3 to generate a final prompt:
+
+Prompt",0.5
+11,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Evaluate the statement""
+* ""topic-neutral or opinion-based"" -> ""either objective or subjective""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+* ""perceptual or factual"" -> ""either concrete or abstract""
+* ""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following Prompt",0.6
+11,"Examine claims and assess whether they express a subjective or objective opinion, given the information provided.",0.65
+11,"Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.",0.7
+11,Consider the assessment and determine the stance of each sentence as either subjective or objective.,0.55
+11,"Evaluate the evaluation and categorize the nature of the information in the given sentence as either objective or impression, considering whether it falls under",0.65
+11,"I'd be happy to help you generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Analyze the statement""
+* ""topic-neutral or opinion-based"" -> ""either objective or subjective""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+* ""perceptual or factual"" -> ""either concrete or abstract""
+* ""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following Prompt:
+
+Prompt",0.6
+11,"I'm happy to help! Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+""Assess the given phrase"" -> ""Analyze the provided language""
+""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+""perceptual or factual"" -> ""concrete or abstract information""
+""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with the following Prompt",0.55
+11,"I'll follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Analyze the statement""
+* ""topic-neutral or opinion-based"" -> ""either objective or subjective""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+* ""perceptual or factual"" -> ""either concrete or abstract""
+* ""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following",0.6
+11,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Analyze the provided language""
+* ""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+* ""perceptual or factual"" -> ""concrete or abstract information""
+* ""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with",0.6
+11,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+""Assess the given phrase"" -> ""Analyze the provided language""
+""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+""perceptual or factual"" -> ""concrete or abstract information""
+""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with Prompt 3 to generate a final prompt:
+
+Prompt",0.5
+12,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Evaluate the statement""
+* ""topic-neutral or opinion-based"" -> ""either objective or subjective""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+* ""perceptual or factual"" -> ""either concrete or abstract""
+* ""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following Prompt",0.6
+12,"Examine claims and assess whether they express a subjective or objective opinion, given the information provided.",0.65
+12,"Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.",0.7
+12,Consider the assessment and determine the stance of each sentence as either subjective or objective.,0.55
+12,"Evaluate the evaluation and categorize the nature of the information in the given sentence as either objective or impression, considering whether it falls under",0.65
+12,"I'd be happy to help you generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Analyze the statement""
+* ""topic-neutral or opinion-based"" -> ""either objective or subjective""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+* ""perceptual or factual"" -> ""either concrete or abstract""
+* ""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following Prompt:
+
+Prompt",0.6
+12,"I'm happy to help! Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+""Assess the given phrase"" -> ""Analyze the provided language""
+""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+""perceptual or factual"" -> ""concrete or abstract information""
+""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with the following Prompt",0.55
+12,"I'll follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Analyze the statement""
+* ""topic-neutral or opinion-based"" -> ""either objective or subjective""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying tone and message""
+
+* ""perceptual or factual"" -> ""either concrete or abstract""
+* ""while considering the context in which they appear"" -> ""by examining the broader implications""
+
+3. Crossover the different parts with the following",0.6
+12,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+* ""Assess the given phrase"" vs ""Determine the nature of the assertion""
+* ""topic-neutral or opinion-based"" vs ""perceptual or factual""
+* ""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+* ""Assess the given phrase"" -> ""Analyze the provided language""
+* ""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+* ""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+* ""perceptual or factual"" -> ""concrete or abstract information""
+* ""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with",0.6
+12,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Assess the given phrase and categorize it as either topic-neutral or opinion-based, determining whether it falls under attitude or reality.
+Prompt 2: Determine the nature of the assertion as either perceptual or factual for sentences or phrases, while considering the context in which they appear.
+
+Different parts:
+
+""Assess the given phrase"" vs ""Determine the nature of the assertion""
+""topic-neutral or opinion-based"" vs ""perceptual or factual""
+""determining whether it falls under attitude or reality"" vs ""while considering the context in which they appear""
+
+2. Randomly mutate the different parts:
+
+""Assess the given phrase"" -> ""Analyze the provided language""
+""topic-neutral or opinion-based"" -> ""objective or emotive tone""
+""determining whether it falls under attitude or reality"" -> ""examining the underlying sentiment""
+
+""perceptual or factual"" -> ""concrete or abstract information""
+""while considering the context in which they appear"" -> ""in the light of the broader narrative""
+
+3. Crossover the different parts with Prompt 3 to generate a final prompt:
+
+Prompt",0.5
