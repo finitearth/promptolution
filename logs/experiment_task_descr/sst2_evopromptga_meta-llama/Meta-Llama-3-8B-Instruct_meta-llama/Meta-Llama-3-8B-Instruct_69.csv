@@ -1,0 +1,121 @@
+step,prompt,score
+1,Classify the input as 'positive' or 'negative' by understanding the sentiment and context of the text,1.0
+1,"Classify the movie review text as positive or negative, considering the sentiment expressed in the review.",0.95
+1,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+1,"Classify the provided movie review as positive or negative, considering the entire sentence and context, to accurately gauge the sentiment expressed.",0.9
+1,"Your task is to classify the comment ""positive"" or ""negative"".",0.85
+1,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.85
+1,"Classify the input text as having a positive or negative sentiment, and return the corresponding label.",0.85
+1,Classify the given movie review as having positive or negative sentiment,0.85
+1,"Now, as a classifier, please determine the sentiment polarity of the given text, classifying it as either positive or negative.",0.8
+1,"Given a statement, classify it as expressing a positive or negative opinion.",0.8
+2,"Classify this text as 'positive' or 'negative' by determining its sentiment, and provide the corresponding label.",1.0
+2,"Classify the movie review text as 'positive' or 'negative', taking into account the entire sentence and contextual information to accurately determine the sentiment.",1.0
+2,Classify the input as 'positive' or 'negative' by understanding the sentiment and context of the text,1.0
+2,"Determine the sentiment of the text, classifying it as 'positive', 'negative', or understanding the emotional undertones by examining the context and emotional tone.",0.95
+2,"Classify the movie review text as positive or negative, considering the sentiment expressed in the review.",0.95
+2,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+2,"Classify the provided movie review as positive or negative, considering the entire sentence and context, to accurately gauge the sentiment expressed.",0.9
+2,Classify the movie review as expressing a positive or negative opinion.,0.9
+2,"Your task is to classify the comment ""positive"" or ""negative"".",0.85
+2,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text.",0.85
+3,"Classify this text as 'positive' or 'negative' by determining its sentiment, and provide the corresponding label.",1.0
+3,"Classify the movie review text as 'positive' or 'negative', taking into account the entire sentence and contextual information to accurately determine the sentiment.",1.0
+3,Classify the input as 'positive' or 'negative' by understanding the sentiment and context of the text,1.0
+3,"Read and classify the given movie review text as expressing either a positive or negative sentiment, considering the context and sentiment cues within the text.",0.95
+3,"Determine the sentiment of the text, classifying it as 'positive', 'negative', or understanding the emotional undertones by examining the context and emotional tone.",0.95
+3,"Classify the provided movie review as ""positive"" or ""negative"", indicating the sentiment expressed.",0.95
+3,"Classify the movie review text as positive or negative, considering the sentiment expressed in the review.",0.95
+3,Classify the given movie review as 'positive' or 'negative' sentiment.,0.95
+3,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+3,Classify the provided text as 'positive' or 'negative' by understanding its sentiment and context,0.9
+4,"Classify this text as 'positive' or 'negative' by determining its sentiment, and provide the corresponding label.",1.0
+4,"Classify the sentiment of the movie review text as 'positive' or 'negative', considering the emotional tone and context within the text.",1.0
+4,"Classify the movie review text as 'positive' or 'negative', taking into account the entire sentence and contextual information to accurately determine the sentiment.",1.0
+4,Classify the input as 'positive' or 'negative' by understanding the sentiment and context of the text,1.0
+4,"Classify the given movie review sentence as 'positive' or 'negative' sentiment, taking into account its context and meaning.",1.0
+4,"Read and classify the given movie review text as expressing either a positive or negative sentiment, considering the context and sentiment cues within the text.",0.95
+4,"Determine the sentiment of the text, classifying it as 'positive', 'negative', or understanding the emotional undertones by examining the context and emotional tone.",0.95
+4,Determine the sentiment of the given text as 'positive' or 'negative' based on its context.,0.95
+4,"Classify the provided movie review as ""positive"" or ""negative"", indicating the sentiment expressed.",0.95
+4,"Classify the movie review text as positive or negative, considering the sentiment expressed in the review.",0.95
+5,"Classify this text as 'positive' or 'negative' by determining its sentiment, and provide the corresponding label.",1.0
+5,"Classify the sentiment of the movie review text as 'positive' or 'negative', considering the emotional tone and context within the text.",1.0
+5,"Classify the movie review text as 'positive' or 'negative', taking into account the entire sentence and contextual information to accurately determine the sentiment.",1.0
+5,Classify the input as 'positive' or 'negative' by understanding the sentiment and context of the text,1.0
+5,"Classify the given movie review sentence as 'positive' or 'negative' sentiment, taking into account its context and meaning.",1.0
+5,"Analyze the provided movie review text to classify its sentiment as either 'positive' or 'negative', considering the emotional undertones and overall context.",1.0
+5,"Analyze the provided movie review sentence to determine whether it expresses a positive or negative sentiment, taking into account the reviewer's emotional tone and the context in which the review was written.",1.0
+5,"Read and classify the given movie review text as expressing either a positive or negative sentiment, considering the context and sentiment cues within the text.",0.95
+5,"Determine the sentiment of the text, classifying it as 'positive', 'negative', or understanding the emotional undertones by examining the context and emotional tone.",0.95
+5,Determine the sentiment of the given text as 'positive' or 'negative' based on its context.,0.95
+6,"Classify this text as 'positive' or 'negative' by determining its sentiment, and provide the corresponding label.",1.0
+6,"Classify the sentiment of the movie review text as 'positive' or 'negative', considering the emotional tone and context within the text.",1.0
+6,"Classify the movie review text as 'positive' or 'negative', taking into account the entire sentence and contextual information to accurately determine the sentiment.",1.0
+6,Classify the input as 'positive' or 'negative' by understanding the sentiment and context of the text,1.0
+6,"Classify the given movie review sentence as 'positive' or 'negative' sentiment, taking into account its context and meaning.",1.0
+6,"Analyze the provided movie review text to classify its sentiment as either 'positive' or 'negative', considering the emotional undertones and overall context.",1.0
+6,"Analyze the provided movie review sentence to determine whether it expresses a positive or negative sentiment, taking into account the reviewer's emotional tone and the context in which the review was written.",1.0
+6,"Read and classify the given movie review text as expressing either a positive or negative sentiment, considering the context and sentiment cues within the text.",0.95
+6,"Determine the sentiment of the text, classifying it as 'positive', 'negative', or understanding the emotional undertones by examining the context and emotional tone.",0.95
+6,Determine the sentiment of the given text as 'positive' or 'negative' based on its context.,0.95
+7,"Given a movie review, use context and sentiment cues to predict whether it's 'positive' or 'negative', and return the corresponding label.",1.0
+7,"Determine the sentiment of the text, classifying it as 'positive' or 'negative' based on its context, with consideration of emotional undertones.",1.0
+7,"Classify this text as 'positive' or 'negative' by determining its sentiment, and provide the corresponding label.",1.0
+7,"Classify the sentiment of the movie review text as 'positive' or 'negative', considering the emotional tone and context within the text.",1.0
+7,"Classify the movie review text as 'positive' or 'negative', taking into account the entire sentence and contextual information to accurately determine the sentiment.",1.0
+7,Classify the input as 'positive' or 'negative' by understanding the sentiment and context of the text,1.0
+7,"Classify the given movie review sentence as 'positive' or 'negative' sentiment, taking into account its context and meaning.",1.0
+7,"Analyze the provided movie review text to classify its sentiment as either 'positive' or 'negative', considering the emotional undertones and overall context.",1.0
+7,"Analyze the provided movie review sentence to determine whether it expresses a positive or negative sentiment, taking into account the reviewer's emotional tone and the context in which the review was written.",1.0
+7,"Read and classify the given movie review text as expressing either a positive or negative sentiment, considering the context and sentiment cues within the text.",0.95
+8,"Given a movie review, use context and sentiment cues to predict whether it's 'positive' or 'negative', and return the corresponding label.",1.0
+8,"Determine the sentiment of the text, classifying it as 'positive' or 'negative' based on its context, with consideration of emotional undertones.",1.0
+8,"Classify this text as 'positive' or 'negative' by determining its sentiment, and provide the corresponding label.",1.0
+8,"Classify the sentiment of the movie review text as 'positive' or 'negative', considering the emotional tone and context within the text.",1.0
+8,"Classify the movie review text as 'positive' or 'negative', taking into account the entire sentence and contextual information to accurately determine the sentiment.",1.0
+8,Classify the input as 'positive' or 'negative' by understanding the sentiment and context of the text,1.0
+8,"Classify the given movie review sentence as 'positive' or 'negative' sentiment, taking into account its context and meaning.",1.0
+8,Classify movie reviews as 'positive' or 'negative' based on entire sentences and context.,1.0
+8,"Analyze the provided movie review text to determine its sentiment, distinguishing between 'positive' and 'negative', considering both emotional undertones and overall context",1.0
+8,"Analyze the provided movie review text to classify its sentiment as either 'positive' or 'negative', considering the emotional undertones and overall context.",1.0
+9,"Given a movie review, use context and sentiment cues to predict whether it's 'positive' or 'negative', and return the corresponding label.",1.0
+9,"Determine the sentiment of the text, classifying it as 'positive' or 'negative' based on its context, with consideration of emotional undertones.",1.0
+9,"Classify this text as 'positive' or 'negative' by determining its sentiment, and provide the corresponding label.",1.0
+9,"Classify the sentiment of the movie review text as 'positive' or 'negative', considering the emotional tone and context within the text.",1.0
+9,"Classify the movie review text as 'positive' or 'negative', taking into account the entire sentence and contextual information to accurately determine the sentiment.",1.0
+9,Classify the input as 'positive' or 'negative' by understanding the sentiment and context of the text,1.0
+9,"Classify the given movie review sentence as 'positive' or 'negative' sentiment, taking into account its context and meaning.",1.0
+9,Classify movie reviews as 'positive' or 'negative' based on entire sentences and context.,1.0
+9,"Analyze the provided movie review text to determine its sentiment, distinguishing between 'positive' and 'negative', considering both emotional undertones and overall context",1.0
+9,"Analyze the provided movie review text to classify its sentiment as either 'positive' or 'negative', considering the emotional undertones and overall context.",1.0
+10,"Given a movie review, use context and sentiment cues to predict whether it's 'positive' or 'negative', and return the corresponding label.",1.0
+10,"Determine the sentiment of the text, classifying it as 'positive' or 'negative' based on its context, with consideration of emotional undertones.",1.0
+10,"Classify this text as 'positive' or 'negative' by determining its sentiment, and provide the corresponding label.",1.0
+10,"Classify the sentiment of the movie review text as 'positive' or 'negative', considering the emotional tone and context within the text.",1.0
+10,"Classify the movie review text as 'positive' or 'negative', taking into account the entire sentence and contextual information to accurately determine the sentiment.",1.0
+10,Classify the input as 'positive' or 'negative' by understanding the sentiment and context of the text,1.0
+10,"Classify the given movie review sentence as 'positive' or 'negative' sentiment, taking into account its context and meaning.",1.0
+10,Classify movie reviews as 'positive' or 'negative' based on entire sentences and context.,1.0
+10,"Analyze the provided movie review text to determine its sentiment, distinguishing between 'positive' and 'negative', considering both emotional undertones and overall context",1.0
+10,"Analyze the provided movie review text to classify its sentiment as either 'positive' or 'negative', considering the emotional undertones and overall context.",1.0
+11,"Given a movie review, use context and sentiment cues to predict whether it's 'positive' or 'negative', and return the corresponding label.",1.0
+11,"Determine the sentiment of the text, classifying it as 'positive' or 'negative' based on its context, with consideration of emotional undertones.",1.0
+11,"Classify this text as 'positive' or 'negative' by determining its sentiment, and provide the corresponding label.",1.0
+11,"Classify the sentiment of the movie review text as 'positive' or 'negative', considering the emotional tone and context within the text.",1.0
+11,"Classify the movie review text as 'positive' or 'negative', taking into account the entire sentence and contextual information to accurately determine the sentiment.",1.0
+11,Classify the input as 'positive' or 'negative' by understanding the sentiment and context of the text,1.0
+11,"Classify the given movie review sentence as 'positive' or 'negative' sentiment, taking into account its context and meaning.",1.0
+11,Classify movie reviews as 'positive' or 'negative' based on entire sentences and context.,1.0
+11,"Analyze the provided movie review text to determine its sentiment, distinguishing between 'positive' and 'negative', considering both emotional undertones and overall context",1.0
+11,"Analyze the provided movie review text to classify its sentiment as either 'positive' or 'negative', considering the emotional undertones and overall context.",1.0
+12,"Given a movie review, use context and sentiment cues to predict whether it's 'positive' or 'negative', and return the corresponding label.",1.0
+12,"Determine the sentiment of the text, classifying it as 'positive' or 'negative' based on its context, with consideration of emotional undertones.",1.0
+12,"Classify this text as 'positive' or 'negative' by determining its sentiment, and provide the corresponding label.",1.0
+12,"Classify the sentiment of the movie review text as 'positive' or 'negative', considering the emotional tone and context within the text.",1.0
+12,"Classify the movie review text as 'positive' or 'negative', taking into account the entire sentence and contextual information to accurately determine the sentiment.",1.0
+12,Classify the input as 'positive' or 'negative' by understanding the sentiment and context of the text,1.0
+12,"Classify the given movie review sentence as 'positive' or 'negative' sentiment, taking into account its context and meaning.",1.0
+12,"Classify movie reviews as 'positive' or 'negative' based on entire sentences, considering emotional tone and context within the text.",1.0
+12,Classify movie reviews as 'positive' or 'negative' based on entire sentences and context.,1.0
+12,"Analyze the provided movie review text to determine its sentiment, distinguishing between 'positive' and 'negative', considering both emotional undertones and overall context",1.0

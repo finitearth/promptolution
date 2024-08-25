@@ -1,0 +1,156 @@
+step,prompt,score
+1,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.55
+1,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.5
+1,"Classify the question into one of the six categories: Description, Entity, Expression, Human, Location, or Number.",0.4
+1,"Classify each question into one of the following categories: Description, Entity, Expression, Human, Location, or Number. Select the primary category from the options provided.",0.35
+1,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.3
+1,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.3
+1,"Classify the given question into one of the following categories: ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'], providing only the assigned label.",0.3
+1,"Classify this sentence based on the provided categories: Description, Entity, Expression, Human, Location, or Number.",0.2
+1,"I'd be happy to help! Here's the step-by-step process:
+
+1. Crossover the prompts:
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location, and Number.
+Prompt 2: Classify this sentence by choosing one of the following options: Description, Entity, Expression, Human, Location, or Number.
+
+Crossover Prompt: Identify and categorize the given question into one of the following categories: Description, Entity, Expression, Human, Location, or Number.
+
+2. Mutate the prompt generated in Step 1:
+
+Mutated Prompt: What type of question is this? Classify it accordingly into one of the following categories: Description, Entity, Expression, Human, Location, or Number.
+
+Final Prompt: [What type of question is this? Classify it accordingly into one of the following categories: Description, Entity, Expression, Human, Location, or Number.](prompt)",0.15
+1,"Determine the category that best describes this sentence: Description, Entity, Expression, Human, Location, or Number.",0.15
+2,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.55
+2,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.5
+2,"What type of question is this? Classify it accordingly into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.4
+2,"Classify the question into one of the six categories: Description, Entity, Expression, Human, Location, or Number.",0.4
+2,"Classify each question into one of the following categories: Description, Entity, Expression, Human, Location, or Number. Select the primary category from the options provided.",0.35
+2,"Assign the given question to one of the six categories (Description, Entity, Expression, Human, Location, or Number), specifying the primary category it belongs to.",0.35
+2,"Reformat the questions to identify the primary category: Description, Entity, Expression, Human, Location, or Number.",0.3
+2,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.3
+2,"Identify the category that corresponds to this sentence: Description, Entity, Expression, Human, Location, or Number.",0.3
+2,"Here are the steps to generate a better prompt:
+
+1. Crossover the prompts:
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location, and Number.
+Prompt 2: Classify this sentence by choosing one of the following options: Description, Entity, Expression, Human, Location, or Number.
+
+Crossover Prompt: Identify and categorize the given question into one of the following categories: Description, Entity, Expression, Human, Location, or Number.
+
+2. Mutate the prompt generated in Step 1:
+
+Mutated Prompt: Can you categorize this question into one of the six categories: Description, Entity, Expression, Human, Location, or Number?
+
+Final Prompt: [Can you categorize this question into one of the six categories: Description, Entity, Expression, Human, Location, or Number?](prompt)
+
+Alternatively, you could also try:
+
+1. Crossover the prompts:
+
+Prompt 1: Determine the type of the given question and choose from Description, Entity, Expression, Human, Location, and Number.
+Prompt 2: Classify this sentence by choosing one of the following options: Description, Entity, Expression, Human, Location, or Number.
+
+Crossover Prompt: What type of",0.3
+3,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.55
+3,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.5
+3,"What type of question is this? Classify it accordingly into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.4
+3,"Classify the question into one of the six categories: Description, Entity, Expression, Human, Location, or Number.",0.4
+3,"Classify each question into one of the following categories: Description, Entity, Expression, Human, Location, or Number. Select the primary category from the options provided.",0.35
+3,"Classify each question into one of six primary categories: Description, Entity, Expression, Human, Location, or Number, and identify the most likely category mentioned first in the response.",0.35
+3,"Assign the given question to one of the six categories (Description, Entity, Expression, Human, Location, or Number), specifying the primary category it belongs to.",0.35
+3,"Reformat the questions to identify the primary category: Description, Entity, Expression, Human, Location, or Number.",0.3
+3,"Please pick the category that matches this sentence: Description, Entity, Expression, Human, Location, or Number.",0.3
+3,"Identify the primary category of the given question from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number'].",0.3
+4,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.55
+4,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.5
+4,"Identify the primary category of the given questions from the options: Description, Entity, Expression, Human, Location, or Number.",0.5
+4,"Classify the given question into one of the six question categories, including Description, Entity, Expression, Human, Location, or Number, providing the most accurate label.",0.5
+4,"What type of question is this? Classify it accordingly into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.4
+4,"Classify the question into one of the six categories: Description, Entity, Expression, Human, Location, or Number.",0.4
+4,"Classify the question into one of the six categories (Description, Entity, Expression, Human, Location, or Number), citing the dominant category.",0.4
+4,"Classify each question into one of the following categories: Description, Entity, Expression, Human, Location, or Number. Select the primary category from the options provided.",0.35
+4,"Classify each question into one of six primary categories: Description, Entity, Expression, Human, Location, or Number, and identify the most likely category mentioned first in the response.",0.35
+4,"Assign the given question to one of the six categories (Description, Entity, Expression, Human, Location, or Number), specifying the primary category it belongs to.",0.35
+5,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.55
+5,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.5
+5,"Identify the primary category of the given questions from the options: Description, Entity, Expression, Human, Location, or Number.",0.5
+5,"Classify the given question into one of the six question categories, including Description, Entity, Expression, Human, Location, or Number, providing the most accurate label.",0.5
+5,"Classify the given questions into one of six categories (Description, Entity, Expression, Human, Location, or Number) and predict the most likely category mentioned first in the response.",0.45
+5,"Classify each question into one of the six categories: Description, Entity, Expression, Human, Location, or Number, and provide the most accurate primary label.",0.45
+5,"Classify each question into its primary category from the set ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return the main label.",0.45
+5,"What type of question is this? Classify it accordingly into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.4
+5,"Classify the question into one of the six categories: Description, Entity, Expression, Human, Location, or Number.",0.4
+5,"Classify the question into one of the six categories (Description, Entity, Expression, Human, Location, or Number), citing the dominant category.",0.4
+6,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.55
+6,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.5
+6,"Identify the primary category of the given questions from the options: Description, Entity, Expression, Human, Location, or Number.",0.5
+6,"Classify the provided questions into one of six categories: Description, Entity, Expression, Human, Location, or Number. Provide the category mentioned first in the response.",0.5
+6,"Classify the given question into one of the six question categories, including Description, Entity, Expression, Human, Location, or Number, providing the most accurate label.",0.5
+6,"Classify the question into one of the six categories: Description, Entity, Expression, Human, Location, or Number, and provide the most accurate primary label.",0.45
+6,"Classify the given questions into one of six categories (Description, Entity, Expression, Human, Location, or Number) and predict the most likely category mentioned first in the response.",0.45
+6,"Classify each question into one of the six categories: Description, Entity, Expression, Human, Location, or Number, and provide the most accurate primary label.",0.45
+6,"Classify each question into its primary category from the set ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return the main label.",0.45
+6,"What type of question is this? Classify it accordingly into one of the following categories: Description, Entity, Expression, Human, Location, or Number.",0.4
+7,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.55
+7,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.5
+7,"Identify the primary category of the given questions from the options: Description, Entity, Expression, Human, Location, or Number.",0.5
+7,"Identify the primary category for each question, choosing from the categories Description, Entity, Expression, Human, Location, or Number.",0.5
+7,"Classify the provided questions into one of six categories: Description, Entity, Expression, Human, Location, or Number. Provide the category mentioned first in the response.",0.5
+7,"Classify the given question into one of the six question categories, including Description, Entity, Expression, Human, Location, or Number, providing the most accurate label.",0.5
+7,"Identify the question type: classify as Description, Entity, Expression, Human, Location, or Number.",0.45
+7,"Classify the question into one of the six categories: Description, Entity, Expression, Human, Location, or Number, and provide the most accurate primary label.",0.45
+7,"Classify the given questions into one of six categories (Description, Entity, Expression, Human, Location, or Number) and predict the most likely category mentioned first in the response.",0.45
+7,"Classify each question into one of the six categories: Description, Entity, Expression, Human, Location, or Number, and provide the most accurate primary label.",0.45
+8,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.55
+8,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.5
+8,"Identify the primary category of the given questions from the options: Description, Entity, Expression, Human, Location, or Number.",0.5
+8,"Identify the primary category for each question, choosing from the categories Description, Entity, Expression, Human, Location, or Number.",0.5
+8,"Classify the provided questions into one of six categories: Description, Entity, Expression, Human, Location, or Number. Provide the category mentioned first in the response.",0.5
+8,"Classify the given question into one of the six question categories, including Description, Entity, Expression, Human, Location, or Number, providing the most accurate label.",0.5
+8,"Identify the question type: classify as Description, Entity, Expression, Human, Location, or Number.",0.45
+8,"Identify the dominant category of the provided questions from the six options (Description, Entity, Expression, Human, Location, or Number)",0.45
+8,"Classify the question into one of the six categories: Description, Entity, Expression, Human, Location, or Number, and provide the most accurate primary label.",0.45
+8,"Classify the question into Description, Entity, Expression, Human, Location, or Number categories.",0.45
+9,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.55
+9,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.5
+9,"Identify the primary category of the given questions from the options: Description, Entity, Expression, Human, Location, or Number.",0.5
+9,"Identify the primary category for each question, choosing from the categories Description, Entity, Expression, Human, Location, or Number.",0.5
+9,"Classify the provided questions into one of six categories: Description, Entity, Expression, Human, Location, or Number. Provide the category mentioned first in the response.",0.5
+9,"Classify the given question into one of the six question categories, including Description, Entity, Expression, Human, Location, or Number, providing the most accurate label.",0.5
+9,"Classify each question into one of the six categories: Description, Entity, Expression, Human, Location, or Number, and predict the primary category mentioned first in the response.",0.5
+9,"Identify the question type: classify as Description, Entity, Expression, Human, Location, or Number.",0.45
+9,"Identify the dominant category of the provided questions from the six options (Description, Entity, Expression, Human, Location, or Number)",0.45
+9,"Classify the questions into one of the six categories: Description, Entity, Expression, Human, Location, or Number, and provide the most accurate primary label. Whenever possible, select the category mentioned first in the response.",0.45
+10,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.55
+10,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.5
+10,"Identify the primary category of the given questions from the options: Description, Entity, Expression, Human, Location, or Number.",0.5
+10,"Identify the primary category for each question, choosing from the categories Description, Entity, Expression, Human, Location, or Number.",0.5
+10,"Classify the provided questions into one of six categories: Description, Entity, Expression, Human, Location, or Number. Provide the category mentioned first in the response.",0.5
+10,"Classify the given question into one of the six question categories, including Description, Entity, Expression, Human, Location, or Number, providing the most accurate label.",0.5
+10,"Classify each question into one of the six categories: Description, Entity, Expression, Human, Location, or Number, and predict the primary category mentioned first in the response.",0.5
+10,"Identify the question type: classify as Description, Entity, Expression, Human, Location, or Number.",0.45
+10,"Identify the dominant category of the provided questions from the six options (Description, Entity, Expression, Human, Location, or Number)",0.45
+10,"Classify the questions into one of the six categories: Description, Entity, Expression, Human, Location, or Number, and provide the most accurate primary label. Whenever possible, select the category mentioned first in the response.",0.45
+11,"Classify the provided text into one of the six question categories (Description, Entity, Expression, Human, Location, or Number) without altering its original meaning.",0.6
+11,"Classify the given questions into their most suitable categories (Description, Entity, Expression, Human, Location, or Number) and report the primary label, favoring the category mentioned first in the response.",0.6
+11,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.55
+11,"Predict the primary category of each question from the given options: Description, Entity, Expression, Human, Location, Number. Return the category label without any additional text.",0.5
+11,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.5
+11,"Identify the primary category of the given questions from the options: Description, Entity, Expression, Human, Location, or Number.",0.5
+11,"Identify the primary category for each question, choosing from the categories Description, Entity, Expression, Human, Location, or Number.",0.5
+11,"Classify the provided questions into one of six categories: Description, Entity, Expression, Human, Location, or Number. Provide the category mentioned first in the response.",0.5
+11,"Classify the given question into one of the six question categories, including Description, Entity, Expression, Human, Location, or Number, providing the most accurate label.",0.5
+11,"Classify each question into one of the six categories: Description, Entity, Expression, Human, Location, or Number, and predict the primary category mentioned first in the response.",0.5
+12,"Please classify each question into its primary category from the following options: Description, Entity, Expression, Human, Location, Number.",0.65
+12,"Classify the provided text into one of the six question categories (Description, Entity, Expression, Human, Location, or Number) without altering its original meaning.",0.6
+12,"Classify the given questions into their most suitable categories (Description, Entity, Expression, Human, Location, or Number) and report the primary label, favoring the category mentioned first in the response.",0.6
+12,"Your task is to choose a type of the question, from Description, Entity, Expression, Human, Location and Number.",0.55
+12,"Predict the primary category of each question from the given options: Description, Entity, Expression, Human, Location, Number. Return the category label without any additional text.",0.5
+12,"Please perform Question Classification task. Given the question, assign a label from ['Description', 'Entity', 'Expression', 'Human', 'Location', 'Number']. Return label only without any other text",0.5
+12,"Identify the primary category of the given questions from the options: Description, Entity, Expression, Human, Location, or Number.",0.5
+12,"Identify the primary category for each question, choosing from the categories Description, Entity, Expression, Human, Location, or Number.",0.5
+12,"Classify the provided questions into one of six categories: Description, Entity, Expression, Human, Location, or Number. Provide the category mentioned first in the response.",0.5
+12,"Classify the given question into one of the six question categories, including Description, Entity, Expression, Human, Location, or Number, providing the most accurate label.",0.5

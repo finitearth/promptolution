@@ -1,0 +1,121 @@
+step,prompt,score
+1,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+1,"Given a statement, classify it as expressing a positive or negative opinion.",0.95
+1,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+1,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.9
+1,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+1,"Now you are a classifier, your task is to determine the sentiment polarity of the given text, whether positive or negative.",0.85
+1,"Given text, classify whether it is positive or negative.",0.85
+1,"Determine the sentiment of a movie review based on a given text, positive or negative.",0.8
+1,"You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as positive or negative.",0.75
+1,"Determine the sentiment of the text provided, positve or negative.",0.7
+2,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+2,"Given a statement, classify it as expressing a positive or negative opinion.",0.95
+2,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+2,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.9
+2,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+2,"Now you are a classifier, your task is to determine the sentiment polarity of the given text, whether positive or negative.",0.85
+2,"Given text, classify whether it is positive or negative.",0.85
+2,"Determine the sentiment of a movie review based on a given text, positive or negative.",0.8
+2,"As a sentiment classifier, analyze /text snippet/ in customer feedback and categorize it as positive or negative, ensuring to consider contextual details and",0.9
+2,"This text involves analyze the phrase in movie reviews and determine the sentiment, positive or negative.",0.75
+3,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+3,"Given a statement, classify it as expressing a positive or negative opinion.",0.95
+3,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+3,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['negative', 'positive']. Return label only without any other text",0.9
+3,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+3,"Now you are a classifier, your task is to determine the sentiment polarity of the given text, whether positive or negative.",0.85
+3,"Given text, classify whether it is positive or negative.",0.85
+3,"Determine the sentiment of a movie review based on a given text, positive or negative.",0.8
+3,"As a sentiment classifier, analyze /text snippet/ in customer feedback and categorize it as positive or negative, ensuring to consider contextual details and",0.9
+3,"This text involves analyze the phrase in movie reviews and determine the sentiment, positive or negative.",0.75
+4,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+4,"Given a statement, classify it as expressing a positive or negative opinion.",0.95
+4,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+4,Read the text from a movie review and classify it as having a positive or negative sentiment.,0.95
+4,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+4,"Now you are a classifier, your task is to determine the sentiment polarity of the given text, whether positive or negative.",0.85
+4,"Given text, classify whether it is positive or negative.",0.85
+4,"Examine the review text, identify the sentiment, and decide the sentiment direction, considering the context of the movie review statement.",0.85
+4,"Read a sentence in a movie review and classify it as alluding to a sentiment with either a positive or negative tone, while considering the context and",0.95
+4,"This text involves analyze the phrase in movie reviews and determine the sentiment, positive or negative.",0.75
+5,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+5,"Given a statement, classify it as expressing a positive or negative opinion.",0.95
+5,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+5,Read the text from a movie review and classify it as having a positive or negative sentiment.,0.95
+5,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+5,"Now you are a classifier, your task is to determine the sentiment polarity of the given text, whether positive or negative.",0.85
+5,"Given text, classify whether it is positive or negative.",0.85
+5,"Examine the review text, identify the sentiment, and decide the sentiment direction, considering the context of the movie review statement.",0.85
+5,"Read a sentence in a movie review and classify it as alluding to a sentiment with either a positive or negative tone, while considering the context and",0.95
+5,"This text involves analyze the phrase in movie reviews and determine the sentiment, positive or negative.",0.75
+6,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+6,"Given a statement, classify it as expressing a positive or negative opinion.",0.95
+6,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+6,Read the text from a movie review and classify it as having a positive or negative sentiment.,0.95
+6,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+6,"Now you are a classifier, your task is to determine the sentiment polarity of the given text, whether positive or negative.",0.85
+6,"Given text, classify whether it is positive or negative.",0.85
+6,"Examine the review text, identify the sentiment, and decide the sentiment direction, considering the context of the movie review statement.",0.85
+6,"Read a sentence in a movie review and classify it as alluding to a sentiment with either a positive or negative tone, while considering the context and",0.95
+6,"This text involves analyze the phrase in movie reviews and determine the sentiment, positive or negative.",0.75
+7,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+7,"Given a statement, classify it as expressing a positive or negative opinion.",0.95
+7,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+7,Read the text from a movie review and classify it as having a positive or negative sentiment.,0.95
+7,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+7,"Now you are a classifier, your task is to determine the sentiment polarity of the given text, whether positive or negative.",0.85
+7,"Given text, classify whether it is positive or negative.",0.85
+7,"Examine the review text, identify the sentiment, and decide the sentiment direction, considering the context of the movie review statement.",0.85
+7,"Read a sentence in a movie review and classify it as alluding to a sentiment with either a positive or negative tone, while considering the context and",0.95
+7,"This text involves analyze the phrase in movie reviews and determine the sentiment, positive or negative.",0.75
+8,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+8,"Given a statement, classify it as expressing a positive or negative opinion.",0.95
+8,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+8,Read the text from a movie review and classify it as having a positive or negative sentiment.,0.95
+8,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+8,"Now you are a classifier, your task is to determine the sentiment polarity of the given text, whether positive or negative.",0.85
+8,"Given text, classify whether it is positive or negative.",0.85
+8,"Examine the review text, identify the sentiment, and decide the sentiment direction, considering the context of the movie review statement.",0.85
+8,"Read a sentence in a movie review and classify it as alluding to a sentiment with either a positive or negative tone, while considering the context and",0.95
+8,"This text involves analyze the phrase in movie reviews and determine the sentiment, positive or negative.",0.75
+9,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+9,"Given a statement, classify it as expressing a positive or negative opinion.",0.95
+9,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+9,Read the text from a movie review and classify it as having a positive or negative sentiment.,0.95
+9,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+9,"Now you are a classifier, your task is to determine the sentiment polarity of the given text, whether positive or negative.",0.85
+9,"Given text, classify whether it is positive or negative.",0.85
+9,"Examine the review text, identify the sentiment, and decide the sentiment direction, considering the context of the movie review statement.",0.85
+9,"Read a sentence in a movie review and classify it as alluding to a sentiment with either a positive or negative tone, while considering the context and",0.95
+9,"This text involves analyze the phrase in movie reviews and determine the sentiment, positive or negative.",0.75
+10,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+10,"Given a statement, classify it as expressing a positive or negative opinion.",0.95
+10,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+10,Read the text from a movie review and classify it as having a positive or negative sentiment.,0.95
+10,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+10,"Now you are a classifier, your task is to determine the sentiment polarity of the given text, whether positive or negative.",0.85
+10,"Given text, classify whether it is positive or negative.",0.85
+10,"Examine the review text, identify the sentiment, and decide the sentiment direction, considering the context of the movie review statement.",0.85
+10,"Read a sentence in a movie review and classify it as alluding to a sentiment with either a positive or negative tone, while considering the context and",0.95
+10,"This text involves analyze the phrase in movie reviews and determine the sentiment, positive or negative.",0.75
+11,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+11,"Given a statement, classify it as expressing a positive or negative opinion.",0.95
+11,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+11,Read the text from a movie review and classify it as having a positive or negative sentiment.,0.95
+11,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+11,"Now you are a classifier, your task is to determine the sentiment polarity of the given text, whether positive or negative.",0.85
+11,"Given text, classify whether it is positive or negative.",0.85
+11,"Examine the review text, identify the sentiment, and decide the sentiment direction, considering the context of the movie review statement.",0.85
+11,"Read a sentence in a movie review and classify it as alluding to a sentiment with either a positive or negative tone, while considering the context and",0.95
+11,"As a sentiment analysis model, review the text and identify the emotional tone of phrases in movie reviews, determining whether they convey a positive or negative sentiment.",0.85
+12,"Given a tweet, classify it as having a positive or negative sentiment.",0.95
+12,"Given a statement, classify it as expressing a positive or negative opinion.",0.95
+12,"Your task is to classify the comment ""positive"" or ""negative"".",0.9
+12,Read the text from a movie review and classify it as having a positive or negative sentiment.,0.95
+12,"Given a sentence, classify it as either positive or negative sentiment.",0.9
+12,"Now you are a classifier, your task is to determine the sentiment polarity of the given text, whether positive or negative.",0.85
+12,"Given text, classify whether it is positive or negative.",0.85
+12,"Examine the review text, identify the sentiment, and decide the sentiment direction, considering the context of the movie review statement.",0.85
+12,"Read a sentence in a movie review and classify it as alluding to a sentiment with either a positive or negative tone, while considering the context and",0.95
+12,"As a sentiment analysis model, review the text and identify the emotional tone of phrases in movie reviews, determining whether they convey a positive or negative sentiment.",0.85

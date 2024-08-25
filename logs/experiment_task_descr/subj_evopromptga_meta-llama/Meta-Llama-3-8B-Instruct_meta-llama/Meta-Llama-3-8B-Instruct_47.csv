@@ -1,0 +1,165 @@
+step,prompt,score
+1,"Determine the category of a movie review based on a given text, subjective or objective.",0.65
+1,"Given a statement, classify it as expressing a subjective or objective opinion.",0.6
+1,"Classify and categorize the provided sentences as either subjective or objective, using your language expertise.",0.6
+1,identify whether the given sentence was expressing an objective or a subjective opinion.,0.55
+1,"Please perform Subjectivity Classification task. Given the sentence, assign a label from ['subjective', 'objective']. Return label only without any other text.",0.55
+1,"Given a sentence, classify it as either subjective or objective category.",0.55
+1,evaluate the given sentences and determine whether they are subjective or objective.,0.5
+1,evaluate each statement as either subjective or objective.,0.5
+1,"Evaluate the following sentence and categorize it as either 'subjective' or 'objective', providing the resultant classification.",0.5
+1,"Classify the provided sentence as either subjective or objective, based on its linguistic cues.",0.5
+2,"Identify the provided sentence as either subjective or objective, considering its emotional tone and linguistic characteristics.",0.7
+2,Evaluate the input sentence and assign a classification of 'subjective' or 'objective' accordingly.,0.7
+2,Evaluate the sentence and categorize it as either 'subjective' or 'objective'. Return the classification result.,0.65
+2,"Determine the category of a movie review based on a given text, subjective or objective.",0.65
+2,"Given a statement, classify it as expressing a subjective or objective opinion.",0.6
+2,"Classify each provided sentence as subjective or objective, using your linguistic knowledge to guide the classification.",0.6
+2,"Classify and categorize the provided sentences as either subjective or objective, using your language expertise.",0.6
+2,identify whether the given sentence was expressing an objective or a subjective opinion.,0.55
+2,"Please perform Subjectivity Classification task. Given the sentence, assign a label from ['subjective', 'objective']. Return label only without any other text.",0.55
+2,"Given a sentence, classify it as either subjective or objective category.",0.55
+3,"Identify the provided sentence as either subjective or objective, considering its emotional tone and linguistic characteristics.",0.7
+3,Evaluate the input sentence and assign a classification of 'subjective' or 'objective' accordingly.,0.7
+3,"Classify the provided sentence as either subjective or objective, providing a definitive categorization",0.7
+3,Evaluate the sentence and categorize it as either 'subjective' or 'objective'. Return the classification result.,0.65
+3,"Determine the category of a movie review based on a given text, subjective or objective.",0.65
+3,"Classify the given sentences as either subjective or objective opinions, using your language expertise.",0.65
+3,"Given a statement, classify it as expressing a subjective or objective opinion.",0.6
+3,Determine whether the provided text is subjective or objective.,0.6
+3,"Classify the given sentence as subjective or objective, taking into account its linguistic features and emotional undertones.",0.6
+3,"Classify each provided sentence as subjective or objective, using your linguistic knowledge to guide the classification.",0.6
+4,"Determine the subjectivity of each sentence in the provided text, given your linguistic expertise.",0.75
+4,"Identify the provided sentence as either subjective or objective, considering its emotional tone and linguistic characteristics.",0.7
+4,Evaluate the input sentence and assign a classification of 'subjective' or 'objective' accordingly.,0.7
+4,"Classify the provided sentence as either subjective or objective, providing a definitive categorization",0.7
+4,Evaluate the statement and categorize its opinion as subjective or objective accordingly.,0.65
+4,Evaluate the sentence and categorize it as either 'subjective' or 'objective'. Return the classification result.,0.65
+4,"Determine the category of a movie review based on a given text, subjective or objective.",0.65
+4,"Classify the given sentences as either subjective or objective opinions, using your language expertise.",0.65
+4,"Given a statement, classify it as expressing a subjective or objective opinion.",0.6
+4,Determine whether the provided text is subjective or objective.,0.6
+5,"Determine the subjectivity of each sentence in the provided text, given your linguistic expertise.",0.75
+5,"Identify the provided sentence as either subjective or objective, considering its emotional tone and linguistic characteristics.",0.7
+5,Evaluate the input sentence and assign a classification of 'subjective' or 'objective' accordingly.,0.7
+5,"Classify the provided sentence as either subjective or objective, providing a definitive categorization",0.7
+5,Evaluate the statement and categorize its opinion as subjective or objective accordingly.,0.65
+5,Evaluate the sentence and categorize it as either 'subjective' or 'objective'. Return the classification result.,0.65
+5,"Determine the category of a movie review based on a given text, subjective or objective.",0.65
+5,"Classify the given sentences as either subjective or objective opinions, using your language expertise.",0.65
+5,"Given a statement, classify it as expressing a subjective or objective opinion.",0.6
+5,Determine whether the provided text is subjective or objective.,0.6
+6,"Determine the subjectivity of each sentence in the provided text, given your linguistic expertise.",0.75
+6,"Identify the provided sentence as either subjective or objective, considering its emotional tone and linguistic characteristics.",0.7
+6,Evaluate the input sentence and assign a classification of 'subjective' or 'objective' accordingly.,0.7
+6,"Classify the provided sentence as either subjective or objective, providing a definitive categorization",0.7
+6,Evaluate the statement and categorize its opinion as subjective or objective accordingly.,0.65
+6,Evaluate the sentence and categorize it as either 'subjective' or 'objective'. Return the classification result.,0.65
+6,"Determine the category of a movie review based on a given text, subjective or objective.",0.65
+6,Classify the tone of the given text as subjective or objective.,0.65
+6,"Classify the given sentences as either subjective or objective opinions, using your language expertise.",0.65
+6,"Given a statement, classify it as expressing a subjective or objective opinion.",0.6
+7,Identify whether the provided sentence expresses a personal viewpoint or objective statement.,0.75
+7,"Determine the subjectivity of each sentence in the provided text, given your linguistic expertise.",0.75
+7,"Identify the provided sentence as either subjective or objective, considering its emotional tone and linguistic characteristics.",0.7
+7,Evaluate the input sentence and assign a classification of 'subjective' or 'objective' accordingly.,0.7
+7,"Classify the provided sentence as either subjective or objective, providing a definitive categorization",0.7
+7,Evaluate the statement and categorize its opinion as subjective or objective accordingly.,0.65
+7,Evaluate the sentence and categorize it as either 'subjective' or 'objective'. Return the classification result.,0.65
+7,"Determine the category of a movie review based on a given text, subjective or objective.",0.65
+7,Classify the tone of the given text as subjective or objective.,0.65
+7,"Classify the given sentences as either subjective or objective opinions, using your language expertise.",0.65
+8,Identify whether the sentences express a personal opinion or objective fact.,0.75
+8,Identify whether the provided sentence expresses a personal viewpoint or objective statement.,0.75
+8,"Determine the subjectivity of each sentence in the provided text, given your linguistic expertise.",0.75
+8,"Identify the provided sentence as either subjective or objective, considering its emotional tone and linguistic characteristics.",0.7
+8,Evaluate the input sentence and assign a classification of 'subjective' or 'objective' accordingly.,0.7
+8,"Classify the provided sentence as either subjective or objective, providing a definitive categorization",0.7
+8,Evaluate the statement and categorize its opinion as subjective or objective accordingly.,0.65
+8,Evaluate the sentence and categorize it as either 'subjective' or 'objective'. Return the classification result.,0.65
+8,"Determine the subjective or objective nature of the provided sentence, considering its emotional undertones and grammatical features.",0.65
+8,"Determine the category of a movie review based on a given text, subjective or objective.",0.65
+9,"Review the provided sentence and categorize it as either subjective (emotive) or objective (neutral), based on its linguistic and emotional characteristics.",0.75
+9,Identify whether the sentences express a personal opinion or objective fact.,0.75
+9,Identify whether the provided sentence expresses a personal viewpoint or objective statement.,0.75
+9,"Here are the steps to generate a better prompt:
+
+1. Crossover the following prompts:
+
+Prompt 1: Classify the provided sentence as either subjective or objective, providing a definitive categorization
+Prompt 2: Evaluate the input sentence and assign a classification of 'subjective' or 'objective' accordingly.
+
+Crossover prompt: Evaluate the input sentence to determine if it expresses a personal opinion or factual information.
+
+2. Mutate the prompt generated in Step 1:
+
+Final prompt: [Evaluate the provided sentence and categorize it as 'subjective' or 'objective' with absolute certainty.]",0.75
+9,"Determine the subjectivity of each sentence in the provided text, given your linguistic expertise.",0.75
+9,"Identify the provided sentence as either subjective or objective, considering its emotional tone and linguistic characteristics.",0.7
+9,Evaluate the input sentence and assign a classification of 'subjective' or 'objective' accordingly.,0.7
+9,"Classify the provided sentence as either subjective or objective, providing a definitive categorization",0.7
+9,"Analyze the sentence and identify its subjectivity/objectivity by considering linguistic features, tone, and semantics, and assign a classification as either 'subjective' or 'objective'",0.7
+9,Accurately label the input sentence as subjective or objective.,0.7
+10,"Review the provided sentence and categorize it as either subjective (emotive) or objective (neutral), based on its linguistic and emotional characteristics.",0.75
+10,Identify whether the sentences express a personal opinion or objective fact.,0.75
+10,Identify whether the provided sentence expresses a personal viewpoint or objective statement.,0.75
+10,"Here are the steps to generate a better prompt:
+
+1. Crossover the following prompts:
+
+Prompt 1: Classify the provided sentence as either subjective or objective, providing a definitive categorization
+Prompt 2: Evaluate the input sentence and assign a classification of 'subjective' or 'objective' accordingly.
+
+Crossover prompt: Evaluate the input sentence to determine if it expresses a personal opinion or factual information.
+
+2. Mutate the prompt generated in Step 1:
+
+Final prompt: [Evaluate the provided sentence and categorize it as 'subjective' or 'objective' with absolute certainty.]",0.75
+10,"Determine the subjectivity of each sentence in the provided text, given your linguistic expertise.",0.75
+10,"Identify the provided sentence as either subjective or objective, considering its emotional tone and linguistic characteristics.",0.7
+10,Evaluate the input sentence and assign a classification of 'subjective' or 'objective' accordingly.,0.7
+10,"Determine the subjectivity/objectivity of each sentence, applying your linguistic expertise to consider tone, semantics, and linguistic features to accurately classify it as 'subjective' or 'objective'",0.7
+10,"Classify the provided sentence as either subjective or objective, providing a definitive categorization",0.7
+10,"Analyze the sentence and identify its subjectivity/objectivity by considering linguistic features, tone, and semantics, and assign a classification as either 'subjective' or 'objective'",0.7
+11,"Review the provided sentence and categorize it as either subjective (emotive) or objective (neutral), based on its linguistic and emotional characteristics.",0.75
+11,Identify whether the sentences express a personal opinion or objective fact.,0.75
+11,Identify whether the provided sentence expresses a personal viewpoint or objective statement.,0.75
+11,"Here are the steps to generate a better prompt:
+
+1. Crossover the following prompts:
+
+Prompt 1: Classify the provided sentence as either subjective or objective, providing a definitive categorization
+Prompt 2: Evaluate the input sentence and assign a classification of 'subjective' or 'objective' accordingly.
+
+Crossover prompt: Evaluate the input sentence to determine if it expresses a personal opinion or factual information.
+
+2. Mutate the prompt generated in Step 1:
+
+Final prompt: [Evaluate the provided sentence and categorize it as 'subjective' or 'objective' with absolute certainty.]",0.75
+11,"Determine the subjectivity of each sentence in the provided text, given your linguistic expertise.",0.75
+11,"Recognize the subjectivity or objectivity of each sentence, taking into account its emotional bias and linguistic criteria.",0.7
+11,"Identify the provided sentence as either subjective or objective, considering its emotional tone and linguistic characteristics.",0.7
+11,Evaluate the input sentence and assign a classification of 'subjective' or 'objective' accordingly.,0.7
+11,"Determine the subjectivity/objectivity of each sentence, applying your linguistic expertise to consider tone, semantics, and linguistic features to accurately classify it as 'subjective' or 'objective'",0.7
+11,"Classify the provided sentence as either subjective or objective, providing a definitive categorization",0.7
+12,"Review the provided sentence and categorize it as either subjective (emotive) or objective (neutral), based on its linguistic and emotional characteristics.",0.75
+12,Identify whether the sentences express a personal opinion or objective fact.,0.75
+12,Identify whether the provided sentence expresses a personal viewpoint or objective statement.,0.75
+12,"Here are the steps to generate a better prompt:
+
+1. Crossover the following prompts:
+
+Prompt 1: Classify the provided sentence as either subjective or objective, providing a definitive categorization
+Prompt 2: Evaluate the input sentence and assign a classification of 'subjective' or 'objective' accordingly.
+
+Crossover prompt: Evaluate the input sentence to determine if it expresses a personal opinion or factual information.
+
+2. Mutate the prompt generated in Step 1:
+
+Final prompt: [Evaluate the provided sentence and categorize it as 'subjective' or 'objective' with absolute certainty.]",0.75
+12,Determine whether the given sentences convey a personal opinion or objective fact.,0.75
+12,"Determine the subjectivity of each sentence in the provided text, given your linguistic expertise.",0.75
+12,"Recognize the subjectivity or objectivity of each sentence, taking into account its emotional bias and linguistic criteria.",0.7
+12,"Identify the provided sentence as either subjective or objective, considering its emotional tone and linguistic characteristics.",0.7
+12,Evaluate the input sentence and assign a classification of 'subjective' or 'objective' accordingly.,0.7
+12,"Determine the subjectivity/objectivity of each sentence, applying your linguistic expertise to consider tone, semantics, and linguistic features to accurately classify it as 'subjective' or 'objective'",0.7

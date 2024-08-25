@@ -1,0 +1,138 @@
+step,prompt,score
+1,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.6
+1,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+1,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+1,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.5
+1,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.5
+1,"In this task, you are given movie reviews. Based on it, classify it to one of the ﬁve classes: (1) terrible, (2) bad, (3) okay, (4) good, and (5) great.",0.4
+1,"Examine the comment provided and classify it into one of five categories: terrible, bad, okay, good, or great.",0.4
+1,"Your objective is to analyze the movie review and allocate it to one of five categories, from terrible to great.",0.2
+1,"Let's follow the instructions step-by-step to generate a better prompt.
+
+1. Identify the different parts between Prompt 1 and Prompt 2:
+
+Prompt 1: Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.
+Prompt 2: In this task, you are given movie reviews. Based on it, classify it to one of the fi¿ve classes: (1) terrible, (2) bad, (3) okay, (4) good, and (5) great.
+
+Different parts:
+
+""Based on the given movie review provided to you"" vs ""In this task, you are given movie reviews""
+""And classify it into one of five categories"" vs ""classify it to one of the fi¿ve classes""
+""Okay, good, or great"" vs ""(1) terrible, (2) bad, (3) okay, (4) good, and (5) great""
+
+2. Randomly mutate the different parts:
+
+""Based on the given movie review provided to you"" -> ""The task is to analyze the movie review statement""
+""returning to class"" -> ""As a sentiment classifier, classify the review""
+""Okay, good, or great",0.15
+1,"Consider the movie review to classify it and process and categorize accordingly one of the following labels: terrible, bad, okay, good, great, while assigning a sentiment score, ranging from terrible to great.</prompt",0.5
+2,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.6
+2,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+2,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+2,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.5
+2,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.5
+2,"In this task, you are given movie reviews. Based on it, classify it to one of the ﬁve classes: (1) terrible, (2) bad, (3) okay, (4) good, and (5) great.",0.4
+2,"Examine the comment provided and classify it into one of five categories: terrible, bad, okay, good, or great.",0.4
+2,"Your objective is to analyze the movie review and allocate it to one of five categories, from terrible to great.",0.2
+2,"The objective is to evaluate the movie review statement according to a scale that includes terrible, bad, good, and great, with the goal of categorizing a review as terrible, bad, okay, good, or great, as a sentiment classifier, while considering the meaning and relevant context.",0.3
+2,"Consider the movie review to classify it and process and categorize accordingly one of the following labels: terrible, bad, okay, good, great, while assigning a sentiment score, ranging from terrible to great.</prompt",0.5
+3,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.6
+3,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+3,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+3,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.5
+3,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.5
+3,"In this task, you are given movie reviews. Based on it, classify it to one of the ﬁve classes: (1) terrible, (2) bad, (3) okay, (4) good, and (5) great.",0.4
+3,"Examine the comment provided and classify it into one of five categories: terrible, bad, okay, good, or great.",0.4
+3,"Assess the provided text and allocate it to one of the following categories: terrible, bad, okay, good, or great.",0.3
+3,"The objective is to evaluate the movie review statement according to a scale that includes terrible, bad, good, and great, with the goal of categorizing a review as terrible, bad, okay, good, or great, as a sentiment classifier, while considering the meaning and relevant context.",0.3
+3,"Consider the movie review to classify it and process and categorize accordingly one of the following labels: terrible, bad, okay, good, great, while assigning a sentiment score, ranging from terrible to great.</prompt",0.5
+4,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.6
+4,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+4,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+4,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.5
+4,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.5
+4,"Analyze the movie review input based on the sentiment and process the movie review data to classify it into one of the following categories: (1) terrible, (2) bad, (3) okay, (4) good, and (5) great.",0.45
+4,"Examine the comment provided and classify it into one of five categories: terrible, bad, okay, good, or great.",0.4
+4,"Assess the provided text and allocate it to one of the following categories: terrible, bad, okay, good, or great.",0.3
+4,"The objective is to evaluate the movie review statement according to a scale that includes terrible, bad, good, and great, with the goal of categorizing a review as terrible, bad, okay, good, or great, as a sentiment classifier, while considering the meaning and relevant context.",0.3
+4,"Consider the movie review to classify it and process and categorize accordingly one of the following labels: terrible, bad, okay, good, great, while assigning a sentiment score, ranging from terrible to great.</prompt",0.5
+5,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.6
+5,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+5,"Classify the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+5,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.5
+5,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.5
+5,"Analyze the movie review input based on the sentiment and process the movie review data to classify it into one of the following categories: (1) terrible, (2) bad, (3) okay, (4) good, and (5) great.",0.45
+5,"Your task is to assess the sentiment of the movie review by examining the given text and classifying it into one of five categories: terrible, bad, okay, good, or great",0.45
+5,"Assess the provided text and allocate it to one of the following categories: terrible, bad, okay, good, or great.",0.3
+5,"The objective is to evaluate the movie review statement according to a scale that includes terrible, bad, good, and great, with the goal of categorizing a review as terrible, bad, okay, good, or great, as a sentiment classifier, while considering the meaning and relevant context.",0.3
+5,"Consider the movie review to classify it and process and categorize accordingly one of the following labels: terrible, bad, okay, good, great, while assigning a sentiment score, ranging from terrible to great.</prompt",0.5
+6,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.6
+6,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+6,"The task is to analyze the film critique and determine the sentiment into one of the following categories: terrible, bad, okay, good, or great, provided to you.",0.55
+6,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.5
+6,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.5
+6,"The object is to classify movie reviews into one of the following categories: terrible, bad, okay, good, or great, based on the sentiment.",0.65
+6,"Your task is to assess the sentiment of the movie review by examining the given text and classifying it into one of five categories: terrible, bad, okay, good, or great",0.45
+6,"Assess the provided text and allocate it to one of the following categories: terrible, bad, okay, good, or great.",0.3
+6,"The objective is to evaluate the movie review statement according to a scale that includes terrible, bad, good, and great, with the goal of categorizing a review as terrible, bad, okay, good, or great, as a sentiment classifier, while considering the meaning and relevant context.",0.3
+6,"Consider the movie review to classify it and process and categorize accordingly one of the following labels: terrible, bad, okay, good, great, while assigning a sentiment score, ranging from terrible to great.</prompt",0.5
+7,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.6
+7,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+7,"The task is to analyze the film critique and determine the sentiment into one of the following categories: terrible, bad, okay, good, or great, provided to you.",0.55
+7,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.5
+7,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.5
+7,"The object is to classify movie reviews into one of the following categories: terrible, bad, okay, good, or great, based on the sentiment.",0.65
+7,"Your task is to assess the sentiment of the movie review by examining the given text and classifying it into one of five categories: terrible, bad, okay, good, or great",0.45
+7,"Assess the provided text and allocate it to one of the following categories: terrible, bad, okay, good, or great.",0.3
+7,"The objective is to evaluate the movie review statement according to a scale that includes terrible, bad, good, and great, with the goal of categorizing a review as terrible, bad, okay, good, or great, as a sentiment classifier, while considering the meaning and relevant context.",0.3
+7,"Consider the movie review to classify it and process and categorize accordingly one of the following labels: terrible, bad, okay, good, great, while assigning a sentiment score, ranging from terrible to great.</prompt",0.5
+8,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.6
+8,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+8,"The task is to analyze the film critique and determine the sentiment into one of the following categories: terrible, bad, okay, good, or great, provided to you.",0.55
+8,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.5
+8,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.5
+8,"The object is to classify movie reviews into one of the following categories: terrible, bad, okay, good, or great, based on the sentiment.",0.65
+8,"Your task is to assess the sentiment of the movie review by examining the given text and classifying it into one of five categories: terrible, bad, okay, good, or great",0.45
+8,"Assess the provided text and allocate it to one of the following categories: terrible, bad, okay, good, or great.",0.3
+8,"The objective is to evaluate the movie review statement according to a scale that includes terrible, bad, good, and great, with the goal of categorizing a review as terrible, bad, okay, good, or great, as a sentiment classifier, while considering the meaning and relevant context.",0.3
+8,"Consider the movie review to classify it and process and categorize accordingly one of the following labels: terrible, bad, okay, good, great, while assigning a sentiment score, ranging from terrible to great.</prompt",0.5
+9,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.6
+9,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+9,"The task is to analyze the film critique and determine the sentiment into one of the following categories: terrible, bad, okay, good, or great, provided to you.",0.55
+9,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.5
+9,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.5
+9,"The object is to classify movie reviews into one of the following categories: terrible, bad, okay, good, or great, based on the sentiment.",0.65
+9,"Your task is to assess the sentiment of the movie review by examining the given text and classifying it into one of five categories: terrible, bad, okay, good, or great",0.45
+9,"Assess the provided text and allocate it to one of the following categories: terrible, bad, okay, good, or great.",0.3
+9,"The objective is to evaluate the movie review statement according to a scale that includes terrible, bad, good, and great, with the goal of categorizing a review as terrible, bad, okay, good, or great, as a sentiment classifier, while considering the meaning and relevant context.",0.3
+9,"Consider the movie review to classify it and process and categorize accordingly one of the following labels: terrible, bad, okay, good, great, while assigning a sentiment score, ranging from terrible to great.</prompt",0.5
+10,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.6
+10,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+10,"The task is to analyze the film critique and determine the sentiment into one of the following categories: terrible, bad, okay, good, or great, provided to you.",0.55
+10,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.5
+10,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.5
+10,"The object is to classify movie reviews into one of the following categories: terrible, bad, okay, good, or great, based on the sentiment.",0.65
+10,"Your task is to assess the sentiment of the movie review by examining the given text and classifying it into one of five categories: terrible, bad, okay, good, or great",0.45
+10,"Assess the provided text and allocate it to one of the following categories: terrible, bad, okay, good, or great.",0.3
+10,"The objective is to evaluate the movie review statement according to a scale that includes terrible, bad, good, and great, with the goal of categorizing a review as terrible, bad, okay, good, or great, as a sentiment classifier, while considering the meaning and relevant context.",0.3
+10,"Consider the movie review to classify it and process and categorize accordingly one of the following labels: terrible, bad, okay, good, great, while assigning a sentiment score, ranging from terrible to great.</prompt",0.5
+11,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.6
+11,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+11,"The task is to analyze the film critique and determine the sentiment into one of the following categories: terrible, bad, okay, good, or great, provided to you.",0.55
+11,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.5
+11,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.5
+11,"The object is to classify movie reviews into one of the following categories: terrible, bad, okay, good, or great, based on the sentiment.",0.65
+11,"Your task is to assess the sentiment of the movie review by examining the given text and classifying it into one of five categories: terrible, bad, okay, good, or great",0.45
+11,"Assess the provided text and allocate it to one of the following categories: terrible, bad, okay, good, or great.",0.3
+11,"The objective is to evaluate the movie review statement according to a scale that includes terrible, bad, good, and great, with the goal of categorizing a review as terrible, bad, okay, good, or great, as a sentiment classifier, while considering the meaning and relevant context.",0.3
+11,"Consider the movie review to classify it and process and categorize accordingly one of the following labels: terrible, bad, okay, good, great, while assigning a sentiment score, ranging from terrible to great.</prompt",0.5
+12,"Please perform Sentiment Classification task. Given the sentence, assign a sentiment label from ['terrible', 'bad', 'okay', 'good', 'great']. Return label only without any other text.",0.6
+12,"Your responsibility is to categorize the movie review provided to you into one of five categories based on the sentiment: terrible, bad, okay, good, or great.",0.5
+12,"The task is to analyze the film critique and determine the sentiment into one of the following categories: terrible, bad, okay, good, or great, provided to you.",0.55
+12,"Based on the movie review provided, assign the moviw to one of five categories: terrible, bad, okay, good, or great.",0.5
+12,"Based on the given movie review provided to you and classify it into one of five categories: terrible, bad, okay, good, or great.",0.5
+12,"The object is to classify movie reviews into one of the following categories: terrible, bad, okay, good, or great, based on the sentiment.",0.65
+12,"Your task is to assess the sentiment of the movie review by examining the given text and classifying it into one of five categories: terrible, bad, okay, good, or great",0.45
+12,"Assess the provided text taking into account the emotional tone and allocate it to one of the mentioned levels: terrible, bad, okay, good, or great.",0.5
+12,"The objective is to evaluate the movie review statement according to a scale that includes terrible, bad, good, and great, with the goal of categorizing a review as terrible, bad, okay, good, or great, as a sentiment classifier, while considering the meaning and relevant context.",0.3
+12,"Consider the movie review to classify it and process and categorize accordingly one of the following labels: terrible, bad, okay, good, great, while assigning a sentiment score, ranging from terrible to great.</prompt",0.5

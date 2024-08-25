@@ -1,0 +1,121 @@
+step,prompt,score
+1,evaluate each sentence as either objective or subjective.,0.6
+1,"Given a statement, classify it as expressing a subjective or objective opinion.",0.6
+1,Which perspective does the sentence express: subjective or objective?,0.55
+1,"Identify whether each sentence expresses a subjective or objective opinion, and categorize it accordingly as ""subjective"" or ""objective"".",0.55
+1,"Delineate each input sentence as either subjective or objective in nature, describing its capacity to express personal opinions or objective facts.",0.55
+1,evaluate each statement as either subjective or objective.,0.5
+1,"Identify the given sentence as either subjective or objective in nature, without any ambiguity",0.5
+1,"Evaluate the given sentences and categorize each one as either subjective or objective, indicating the intended category based on the first likely response.",0.5
+1,"Classify the provided text as either ""subjective"" or ""objective"", distinguishing between personal opinions and factual statements.",0.5
+1,identify whether the given sentence was expressing an objective or a subjective opinion.,0.45
+2,"Determine whether each input sentence is subjective or objective, based on its distinction between personal opinions and objective facts.",0.7
+2,"Determine the perspective of the input text: is it subjective or objective, maintaining the accuracy of the classification.",0.65
+2,evaluate each sentence as either objective or subjective.,0.6
+2,"Given a statement, classify it as expressing a subjective or objective opinion.",0.6
+2,"Determine whether the provided statement expresses an objective fact or a subjective opinion, classifying it accordingly",0.6
+2,Which perspective does the sentence express: subjective or objective?,0.55
+2,Use the provided sentence to infer whether it embodies a subjective or objective viewpoint.,0.55
+2,"Identify whether each sentence expresses a subjective or objective opinion, and categorize it accordingly as ""subjective"" or ""objective"".",0.55
+2,Evaluate the provided sentences and categorize each one as either subjective or objective based on its most likely classification.,0.55
+2,"Delineate each input sentence as either subjective or objective in nature, describing its capacity to express personal opinions or objective facts.",0.55
+3,"Determine the type of opinion expressed in the given sentence, either subjective or objective, based on the context and wording provided.",0.75
+3,"Determine whether each input sentence is subjective or objective, based on its distinction between personal opinions and objective facts.",0.7
+3,"Determine the perspective of the sentence and classify it as either subjective or objective, ensuring accurate classification.",0.7
+3,Determine the nature of each sentence as expressing a subjective or objective opinion.,0.7
+3,"Determine the perspective of the input text: is it subjective or objective, maintaining the accuracy of the classification.",0.65
+3,Determine the perspective of the given sentence as either subjective or objective.,0.65
+3,"Classify each input sentence as subjective or objective, highlighting its distinction between personal opinions and objective facts.",0.65
+3,"Classify a given sentence as expressing a subjective or objective opinion accurately, and categorize it accordingly.",0.65
+3,evaluate each sentence as either objective or subjective.,0.6
+3,"Identify the tone of each sentence as either subjective or objective, distinguishing between personal opinions and objective facts, and categorize it accordingly.",0.6
+4,"Determine the type of opinion expressed in the given sentence, either subjective or objective, based on the context and wording provided.",0.75
+4,"Determine whether each input sentence is subjective or objective, based on its distinction between personal opinions and objective facts.",0.7
+4,"Determine the perspective of the sentence and classify it as either subjective or objective, ensuring accurate classification.",0.7
+4,Determine the nature of each sentence as expressing a subjective or objective opinion.,0.7
+4,"Determine the perspective of the input text: is it subjective or objective, maintaining the accuracy of the classification.",0.65
+4,Determine the perspective of the given sentence as either subjective or objective.,0.65
+4,"Classify the provided text as subjective or objective, accurately interpreting its perspective.",0.65
+4,"Classify the provided sentences as either subjective or objective, focusing on identifying the presence of personal opinions versus objective truth",0.65
+4,"Classify each input sentence as subjective or objective, highlighting its distinction between personal opinions and objective facts.",0.65
+4,"Classify a given sentence as expressing a subjective or objective opinion accurately, and categorize it accordingly.",0.65
+5,"Determine the type of opinion expressed in the given sentence, either subjective or objective, based on the context and wording provided.",0.75
+5,"Identify the provided sentence as expressing a subjective or objective opinion, and accurately categorize it.",0.7
+5,"Determine whether each input sentence is subjective or objective, based on its distinction between personal opinions and objective facts.",0.7
+5,"Determine the perspective of the sentence and classify it as either subjective or objective, ensuring accurate classification.",0.7
+5,Determine the nature of each sentence as expressing a subjective or objective opinion.,0.7
+5,"Determine the perspective of the input text: is it subjective or objective, maintaining the accuracy of the classification.",0.65
+5,Determine the perspective of the given sentence as either subjective or objective.,0.65
+5,"Classify the provided text as subjective or objective, accurately interpreting its perspective.",0.65
+5,"Classify the provided sentences as either subjective or objective, focusing on identifying the presence of personal opinions versus objective truth",0.65
+5,"Classify the input sentence as either subjective or objective, drawing a clear distinction between expressions of personal opinion and objective facts, and provide the corresponding label based on context and language usage.",0.65
+6,"Distinguish between subjective and objective opinions in the provided text, using context and linguistic nuances to accurately classify sentences as either expressing personal perspectives or conveying factual information.",0.75
+6,"Determine the type of opinion expressed in the given sentence, either subjective or objective, based on the context and wording provided.",0.75
+6,"Identify the provided sentence as expressing a subjective or objective opinion, and accurately categorize it.",0.7
+6,"Determine whether each input sentence is subjective or objective, based on its distinction between personal opinions and objective facts.",0.7
+6,"Determine the perspective of the sentence and classify it as either subjective or objective, ensuring accurate classification.",0.7
+6,Determine the nature of each sentence as expressing a subjective or objective opinion.,0.7
+6,"Accurately identify whether the input text expresses a subjective perspective (personal opinion or feeling) or an objective perspective (fact or concrete information), taking into account the language usage and context.",0.7
+6,"Determine the perspective of the input text: is it subjective or objective, maintaining the accuracy of the classification.",0.65
+6,Determine the perspective of the given sentence as either subjective or objective.,0.65
+6,"Classify the provided text as subjective or objective, accurately interpreting its perspective.",0.65
+7,"Classify the provided sentences as either subjective (expressing a personal opinion or emotion) or objective (presenting factual information), taking into account linguistic nuances and contextual clues.",0.8
+7,"Distinguish between subjective and objective opinions in the provided text, using context and linguistic nuances to accurately classify sentences as either expressing personal perspectives or conveying factual information.",0.75
+7,"Determine the type of opinion expressed in the given sentence, either subjective or objective, based on the context and wording provided.",0.75
+7,"Classify the input text as either subjective (expressing personal opinion or feeling) or objective (conveying factual information), taking into account linguistic nuances and context to accurately determine the perspective.",0.75
+7,"Identify the provided sentence as expressing a subjective or objective opinion, and accurately categorize it.",0.7
+7,"Determine whether each input sentence is subjective or objective, based on its distinction between personal opinions and objective facts.",0.7
+7,"Determine the perspective of the sentence and classify it as either subjective or objective, ensuring accurate classification.",0.7
+7,Determine the nature of each sentence as expressing a subjective or objective opinion.,0.7
+7,Classify each input sentence as either subjective or objective by analyzing the textual content for indicators of personal opinions and objective facts.,0.7
+7,"Accurately identify whether the input text expresses a subjective perspective (personal opinion or feeling) or an objective perspective (fact or concrete information), taking into account the language usage and context.",0.7
+8,"Classify the provided sentences as either subjective (expressing a personal opinion or emotion) or objective (presenting factual information), taking into account linguistic nuances and contextual clues.",0.8
+8,"Distinguish between subjective and objective opinions in the provided text, using context and linguistic nuances to accurately classify sentences as either expressing personal perspectives or conveying factual information.",0.75
+8,"Determine the type of opinion expressed in the given sentence, either subjective or objective, based on the context and wording provided.",0.75
+8,"Classify the provided text as expressing a subjective opinion (personal bias or feeling) or an objective opinion (factual information), considering the language nuances and contextual clues to make an accurate distinction",0.75
+8,"Classify the input text as either subjective (expressing personal opinion or feeling) or objective (conveying factual information), taking into account linguistic nuances and context to accurately determine the perspective.",0.75
+8,"Identify the provided sentence as expressing a subjective or objective opinion, and accurately categorize it.",0.7
+8,"Determine whether each input sentence is subjective or objective, based on its distinction between personal opinions and objective facts.",0.7
+8,"Determine the perspective of the sentence and classify it as either subjective or objective, ensuring accurate classification.",0.7
+8,Determine the nature of each sentence as expressing a subjective or objective opinion.,0.7
+8,Classify each input sentence as either subjective or objective by analyzing the textual content for indicators of personal opinions and objective facts.,0.7
+9,"Classify the sentence and determine its perspective, distinguishing between subjective expressions of personal opinions or feelings and objective presentations of factual information, while considering linguistic nuances, contextual clues, and subtle linguistic cues.",0.8
+9,"Classify the provided sentences as either subjective (expressing a personal opinion or emotion) or objective (presenting factual information), taking into account linguistic nuances and contextual clues.",0.8
+9,"Distinguish between subjective and objective opinions in the provided text, using context and linguistic nuances to accurately classify sentences as either expressing personal perspectives or conveying factual information.",0.75
+9,"Determine the type of opinion expressed in the given sentence, either subjective or objective, based on the context and wording provided.",0.75
+9,"Classify the provided text as expressing a subjective opinion (personal bias or feeling) or an objective opinion (factual information), considering the language nuances and contextual clues to make an accurate distinction",0.75
+9,"Classify the input text as either subjective (expressing personal opinion or feeling) or objective (conveying factual information), taking into account linguistic nuances and context to accurately determine the perspective.",0.75
+9,"Identify the subjective or objective nature of each sentence, accounting for linguistic nuances and context to accurately pinpoint the perspective.",0.7
+9,"Identify the provided sentence as expressing a subjective or objective opinion, and accurately categorize it.",0.7
+9,"Determine whether each input sentence is subjective or objective, based on its distinction between personal opinions and objective facts.",0.7
+9,"Determine the perspective of the sentence and classify it as either subjective or objective, ensuring accurate classification.",0.7
+10,"Classify the sentence and determine its perspective, distinguishing between subjective expressions of personal opinions or feelings and objective presentations of factual information, while considering linguistic nuances, contextual clues, and subtle linguistic cues.",0.8
+10,"Classify the provided sentences as either subjective (expressing a personal opinion or emotion) or objective (presenting factual information), taking into account linguistic nuances and contextual clues.",0.8
+10,"Distinguish between subjective and objective opinions in the provided text, using context and linguistic nuances to accurately classify sentences as either expressing personal perspectives or conveying factual information.",0.75
+10,"Determine the type of opinion expressed in the given sentence, either subjective or objective, based on the context and wording provided.",0.75
+10,"Classify the provided text as expressing a subjective opinion (personal bias or feeling) or an objective opinion (factual information), considering the language nuances and contextual clues to make an accurate distinction",0.75
+10,"Classify the input text as either subjective (expressing personal opinion or feeling) or objective (conveying factual information), taking into account linguistic nuances and context to accurately determine the perspective.",0.75
+10,"Identify the subjective or objective nature of each sentence, accounting for linguistic nuances and context to accurately pinpoint the perspective.",0.7
+10,"Identify the provided sentence as expressing a subjective or objective opinion, and accurately categorize it.",0.7
+10,"Determine whether each input sentence is subjective or objective, based on its distinction between personal opinions and objective facts.",0.7
+10,"Determine the perspective of the sentence and classify it as either subjective or objective, ensuring accurate classification.",0.7
+11,"Classify the sentence and determine its perspective, distinguishing between subjective expressions of personal opinions or feelings and objective presentations of factual information, while considering linguistic nuances, contextual clues, and subtle linguistic cues.",0.8
+11,"Classify the provided sentences as either subjective (expressing a personal opinion or emotion) or objective (presenting factual information), taking into account linguistic nuances and contextual clues.",0.8
+11,"Distinguish between subjective and objective opinions in the provided text, using context and linguistic nuances to accurately classify sentences as either expressing personal perspectives or conveying factual information.",0.75
+11,"Determine the type of opinion expressed in the given sentence, either subjective or objective, based on the context and wording provided.",0.75
+11,"Classify the provided text as expressing a subjective opinion (personal bias or feeling) or an objective opinion (factual information), considering the language nuances and contextual clues to make an accurate distinction",0.75
+11,"Classify the input text as either subjective (expressing personal opinion or feeling) or objective (conveying factual information), taking into account linguistic nuances and context to accurately determine the perspective.",0.75
+11,"Classify the given sentence as subjective (expressing a personal opinion or emotion) or objective (providing factual information), considering linguistic complexities and contextual clues to ensure accurate categorization.",0.75
+11,Identify the tone of the input sentences: are they subjective (expressing personal opinion or emotion) or objective (factual information)? Analyze linguistic patterns and contextual hints to provide an accurate classification.,0.7
+11,"Identify the subjective or objective nature of each sentence, accounting for linguistic nuances and context to accurately pinpoint the perspective.",0.7
+11,"Identify the provided sentence as expressing a subjective or objective opinion, and accurately categorize it.",0.7
+12,"Classify the sentence and determine its perspective, distinguishing between subjective expressions of personal opinions or feelings and objective presentations of factual information, while considering linguistic nuances, contextual clues, and subtle linguistic cues.",0.8
+12,"Classify the provided sentences as either subjective (expressing a personal opinion or emotion) or objective (presenting factual information), taking into account linguistic nuances and contextual clues.",0.8
+12,"Distinguish between subjective and objective opinions in the provided text, using context and linguistic nuances to accurately classify sentences as either expressing personal perspectives or conveying factual information.",0.75
+12,"Determine the type of opinion expressed in the given sentence, either subjective or objective, based on the context and wording provided.",0.75
+12,"Classify the provided text as expressing a subjective opinion (personal bias or feeling) or an objective opinion (factual information), considering the language nuances and contextual clues to make an accurate distinction",0.75
+12,"Classify the input text as either subjective (expressing personal opinion or feeling) or objective (conveying factual information), taking into account linguistic nuances and context to accurately determine the perspective.",0.75
+12,"Classify the given sentence as subjective (expressing a personal opinion or emotion) or objective (providing factual information), considering linguistic complexities and contextual clues to ensure accurate categorization.",0.75
+12,"Classify each sentence into subjective or objective categories, considering subtle linguistic cues and context to accurately determine the intended perspective",0.75
+12,Identify the tone of the input sentences: are they subjective (expressing personal opinion or emotion) or objective (factual information)? Analyze linguistic patterns and contextual hints to provide an accurate classification.,0.7
+12,Identify the tone of the input sentence as either subjective (reflecting personal opinion or sentiment) or objective (presenting factual content,0.7
