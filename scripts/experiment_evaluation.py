@@ -13,11 +13,6 @@ from promptolution.tasks import get_tasks
 logger = Logger(__name__)
 logger.setLevel(INFO)
 
-# TODO: use only GPT-4o
-#   - on 4 tasks (just one binary sentiment classification) - we omit trek since our evolutionary optimizer degenerates 
-#      due to too long prompts
-#   - only on the results of the better optimizer
-
 
 def get_best_prompt_from_csv(csv_path: str) -> Tuple[str, float]:
     """
@@ -88,11 +83,14 @@ def main():
     args = arg_parser.parse_args()
     all_configs = ConfigParser()
     all_configs.read(args.experiment)
+    print(all_configs)
 
     experiment_name = all_configs["experiment"]["name"]
     target_experiment = all_configs["target_experiment"]["name"]
     downstream_llms = all_configs["downstream_llm"]["name"].split(",")
     tasks = all_configs["task"]["task_name"].split(",")
+    optimizers = all_configs["task"]["optimizer"].split(",")
+    llms = all_configs["task"]["llm"].split(",")
     seed = int(all_configs["task"]["subsample_seed"])
     n_samples = int(all_configs["task"]["n_samples"])
 
@@ -102,9 +100,15 @@ def main():
         logger.critical(f"Downstream LLM: {downstream_llm}")
         # iterate through all files in the target experiment folder
         for logging_dir in tqdm(Path(f"logs/{target_experiment}").rglob("*.csv")):
-            if "best_scores" in str(logging_dir) or not any(task in str(logging_dir) for task in tasks):
+            if (
+                "best_scores" in str(logging_dir)
+                or not any(task in str(logging_dir) for task in tasks)
+                or not any(optimizer in str(logging_dir) for optimizer in optimizers)
+                or not any(llm in str(logging_dir) for llm in llms)
+            ):
                 continue
 
+            print(logging_dir)
             # extract the logging directory from the file path by removing the directory and experiment name
             evaluate_best_prompts(
                 experiment_name=experiment_name,

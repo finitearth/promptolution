@@ -1,6 +1,7 @@
 import asyncio
 import requests
 import time
+import openai
 from logging import INFO, Logger
 
 from langchain_anthropic import ChatAnthropic
@@ -47,7 +48,7 @@ class APILLM:
 
     def get_response(self, prompts: list[str]) -> list[str]:
         max_retries = 100
-        delay = 3
+        delay = 60
         attempts = 0
 
         while attempts < max_retries:
@@ -60,11 +61,19 @@ class APILLM:
                     f"Connection error: {e}. Attempt {attempts}/{max_retries}. Retrying in {delay} seconds..."
                 )
                 time.sleep(delay)
+            except openai.RateLimitError as e:
+                attempts += 1
+                logger.critical(
+                    f"Rate limit error: {e}. Attempt {attempts}/{max_retries}. Retrying in {delay} seconds..."
+                )
+                time.sleep(delay)
 
         # If the loop exits, it means max retries were reached
         raise requests.exceptions.ConnectionError("Max retries exceeded. Connection could not be established.")
 
-    async def _get_response(self, prompts: list[str], max_concurrent_calls=200) -> list[str]:  #TODO change name of method
+    async def _get_response(
+        self, prompts: list[str], max_concurrent_calls=200
+    ) -> list[str]:  # TODO change name of method
         semaphore = asyncio.Semaphore(max_concurrent_calls)  # Limit the number of concurrent calls
         tasks = []
 
