@@ -48,7 +48,7 @@ class APILLM:
 
     def get_response(self, prompts: list[str]) -> list[str]:
         max_retries = 100
-        delay = 60
+        delay = 3
         attempts = 0
 
         while attempts < max_retries:
