@@ -1,3 +1,4 @@
+task,optimizer,meta_llm,downstream_llm,evaluation_llm,use_task_desc,random_seed,test_score
 agnews,evopromptde,meta-llama\Meta-Llama-3-8B-Instruct,meta-llama/Meta-Llama-3-70B-Instruct,meta-llama\Meta-Llama-3-8B-Instruct,42,"You will be given a news article and asked to classify it as World, Sports, Business and Tech, depending on its main topic.",0.95,0.885
 agnews,evopromptde,meta-llama\Meta-Llama-3-8B-Instruct,meta-llama/Meta-Llama-3-70B-Instruct,meta-llama\Meta-Llama-3-8B-Instruct,47,"Your task is to classify the news item as ""World"", ""Sports"", ""Tech"" or ""Business"".",0.9,0.89
 agnews,evopromptde,meta-llama\Meta-Llama-3-8B-Instruct,meta-llama/Meta-Llama-3-70B-Instruct,meta-llama\Meta-Llama-3-8B-Instruct,69,"The objective is to assign a news article to one of the following categories: World, Sports, Business, or Tech, based on its main topic.",1.0,0.88

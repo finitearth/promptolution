@@ -1,4 +1,4 @@
-task,optimizer,meta_llm,downstream_llm,evaluation_llm,use_task_desc,random_seed,test_score
+task,optimizer,meta_llm,downstream_llm,evaluation_llm,random_seed,use_task_desc,train_score,test_score
 agnews,evopromptde,meta-llama\Meta-Llama-3-70B-Instruct,gpt-4o-2024-05-13,meta-llama\Meta-Llama-3-70B-Instruct,42,"Classify the topic of the following news as ""World"", ""Sports"", ""Tech"" or ""Business"".",1.0,0.825
 agnews,evopromptde,meta-llama\Meta-Llama-3-70B-Instruct,gpt-4o-2024-05-13,meta-llama\Meta-Llama-3-70B-Instruct,47,"Your task is to identify the subject of the news piece and classify it into one of four categories: World, Sports, Business and Tech.",0.95,0.825
 agnews,evopromptde,meta-llama\Meta-Llama-3-70B-Instruct,gpt-4o-2024-05-13,meta-llama\Meta-Llama-3-70B-Instruct,69,"The goal is to identify the journal article according to its primary theme and determine whether it belongs to the World, Sports, Business, or Tech category.</prompt",1.0,0.815

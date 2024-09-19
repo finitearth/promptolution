@@ -1,3 +1,4 @@
+task,optimizer,meta_llm,downstream_llm,evaluation_llm,use_task_desc,random_seed,test_score
 agnews,evopromptga,meta-llama/Meta-Llama-3-8B-Instruct,meta-llama/Meta-Llama-3-70B-Instruct,meta-llama/Meta-Llama-3-8B-Instruct,templates/evoprompt_ga_template_task_desc.txt,42,0.845
 agnews,evopromptga,meta-llama/Meta-Llama-3-8B-Instruct,meta-llama/Meta-Llama-3-70B-Instruct,meta-llama/Meta-Llama-3-8B-Instruct,templates/evoprompt_ga_template_task_desc.txt,47,0.865
 agnews,evopromptga,meta-llama/Meta-Llama-3-8B-Instruct,meta-llama/Meta-Llama-3-70B-Instruct,meta-llama/Meta-Llama-3-8B-Instruct,templates/evoprompt_ga_template_task_desc.txt,69,0.86

@@ -30,3 +30,5 @@ we assume an average token size of 35 tokens per sample + 25 per prompt = 60 tok
 # Limitations
 - we consider the score a prompt gained in the step it was created as its "true" value. We do not reevaluate that prompt, meaning "it could have been lucky" in getting 20 easy down stream examples.
 - once a prompt hits 100% in a test metric, it will be chosen as the final prompt. --> no exploration no more (especially in the case of having large llm as evaluator)
+- limit of token length lead to unfinished prompts -> <prompt> was never reached, therefore whole metaprompt is prompt
+
