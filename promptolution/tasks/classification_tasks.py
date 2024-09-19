@@ -8,7 +8,36 @@ from promptolution.tasks.base_task import BaseTask
 
 
 class ClassificationTask(BaseTask):
+    """
+    A class representing a classification task in the promptolution library.
+
+    This class handles the loading and management of classification datasets,
+    as well as the evaluation of predictors on these datasets.
+
+    Attributes:
+        task_id (str): Unique identifier for the task.
+        dataset_json (Dict): Dictionary containing dataset information.
+        description (Optional[str]): Description of the task.
+        initial_population (Optional[List[str]]): Initial set of prompts.
+        xs (Optional[np.ndarray]): Input data for the task.
+        ys (Optional[np.ndarray]): Ground truth labels for the task.
+        classes (Optional[List]): List of possible class labels.
+        split (Literal["dev", "test"]): Dataset split to use.
+        seed (int): Random seed for reproducibility.
+
+    Inherits from:
+        BaseTask: The base class for tasks in the promptolution library.
+    """
     def __init__(self, task_id: str, dataset_json: Dict, seed: int = 42, split: Literal["dev", "test"] = "dev"): 
+        """
+        Initialize the ClassificationTask.
+
+        Args:
+            task_id (str): Unique identifier for the task.
+            dataset_json (Dict): Dictionary containing dataset information.
+            seed (int, optional): Random seed for reproducibility. Defaults to 42.
+            split (Literal["dev", "test"], optional): Dataset split to use. Defaults to "dev".
+        """
         # TODO fix seed handling to be more clear (currently seed != seed)
         self.task_id: str = task_id
         self.dataset_json: Dict = dataset_json
@@ -25,6 +54,12 @@ class ClassificationTask(BaseTask):
         return self.task_id
 
     def _parse_task(self):
+        """
+        Parse the task data from the provided dataset JSON.
+
+        This method loads the task description, classes, initial prompts,
+        and the dataset split (dev or test) into the class attributes.
+        """
         task_path = Path(self.dataset_json["path"])
         self.description = self.dataset_json["description"]
         self.classes = self.dataset_json["classes"]
@@ -54,6 +89,18 @@ class ClassificationTask(BaseTask):
     def evaluate(
         self, prompts: List[str], predictor: BasePredictor, n_samples: int = 20, subsample: bool = True
     ) -> np.ndarray:  # TODO include in config
+        """
+        Evaluate a set of prompts using a given predictor.
+
+        Args:
+            prompts (List[str]): List of prompts to evaluate.
+            predictor (BasePredictor): Predictor to use for evaluation.
+            n_samples (int, optional): Number of samples to use if subsampling. Defaults to 20.
+            subsample (bool, optional): Whether to use subsampling. Defaults to True.
+
+        Returns:
+            np.ndarray: Array of accuracy scores for each prompt.
+        """
         if isinstance(prompts, str):
             prompts = [prompts]
         # Randomly select a subsample of n_samples

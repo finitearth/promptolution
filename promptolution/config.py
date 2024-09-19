@@ -4,6 +4,27 @@ from dataclasses import dataclass
 
 @dataclass
 class Config:
+    """
+    Configuration class for the promptolution library.
+
+    This class handles loading and parsing of configuration settings,
+    either from a config file or from keyword arguments.
+
+    Attributes:
+        task_name (str): Name of the task.
+        ds_path (str): Path to the dataset.
+        n_steps (int): Number of optimization steps.
+        optimizer (str): Name of the optimizer to use.
+        meta_prompt_path (str): Path to the meta prompt file.
+        meta_llms (str): Name of the meta language model.
+        downstream_llm (str): Name of the downstream language model.
+        evaluation_llm (str): Name of the evaluation language model.
+        init_pop_size (int): Initial population size. Defaults to 10.
+        logging_dir (str): Directory for logging. Defaults to "logs/run.csv".
+        experiment_name (str): Name of the experiment. Defaults to "experiment".
+        include_task_desc (bool): Whether to include task description. Defaults to False.
+        random_seed (int): Random seed for reproducibility. Defaults to 42.
+    """
     task_name: str
     ds_path: str
     n_steps: int

@@ -6,6 +6,30 @@ from promptolution.optimizers.base_optimizer import BaseOptimizer
 
 
 class EvoPromptGA(BaseOptimizer):
+    """
+    EvoPromptGA: Genetic Algorithm-based Prompt Optimizer
+
+    This class implements a genetic algorithm for optimizing prompts in large language models.
+    It is adapted from the paper "Connecting Large Language Models with Evolutionary Algorithms
+    Yields Powerful Prompt Optimizers" by Guo et al., 2023.
+
+    The optimizer uses crossover operations to generate new prompts from existing ones,
+    with different selection methods available for choosing parent prompts.
+
+    Attributes:
+        prompt_template (str): Template for generating meta-prompts during crossover.
+        meta_llm: Language model used for generating child prompts from meta-prompts.
+        selection_mode (str): Method for selecting parent prompts ('random', 'wheel', or 'tour').
+
+    Args:
+        prompt_template (str): Template for meta-prompts.
+        meta_llm: Language model for child prompt generation.
+        selection_mode (str, optional): Parent selection method. Defaults to "wheel".
+        **args: Additional arguments passed to the BaseOptimizer.
+
+    Raises:
+        AssertionError: If an invalid selection mode is provided.
+    """
     def __init__(self, prompt_template, meta_llm, selection_mode="wheel", **args):
         self.prompt_template = prompt_template
         self.meta_llm = meta_llm
@@ -14,6 +38,19 @@ class EvoPromptGA(BaseOptimizer):
         super().__init__(**args)
 
     def optimize(self, n_steps: int) -> List[str]:
+        """
+        Perform the optimization process for a specified number of steps.
+
+        This method iteratively improves the prompts using genetic algorithm techniques.
+        It evaluates prompts, performs crossover to generate new prompts, and selects
+        the best prompts for the next generation.
+
+        Args:
+            n_steps (int): Number of optimization steps to perform.
+
+        Returns:
+            List[str]: The optimized list of prompts after all steps.
+        """
         # get scores from task
         self.scores = self.task.evaluate(self.prompts, self.predictor).tolist()
         # sort prompts by score
@@ -33,6 +70,20 @@ class EvoPromptGA(BaseOptimizer):
         return self.prompts
 
     def _crossover(self, prompts, scores) -> str:
+        """
+        Perform crossover operation to generate new child prompts.
+
+        This method selects parent prompts based on the chosen selection mode,
+        creates meta-prompts using the prompt template, and generates new child
+        prompts using the meta language model.
+
+        Args:
+            prompts (List[str]): List of current prompts.
+            scores (List[float]): Corresponding scores for the prompts.
+
+        Returns:
+            List[str]: Newly generated child prompts.
+        """
         # parent selection
         if self.selection_mode == "wheel":
             wheel_idx = np.random.choice(

@@ -16,6 +16,15 @@ class Callback:
 
 
 class LoggerCallback(Callback):
+    """
+    Callback for logging optimization progress.
+
+    This callback logs information about each step, epoch, and the end of training.
+
+    Attributes:
+        logger: The logger object to use for logging.
+        step (int): The current step number.
+    """
     def __init__(self, logger):
         # TODO check up whats up with logging leves
         self.logger = logger
@@ -36,6 +45,15 @@ class LoggerCallback(Callback):
 
 
 class CSVCallback(Callback):
+    """
+    Callback for saving optimization progress to a CSV file.
+
+    This callback saves prompts and scores at each step to a CSV file.
+
+    Attributes:
+        path (str): The path to the CSV file.
+        step (int): The current step number.
+    """
     def __init__(self, path):
         # if dir does not exist
         if not os.path.exists(os.path.dirname(path)):
@@ -62,6 +80,15 @@ class CSVCallback(Callback):
 
 
 class BestPromptCallback(Callback):
+    """
+    Callback for tracking the best prompt during optimization.
+
+    This callback keeps track of the prompt with the highest score.
+
+    Attributes:
+        best_prompt (str): The prompt with the highest score so far.
+        best_score (float): The highest score achieved so far.
+    """
     def __init__(self):
         self.best_prompt = ""
         self.best_score = -99999
@@ -76,6 +103,14 @@ class BestPromptCallback(Callback):
 
 
 class ProgressBarCallback(Callback):
+    """
+    Callback for displaying a progress bar during optimization.
+
+    This callback uses tqdm to display a progress bar that updates at each step.
+
+    Attributes:
+        pbar (tqdm): The tqdm progress bar object.
+    """
     def __init__(self, total_steps):
         self.pbar = tqdm(total=total_steps)
 
