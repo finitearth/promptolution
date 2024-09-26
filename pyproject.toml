@@ -14,6 +14,8 @@ langchain-core = "^0.2.29"
 langchain-community = "^0.2.12"
 pandas = "^2.2.2"
 tqdm = "^4.66.5"
+matplotlib = "^3.9.2"
+seaborn = "^0.13.2"
 
 
 
