@@ -1,0 +1,2603 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Tasks - Promptolution Documentation</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <link href="../../assets/_mkdocstrings.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Promptolution Documentation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">API Reference</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../llms/" class="dropdown-item">LLMs</a>
+</li>
+                                    
+<li>
+    <a href="../optimizers/" class="dropdown-item">Optimizers</a>
+</li>
+                                    
+<li>
+    <a href="../predictors/" class="dropdown-item">Predictors</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Tasks</a>
+</li>
+                                    
+<li>
+    <a href="../callbacks/" class="dropdown-item">Callbacks</a>
+</li>
+                                    
+<li>
+    <a href="../config/" class="dropdown-item">Config</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../predictors/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../callbacks/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#tasks" class="nav-link">Tasks</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#promptolution.tasks" class="nav-link">tasks</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#promptolution.tasks.get_tasks" class="nav-link">get_tasks</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#promptolution.tasks.base_task" class="nav-link">base_task</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#promptolution.tasks.classification_tasks" class="nav-link">classification_tasks</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#base-task" class="nav-link">Base Task</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#promptolution.tasks.base_task" class="nav-link">base_task</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#promptolution.tasks.base_task.BaseTask" class="nav-link">BaseTask</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#promptolution.tasks.base_task.DummyTask" class="nav-link">DummyTask</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#classification-tasks" class="nav-link">Classification Tasks</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#promptolution.tasks.classification_tasks" class="nav-link">classification_tasks</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#promptolution.tasks.classification_tasks.ClassificationTask" class="nav-link">ClassificationTask</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="tasks">Tasks</h1>
+<p>This module contains task-specific implementations.</p>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="promptolution.tasks"></a>
+    <div class="doc doc-contents first">
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="promptolution.tasks.get_tasks" class="doc doc-heading">
+            <code class="highlight language-python">get_tasks(config, split='dev')</code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Create and return a list of task instances based on the provided configuration.</p>
+<p>This function supports creating multiple tasks, including a special 'dummy' task
+for testing purposes and classification tasks based on JSON descriptions.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>config</code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Configuration object containing task settings.
+    Expected attributes:
+    - task_name (str): Comma-separated list of task names.
+    - ds_path (str): Path to the dataset directory.
+    - random_seed (int): Seed for random number generation.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>split</code></td>
+            <td>
+                  <code><span title="typing.Literal">Literal</span>[&#39;dev&#39;, &#39;test&#39;]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dataset split to use. Defaults to "dev".</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;dev&#39;</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="promptolution.tasks.base_task.BaseTask" href="#promptolution.tasks.base_task.BaseTask">BaseTask</a>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List[BaseTask]: A list of instantiated task objects.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>FileNotFoundError</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If the task description file is not found.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="json.JSONDecodeError">JSONDecodeError</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If the task description file is not valid JSON.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="notes" open>
+  <summary>Notes</summary>
+  <ul>
+<li>The 'dummy' task is a special case that creates a DummyTask instance.</li>
+<li>For all other tasks, a ClassificationTask instance is created.</li>
+<li>The task description is loaded from a 'description.json' file in the dataset path.</li>
+</ul>
+</details>
+            <details class="quote">
+              <summary>Source code in <code>promptolution\tasks\__init__.py</code></summary>
+              <pre class="highlight"><code class="language-python">def get_tasks(config, split: Literal["dev", "test"] = "dev") -&gt; List[BaseTask]:
+    """
+    Create and return a list of task instances based on the provided configuration.
+
+    This function supports creating multiple tasks, including a special 'dummy' task
+    for testing purposes and classification tasks based on JSON descriptions.
+
+    Args:
+        config: Configuration object containing task settings.
+                Expected attributes:
+                - task_name (str): Comma-separated list of task names.
+                - ds_path (str): Path to the dataset directory.
+                - random_seed (int): Seed for random number generation.
+        split (Literal["dev", "test"], optional): Dataset split to use. Defaults to "dev".
+
+    Returns:
+        List[BaseTask]: A list of instantiated task objects.
+
+    Raises:
+        FileNotFoundError: If the task description file is not found.
+        json.JSONDecodeError: If the task description file is not valid JSON.
+
+    Notes:
+        - The 'dummy' task is a special case that creates a DummyTask instance.
+        - For all other tasks, a ClassificationTask instance is created.
+        - The task description is loaded from a 'description.json' file in the dataset path.
+    """
+    task_names = config.task_name.split(",")
+
+    task_list = []
+    for task_name in task_names:
+        task_description_path = Path(config.ds_path) / Path("description.json")
+        task_description = json.loads(task_description_path.read_text())
+        if task_name == "dummy":
+            task = DummyTask()
+            task_list.append(task)
+            continue
+        task = ClassificationTask(task_name, task_description, split=split, seed=config.random_seed)
+        task_list.append(task)
+
+    return task_list</code></pre>
+            </details>
+    </div>
+
+</div>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="promptolution.tasks.base_task" class="doc doc-heading">
+            <code>base_task</code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="promptolution.tasks.base_task.BaseTask" class="doc doc-heading">
+            <code>BaseTask</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="abc.ABC">ABC</span></code></p>
+
+
+        <p>Abstract base class for tasks in the promptolution library.</p>
+<p>This class defines the interface that all concrete task implementations should follow.</p>
+
+
+<p><span class="doc-section-title">Methods:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="promptolution.tasks.base_task.BaseTask.evaluate" href="#promptolution.tasks.base_task.BaseTask.evaluate">evaluate</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>An abstract method that should be implemented by subclasses
+      to evaluate prompts using a given predictor.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+              <details class="quote">
+                <summary>Source code in <code>promptolution\tasks\base_task.py</code></summary>
+                <pre class="highlight"><code class="language-python">class BaseTask(ABC):
+    """
+    Abstract base class for tasks in the promptolution library.
+
+    This class defines the interface that all concrete task implementations should follow.
+
+    Methods:
+        evaluate: An abstract method that should be implemented by subclasses
+                  to evaluate prompts using a given predictor.
+    """
+    def __init__(self, *args, **kwargs):
+        pass
+
+    @abstractmethod
+    def evaluate(self, prompts: List[str], predictor) -&gt; np.ndarray:
+        """
+        Abstract method to evaluate prompts using a given predictor.
+
+        Args:
+            prompts (List[str]): List of prompts to evaluate.
+            predictor: The predictor to use for evaluation.
+
+        Returns:
+            np.ndarray: Array of evaluation scores for each prompt.
+
+        Raises:
+            NotImplementedError: If not implemented by a subclass.
+        """
+        raise NotImplementedError</code></pre>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="promptolution.tasks.base_task.BaseTask.evaluate" class="doc doc-heading">
+            <code class="highlight language-python">evaluate(prompts, predictor)</code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-abstractmethod"><code>abstractmethod</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Abstract method to evaluate prompts using a given predictor.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>prompts</code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of prompts to evaluate.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>predictor</code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The predictor to use for evaluation.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="numpy.ndarray">ndarray</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>np.ndarray: Array of evaluation scores for each prompt.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>NotImplementedError</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If not implemented by a subclass.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+            <details class="quote">
+              <summary>Source code in <code>promptolution\tasks\base_task.py</code></summary>
+              <pre class="highlight"><code class="language-python">@abstractmethod
+def evaluate(self, prompts: List[str], predictor) -&gt; np.ndarray:
+    """
+    Abstract method to evaluate prompts using a given predictor.
+
+    Args:
+        prompts (List[str]): List of prompts to evaluate.
+        predictor: The predictor to use for evaluation.
+
+    Returns:
+        np.ndarray: Array of evaluation scores for each prompt.
+
+    Raises:
+        NotImplementedError: If not implemented by a subclass.
+    """
+    raise NotImplementedError</code></pre>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="promptolution.tasks.base_task.DummyTask" class="doc doc-heading">
+            <code>DummyTask</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="promptolution.tasks.base_task.BaseTask" href="#promptolution.tasks.base_task.BaseTask">BaseTask</a></code></p>
+
+
+        <p>A dummy task implementation for testing purposes.</p>
+<p>This task generates random evaluation scores for given prompts.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.base_task.DummyTask.task_id">task_id</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Identifier for the task, set to "dummy".</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.base_task.DummyTask.dataset_json">dataset_json</span></code></td>
+            <td>
+                  <code>None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Placeholder for dataset information.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.base_task.DummyTask.initial_population">initial_population</span></code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of initial prompts.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.base_task.DummyTask.description">description</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Description of the dummy task.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.base_task.DummyTask.xs">xs</span></code></td>
+            <td>
+                  <code><span title="numpy.ndarray">ndarray</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Array of dummy input data.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.base_task.DummyTask.ys">ys</span></code></td>
+            <td>
+                  <code><span title="numpy.ndarray">ndarray</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Array of dummy labels.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.base_task.DummyTask.classes">classes</span></code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of possible class labels.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+              <details class="quote">
+                <summary>Source code in <code>promptolution\tasks\base_task.py</code></summary>
+                <pre class="highlight"><code class="language-python">class DummyTask(BaseTask):
+    """
+    A dummy task implementation for testing purposes.
+
+    This task generates random evaluation scores for given prompts.
+
+    Attributes:
+        task_id (str): Identifier for the task, set to "dummy".
+        dataset_json (None): Placeholder for dataset information.
+        initial_population (List[str]): List of initial prompts.
+        description (str): Description of the dummy task.
+        xs (np.ndarray): Array of dummy input data.
+        ys (np.ndarray): Array of dummy labels.
+        classes (List[str]): List of possible class labels.
+    """
+    def __init__(self):
+        self.task_id = "dummy"
+        self.dataset_json = None
+        self.initial_population = ["Some", "initial", "prompts", "that", "will", "do", "the", "trick"]
+        self.description = "This is a dummy task for testing purposes."
+        self.xs = np.array(["This is a test", "This is another test", "This is a third test"])
+        self.ys = np.array(["positive", "negative", "positive"])
+        self.classes = ["negative", "positive"]
+
+    def evaluate(self, prompts: List[str], predictor) -&gt; np.ndarray:
+        """
+        Generate random evaluation scores for the given prompts.
+
+        Args:
+            prompts (List[str]): List of prompts to evaluate.
+            predictor: The predictor to use for evaluation (ignored in this implementation).
+
+        Returns:
+            np.ndarray: Array of random evaluation scores, one for each prompt.
+        """
+        return np.array([np.random.rand()] * len(prompts))</code></pre>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="promptolution.tasks.base_task.DummyTask.evaluate" class="doc doc-heading">
+            <code class="highlight language-python">evaluate(prompts, predictor)</code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generate random evaluation scores for the given prompts.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>prompts</code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of prompts to evaluate.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>predictor</code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The predictor to use for evaluation (ignored in this implementation).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="numpy.ndarray">ndarray</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>np.ndarray: Array of random evaluation scores, one for each prompt.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+            <details class="quote">
+              <summary>Source code in <code>promptolution\tasks\base_task.py</code></summary>
+              <pre class="highlight"><code class="language-python">def evaluate(self, prompts: List[str], predictor) -&gt; np.ndarray:
+    """
+    Generate random evaluation scores for the given prompts.
+
+    Args:
+        prompts (List[str]): List of prompts to evaluate.
+        predictor: The predictor to use for evaluation (ignored in this implementation).
+
+    Returns:
+        np.ndarray: Array of random evaluation scores, one for each prompt.
+    """
+    return np.array([np.random.rand()] * len(prompts))</code></pre>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="promptolution.tasks.classification_tasks" class="doc doc-heading">
+            <code>classification_tasks</code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="promptolution.tasks.classification_tasks.ClassificationTask" class="doc doc-heading">
+            <code>ClassificationTask</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="promptolution.tasks.base_task.BaseTask" href="#promptolution.tasks.base_task.BaseTask">BaseTask</a></code></p>
+
+
+        <p>A class representing a classification task in the promptolution library.</p>
+<p>This class handles the loading and management of classification datasets,
+as well as the evaluation of predictors on these datasets.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.classification_tasks.ClassificationTask.task_id">task_id</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Unique identifier for the task.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.classification_tasks.ClassificationTask.dataset_json">dataset_json</span></code></td>
+            <td>
+                  <code><span title="typing.Dict">Dict</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dictionary containing dataset information.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.classification_tasks.ClassificationTask.description">description</span></code></td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Description of the task.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.classification_tasks.ClassificationTask.initial_population">initial_population</span></code></td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Initial set of prompts.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.classification_tasks.ClassificationTask.xs">xs</span></code></td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="numpy.ndarray">ndarray</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Input data for the task.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.classification_tasks.ClassificationTask.ys">ys</span></code></td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="numpy.ndarray">ndarray</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Ground truth labels for the task.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.classification_tasks.ClassificationTask.classes">classes</span></code></td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of possible class labels.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.classification_tasks.ClassificationTask.split">split</span></code></td>
+            <td>
+                  <code><span title="typing.Literal">Literal</span>[&#39;dev&#39;, &#39;test&#39;]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dataset split to use.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.classification_tasks.ClassificationTask.seed">seed</span></code></td>
+            <td>
+                  <code>int</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Random seed for reproducibility.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="inherits-from" open>
+  <summary>Inherits from</summary>
+  <p>BaseTask: The base class for tasks in the promptolution library.</p>
+</details>
+              <details class="quote">
+                <summary>Source code in <code>promptolution\tasks\classification_tasks.py</code></summary>
+                <pre class="highlight"><code class="language-python">class ClassificationTask(BaseTask):
+    """
+    A class representing a classification task in the promptolution library.
+
+    This class handles the loading and management of classification datasets,
+    as well as the evaluation of predictors on these datasets.
+
+    Attributes:
+        task_id (str): Unique identifier for the task.
+        dataset_json (Dict): Dictionary containing dataset information.
+        description (Optional[str]): Description of the task.
+        initial_population (Optional[List[str]]): Initial set of prompts.
+        xs (Optional[np.ndarray]): Input data for the task.
+        ys (Optional[np.ndarray]): Ground truth labels for the task.
+        classes (Optional[List]): List of possible class labels.
+        split (Literal["dev", "test"]): Dataset split to use.
+        seed (int): Random seed for reproducibility.
+
+    Inherits from:
+        BaseTask: The base class for tasks in the promptolution library.
+    """
+    def __init__(self, task_id: str, dataset_json: Dict, seed: int = 42, split: Literal["dev", "test"] = "dev"): 
+        """
+        Initialize the ClassificationTask.
+
+        Args:
+            task_id (str): Unique identifier for the task.
+            dataset_json (Dict): Dictionary containing dataset information.
+            seed (int, optional): Random seed for reproducibility. Defaults to 42.
+            split (Literal["dev", "test"], optional): Dataset split to use. Defaults to "dev".
+        """
+        self.task_id: str = task_id
+        self.dataset_json: Dict = dataset_json
+        self.description: Optional[str] = None
+        self.initial_population: Optional[List[str]] = None
+        self.xs: Optional[np.ndarray] = np.array([])
+        self.ys: Optional[np.ndarray] = None
+        self.classes: Optional[List] = None
+        self.split: Literal["dev", "test"] = split
+        self._parse_task()
+        self.reset_seed(seed)
+
+    def __str__(self):
+        return self.task_id
+
+    def _parse_task(self):
+        """
+        Parse the task data from the provided dataset JSON.
+
+        This method loads the task description, classes, initial prompts,
+        and the dataset split (dev or test) into the class attributes.
+        """
+        task_path = Path(self.dataset_json["path"])
+        self.description = self.dataset_json["description"]
+        self.classes = self.dataset_json["classes"]
+
+        with open(task_path / Path(self.dataset_json["init_prompts"]), "r", encoding="utf-8") as file:
+            lines = file.readlines()
+        self.initial_population = [line.strip() for line in lines]
+
+        seed = Path(self.dataset_json["seed"])
+        split = Path(self.split + ".txt")
+
+        with open(task_path / seed / split, "r", encoding="utf-8") as file:
+            lines = file.readlines()
+        lines = [line.strip() for line in lines]
+
+        xs = []
+        ys = []
+
+        for line in lines:
+            x, y = line.split("\t")
+            xs.append(x)
+            ys.append(self.classes[int(y)])
+
+        self.xs = np.array(xs)
+        self.ys = np.array(ys)
+
+    def evaluate(
+        self, prompts: List[str], predictor: BasePredictor, n_samples: int = 20, subsample: bool = True
+    ) -&gt; np.ndarray: 
+        """
+        Evaluate a set of prompts using a given predictor.
+
+        Args:
+            prompts (List[str]): List of prompts to evaluate.
+            predictor (BasePredictor): Predictor to use for evaluation.
+            n_samples (int, optional): Number of samples to use if subsampling. Defaults to 20.
+            subsample (bool, optional): Whether to use subsampling. Defaults to True.
+
+        Returns:
+            np.ndarray: Array of accuracy scores for each prompt.
+        """
+        if isinstance(prompts, str):
+            prompts = [prompts]
+        # Randomly select a subsample of n_samples
+        if subsample:
+            indices = np.random.choice(len(self.xs), n_samples, replace=False)
+        else:
+            indices = np.arange(len(self.xs))
+
+        xs_subsample = self.xs[indices]
+        ys_subsample = self.ys[indices]
+
+        # Make predictions on the subsample
+        preds = predictor.predict(prompts, xs_subsample)
+
+        # Calculate accuracy: number of correct predictions / total number of predictions per prompt
+        return np.mean(preds == ys_subsample, axis=1)
+
+    def reset_seed(self, seed: int = None):
+        if seed is not None:
+            self.seed = seed
+        np.random.seed(self.seed)</code></pre>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="promptolution.tasks.classification_tasks.ClassificationTask.__init__" class="doc doc-heading">
+            <code class="highlight language-python">__init__(task_id, dataset_json, seed=42, split='dev')</code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initialize the ClassificationTask.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>task_id</code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Unique identifier for the task.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>dataset_json</code></td>
+            <td>
+                  <code><span title="typing.Dict">Dict</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dictionary containing dataset information.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>seed</code></td>
+            <td>
+                  <code>int</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Random seed for reproducibility. Defaults to 42.</p>
+              </div>
+            </td>
+            <td>
+                  <code>42</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>split</code></td>
+            <td>
+                  <code><span title="typing.Literal">Literal</span>[&#39;dev&#39;, &#39;test&#39;]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dataset split to use. Defaults to "dev".</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;dev&#39;</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+            <details class="quote">
+              <summary>Source code in <code>promptolution\tasks\classification_tasks.py</code></summary>
+              <pre class="highlight"><code class="language-python">def __init__(self, task_id: str, dataset_json: Dict, seed: int = 42, split: Literal["dev", "test"] = "dev"): 
+    """
+    Initialize the ClassificationTask.
+
+    Args:
+        task_id (str): Unique identifier for the task.
+        dataset_json (Dict): Dictionary containing dataset information.
+        seed (int, optional): Random seed for reproducibility. Defaults to 42.
+        split (Literal["dev", "test"], optional): Dataset split to use. Defaults to "dev".
+    """
+    self.task_id: str = task_id
+    self.dataset_json: Dict = dataset_json
+    self.description: Optional[str] = None
+    self.initial_population: Optional[List[str]] = None
+    self.xs: Optional[np.ndarray] = np.array([])
+    self.ys: Optional[np.ndarray] = None
+    self.classes: Optional[List] = None
+    self.split: Literal["dev", "test"] = split
+    self._parse_task()
+    self.reset_seed(seed)</code></pre>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="promptolution.tasks.classification_tasks.ClassificationTask.evaluate" class="doc doc-heading">
+            <code class="highlight language-python">evaluate(prompts, predictor, n_samples=20, subsample=True)</code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Evaluate a set of prompts using a given predictor.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>prompts</code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of prompts to evaluate.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>predictor</code></td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="promptolution.predictors.base_predictor.BasePredictor" href="../predictors/#promptolution.predictors.base_predictor.BasePredictor">BasePredictor</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Predictor to use for evaluation.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>n_samples</code></td>
+            <td>
+                  <code>int</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of samples to use if subsampling. Defaults to 20.</p>
+              </div>
+            </td>
+            <td>
+                  <code>20</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>subsample</code></td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether to use subsampling. Defaults to True.</p>
+              </div>
+            </td>
+            <td>
+                  <code>True</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="numpy.ndarray">ndarray</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>np.ndarray: Array of accuracy scores for each prompt.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+            <details class="quote">
+              <summary>Source code in <code>promptolution\tasks\classification_tasks.py</code></summary>
+              <pre class="highlight"><code class="language-python">def evaluate(
+    self, prompts: List[str], predictor: BasePredictor, n_samples: int = 20, subsample: bool = True
+) -&gt; np.ndarray: 
+    """
+    Evaluate a set of prompts using a given predictor.
+
+    Args:
+        prompts (List[str]): List of prompts to evaluate.
+        predictor (BasePredictor): Predictor to use for evaluation.
+        n_samples (int, optional): Number of samples to use if subsampling. Defaults to 20.
+        subsample (bool, optional): Whether to use subsampling. Defaults to True.
+
+    Returns:
+        np.ndarray: Array of accuracy scores for each prompt.
+    """
+    if isinstance(prompts, str):
+        prompts = [prompts]
+    # Randomly select a subsample of n_samples
+    if subsample:
+        indices = np.random.choice(len(self.xs), n_samples, replace=False)
+    else:
+        indices = np.arange(len(self.xs))
+
+    xs_subsample = self.xs[indices]
+    ys_subsample = self.ys[indices]
+
+    # Make predictions on the subsample
+    preds = predictor.predict(prompts, xs_subsample)
+
+    # Calculate accuracy: number of correct predictions / total number of predictions per prompt
+    return np.mean(preds == ys_subsample, axis=1)</code></pre>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+  </div>
+
+    </div>
+
+</div><h2 id="base-task">Base Task</h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="promptolution.tasks.base_task"></a>
+    <div class="doc doc-contents first">
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="promptolution.tasks.base_task.BaseTask" class="doc doc-heading">
+            <code>BaseTask</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="abc.ABC">ABC</span></code></p>
+
+
+        <p>Abstract base class for tasks in the promptolution library.</p>
+<p>This class defines the interface that all concrete task implementations should follow.</p>
+
+
+<p><span class="doc-section-title">Methods:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr class="doc-section-item">
+              <td><code><a class="autorefs autorefs-internal" title="promptolution.tasks.base_task.BaseTask.evaluate" href="#promptolution.tasks.base_task.BaseTask.evaluate">evaluate</a></code></td>
+              <td>
+                <div class="doc-md-description">
+                  <p>An abstract method that should be implemented by subclasses
+      to evaluate prompts using a given predictor.</p>
+                </div>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+
+              <details class="quote">
+                <summary>Source code in <code>promptolution\tasks\base_task.py</code></summary>
+                <pre class="highlight"><code class="language-python">class BaseTask(ABC):
+    """
+    Abstract base class for tasks in the promptolution library.
+
+    This class defines the interface that all concrete task implementations should follow.
+
+    Methods:
+        evaluate: An abstract method that should be implemented by subclasses
+                  to evaluate prompts using a given predictor.
+    """
+    def __init__(self, *args, **kwargs):
+        pass
+
+    @abstractmethod
+    def evaluate(self, prompts: List[str], predictor) -&gt; np.ndarray:
+        """
+        Abstract method to evaluate prompts using a given predictor.
+
+        Args:
+            prompts (List[str]): List of prompts to evaluate.
+            predictor: The predictor to use for evaluation.
+
+        Returns:
+            np.ndarray: Array of evaluation scores for each prompt.
+
+        Raises:
+            NotImplementedError: If not implemented by a subclass.
+        """
+        raise NotImplementedError</code></pre>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="promptolution.tasks.base_task.BaseTask.evaluate" class="doc doc-heading">
+            <code class="highlight language-python">evaluate(prompts, predictor)</code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-abstractmethod"><code>abstractmethod</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Abstract method to evaluate prompts using a given predictor.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>prompts</code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of prompts to evaluate.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>predictor</code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The predictor to use for evaluation.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="numpy.ndarray">ndarray</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>np.ndarray: Array of evaluation scores for each prompt.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>NotImplementedError</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If not implemented by a subclass.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+            <details class="quote">
+              <summary>Source code in <code>promptolution\tasks\base_task.py</code></summary>
+              <pre class="highlight"><code class="language-python">@abstractmethod
+def evaluate(self, prompts: List[str], predictor) -&gt; np.ndarray:
+    """
+    Abstract method to evaluate prompts using a given predictor.
+
+    Args:
+        prompts (List[str]): List of prompts to evaluate.
+        predictor: The predictor to use for evaluation.
+
+    Returns:
+        np.ndarray: Array of evaluation scores for each prompt.
+
+    Raises:
+        NotImplementedError: If not implemented by a subclass.
+    """
+    raise NotImplementedError</code></pre>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="promptolution.tasks.base_task.DummyTask" class="doc doc-heading">
+            <code>DummyTask</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="promptolution.tasks.base_task.BaseTask" href="#promptolution.tasks.base_task.BaseTask">BaseTask</a></code></p>
+
+
+        <p>A dummy task implementation for testing purposes.</p>
+<p>This task generates random evaluation scores for given prompts.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.base_task.DummyTask.task_id">task_id</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Identifier for the task, set to "dummy".</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.base_task.DummyTask.dataset_json">dataset_json</span></code></td>
+            <td>
+                  <code>None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Placeholder for dataset information.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.base_task.DummyTask.initial_population">initial_population</span></code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of initial prompts.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.base_task.DummyTask.description">description</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Description of the dummy task.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.base_task.DummyTask.xs">xs</span></code></td>
+            <td>
+                  <code><span title="numpy.ndarray">ndarray</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Array of dummy input data.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.base_task.DummyTask.ys">ys</span></code></td>
+            <td>
+                  <code><span title="numpy.ndarray">ndarray</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Array of dummy labels.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.base_task.DummyTask.classes">classes</span></code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of possible class labels.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+              <details class="quote">
+                <summary>Source code in <code>promptolution\tasks\base_task.py</code></summary>
+                <pre class="highlight"><code class="language-python">class DummyTask(BaseTask):
+    """
+    A dummy task implementation for testing purposes.
+
+    This task generates random evaluation scores for given prompts.
+
+    Attributes:
+        task_id (str): Identifier for the task, set to "dummy".
+        dataset_json (None): Placeholder for dataset information.
+        initial_population (List[str]): List of initial prompts.
+        description (str): Description of the dummy task.
+        xs (np.ndarray): Array of dummy input data.
+        ys (np.ndarray): Array of dummy labels.
+        classes (List[str]): List of possible class labels.
+    """
+    def __init__(self):
+        self.task_id = "dummy"
+        self.dataset_json = None
+        self.initial_population = ["Some", "initial", "prompts", "that", "will", "do", "the", "trick"]
+        self.description = "This is a dummy task for testing purposes."
+        self.xs = np.array(["This is a test", "This is another test", "This is a third test"])
+        self.ys = np.array(["positive", "negative", "positive"])
+        self.classes = ["negative", "positive"]
+
+    def evaluate(self, prompts: List[str], predictor) -&gt; np.ndarray:
+        """
+        Generate random evaluation scores for the given prompts.
+
+        Args:
+            prompts (List[str]): List of prompts to evaluate.
+            predictor: The predictor to use for evaluation (ignored in this implementation).
+
+        Returns:
+            np.ndarray: Array of random evaluation scores, one for each prompt.
+        """
+        return np.array([np.random.rand()] * len(prompts))</code></pre>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="promptolution.tasks.base_task.DummyTask.evaluate" class="doc doc-heading">
+            <code class="highlight language-python">evaluate(prompts, predictor)</code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Generate random evaluation scores for the given prompts.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>prompts</code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of prompts to evaluate.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>predictor</code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The predictor to use for evaluation (ignored in this implementation).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="numpy.ndarray">ndarray</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>np.ndarray: Array of random evaluation scores, one for each prompt.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+            <details class="quote">
+              <summary>Source code in <code>promptolution\tasks\base_task.py</code></summary>
+              <pre class="highlight"><code class="language-python">def evaluate(self, prompts: List[str], predictor) -&gt; np.ndarray:
+    """
+    Generate random evaluation scores for the given prompts.
+
+    Args:
+        prompts (List[str]): List of prompts to evaluate.
+        predictor: The predictor to use for evaluation (ignored in this implementation).
+
+    Returns:
+        np.ndarray: Array of random evaluation scores, one for each prompt.
+    """
+    return np.array([np.random.rand()] * len(prompts))</code></pre>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div><h2 id="classification-tasks">Classification Tasks</h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="promptolution.tasks.classification_tasks"></a>
+    <div class="doc doc-contents first">
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="promptolution.tasks.classification_tasks.ClassificationTask" class="doc doc-heading">
+            <code>ClassificationTask</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="promptolution.tasks.base_task.BaseTask" href="#promptolution.tasks.base_task.BaseTask">BaseTask</a></code></p>
+
+
+        <p>A class representing a classification task in the promptolution library.</p>
+<p>This class handles the loading and management of classification datasets,
+as well as the evaluation of predictors on these datasets.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.classification_tasks.ClassificationTask.task_id">task_id</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Unique identifier for the task.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.classification_tasks.ClassificationTask.dataset_json">dataset_json</span></code></td>
+            <td>
+                  <code><span title="typing.Dict">Dict</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dictionary containing dataset information.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.classification_tasks.ClassificationTask.description">description</span></code></td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Description of the task.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.classification_tasks.ClassificationTask.initial_population">initial_population</span></code></td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Initial set of prompts.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.classification_tasks.ClassificationTask.xs">xs</span></code></td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="numpy.ndarray">ndarray</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Input data for the task.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.classification_tasks.ClassificationTask.ys">ys</span></code></td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="numpy.ndarray">ndarray</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Ground truth labels for the task.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.classification_tasks.ClassificationTask.classes">classes</span></code></td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of possible class labels.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.classification_tasks.ClassificationTask.split">split</span></code></td>
+            <td>
+                  <code><span title="typing.Literal">Literal</span>[&#39;dev&#39;, &#39;test&#39;]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dataset split to use.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.tasks.classification_tasks.ClassificationTask.seed">seed</span></code></td>
+            <td>
+                  <code>int</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Random seed for reproducibility.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="inherits-from" open>
+  <summary>Inherits from</summary>
+  <p>BaseTask: The base class for tasks in the promptolution library.</p>
+</details>
+              <details class="quote">
+                <summary>Source code in <code>promptolution\tasks\classification_tasks.py</code></summary>
+                <pre class="highlight"><code class="language-python">class ClassificationTask(BaseTask):
+    """
+    A class representing a classification task in the promptolution library.
+
+    This class handles the loading and management of classification datasets,
+    as well as the evaluation of predictors on these datasets.
+
+    Attributes:
+        task_id (str): Unique identifier for the task.
+        dataset_json (Dict): Dictionary containing dataset information.
+        description (Optional[str]): Description of the task.
+        initial_population (Optional[List[str]]): Initial set of prompts.
+        xs (Optional[np.ndarray]): Input data for the task.
+        ys (Optional[np.ndarray]): Ground truth labels for the task.
+        classes (Optional[List]): List of possible class labels.
+        split (Literal["dev", "test"]): Dataset split to use.
+        seed (int): Random seed for reproducibility.
+
+    Inherits from:
+        BaseTask: The base class for tasks in the promptolution library.
+    """
+    def __init__(self, task_id: str, dataset_json: Dict, seed: int = 42, split: Literal["dev", "test"] = "dev"): 
+        """
+        Initialize the ClassificationTask.
+
+        Args:
+            task_id (str): Unique identifier for the task.
+            dataset_json (Dict): Dictionary containing dataset information.
+            seed (int, optional): Random seed for reproducibility. Defaults to 42.
+            split (Literal["dev", "test"], optional): Dataset split to use. Defaults to "dev".
+        """
+        self.task_id: str = task_id
+        self.dataset_json: Dict = dataset_json
+        self.description: Optional[str] = None
+        self.initial_population: Optional[List[str]] = None
+        self.xs: Optional[np.ndarray] = np.array([])
+        self.ys: Optional[np.ndarray] = None
+        self.classes: Optional[List] = None
+        self.split: Literal["dev", "test"] = split
+        self._parse_task()
+        self.reset_seed(seed)
+
+    def __str__(self):
+        return self.task_id
+
+    def _parse_task(self):
+        """
+        Parse the task data from the provided dataset JSON.
+
+        This method loads the task description, classes, initial prompts,
+        and the dataset split (dev or test) into the class attributes.
+        """
+        task_path = Path(self.dataset_json["path"])
+        self.description = self.dataset_json["description"]
+        self.classes = self.dataset_json["classes"]
+
+        with open(task_path / Path(self.dataset_json["init_prompts"]), "r", encoding="utf-8") as file:
+            lines = file.readlines()
+        self.initial_population = [line.strip() for line in lines]
+
+        seed = Path(self.dataset_json["seed"])
+        split = Path(self.split + ".txt")
+
+        with open(task_path / seed / split, "r", encoding="utf-8") as file:
+            lines = file.readlines()
+        lines = [line.strip() for line in lines]
+
+        xs = []
+        ys = []
+
+        for line in lines:
+            x, y = line.split("\t")
+            xs.append(x)
+            ys.append(self.classes[int(y)])
+
+        self.xs = np.array(xs)
+        self.ys = np.array(ys)
+
+    def evaluate(
+        self, prompts: List[str], predictor: BasePredictor, n_samples: int = 20, subsample: bool = True
+    ) -&gt; np.ndarray: 
+        """
+        Evaluate a set of prompts using a given predictor.
+
+        Args:
+            prompts (List[str]): List of prompts to evaluate.
+            predictor (BasePredictor): Predictor to use for evaluation.
+            n_samples (int, optional): Number of samples to use if subsampling. Defaults to 20.
+            subsample (bool, optional): Whether to use subsampling. Defaults to True.
+
+        Returns:
+            np.ndarray: Array of accuracy scores for each prompt.
+        """
+        if isinstance(prompts, str):
+            prompts = [prompts]
+        # Randomly select a subsample of n_samples
+        if subsample:
+            indices = np.random.choice(len(self.xs), n_samples, replace=False)
+        else:
+            indices = np.arange(len(self.xs))
+
+        xs_subsample = self.xs[indices]
+        ys_subsample = self.ys[indices]
+
+        # Make predictions on the subsample
+        preds = predictor.predict(prompts, xs_subsample)
+
+        # Calculate accuracy: number of correct predictions / total number of predictions per prompt
+        return np.mean(preds == ys_subsample, axis=1)
+
+    def reset_seed(self, seed: int = None):
+        if seed is not None:
+            self.seed = seed
+        np.random.seed(self.seed)</code></pre>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="promptolution.tasks.classification_tasks.ClassificationTask.__init__" class="doc doc-heading">
+            <code class="highlight language-python">__init__(task_id, dataset_json, seed=42, split='dev')</code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Initialize the ClassificationTask.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>task_id</code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Unique identifier for the task.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>dataset_json</code></td>
+            <td>
+                  <code><span title="typing.Dict">Dict</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dictionary containing dataset information.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>seed</code></td>
+            <td>
+                  <code>int</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Random seed for reproducibility. Defaults to 42.</p>
+              </div>
+            </td>
+            <td>
+                  <code>42</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>split</code></td>
+            <td>
+                  <code><span title="typing.Literal">Literal</span>[&#39;dev&#39;, &#39;test&#39;]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dataset split to use. Defaults to "dev".</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;dev&#39;</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+            <details class="quote">
+              <summary>Source code in <code>promptolution\tasks\classification_tasks.py</code></summary>
+              <pre class="highlight"><code class="language-python">def __init__(self, task_id: str, dataset_json: Dict, seed: int = 42, split: Literal["dev", "test"] = "dev"): 
+    """
+    Initialize the ClassificationTask.
+
+    Args:
+        task_id (str): Unique identifier for the task.
+        dataset_json (Dict): Dictionary containing dataset information.
+        seed (int, optional): Random seed for reproducibility. Defaults to 42.
+        split (Literal["dev", "test"], optional): Dataset split to use. Defaults to "dev".
+    """
+    self.task_id: str = task_id
+    self.dataset_json: Dict = dataset_json
+    self.description: Optional[str] = None
+    self.initial_population: Optional[List[str]] = None
+    self.xs: Optional[np.ndarray] = np.array([])
+    self.ys: Optional[np.ndarray] = None
+    self.classes: Optional[List] = None
+    self.split: Literal["dev", "test"] = split
+    self._parse_task()
+    self.reset_seed(seed)</code></pre>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="promptolution.tasks.classification_tasks.ClassificationTask.evaluate" class="doc doc-heading">
+            <code class="highlight language-python">evaluate(prompts, predictor, n_samples=20, subsample=True)</code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Evaluate a set of prompts using a given predictor.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>prompts</code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of prompts to evaluate.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>predictor</code></td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="promptolution.predictors.base_predictor.BasePredictor" href="../predictors/#promptolution.predictors.base_predictor.BasePredictor">BasePredictor</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Predictor to use for evaluation.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>n_samples</code></td>
+            <td>
+                  <code>int</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of samples to use if subsampling. Defaults to 20.</p>
+              </div>
+            </td>
+            <td>
+                  <code>20</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>subsample</code></td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether to use subsampling. Defaults to True.</p>
+              </div>
+            </td>
+            <td>
+                  <code>True</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="numpy.ndarray">ndarray</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>np.ndarray: Array of accuracy scores for each prompt.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+            <details class="quote">
+              <summary>Source code in <code>promptolution\tasks\classification_tasks.py</code></summary>
+              <pre class="highlight"><code class="language-python">def evaluate(
+    self, prompts: List[str], predictor: BasePredictor, n_samples: int = 20, subsample: bool = True
+) -&gt; np.ndarray: 
+    """
+    Evaluate a set of prompts using a given predictor.
+
+    Args:
+        prompts (List[str]): List of prompts to evaluate.
+        predictor (BasePredictor): Predictor to use for evaluation.
+        n_samples (int, optional): Number of samples to use if subsampling. Defaults to 20.
+        subsample (bool, optional): Whether to use subsampling. Defaults to True.
+
+    Returns:
+        np.ndarray: Array of accuracy scores for each prompt.
+    """
+    if isinstance(prompts, str):
+        prompts = [prompts]
+    # Randomly select a subsample of n_samples
+    if subsample:
+        indices = np.random.choice(len(self.xs), n_samples, replace=False)
+    else:
+        indices = np.arange(len(self.xs))
+
+    xs_subsample = self.xs[indices]
+    ys_subsample = self.ys[indices]
+
+    # Make predictions on the subsample
+    preds = predictor.predict(prompts, xs_subsample)
+
+    # Calculate accuracy: number of correct predictions / total number of predictions per prompt
+    return np.mean(preds == ys_subsample, axis=1)</code></pre>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+                <p>&copy; 2024 <a href="https://github.com/yourusername"  target="_blank" rel="noopener">Tom Zehle, Timo Heiß, Moritz Schlager</a></p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

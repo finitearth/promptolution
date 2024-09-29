@@ -1,0 +1,3405 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Optimizers - Promptolution Documentation</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <link href="../../assets/_mkdocstrings.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Promptolution Documentation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">API Reference</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../llms/" class="dropdown-item">LLMs</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Optimizers</a>
+</li>
+                                    
+<li>
+    <a href="../predictors/" class="dropdown-item">Predictors</a>
+</li>
+                                    
+<li>
+    <a href="../tasks/" class="dropdown-item">Tasks</a>
+</li>
+                                    
+<li>
+    <a href="../callbacks/" class="dropdown-item">Callbacks</a>
+</li>
+                                    
+<li>
+    <a href="../config/" class="dropdown-item">Config</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../llms/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../predictors/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#optimizers" class="nav-link">Optimizers</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#promptolution.optimizers" class="nav-link">optimizers</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#promptolution.optimizers.get_optimizer" class="nav-link">get_optimizer</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#promptolution.optimizers.base_optimizer" class="nav-link">base_optimizer</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#promptolution.optimizers.evoprompt_de" class="nav-link">evoprompt_de</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#promptolution.optimizers.evoprompt_ga" class="nav-link">evoprompt_ga</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#base-optimizer" class="nav-link">Base Optimizer</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#promptolution.optimizers.base_optimizer" class="nav-link">base_optimizer</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#promptolution.optimizers.base_optimizer.BaseOptimizer" class="nav-link">BaseOptimizer</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#promptolution.optimizers.base_optimizer.DummyOptimizer" class="nav-link">DummyOptimizer</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#evoprompt-de" class="nav-link">EvoPrompt DE</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#promptolution.optimizers.evoprompt_de" class="nav-link">evoprompt_de</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#promptolution.optimizers.evoprompt_de.EvoPromptDE" class="nav-link">EvoPromptDE</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#evoprompt-ga" class="nav-link">EvoPrompt GA</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#promptolution.optimizers.evoprompt_ga" class="nav-link">evoprompt_ga</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#promptolution.optimizers.evoprompt_ga.EvoPromptGA" class="nav-link">EvoPromptGA</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="optimizers">Optimizers</h1>
+<p>This module contains various optimization algorithms for prompt tuning.</p>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="promptolution.optimizers"></a>
+    <div class="doc doc-contents first">
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="promptolution.optimizers.get_optimizer" class="doc doc-heading">
+            <code class="highlight language-python">get_optimizer(config, *args, **kwargs)</code>
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Factory function to create and return an optimizer instance based on the provided configuration.</p>
+<p>This function selects and instantiates the appropriate optimizer class based on the
+'optimizer' field in the config object. It supports three types of optimizers:
+'dummy', 'evopromptde', and 'evopromptga'.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>config</code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A configuration object that must have an 'optimizer' attribute.
+    For 'evopromptde', it should also have a 'donor_random' attribute.
+    For 'evopromptga', it should also have a 'selection_mode' attribute.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>*args</code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Variable length argument list passed to the optimizer constructor.</p>
+              </div>
+            </td>
+            <td>
+                  <code>()</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>**kwargs</code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Arbitrary keyword arguments passed to the optimizer constructor.</p>
+              </div>
+            </td>
+            <td>
+                  <code>{}</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>An instance of the specified optimizer class.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>ValueError</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If an unknown optimizer type is specified in the config.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+            <details class="quote">
+              <summary>Source code in <code>promptolution\optimizers\__init__.py</code></summary>
+              <pre class="highlight"><code class="language-python">def get_optimizer(config, *args, **kwargs):
+    """
+    Factory function to create and return an optimizer instance based on the provided configuration.
+
+    This function selects and instantiates the appropriate optimizer class based on the
+    'optimizer' field in the config object. It supports three types of optimizers:
+    'dummy', 'evopromptde', and 'evopromptga'.
+
+    Args:
+        config: A configuration object that must have an 'optimizer' attribute.
+                For 'evopromptde', it should also have a 'donor_random' attribute.
+                For 'evopromptga', it should also have a 'selection_mode' attribute.
+        *args: Variable length argument list passed to the optimizer constructor.
+        **kwargs: Arbitrary keyword arguments passed to the optimizer constructor.
+
+    Returns:
+        An instance of the specified optimizer class.
+
+    Raises:
+        ValueError: If an unknown optimizer type is specified in the config.
+    """
+    if config.optimizer == "dummy":
+        return DummyOptimizer(*args, **kwargs)
+    if config.optimizer == "evopromptde":
+        return EvoPromptDE(donor_random=config.donor_random, *args, **kwargs)
+    if config.optimizer == "evopromptga":
+        return EvoPromptGA(selection_mode=config.selection_mode, *args, **kwargs)
+    raise ValueError(f"Unknown optimizer: {config.optimizer}")</code></pre>
+            </details>
+    </div>
+
+</div>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="promptolution.optimizers.base_optimizer" class="doc doc-heading">
+            <code>base_optimizer</code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="promptolution.optimizers.base_optimizer.BaseOptimizer" class="doc doc-heading">
+            <code>BaseOptimizer</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="abc.ABC">ABC</span></code></p>
+
+
+        <p>Abstract base class for prompt optimizers.</p>
+<p>This class defines the basic structure and interface for prompt optimization algorithms.
+Concrete optimizer implementations should inherit from this class and implement
+the <code>optimize</code> method.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.base_optimizer.BaseOptimizer.prompts">prompts</span></code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of current prompts being optimized.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.base_optimizer.BaseOptimizer.task">task</span></code></td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="promptolution.tasks.base_task.BaseTask" href="../tasks/#promptolution.tasks.base_task.BaseTask">BaseTask</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The task object used for evaluating prompts.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.base_optimizer.BaseOptimizer.callbacks">callbacks</span></code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.Callable">Callable</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of callback functions to be called during optimization.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.base_optimizer.BaseOptimizer.predictor">predictor</span></code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The predictor used for prompt evaluation (if applicable).</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>initial_prompts</code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Initial set of prompts to start optimization with.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>task</code></td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="promptolution.tasks.base_task.BaseTask" href="../tasks/#promptolution.tasks.base_task.BaseTask">BaseTask</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Task object for prompt evaluation.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>callbacks</code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.Callable">Callable</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of callback functions. Defaults to an empty list.</p>
+              </div>
+            </td>
+            <td>
+                  <code>[]</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>predictor</code></td>
+            <td>
+                  <code>optional</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Predictor for prompt evaluation. Defaults to None.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+              <details class="quote">
+                <summary>Source code in <code>promptolution\optimizers\base_optimizer.py</code></summary>
+                <pre class="highlight"><code class="language-python">class BaseOptimizer(ABC):    
+    """
+    Abstract base class for prompt optimizers.
+
+    This class defines the basic structure and interface for prompt optimization algorithms.
+    Concrete optimizer implementations should inherit from this class and implement
+    the `optimize` method.
+
+    Attributes:
+        prompts (List[str]): List of current prompts being optimized.
+        task (BaseTask): The task object used for evaluating prompts.
+        callbacks (List[Callable]): List of callback functions to be called during optimization.
+        predictor: The predictor used for prompt evaluation (if applicable).
+
+    Args:
+        initial_prompts (List[str]): Initial set of prompts to start optimization with.
+        task (BaseTask): Task object for prompt evaluation.
+        callbacks (List[Callable], optional): List of callback functions. Defaults to an empty list.
+        predictor (optional): Predictor for prompt evaluation. Defaults to None.
+    """
+    def __init__(self, initial_prompts: list[str], task: BaseTask, callbacks: list[Callable] = [], predictor=None):
+        self.prompts = initial_prompts
+        self.task = task
+        self.callbacks = callbacks
+        self.predictor = predictor
+
+    @abstractmethod
+    def optimize(self, n_steps: int) -&gt; List[str]:
+        """
+        Abstract method to perform the optimization process.
+
+        This method should be implemented by concrete optimizer classes to define
+        the specific optimization algorithm.
+
+        Args:
+            n_steps (int): Number of optimization steps to perform.
+
+        Returns:
+            List[str]: The optimized list of prompts after all steps.
+
+        Raises:
+            NotImplementedError: If not implemented by a concrete class.
+        """
+        raise NotImplementedError
+
+    def _on_step_end(self):
+        """
+        Call all registered callbacks at the end of each optimization step.
+        """
+        for callback in self.callbacks:
+            callback.on_step_end(self)
+
+    def _on_epoch_end(self):
+        """
+        Call all registered callbacks at the end of each optimization epoch.
+        """
+        for callback in self.callbacks:
+            callback.on_epoch_end(self)
+
+    def _on_train_end(self):
+        """
+        Call all registered callbacks at the end of the entire optimization process.
+        """
+        for callback in self.callbacks:
+            callback.on_train_end(self)</code></pre>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="promptolution.optimizers.base_optimizer.BaseOptimizer.optimize" class="doc doc-heading">
+            <code class="highlight language-python">optimize(n_steps)</code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-abstractmethod"><code>abstractmethod</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Abstract method to perform the optimization process.</p>
+<p>This method should be implemented by concrete optimizer classes to define
+the specific optimization algorithm.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>n_steps</code></td>
+            <td>
+                  <code>int</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of optimization steps to perform.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List[str]: The optimized list of prompts after all steps.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>NotImplementedError</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If not implemented by a concrete class.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+            <details class="quote">
+              <summary>Source code in <code>promptolution\optimizers\base_optimizer.py</code></summary>
+              <pre class="highlight"><code class="language-python">@abstractmethod
+def optimize(self, n_steps: int) -&gt; List[str]:
+    """
+    Abstract method to perform the optimization process.
+
+    This method should be implemented by concrete optimizer classes to define
+    the specific optimization algorithm.
+
+    Args:
+        n_steps (int): Number of optimization steps to perform.
+
+    Returns:
+        List[str]: The optimized list of prompts after all steps.
+
+    Raises:
+        NotImplementedError: If not implemented by a concrete class.
+    """
+    raise NotImplementedError</code></pre>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="promptolution.optimizers.base_optimizer.DummyOptimizer" class="doc doc-heading">
+            <code>DummyOptimizer</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="promptolution.optimizers.base_optimizer.BaseOptimizer" href="#promptolution.optimizers.base_optimizer.BaseOptimizer">BaseOptimizer</a></code></p>
+
+
+        <p>A dummy optimizer that doesn't perform any actual optimization.</p>
+<p>This optimizer simply returns the initial prompts without modification.
+It's useful for testing or as a baseline comparison.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.base_optimizer.DummyOptimizer.prompts">prompts</span></code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of prompts (unchanged from initialization).</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.base_optimizer.DummyOptimizer.callbacks">callbacks</span></code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.Callable">Callable</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Empty list of callbacks.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>initial_prompts</code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Initial set of prompts.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>*args</code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Variable length argument list (unused).</p>
+              </div>
+            </td>
+            <td>
+                  <code>()</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>**kwargs</code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Arbitrary keyword arguments (unused).</p>
+              </div>
+            </td>
+            <td>
+                  <code>{}</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+              <details class="quote">
+                <summary>Source code in <code>promptolution\optimizers\base_optimizer.py</code></summary>
+                <pre class="highlight"><code class="language-python">class DummyOptimizer(BaseOptimizer):
+    """
+    A dummy optimizer that doesn't perform any actual optimization.
+
+    This optimizer simply returns the initial prompts without modification.
+    It's useful for testing or as a baseline comparison.
+
+    Attributes:
+        prompts (List[str]): List of prompts (unchanged from initialization).
+        callbacks (List[Callable]): Empty list of callbacks.
+
+    Args:
+        initial_prompts (List[str]): Initial set of prompts.
+        *args: Variable length argument list (unused).
+        **kwargs: Arbitrary keyword arguments (unused).
+    """
+    def __init__(self, initial_prompts, *args, **kwargs):
+        self.callbacks = []
+        self.prompts = initial_prompts
+
+    def optimize(self, n_steps) -&gt; list[str]:
+        """
+        Simulate an optimization process without actually modifying the prompts.
+
+        This method calls the callback methods to simulate a complete optimization
+        cycle, but returns the initial prompts unchanged.
+
+        Args:
+            n_steps (int): Number of optimization steps (unused in this implementation).
+
+        Returns:
+            List[str]: The original list of prompts, unchanged.
+        """
+        self._on_step_end()
+        self._on_epoch_end()
+        self._on_train_end()
+        return self.prompts</code></pre>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="promptolution.optimizers.base_optimizer.DummyOptimizer.optimize" class="doc doc-heading">
+            <code class="highlight language-python">optimize(n_steps)</code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Simulate an optimization process without actually modifying the prompts.</p>
+<p>This method calls the callback methods to simulate a complete optimization
+cycle, but returns the initial prompts unchanged.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>n_steps</code></td>
+            <td>
+                  <code>int</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of optimization steps (unused in this implementation).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>list[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List[str]: The original list of prompts, unchanged.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+            <details class="quote">
+              <summary>Source code in <code>promptolution\optimizers\base_optimizer.py</code></summary>
+              <pre class="highlight"><code class="language-python">def optimize(self, n_steps) -&gt; list[str]:
+    """
+    Simulate an optimization process without actually modifying the prompts.
+
+    This method calls the callback methods to simulate a complete optimization
+    cycle, but returns the initial prompts unchanged.
+
+    Args:
+        n_steps (int): Number of optimization steps (unused in this implementation).
+
+    Returns:
+        List[str]: The original list of prompts, unchanged.
+    """
+    self._on_step_end()
+    self._on_epoch_end()
+    self._on_train_end()
+    return self.prompts</code></pre>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="promptolution.optimizers.evoprompt_de" class="doc doc-heading">
+            <code>evoprompt_de</code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="promptolution.optimizers.evoprompt_de.EvoPromptDE" class="doc doc-heading">
+            <code>EvoPromptDE</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="promptolution.optimizers.base_optimizer.BaseOptimizer" href="#promptolution.optimizers.base_optimizer.BaseOptimizer">BaseOptimizer</a></code></p>
+
+
+        <p>EvoPromptDE: Differential Evolution-based Prompt Optimizer</p>
+<p>This class implements a differential evolution algorithm for optimizing prompts in large language models.
+It is adapted from the paper "Connecting Large Language Models with Evolutionary Algorithms
+Yields Powerful Prompt Optimizers" by Guo et al., 2023.</p>
+<p>The optimizer uses a differential evolution strategy to generate new prompts from existing ones,
+with an option to use the current best prompt as a donor.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.evoprompt_de.EvoPromptDE.prompt_template">prompt_template</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Template for generating meta-prompts during evolution.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.evoprompt_de.EvoPromptDE.donor_random">donor_random</span></code></td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If False, uses the current best prompt as a donor; if True, uses a random prompt.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.evoprompt_de.EvoPromptDE.meta_llm">meta_llm</span></code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Language model used for generating child prompts from meta-prompts.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>prompt_template</code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Template for meta-prompts.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>meta_llm</code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Language model for child prompt generation.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>donor_random</code></td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether to use a random donor. Defaults to False.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>**args</code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Additional arguments passed to the BaseOptimizer.</p>
+              </div>
+            </td>
+            <td>
+                  <code>{}</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+              <details class="quote">
+                <summary>Source code in <code>promptolution\optimizers\evoprompt_de.py</code></summary>
+                <pre class="highlight"><code class="language-python">class EvoPromptDE(BaseOptimizer):
+    """
+    EvoPromptDE: Differential Evolution-based Prompt Optimizer
+
+    This class implements a differential evolution algorithm for optimizing prompts in large language models.
+    It is adapted from the paper "Connecting Large Language Models with Evolutionary Algorithms
+    Yields Powerful Prompt Optimizers" by Guo et al., 2023.
+
+    The optimizer uses a differential evolution strategy to generate new prompts from existing ones,
+    with an option to use the current best prompt as a donor.
+
+    Attributes:
+        prompt_template (str): Template for generating meta-prompts during evolution.
+        donor_random (bool): If False, uses the current best prompt as a donor; if True, uses a random prompt.
+        meta_llm: Language model used for generating child prompts from meta-prompts.
+
+    Args:
+        prompt_template (str): Template for meta-prompts.
+        meta_llm: Language model for child prompt generation.
+        donor_random (bool, optional): Whether to use a random donor. Defaults to False.
+        **args: Additional arguments passed to the BaseOptimizer.
+    """
+    def __init__(self, prompt_template, meta_llm, donor_random=False, **args):
+        self.prompt_template = prompt_template
+        self.donor_random = donor_random
+        self.meta_llm = meta_llm
+        super().__init__(**args)
+
+    def optimize(self, n_steps: int) -&gt; List[str]:
+        """
+        Perform the optimization process for a specified number of steps.
+
+        This method iteratively improves the prompts using a differential evolution strategy.
+        It evaluates prompts, generates new prompts using the DE algorithm, and replaces
+        prompts if the new ones perform better.
+
+        Args:
+            n_steps (int): Number of optimization steps to perform.
+
+        Returns:
+            List[str]: The optimized list of prompts after all steps.
+        """
+        self.scores = self.task.evaluate(self.prompts, self.predictor)
+        self.prompts = [prompt for _, prompt in sorted(zip(self.scores, self.prompts), reverse=True)]
+        self.scores = sorted(self.scores, reverse=True)
+
+        for _ in range(n_steps):
+            cur_best = self.prompts[0]
+            meta_prompts = []
+            for i in range(len(self.prompts)):
+                # create meta prompts
+                old_prompt = self.prompts[i]
+
+                candidates = [prompt for prompt in self.prompts if prompt != old_prompt]
+                a, b, c = np.random.choice(candidates, size=3, replace=False)
+
+                if not self.donor_random:
+                    c = cur_best
+
+                meta_prompt = (
+                    self.prompt_template.replace("&lt;prompt0&gt;", old_prompt)
+                    .replace("&lt;prompt1&gt;", a)
+                    .replace("&lt;prompt2&gt;", b)
+                    .replace("&lt;prompt3&gt;", c)
+                )
+
+                meta_prompts.append(meta_prompt)
+
+            child_prompts = self.meta_llm.get_response(meta_prompts)
+            child_prompts = [prompt.split("&lt;prompt&gt;")[-1].split("&lt;/prompt&gt;")[0].strip() for prompt in child_prompts]
+
+            child_scores = self.task.evaluate(child_prompts, self.predictor)
+
+            for i in range(len(self.prompts)):
+                if child_scores[i] &gt; self.scores[i]:
+                    self.prompts[i] = child_prompts[i]
+                    self.scores[i] = child_scores[i]
+
+            self._on_step_end()
+
+        self._on_train_end()
+        return self.prompts</code></pre>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="promptolution.optimizers.evoprompt_de.EvoPromptDE.optimize" class="doc doc-heading">
+            <code class="highlight language-python">optimize(n_steps)</code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Perform the optimization process for a specified number of steps.</p>
+<p>This method iteratively improves the prompts using a differential evolution strategy.
+It evaluates prompts, generates new prompts using the DE algorithm, and replaces
+prompts if the new ones perform better.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>n_steps</code></td>
+            <td>
+                  <code>int</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of optimization steps to perform.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List[str]: The optimized list of prompts after all steps.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+            <details class="quote">
+              <summary>Source code in <code>promptolution\optimizers\evoprompt_de.py</code></summary>
+              <pre class="highlight"><code class="language-python">def optimize(self, n_steps: int) -&gt; List[str]:
+    """
+    Perform the optimization process for a specified number of steps.
+
+    This method iteratively improves the prompts using a differential evolution strategy.
+    It evaluates prompts, generates new prompts using the DE algorithm, and replaces
+    prompts if the new ones perform better.
+
+    Args:
+        n_steps (int): Number of optimization steps to perform.
+
+    Returns:
+        List[str]: The optimized list of prompts after all steps.
+    """
+    self.scores = self.task.evaluate(self.prompts, self.predictor)
+    self.prompts = [prompt for _, prompt in sorted(zip(self.scores, self.prompts), reverse=True)]
+    self.scores = sorted(self.scores, reverse=True)
+
+    for _ in range(n_steps):
+        cur_best = self.prompts[0]
+        meta_prompts = []
+        for i in range(len(self.prompts)):
+            # create meta prompts
+            old_prompt = self.prompts[i]
+
+            candidates = [prompt for prompt in self.prompts if prompt != old_prompt]
+            a, b, c = np.random.choice(candidates, size=3, replace=False)
+
+            if not self.donor_random:
+                c = cur_best
+
+            meta_prompt = (
+                self.prompt_template.replace("&lt;prompt0&gt;", old_prompt)
+                .replace("&lt;prompt1&gt;", a)
+                .replace("&lt;prompt2&gt;", b)
+                .replace("&lt;prompt3&gt;", c)
+            )
+
+            meta_prompts.append(meta_prompt)
+
+        child_prompts = self.meta_llm.get_response(meta_prompts)
+        child_prompts = [prompt.split("&lt;prompt&gt;")[-1].split("&lt;/prompt&gt;")[0].strip() for prompt in child_prompts]
+
+        child_scores = self.task.evaluate(child_prompts, self.predictor)
+
+        for i in range(len(self.prompts)):
+            if child_scores[i] &gt; self.scores[i]:
+                self.prompts[i] = child_prompts[i]
+                self.scores[i] = child_scores[i]
+
+        self._on_step_end()
+
+    self._on_train_end()
+    return self.prompts</code></pre>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="promptolution.optimizers.evoprompt_ga" class="doc doc-heading">
+            <code>evoprompt_ga</code>
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="promptolution.optimizers.evoprompt_ga.EvoPromptGA" class="doc doc-heading">
+            <code>EvoPromptGA</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="promptolution.optimizers.base_optimizer.BaseOptimizer" href="#promptolution.optimizers.base_optimizer.BaseOptimizer">BaseOptimizer</a></code></p>
+
+
+        <p>EvoPromptGA: Genetic Algorithm-based Prompt Optimizer</p>
+<p>This class implements a genetic algorithm for optimizing prompts in large language models.
+It is adapted from the paper "Connecting Large Language Models with Evolutionary Algorithms
+Yields Powerful Prompt Optimizers" by Guo et al., 2023.</p>
+<p>The optimizer uses crossover operations to generate new prompts from existing ones,
+with different selection methods available for choosing parent prompts.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.evoprompt_ga.EvoPromptGA.prompt_template">prompt_template</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Template for generating meta-prompts during crossover.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.evoprompt_ga.EvoPromptGA.meta_llm">meta_llm</span></code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Language model used for generating child prompts from meta-prompts.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.evoprompt_ga.EvoPromptGA.selection_mode">selection_mode</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Method for selecting parent prompts ('random', 'wheel', or 'tour').</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>prompt_template</code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Template for meta-prompts.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>meta_llm</code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Language model for child prompt generation.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>selection_mode</code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Parent selection method. Defaults to "wheel".</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;wheel&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>**args</code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Additional arguments passed to the BaseOptimizer.</p>
+              </div>
+            </td>
+            <td>
+                  <code>{}</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>AssertionError</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If an invalid selection mode is provided.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+              <details class="quote">
+                <summary>Source code in <code>promptolution\optimizers\evoprompt_ga.py</code></summary>
+                <pre class="highlight"><code class="language-python">class EvoPromptGA(BaseOptimizer):
+    """
+    EvoPromptGA: Genetic Algorithm-based Prompt Optimizer
+
+    This class implements a genetic algorithm for optimizing prompts in large language models.
+    It is adapted from the paper "Connecting Large Language Models with Evolutionary Algorithms
+    Yields Powerful Prompt Optimizers" by Guo et al., 2023.
+
+    The optimizer uses crossover operations to generate new prompts from existing ones,
+    with different selection methods available for choosing parent prompts.
+
+    Attributes:
+        prompt_template (str): Template for generating meta-prompts during crossover.
+        meta_llm: Language model used for generating child prompts from meta-prompts.
+        selection_mode (str): Method for selecting parent prompts ('random', 'wheel', or 'tour').
+
+    Args:
+        prompt_template (str): Template for meta-prompts.
+        meta_llm: Language model for child prompt generation.
+        selection_mode (str, optional): Parent selection method. Defaults to "wheel".
+        **args: Additional arguments passed to the BaseOptimizer.
+
+    Raises:
+        AssertionError: If an invalid selection mode is provided.
+    """
+    def __init__(self, prompt_template, meta_llm, selection_mode="wheel", **args):
+        self.prompt_template = prompt_template
+        self.meta_llm = meta_llm
+        assert selection_mode in ["random", "wheel", "tour"], "Invalid selection mode."
+        self.selection_mode = selection_mode
+        super().__init__(**args)
+
+    def optimize(self, n_steps: int) -&gt; List[str]:
+        """
+        Perform the optimization process for a specified number of steps.
+
+        This method iteratively improves the prompts using genetic algorithm techniques.
+        It evaluates prompts, performs crossover to generate new prompts, and selects
+        the best prompts for the next generation.
+
+        Args:
+            n_steps (int): Number of optimization steps to perform.
+
+        Returns:
+            List[str]: The optimized list of prompts after all steps.
+        """
+        # get scores from task
+        self.scores = self.task.evaluate(self.prompts, self.predictor).tolist()
+        # sort prompts by score
+        self.prompts = [prompt for _, prompt in sorted(zip(self.scores, self.prompts), reverse=True)]
+        self.scores = sorted(self.scores, reverse=True)
+
+        for _ in range(n_steps):
+            new_prompts = self._crossover(self.prompts, self.scores)
+            prompts = self.prompts + new_prompts
+            scores = self.scores + self.task.evaluate(new_prompts, self.predictor).tolist()
+
+            # sort scores and prompts
+            self.prompts = [prompt for _, prompt in sorted(zip(scores, prompts), reverse=True)][: len(self.prompts)]
+            self.scores = sorted(scores, reverse=True)[: len(self.prompts)]
+
+            self._on_step_end()
+        return self.prompts
+
+    def _crossover(self, prompts, scores) -&gt; str:
+        """
+        Perform crossover operation to generate new child prompts.
+
+        This method selects parent prompts based on the chosen selection mode,
+        creates meta-prompts using the prompt template, and generates new child
+        prompts using the meta language model.
+
+        Args:
+            prompts (List[str]): List of current prompts.
+            scores (List[float]): Corresponding scores for the prompts.
+
+        Returns:
+            List[str]: Newly generated child prompts.
+        """
+        # parent selection
+        if self.selection_mode == "wheel":
+            wheel_idx = np.random.choice(
+                np.arange(0, len(prompts)),
+                size=len(prompts),
+                replace=True,
+                p=np.array(scores) / np.sum(scores) if np.sum(scores) &gt; 0 else np.ones(len(scores)) / len(scores),
+            ).tolist()
+            parent_pop = [self.prompts[idx] for idx in wheel_idx]
+
+        elif self.selection_mode in ["random", "tour"]:
+            parent_pop = self.prompts
+
+        # crossover
+        meta_prompts = []
+        for _ in self.prompts:
+            if self.selection_mode in ["random", "wheel"]:
+                parent_1, parent_2 = np.random.choice(parent_pop, size=2, replace=False)
+            elif self.selection_mode == "tour":
+                group_1 = np.random.choice(parent_pop, size=2, replace=False)
+                group_2 = np.random.choice(parent_pop, size=2, replace=False)
+                # use the best of each group based on scores
+                parent_1 = group_1[np.argmax([self.scores[self.prompts.index(p)] for p in group_1])]
+                parent_2 = group_2[np.argmax([self.scores[self.prompts.index(p)] for p in group_2])]
+
+            meta_prompt = self.prompt_template.replace("&lt;prompt1&gt;", parent_1).replace("&lt;prompt2&gt;", parent_2)
+            meta_prompts.append(meta_prompt)
+
+        child_prompts = self.meta_llm.get_response(meta_prompts)
+        child_prompts = [prompt.split("&lt;prompt&gt;")[-1].split("&lt;/prompt&gt;")[0].strip() for prompt in child_prompts]
+
+        return child_prompts</code></pre>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="promptolution.optimizers.evoprompt_ga.EvoPromptGA.optimize" class="doc doc-heading">
+            <code class="highlight language-python">optimize(n_steps)</code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Perform the optimization process for a specified number of steps.</p>
+<p>This method iteratively improves the prompts using genetic algorithm techniques.
+It evaluates prompts, performs crossover to generate new prompts, and selects
+the best prompts for the next generation.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>n_steps</code></td>
+            <td>
+                  <code>int</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of optimization steps to perform.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List[str]: The optimized list of prompts after all steps.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+            <details class="quote">
+              <summary>Source code in <code>promptolution\optimizers\evoprompt_ga.py</code></summary>
+              <pre class="highlight"><code class="language-python">def optimize(self, n_steps: int) -&gt; List[str]:
+    """
+    Perform the optimization process for a specified number of steps.
+
+    This method iteratively improves the prompts using genetic algorithm techniques.
+    It evaluates prompts, performs crossover to generate new prompts, and selects
+    the best prompts for the next generation.
+
+    Args:
+        n_steps (int): Number of optimization steps to perform.
+
+    Returns:
+        List[str]: The optimized list of prompts after all steps.
+    """
+    # get scores from task
+    self.scores = self.task.evaluate(self.prompts, self.predictor).tolist()
+    # sort prompts by score
+    self.prompts = [prompt for _, prompt in sorted(zip(self.scores, self.prompts), reverse=True)]
+    self.scores = sorted(self.scores, reverse=True)
+
+    for _ in range(n_steps):
+        new_prompts = self._crossover(self.prompts, self.scores)
+        prompts = self.prompts + new_prompts
+        scores = self.scores + self.task.evaluate(new_prompts, self.predictor).tolist()
+
+        # sort scores and prompts
+        self.prompts = [prompt for _, prompt in sorted(zip(scores, prompts), reverse=True)][: len(self.prompts)]
+        self.scores = sorted(scores, reverse=True)[: len(self.prompts)]
+
+        self._on_step_end()
+    return self.prompts</code></pre>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+  </div>
+
+    </div>
+
+</div><h2 id="base-optimizer">Base Optimizer</h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="promptolution.optimizers.base_optimizer"></a>
+    <div class="doc doc-contents first">
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="promptolution.optimizers.base_optimizer.BaseOptimizer" class="doc doc-heading">
+            <code>BaseOptimizer</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="abc.ABC">ABC</span></code></p>
+
+
+        <p>Abstract base class for prompt optimizers.</p>
+<p>This class defines the basic structure and interface for prompt optimization algorithms.
+Concrete optimizer implementations should inherit from this class and implement
+the <code>optimize</code> method.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.base_optimizer.BaseOptimizer.prompts">prompts</span></code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of current prompts being optimized.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.base_optimizer.BaseOptimizer.task">task</span></code></td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="promptolution.tasks.base_task.BaseTask" href="../tasks/#promptolution.tasks.base_task.BaseTask">BaseTask</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The task object used for evaluating prompts.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.base_optimizer.BaseOptimizer.callbacks">callbacks</span></code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.Callable">Callable</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of callback functions to be called during optimization.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.base_optimizer.BaseOptimizer.predictor">predictor</span></code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The predictor used for prompt evaluation (if applicable).</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>initial_prompts</code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Initial set of prompts to start optimization with.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>task</code></td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="promptolution.tasks.base_task.BaseTask" href="../tasks/#promptolution.tasks.base_task.BaseTask">BaseTask</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Task object for prompt evaluation.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>callbacks</code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.Callable">Callable</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of callback functions. Defaults to an empty list.</p>
+              </div>
+            </td>
+            <td>
+                  <code>[]</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>predictor</code></td>
+            <td>
+                  <code>optional</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Predictor for prompt evaluation. Defaults to None.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+              <details class="quote">
+                <summary>Source code in <code>promptolution\optimizers\base_optimizer.py</code></summary>
+                <pre class="highlight"><code class="language-python">class BaseOptimizer(ABC):    
+    """
+    Abstract base class for prompt optimizers.
+
+    This class defines the basic structure and interface for prompt optimization algorithms.
+    Concrete optimizer implementations should inherit from this class and implement
+    the `optimize` method.
+
+    Attributes:
+        prompts (List[str]): List of current prompts being optimized.
+        task (BaseTask): The task object used for evaluating prompts.
+        callbacks (List[Callable]): List of callback functions to be called during optimization.
+        predictor: The predictor used for prompt evaluation (if applicable).
+
+    Args:
+        initial_prompts (List[str]): Initial set of prompts to start optimization with.
+        task (BaseTask): Task object for prompt evaluation.
+        callbacks (List[Callable], optional): List of callback functions. Defaults to an empty list.
+        predictor (optional): Predictor for prompt evaluation. Defaults to None.
+    """
+    def __init__(self, initial_prompts: list[str], task: BaseTask, callbacks: list[Callable] = [], predictor=None):
+        self.prompts = initial_prompts
+        self.task = task
+        self.callbacks = callbacks
+        self.predictor = predictor
+
+    @abstractmethod
+    def optimize(self, n_steps: int) -&gt; List[str]:
+        """
+        Abstract method to perform the optimization process.
+
+        This method should be implemented by concrete optimizer classes to define
+        the specific optimization algorithm.
+
+        Args:
+            n_steps (int): Number of optimization steps to perform.
+
+        Returns:
+            List[str]: The optimized list of prompts after all steps.
+
+        Raises:
+            NotImplementedError: If not implemented by a concrete class.
+        """
+        raise NotImplementedError
+
+    def _on_step_end(self):
+        """
+        Call all registered callbacks at the end of each optimization step.
+        """
+        for callback in self.callbacks:
+            callback.on_step_end(self)
+
+    def _on_epoch_end(self):
+        """
+        Call all registered callbacks at the end of each optimization epoch.
+        """
+        for callback in self.callbacks:
+            callback.on_epoch_end(self)
+
+    def _on_train_end(self):
+        """
+        Call all registered callbacks at the end of the entire optimization process.
+        """
+        for callback in self.callbacks:
+            callback.on_train_end(self)</code></pre>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="promptolution.optimizers.base_optimizer.BaseOptimizer.optimize" class="doc doc-heading">
+            <code class="highlight language-python">optimize(n_steps)</code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-abstractmethod"><code>abstractmethod</code></small>
+  </span>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Abstract method to perform the optimization process.</p>
+<p>This method should be implemented by concrete optimizer classes to define
+the specific optimization algorithm.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>n_steps</code></td>
+            <td>
+                  <code>int</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of optimization steps to perform.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List[str]: The optimized list of prompts after all steps.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>NotImplementedError</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If not implemented by a concrete class.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+            <details class="quote">
+              <summary>Source code in <code>promptolution\optimizers\base_optimizer.py</code></summary>
+              <pre class="highlight"><code class="language-python">@abstractmethod
+def optimize(self, n_steps: int) -&gt; List[str]:
+    """
+    Abstract method to perform the optimization process.
+
+    This method should be implemented by concrete optimizer classes to define
+    the specific optimization algorithm.
+
+    Args:
+        n_steps (int): Number of optimization steps to perform.
+
+    Returns:
+        List[str]: The optimized list of prompts after all steps.
+
+    Raises:
+        NotImplementedError: If not implemented by a concrete class.
+    """
+    raise NotImplementedError</code></pre>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="promptolution.optimizers.base_optimizer.DummyOptimizer" class="doc doc-heading">
+            <code>DummyOptimizer</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="promptolution.optimizers.base_optimizer.BaseOptimizer" href="#promptolution.optimizers.base_optimizer.BaseOptimizer">BaseOptimizer</a></code></p>
+
+
+        <p>A dummy optimizer that doesn't perform any actual optimization.</p>
+<p>This optimizer simply returns the initial prompts without modification.
+It's useful for testing or as a baseline comparison.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.base_optimizer.DummyOptimizer.prompts">prompts</span></code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of prompts (unchanged from initialization).</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.base_optimizer.DummyOptimizer.callbacks">callbacks</span></code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.Callable">Callable</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Empty list of callbacks.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>initial_prompts</code></td>
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Initial set of prompts.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>*args</code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Variable length argument list (unused).</p>
+              </div>
+            </td>
+            <td>
+                  <code>()</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>**kwargs</code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Arbitrary keyword arguments (unused).</p>
+              </div>
+            </td>
+            <td>
+                  <code>{}</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+              <details class="quote">
+                <summary>Source code in <code>promptolution\optimizers\base_optimizer.py</code></summary>
+                <pre class="highlight"><code class="language-python">class DummyOptimizer(BaseOptimizer):
+    """
+    A dummy optimizer that doesn't perform any actual optimization.
+
+    This optimizer simply returns the initial prompts without modification.
+    It's useful for testing or as a baseline comparison.
+
+    Attributes:
+        prompts (List[str]): List of prompts (unchanged from initialization).
+        callbacks (List[Callable]): Empty list of callbacks.
+
+    Args:
+        initial_prompts (List[str]): Initial set of prompts.
+        *args: Variable length argument list (unused).
+        **kwargs: Arbitrary keyword arguments (unused).
+    """
+    def __init__(self, initial_prompts, *args, **kwargs):
+        self.callbacks = []
+        self.prompts = initial_prompts
+
+    def optimize(self, n_steps) -&gt; list[str]:
+        """
+        Simulate an optimization process without actually modifying the prompts.
+
+        This method calls the callback methods to simulate a complete optimization
+        cycle, but returns the initial prompts unchanged.
+
+        Args:
+            n_steps (int): Number of optimization steps (unused in this implementation).
+
+        Returns:
+            List[str]: The original list of prompts, unchanged.
+        """
+        self._on_step_end()
+        self._on_epoch_end()
+        self._on_train_end()
+        return self.prompts</code></pre>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="promptolution.optimizers.base_optimizer.DummyOptimizer.optimize" class="doc doc-heading">
+            <code class="highlight language-python">optimize(n_steps)</code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Simulate an optimization process without actually modifying the prompts.</p>
+<p>This method calls the callback methods to simulate a complete optimization
+cycle, but returns the initial prompts unchanged.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>n_steps</code></td>
+            <td>
+                  <code>int</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of optimization steps (unused in this implementation).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>list[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List[str]: The original list of prompts, unchanged.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+            <details class="quote">
+              <summary>Source code in <code>promptolution\optimizers\base_optimizer.py</code></summary>
+              <pre class="highlight"><code class="language-python">def optimize(self, n_steps) -&gt; list[str]:
+    """
+    Simulate an optimization process without actually modifying the prompts.
+
+    This method calls the callback methods to simulate a complete optimization
+    cycle, but returns the initial prompts unchanged.
+
+    Args:
+        n_steps (int): Number of optimization steps (unused in this implementation).
+
+    Returns:
+        List[str]: The original list of prompts, unchanged.
+    """
+    self._on_step_end()
+    self._on_epoch_end()
+    self._on_train_end()
+    return self.prompts</code></pre>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div><h2 id="evoprompt-de">EvoPrompt DE</h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="promptolution.optimizers.evoprompt_de"></a>
+    <div class="doc doc-contents first">
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="promptolution.optimizers.evoprompt_de.EvoPromptDE" class="doc doc-heading">
+            <code>EvoPromptDE</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="promptolution.optimizers.base_optimizer.BaseOptimizer" href="#promptolution.optimizers.base_optimizer.BaseOptimizer">BaseOptimizer</a></code></p>
+
+
+        <p>EvoPromptDE: Differential Evolution-based Prompt Optimizer</p>
+<p>This class implements a differential evolution algorithm for optimizing prompts in large language models.
+It is adapted from the paper "Connecting Large Language Models with Evolutionary Algorithms
+Yields Powerful Prompt Optimizers" by Guo et al., 2023.</p>
+<p>The optimizer uses a differential evolution strategy to generate new prompts from existing ones,
+with an option to use the current best prompt as a donor.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.evoprompt_de.EvoPromptDE.prompt_template">prompt_template</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Template for generating meta-prompts during evolution.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.evoprompt_de.EvoPromptDE.donor_random">donor_random</span></code></td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If False, uses the current best prompt as a donor; if True, uses a random prompt.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.evoprompt_de.EvoPromptDE.meta_llm">meta_llm</span></code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Language model used for generating child prompts from meta-prompts.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>prompt_template</code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Template for meta-prompts.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>meta_llm</code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Language model for child prompt generation.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>donor_random</code></td>
+            <td>
+                  <code>bool</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether to use a random donor. Defaults to False.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>**args</code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Additional arguments passed to the BaseOptimizer.</p>
+              </div>
+            </td>
+            <td>
+                  <code>{}</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+              <details class="quote">
+                <summary>Source code in <code>promptolution\optimizers\evoprompt_de.py</code></summary>
+                <pre class="highlight"><code class="language-python">class EvoPromptDE(BaseOptimizer):
+    """
+    EvoPromptDE: Differential Evolution-based Prompt Optimizer
+
+    This class implements a differential evolution algorithm for optimizing prompts in large language models.
+    It is adapted from the paper "Connecting Large Language Models with Evolutionary Algorithms
+    Yields Powerful Prompt Optimizers" by Guo et al., 2023.
+
+    The optimizer uses a differential evolution strategy to generate new prompts from existing ones,
+    with an option to use the current best prompt as a donor.
+
+    Attributes:
+        prompt_template (str): Template for generating meta-prompts during evolution.
+        donor_random (bool): If False, uses the current best prompt as a donor; if True, uses a random prompt.
+        meta_llm: Language model used for generating child prompts from meta-prompts.
+
+    Args:
+        prompt_template (str): Template for meta-prompts.
+        meta_llm: Language model for child prompt generation.
+        donor_random (bool, optional): Whether to use a random donor. Defaults to False.
+        **args: Additional arguments passed to the BaseOptimizer.
+    """
+    def __init__(self, prompt_template, meta_llm, donor_random=False, **args):
+        self.prompt_template = prompt_template
+        self.donor_random = donor_random
+        self.meta_llm = meta_llm
+        super().__init__(**args)
+
+    def optimize(self, n_steps: int) -&gt; List[str]:
+        """
+        Perform the optimization process for a specified number of steps.
+
+        This method iteratively improves the prompts using a differential evolution strategy.
+        It evaluates prompts, generates new prompts using the DE algorithm, and replaces
+        prompts if the new ones perform better.
+
+        Args:
+            n_steps (int): Number of optimization steps to perform.
+
+        Returns:
+            List[str]: The optimized list of prompts after all steps.
+        """
+        self.scores = self.task.evaluate(self.prompts, self.predictor)
+        self.prompts = [prompt for _, prompt in sorted(zip(self.scores, self.prompts), reverse=True)]
+        self.scores = sorted(self.scores, reverse=True)
+
+        for _ in range(n_steps):
+            cur_best = self.prompts[0]
+            meta_prompts = []
+            for i in range(len(self.prompts)):
+                # create meta prompts
+                old_prompt = self.prompts[i]
+
+                candidates = [prompt for prompt in self.prompts if prompt != old_prompt]
+                a, b, c = np.random.choice(candidates, size=3, replace=False)
+
+                if not self.donor_random:
+                    c = cur_best
+
+                meta_prompt = (
+                    self.prompt_template.replace("&lt;prompt0&gt;", old_prompt)
+                    .replace("&lt;prompt1&gt;", a)
+                    .replace("&lt;prompt2&gt;", b)
+                    .replace("&lt;prompt3&gt;", c)
+                )
+
+                meta_prompts.append(meta_prompt)
+
+            child_prompts = self.meta_llm.get_response(meta_prompts)
+            child_prompts = [prompt.split("&lt;prompt&gt;")[-1].split("&lt;/prompt&gt;")[0].strip() for prompt in child_prompts]
+
+            child_scores = self.task.evaluate(child_prompts, self.predictor)
+
+            for i in range(len(self.prompts)):
+                if child_scores[i] &gt; self.scores[i]:
+                    self.prompts[i] = child_prompts[i]
+                    self.scores[i] = child_scores[i]
+
+            self._on_step_end()
+
+        self._on_train_end()
+        return self.prompts</code></pre>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="promptolution.optimizers.evoprompt_de.EvoPromptDE.optimize" class="doc doc-heading">
+            <code class="highlight language-python">optimize(n_steps)</code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Perform the optimization process for a specified number of steps.</p>
+<p>This method iteratively improves the prompts using a differential evolution strategy.
+It evaluates prompts, generates new prompts using the DE algorithm, and replaces
+prompts if the new ones perform better.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>n_steps</code></td>
+            <td>
+                  <code>int</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of optimization steps to perform.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List[str]: The optimized list of prompts after all steps.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+            <details class="quote">
+              <summary>Source code in <code>promptolution\optimizers\evoprompt_de.py</code></summary>
+              <pre class="highlight"><code class="language-python">def optimize(self, n_steps: int) -&gt; List[str]:
+    """
+    Perform the optimization process for a specified number of steps.
+
+    This method iteratively improves the prompts using a differential evolution strategy.
+    It evaluates prompts, generates new prompts using the DE algorithm, and replaces
+    prompts if the new ones perform better.
+
+    Args:
+        n_steps (int): Number of optimization steps to perform.
+
+    Returns:
+        List[str]: The optimized list of prompts after all steps.
+    """
+    self.scores = self.task.evaluate(self.prompts, self.predictor)
+    self.prompts = [prompt for _, prompt in sorted(zip(self.scores, self.prompts), reverse=True)]
+    self.scores = sorted(self.scores, reverse=True)
+
+    for _ in range(n_steps):
+        cur_best = self.prompts[0]
+        meta_prompts = []
+        for i in range(len(self.prompts)):
+            # create meta prompts
+            old_prompt = self.prompts[i]
+
+            candidates = [prompt for prompt in self.prompts if prompt != old_prompt]
+            a, b, c = np.random.choice(candidates, size=3, replace=False)
+
+            if not self.donor_random:
+                c = cur_best
+
+            meta_prompt = (
+                self.prompt_template.replace("&lt;prompt0&gt;", old_prompt)
+                .replace("&lt;prompt1&gt;", a)
+                .replace("&lt;prompt2&gt;", b)
+                .replace("&lt;prompt3&gt;", c)
+            )
+
+            meta_prompts.append(meta_prompt)
+
+        child_prompts = self.meta_llm.get_response(meta_prompts)
+        child_prompts = [prompt.split("&lt;prompt&gt;")[-1].split("&lt;/prompt&gt;")[0].strip() for prompt in child_prompts]
+
+        child_scores = self.task.evaluate(child_prompts, self.predictor)
+
+        for i in range(len(self.prompts)):
+            if child_scores[i] &gt; self.scores[i]:
+                self.prompts[i] = child_prompts[i]
+                self.scores[i] = child_scores[i]
+
+        self._on_step_end()
+
+    self._on_train_end()
+    return self.prompts</code></pre>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div><h2 id="evoprompt-ga">EvoPrompt GA</h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="promptolution.optimizers.evoprompt_ga"></a>
+    <div class="doc doc-contents first">
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="promptolution.optimizers.evoprompt_ga.EvoPromptGA" class="doc doc-heading">
+            <code>EvoPromptGA</code>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="promptolution.optimizers.base_optimizer.BaseOptimizer" href="#promptolution.optimizers.base_optimizer.BaseOptimizer">BaseOptimizer</a></code></p>
+
+
+        <p>EvoPromptGA: Genetic Algorithm-based Prompt Optimizer</p>
+<p>This class implements a genetic algorithm for optimizing prompts in large language models.
+It is adapted from the paper "Connecting Large Language Models with Evolutionary Algorithms
+Yields Powerful Prompt Optimizers" by Guo et al., 2023.</p>
+<p>The optimizer uses crossover operations to generate new prompts from existing ones,
+with different selection methods available for choosing parent prompts.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.evoprompt_ga.EvoPromptGA.prompt_template">prompt_template</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Template for generating meta-prompts during crossover.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.evoprompt_ga.EvoPromptGA.meta_llm">meta_llm</span></code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Language model used for generating child prompts from meta-prompts.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="promptolution.optimizers.evoprompt_ga.EvoPromptGA.selection_mode">selection_mode</span></code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Method for selecting parent prompts ('random', 'wheel', or 'tour').</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>prompt_template</code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Template for meta-prompts.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>meta_llm</code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Language model for child prompt generation.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>selection_mode</code></td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Parent selection method. Defaults to "wheel".</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;wheel&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code>**args</code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Additional arguments passed to the BaseOptimizer.</p>
+              </div>
+            </td>
+            <td>
+                  <code>{}</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code>AssertionError</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If an invalid selection mode is provided.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+              <details class="quote">
+                <summary>Source code in <code>promptolution\optimizers\evoprompt_ga.py</code></summary>
+                <pre class="highlight"><code class="language-python">class EvoPromptGA(BaseOptimizer):
+    """
+    EvoPromptGA: Genetic Algorithm-based Prompt Optimizer
+
+    This class implements a genetic algorithm for optimizing prompts in large language models.
+    It is adapted from the paper "Connecting Large Language Models with Evolutionary Algorithms
+    Yields Powerful Prompt Optimizers" by Guo et al., 2023.
+
+    The optimizer uses crossover operations to generate new prompts from existing ones,
+    with different selection methods available for choosing parent prompts.
+
+    Attributes:
+        prompt_template (str): Template for generating meta-prompts during crossover.
+        meta_llm: Language model used for generating child prompts from meta-prompts.
+        selection_mode (str): Method for selecting parent prompts ('random', 'wheel', or 'tour').
+
+    Args:
+        prompt_template (str): Template for meta-prompts.
+        meta_llm: Language model for child prompt generation.
+        selection_mode (str, optional): Parent selection method. Defaults to "wheel".
+        **args: Additional arguments passed to the BaseOptimizer.
+
+    Raises:
+        AssertionError: If an invalid selection mode is provided.
+    """
+    def __init__(self, prompt_template, meta_llm, selection_mode="wheel", **args):
+        self.prompt_template = prompt_template
+        self.meta_llm = meta_llm
+        assert selection_mode in ["random", "wheel", "tour"], "Invalid selection mode."
+        self.selection_mode = selection_mode
+        super().__init__(**args)
+
+    def optimize(self, n_steps: int) -&gt; List[str]:
+        """
+        Perform the optimization process for a specified number of steps.
+
+        This method iteratively improves the prompts using genetic algorithm techniques.
+        It evaluates prompts, performs crossover to generate new prompts, and selects
+        the best prompts for the next generation.
+
+        Args:
+            n_steps (int): Number of optimization steps to perform.
+
+        Returns:
+            List[str]: The optimized list of prompts after all steps.
+        """
+        # get scores from task
+        self.scores = self.task.evaluate(self.prompts, self.predictor).tolist()
+        # sort prompts by score
+        self.prompts = [prompt for _, prompt in sorted(zip(self.scores, self.prompts), reverse=True)]
+        self.scores = sorted(self.scores, reverse=True)
+
+        for _ in range(n_steps):
+            new_prompts = self._crossover(self.prompts, self.scores)
+            prompts = self.prompts + new_prompts
+            scores = self.scores + self.task.evaluate(new_prompts, self.predictor).tolist()
+
+            # sort scores and prompts
+            self.prompts = [prompt for _, prompt in sorted(zip(scores, prompts), reverse=True)][: len(self.prompts)]
+            self.scores = sorted(scores, reverse=True)[: len(self.prompts)]
+
+            self._on_step_end()
+        return self.prompts
+
+    def _crossover(self, prompts, scores) -&gt; str:
+        """
+        Perform crossover operation to generate new child prompts.
+
+        This method selects parent prompts based on the chosen selection mode,
+        creates meta-prompts using the prompt template, and generates new child
+        prompts using the meta language model.
+
+        Args:
+            prompts (List[str]): List of current prompts.
+            scores (List[float]): Corresponding scores for the prompts.
+
+        Returns:
+            List[str]: Newly generated child prompts.
+        """
+        # parent selection
+        if self.selection_mode == "wheel":
+            wheel_idx = np.random.choice(
+                np.arange(0, len(prompts)),
+                size=len(prompts),
+                replace=True,
+                p=np.array(scores) / np.sum(scores) if np.sum(scores) &gt; 0 else np.ones(len(scores)) / len(scores),
+            ).tolist()
+            parent_pop = [self.prompts[idx] for idx in wheel_idx]
+
+        elif self.selection_mode in ["random", "tour"]:
+            parent_pop = self.prompts
+
+        # crossover
+        meta_prompts = []
+        for _ in self.prompts:
+            if self.selection_mode in ["random", "wheel"]:
+                parent_1, parent_2 = np.random.choice(parent_pop, size=2, replace=False)
+            elif self.selection_mode == "tour":
+                group_1 = np.random.choice(parent_pop, size=2, replace=False)
+                group_2 = np.random.choice(parent_pop, size=2, replace=False)
+                # use the best of each group based on scores
+                parent_1 = group_1[np.argmax([self.scores[self.prompts.index(p)] for p in group_1])]
+                parent_2 = group_2[np.argmax([self.scores[self.prompts.index(p)] for p in group_2])]
+
+            meta_prompt = self.prompt_template.replace("&lt;prompt1&gt;", parent_1).replace("&lt;prompt2&gt;", parent_2)
+            meta_prompts.append(meta_prompt)
+
+        child_prompts = self.meta_llm.get_response(meta_prompts)
+        child_prompts = [prompt.split("&lt;prompt&gt;")[-1].split("&lt;/prompt&gt;")[0].strip() for prompt in child_prompts]
+
+        return child_prompts</code></pre>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="promptolution.optimizers.evoprompt_ga.EvoPromptGA.optimize" class="doc doc-heading">
+            <code class="highlight language-python">optimize(n_steps)</code>
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Perform the optimization process for a specified number of steps.</p>
+<p>This method iteratively improves the prompts using genetic algorithm techniques.
+It evaluates prompts, performs crossover to generate new prompts, and selects
+the best prompts for the next generation.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code>n_steps</code></td>
+            <td>
+                  <code>int</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of optimization steps to perform.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="typing.List">List</span>[str]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List[str]: The optimized list of prompts after all steps.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+            <details class="quote">
+              <summary>Source code in <code>promptolution\optimizers\evoprompt_ga.py</code></summary>
+              <pre class="highlight"><code class="language-python">def optimize(self, n_steps: int) -&gt; List[str]:
+    """
+    Perform the optimization process for a specified number of steps.
+
+    This method iteratively improves the prompts using genetic algorithm techniques.
+    It evaluates prompts, performs crossover to generate new prompts, and selects
+    the best prompts for the next generation.
+
+    Args:
+        n_steps (int): Number of optimization steps to perform.
+
+    Returns:
+        List[str]: The optimized list of prompts after all steps.
+    """
+    # get scores from task
+    self.scores = self.task.evaluate(self.prompts, self.predictor).tolist()
+    # sort prompts by score
+    self.prompts = [prompt for _, prompt in sorted(zip(self.scores, self.prompts), reverse=True)]
+    self.scores = sorted(self.scores, reverse=True)
+
+    for _ in range(n_steps):
+        new_prompts = self._crossover(self.prompts, self.scores)
+        prompts = self.prompts + new_prompts
+        scores = self.scores + self.task.evaluate(new_prompts, self.predictor).tolist()
+
+        # sort scores and prompts
+        self.prompts = [prompt for _, prompt in sorted(zip(scores, prompts), reverse=True)][: len(self.prompts)]
+        self.scores = sorted(scores, reverse=True)[: len(self.prompts)]
+
+        self._on_step_end()
+    return self.prompts</code></pre>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+                <p>&copy; 2024 <a href="https://github.com/yourusername"  target="_blank" rel="noopener">Tom Zehle, Timo Heiß, Moritz Schlager</a></p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
