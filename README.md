@@ -4,7 +4,12 @@ Project for seminar "AutoML in the age of large pre-trained language models" at 
 
 ## Set Up
 
-After having cloned the repository, run
+You may run 
+```
+pip install promptolution
+```
+
+Or after having cloned the repository, run
 
 ```
 poetry install
