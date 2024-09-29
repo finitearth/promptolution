@@ -1,5 +1,4 @@
 from __future__ import annotations
-# TODO delete?
 from typing import (
     Any,
     AsyncIterator,

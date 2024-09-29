@@ -38,7 +38,6 @@ class ClassificationTask(BaseTask):
             seed (int, optional): Random seed for reproducibility. Defaults to 42.
             split (Literal["dev", "test"], optional): Dataset split to use. Defaults to "dev".
         """
-        # TODO fix seed handling to be more clear (currently seed != seed)
         self.task_id: str = task_id
         self.dataset_json: Dict = dataset_json
         self.description: Optional[str] = None
@@ -88,7 +87,7 @@ class ClassificationTask(BaseTask):
 
     def evaluate(
         self, prompts: List[str], predictor: BasePredictor, n_samples: int = 20, subsample: bool = True
-    ) -> np.ndarray:  # TODO include in config
+    ) -> np.ndarray: 
         """
         Evaluate a set of prompts using a given predictor.
 

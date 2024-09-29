@@ -21,8 +21,6 @@ Create API Keys for the models you want to use:
 - Anthropic: store token in anthropictoken.txt
 - DeepInfra (for Llama): store token in deepinfratoken.txt
 
-TODO: CREATE WHEEL FILES AND UPLOAD TO PIP
-
 Run experiments based on config via:
 
 ```

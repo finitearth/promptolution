@@ -126,7 +126,7 @@ class APILLM:
 
     async def _get_response(
         self, prompts: list[str], max_concurrent_calls=200
-    ) -> list[str]:  # TODO change name of method
+    ) -> list[str]:  
         """
         Asynchronously get responses for a list of prompts.
 
