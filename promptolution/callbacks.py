@@ -26,7 +26,6 @@ class LoggerCallback(Callback):
         step (int): The current step number.
     """
     def __init__(self, logger):
-        # TODO check up whats up with logging leves
         self.logger = logger
         self.step = 0
 
