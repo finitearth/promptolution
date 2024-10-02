@@ -1,7 +1,7 @@
 from .base_optimizer import DummyOptimizer
 from .evoprompt_de import EvoPromptDE
 from .evoprompt_ga import EvoPromptGA
-
+from .opro import Opro
 
 def get_optimizer(config, *args, **kwargs):
     """

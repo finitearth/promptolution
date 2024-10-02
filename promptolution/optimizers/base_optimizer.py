@@ -24,7 +24,7 @@ class BaseOptimizer(ABC):
         callbacks (List[Callable], optional): List of callback functions. Defaults to an empty list.
         predictor (optional): Predictor for prompt evaluation. Defaults to None.
     """
-    def __init__(self, initial_prompts: list[str], task: BaseTask, callbacks: list[Callable] = [], predictor=None):
+    def __init__(self, initial_prompts: list[str] = None, task: BaseTask = None, callbacks: list[Callable] = [], predictor=None):
         self.prompts = initial_prompts
         self.task = task
         self.callbacks = callbacks

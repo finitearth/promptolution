@@ -16,15 +16,14 @@ class Opro(BaseOptimizer):
     def __init__(self, llm: BaseLLM, n_samples: int = 2, **args):
         self.llm = llm
         self.n_samples = n_samples
-        with open("../templates/opro_template.txt") as f:
-            self.meta_prompt = f.readlines()
+        with open("templates/opro_template.txt") as f:
+            self.meta_prompt = "".join(f.readlines())
         
+        super().__init__(**args)
         self.meta_prompt = self.meta_prompt.replace("<task_description>", self.task.description)
 
-        super().__init__(**args)
         self.prompts = []
         self.scores = []
-
 
     def _sample_examples(self):
         sample_x = np.random.choice(self.task.xs, self.n_samples)
@@ -44,7 +43,8 @@ class Opro(BaseOptimizer):
                 .replace("<examples>", self._sample_examples())
             )
 
-            prompt = self.llm.get_response(meta_prompt)
+            prompt = self.llm.get_response([meta_prompt])[0]
+            prompt = prompt.split("<prompt>")[-1].split("</prompt>")[0]
             score = self.task.evaluate(prompt, self.predictor)
             
             self.prompts.append(prompt)
