@@ -60,7 +60,7 @@ def create_prompts_from_samples(task: BaseTask, llm: BaseLLM, n_samples: int = 3
         xs.extend(task.xs[indices])
         ys.extend(task.ys[indices])
 
-    meta_prompt = """You are asked to give the corresponnding prompt that gives the following outputs given these inputs. Return it starting with <prompt> and ending with </prompt> tags. 
+    meta_prompt = """You are asked to generate a corresponding prompt that leads to the following outputs given these inputs. Return it starting with <prompt> and ending with </prompt> tags. 
     Include the name of the output classes in the prompt."""
     for x, y in zip(xs, ys):
         meta_prompt += f"\n\nInput: {x}\nOutput: {y}"
