@@ -1,15 +1,13 @@
-from typing import List, Union
-
 import numpy as np
 
+from typing import Union, List
 from promptolution.llms.base_llm import BaseLLM
 from promptolution.tasks.base_task import BaseTask
 from promptolution.tasks.classification_tasks import ClassificationTask
 
-
-def create_prompt_variation(prompt: Union[List[str], str], llm: BaseLLM, meta_prompt: str = None) -> List[str]:
+def create_prompt_variation(prompt: Union[List[str], str], llm: BaseLLM) -> List[str]:
     """
-    Generate a variation of the given prompt(s) while keeping the semantic meaning. Idea taken from
+    Generate a variation of the given prompt(s) while keeping the semantic meaning. Idea taken from 
     the paper Zhou et al. (2021) https://arxiv.org/pdf/2211.01910
 
     Args:
@@ -72,7 +70,7 @@ def create_prompts_from_samples(task: BaseTask, llm: BaseLLM, meta_prompt: str =
             indices = np.random.choice(indices, n_samples, replace=False)
             xs.extend(task.xs[indices])
             ys.extend(task.ys[indices])
-
+    
     else:
         # if not classification task, sample randomly
         indices = np.random.choice(len(task.xs), n_samples, replace=False)
@@ -93,5 +91,6 @@ def create_prompts_from_samples(task: BaseTask, llm: BaseLLM, meta_prompt: str =
 
     prompt = llm.get_response([meta_prompt])[0]
     prompt = prompt.split("</prompt>")[0].split("<prompt>")[-1]
+
 
     return prompt
