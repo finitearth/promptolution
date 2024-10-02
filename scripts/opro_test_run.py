@@ -12,15 +12,15 @@ logger = Logger(__name__)
 
 def main():
     config = ConfigParser()
-    config.task_name = "subj"
-    config.ds_path = "data_sets/cls/subj"
+    config.task_name = "agnews"
+    config.ds_path = "data_sets/cls/agnews"
     config.random_seed = 42
 
     llm = get_llm("meta-llama/Meta-Llama-3-8B-Instruct")
     task = get_tasks(config)[0]
     predictor = get_predictor("meta-llama/Meta-Llama-3-8B-Instruct", classes=task.classes)
 
-    optimizer = Opro(llm, task=task, predictor=predictor, callbacks=[LoggerCallback(logger)], n_samples=2)
+    optimizer = Opro(llm, initial_prompts=task.initial_population, task=task, predictor=predictor, callbacks=[LoggerCallback(logger)], n_samples=5)
     prompts = optimizer.optimize(n_steps=10)
 
     logger.info(f"Optimized prompts: {prompts}")
