@@ -4,4 +4,4 @@ from . import predictors
 from . import tasks
 from . import callbacks
 from . import config
-from . import prompt_creation
+from .utils import prompt_creation

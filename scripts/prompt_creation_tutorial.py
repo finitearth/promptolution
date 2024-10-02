@@ -1,4 +1,4 @@
-from promptolution.prompt_creation import create_prompt_variation, create_prompts_from_samples
+from promptolution.utils.prompt_creation import create_prompt_variation, create_prompts_from_samples
 from promptolution.llms import get_llm
 from promptolution.tasks import get_tasks
 from promptolution.predictors import get_predictor
