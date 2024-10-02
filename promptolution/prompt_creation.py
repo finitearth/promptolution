@@ -33,7 +33,7 @@ def create_prompt_variation(prompt: Union[List[str], str], llm: BaseLLM) -> List
 
 def create_prompts_from_samples(task: BaseTask, llm: BaseLLM, n_samples: int = 3) -> List[str]:
     """
-    Generate a set of prompts from dataset examples sampeld from a given task. Idea taken from
+    Generate a set of prompts from dataset examples sampled from a given task. Idea taken from
     the paper Zhou et al. (2021) https://arxiv.org/pdf/2211.01910
     Samples are selected, such that 
     (1) all possible classes are represented
