@@ -38,11 +38,10 @@ class Opro(BaseOptimizer):
 
     def optimize(self, n_steps: int) -> List[str]:
         for _ in range(n_steps):
-            examples = self._sample_examples()
             meta_prompt = (
                 self.meta_prompt
-                .replace("<old_instructions>", self.prompts)
-                .replace("<examples>", examples)
+                .replace("<old_instructions>", self._format_old_instructions())
+                .replace("<examples>", self._sample_examples())
             )
 
             prompt = self.llm.get_response(meta_prompt)
