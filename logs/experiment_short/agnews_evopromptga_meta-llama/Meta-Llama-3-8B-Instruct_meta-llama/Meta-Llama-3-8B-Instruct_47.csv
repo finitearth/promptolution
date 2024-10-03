@@ -1,0 +1,3 @@
+step,prompt,score
+1,"Your objective is to classify a news article into one of four themes: World, Sports, Business and Tech.",0.85
+1,"Determine the theme of the news item. Choose from World, Sports, Business and Tech.",0.8

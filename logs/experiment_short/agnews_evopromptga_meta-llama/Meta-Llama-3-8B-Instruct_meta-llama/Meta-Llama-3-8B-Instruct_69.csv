@@ -1,0 +1,3 @@
+step,prompt,score
+1,"You will be given a news article and asked to classify it as World, Sports, Business and Tech, depending on its main topic.",0.8
+1,"Based on the main theme of given the news article, categorize it into World, Sports, Business, or Tech.",0.75
