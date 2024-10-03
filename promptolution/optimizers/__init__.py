@@ -1,11 +1,12 @@
+"""Module for prompt optimizers."""
+
 from .base_optimizer import DummyOptimizer
 from .evoprompt_de import EvoPromptDE
 from .evoprompt_ga import EvoPromptGA
 
 
 def get_optimizer(config, *args, **kwargs):
-    """
-    Factory function to create and return an optimizer instance based on the provided configuration.
+    """Factory function to create and return an optimizer instance based on the provided configuration.
 
     This function selects and instantiates the appropriate optimizer class based on the
     'optimizer' field in the config object. It supports three types of optimizers:

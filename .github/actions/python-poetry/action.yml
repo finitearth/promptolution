@@ -1,0 +1,39 @@
+name: Setup-Python-Poetry
+description: 'Setup Python and Poetry'
+
+inputs:
+  python-version:
+    description: 'Python version to use'
+    required: true
+    default: '3.11'
+  poetry-version:
+    description: 'Poetry version to use'
+    required: true
+    default: 'latest'
+  groups:
+    required: false
+    default: 'main'
+    type: string
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python-version }}
+    - name: Setup Poetry
+      uses: snok/install-poetry@v1.4.1
+      with:
+        python-version: ${{ inputs.python-version }}
+        virtualenvs-in-project: true
+        virtualenvs-create: true
+    - uses: actions/cache@v3
+      id: cached-poetry-dependencies
+      with:
+        path: .venv
+        key: ${{ runner.os }}-poetry-${{ inputs.poetry-version }}-${{ hashFiles('**/poetry.lock') }}
+    - name: Install dependencies
+      run: poetry install --no-interaction --no-root --only ${{ inputs.groups }}
+      if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+      shell: bash

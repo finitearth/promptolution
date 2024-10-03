@@ -1,3 +1,5 @@
+"""Module for EvoPromptDE optimizer."""
+
 from typing import List
 
 import numpy as np
@@ -6,8 +8,7 @@ from promptolution.optimizers.base_optimizer import BaseOptimizer
 
 
 class EvoPromptDE(BaseOptimizer):
-    """
-    EvoPromptDE: Differential Evolution-based Prompt Optimizer
+    """EvoPromptDE: Differential Evolution-based Prompt Optimizer.
 
     This class implements a differential evolution algorithm for optimizing prompts in large language models.
     It is adapted from the paper "Connecting Large Language Models with Evolutionary Algorithms
@@ -27,15 +28,16 @@ class EvoPromptDE(BaseOptimizer):
         donor_random (bool, optional): Whether to use a random donor. Defaults to False.
         **args: Additional arguments passed to the BaseOptimizer.
     """
+
     def __init__(self, prompt_template, meta_llm, donor_random=False, **args):
+        """Initialize the EvoPromptDE optimizer."""
         self.prompt_template = prompt_template
         self.donor_random = donor_random
         self.meta_llm = meta_llm
         super().__init__(**args)
 
     def optimize(self, n_steps: int) -> List[str]:
-        """
-        Perform the optimization process for a specified number of steps.
+        """Perform the optimization process for a specified number of steps.
 
         This method iteratively improves the prompts using a differential evolution strategy.
         It evaluates prompts, generates new prompts using the DE algorithm, and replaces

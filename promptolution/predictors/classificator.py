@@ -1,3 +1,5 @@
+"""Module for classification predictors."""
+
 from typing import List
 
 import numpy as np
@@ -6,8 +8,7 @@ from promptolution.predictors.base_predictor import BasePredictor
 
 
 class Classificator(BasePredictor):
-    """
-    A predictor class for classification tasks using language models.
+    """A predictor class for classification tasks using language models.
 
     This class takes a language model and a list of classes, and provides a method
     to predict classes for given prompts and input data.
@@ -19,9 +20,9 @@ class Classificator(BasePredictor):
     Inherits from:
         BasePredictor: The base class for predictors in the promptolution library.
     """
+
     def __init__(self, llm, classes, *args, **kwargs):
-        """
-        Initialize the Classificator.
+        """Initialize the Classificator.
 
         Args:
             llm: The language model to use for predictions.
@@ -35,8 +36,7 @@ class Classificator(BasePredictor):
         prompts: List[str],
         xs: np.ndarray,
     ) -> np.ndarray:
-        """
-        Predict classes for given prompts and input data.
+        """Predict classes for given prompts and input data.
 
         This method generates predictions using the language model and then
         extracts the predicted class from the model's output.

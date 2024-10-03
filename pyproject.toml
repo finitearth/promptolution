@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "promptolution"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Tom Zehle, Moritz Schlager, Timo Heiß"]
 readme = "README.md"
@@ -27,9 +27,22 @@ isort = "^5.13.2"
 pre-commit = "^3.7.1"
 ipykernel = "^6.29.5"
 
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = "^1.6.1"
+mkdocs-material = "^9.5.39"
+mkdocstrings = {version = "^0.26.1", extras = ["python"]}
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 line-length = 120
+
+[tool.isort]
+line_length = 120
+profile = "black"
+
+[tool.pydocstyle]
+convention = "google"
