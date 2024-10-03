@@ -1,3 +1,5 @@
+"""Module for OPRO."""
+
 from typing import List
 
 import numpy as np
@@ -7,7 +9,7 @@ from promptolution.optimizers.base_optimizer import BaseOptimizer
 
 
 class Opro(BaseOptimizer):
-    """Opro: Optimization by PROmpting
+    """Opro: Optimization by PROmpting.
 
     Proposed by the paper "Large Language Models as Optimizers" by Yang et. al: https://arxiv.org/abs/2309.03409.
     This Optimizer works by providing the Meta-LLM with a task-description, as well as previous
@@ -41,7 +43,8 @@ class Opro(BaseOptimizer):
         """Sample examples from the task dataset with their label.
 
         Returns:
-            str: The formatted string of sampled examples."""
+            str: The formatted string of sampled examples.
+        """
         idx = np.random.choice(len(self.task.xs), self.n_samples)
         sample_x = self.task.xs[idx]
         sample_y = self.task.ys[idx]
@@ -52,7 +55,8 @@ class Opro(BaseOptimizer):
         """Format the previous prompts and their respective scores.
 
         Returns:
-            str: The formatted string of previous prompts and their scores."""
+            str: The formatted string of previous prompts and their scores.
+        """
         return "".join(
             [f"Old instruction: {prompt}\nScore: {score}\n\n" for prompt, score in zip(self.prompts, self.scores)]
         )
@@ -63,8 +67,9 @@ class Opro(BaseOptimizer):
         Args:
             n_steps (int): The number of optimization steps to perform.
 
-            Returns:
-                str: The best prompt found by the optimizer."""
+        Returns:
+            str: The best prompt found by the optimizer.
+        """
         for _ in range(n_steps):
             meta_prompt = self.meta_prompt.replace("<old_instructions>", self._format_old_instructions()).replace(
                 "<examples>", self._sample_examples()

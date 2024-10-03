@@ -1,3 +1,5 @@
+"""Test run for the Opro optimizer."""
+
 from configparser import ConfigParser
 from logging import Logger
 
@@ -11,6 +13,7 @@ logger = Logger(__name__)
 
 
 def main():
+    """Run a test run for the Opro optimizer."""
     config = ConfigParser()
     config.task_name = "agnews"
     config.ds_path = "data_sets/cls/agnews"

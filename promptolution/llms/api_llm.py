@@ -122,8 +122,7 @@ class APILLM:
         raise requests.exceptions.ConnectionError("Max retries exceeded. Connection could not be established.")
 
     async def _get_response(self, prompts: list[str], max_concurrent_calls=200) -> list[str]:
-        """
-        Asynchronously get responses for a list of prompts.
+        """Asynchronously get responses for a list of prompts.
 
         This method uses a semaphore to limit the number of concurrent API calls.
 
