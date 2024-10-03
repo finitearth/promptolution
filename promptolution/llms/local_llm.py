@@ -21,6 +21,7 @@ class LocalLLM:
     Methods:
         get_response: Generate responses for a list of prompts.
     """
+
     def __init__(self, model_id: str, batch_size=8):
         """
         Initialize the LocalLLM with a specific model.
@@ -68,7 +69,7 @@ class LocalLLM:
 
         response = [r["generated_text"] for r in response]
         return response
-    
+
     def __del__(self):
         try:
             del self.pipeline

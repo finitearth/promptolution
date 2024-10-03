@@ -28,7 +28,8 @@ class ClassificationTask(BaseTask):
     Inherits from:
         BaseTask: The base class for tasks in the promptolution library.
     """
-    def __init__(self, task_id: str, dataset_json: Dict, seed: int = 42, split: Literal["dev", "test"] = "dev"): 
+
+    def __init__(self, task_id: str, dataset_json: Dict, seed: int = 42, split: Literal["dev", "test"] = "dev"):
         """
         Initialize the ClassificationTask.
 
@@ -87,7 +88,7 @@ class ClassificationTask(BaseTask):
 
     def evaluate(
         self, prompts: List[str], predictor: BasePredictor, n_samples: int = 20, subsample: bool = True
-    ) -> np.ndarray: 
+    ) -> np.ndarray:
         """
         Evaluate a set of prompts using a given predictor.
 

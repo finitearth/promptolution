@@ -25,6 +25,7 @@ class Config:
         include_task_desc (bool): Whether to include task description. Defaults to False.
         random_seed (int): Random seed for reproducibility. Defaults to 42.
     """
+
     task_name: str
     ds_path: str
     n_steps: int

@@ -18,6 +18,7 @@ class BasePredictor:
         predict: An abstract method that should be implemented by subclasses
                  to make predictions based on prompts and input data.
     """
+
     def __init__(self, model_id, classes, *args, **kwargs):
         """
         Initialize the BasePredictor.
@@ -66,6 +67,7 @@ class DummyPredictor(BasePredictor):
     Methods:
         predict: Generates random predictions for the given prompts and input data.
     """
+
     def __init__(self, model_id, classes, *args, **kwargs):
         self.model_id = "dummy"
         self.classes = classes

@@ -19,6 +19,7 @@ class Classificator(BasePredictor):
     Inherits from:
         BasePredictor: The base class for predictors in the promptolution library.
     """
+
     def __init__(self, llm, classes, *args, **kwargs):
         """
         Initialize the Classificator.

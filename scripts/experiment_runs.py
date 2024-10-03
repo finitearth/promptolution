@@ -1,5 +1,6 @@
-from configparser import ConfigParser
+"""Experiments for paper Towards Cost-Effective Prompt Tuning."""
 from argparse import ArgumentParser
+from configparser import ConfigParser
 from logging import INFO, Logger
 from pathlib import Path
 
@@ -18,9 +19,10 @@ logger.setLevel(INFO)
 
 
 def main():
+    """Run the experiments defined in the provided configuration file."""
     # read experiments ini
     arg_parser = ArgumentParser()
-    arg_parser.add_argument('-e', '--experiment', type=str, help='Experiment Config Filepath')
+    arg_parser.add_argument("-e", "--experiment", type=str, help="Experiment Config Filepath")
     args = arg_parser.parse_args()
     all_configs = ConfigParser()
     all_configs.read(args.experiment)
@@ -45,7 +47,10 @@ def main():
                             downstream_llm=downstream_llm,
                             meta_prompt_path=meta_prompt_path,
                             init_pop_size=int(all_configs["optimizer"]["init_population"]),
-                            logging_dir=f"logs/{experiment_name}/{task_name}_{optimizer_name}_{meta_llm}_{evaluator_llm}_{random_seed}.csv",
+                            logging_dir=(
+                                f"logs/{experiment_name}/"
+                                + f"{task_name}_{optimizer_name}_{meta_llm}_{evaluator_llm}_{random_seed}.csv"
+                            ),
                             experiment_name=experiment_name,
                             random_seed=random_seed,
                             evaluation_llm=evaluator_llm,
@@ -59,6 +64,7 @@ def main():
 
 
 def run_experiment(config: Config):
+    """Run a single experiment."""
     task = get_tasks(config)[0]
     init_populations = task.initial_population
     # subsample using random seed

@@ -1,18 +1,16 @@
 import asyncio
-import requests
 import time
-import openai
 from logging import INFO, Logger
-
 from typing import List
 
+import openai
+import requests
 from langchain_anthropic import ChatAnthropic
 from langchain_community.chat_models.deepinfra import ChatDeepInfraException
 from langchain_core.messages import HumanMessage
 from langchain_openai import ChatOpenAI
 
 from promptolution.llms.deepinfra import ChatDeepInfra
-
 
 logger = Logger(__name__)
 logger.setLevel(INFO)
@@ -63,6 +61,7 @@ class APILLM:
         get_response: Synchronously get responses for a list of prompts.
         _get_response: Asynchronously get responses for a list of prompts.
     """
+
     def __init__(self, model_id: str):
         """
         Initialize the APILLM with a specific model.
@@ -124,9 +123,7 @@ class APILLM:
         # If the loop exits, it means max retries were reached
         raise requests.exceptions.ConnectionError("Max retries exceeded. Connection could not be established.")
 
-    async def _get_response(
-        self, prompts: list[str], max_concurrent_calls=200
-    ) -> list[str]:  
+    async def _get_response(self, prompts: list[str], max_concurrent_calls=200) -> list[str]:
         """
         Asynchronously get responses for a list of prompts.
 

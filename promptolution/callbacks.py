@@ -25,6 +25,7 @@ class LoggerCallback(Callback):
         logger: The logger object to use for logging.
         step (int): The current step number.
     """
+
     def __init__(self, logger):
         self.logger = logger
         self.step = 0
@@ -53,6 +54,7 @@ class CSVCallback(Callback):
         path (str): The path to the CSV file.
         step (int): The current step number.
     """
+
     def __init__(self, path):
         # if dir does not exist
         if not os.path.exists(os.path.dirname(path)):
@@ -88,6 +90,7 @@ class BestPromptCallback(Callback):
         best_prompt (str): The prompt with the highest score so far.
         best_score (float): The highest score achieved so far.
     """
+
     def __init__(self):
         self.best_prompt = ""
         self.best_score = -99999
@@ -110,6 +113,7 @@ class ProgressBarCallback(Callback):
     Attributes:
         pbar (tqdm): The tqdm progress bar object.
     """
+
     def __init__(self, total_steps):
         self.pbar = tqdm(total=total_steps)
 

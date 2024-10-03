@@ -14,6 +14,7 @@ class BaseTask(ABC):
         evaluate: An abstract method that should be implemented by subclasses
                   to evaluate prompts using a given predictor.
     """
+
     def __init__(self, *args, **kwargs):
         pass
 
@@ -50,6 +51,7 @@ class DummyTask(BaseTask):
         ys (np.ndarray): Array of dummy labels.
         classes (List[str]): List of possible class labels.
     """
+
     def __init__(self):
         self.task_id = "dummy"
         self.dataset_json = None

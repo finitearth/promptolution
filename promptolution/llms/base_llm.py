@@ -14,6 +14,7 @@ class BaseLLM(ABC):
         get_response: An abstract method that should be implemented by subclasses
                       to generate responses for given prompts.
     """
+
     def __init__(self, *args, **kwargs):
         pass
 
@@ -42,6 +43,7 @@ class DummyLLM(BaseLLM):
     the behavior of a language model without actually performing any
     complex natural language processing.
     """
+
     def __init__(self, *args, **kwargs):
         pass
 

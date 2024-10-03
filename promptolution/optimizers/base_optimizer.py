@@ -4,7 +4,7 @@ from typing import Callable, List
 from promptolution.tasks.base_task import BaseTask
 
 
-class BaseOptimizer(ABC):    
+class BaseOptimizer(ABC):
     """
     Abstract base class for prompt optimizers.
 
@@ -24,7 +24,10 @@ class BaseOptimizer(ABC):
         callbacks (List[Callable], optional): List of callback functions. Defaults to an empty list.
         predictor (optional): Predictor for prompt evaluation. Defaults to None.
     """
-    def __init__(self, initial_prompts: list[str] = None, task: BaseTask = None, callbacks: list[Callable] = [], predictor=None):
+
+    def __init__(
+        self, initial_prompts: list[str] = None, task: BaseTask = None, callbacks: list[Callable] = [], predictor=None
+    ):
         self.prompts = initial_prompts
         self.task = task
         self.callbacks = callbacks
@@ -87,6 +90,7 @@ class DummyOptimizer(BaseOptimizer):
         *args: Variable length argument list (unused).
         **kwargs: Arbitrary keyword arguments (unused).
     """
+
     def __init__(self, initial_prompts, *args, **kwargs):
         self.callbacks = []
         self.prompts = initial_prompts

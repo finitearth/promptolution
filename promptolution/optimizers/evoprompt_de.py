@@ -27,6 +27,7 @@ class EvoPromptDE(BaseOptimizer):
         donor_random (bool, optional): Whether to use a random donor. Defaults to False.
         **args: Additional arguments passed to the BaseOptimizer.
     """
+
     def __init__(self, prompt_template, meta_llm, donor_random=False, **args):
         self.prompt_template = prompt_template
         self.donor_random = donor_random

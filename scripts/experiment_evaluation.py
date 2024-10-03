@@ -1,8 +1,9 @@
-from configparser import ConfigParser
 from argparse import ArgumentParser
-from typing import Tuple
-from pathlib import Path
+from configparser import ConfigParser
 from logging import INFO, Logger
+from pathlib import Path
+from typing import Tuple
+
 import pandas as pd
 from tqdm import tqdm
 

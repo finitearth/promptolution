@@ -1,53 +1,27 @@
 from __future__ import annotations
-from typing import (
-    Any,
-    AsyncIterator,
-    Callable,
-    Dict,
-    Iterator,
-    List,
-    Mapping,
-    Optional,
-    Sequence,
-    Tuple,
-    Type,
-    Union,
-)
 
-from langchain_core.callbacks.manager import (
-    AsyncCallbackManagerForLLMRun,
-    CallbackManagerForLLMRun,
+from typing import Any, AsyncIterator, Callable, Dict, Iterator, List, Mapping, Optional, Sequence, Tuple, Type, Union
+
+from langchain_community.chat_models.deepinfra import (
+    ChatDeepInfraException,
+    _convert_dict_to_message,
+    _convert_message_to_dict,
+    _create_retry_decorator,
+    _handle_sse_line,
+    _parse_stream,
+    _parse_stream_async,
 )
+from langchain_community.utilities.requests import Requests
+from langchain_core.callbacks.manager import AsyncCallbackManagerForLLMRun, CallbackManagerForLLMRun
 from langchain_core.language_models import LanguageModelInput
-from langchain_core.language_models.chat_models import (
-    BaseChatModel,
-    agenerate_from_stream,
-    generate_from_stream,
-)
-from langchain_core.messages import (
-    BaseMessage,
-)
-from langchain_core.outputs import (
-    ChatGeneration,
-    ChatGenerationChunk,
-    ChatResult,
-)
+from langchain_core.language_models.chat_models import BaseChatModel, agenerate_from_stream, generate_from_stream
+from langchain_core.messages import BaseMessage
+from langchain_core.outputs import ChatGeneration, ChatGenerationChunk, ChatResult
 from langchain_core.pydantic_v1 import BaseModel, Field, root_validator
 from langchain_core.runnables import Runnable
 from langchain_core.tools import BaseTool
 from langchain_core.utils import get_from_dict_or_env
 from langchain_core.utils.function_calling import convert_to_openai_tool
-from langchain_community.chat_models.deepinfra import (
-    _create_retry_decorator,
-    _convert_dict_to_message,
-    _convert_message_to_dict,
-    _handle_sse_line,
-    _parse_stream,
-    _parse_stream_async,
-    ChatDeepInfraException,
-)
-
-from langchain_community.utilities.requests import Requests
 
 
 class ChatDeepInfra(BaseChatModel):
