@@ -1,3 +1,4 @@
+"""Module for running language models locally using the Hugging Face Transformers library."""
 try:
     import torch
     import transformers
@@ -9,8 +10,7 @@ except ImportError as e:
 
 
 class LocalLLM:
-    """
-    A class for running language models locally using the Hugging Face Transformers library.
+    """A class for running language models locally using the Hugging Face Transformers library.
 
     This class sets up a text generation pipeline with specified model parameters
     and provides a method to generate responses for given prompts.
@@ -23,8 +23,7 @@ class LocalLLM:
     """
 
     def __init__(self, model_id: str, batch_size=8):
-        """
-        Initialize the LocalLLM with a specific model.
+        """Initialize the LocalLLM with a specific model.
 
         Args:
             model_id (str): The identifier of the model to use (e.g., "gpt2", "facebook/opt-1.3b").
@@ -48,8 +47,7 @@ class LocalLLM:
         self.pipeline.tokenizer.padding_side = "left"
 
     def get_response(self, prompts: list[str]):
-        """
-        Generate responses for a list of prompts using the local language model.
+        """Generate responses for a list of prompts using the local language model.
 
         Args:
             prompts (list[str]): A list of input prompts.
@@ -71,6 +69,7 @@ class LocalLLM:
         return response
 
     def __del__(self):
+        """Cleanup method to delete the pipeline and free up GPU memory."""
         try:
             del self.pipeline
             torch.cuda.empty_cache()

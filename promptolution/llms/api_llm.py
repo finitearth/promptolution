@@ -1,3 +1,5 @@
+"""Module to interface with various language models through their respective APIs."""
+
 import asyncio
 import time
 from logging import INFO, Logger
@@ -17,8 +19,7 @@ logger.setLevel(INFO)
 
 
 async def invoke_model(prompt, model, semaphore):
-    """
-    Asynchronously invoke a language model with retry logic.
+    """Asynchronously invoke a language model with retry logic.
 
     Args:
         prompt (str): The input prompt for the model.
@@ -47,8 +48,7 @@ async def invoke_model(prompt, model, semaphore):
 
 
 class APILLM:
-    """
-    A class to interface with various language models through their respective APIs.
+    """A class to interface with various language models through their respective APIs.
 
     This class supports Claude (Anthropic), GPT (OpenAI), and LLaMA (DeepInfra) models.
     It handles API key management, model initialization, and provides methods for
@@ -63,8 +63,7 @@ class APILLM:
     """
 
     def __init__(self, model_id: str):
-        """
-        Initialize the APILLM with a specific model.
+        """Initialize the APILLM with a specific model.
 
         Args:
             model_id (str): Identifier for the model to use.
@@ -85,8 +84,7 @@ class APILLM:
             raise ValueError(f"Unknown model: {model_id}")
 
     def get_response(self, prompts: List[str]) -> List[str]:
-        """
-        Synchronously get responses for a list of prompts.
+        """Get responses for a list of prompts in a synchronous manner.
 
         This method includes retry logic for handling connection errors and rate limits.
 

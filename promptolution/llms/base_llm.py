@@ -1,3 +1,5 @@
+"""Base module for LLMs in the promptolution library."""
+
 from abc import ABC, abstractmethod
 from typing import List
 
@@ -5,8 +7,7 @@ import numpy as np
 
 
 class BaseLLM(ABC):
-    """
-    Abstract base class for Language Models in the promptolution library.
+    """Abstract base class for Language Models in the promptolution library.
 
     This class defines the interface that all concrete LLM implementations should follow.
 
@@ -16,12 +17,12 @@ class BaseLLM(ABC):
     """
 
     def __init__(self, *args, **kwargs):
+        """Initialize the LLM."""
         pass
 
     @abstractmethod
     def get_response(self, prompts: List[str]) -> List[str]:
-        """
-        Generate responses for the given prompts.
+        """Generate responses for the given prompts.
 
         This method should be implemented by subclasses to define how
         the LLM generates responses.
@@ -36,8 +37,7 @@ class BaseLLM(ABC):
 
 
 class DummyLLM(BaseLLM):
-    """
-    A dummy implementation of the BaseLLM for testing purposes.
+    """A dummy implementation of the BaseLLM for testing purposes.
 
     This class generates random responses for given prompts, simulating
     the behavior of a language model without actually performing any
@@ -45,11 +45,11 @@ class DummyLLM(BaseLLM):
     """
 
     def __init__(self, *args, **kwargs):
+        """Initialize the DummyLLM."""
         pass
 
     def get_response(self, prompts: str) -> str:
-        """
-        Generate random responses for the given prompts.
+        """Generate random responses for the given prompts.
 
         This method creates silly, random responses enclosed in <prompt> tags.
         It's designed for testing and demonstration purposes.

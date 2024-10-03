@@ -1,3 +1,5 @@
+"""DeepInfra API module for language models."""
+
 from __future__ import annotations
 
 from typing import Any, AsyncIterator, Callable, Dict, Iterator, List, Mapping, Optional, Sequence, Tuple, Type, Union
@@ -50,6 +52,7 @@ class ChatDeepInfra(BaseChatModel):
     max_retries: int = 1
 
     def __init__(self, model_name: str, **kwargs: Any):
+        """Initialize the DeepInfra chat model."""
         super().__init__(model=model_name, **kwargs)
 
     @property
@@ -138,6 +141,7 @@ class ChatDeepInfra(BaseChatModel):
 
     @root_validator(pre=False, skip_on_failure=True)
     def validate_environment(cls, values: Dict) -> Dict:
+        """Validate the environment variables."""
         if values["temperature"] is not None and not 0 <= values["temperature"] <= 1:
             raise ValueError("temperature must be in the range [0.0, 1.0]")
 
@@ -303,6 +307,5 @@ class ChatDeepInfra(BaseChatModel):
             **kwargs: Any additional parameters to pass to the
                 :class:`~langchain.runnable.Runnable` constructor.
         """
-
         formatted_tools = [convert_to_openai_tool(tool) for tool in tools]
         return super().bind(tools=formatted_tools, **kwargs)

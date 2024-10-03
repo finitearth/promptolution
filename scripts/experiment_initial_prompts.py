@@ -1,3 +1,4 @@
+"""Experiments for paper Towards Cost-Effective Prompt Tuning initial prompt evaluation."""
 from argparse import ArgumentParser
 from configparser import ConfigParser
 from logging import INFO, Logger
@@ -23,10 +24,7 @@ def evaluate_prompts(
     n_samples: int,
     prompts: List[str],
 ) -> pd.DataFrame:
-    """
-    Evaluate the best prompts from a csv file
-    """
-
+    """Evaluate the best prompts from a csv file."""
     # create config for the experiment
     config = Config(
         task_name=task_name,
@@ -75,6 +73,7 @@ def evaluate_prompts(
 
 
 def main():
+    """Run experiment."""
     # read experiments
     arg_parser = ArgumentParser()
     arg_parser.add_argument("-e", "--experiment", type=str, help="Experiment Config Filepath")

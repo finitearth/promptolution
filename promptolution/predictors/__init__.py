@@ -1,3 +1,5 @@
+"""Module for LLM predictors."""
+
 from promptolution.llms import get_llm
 
 from .base_predictor import DummyPredictor
@@ -5,8 +7,7 @@ from .classificator import Classificator
 
 
 def get_predictor(name, *args, **kwargs):
-    """
-    Factory function to create and return a predictor instance based on the provided name.
+    """Factory function to create and return a predictor instance based on the provided name.
 
     This function supports two types of predictors:
     1. DummyPredictor: A mock predictor for testing purposes.

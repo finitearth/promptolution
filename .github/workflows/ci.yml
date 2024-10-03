@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    types: [opened, synchronize]
+    branches:
+      - dev
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: Set up Python and Poetry
+        uses: ./.github/actions/python-poetry
+        with:
+          groups: dev
+      - name: Run pre-commit
+        uses: pre-commit/action@v3.0.1
+      # - name: Run tests
+      #   run: poetry run python -m pytest
+
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Python and Poetry
+        uses: ./.github/actions/python-poetry
+
+      - name: Build wheel
+        run: poetry build --format wheel
+
+      - name: Upload wheel
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ github.event.repository.name }}
+          path: dist/

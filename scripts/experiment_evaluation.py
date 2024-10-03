@@ -1,3 +1,4 @@
+"""Experiment for paper Towards Cost-Effective Prompt Tuning to evaluate best prompts."""
 from argparse import ArgumentParser
 from configparser import ConfigParser
 from logging import INFO, Logger
@@ -16,8 +17,9 @@ logger.setLevel(INFO)
 
 
 def get_best_prompt_from_csv(csv_path: str) -> Tuple[str, float]:
-    """
-    Get the best prompt from a csv file, by looking at the most recent step
+    """Get the best prompt from a csv file.
+
+    This function gets the best prompst from a csv file by looking at the most recent step
     and picking the prompt with the highest score in that step. There are multiple occurrences of the same step,
     we only pick the highest score (first occurrrence if there are multiple).
     """
@@ -32,9 +34,7 @@ def get_best_prompt_from_csv(csv_path: str) -> Tuple[str, float]:
 def evaluate_best_prompts(
     experiment_name: str, target_experiment: str, logging_dir: Path, downstream_llm: str, n_samples: int, seed: int
 ) -> pd.DataFrame:
-    """
-    Evaluate the best prompts from a csv file
-    """
+    """Evaluate the best prompts from a csv file."""
     # convert the logging directory to a string
     logging_dir = str(logging_dir)
 
@@ -78,6 +78,7 @@ def evaluate_best_prompts(
 
 
 def main():
+    """Run the evaluation of best prompts."""
     # read experiments
     arg_parser = ArgumentParser()
     arg_parser.add_argument("-e", "--experiment", type=str, help="Experiment Config Filepath")
