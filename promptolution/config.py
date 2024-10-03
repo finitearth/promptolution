@@ -1,11 +1,12 @@
+"""Configuration class for the promptolution library."""
+
 from configparser import ConfigParser
 from dataclasses import dataclass
 
 
 @dataclass
 class Config:
-    """
-    Configuration class for the promptolution library.
+    """Configuration class for the promptolution library.
 
     This class handles loading and parsing of configuration settings,
     either from a config file or from keyword arguments.
@@ -25,6 +26,7 @@ class Config:
         include_task_desc (bool): Whether to include task description. Defaults to False.
         random_seed (int): Random seed for reproducibility. Defaults to 42.
     """
+
     task_name: str
     ds_path: str
     n_steps: int
@@ -40,6 +42,7 @@ class Config:
     random_seed: int = 42
 
     def __init__(self, config_path: str = None, **kwargs):
+        """Initialize the Config object."""
         if config_path:
             self.config_path = config_path
             self.config = ConfigParser()
@@ -50,6 +53,7 @@ class Config:
                 setattr(self, key, value)
 
     def _parse_config(self):
+        """Parse the configuration settings from the config file."""
         self.task_name = self.config["task"]["task_name"]
         self.ds_path = self.config["task"]["ds_path"]
         self.n_steps = int(self.config["task"]["steps"])

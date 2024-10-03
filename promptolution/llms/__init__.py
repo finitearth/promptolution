@@ -1,11 +1,12 @@
+"""Module for Large Language Models."""
+
 from .api_llm import APILLM
 from .base_llm import DummyLLM
 from .local_llm import LocalLLM
 
 
 def get_llm(model_id: str, *args, **kwargs):
-    """
-    Factory function to create and return a language model instance based on the provided model_id.
+    """Factory function to create and return a language model instance based on the provided model_id.
 
     This function supports three types of language models:
     1. DummyLLM: A mock LLM for testing purposes.

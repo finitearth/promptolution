@@ -1,12 +1,13 @@
+"""Base class for prompt optimizers."""
+
 from abc import ABC, abstractmethod
 from typing import Callable, List
 
 from promptolution.tasks.base_task import BaseTask
 
 
-class BaseOptimizer(ABC):    
-    """
-    Abstract base class for prompt optimizers.
+class BaseOptimizer(ABC):
+    """Abstract base class for prompt optimizers.
 
     This class defines the basic structure and interface for prompt optimization algorithms.
     Concrete optimizer implementations should inherit from this class and implement
@@ -24,7 +25,9 @@ class BaseOptimizer(ABC):
         callbacks (List[Callable], optional): List of callback functions. Defaults to an empty list.
         predictor (optional): Predictor for prompt evaluation. Defaults to None.
     """
+
     def __init__(self, initial_prompts: list[str], task: BaseTask, callbacks: list[Callable] = [], predictor=None):
+        """Initialize the BaseOptimizer."""
         self.prompts = initial_prompts
         self.task = task
         self.callbacks = callbacks
@@ -32,8 +35,7 @@ class BaseOptimizer(ABC):
 
     @abstractmethod
     def optimize(self, n_steps: int) -> List[str]:
-        """
-        Abstract method to perform the optimization process.
+        """Abstract method to perform the optimization process.
 
         This method should be implemented by concrete optimizer classes to define
         the specific optimization algorithm.
@@ -50,30 +52,23 @@ class BaseOptimizer(ABC):
         raise NotImplementedError
 
     def _on_step_end(self):
-        """
-        Call all registered callbacks at the end of each optimization step.
-        """
+        """Call all registered callbacks at the end of each optimization step."""
         for callback in self.callbacks:
             callback.on_step_end(self)
 
     def _on_epoch_end(self):
-        """
-        Call all registered callbacks at the end of each optimization epoch.
-        """
+        """Call all registered callbacks at the end of each optimization epoch."""
         for callback in self.callbacks:
             callback.on_epoch_end(self)
 
     def _on_train_end(self):
-        """
-        Call all registered callbacks at the end of the entire optimization process.
-        """
+        """Call all registered callbacks at the end of the entire optimization process."""
         for callback in self.callbacks:
             callback.on_train_end(self)
 
 
 class DummyOptimizer(BaseOptimizer):
-    """
-    A dummy optimizer that doesn't perform any actual optimization.
+    """A dummy optimizer that doesn't perform any actual optimization.
 
     This optimizer simply returns the initial prompts without modification.
     It's useful for testing or as a baseline comparison.
@@ -87,13 +82,14 @@ class DummyOptimizer(BaseOptimizer):
         *args: Variable length argument list (unused).
         **kwargs: Arbitrary keyword arguments (unused).
     """
+
     def __init__(self, initial_prompts, *args, **kwargs):
+        """Initialize the DummyOptimizer."""
         self.callbacks = []
         self.prompts = initial_prompts
 
     def optimize(self, n_steps) -> list[str]:
-        """
-        Simulate an optimization process without actually modifying the prompts.
+        """Simulate an optimization process without actually modifying the prompts.
 
         This method calls the callback methods to simulate a complete optimization
         cycle, but returns the initial prompts unchanged.
