@@ -27,6 +27,12 @@ isort = "^5.13.2"
 pre-commit = "^3.7.1"
 ipykernel = "^6.29.5"
 
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = "^1.6.1"
+mkdocs-material = "^9.5.39"
+mkdocstrings = {version = "^0.26.1", extras = ["python"]}
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
