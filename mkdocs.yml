@@ -5,7 +5,7 @@ remote_branch: docs
 
 theme:
   name: material
-  logo: img/logo.png
+  logo: img/logo.svg
   features:
     - navigation.tabs
     - navigation.sections
@@ -69,4 +69,4 @@ markdown_extensions:
   - attr_list
 
 copyright: |
-  &copy; 2024 <a href="https://github.com/yourusername"  target="_blank" rel="noopener">Tom Zehle, Timo Heiß, Moritz Schlager</a>
+  by Tom Zehle, Timo Heiß, Moritz Schlager
