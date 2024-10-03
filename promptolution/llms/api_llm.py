@@ -1,11 +1,12 @@
-import asyncio
-import requests
-import time
-import openai
-from logging import INFO, Logger
+"""Module to interface with various language models through their respective APIs."""
 
+import asyncio
+import time
+from logging import INFO, Logger
 from typing import List
 
+import openai
+import requests
 from langchain_anthropic import ChatAnthropic
 from langchain_community.chat_models.deepinfra import ChatDeepInfraException
 from langchain_core.messages import HumanMessage
@@ -13,14 +14,12 @@ from langchain_openai import ChatOpenAI
 
 from promptolution.llms.deepinfra import ChatDeepInfra
 
-
 logger = Logger(__name__)
 logger.setLevel(INFO)
 
 
 async def invoke_model(prompt, model, semaphore):
-    """
-    Asynchronously invoke a language model with retry logic.
+    """Asynchronously invoke a language model with retry logic.
 
     Args:
         prompt (str): The input prompt for the model.
@@ -49,8 +48,7 @@ async def invoke_model(prompt, model, semaphore):
 
 
 class APILLM:
-    """
-    A class to interface with various language models through their respective APIs.
+    """A class to interface with various language models through their respective APIs.
 
     This class supports Claude (Anthropic), GPT (OpenAI), and LLaMA (DeepInfra) models.
     It handles API key management, model initialization, and provides methods for
@@ -63,9 +61,9 @@ class APILLM:
         get_response: Synchronously get responses for a list of prompts.
         _get_response: Asynchronously get responses for a list of prompts.
     """
+
     def __init__(self, model_id: str):
-        """
-        Initialize the APILLM with a specific model.
+        """Initialize the APILLM with a specific model.
 
         Args:
             model_id (str): Identifier for the model to use.
@@ -86,8 +84,7 @@ class APILLM:
             raise ValueError(f"Unknown model: {model_id}")
 
     def get_response(self, prompts: List[str]) -> List[str]:
-        """
-        Synchronously get responses for a list of prompts.
+        """Get responses for a list of prompts in a synchronous manner.
 
         This method includes retry logic for handling connection errors and rate limits.
 
@@ -124,11 +121,8 @@ class APILLM:
         # If the loop exits, it means max retries were reached
         raise requests.exceptions.ConnectionError("Max retries exceeded. Connection could not be established.")
 
-    async def _get_response(
-        self, prompts: list[str], max_concurrent_calls=200
-    ) -> list[str]:  
-        """
-        Asynchronously get responses for a list of prompts.
+    async def _get_response(self, prompts: list[str], max_concurrent_calls=200) -> list[str]:
+        """Asynchronously get responses for a list of prompts.
 
         This method uses a semaphore to limit the number of concurrent API calls.
 

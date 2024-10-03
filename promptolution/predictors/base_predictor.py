@@ -1,3 +1,5 @@
+"""Base module for predictors."""
+
 from abc import abstractmethod
 from typing import List
 
@@ -5,8 +7,7 @@ import numpy as np
 
 
 class BasePredictor:
-    """
-    Abstract base class for predictors in the promptolution library.
+    """Abstract base class for predictors in the promptolution library.
 
     This class defines the interface that all concrete predictor implementations should follow.
 
@@ -18,9 +19,9 @@ class BasePredictor:
         predict: An abstract method that should be implemented by subclasses
                  to make predictions based on prompts and input data.
     """
+
     def __init__(self, model_id, classes, *args, **kwargs):
-        """
-        Initialize the BasePredictor.
+        """Initialize the BasePredictor.
 
         Args:
             model_id (str): Identifier for the model to use.
@@ -37,8 +38,7 @@ class BasePredictor:
         prompts: List[str],
         xs: np.ndarray,
     ) -> np.ndarray:
-        """
-        Abstract method to make predictions based on prompts and input data.
+        """Abstract method to make predictions based on prompts and input data.
 
         Args:
             prompts (List[str]): List of prompts to use for prediction.
@@ -54,8 +54,7 @@ class BasePredictor:
 
 
 class DummyPredictor(BasePredictor):
-    """
-    A dummy predictor implementation for testing purposes.
+    """A dummy predictor implementation for testing purposes.
 
     This predictor generates random predictions from the list of possible classes.
 
@@ -66,7 +65,17 @@ class DummyPredictor(BasePredictor):
     Methods:
         predict: Generates random predictions for the given prompts and input data.
     """
+
     def __init__(self, model_id, classes, *args, **kwargs):
+        """Initialize the DummyPredictor.
+
+        Parameters
+        ----------
+        model_id : str
+            Model identifier string.
+        classes : list
+            List of possible class labels.
+        """
         self.model_id = "dummy"
         self.classes = classes
 
@@ -75,8 +84,7 @@ class DummyPredictor(BasePredictor):
         prompts: List[str],
         xs: np.ndarray,
     ) -> np.ndarray:
-        """
-        Generate random predictions for the given prompts and input data.
+        """Generate random predictions for the given prompts and input data.
 
         Args:
             prompts (List[str]): List of prompts (ignored in this implementation).
