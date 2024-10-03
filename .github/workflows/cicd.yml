@@ -1,0 +1,106 @@
+name: CICD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize]
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Run Tests, Pre-Commits, and Build Python package
+    uses: ./.github/workflows/ci.yml
+
+  check-version:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      version: ${{ steps.get_version.outputs.VERSION }}
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python and Poetry
+      uses: ./.github/actions/python-poetry
+      with:
+        cache: true
+
+    - name: Get version from pyproject.toml
+      id: get_version
+      run: |
+        echo ::set-output name=VERSION::$(poetry version -s)
+
+    - name: Get latest release version
+      id: get_latest_release
+      run: |
+        latest_release=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases/latest | jq -r .tag_name)
+        echo ::set-output name=LATEST_VERSION::${latest_release#v}
+
+    - name: Compare versions
+      run: |
+        current_version="${{ steps.get_version.outputs.VERSION }}"
+        latest_version="${{ steps.get_latest_release.outputs.LATEST_VERSION }}"
+        if [ "$(printf '%s\n' "$latest_version" "$current_version" | sort -V | tail -n1)" != "$current_version" ]; then
+          echo "Error: Current version ($current_version) is not higher than the latest release ($latest_version)"
+          exit 1
+        fi
+
+  create-release:
+    needs: check-version
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Create and push tag
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git tag -a v${{ needs.check-version.outputs.version }} -m "Release v${{ needs.check-version.outputs.version }}"
+        git push origin v${{ needs.check-version.outputs.version }}
+
+    - name: Create GitHub Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ needs.check-version.outputs.version }}
+        release_name: Release v${{ needs.check-version.outputs.version }}
+        draft: false
+        prerelease: false
+
+  publish-to-pypi:
+    needs: [build, check-version, create-release]
+    name: Publish Python package to PyPI
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python and Poetry
+      uses: ./.github/actions/python-poetry
+      with:
+        cache: true  # Enable caching if your custom action supports it
+
+    - name: Download wheel
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{ github.event.repository.name }}
+        path: dist/
+
+    - name: Publish to PyPI
+      env:
+        PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+      run: |
+        poetry config pypi-token.pypi $PYPI_TOKEN
+        poetry publish
