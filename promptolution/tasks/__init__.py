@@ -1,3 +1,4 @@
+"""Module for task-related functions and classes."""
 import json
 from pathlib import Path
 from typing import List, Literal
@@ -7,8 +8,7 @@ from promptolution.tasks.classification_tasks import ClassificationTask
 
 
 def get_tasks(config, split: Literal["dev", "test"] = "dev") -> List[BaseTask]:
-    """
-    Create and return a list of task instances based on the provided configuration.
+    """Create and return a list of task instances based on the provided configuration.
 
     This function supports creating multiple tasks, including a special 'dummy' task
     for testing purposes and classification tasks based on JSON descriptions.
