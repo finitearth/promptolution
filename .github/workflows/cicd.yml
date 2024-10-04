@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    types: [opened, synchronize]
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
@@ -33,13 +29,13 @@ jobs:
     - name: Get version from pyproject.toml
       id: get_version
       run: |
-        echo ::set-output name=VERSION::$(poetry version -s)
+        echo "VERSION=$(poetry version -s)" >> $GITHUB_OUTPUT
 
     - name: Get latest release version
       id: get_latest_release
       run: |
         latest_release=$(curl -s https://api.github.com/repos/${{ github.repository }}/releases/latest | jq -r .tag_name)
-        echo ::set-output name=LATEST_VERSION::${latest_release#v}
+        echo "LATEST_VERSION=${latest_release#v}" >> $GITHUB_OUTPUT
 
     - name: Compare versions
       run: |
