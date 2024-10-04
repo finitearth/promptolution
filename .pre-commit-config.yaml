@@ -3,13 +3,16 @@ repos:
     rev: 23.3.0  # Use the latest version
     hooks:
       - id: black
+    include: '^promptolution/'
 
   - repo: https://github.com/pycqa/flake8
     rev: 6.0.0  # Use the latest version
     hooks:
       - id: flake8
+    include: '^promptolution/'
 
   - repo: https://github.com/pre-commit/mirrors-isort
     rev: v5.10.1  # Use the latest version
     hooks:
       - id: isort
+    include: '^promptolution/'
