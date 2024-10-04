@@ -1,3 +1,5 @@
+"""Base module for tasks."""
+
 from abc import ABC, abstractmethod
 from typing import List
 
@@ -5,8 +7,7 @@ import numpy as np
 
 
 class BaseTask(ABC):
-    """
-    Abstract base class for tasks in the promptolution library.
+    """Abstract base class for tasks in the promptolution library.
 
     This class defines the interface that all concrete task implementations should follow.
 
@@ -14,13 +15,14 @@ class BaseTask(ABC):
         evaluate: An abstract method that should be implemented by subclasses
                   to evaluate prompts using a given predictor.
     """
+
     def __init__(self, *args, **kwargs):
+        """Initialize the BaseTask."""
         pass
 
     @abstractmethod
     def evaluate(self, prompts: List[str], predictor) -> np.ndarray:
-        """
-        Abstract method to evaluate prompts using a given predictor.
+        """Abstract method to evaluate prompts using a given predictor.
 
         Args:
             prompts (List[str]): List of prompts to evaluate.
@@ -36,8 +38,7 @@ class BaseTask(ABC):
 
 
 class DummyTask(BaseTask):
-    """
-    A dummy task implementation for testing purposes.
+    """A dummy task implementation for testing purposes.
 
     This task generates random evaluation scores for given prompts.
 
@@ -50,7 +51,9 @@ class DummyTask(BaseTask):
         ys (np.ndarray): Array of dummy labels.
         classes (List[str]): List of possible class labels.
     """
+
     def __init__(self):
+        """Initialize the DummyTask."""
         self.task_id = "dummy"
         self.dataset_json = None
         self.initial_population = ["Some", "initial", "prompts", "that", "will", "do", "the", "trick"]
@@ -60,8 +63,7 @@ class DummyTask(BaseTask):
         self.classes = ["negative", "positive"]
 
     def evaluate(self, prompts: List[str], predictor) -> np.ndarray:
-        """
-        Generate random evaluation scores for the given prompts.
+        """Generate random evaluation scores for the given prompts.
 
         Args:
             prompts (List[str]): List of prompts to evaluate.

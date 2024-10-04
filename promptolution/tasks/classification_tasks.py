@@ -1,3 +1,5 @@
+"""Module for classification tasks."""
+
 from pathlib import Path
 from typing import Dict, List, Literal, Optional
 
@@ -8,8 +10,7 @@ from promptolution.tasks.base_task import BaseTask
 
 
 class ClassificationTask(BaseTask):
-    """
-    A class representing a classification task in the promptolution library.
+    """A class representing a classification task in the promptolution library.
 
     This class handles the loading and management of classification datasets,
     as well as the evaluation of predictors on these datasets.
@@ -28,9 +29,9 @@ class ClassificationTask(BaseTask):
     Inherits from:
         BaseTask: The base class for tasks in the promptolution library.
     """
-    def __init__(self, task_id: str, dataset_json: Dict, seed: int = 42, split: Literal["dev", "test"] = "dev"): 
-        """
-        Initialize the ClassificationTask.
+
+    def __init__(self, task_id: str, dataset_json: Dict, seed: int = 42, split: Literal["dev", "test"] = "dev"):
+        """Initialize the ClassificationTask.
 
         Args:
             task_id (str): Unique identifier for the task.
@@ -50,11 +51,11 @@ class ClassificationTask(BaseTask):
         self.reset_seed(seed)
 
     def __str__(self):
+        """Convert task to string representation, returning the task id."""
         return self.task_id
 
     def _parse_task(self):
-        """
-        Parse the task data from the provided dataset JSON.
+        """Parse the task data from the provided dataset JSON.
 
         This method loads the task description, classes, initial prompts,
         and the dataset split (dev or test) into the class attributes.
@@ -87,9 +88,8 @@ class ClassificationTask(BaseTask):
 
     def evaluate(
         self, prompts: List[str], predictor: BasePredictor, n_samples: int = 20, subsample: bool = True
-    ) -> np.ndarray: 
-        """
-        Evaluate a set of prompts using a given predictor.
+    ) -> np.ndarray:
+        """Evaluate a set of prompts using a given predictor.
 
         Args:
             prompts (List[str]): List of prompts to evaluate.
@@ -118,6 +118,7 @@ class ClassificationTask(BaseTask):
         return np.mean(preds == ys_subsample, axis=1)
 
     def reset_seed(self, seed: int = None):
+        """Reset the random seed."""
         if seed is not None:
             self.seed = seed
         np.random.seed(self.seed)
