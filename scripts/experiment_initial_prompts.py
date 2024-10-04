@@ -1,10 +1,12 @@
-from configparser import ConfigParser
+"""Experiments for paper Towards Cost-Effective Prompt Tuning initial prompt evaluation."""
 from argparse import ArgumentParser
+from configparser import ConfigParser
+from logging import INFO, Logger
 from pathlib import Path
 from typing import List
-from logging import INFO, Logger
-import pandas as pd
+
 import numpy as np
+import pandas as pd
 
 from promptolution.config import Config
 from promptolution.predictors import get_predictor
@@ -22,10 +24,7 @@ def evaluate_prompts(
     n_samples: int,
     prompts: List[str],
 ) -> pd.DataFrame:
-    """
-    Evaluate the best prompts from a csv file
-    """
-
+    """Evaluate the best prompts from a csv file."""
     # create config for the experiment
     config = Config(
         task_name=task_name,
@@ -39,7 +38,7 @@ def evaluate_prompts(
 
     # evaluate the best prompt on the test set
     for prompt in prompts:
-        # check if the combination of task, downstream_llm, seed and prompt has already been evaluated and is a row in 
+        # check if the combination of task, downstream_llm, seed and prompt has already been evaluated and is a row in
         # the csv file
         if Path(f"logs/{experiment_name}/best_scores.csv").exists():
             df = pd.read_csv(f"logs/{experiment_name}/best_scores.csv")
@@ -74,6 +73,7 @@ def evaluate_prompts(
 
 
 def main():
+    """Run experiment."""
     # read experiments
     arg_parser = ArgumentParser()
     arg_parser.add_argument("-e", "--experiment", type=str, help="Experiment Config Filepath")
@@ -95,7 +95,6 @@ def main():
         logger.critical(f"Downstream LLM: {downstream_llm}")
 
         for task in tasks:
-
             # sample initial prompt (read txt from datasets/cls/task_name/prompts.txt)
             task_path = Path(f"data_sets/cls/{task}/prompts.txt")
             with open(task_path, "r", encoding="utf-8") as file:

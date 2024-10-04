@@ -1,12 +1,19 @@
 site_name: Promptolution Documentation
+site_url: https://finitearth.github.io/promptolution/
+repo_url: https://github.com/finitearth/promptolution/
+remote_branch: docs
+
 theme:
-  name: mkdocs
+  name: material
+  logo: img/logo.svg
   features:
     - navigation.tabs
     - navigation.sections
     - toc.integrate
+    - toc.follow
     - search.suggest
     - search.highlight
+    - search.share
     - content.tabs.link
     - content.code.annotation
     - content.code.copy
@@ -14,30 +21,31 @@ theme:
   palette:
     - scheme: default
       toggle:
-        icon: material/toggle-switch-off-outline 
+        icon: material/toggle-switch-off-outline
         name: Switch to dark mode
-      primary: teal
-      accent: purple 
-    - scheme: slate 
+      primary: custom
+      accent: purple
+    - scheme: slate
       toggle:
         icon: material/toggle-switch
-        name: Switch to light mode    
-      primary: teal
+        name: Switch to light mode
+      primary: custom
       accent: lime
+extra_css:
+  - stylesheets/extra.css
 
 plugins:
   - search
   - mkdocstrings:
-      default_handler: python
       handlers:
         python:
-          rendering:
+          options:
             show_source: true
-      watch:
-        - promptolution
+            show_submodules: true
 
 nav:
   - Home: index.md
+  - Release Notes: release-notes.md
   - API Reference:
     - LLMs: api/llms.md
     - Optimizers: api/optimizers.md
@@ -61,4 +69,4 @@ markdown_extensions:
   - attr_list
 
 copyright: |
-  &copy; 2024 <a href="https://github.com/yourusername"  target="_blank" rel="noopener">Tom Zehle, Timo Heiß, Moritz Schlager</a>
+  by Tom Zehle, Timo Heiß, Moritz Schlager

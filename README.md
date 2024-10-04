@@ -1,5 +1,5 @@
+![promptolution](https://github.com/user-attachments/assets/84c050bd-61a1-4f2e-bc4e-874d9b4a69af)
 # Promptolution
-
 Promptolution is a library that provides a modular and extensible framework for implementing prompt tuning experiments. It offers a user-friendly interface to assemble the core components for various prompt optimization tasks.
 
 In addition, this repository contains our experiments for the paper "Towards Cost-Effective Prompt Tuning: Evaluating the Effects of Model Size, Model Family and Task Descriptions in EvoPrompt".

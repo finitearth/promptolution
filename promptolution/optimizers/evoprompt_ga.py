@@ -1,3 +1,5 @@
+"""Module for EvoPromptGA optimizer."""
+
 from typing import List
 
 import numpy as np
@@ -6,8 +8,7 @@ from promptolution.optimizers.base_optimizer import BaseOptimizer
 
 
 class EvoPromptGA(BaseOptimizer):
-    """
-    EvoPromptGA: Genetic Algorithm-based Prompt Optimizer
+    """EvoPromptGA: Genetic Algorithm-based Prompt Optimizer.
 
     This class implements a genetic algorithm for optimizing prompts in large language models.
     It is adapted from the paper "Connecting Large Language Models with Evolutionary Algorithms
@@ -30,7 +31,9 @@ class EvoPromptGA(BaseOptimizer):
     Raises:
         AssertionError: If an invalid selection mode is provided.
     """
+
     def __init__(self, prompt_template, meta_llm, selection_mode="wheel", **args):
+        """Initialize the EvoPromptGA optimizer."""
         self.prompt_template = prompt_template
         self.meta_llm = meta_llm
         assert selection_mode in ["random", "wheel", "tour"], "Invalid selection mode."
@@ -38,8 +41,7 @@ class EvoPromptGA(BaseOptimizer):
         super().__init__(**args)
 
     def optimize(self, n_steps: int) -> List[str]:
-        """
-        Perform the optimization process for a specified number of steps.
+        """Perform the optimization process for a specified number of steps.
 
         This method iteratively improves the prompts using genetic algorithm techniques.
         It evaluates prompts, performs crossover to generate new prompts, and selects
@@ -70,8 +72,7 @@ class EvoPromptGA(BaseOptimizer):
         return self.prompts
 
     def _crossover(self, prompts, scores) -> str:
-        """
-        Perform crossover operation to generate new child prompts.
+        """Perform crossover operation to generate new child prompts.
 
         This method selects parent prompts based on the chosen selection mode,
         creates meta-prompts using the prompt template, and generates new child
