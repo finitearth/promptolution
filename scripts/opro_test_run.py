@@ -1,26 +1,20 @@
 """Test run for the Opro optimizer."""
 
-from configparser import ConfigParser
 from logging import Logger
 
 from promptolution.callbacks import LoggerCallback
 from promptolution.llms import get_llm
 from promptolution.optimizers import Opro
 from promptolution.predictors import get_predictor
-from promptolution.tasks import get_tasks
+from promptolution.tasks import get_task
 
 logger = Logger(__name__)
 
 
 def main():
     """Run a test run for the Opro optimizer."""
-    config = ConfigParser()
-    config.task_name = "agnews"
-    config.ds_path = "data_sets/cls/agnews"
-    config.random_seed = 42
-
     llm = get_llm("meta-llama/Meta-Llama-3-8B-Instruct")
-    task = get_tasks(config)[0]
+    task = get_task("data_sets/agnews", split="test", random_seed=42, task_name="agnews")
     predictor = get_predictor("meta-llama/Meta-Llama-3-8B-Instruct", classes=task.classes)
 
     optimizer = Opro(

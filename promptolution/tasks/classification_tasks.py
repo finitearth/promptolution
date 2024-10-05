@@ -30,7 +30,13 @@ class ClassificationTask(BaseTask):
         BaseTask: The base class for tasks in the promptolution library.
     """
 
-    def __init__(self, task_id: str, dataset_json: Dict, seed: int = 42, split: Literal["dev", "test"] = "dev"):
+    def __init__(
+        self,
+        dataset_json: Dict,
+        task_id: str = "Classification Task",
+        seed: int = 42,
+        split: Literal["dev", "test"] = "dev",
+    ):
         """Initialize the ClassificationTask.
 
         Args:

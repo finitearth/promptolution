@@ -12,7 +12,7 @@ from promptolution.config import Config
 from promptolution.llms import get_llm
 from promptolution.optimizers import get_optimizer
 from promptolution.predictors import get_predictor
-from promptolution.tasks import get_tasks
+from promptolution.tasks import get_task
 
 logger = Logger(__name__)
 logger.setLevel(INFO)
@@ -40,7 +40,7 @@ def main():
                     for random_seed in [42, 47, 69]:
                         config = Config(
                             task_name=task_name,
-                            ds_path=f"data_sets/cls/{task_name}",
+                            ds_path=f"data_sets/{task_name}",
                             n_steps=int(all_configs["task"]["steps"]),
                             optimizer=optimizer_name,
                             meta_llm=meta_llm,
@@ -65,7 +65,8 @@ def main():
 
 def run_experiment(config: Config):
     """Run a single experiment."""
-    task = get_tasks(config)[0]
+    task = get_task(config.ds_path, split="test", random_seed=config.random_seed, task_name=config.task_name)
+
     init_populations = task.initial_population
     # subsample using random seed
     np.random.seed(config.random_seed)
@@ -104,7 +105,7 @@ def run_experiment(config: Config):
     best_prompt, best_score = best_prompt_callback.get_best_prompt()
     logger.critical(f"Final prompt: {best_prompt}, with score: {best_score}")
 
-    test_task = get_tasks(config, split="test")[0]
+    test_task = get_task(config.ds_path, split="test", random_seed=config.random_seed, task_name=config.task_name)
     test_predictor = get_predictor(config.downstream_llm, classes=test_task.classes)
     test_score = test_task.evaluate(best_prompt, test_predictor, subsample=False)
 
