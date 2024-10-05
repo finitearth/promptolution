@@ -1,82 +1,89 @@
 """Configuration class for the promptolution library."""
-
-from configparser import ConfigParser
+import configparser
 from dataclasses import dataclass
+from pathlib import Path
+from typing import Any, Dict, Optional
 
 
 @dataclass
 class Config:
-    """Configuration class for the promptolution library.
-
-    This class handles loading and parsing of configuration settings,
-    either from a config file or from keyword arguments.
-
-    Attributes:
-        task_name (str): Name of the task.
-        ds_path (str): Path to the dataset.
-        n_steps (int): Number of optimization steps.
-        optimizer (str): Name of the optimizer to use.
-        meta_prompt_path (str): Path to the meta prompt file.
-        meta_llms (str): Name of the meta language model.
-        downstream_llm (str): Name of the downstream language model.
-        evaluation_llm (str): Name of the evaluation language model.
-        init_pop_size (int): Initial population size. Defaults to 10.
-        logging_dir (str): Directory for logging. Defaults to "logs/run.csv".
-        experiment_name (str): Name of the experiment. Defaults to "experiment".
-        include_task_desc (bool): Whether to include task description. Defaults to False.
-        random_seed (int): Random seed for reproducibility. Defaults to 42.
-    """
+    """Configuration class for the promptolution library."""
 
     task_name: str
-    ds_path: str
+    ds_path: Path
     n_steps: int
     optimizer: str
-    meta_prompt_path: str
-    meta_llms: str
+    meta_prompt_path: Path
+    meta_llm: str
     downstream_llm: str
     evaluation_llm: str
     init_pop_size: int = 10
-    logging_dir: str = "logs/run.csv"
+    logging_dir: Path = Path("logs/run.csv")
     experiment_name: str = "experiment"
-    include_task_desc: bool = False
+    include_task_desc: bool = True
+    donor_random: bool = False
     random_seed: int = 42
+    selection_mode: Optional[str] = None
+    meta_bs: Optional[int] = None
+    downstream_bs: Optional[int] = None
 
-    def __init__(self, config_path: str = None, **kwargs):
-        """Initialize the Config object."""
-        if config_path:
-            self.config_path = config_path
-            self.config = ConfigParser()
-            self.config.read(config_path)
-            self._parse_config()
-        else:
-            for key, value in kwargs.items():
-                setattr(self, key, value)
+    def __post_init__(self):
+        """Validate the configuration after initialization."""
+        self._validate_config()
 
-    def _parse_config(self):
-        """Parse the configuration settings from the config file."""
-        self.task_name = self.config["task"]["task_name"]
-        self.ds_path = self.config["task"]["ds_path"]
-        self.n_steps = int(self.config["task"]["steps"])
-        self.random_seed = int(self.config["task"]["random_seed"])
-        self.optimizer = self.config["optimizer"]["name"]
-        self.meta_prompt_path = self.config["optimizer"]["meta_prompt_path"]
-        self.meta_llm = self.config["meta_llm"]["name"]
-        self.downstream_llm = self.config["downstream_llm"]["name"]
-        self.evaluation_llm = self.config["evaluator_llm"]["name"]
-        self.init_pop_size = int(self.config["optimizer"]["init_pop_size"])
-        self.logging_dir = self.config["logging"]["dir"]
-        self.experiment_name = self.config["experiment"]["name"]
+    @classmethod
+    def from_dict(cls, config_dict: Dict[str, Any]) -> "Config":
+        """Create a Config instance from a dictionary."""
+        return cls(**cls._process_config_dict(config_dict))
 
-        if "include_task_desc" in self.config["task"]:
-            self.include_task_desc = self.config["task"]["include_task_desc"] == "True"
+    @classmethod
+    def from_file(cls, config_path: Path) -> "Config":
+        """Create a Config instance from a configuration file."""
+        if not config_path.exists():
+            raise FileNotFoundError(f"Configuration file not found: {config_path}")
 
-        if self.optimizer == "evopromptga":
-            self.selection_mode = self.config["optimizer"]["selection_mode"]
-        elif self.optimizer == "evopromptde":
-            self.selection_mode = self.config["optimizer"]["donor_random"]
+        config = configparser.ConfigParser()
+        config.read(config_path)
 
-        if "local" in self.meta_llm:
-            self.meta_bs = int(self.config["meta_llm"]["batch_size"])
+        config_dict = {key: value for section in config.sections() for key, value in config[section].items()}
 
-        if "local" in self.downstream_llm:
-            self.downstream_bs = int(self.config["downstream_llm"]["batch_size"])
+        return cls.from_dict(config_dict)
+
+    @classmethod
+    def _process_config_dict(cls, config_dict: Dict[str, Any]) -> Dict[str, Any]:
+        """Process and validate the configuration dictionary."""
+        processed_dict = {}
+        for field in cls.__dataclass_fields__.values():
+            if field.name in config_dict:
+                value = config_dict[field.name]
+                if field.type == Path:
+                    processed_dict[field.name] = Path(value)
+                elif field.type == bool:
+                    processed_dict[field.name] = str(value).lower() == "true"
+                elif field.type == int:
+                    processed_dict[field.name] = int(value)
+                else:
+                    processed_dict[field.name] = value
+            elif field.default == field.default_factory:  # Check if field is required
+                raise ValueError(f"Required configuration parameter '{field.name}' is missing")
+
+        unknown_args = set(config_dict.keys()) - set(cls.__dataclass_fields__.keys())
+        if unknown_args:
+            print(f"Warning: Unexpected configuration arguments: {', '.join(unknown_args)}")
+
+        return processed_dict
+
+    def _validate_config(self):
+        """Validate the configuration settings."""
+        if self.optimizer == "evopromptga" and not self.selection_mode:
+            raise ValueError("'selection_mode' must be specified for 'evopromptga' optimizer")
+        if self.optimizer == "evopromptde" and self.donor_random is None:
+            raise ValueError("'donor_random' must be specified for 'evopromptde' optimizer")
+        if "local" in self.meta_llm and self.meta_bs is None:
+            raise ValueError("'meta_bs' must be specified for local meta_llm")
+        if "local" in self.downstream_llm and self.downstream_bs is None:
+            raise ValueError("'downstream_bs' must be specified for local downstream_llm")
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert the Config instance to a dictionary."""
+        return {field.name: getattr(self, field.name) for field in self.__dataclass_fields__.values()}

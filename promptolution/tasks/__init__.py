@@ -7,21 +7,17 @@ from promptolution.tasks.base_task import BaseTask, DummyTask
 from promptolution.tasks.classification_tasks import ClassificationTask
 
 
-def get_task(
-    ds_path: str, split: Literal["dev", "test"] = "dev", random_seed: int = 42, task_name: str = "Classification Task"
-) -> BaseTask:
+def get_task(config, split: Literal["dev", "test"] = "dev") -> BaseTask:
     """Create and return the task instance based on the provided configuration.
 
     This function supports creating multiple tasks, including a special 'dummy' task
     for testing purposes and classification tasks based on JSON descriptions.
 
     Args:
-        config: Configuration object containing task settings.
-                Expected attributes:
-                - task_name (str): Comma-separated list of task names.
-                - ds_path (str): Path to the dataset directory.
-                - random_seed (int): Seed for random number generation.
+        ds_path (str): Path to the dataset directory.
+        random_seed (int): Seed for random number generation.
         split (Literal["dev", "test"], optional): Dataset split to use. Defaults to "dev".
+        task_name (str): Comma-separated list of task names.
 
     Returns:
         BaseTask: A list of instantiated task objects.
@@ -35,11 +31,10 @@ def get_task(
         - For all other tasks, a ClassificationTask instance is created.
         - The task description is loaded from a 'description.json' file in the dataset path.
     """
-    task_description_path = Path(ds_path) / Path("description.json")
-    task_description = json.loads(task_description_path.read_text())
-    if task_name == "dummy":
+    if config.task_name == "dummy":
         task = DummyTask()
         return task
-    task = ClassificationTask(task_name, task_description, split=split, seed=random_seed)
+    task_description_path = Path(config.ds_path)
+    task = ClassificationTask(task_description_path, config.task_name, split=split, seed=config.random_seed)
 
     return task

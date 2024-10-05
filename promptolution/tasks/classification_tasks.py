@@ -1,5 +1,6 @@
 """Module for classification tasks."""
 
+import json
 from pathlib import Path
 from typing import Dict, List, Literal, Optional
 
@@ -17,6 +18,7 @@ class ClassificationTask(BaseTask):
 
     Attributes:
         task_id (str): Unique identifier for the task.
+        path (Path): Path to the dataset description JSON file, and initial prompts.
         dataset_json (Dict): Dictionary containing dataset information.
         description (Optional[str]): Description of the task.
         initial_population (Optional[List[str]]): Initial set of prompts.
@@ -32,7 +34,7 @@ class ClassificationTask(BaseTask):
 
     def __init__(
         self,
-        dataset_json: Dict,
+        dataset_path: Path,
         task_id: str = "Classification Task",
         seed: int = 42,
         split: Literal["dev", "test"] = "dev",
@@ -41,12 +43,13 @@ class ClassificationTask(BaseTask):
 
         Args:
             task_id (str): Unique identifier for the task.
-            dataset_json (Dict): Dictionary containing dataset information.
+            dataset_path (str): Path to the dataset description JSON file.
             seed (int, optional): Random seed for reproducibility. Defaults to 42.
             split (Literal["dev", "test"], optional): Dataset split to use. Defaults to "dev".
         """
         self.task_id: str = task_id
-        self.dataset_json: Dict = dataset_json
+        self.path: Path = dataset_path
+        self.dataset_json: Dict = json.loads((dataset_path / Path("description.json")).read_text())
         self.description: Optional[str] = None
         self.initial_population: Optional[List[str]] = None
         self.xs: Optional[np.ndarray] = np.array([])
@@ -66,18 +69,17 @@ class ClassificationTask(BaseTask):
         This method loads the task description, classes, initial prompts,
         and the dataset split (dev or test) into the class attributes.
         """
-        task_path = Path(self.dataset_json["path"])
         self.description = self.dataset_json["description"]
         self.classes = self.dataset_json["classes"]
 
-        with open(task_path / Path(self.dataset_json["init_prompts"]), "r", encoding="utf-8") as file:
+        with open(self.path / Path(self.dataset_json["init_prompts"]), "r", encoding="utf-8") as file:
             lines = file.readlines()
         self.initial_population = [line.strip() for line in lines]
 
         seed = Path(self.dataset_json["seed"])
         split = Path(self.split + ".txt")
 
-        with open(task_path / seed / split, "r", encoding="utf-8") as file:
+        with open(self.path / seed / split, "r", encoding="utf-8") as file:
             lines = file.readlines()
         lines = [line.strip() for line in lines]
 
