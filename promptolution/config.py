@@ -13,7 +13,6 @@ class Config:
     ds_path: Path
     n_steps: int
     optimizer: str
-    meta_prompt_path: Path
     meta_llm: str
     downstream_llm: str
     evaluation_llm: str
@@ -26,6 +25,7 @@ class Config:
     selection_mode: Optional[str] = None
     meta_bs: Optional[int] = None
     downstream_bs: Optional[int] = None
+    api_token: Optional[str] = None
 
     def __post_init__(self):
         """Validate the configuration after initialization."""
@@ -83,6 +83,8 @@ class Config:
             raise ValueError("'meta_bs' must be specified for local meta_llm")
         if "local" in self.downstream_llm and self.downstream_bs is None:
             raise ValueError("'downstream_bs' must be specified for local downstream_llm")
+        if self.api_token is None:
+            print("Warning: No API token provided. Using default tokens from token files.")
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert the Config instance to a dictionary."""
