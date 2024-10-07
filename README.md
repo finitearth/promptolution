@@ -36,9 +36,9 @@ Create API Keys for the models you want to use:
 ## Optimization Algorithms to choose from
 | **Name** | **# init population** | **Exploration** | **Costs** | **Convergence Speed** | **Parallelizable** | **Utilizes Failure Cases** |
 |:--------:|:---------------------:|:---------------:|:---------:|:---------------------:|:------------------:|:---------------------:|
-| EvoPrompt DE | 8-12 | 👍 | 💲💲 | ⚡ | ✅ | ❌ |
+| EvoPrompt DE | 8-12 | 👍 | 💲 | ⚡ | ✅ | ❌ |
 | EvoPrompt GA | 8-12 | 👍 | 💲 | ⚡ | ✅ | ❌ |
-| OPro | 0 | 👎 | 💲💲💲 | 🐢 | ❌ | ❌ |
+| OPro | 0 | 👎 | 💲💲 | 🐢 | ❌ | ❌ |
 
 ## Core Components
 
