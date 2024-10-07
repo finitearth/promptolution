@@ -25,14 +25,13 @@ class Opro(BaseOptimizer):
         optimize: Optimize the Meta-LLM by providing it with a new prompt.
     """
 
-    def __init__(self, llm: BaseLLM, n_samples: int = 2, template_path: str = "templates/opro_template.txt", **args):
+    def __init__(self, llm: BaseLLM, n_samples: int = 2, prompt_template: str = None, **args):
         """Initialize the Opro optimizer."""
         self.llm = llm
 
         assert n_samples > 0, "n_samples must be greater than 0."
         self.n_samples = n_samples
-        with open(template_path) as f:
-            self.meta_prompt = "".join(f.readlines())
+        self.meta_prompt = prompt_template
 
         super().__init__(**args)
         self.meta_prompt = self.meta_prompt.replace("<task_description>", self.task.description)

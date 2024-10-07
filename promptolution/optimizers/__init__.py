@@ -1,5 +1,13 @@
 """Module for prompt optimizers."""
 
+from promptolution.templates import (
+    EVOPROMPT_DE_TEMPLATE,
+    EVOPROMPT_DE_TEMPLATE_TD,
+    EVOPROMPT_GA_TEMPLATE,
+    EVOPROMPT_GA_TEMPLATE_TD,
+    OPRO_TEMPLATE,
+)
+
 from .base_optimizer import DummyOptimizer
 from .evoprompt_de import EvoPromptDE
 from .evoprompt_ga import EvoPromptGA
@@ -29,9 +37,12 @@ def get_optimizer(config, *args, **kwargs):
     if config.optimizer == "dummy":
         return DummyOptimizer(*args, **kwargs)
     if config.optimizer == "evopromptde":
-        return EvoPromptDE(donor_random=config.donor_random, *args, **kwargs)
+        prompt_template = EVOPROMPT_DE_TEMPLATE_TD if config.include_task_desc else EVOPROMPT_DE_TEMPLATE
+        return EvoPromptDE(donor_random=config.donor_random, prompt_template=prompt_template, *args, **kwargs)
     if config.optimizer == "evopromptga":
-        return EvoPromptGA(selection_mode=config.selection_mode, *args, **kwargs)
+        prompt_template = EVOPROMPT_GA_TEMPLATE_TD if config.include_task_desc else EVOPROMPT_GA_TEMPLATE
+        return EvoPromptGA(selection_mode=config.selection_mode, prompt_template=prompt_template, *args, **kwargs)
     if config.optimizer == "opro":
-        return Opro(*args, **kwargs)
+        prompt_template = OPRO_TEMPLATE
+        return Opro(prompt_template=prompt_template, *args, **kwargs)
     raise ValueError(f"Unknown optimizer: {config.optimizer}")

@@ -4,6 +4,7 @@ from typing import List
 
 import numpy as np
 
+from promptolution.llms.base_llm import BaseLLM
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 
 
@@ -32,7 +33,7 @@ class EvoPromptGA(BaseOptimizer):
         AssertionError: If an invalid selection mode is provided.
     """
 
-    def __init__(self, prompt_template, meta_llm, selection_mode="wheel", **args):
+    def __init__(self, prompt_template: str = None, meta_llm: BaseLLM = None, selection_mode: str = "wheel", **args):
         """Initialize the EvoPromptGA optimizer."""
         self.prompt_template = prompt_template
         self.meta_llm = meta_llm
