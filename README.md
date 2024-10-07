@@ -33,12 +33,12 @@ Create API Keys for the models you want to use:
 - Anthropic: store token in anthropictoken.txt
 - DeepInfra (for Llama): store token in deepinfratoken.txt
 
-## Optimization Algorithms to chose from
-| **Name**     | **# init population** | **Exploration**|
-|--------------|----------------------------|----|
-| EvoPrompt DE | 8-12 | 👍🏻|
-| EvoPrompt GA | 8-12 |👍🏻|
-| OPro         | 0 | 👎🏻|
+## Optimization Algorithms to choose from
+| **Name** | **# init population** | **Exploration** | **Costs** | **Convergence Speed** | **Parallelizable** | **Utilizes Failure Cases** |
+|:--------:|:---------------------:|:---------------:|:---------:|:---------------------:|:------------------:|:---------------------:|
+| EvoPrompt DE | 8-12 | 👍 | 💲💲 | ⚡ | ✅ | ❌ |
+| EvoPrompt GA | 8-12 | 👍 | 💲 | ⚡ | ✅ | ❌ |
+| OPro | 0 | 👎 | 💲💲💲 | 🐢 | ❌ | ❌ |
 
 ## Core Components
 
