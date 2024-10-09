@@ -50,7 +50,6 @@ def main():
                             optimizer=optimizer_name,
                             meta_llm=meta_llm,
                             downstream_llm=downstream_llm,
-                            meta_prompt_path=meta_prompt_path,
                             init_pop_size=int(all_configs["optimizer"]["init_population"]),
                             logging_dir=(
                                 f"logs/{experiment_name}/"
@@ -61,7 +60,7 @@ def main():
                             evaluation_llm=evaluator_llm,
                             selection_mode="random",
                             donor_random=False,
-                            prompt_template=prompt_template,
+                            meta_prompt=prompt_template,
                         )
                         # skip already performed experiments
                         if Path(config.logging_dir).exists():
@@ -71,7 +70,7 @@ def main():
 
 def run_experiment(config: Config):
     """Run a single experiment."""
-    task = get_task(config.ds_path, split="test", random_seed=config.random_seed, task_name=config.task_name)
+    task = get_task(config, split="test")
 
     init_populations = task.initial_population
     # subsample using random seed
@@ -87,7 +86,7 @@ def run_experiment(config: Config):
         best_prompt_callback,
         ProgressBarCallback(config.n_steps),
     ]
-    prompt_template = open(config.meta_prompt_path, "r").read()
+    prompt_template = config.meta_prompt
     prompt_template = prompt_template.replace("<task_desc>", task.description)
 
     if "local" in config.meta_llm:
@@ -101,7 +100,6 @@ def run_experiment(config: Config):
         task=task,
         initial_prompts=init_population,
         callbacks=callbacks,
-        prompt_template=prompt_template,
         predictor=predictor,
     )
 

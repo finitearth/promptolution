@@ -6,6 +6,7 @@ import numpy as np
 
 from promptolution.llms.base_llm import BaseLLM
 from promptolution.optimizers.base_optimizer import BaseOptimizer
+from promptolution.templates import OPRO_TEMPLATE
 
 
 class Opro(BaseOptimizer):
@@ -31,7 +32,8 @@ class Opro(BaseOptimizer):
 
         assert n_samples > 0, "n_samples must be greater than 0."
         self.n_samples = n_samples
-        self.meta_prompt = prompt_template
+
+        self.meta_prompt = prompt_template if prompt_template else OPRO_TEMPLATE
 
         super().__init__(**args)
         self.meta_prompt = self.meta_prompt.replace("<task_description>", self.task.description)

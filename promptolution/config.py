@@ -26,6 +26,7 @@ class Config:
     meta_bs: Optional[int] = None
     downstream_bs: Optional[int] = None
     api_token: Optional[str] = None
+    meta_prompt: Optional[str] = None
 
     def __post_init__(self):
         """Validate the configuration after initialization."""

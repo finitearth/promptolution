@@ -38,11 +38,14 @@ def get_optimizer(config, *args, **kwargs):
         return DummyOptimizer(*args, **kwargs)
     if config.optimizer == "evopromptde":
         prompt_template = EVOPROMPT_DE_TEMPLATE_TD if config.include_task_desc else EVOPROMPT_DE_TEMPLATE
+        prompt_template = config.meta_prompt if config.meta_prompt else prompt_template
         return EvoPromptDE(donor_random=config.donor_random, prompt_template=prompt_template, *args, **kwargs)
     if config.optimizer == "evopromptga":
         prompt_template = EVOPROMPT_GA_TEMPLATE_TD if config.include_task_desc else EVOPROMPT_GA_TEMPLATE
+        prompt_template = config.meta_prompt if config.meta_prompt else prompt_template
         return EvoPromptGA(selection_mode=config.selection_mode, prompt_template=prompt_template, *args, **kwargs)
     if config.optimizer == "opro":
         prompt_template = OPRO_TEMPLATE
+        prompt_template = config.meta_prompt if config.meta_prompt else prompt_template
         return Opro(prompt_template=prompt_template, *args, **kwargs)
     raise ValueError(f"Unknown optimizer: {config.optimizer}")

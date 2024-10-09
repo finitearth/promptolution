@@ -14,12 +14,12 @@ logger = Logger(__name__)
 def main():
     """Main function to run the experiment."""
     config = ConfigParser()
-    config.task_name = "subj"
-    config.ds_path = "data_sets/subj"
+    config.task_name = "agnews"
+    config.ds_path = "data_sets/agnews"
     config.random_seed = 42
 
     llm = get_llm("meta-llama/Meta-Llama-3-8B-Instruct")
-    task = get_task(config.ds_path, split="test", random_seed=config.random_seed, task_name=config.task_name)
+    task = get_task(config, split="test")
 
     predictor = get_predictor("meta-llama/Meta-Llama-3-8B-Instruct", classes=task.classes)
 

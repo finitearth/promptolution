@@ -36,7 +36,6 @@ def main():
         predictor=predictor,
         callbacks=[LoggerCallback(logger)],
         n_samples=5,
-        template_path=config.meta_prompt_path,
     )
     prompts = optimizer.optimize(n_steps=10)
 

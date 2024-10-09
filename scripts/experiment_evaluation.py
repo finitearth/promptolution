@@ -53,7 +53,7 @@ def evaluate_best_prompts(
     )
 
     # create a test task to retrieve the samples to evaluate
-    test_task = get_task(config.ds_path, split="test", random_seed=config.random_seed, task_name=config.task_name)
+    test_task = get_task(config, split="test")
     test_predictor = get_predictor(downstream_llm, classes=test_task.classes)
 
     # evaluate the best prompt on the test set
