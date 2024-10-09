@@ -1,5 +1,5 @@
 {
-    "path": "data_sets/cls/agnews",
+    "path": "data_sets/agnews",
     "seed": "seed5",
     "init_prompts": "prompts.txt",
     "description": "The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories. The class mentioned first in the response of the LLM will be the prediction.",

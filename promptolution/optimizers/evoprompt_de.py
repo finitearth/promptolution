@@ -4,6 +4,7 @@ from typing import List
 
 import numpy as np
 
+from promptolution.llms.base_llm import BaseLLM
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 
 
@@ -29,10 +30,11 @@ class EvoPromptDE(BaseOptimizer):
         **args: Additional arguments passed to the BaseOptimizer.
     """
 
-    def __init__(self, prompt_template, meta_llm, donor_random=False, **args):
+    def __init__(self, prompt_template: str = None, meta_llm: BaseLLM = None, donor_random: bool = False, **args):
         """Initialize the EvoPromptDE optimizer."""
         self.prompt_template = prompt_template
         self.donor_random = donor_random
+        assert meta_llm is not None, "A meta language model must be provided."
         self.meta_llm = meta_llm
         super().__init__(**args)
 

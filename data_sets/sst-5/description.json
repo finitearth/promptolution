@@ -1,5 +1,5 @@
 {
-    "path": "data_sets/cls/sst-5",
+    "path": "data_sets/sst-5",
     "seed": "seed5",
     "init_prompts": "prompts.txt",
     "description": "The dataset consists of movie reviews with five levels of sentiment labels: terrible, bad, neutral, okay, good, and great. The task is to classify each movie review into one of these five sentiment categories. The class mentioned first in the response of the LLM will be the prediction.",

@@ -1,5 +1,5 @@
 {
-    "path": "data_sets/cls/mr",
+    "path": "data_sets/mr",
     "seed": "seed5",
     "init_prompts": "prompts.txt",
     "description": "The dataset includes movie reviews with binary sentiment annotations. The task is to classify the sentiment of each review as either positive or negative. The class mentioned first in the response of the LLM will be the prediction.",
