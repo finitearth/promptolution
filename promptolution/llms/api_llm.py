@@ -8,11 +8,9 @@ from typing import List
 import openai
 import requests
 from langchain_anthropic import ChatAnthropic
-from langchain_community.chat_models.deepinfra import ChatDeepInfraException
+from langchain_community.chat_models.deepinfra import ChatDeepInfra, ChatDeepInfraException
 from langchain_core.messages import HumanMessage
 from langchain_openai import ChatOpenAI
-
-from promptolution.llms.deepinfra import ChatDeepInfra
 
 logger = Logger(__name__)
 logger.setLevel(INFO)
