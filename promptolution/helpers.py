@@ -62,13 +62,11 @@ def run_evaluation(config: Config, prompts: List[str]):
     """
     task = get_task(config, split="test")
 
-    token = open("../deepinfratoken.txt", "r").read()
-    llm = get_llm(config.evaluation_llm, token=token)
-
+    llm = get_llm(config.evaluation_llm, token=config.api_token)
     predictor = Classificator(llm, classes=task.classes)
 
     scores = task.evaluate(prompts, predictor)
-
     df = pd.DataFrame(dict(prompt=prompts, score=scores))
+    df = df.sort_values("score", ascending=False)
 
     return df
