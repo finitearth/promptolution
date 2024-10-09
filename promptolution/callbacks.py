@@ -17,16 +17,20 @@ class Callback:
         """
         pass
 
-    def on_epoch_end(self, epoch):
+    def on_epoch_end(self, optimizer):
         """Called at the end of each optimization epoch.
 
         Args:
-        epoch: The current epoch number.
+        optimizer: The optimizer object that called the callback.
         """
         pass
 
-    def on_train_end(self):
-        """Called at the end of the entire optimization process."""
+    def on_train_end(self, optimizer):
+        """Called at the end of the entire optimization process.
+
+        Args:
+        optimizer: The optimizer object that called the callback.
+        """
         pass
 
 
@@ -53,19 +57,21 @@ class LoggerCallback(Callback):
             self.logger.critical(f"*** Prompt {i}: Score: {score}")
             self.logger.critical(f"{prompt}")
 
-    def on_epoch_end(self, epoch, logs=None):
+    def on_epoch_end(self, epoch, optimizer, logs=None):
         """Log information about the current epoch.
 
         Args:
         epoch: The current epoch number.
+        optimizer: The optimizer object that called the callback.
         logs: Additional information to log.
         """
         self.logger.critical(f"Epoch {epoch} - {logs}")
 
-    def on_train_end(self, logs=None):
+    def on_train_end(self, optimizer, logs=None):
         """Log information at the end of training.
 
         Args:
+        optimizer: The optimizer object that called the callback.
         logs: Additional information to log.
         """
         self.logger.critical(f"Training ended - {logs}")
@@ -109,8 +115,12 @@ class CSVCallback(Callback):
         )
         df.to_csv(self.path, mode="a", header=False, index=False)
 
-    def on_train_end(self):
-        """Called at the end of training."""
+    def on_train_end(self, optimizer):
+        """Called at the end of training.
+
+        Args:
+        optimizer: The optimizer object that called the callback.
+        """
         pass
 
 
@@ -173,6 +183,10 @@ class ProgressBarCallback(Callback):
         """
         self.pbar.update(1)
 
-    def on_train_end(self):
-        """Close the progress bar at the end of training."""
+    def on_train_end(self, optimizer):
+        """Close the progress bar at the end of training.
+
+        Args:
+        optimizer: The optimizer object that called the callback.
+        """
         self.pbar.close()
