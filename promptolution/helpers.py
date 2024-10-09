@@ -1,9 +1,11 @@
 """Helper functions for the usage of the libary."""
+from logging import Logger
 from typing import List
 
 import numpy as np
 import pandas as pd
 
+from promptolution.callbacks import LoggerCallback, ProgressBarCallback
 from promptolution.config import Config
 from promptolution.llms import get_llm
 from promptolution.optimizers import get_optimizer
@@ -43,7 +45,14 @@ def run_optimization(config: Config):
     else:
         init_pop = task.initial_population
 
-    optimizer = get_optimizer(config, meta_llm=llm, initial_prompts=init_pop, task=task, predictor=predictor)
+    optimizer = get_optimizer(
+        config,
+        meta_llm=llm,
+        initial_prompts=init_pop,
+        task=task,
+        predictor=predictor,
+        callbacks=[LoggerCallback(Logger("__main__")), ProgressBarCallback(config.n_steps)],
+    )
 
     prompts = optimizer.optimize(n_steps=config.n_steps)
 

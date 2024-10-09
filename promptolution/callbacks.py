@@ -57,16 +57,6 @@ class LoggerCallback(Callback):
             self.logger.critical(f"*** Prompt {i}: Score: {score}")
             self.logger.critical(f"{prompt}")
 
-    def on_epoch_end(self, epoch, optimizer, logs=None):
-        """Log information about the current epoch.
-
-        Args:
-        epoch: The current epoch number.
-        optimizer: The optimizer object that called the callback.
-        logs: Additional information to log.
-        """
-        self.logger.critical(f"Epoch {epoch} - {logs}")
-
     def on_train_end(self, optimizer, logs=None):
         """Log information at the end of training.
 

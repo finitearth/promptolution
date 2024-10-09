@@ -26,9 +26,9 @@ class Opro(BaseOptimizer):
         optimize: Optimize the Meta-LLM by providing it with a new prompt.
     """
 
-    def __init__(self, llm: BaseLLM, n_samples: int = 2, prompt_template: str = None, **args):
+    def __init__(self, meta_llm: BaseLLM, n_samples: int = 2, prompt_template: str = None, **args):
         """Initialize the Opro optimizer."""
-        self.llm = llm
+        self.meta_llm = meta_llm
 
         assert n_samples > 0, "n_samples must be greater than 0."
         self.n_samples = n_samples
@@ -76,7 +76,7 @@ class Opro(BaseOptimizer):
                 "<examples>", self._sample_examples()
             )
 
-            prompt = self.llm.get_response([meta_prompt])[0]
+            prompt = self.meta_llm.get_response([meta_prompt])[0]
             prompt = prompt.split("<prompt>")[-1].split("</prompt>")[0].strip()
             score = self.task.evaluate(prompt, self.predictor)
 

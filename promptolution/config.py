@@ -22,7 +22,7 @@ class Config:
     include_task_desc: bool = True
     donor_random: bool = False
     random_seed: int = 42
-    selection_mode: Optional[str] = None
+    selection_mode: Optional[str] = "random"
     meta_bs: Optional[int] = None
     downstream_bs: Optional[int] = None
     api_token: Optional[str] = None
@@ -76,10 +76,6 @@ class Config:
 
     def _validate_config(self):
         """Validate the configuration settings."""
-        if self.optimizer == "evopromptga" and not self.selection_mode:
-            raise ValueError("'selection_mode' must be specified for 'evopromptga' optimizer")
-        if self.optimizer == "evopromptde" and self.donor_random is None:
-            raise ValueError("'donor_random' must be specified for 'evopromptde' optimizer")
         if "local" in self.meta_llm and self.meta_bs is None:
             raise ValueError("'meta_bs' must be specified for local meta_llm")
         if "local" in self.downstream_llm and self.downstream_bs is None:
