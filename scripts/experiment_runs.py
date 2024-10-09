@@ -13,6 +13,7 @@ from promptolution.llms import get_llm
 from promptolution.optimizers import get_optimizer
 from promptolution.predictors import get_predictor
 from promptolution.tasks import get_task
+from promptolution.templates import EVOPROMPT_DE_TEMPLATE, EVOPROMPT_GA_TEMPLATE, EVOPROMPT_DE_TEMPLATE_TD, EVOPROMPT_GA_TEMPLATE_TD
 
 logger = Logger(__name__)
 logger.setLevel(INFO)
@@ -38,6 +39,10 @@ def main():
             for evaluator_llm, meta_llm in zip(evaluator_llms, meta_llms):
                 for downstream_llm in downstream_llms:
                     for random_seed in [42, 47, 69]:
+                        if "task_desc" in meta_prompt_path:
+                            prompt_template = EVOPROMPT_DE_TEMPLATE_TD if "evopromptde" in optimizer_name else EVOPROMPT_GA_TEMPLATE_TD
+                        else:
+                            prompt_template = EVOPROMPT_DE_TEMPLATE if "evopromptde" in optimizer_name else EVOPROMPT_GA_TEMPLATE
                         config = Config(
                             task_name=task_name,
                             ds_path=f"data_sets/{task_name}",
@@ -56,6 +61,7 @@ def main():
                             evaluation_llm=evaluator_llm,
                             selection_mode="random",
                             donor_random=False,
+                            prompt_template=prompt_template,
                         )
                         # skip already performed experiments
                         if Path(config.logging_dir).exists():

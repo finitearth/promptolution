@@ -21,7 +21,6 @@ def main():
         task_name="agnews",
         n_steps=10,
         optimizer="opro",
-        meta_prompt_path="promptolution/templates/opro_template.txt",
         downstream_llm="meta-llama/Meta-Llama-3-8B-Instruct",
         evaluation_llm="meta-llama/Meta-Llama-3-8B-Instruct",
 
