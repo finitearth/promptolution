@@ -16,7 +16,7 @@ class Config:
     meta_llm: str
     downstream_llm: str
     evaluation_llm: str
-    init_pop_size: int = 10
+    init_pop_size: int = None
     logging_dir: Path = Path("logs/run.csv")
     experiment_name: str = "experiment"
     include_task_desc: bool = True

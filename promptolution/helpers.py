@@ -1,6 +1,7 @@
 """Helper functions for the usage of the libary."""
 from typing import List
 
+import numpy as np
 import pandas as pd
 
 from promptolution.config import Config
@@ -37,9 +38,12 @@ def run_optimization(config: Config):
     llm = get_llm(config.meta_llm, token=config.api_token)
     predictor = Classificator(llm, classes=task.classes)
 
-    optimizer = get_optimizer(
-        config, meta_llm=llm, initial_prompts=task.initial_population, task=task, predictor=predictor
-    )
+    if config.init_pop_size:
+        init_pop = np.random.choice(task.initial_population, size=config.init_pop_size, replace=True)
+    else:
+        init_pop = task.initial_population
+
+    optimizer = get_optimizer(config, meta_llm=llm, initial_prompts=init_pop, task=task, predictor=predictor)
 
     prompts = optimizer.optimize(n_steps=config.n_steps)
 
@@ -56,7 +60,7 @@ def run_evaluation(config: Config, prompts: List[str]):
     Returns:
         pd.DataFrame: A DataFrame containing the prompts and their scores.
     """
-    task = get_task(config)
+    task = get_task(config, split="test")
 
     token = open("../deepinfratoken.txt", "r").read()
     llm = get_llm(config.evaluation_llm, token=token)
