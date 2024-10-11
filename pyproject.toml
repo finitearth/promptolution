@@ -14,12 +14,10 @@ langchain-core = "^0.2.29"
 langchain-community = "^0.2.12"
 pandas = "^2.2.2"
 tqdm = "^4.66.5"
-matplotlib = "^3.9.2"
-seaborn = "^0.13.2"
-
-
 
 [tool.poetry.group.dev.dependencies]
+matplotlib = "^3.9.2"
+seaborn = "^0.13.2"
 transformers = "^4.44.0"
 black = "^24.4.2"
 flake8 = "^7.1.0"
