@@ -60,7 +60,7 @@ class APILLM:
 
     Methods:
         get_response: Synchronously get responses for a list of prompts.
-        _get_response: Asynchronously get responses for a list of prompts.
+        get_response_async: Asynchronously get responses for a list of prompts.
     """
 
     def __init__(self, model_id: str, token: str = None):
