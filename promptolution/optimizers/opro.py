@@ -85,9 +85,6 @@ class Opro(BaseOptimizer):
 
             self._on_step_end()
 
-        # obtain best prompt
-        best_prompt = self.prompts[self.scores.index(max(self.scores))]
-
         self._on_epoch_end()
 
-        return best_prompt
+        return self.prompts

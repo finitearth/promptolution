@@ -70,7 +70,7 @@ def main():
 
 def run_experiment(config: Config):
     """Run a single experiment."""
-    task = get_task(config, split="test")
+    task = get_task(config, split="dev")
 
     init_populations = task.initial_population
     # subsample using random seed

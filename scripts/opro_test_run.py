@@ -25,7 +25,7 @@ def main():
         evaluation_llm="meta-llama/Meta-Llama-3-8B-Instruct",
 
     )
-    task = get_task(config, split="test")
+    task = get_task(config, split="dev")
     predictor = get_predictor(config.evaluation_llm, classes=task.classes)
 
     llm = get_llm(config.meta_llm)

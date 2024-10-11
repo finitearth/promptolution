@@ -5,11 +5,10 @@ from typing import List
 import numpy as np
 import pandas as pd
 
-from promptolution.callbacks import LoggerCallback, ProgressBarCallback
 from promptolution.config import Config
 from promptolution.llms import get_llm
 from promptolution.optimizers import get_optimizer
-from promptolution.predictors.classificator import Classificator
+from promptolution.predictors import Classificator
 from promptolution.tasks import get_task
 
 
@@ -51,7 +50,6 @@ def run_optimization(config: Config):
         initial_prompts=init_pop,
         task=task,
         predictor=predictor,
-        callbacks=[LoggerCallback(Logger("__main__")), ProgressBarCallback(config.n_steps)],
     )
 
     prompts = optimizer.optimize(n_steps=config.n_steps)

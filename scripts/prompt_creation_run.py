@@ -19,7 +19,7 @@ def main():
     config.random_seed = 42
 
     llm = get_llm("meta-llama/Meta-Llama-3-8B-Instruct")
-    task = get_task(config, split="test")
+    task = get_task(config, split="dev")
 
     predictor = get_predictor("meta-llama/Meta-Llama-3-8B-Instruct", classes=task.classes)
 

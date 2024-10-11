@@ -48,7 +48,7 @@ def evaluate_best_prompts(
     # create config for the experiment
     config = Config(
         task_name=task_name,
-        ds_path=f"data_sets/{task_name}",
+        ds_path=f"data_sets/cls/{task_name}",
         random_seed=seed,
     )
 
@@ -85,7 +85,6 @@ def main():
     args = arg_parser.parse_args()
     all_configs = ConfigParser()
     all_configs.read(args.experiment)
-    print(all_configs)
 
     experiment_name = all_configs["experiment"]["name"]
     target_experiment = all_configs["target_experiment"]["name"]

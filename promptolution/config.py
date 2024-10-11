@@ -7,15 +7,39 @@ from typing import Any, Dict, Optional
 
 @dataclass
 class Config:
-    """Configuration class for the promptolution library."""
+    """Configuration class for the promptolution library.
 
-    task_name: str
-    ds_path: Path
-    n_steps: int
-    optimizer: str
-    meta_llm: str
-    downstream_llm: str
-    evaluation_llm: str
+    This class handles loading and parsing of configuration settings,
+    either from a config file or from keyword arguments.
+
+    Attributes:
+        task_name (str): Name of the task.
+        ds_path (str): Path to the dataset.
+        n_steps (int): Number of optimization steps.
+        optimizer (str): Name of the optimizer to use.
+        meta_llm (str): Name of the meta language model.
+        downstream_llm (str): Name of the downstream language model.
+        evaluation_llm (str): Name of the evaluation language model.
+        init_pop_size (int): Initial population size. Defaults to 10.
+        logging_dir (str): Directory for logging. Defaults to "logs/run.csv".
+        experiment_name (str): Name of the experiment. Defaults to "experiment".
+        include_task_desc (bool): Whether to include task description. Defaults to False.
+        donor_random (bool): Whether to use random donor prompts for EvoPromptDE. Defaults to False.
+        random_seed (int): Random seed for reproducibility. Defaults to 42.
+        selection_mode (str): Selection mode for EvoPromptGA. Defaults to "random".
+        meta_bs (int): Batch size for local meta LLM. Defaults to None.
+        downstream_bs (int): Batch size for local downstream LLM. Defaults to None.
+        api_token (str): API token for different APIs, implemented as LLM class. Defaults to None.
+        meta_prompt (str): Prompt template for the meta LLM. Defaults to None.
+    """
+
+    task_name: str = None
+    ds_path: Path = None
+    optimizer: str = None
+    meta_llm: str = None
+    downstream_llm: str = None
+    evaluation_llm: str = None
+    n_steps: int = None
     init_pop_size: int = None
     logging_dir: Path = Path("logs/run.csv")
     experiment_name: str = "experiment"
@@ -76,10 +100,11 @@ class Config:
 
     def _validate_config(self):
         """Validate the configuration settings."""
-        if "local" in self.meta_llm and self.meta_bs is None:
-            raise ValueError("'meta_bs' must be specified for local meta_llm")
-        if "local" in self.downstream_llm and self.downstream_bs is None:
-            raise ValueError("'downstream_bs' must be specified for local downstream_llm")
+        if self.meta_llm is not None:
+            if "local" in self.meta_llm and self.meta_bs is None:
+                raise ValueError("'meta_bs' must be specified for local meta_llm")
+            if "local" in self.downstream_llm and self.downstream_bs is None:
+                raise ValueError("'downstream_bs' must be specified for local downstream_llm")
         if self.api_token is None:
             print("Warning: No API token provided. Using default tokens from token files.")
 
