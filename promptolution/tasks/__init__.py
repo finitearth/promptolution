@@ -14,10 +14,11 @@ def get_task(
     task_name: str = None,
     random_seed: int = None,
 ) -> BaseTask:
-    """Create and return the task instance based on the provided configuration.
+    """Create and return an task instance.
 
     This function supports creating multiple tasks, including a special 'dummy' task
-    for testing purposes and classification tasks based on JSON descriptions.
+    for testing purposes and classification tasks based on parsed config, or alternativly
+    the parsed arguments.
 
     Args:
         config (Config): Configuration object containing the task details.

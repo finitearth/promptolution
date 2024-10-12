@@ -20,8 +20,8 @@ def get_optimizer(
     """Factory function to create and return an optimizer instance based on the provided configuration.
 
     This function selects and instantiates the appropriate optimizer class based on the
-    'optimizer' field in the config object. It supports three types of optimizers:
-    'dummy', 'evopromptde', and 'evopromptga'.
+    'optimizer' field in the config object. Alternatively you can pass the relevant parameters.
+    It supports three types of optimizers: 'dummy', 'evopromptde', 'evopromptga', and 'opro'.
 
     Args:
         config (Config): Configuration object containing the optimizer type.

@@ -29,7 +29,7 @@ class Config:
         selection_mode (str): Selection mode for EvoPromptGA. Defaults to "random".
         meta_bs (int): Batch size for local meta LLM. Defaults to None.
         downstream_bs (int): Batch size for local downstream LLM. Defaults to None.
-        api_token (str): API token for different APIs, implemented as LLM class. Defaults to None.
+        api_token (str): API token for different APIs, as implemented in LLM classes. Defaults to None.
         meta_prompt (str): Prompt template for the meta LLM. Defaults to None.
     """
 
