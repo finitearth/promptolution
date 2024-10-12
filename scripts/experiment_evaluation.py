@@ -10,7 +10,7 @@ from tqdm import tqdm
 
 from promptolution.config import Config
 from promptolution.predictors import get_predictor
-from promptolution.tasks import get_tasks
+from promptolution.tasks import get_task
 
 logger = Logger(__name__)
 logger.setLevel(INFO)
@@ -53,7 +53,7 @@ def evaluate_best_prompts(
     )
 
     # create a test task to retrieve the samples to evaluate
-    test_task = get_tasks(config, split="test")[0]
+    test_task = get_task(config, split="test")
     test_predictor = get_predictor(downstream_llm, classes=test_task.classes)
 
     # evaluate the best prompt on the test set
@@ -85,7 +85,6 @@ def main():
     args = arg_parser.parse_args()
     all_configs = ConfigParser()
     all_configs.read(args.experiment)
-    print(all_configs)
 
     experiment_name = all_configs["experiment"]["name"]
     target_experiment = all_configs["target_experiment"]["name"]

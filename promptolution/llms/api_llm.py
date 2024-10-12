@@ -5,6 +5,7 @@ import time
 from logging import INFO, Logger
 from typing import List
 
+import nest_asyncio
 import openai
 import requests
 from langchain_anthropic import ChatAnthropic
@@ -37,12 +38,12 @@ async def invoke_model(prompt, model, semaphore):
 
         while attempts < max_retries:
             try:
-                response = await asyncio.to_thread(model.invoke, [HumanMessage(content=prompt)])
+                response = await model.ainvoke([HumanMessage(content=prompt)])
                 return response.content
             except ChatDeepInfraException as e:
                 print(f"DeepInfra error: {e}. Attempt {attempts}/{max_retries}. Retrying in {delay} seconds...")
                 attempts += 1
-                time.sleep(delay)
+                await asyncio.sleep(delay)
 
 
 class APILLM:
@@ -57,29 +58,28 @@ class APILLM:
 
     Methods:
         get_response: Synchronously get responses for a list of prompts.
-        _get_response: Asynchronously get responses for a list of prompts.
+        get_response_async: Asynchronously get responses for a list of prompts.
     """
 
-    def __init__(self, model_id: str):
+    def __init__(self, model_id: str, token: str = None):
         """Initialize the APILLM with a specific model.
 
         Args:
             model_id (str): Identifier for the model to use.
+            token (str): API key for the model.
 
         Raises:
             ValueError: If an unknown model identifier is provided.
         """
         if "claude" in model_id:
-            ANTHROPIC_API_KEY = open("anthropictoken.txt", "r").read()
+            ANTHROPIC_API_KEY = open("anthropictoken.txt", "r").read() if token is None else token
             self.model = ChatAnthropic(model=model_id, api_key=ANTHROPIC_API_KEY)
         elif "gpt" in model_id:
-            OPENAI_API_KEY = open("openaitoken.txt", "r").read()
+            OPENAI_API_KEY = open("openaitoken.txt", "r").read() if token is None else token
             self.model = ChatOpenAI(model=model_id, api_key=OPENAI_API_KEY)
-        elif "llama" in model_id:
-            DEEPINFRA_API_KEY = open("deepinfratoken.txt", "r").read()
-            self.model = ChatDeepInfra(model_name=model_id, deepinfra_api_token=DEEPINFRA_API_KEY)
         else:
-            raise ValueError(f"Unknown model: {model_id}")
+            DEEPINFRA_API_KEY = open("deepinfratoken.txt", "r").read() if token is None else token
+            self.model = ChatDeepInfra(model_name=model_id, deepinfra_api_token=DEEPINFRA_API_KEY)
 
     def get_response(self, prompts: List[str]) -> List[str]:
         """Get responses for a list of prompts in a synchronous manner.
@@ -99,9 +99,11 @@ class APILLM:
         delay = 3
         attempts = 0
 
+        nest_asyncio.apply()
+
         while attempts < max_retries:
             try:
-                responses = asyncio.run(self._get_response(prompts))
+                responses = asyncio.run(self.get_response_async(prompts))
                 return responses
             except requests.exceptions.ConnectionError as e:
                 attempts += 1
@@ -119,7 +121,7 @@ class APILLM:
         # If the loop exits, it means max retries were reached
         raise requests.exceptions.ConnectionError("Max retries exceeded. Connection could not be established.")
 
-    async def _get_response(self, prompts: list[str], max_concurrent_calls=200) -> list[str]:
+    async def get_response_async(self, prompts: list[str], max_concurrent_calls=200) -> list[str]:
         """Asynchronously get responses for a list of prompts.
 
         This method uses a semaphore to limit the number of concurrent API calls.
@@ -131,7 +133,7 @@ class APILLM:
         Returns:
             list[str]: List of model responses.
         """
-        semaphore = asyncio.Semaphore(max_concurrent_calls)  # Limit the number of concurrent calls
+        semaphore = asyncio.Semaphore(max_concurrent_calls)
         tasks = []
 
         for prompt in prompts:
