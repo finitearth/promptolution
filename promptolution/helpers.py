@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 
 from promptolution.config import Config
+from promptolution.exemplar_selectors.random_selector import RandomSelector
 from promptolution.llms import get_llm
 from promptolution.optimizers import get_optimizer
 from promptolution.predictors import Classificator
@@ -53,6 +54,10 @@ def run_optimization(config: Config):
     )
 
     prompts = optimizer.optimize(n_steps=config.n_steps)
+
+    if config.prepend_examplars:
+        selector = RandomSelector(task, predictor)
+        prompts = [selector.select_exemplars(p, n_examples=config.n_examplars) for p in prompts]
 
     return prompts
 

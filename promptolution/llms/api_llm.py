@@ -72,14 +72,11 @@ class APILLM:
             ValueError: If an unknown model identifier is provided.
         """
         if "claude" in model_id:
-            ANTHROPIC_API_KEY = open("anthropictoken.txt", "r").read() if token is None else token
-            self.model = ChatAnthropic(model=model_id, api_key=ANTHROPIC_API_KEY)
+            self.model = ChatAnthropic(model=model_id, api_key=token)
         elif "gpt" in model_id:
-            OPENAI_API_KEY = open("openaitoken.txt", "r").read() if token is None else token
-            self.model = ChatOpenAI(model=model_id, api_key=OPENAI_API_KEY)
+            self.model = ChatOpenAI(model=model_id, api_key=token)
         else:
-            DEEPINFRA_API_KEY = open("deepinfratoken.txt", "r").read() if token is None else token
-            self.model = ChatDeepInfra(model_name=model_id, deepinfra_api_token=DEEPINFRA_API_KEY)
+            self.model = ChatDeepInfra(model_name=model_id, deepinfra_api_token=token)
 
     def get_response(self, prompts: List[str]) -> List[str]:
         """Get responses for a list of prompts in a synchronous manner.

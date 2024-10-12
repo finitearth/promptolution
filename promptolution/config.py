@@ -31,6 +31,8 @@ class Config:
         downstream_bs (int): Batch size for local downstream LLM. Defaults to None.
         api_token (str): API token for different APIs, as implemented in LLM classes. Defaults to None.
         meta_prompt (str): Prompt template for the meta LLM. Defaults to None.
+        prepend_examplars (bool): rather to do examplar search and prepend few-shot examples. Defaults to False.
+        n_examplars (int): how many examplars to prepend. Only used if prepend_examplars is True. Defaults to 5.
     """
 
     task_name: str = None
@@ -51,6 +53,8 @@ class Config:
     downstream_bs: Optional[int] = None
     api_token: Optional[str] = None
     meta_prompt: Optional[str] = None
+    prepend_examplars: Optional[bool] = False
+    n_examplars: Optional[int] = 5
 
     def __post_init__(self):
         """Validate the configuration after initialization."""
