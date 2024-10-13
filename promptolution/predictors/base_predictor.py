@@ -35,7 +35,7 @@ class BasePredictor:
         Args:
             prompts (List[str]): List of prompts to use for prediction.
             xs (np.ndarray): Array of input data.
-            return_seq (bool, optional): rather to return the generating sequence
+            return_seq (bool, optional): whether to return the generating sequence
 
         Returns:
             np.ndarray: Array of predictions.
