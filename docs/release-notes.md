@@ -6,7 +6,7 @@
 #### Added Features: 
 * Prompt creation utility function
 * Prompt variation utility function
-* New optimizer: OPro (https://arxiv.org/abs/2309.03409)
+* New optimizer: OPro (see [arXiv paper](https://arxiv.org/abs/2309.03409))
 
 
 #### Further Changes:
@@ -14,7 +14,7 @@
 * New documentation page appearance
 * Additional Docstrings & Formatting
 
-**Full Changelog**: https://github.com/finitearth/promptolution/compare/v0.1.1...v0.2.0
+**Full Changelog**: [here](https://github.com/finitearth/promptolution/compare/v0.1.1...v0.2.0)
 
 ## Release v0.1.1 (2)
 
@@ -30,7 +30,7 @@
 * Updated readme
 * Updated docs
 
-**Full Changelog**: https://github.com/finitearth/promptolution/compare/0.1.1...v0.1.1
+**Full Changelog**: [here](https://github.com/finitearth/promptolution/compare/0.1.1...v0.1.1)
 
 ## Release v0.1.1
 
@@ -44,7 +44,7 @@
 * Add documentation pages
 * Update README
 
-**Full Changelog**: https://github.com/finitearth/promptolution/compare/0.1.0...0.1.1
+**Full Changelog**: [here](https://github.com/finitearth/promptolution/compare/0.1.0...0.1.1)
 
 ## Release v0.1.0
 
@@ -57,12 +57,12 @@
 * Classification task
 * API LLMs from OpenAI, Anthropic, and DeepInfra
 * Local LLM
-* optimizer EvoPrompt GA and EvoPrompt DE (https://arxiv.org/abs/2309.08532)
+* optimizer EvoPrompt GA and EvoPrompt DE (see [arXiv paper](https://arxiv.org/abs/2309.08532))
 
 #### Further changes:
-* Added example classification datasets used in https://arxiv.org/abs/2309.08532
+* Added example classification datasets used in the [EvoPrompt paper](https://arxiv.org/abs/2309.08532)
 * Added dummy classes for testing
 * Added example scripts and configs for experiments
 * Added experiment results and evaluation notebooks
 
-**Full Changelog**: https://github.com/finitearth/promptolution/commits/0.1.0
+**Full Changelog**: [here](https://github.com/finitearth/promptolution/commits/0.1.0)
