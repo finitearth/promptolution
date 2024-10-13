@@ -1,6 +1,6 @@
 """Module for classification predictors."""
 
-from typing import List
+from typing import List, Tuple
 
 import numpy as np
 
@@ -11,7 +11,10 @@ class Classificator(BasePredictor):
     """A predictor class for classification tasks using language models.
 
     This class takes a language model and a list of classes, and provides a method
-    to predict classes for given prompts and input data.
+    to predict classes for given prompts and input data. The class labels are extracted
+    by matching the words in the prediction with the list of valid class labels.
+    The first occurrence of a valid class label in the prediction is used as the predicted class.
+    If no valid class label is found, the first class label in the list is used as the default prediction.
 
     Attributes:
         llm: The language model used for generating predictions.
@@ -28,39 +31,19 @@ class Classificator(BasePredictor):
             llm: The language model to use for predictions.
             classes (List[str]): The list of valid class labels.
         """
-        self.llm = llm
+        super().__init__(llm)
         self.classes = classes
 
-    def predict(
-        self,
-        prompts: List[str],
-        xs: np.ndarray,
-    ) -> np.ndarray:
-        """Predict classes for given prompts and input data.
-
-        This method generates predictions using the language model and then
-        extracts the predicted class from the model's output.
+    def _extract_preds(self, preds: List[str], shape: Tuple[int, int]) -> np.ndarray:
+        """Extract class labels from the predictions, based on the list of valid class labels.
 
         Args:
-            prompts (List[str]): The list of prompts to use for prediction.
-            xs (np.ndarray): The input data array.
-
-        Returns:
-            np.ndarray: A 2D array of predicted classes, with shape (len(prompts), len(xs)).
-
-        Note:
-            The method concatenates each prompt with each input data point,
-            passes it to the language model, and then extracts the first word
-            in the response that matches a class in self.classes.
+            preds: The raw predictions from the language model.
+            shape: The shape of the output array: (n_prompts, n_samples).
         """
-        if isinstance(prompts, str):
-            prompts = [prompts]
-
-        preds = self.llm.get_response([prompt + "\n" + x for prompt in prompts for x in xs])
-
         response = []
         for pred in preds:
-            predicted_class = ""
+            predicted_class = self.classes[0]  # use first class as default pred
             for word in pred.split(" "):
                 word = "".join([c for c in word if c.isalnum()])
                 if word in self.classes:
@@ -69,5 +52,5 @@ class Classificator(BasePredictor):
 
             response.append(predicted_class)
 
-        response = np.array(response).reshape(len(prompts), len(xs))
+        response = np.array(response).reshape(*shape)
         return response

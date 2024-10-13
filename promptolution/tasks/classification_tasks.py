@@ -2,9 +2,10 @@
 
 import json
 from pathlib import Path
-from typing import Dict, List, Literal, Optional
+from typing import Callable, Dict, List, Literal, Optional
 
 import numpy as np
+from sklearn.metrics import accuracy_score
 
 from promptolution.predictors.base_predictor import BasePredictor
 from promptolution.tasks.base_task import BaseTask
@@ -25,8 +26,9 @@ class ClassificationTask(BaseTask):
         xs (Optional[np.ndarray]): Input data for the task.
         ys (Optional[np.ndarray]): Ground truth labels for the task.
         classes (Optional[List]): List of possible class labels.
-        split (Literal["dev", "test"]): Dataset split to use.
         seed (int): Random seed for reproducibility.
+        split (Literal["dev", "test"]): Dataset split to use.
+        metric (Callable): Metric to use as an evaluation score for the prompts.
 
     Inherits from:
         BaseTask: The base class for tasks in the promptolution library.
@@ -38,6 +40,7 @@ class ClassificationTask(BaseTask):
         task_id: str = "Classification Task",
         seed: int = 42,
         split: Literal["dev", "test"] = "dev",
+        metric: Callable = accuracy_score,
     ):
         """Initialize the ClassificationTask.
 
@@ -46,6 +49,7 @@ class ClassificationTask(BaseTask):
             dataset_path (str): Path to the dataset description JSON file.
             seed (int, optional): Random seed for reproducibility. Defaults to 42.
             split (Literal["dev", "test"], optional): Dataset split to use. Defaults to "dev".
+            metric (Callable): Metric to use as an evaluation score for the prompts. Defaults to sklearn's accuracy.
         """
         self.task_id: str = task_id
         self.path: Path = dataset_path
@@ -56,6 +60,7 @@ class ClassificationTask(BaseTask):
         self.ys: Optional[np.ndarray] = None
         self.classes: Optional[List] = None
         self.split: Literal["dev", "test"] = split
+        self.metric = metric
         self._parse_task()
         self.reset_seed(seed)
 
@@ -95,7 +100,12 @@ class ClassificationTask(BaseTask):
         self.ys = np.array(ys)
 
     def evaluate(
-        self, prompts: List[str], predictor: BasePredictor, n_samples: int = 20, subsample: bool = True
+        self,
+        prompts: List[str],
+        predictor: BasePredictor,
+        n_samples: int = 20,
+        subsample: bool = False,
+        return_seq: bool = False,
     ) -> np.ndarray:
         """Evaluate a set of prompts using a given predictor.
 
@@ -103,7 +113,9 @@ class ClassificationTask(BaseTask):
             prompts (List[str]): List of prompts to evaluate.
             predictor (BasePredictor): Predictor to use for evaluation.
             n_samples (int, optional): Number of samples to use if subsampling. Defaults to 20.
-            subsample (bool, optional): Whether to use subsampling. Defaults to True.
+            subsample (bool, optional): Whether to use subsampling.
+            If set to true, samples a different subset per call. Defaults to False.
+            return_seq (bool, optional): whether to return the generating sequence
 
         Returns:
             np.ndarray: Array of accuracy scores for each prompt.
@@ -120,10 +132,17 @@ class ClassificationTask(BaseTask):
         ys_subsample = self.ys[indices]
 
         # Make predictions on the subsample
-        preds = predictor.predict(prompts, xs_subsample)
+        preds = predictor.predict(prompts, xs_subsample, return_seq=return_seq)
 
-        # Calculate accuracy: number of correct predictions / total number of predictions per prompt
-        return np.mean(preds == ys_subsample, axis=1)
+        if return_seq:
+            preds, seqs = preds
+
+        scores = np.array([self.metric(ys_subsample, pred) for pred in preds])
+
+        if return_seq:
+            return scores, seqs
+
+        return scores
 
     def reset_seed(self, seed: int = None):
         """Reset the random seed."""

@@ -2,7 +2,7 @@
 import configparser
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Literal, Optional
 
 
 @dataclass
@@ -13,13 +13,13 @@ class Config:
     either from a config file or from keyword arguments.
 
     Attributes:
-        task_name (str): Name of the task.
-        ds_path (str): Path to the dataset.
-        n_steps (int): Number of optimization steps.
-        optimizer (str): Name of the optimizer to use.
-        meta_llm (str): Name of the meta language model.
-        downstream_llm (str): Name of the downstream language model.
-        evaluation_llm (str): Name of the evaluation language model.
+        task_name (str): Name of the task. Should not be None if used.
+        ds_path (str): Path to the dataset. Should not be None if used.
+        n_steps (int): Number of optimization steps. Should not be None if used.
+        optimizer (str): Name of the optimizer to use. Should not be None if used.
+        meta_llm (str): Name of the meta language model. Should not be None if used.
+        downstream_llm (str): Name of the downstream language model. Should not be None if used.
+        evaluation_llm (str): Name of the evaluation language model. Should not be None if used.
         init_pop_size (int): Initial population size. Defaults to 10.
         logging_dir (str): Directory for logging. Defaults to "logs/run.csv".
         experiment_name (str): Name of the experiment. Defaults to "experiment".
@@ -27,10 +27,20 @@ class Config:
         donor_random (bool): Whether to use random donor prompts for EvoPromptDE. Defaults to False.
         random_seed (int): Random seed for reproducibility. Defaults to 42.
         selection_mode (str): Selection mode for EvoPromptGA. Defaults to "random".
-        meta_bs (int): Batch size for local meta LLM. Defaults to None.
-        downstream_bs (int): Batch size for local downstream LLM. Defaults to None.
-        api_token (str): API token for different APIs, as implemented in LLM classes. Defaults to None.
-        meta_prompt (str): Prompt template for the meta LLM. Defaults to None.
+        meta_bs (int): Batch size for local meta LLM. Should not be None if llm is run locally. Defaults to None.
+        downstream_bs (int): Batch size for local downstream LLM.
+        Should not be None if llm is run locally Defaults to None.
+        api_token (str): API token for different APIs, as implemented in LLM classes.
+        Should not be None if APILLM is used. Defaults to None.
+        meta_prompt (str): Prompt template for the meta LLM.
+        If None is set, default meta_prompts from template.py will be used. Defaults to None.
+        prepend_exemplars (bool): rather to do exemplar search and prepend few-shot examples. Defaults to False.
+        n_exemplars (int): how many exemplars to prepend. Only used if prepend_exemplars is True. Defaults to 5.
+        exemplar_selector (str): which exemplar selector to use. Should not be None if preped_exemplars is True.
+        Defaults to None.
+        n_ds_samples_to_meta (int): how many examples to show of the ds to show to meta-llm
+        (not applicable to every optimizer)
+        n_eval_samples (int): how many examples to show to evaluation llm for evaluation.
     """
 
     task_name: str = None
@@ -46,11 +56,16 @@ class Config:
     include_task_desc: bool = True
     donor_random: bool = False
     random_seed: int = 42
-    selection_mode: Optional[str] = "random"
+    selection_mode: Optional[Literal["random", "wheel", "tour"]] = "random"
     meta_bs: Optional[int] = None
     downstream_bs: Optional[int] = None
     api_token: Optional[str] = None
     meta_prompt: Optional[str] = None
+    prepend_exemplars: Optional[bool] = False
+    n_exemplars: Optional[int] = 5
+    exemplar_selector: Optional[str] = None
+    n_ds_samples_to_meta: Optional[int] = 2
+    n_eval_samples: Optional[int] = 20
 
     def __post_init__(self):
         """Validate the configuration after initialization."""

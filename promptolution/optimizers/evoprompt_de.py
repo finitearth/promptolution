@@ -51,7 +51,7 @@ class EvoPromptDE(BaseOptimizer):
         Returns:
             List[str]: The optimized list of prompts after all steps.
         """
-        self.scores = self.task.evaluate(self.prompts, self.predictor)
+        self.scores = self.task.evaluate(self.prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples)
         self.prompts = [prompt for _, prompt in sorted(zip(self.scores, self.prompts), reverse=True)]
         self.scores = sorted(self.scores, reverse=True)
 
@@ -80,7 +80,9 @@ class EvoPromptDE(BaseOptimizer):
             child_prompts = self.meta_llm.get_response(meta_prompts)
             child_prompts = [prompt.split("<prompt>")[-1].split("</prompt>")[0].strip() for prompt in child_prompts]
 
-            child_scores = self.task.evaluate(child_prompts, self.predictor)
+            child_scores = self.task.evaluate(
+                child_prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples
+            )
 
             for i in range(len(self.prompts)):
                 if child_scores[i] > self.scores[i]:
