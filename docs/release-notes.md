@@ -1,10 +1,18 @@
 # Release Notes
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of 25639c9 (Merge branch dev accepting all incoming changes)
+### Release v1.0.0
+### What's changed
+#### Added Features:
+* Classes for Exemplar selection (Random and RandomSearch)
+* helper functions: run_experiment, run_optimization and run_evaluation
+
+#### Further Changes:
+* removed deepinfra helper functions, as the langchain-community libary is now working as intended
+* added license
+* added release notes :)
+
+**Full Changelog**: [here](https://github.com/finitearth/promptolution/compare/v0..20...v1.0.0)
+
 ## Release v0.2.0
 
 ### What's Changed

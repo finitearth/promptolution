@@ -46,6 +46,7 @@ Create API Keys for the models you want to use:
 - Predictor: Implements the prediction logic, interfacing between the Task and LLM components.
 - LLM: Unifies the process of obtaining responses from language models, whether locally hosted or accessed via API.
 - Optimizer: Implements prompt optimization algorithms, utilizing the other components during the optimization process.
+- Exemplar Selectors: Implements algorithms for the search of few shot examples that are added to the prompt.
 
 ## Key Features
 
@@ -56,6 +57,9 @@ Create API Keys for the models you want to use:
 - Integration with langchain for standardized LLM API calls
 - Detailed logging and callback system for optimization analysis
 
+
+## Getting Started
+Take a look at our getting started notebook: [getting_started.py](https://github.com/finitearth/promptolution/blob/main/notebooks/getting_started.ipynb)
 ## Reproduce our Experiments
 
 We provide scripts and configs for all our experiments. Run experiments based on config via:
