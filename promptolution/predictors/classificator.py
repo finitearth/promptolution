@@ -1,10 +1,6 @@
 """Module for classification predictors."""
 
-<<<<<<< HEAD
 from typing import List, Tuple
-=======
-from typing import List
->>>>>>> main
 
 import numpy as np
 
@@ -38,20 +34,8 @@ class Classificator(BasePredictor):
         super().__init__(llm)
         self.classes = classes
 
-<<<<<<< HEAD
     def _extract_preds(self, preds: List[str], shape: Tuple[int, int]) -> np.ndarray:
         """Extract class labels from the predictions, based on the list of valid class labels.
-=======
-    def predict(
-        self,
-        prompts: List[str],
-        xs: np.ndarray,
-    ) -> np.ndarray:
-        """Predict classes for given prompts and input data.
-
-        This method generates predictions using the language model and then
-        extracts the predicted class from the model's output.
->>>>>>> main
 
         Args:
             preds: The raw predictions from the language model.

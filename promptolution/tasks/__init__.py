@@ -7,7 +7,6 @@ from promptolution.tasks.base_task import BaseTask, DummyTask
 from promptolution.tasks.classification_tasks import ClassificationTask
 
 
-<<<<<<< HEAD
 def get_task(
     config=None,
     split: Literal["dev", "test"] = "dev",
@@ -16,10 +15,6 @@ def get_task(
     random_seed: int = None,
 ) -> BaseTask:
     """Create and return an task instance.
-=======
-def get_tasks(config, split: Literal["dev", "test"] = "dev") -> List[BaseTask]:
-    """Create and return a list of task instances based on the provided configuration.
->>>>>>> main
 
     This function supports creating multiple tasks, including a special 'dummy' task
     for testing purposes and classification tasks based on parsed config, or alternativly

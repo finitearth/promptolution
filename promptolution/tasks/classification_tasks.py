@@ -1,9 +1,6 @@
 """Module for classification tasks."""
 
-<<<<<<< HEAD
 import json
-=======
->>>>>>> main
 from pathlib import Path
 from typing import Callable, Dict, List, Literal, Optional
 
@@ -37,7 +34,6 @@ class ClassificationTask(BaseTask):
         BaseTask: The base class for tasks in the promptolution library.
     """
 
-<<<<<<< HEAD
     def __init__(
         self,
         dataset_path: Path,
@@ -46,9 +42,6 @@ class ClassificationTask(BaseTask):
         split: Literal["dev", "test"] = "dev",
         metric: Callable = accuracy_score,
     ):
-=======
-    def __init__(self, task_id: str, dataset_json: Dict, seed: int = 42, split: Literal["dev", "test"] = "dev"):
->>>>>>> main
         """Initialize the ClassificationTask.
 
         Args:
@@ -107,16 +100,12 @@ class ClassificationTask(BaseTask):
         self.ys = np.array(ys)
 
     def evaluate(
-<<<<<<< HEAD
         self,
         prompts: List[str],
         predictor: BasePredictor,
         n_samples: int = 20,
         subsample: bool = False,
         return_seq: bool = False,
-=======
-        self, prompts: List[str], predictor: BasePredictor, n_samples: int = 20, subsample: bool = True
->>>>>>> main
     ) -> np.ndarray:
         """Evaluate a set of prompts using a given predictor.
 

@@ -2,6 +2,9 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 25639c9 (Merge branch dev accepting all incoming changes)
 ## Release v0.2.0
 
 ### What's Changed
@@ -68,9 +71,12 @@
 * Added experiment results and evaluation notebooks
 
 **Full Changelog**: [here](https://github.com/finitearth/promptolution/commits/0.1.0)
+<<<<<<< HEAD
 =======
 coming soon...
 >>>>>>> main
 =======
 coming soon...
 >>>>>>> parent of e23dd74 (Chore/docs release notes (#18))
+=======
+>>>>>>> parent of 25639c9 (Merge branch dev accepting all incoming changes)

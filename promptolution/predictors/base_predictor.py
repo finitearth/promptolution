@@ -22,11 +22,7 @@ class BasePredictor:
                  to make predictions based on prompts and input data.
     """
 
-<<<<<<< HEAD
     def __init__(self, llm: BaseLLM):
-=======
-    def __init__(self, model_id, classes, *args, **kwargs):
->>>>>>> main
         """Initialize the BasePredictor.
 
         Args:
@@ -35,16 +31,7 @@ class BasePredictor:
         """
         self.llm = llm
 
-<<<<<<< HEAD
     def predict(self, prompts: List[str], xs: np.ndarray, return_seq: bool = False) -> np.ndarray:
-=======
-    @abstractmethod
-    def predict(
-        self,
-        prompts: List[str],
-        xs: np.ndarray,
-    ) -> np.ndarray:
->>>>>>> main
         """Abstract method to make predictions based on prompts and input data.
 
         Args:

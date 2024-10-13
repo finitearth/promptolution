@@ -1,10 +1,5 @@
 """Configuration class for the promptolution library."""
-<<<<<<< HEAD
 import configparser
-=======
-
-from configparser import ConfigParser
->>>>>>> main
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, Literal, Optional
@@ -48,7 +43,6 @@ class Config:
         n_eval_samples (int): how many examples to show to evaluation llm for evaluation.
     """
 
-<<<<<<< HEAD
     task_name: str = None
     ds_path: Path = None
     optimizer: str = None
@@ -58,18 +52,6 @@ class Config:
     n_steps: int = None
     init_pop_size: int = None
     logging_dir: Path = Path("logs/run.csv")
-=======
-    task_name: str
-    ds_path: str
-    n_steps: int
-    optimizer: str
-    meta_prompt_path: str
-    meta_llms: str
-    downstream_llm: str
-    evaluation_llm: str
-    init_pop_size: int = 10
-    logging_dir: str = "logs/run.csv"
->>>>>>> main
     experiment_name: str = "experiment"
     include_task_desc: bool = True
     donor_random: bool = False
@@ -85,7 +67,6 @@ class Config:
     n_ds_samples_to_meta: Optional[int] = 2
     n_eval_samples: Optional[int] = 20
 
-<<<<<<< HEAD
     def __post_init__(self):
         """Validate the configuration after initialization."""
         self._validate_config()
@@ -94,33 +75,6 @@ class Config:
     def from_dict(cls, config_dict: Dict[str, Any]) -> "Config":
         """Create a Config instance from a dictionary."""
         return cls(**cls._process_config_dict(config_dict))
-=======
-    def __init__(self, config_path: str = None, **kwargs):
-        """Initialize the Config object."""
-        if config_path:
-            self.config_path = config_path
-            self.config = ConfigParser()
-            self.config.read(config_path)
-            self._parse_config()
-        else:
-            for key, value in kwargs.items():
-                setattr(self, key, value)
-
-    def _parse_config(self):
-        """Parse the configuration settings from the config file."""
-        self.task_name = self.config["task"]["task_name"]
-        self.ds_path = self.config["task"]["ds_path"]
-        self.n_steps = int(self.config["task"]["steps"])
-        self.random_seed = int(self.config["task"]["random_seed"])
-        self.optimizer = self.config["optimizer"]["name"]
-        self.meta_prompt_path = self.config["optimizer"]["meta_prompt_path"]
-        self.meta_llm = self.config["meta_llm"]["name"]
-        self.downstream_llm = self.config["downstream_llm"]["name"]
-        self.evaluation_llm = self.config["evaluator_llm"]["name"]
-        self.init_pop_size = int(self.config["optimizer"]["init_pop_size"])
-        self.logging_dir = self.config["logging"]["dir"]
-        self.experiment_name = self.config["experiment"]["name"]
->>>>>>> main
 
     @classmethod
     def from_file(cls, config_path: Path) -> "Config":
