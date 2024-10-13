@@ -5,7 +5,10 @@ import time
 from logging import INFO, Logger
 from typing import List
 
+<<<<<<< HEAD
 import nest_asyncio
+=======
+>>>>>>> main
 import openai
 import requests
 from langchain_anthropic import ChatAnthropic
@@ -13,6 +16,11 @@ from langchain_community.chat_models.deepinfra import ChatDeepInfra, ChatDeepInf
 from langchain_core.messages import HumanMessage
 from langchain_openai import ChatOpenAI
 
+<<<<<<< HEAD
+=======
+from promptolution.llms.deepinfra import ChatDeepInfra
+
+>>>>>>> main
 logger = Logger(__name__)
 logger.setLevel(INFO)
 
@@ -61,7 +69,11 @@ class APILLM:
         get_response_async: Asynchronously get responses for a list of prompts.
     """
 
+<<<<<<< HEAD
     def __init__(self, model_id: str, token: str = None):
+=======
+    def __init__(self, model_id: str):
+>>>>>>> main
         """Initialize the APILLM with a specific model.
 
         Args:
@@ -118,7 +130,11 @@ class APILLM:
         # If the loop exits, it means max retries were reached
         raise requests.exceptions.ConnectionError("Max retries exceeded. Connection could not be established.")
 
+<<<<<<< HEAD
     async def get_response_async(self, prompts: list[str], max_concurrent_calls=200) -> list[str]:
+=======
+    async def _get_response(self, prompts: list[str], max_concurrent_calls=200) -> list[str]:
+>>>>>>> main
         """Asynchronously get responses for a list of prompts.
 
         This method uses a semaphore to limit the number of concurrent API calls.

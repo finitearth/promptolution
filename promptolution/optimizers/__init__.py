@@ -1,5 +1,6 @@
 """Module for prompt optimizers."""
 
+<<<<<<< HEAD
 from promptolution.templates import (
     EVOPROMPT_DE_TEMPLATE,
     EVOPROMPT_DE_TEMPLATE_TD,
@@ -8,15 +9,21 @@ from promptolution.templates import (
     OPRO_TEMPLATE,
 )
 
+=======
+>>>>>>> main
 from .base_optimizer import DummyOptimizer
 from .evoprompt_de import EvoPromptDE
 from .evoprompt_ga import EvoPromptGA
 from .opro import Opro
 
 
+<<<<<<< HEAD
 def get_optimizer(
     config=None, optimizer: str = None, include_task_desc: bool = None, meta_prompt: str = None, *args, **kwargs
 ):
+=======
+def get_optimizer(config, *args, **kwargs):
+>>>>>>> main
     """Factory function to create and return an optimizer instance based on the provided configuration.
 
     This function selects and instantiates the appropriate optimizer class based on the
@@ -58,6 +65,7 @@ def get_optimizer(
         return EvoPromptDE(donor_random=donor_random, prompt_template=prompt_template, *args, **kwargs)
 
     if config.optimizer == "evopromptga":
+<<<<<<< HEAD
         prompt_template = EVOPROMPT_GA_TEMPLATE_TD if config.include_task_desc else EVOPROMPT_GA_TEMPLATE
         prompt_template = config.meta_prompt if meta_prompt else prompt_template
         selection_mode = kwargs.get("selection_mode", config.selection_mode if config is not None else None)
@@ -69,4 +77,9 @@ def get_optimizer(
         n_samples = kwargs.get("n_samples", config.n_ds_samples_to_meta if config is not None else None)
         return Opro(prompt_template=prompt_template, n_samples=n_samples, *args, **kwargs)
 
+=======
+        return EvoPromptGA(selection_mode=config.selection_mode, *args, **kwargs)
+    if config.optimizer == "opro":
+        return Opro(*args, **kwargs)
+>>>>>>> main
     raise ValueError(f"Unknown optimizer: {config.optimizer}")

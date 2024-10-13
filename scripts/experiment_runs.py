@@ -70,8 +70,12 @@ def main():
 
 def run_experiment(config: Config):
     """Run a single experiment."""
+<<<<<<< HEAD
     task = get_task(config, split="dev")
 
+=======
+    task = get_tasks(config)[0]
+>>>>>>> main
     init_populations = task.initial_population
     # subsample using random seed
     np.random.seed(config.random_seed)

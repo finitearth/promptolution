@@ -30,7 +30,11 @@ class EvoPromptDE(BaseOptimizer):
         **args: Additional arguments passed to the BaseOptimizer.
     """
 
+<<<<<<< HEAD
     def __init__(self, prompt_template: str = None, meta_llm: BaseLLM = None, donor_random: bool = False, **args):
+=======
+    def __init__(self, prompt_template, meta_llm, donor_random=False, **args):
+>>>>>>> main
         """Initialize the EvoPromptDE optimizer."""
         self.prompt_template = prompt_template
         self.donor_random = donor_random

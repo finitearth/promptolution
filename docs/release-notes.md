@@ -1,5 +1,6 @@
 # Release Notes
 
+<<<<<<< HEAD
 ## Release v0.2.0
 
 ### What's Changed
@@ -66,3 +67,6 @@
 * Added experiment results and evaluation notebooks
 
 **Full Changelog**: [here](https://github.com/finitearth/promptolution/commits/0.1.0)
+=======
+coming soon...
+>>>>>>> main

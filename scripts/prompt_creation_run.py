@@ -5,7 +5,11 @@ from logging import Logger
 
 from promptolution.llms import get_llm
 from promptolution.predictors import get_predictor
+<<<<<<< HEAD
 from promptolution.tasks import get_task
+=======
+from promptolution.tasks import get_tasks
+>>>>>>> main
 from promptolution.utils.prompt_creation import create_prompt_variation, create_prompts_from_samples
 
 logger = Logger(__name__)
@@ -14,6 +18,7 @@ logger = Logger(__name__)
 def main():
     """Main function to run the experiment."""
     config = ConfigParser()
+<<<<<<< HEAD
     config.task_name = "agnews"
     config.ds_path = "data_sets/agnews"
     config.random_seed = 42
@@ -21,6 +26,14 @@ def main():
     llm = get_llm("meta-llama/Meta-Llama-3-8B-Instruct")
     task = get_task(config, split="dev")
 
+=======
+    config.task_name = "subj"
+    config.ds_path = "data_sets/cls/subj"
+    config.random_seed = 42
+
+    llm = get_llm("meta-llama/Meta-Llama-3-8B-Instruct")
+    task = get_tasks(config)[0]
+>>>>>>> main
     predictor = get_predictor("meta-llama/Meta-Llama-3-8B-Instruct", classes=task.classes)
 
     init_prompts = create_prompts_from_samples(task, llm)

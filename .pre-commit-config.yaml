@@ -1,5 +1,9 @@
 fail_fast: true
+<<<<<<< HEAD
 exclude: '^(?!promptolution/).*$|^promptolution/templates.py'
+=======
+exclude: '^(?!promptolution/).*$'
+>>>>>>> main
 repos:
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.18.2

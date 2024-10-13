@@ -26,6 +26,7 @@ class BaseOptimizer(ABC):
         predictor (optional): Predictor for prompt evaluation. Defaults to None.
     """
 
+<<<<<<< HEAD
     def __init__(
         self,
         initial_prompts: list[str],
@@ -34,6 +35,9 @@ class BaseOptimizer(ABC):
         predictor=None,
         n_eval_samples=20,
     ):
+=======
+    def __init__(self, initial_prompts: list[str], task: BaseTask, callbacks: list[Callable] = [], predictor=None):
+>>>>>>> main
         """Initialize the BaseOptimizer."""
         self.prompts = initial_prompts
         self.task = task

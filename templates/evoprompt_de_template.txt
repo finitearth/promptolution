@@ -1,0 +1,26 @@
+Please follow the instruction step-by-step to generate a better prompt.
+Identifying the different parts between Prompt 1 and Prompt 2:
+Prompt 1: Your task is to classify the comment as one of the following categories: terrible, bad, okay, good, great.
+Prompt 2: In this task, you are given sentences from movie reviews. The task is to classify a sentence as one of the following categories: terrible, bad, okay, good, great.
+Different parts:
+"Your task is to classify the comment" vs "In this task, you are given sentences from movie reviews. The task is to classify a sentence"
+"comment" vs "sentences from movie reviews"
+
+2. Randomly mutate the different parts:
+"Your task is to classify the comment" -> "The objective is to categorize the statement"
+"comment" -> "phrases in movie reviews"
+
+3. Crossover the different parts with the following Prompt 3 and generate a final prompt bracketed with <prompt> and </prompt>:
+Prompt 3: You are a sentiment classifier. To do this, you must first understand the meaning of the sentence and any relevant context. And then you should classify it as one of the following categories: terrible, bad, okay, good, great.
+
+Final Prompt: <prompt>As a sentiment classifier, analyze phrases in movie reviews and categorize them into one of the following categories: terrible, bad, okay, good, great, while considering the meaning and relevant context.</prompt>
+
+Please follow the instruction step-by-step to generate a better prompt.
+1. Identify the different parts between the Prompt 1 and Prompt 2:
+Prompt 1: <prompt1>
+Prompt 2: <prompt2>
+2. Randomly mutate the different parts
+3. Crossover the different parts with the following Prompt 3 and generate a final prompt bracketed with <prompt> and </prompt>:
+Prompt 3: <prompt0>
+
+1.

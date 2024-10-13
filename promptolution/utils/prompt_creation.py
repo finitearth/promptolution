@@ -7,7 +7,10 @@ import numpy as np
 from promptolution.llms.base_llm import BaseLLM
 from promptolution.tasks.base_task import BaseTask
 from promptolution.tasks.classification_tasks import ClassificationTask
+<<<<<<< HEAD
 from promptolution.templates import PROMPT_CREATION_TEMPLATE, PROMPT_VARIATION_TEMPLATE
+=======
+>>>>>>> main
 
 
 def create_prompt_variation(prompt: Union[List[str], str], llm: BaseLLM, meta_prompt: str = None) -> List[str]:
@@ -24,7 +27,17 @@ def create_prompt_variation(prompt: Union[List[str], str], llm: BaseLLM, meta_pr
     Returns:
         List[str]: A list of generated variations of the input prompt(s).
     """
+<<<<<<< HEAD
     meta_prompt = PROMPT_VARIATION_TEMPLATE if meta_prompt is None else meta_prompt
+=======
+    if meta_prompt is None:
+        meta_prompt = """Generate a single variation of the following instruction while keeping the semantic meaning.
+        Generate the variation starting with <prompt> and ending with </prompt> tags.
+
+        Input: <prev_prompt>
+
+        Output:"""
+>>>>>>> main
 
     if isinstance(prompt, str):
         prompt = [prompt]
@@ -76,6 +89,7 @@ def create_prompts_from_samples(task: BaseTask, llm: BaseLLM, meta_prompt: str =
         xs = task.xs[indices].tolist()
         ys = task.ys[indices].tolist()
 
+<<<<<<< HEAD
     meta_prompt = PROMPT_CREATION_TEMPLATE if meta_prompt is None else meta_prompt
     examples = "\n\n".join([f"Input: {x}\nOutput: {y}" for x, y in zip(xs, ys)])
     meta_prompt = meta_prompt.replace("<input_output_pairs", examples)
@@ -84,3 +98,19 @@ def create_prompts_from_samples(task: BaseTask, llm: BaseLLM, meta_prompt: str =
     prompt = prompt.split("</prompt>")[0].split("<prompt>")[-1]
 
     return prompt
+=======
+    if meta_prompt is None:
+        meta_prompt = (
+            "You are asked to give the corresponding prompt that gives the following outputs given these inputs."
+            + "Return it starting with <prompt> and ending with </prompt> tags."
+            + "Include the name of the output classes in the prompt."
+        )
+
+    for x, y in zip(xs, ys):
+        meta_prompt += f"\n\nInput: {x}\nOutput: {y}"
+
+    meta_prompt += "\nThe instruction was"
+
+    prompt = llm.get_response([meta_prompt])[0]
+    prompt = prompt.split("</prompt>")[0].split("<prompt>")[-1]
+>>>>>>> main

@@ -1,0 +1,13 @@
+Your task is to generate an instruction for the following task:
+<task_description>
+
+Below are some previous instructions with their scores. The score ranges from 0 to 100.
+
+<old_instructions>
+
+Here are some examples of the target dataset:
+<examples>
+
+Generate a new instruction bracketed with <prompt> and ending it with </prompt> that is different from all the instructions above and has a higher score than all the instructions above. The instruction should be concise, effective, and generally applicable to the task described.
+
+Your new instruction:
