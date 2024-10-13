@@ -43,16 +43,14 @@ class BasePredictor:
         Raises:
             NotImplementedError: If not implemented by a subclass.
         """
-
         if isinstance(prompts, str):
             prompts = [prompts]
 
-        inputs = [prompt + "\n" + x for prompt in prompts for x in xs]
-        outputs = self.llm.get_response(inputs)
+        outputs = self.llm.get_response([prompt + "\n" + x for prompt in prompts for x in xs])
         preds = self._extract_preds(outputs, (len(prompts), len(xs)))
 
         if return_seq:
-            return preds, [i + "\n" + o for i, o in zip(inputs, outputs)]
+            return preds, [i + "\n" + o for i, o in zip(xs, outputs)]
 
         return preds
 

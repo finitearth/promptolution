@@ -31,29 +31,6 @@ class Classificator(BasePredictor):
         super().__init__(llm)
         self.classes = classes
 
-    # def predict(
-    #     self,
-    #     prompts: List[str],
-    #     xs: np.ndarray,
-    # ) -> np.ndarray:
-    #     """Predict classes for given prompts and input data.
-
-    #     This method generates predictions using the language model and then
-    #     extracts the predicted class from the model's output.
-
-    #     Args:
-    #         prompts (List[str]): The list of prompts to use for prediction.
-    #         xs (np.ndarray): The input data array.
-
-    #     Returns:
-    #         np.ndarray: A 2D array of predicted classes, with shape (len(prompts), len(xs)).
-
-    #     Note:
-    #         The method concatenates each prompt with each input data point,
-    #         passes it to the language model, and then extracts the first word
-    #         in the response that matches a class in self.classes.
-    #     """
-
     def _extract_preds(self, preds, shape):
         response = []
         for pred in preds:

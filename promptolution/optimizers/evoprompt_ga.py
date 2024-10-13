@@ -56,7 +56,7 @@ class EvoPromptGA(BaseOptimizer):
             List[str]: The optimized list of prompts after all steps.
         """
         # get scores from task
-        self.scores = self.task.evaluate(self.prompts, self.predictor).tolist()
+        self.scores = self.task.evaluate(self.prompts, self.predictor, subsample=True).tolist()
         # sort prompts by score
         self.prompts = [prompt for _, prompt in sorted(zip(self.scores, self.prompts), reverse=True)]
         self.scores = sorted(self.scores, reverse=True)
@@ -64,7 +64,7 @@ class EvoPromptGA(BaseOptimizer):
         for _ in range(n_steps):
             new_prompts = self._crossover(self.prompts, self.scores)
             prompts = self.prompts + new_prompts
-            scores = self.scores + self.task.evaluate(new_prompts, self.predictor).tolist()
+            scores = self.scores + self.task.evaluate(new_prompts, self.predictor, subsample=True).tolist()
 
             # sort scores and prompts
             self.prompts = [prompt for _, prompt in sorted(zip(scores, prompts), reverse=True)][: len(self.prompts)]

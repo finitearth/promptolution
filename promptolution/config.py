@@ -33,6 +33,9 @@ class Config:
         meta_prompt (str): Prompt template for the meta LLM. Defaults to None.
         prepend_examplars (bool): rather to do examplar search and prepend few-shot examples. Defaults to False.
         n_examplars (int): how many examplars to prepend. Only used if prepend_examplars is True. Defaults to 5.
+        exemplar_selector (str): which exemplar selector to use. Defaults to None.
+        n_ds_samples_to_meta (int): how many examples to show of the ds to show to meta-llm
+        (not applicable to every optimizer)
     """
 
     task_name: str = None
@@ -55,6 +58,8 @@ class Config:
     meta_prompt: Optional[str] = None
     prepend_examplars: Optional[bool] = False
     n_examplars: Optional[int] = 5
+    exemplar_selector: Optional[str] = None
+    n_ds_samples_to_meta: Optional[int] = 2
 
     def __post_init__(self):
         """Validate the configuration after initialization."""

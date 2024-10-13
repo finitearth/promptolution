@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 
 from promptolution.config import Config
-from promptolution.exemplar_selectors.random_selector import RandomSelector
+from promptolution.exemplar_selectors import get_exemplar_selector
 from promptolution.llms import get_llm
 from promptolution.optimizers import get_optimizer
 from promptolution.predictors import Classificator
@@ -56,7 +56,7 @@ def run_optimization(config: Config):
     prompts = optimizer.optimize(n_steps=config.n_steps)
 
     if config.prepend_examplars:
-        selector = RandomSelector(task, predictor)
+        selector = get_exemplar_selector(config.exemplar_selector, task, predictor)
         prompts = [selector.select_exemplars(p, n_examples=config.n_examplars) for p in prompts]
 
     return prompts
@@ -77,7 +77,7 @@ def run_evaluation(config: Config, prompts: List[str]):
     llm = get_llm(config.evaluation_llm, token=config.api_token)
     predictor = Classificator(llm, classes=task.classes)
 
-    scores = task.evaluate(prompts, predictor)
+    scores = task.evaluate(prompts, predictor, subsample=True, n_samples=50)
     df = pd.DataFrame(dict(prompt=prompts, score=scores))
     df = df.sort_values("score", ascending=False)
 

@@ -80,7 +80,7 @@ class EvoPromptDE(BaseOptimizer):
             child_prompts = self.meta_llm.get_response(meta_prompts)
             child_prompts = [prompt.split("<prompt>")[-1].split("</prompt>")[0].strip() for prompt in child_prompts]
 
-            child_scores = self.task.evaluate(child_prompts, self.predictor)
+            child_scores = self.task.evaluate(child_prompts, self.predictor, subsample=True)
 
             for i in range(len(self.prompts)):
                 if child_scores[i] > self.scores[i]:

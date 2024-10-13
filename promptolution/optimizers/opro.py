@@ -78,7 +78,7 @@ class Opro(BaseOptimizer):
 
             prompt = self.meta_llm.get_response([meta_prompt])[0]
             prompt = prompt.split("<prompt>")[-1].split("</prompt>")[0].strip()
-            score = self.task.evaluate(prompt, self.predictor)
+            score = self.task.evaluate(prompt, self.predictor, subsample=True)
 
             self.prompts.append(prompt)
             self.scores.append(score)

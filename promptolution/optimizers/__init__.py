@@ -66,7 +66,7 @@ def get_optimizer(
     if config.optimizer == "opro":
         prompt_template = OPRO_TEMPLATE
         prompt_template = config.meta_prompt if config.meta_prompt else prompt_template
-        n_samples = kwargs.get("n_samples", config.n_samples if config is not None else None)
+        n_samples = kwargs.get("n_samples", config.n_ds_samples_to_meta if config is not None else None)
         return Opro(prompt_template=prompt_template, n_samples=n_samples, *args, **kwargs)
 
     raise ValueError(f"Unknown optimizer: {config.optimizer}")

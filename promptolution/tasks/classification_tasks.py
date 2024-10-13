@@ -104,7 +104,7 @@ class ClassificationTask(BaseTask):
         prompts: List[str],
         predictor: BasePredictor,
         n_samples: int = 20,
-        subsample: bool = True,
+        subsample: bool = False,
         return_seq: bool = False,
     ) -> np.ndarray:
         """Evaluate a set of prompts using a given predictor.
@@ -113,7 +113,8 @@ class ClassificationTask(BaseTask):
             prompts (List[str]): List of prompts to evaluate.
             predictor (BasePredictor): Predictor to use for evaluation.
             n_samples (int, optional): Number of samples to use if subsampling. Defaults to 20.
-            subsample (bool, optional): Whether to use subsampling. Defaults to True.
+            subsample (bool, optional): Whether to use subsampling.
+            If set to true, samples a different subset per call. Defaults to False.
             return_seq (bool, optional): rather to return the generating sequence
 
         Returns:
