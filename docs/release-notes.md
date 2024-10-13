@@ -1,6 +1,7 @@
 # Release Notes
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ## Release v0.2.0
 
 ### What's Changed
@@ -70,3 +71,6 @@
 =======
 coming soon...
 >>>>>>> main
+=======
+coming soon...
+>>>>>>> parent of e23dd74 (Chore/docs release notes (#18))
