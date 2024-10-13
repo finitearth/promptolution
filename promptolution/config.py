@@ -2,7 +2,7 @@
 import configparser
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Literal, Optional
 
 
 @dataclass
@@ -33,13 +33,14 @@ class Config:
         api_token (str): API token for different APIs, as implemented in LLM classes.
         Should not be None if APILLM is used. Defaults to None.
         meta_prompt (str): Prompt template for the meta LLM.
-    If None is set, default meta_prompts from template.py will be used. Defaults to None.
-    prepend_exemplars (bool): rather to do exemplar search and prepend few-shot examples. Defaults to False.
-    n_exemplars (int): how many exemplars to prepend. Only used if prepend_exemplars is True. Defaults to 5.
-    exemplar_selector (str): which exemplar selector to use. Should not be None if preped_exemplars is True.
-    Defaults to None.
-    n_ds_samples_to_meta (int): how many examples to show of the ds to show to meta-llm
-    (not applicable to every optimizer)
+        If None is set, default meta_prompts from template.py will be used. Defaults to None.
+        prepend_exemplars (bool): rather to do exemplar search and prepend few-shot examples. Defaults to False.
+        n_exemplars (int): how many exemplars to prepend. Only used if prepend_exemplars is True. Defaults to 5.
+        exemplar_selector (str): which exemplar selector to use. Should not be None if preped_exemplars is True.
+        Defaults to None.
+        n_ds_samples_to_meta (int): how many examples to show of the ds to show to meta-llm
+        (not applicable to every optimizer)
+        n_eval_samples (int): how many examples to show to evaluation llm for evaluation.
     """
 
     task_name: str = None
@@ -55,7 +56,7 @@ class Config:
     include_task_desc: bool = True
     donor_random: bool = False
     random_seed: int = 42
-    selection_mode: Optional[str] = "random"
+    selection_mode: Optional[Literal["random", "wheel", "tour"]] = "random"
     meta_bs: Optional[int] = None
     downstream_bs: Optional[int] = None
     api_token: Optional[str] = None
@@ -64,6 +65,7 @@ class Config:
     n_exemplars: Optional[int] = 5
     exemplar_selector: Optional[str] = None
     n_ds_samples_to_meta: Optional[int] = 2
+    n_eval_samples: Optional[int] = 20
 
     def __post_init__(self):
         """Validate the configuration after initialization."""

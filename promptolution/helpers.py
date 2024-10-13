@@ -51,6 +51,7 @@ def run_optimization(config: Config):
         initial_prompts=init_pop,
         task=task,
         predictor=predictor,
+        n_eval_samples=config.n_eval_samples,
     )
 
     prompts = optimizer.optimize(n_steps=config.n_steps)
@@ -77,7 +78,7 @@ def run_evaluation(config: Config, prompts: List[str]):
     llm = get_llm(config.evaluation_llm, token=config.api_token)
     predictor = Classificator(llm, classes=task.classes)
 
-    scores = task.evaluate(prompts, predictor, subsample=True, n_samples=50)
+    scores = task.evaluate(prompts, predictor, subsample=True, n_samples=config.n_eval_samples)
     df = pd.DataFrame(dict(prompt=prompts, score=scores))
     df = df.sort_values("score", ascending=False)
 

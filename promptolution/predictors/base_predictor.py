@@ -1,9 +1,11 @@
 """Base module for predictors."""
 
 from abc import abstractmethod
-from typing import List
+from typing import List, Tuple
 
 import numpy as np
+
+from promptolution.llms.base_llm import BaseLLM
 
 
 class BasePredictor:
@@ -20,7 +22,7 @@ class BasePredictor:
                  to make predictions based on prompts and input data.
     """
 
-    def __init__(self, llm):
+    def __init__(self, llm: BaseLLM):
         """Initialize the Classificator.
 
         Args:
@@ -54,7 +56,13 @@ class BasePredictor:
 
         return preds
 
-    def _extract_preds(self, preds, shape):
+    def _extract_preds(self, preds: List[str], shape: Tuple[int, int]) -> np.ndarray:
+        """Extract class labels from the predictions, based on the list of valid class labels.
+
+        Args:
+            preds: The raw predictions from the language model.
+            shape: The shape of the output array: (n_prompts, n_samples).
+        """
         raise NotImplementedError
 
 

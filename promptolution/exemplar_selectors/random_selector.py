@@ -41,6 +41,6 @@ class RandomSelector(BaseExemplarSelector):
             score, seq = self.task.evaluate(prompt, self.predictor, n_samples=1, return_seq=True)
             if score == self.desired_score:
                 examples.append(seq[0])
-        prompt = "\n".join([prompt] + examples)
+        prompt = "\n\n".join([prompt] + examples) + "\n\n"
 
         return prompt

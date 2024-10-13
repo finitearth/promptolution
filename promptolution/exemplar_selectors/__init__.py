@@ -1,12 +1,19 @@
 """Module for exemplar selectors."""
 
+from typing import Literal
+
 from promptolution.exemplar_selectors.random_search_selector import RandomSearchSelector
 from promptolution.exemplar_selectors.random_selector import RandomSelector
 from promptolution.predictors.base_predictor import BasePredictor
 from promptolution.tasks.base_task import BaseTask
 
+SELECTOR_MAP = {
+    "random": RandomSelector,
+    "random_search": RandomSearchSelector,
+}
 
-def get_exemplar_selector(name: str, task: BaseTask, predictor: BasePredictor):
+
+def get_exemplar_selector(name: Literal["random", "random_search"], task: BaseTask, predictor: BasePredictor):
     """Factory function to get an exemplar selector based on the given name.
 
     Args:
@@ -18,12 +25,9 @@ def get_exemplar_selector(name: str, task: BaseTask, predictor: BasePredictor):
         BaseExemplarSelector: An instance of the requested exemplar selector.
 
     Raises:
-        ValueError: If the requested selector name is not found in the SELECTOR_MAPPING.
+        ValueError: If the requested selector name is not found.
     """
-    if name == "random":
-        return RandomSelector(task, predictor)
+    if name not in SELECTOR_MAP:
+        raise ValueError(f"Exemplar selector '{name}' not found. Available selectors: {list(SELECTOR_MAP.keys())}")
 
-    if name == "random_search":
-        return RandomSearchSelector(task, predictor)
-
-    raise ValueError(f"Unknown exemplar selector: {name}")
+    return SELECTOR_MAP[name](task, predictor)

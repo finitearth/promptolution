@@ -29,8 +29,8 @@ class RandomSearchSelector(BaseExemplarSelector):
 
         for _ in range(n_trials):
             _, seq = self.task.evaluate(prompt, self.predictor, n_samples=n_examples, subsample=True, return_seq=True)
-            # evaluate prompts as few shots
-            prompt_with_examples = "\n".join([prompt] + seq)
+            prompt_with_examples = "\n\n".join([prompt] + seq) + "\n\n"
+            # evaluate prompts as few shot prompt
             score = self.task.evaluate(prompt_with_examples, self.predictor, subsample=True)
             if score > best_score:
                 best_score = score

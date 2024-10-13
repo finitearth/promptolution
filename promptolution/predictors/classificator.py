@@ -1,6 +1,6 @@
 """Module for classification predictors."""
 
-from typing import List
+from typing import List, Tuple
 
 import numpy as np
 
@@ -11,7 +11,10 @@ class Classificator(BasePredictor):
     """A predictor class for classification tasks using language models.
 
     This class takes a language model and a list of classes, and provides a method
-    to predict classes for given prompts and input data.
+    to predict classes for given prompts and input data. The class labels are extracted
+    by matching the words in the prediction with the list of valid class labels.
+    The first occurrence of a valid class label in the prediction is used as the predicted class.
+    If no valid class label is found, the first class label in the list is used as the default prediction.
 
     Attributes:
         llm: The language model used for generating predictions.
@@ -31,7 +34,13 @@ class Classificator(BasePredictor):
         super().__init__(llm)
         self.classes = classes
 
-    def _extract_preds(self, preds, shape):
+    def _extract_preds(self, preds: List[str], shape: Tuple[int, int]) -> np.ndarray:
+        """Extract class labels from the predictions, based on the list of valid class labels.
+
+        Args:
+            preds: The raw predictions from the language model.
+            shape: The shape of the output array: (n_prompts, n_samples).
+        """
         response = []
         for pred in preds:
             predicted_class = self.classes[0]  # use first class as default pred

@@ -38,7 +38,9 @@ class Opro(BaseOptimizer):
         super().__init__(**args)
         self.meta_prompt = self.meta_prompt.replace("<task_description>", self.task.description)
 
-        self.scores = [self.task.evaluate(p, self.predictor) for p in self.prompts]
+        self.scores = [
+            self.task.evaluate(p, self.predictor, subsample=True, n_samples=self.n_eval_samples) for p in self.prompts
+        ]
 
     def _sample_examples(self):
         """Sample examples from the task dataset with their label.
@@ -78,7 +80,7 @@ class Opro(BaseOptimizer):
 
             prompt = self.meta_llm.get_response([meta_prompt])[0]
             prompt = prompt.split("<prompt>")[-1].split("</prompt>")[0].strip()
-            score = self.task.evaluate(prompt, self.predictor, subsample=True)
+            score = self.task.evaluate(prompt, self.predictor, subsample=True, n_samples=self.n_eval_samples)
 
             self.prompts.append(prompt)
             self.scores.append(score)
