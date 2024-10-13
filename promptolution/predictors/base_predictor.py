@@ -23,7 +23,7 @@ class BasePredictor:
     """
 
     def __init__(self, llm: BaseLLM):
-        """Initialize the Classificator.
+        """Initialize the BasePredictor.
 
         Args:
             llm: The language model to use for predictions.
