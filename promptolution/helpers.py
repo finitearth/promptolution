@@ -55,9 +55,9 @@ def run_optimization(config: Config):
 
     prompts = optimizer.optimize(n_steps=config.n_steps)
 
-    if config.prepend_examplars:
+    if config.prepend_exemplars:
         selector = get_exemplar_selector(config.exemplar_selector, task, predictor)
-        prompts = [selector.select_exemplars(p, n_examples=config.n_examplars) for p in prompts]
+        prompts = [selector.select_exemplars(p, n_examples=config.n_exemplars) for p in prompts]
 
     return prompts
 
