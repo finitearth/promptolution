@@ -1,9 +1,11 @@
 """Base module for predictors."""
 
 from abc import abstractmethod
-from typing import List
+from typing import List, Tuple
 
 import numpy as np
+
+from promptolution.llms.base_llm import BaseLLM
 
 
 class BasePredictor:
@@ -12,43 +14,54 @@ class BasePredictor:
     This class defines the interface that all concrete predictor implementations should follow.
 
     Attributes:
-        model_id (str): Identifier for the model used by the predictor.
-        classes (List[str]): List of possible class labels for classification tasks.
+        llm: The language model used for generating predictions.
+
 
     Methods:
         predict: An abstract method that should be implemented by subclasses
                  to make predictions based on prompts and input data.
     """
 
-    def __init__(self, model_id, classes, *args, **kwargs):
+    def __init__(self, llm: BaseLLM):
         """Initialize the BasePredictor.
 
         Args:
-            model_id (str): Identifier for the model to use.
-            classes (List[str]): List of possible class labels.
-            *args: Variable length argument list.
-            **kwargs: Arbitrary keyword arguments.
+            llm: The language model to use for predictions.
+            classes (List[str]): The list of valid class labels.
         """
-        self.model_id = model_id
-        self.classes = classes
+        self.llm = llm
 
-    @abstractmethod
-    def predict(
-        self,
-        prompts: List[str],
-        xs: np.ndarray,
-    ) -> np.ndarray:
+    def predict(self, prompts: List[str], xs: np.ndarray, return_seq: bool = False) -> np.ndarray:
         """Abstract method to make predictions based on prompts and input data.
 
         Args:
             prompts (List[str]): List of prompts to use for prediction.
             xs (np.ndarray): Array of input data.
+            return_seq (bool, optional): whether to return the generating sequence
 
         Returns:
             np.ndarray: Array of predictions.
 
         Raises:
             NotImplementedError: If not implemented by a subclass.
+        """
+        if isinstance(prompts, str):
+            prompts = [prompts]
+
+        outputs = self.llm.get_response([prompt + "\n" + x for prompt in prompts for x in xs])
+        preds = self._extract_preds(outputs, (len(prompts), len(xs)))
+
+        if return_seq:
+            return preds, [i + "\n" + o for i, o in zip(xs, outputs)]
+
+        return preds
+
+    def _extract_preds(self, preds: List[str], shape: Tuple[int, int]) -> np.ndarray:
+        """Extract class labels from the predictions, based on the list of valid class labels.
+
+        Args:
+            preds: The raw predictions from the language model.
+            shape: The shape of the output array: (n_prompts, n_samples).
         """
         raise NotImplementedError
 

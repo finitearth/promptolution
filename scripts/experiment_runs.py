@@ -12,7 +12,8 @@ from promptolution.config import Config
 from promptolution.llms import get_llm
 from promptolution.optimizers import get_optimizer
 from promptolution.predictors import get_predictor
-from promptolution.tasks import get_tasks
+from promptolution.tasks import get_task
+from promptolution.templates import EVOPROMPT_DE_TEMPLATE, EVOPROMPT_GA_TEMPLATE, EVOPROMPT_DE_TEMPLATE_TD, EVOPROMPT_GA_TEMPLATE_TD
 
 logger = Logger(__name__)
 logger.setLevel(INFO)
@@ -38,14 +39,17 @@ def main():
             for evaluator_llm, meta_llm in zip(evaluator_llms, meta_llms):
                 for downstream_llm in downstream_llms:
                     for random_seed in [42, 47, 69]:
+                        if "task_desc" in meta_prompt_path:
+                            prompt_template = EVOPROMPT_DE_TEMPLATE_TD if "evopromptde" in optimizer_name else EVOPROMPT_GA_TEMPLATE_TD
+                        else:
+                            prompt_template = EVOPROMPT_DE_TEMPLATE if "evopromptde" in optimizer_name else EVOPROMPT_GA_TEMPLATE
                         config = Config(
                             task_name=task_name,
-                            ds_path=f"data_sets/cls/{task_name}",
+                            ds_path=f"data_sets/{task_name}",
                             n_steps=int(all_configs["task"]["steps"]),
                             optimizer=optimizer_name,
                             meta_llm=meta_llm,
                             downstream_llm=downstream_llm,
-                            meta_prompt_path=meta_prompt_path,
                             init_pop_size=int(all_configs["optimizer"]["init_population"]),
                             logging_dir=(
                                 f"logs/{experiment_name}/"
@@ -56,6 +60,7 @@ def main():
                             evaluation_llm=evaluator_llm,
                             selection_mode="random",
                             donor_random=False,
+                            meta_prompt=prompt_template,
                         )
                         # skip already performed experiments
                         if Path(config.logging_dir).exists():
@@ -65,7 +70,8 @@ def main():
 
 def run_experiment(config: Config):
     """Run a single experiment."""
-    task = get_tasks(config)[0]
+    task = get_task(config, split="dev")
+
     init_populations = task.initial_population
     # subsample using random seed
     np.random.seed(config.random_seed)
@@ -80,7 +86,7 @@ def run_experiment(config: Config):
         best_prompt_callback,
         ProgressBarCallback(config.n_steps),
     ]
-    prompt_template = open(config.meta_prompt_path, "r").read()
+    prompt_template = config.meta_prompt
     prompt_template = prompt_template.replace("<task_desc>", task.description)
 
     if "local" in config.meta_llm:
@@ -94,7 +100,6 @@ def run_experiment(config: Config):
         task=task,
         initial_prompts=init_population,
         callbacks=callbacks,
-        prompt_template=prompt_template,
         predictor=predictor,
     )
 
@@ -104,7 +109,7 @@ def run_experiment(config: Config):
     best_prompt, best_score = best_prompt_callback.get_best_prompt()
     logger.critical(f"Final prompt: {best_prompt}, with score: {best_score}")
 
-    test_task = get_tasks(config, split="test")[0]
+    test_task = get_task(config.ds_path, split="test", random_seed=config.random_seed, task_name=config.task_name)
     test_predictor = get_predictor(config.downstream_llm, classes=test_task.classes)
     test_score = test_task.evaluate(best_prompt, test_predictor, subsample=False)
 

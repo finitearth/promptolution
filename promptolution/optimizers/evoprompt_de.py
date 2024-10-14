@@ -4,6 +4,7 @@ from typing import List
 
 import numpy as np
 
+from promptolution.llms.base_llm import BaseLLM
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 
 
@@ -29,10 +30,11 @@ class EvoPromptDE(BaseOptimizer):
         **args: Additional arguments passed to the BaseOptimizer.
     """
 
-    def __init__(self, prompt_template, meta_llm, donor_random=False, **args):
+    def __init__(self, prompt_template: str = None, meta_llm: BaseLLM = None, donor_random: bool = False, **args):
         """Initialize the EvoPromptDE optimizer."""
         self.prompt_template = prompt_template
         self.donor_random = donor_random
+        assert meta_llm is not None, "A meta language model must be provided."
         self.meta_llm = meta_llm
         super().__init__(**args)
 
@@ -49,7 +51,7 @@ class EvoPromptDE(BaseOptimizer):
         Returns:
             List[str]: The optimized list of prompts after all steps.
         """
-        self.scores = self.task.evaluate(self.prompts, self.predictor)
+        self.scores = self.task.evaluate(self.prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples)
         self.prompts = [prompt for _, prompt in sorted(zip(self.scores, self.prompts), reverse=True)]
         self.scores = sorted(self.scores, reverse=True)
 
@@ -78,7 +80,9 @@ class EvoPromptDE(BaseOptimizer):
             child_prompts = self.meta_llm.get_response(meta_prompts)
             child_prompts = [prompt.split("<prompt>")[-1].split("</prompt>")[0].strip() for prompt in child_prompts]
 
-            child_scores = self.task.evaluate(child_prompts, self.predictor)
+            child_scores = self.task.evaluate(
+                child_prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples
+            )
 
             for i in range(len(self.prompts)):
                 if child_scores[i] > self.scores[i]:

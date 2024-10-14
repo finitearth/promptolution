@@ -4,6 +4,7 @@ from typing import List
 
 import numpy as np
 
+from promptolution.llms.base_llm import BaseLLM
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 
 
@@ -32,9 +33,10 @@ class EvoPromptGA(BaseOptimizer):
         AssertionError: If an invalid selection mode is provided.
     """
 
-    def __init__(self, prompt_template, meta_llm, selection_mode="wheel", **args):
+    def __init__(self, prompt_template: str = None, meta_llm: BaseLLM = None, selection_mode: str = "wheel", **args):
         """Initialize the EvoPromptGA optimizer."""
         self.prompt_template = prompt_template
+        assert meta_llm is not None, "Meta_llm is required"
         self.meta_llm = meta_llm
         assert selection_mode in ["random", "wheel", "tour"], "Invalid selection mode."
         self.selection_mode = selection_mode
@@ -54,7 +56,9 @@ class EvoPromptGA(BaseOptimizer):
             List[str]: The optimized list of prompts after all steps.
         """
         # get scores from task
-        self.scores = self.task.evaluate(self.prompts, self.predictor).tolist()
+        self.scores = self.task.evaluate(
+            self.prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples
+        ).tolist()
         # sort prompts by score
         self.prompts = [prompt for _, prompt in sorted(zip(self.scores, self.prompts), reverse=True)]
         self.scores = sorted(self.scores, reverse=True)
@@ -62,7 +66,12 @@ class EvoPromptGA(BaseOptimizer):
         for _ in range(n_steps):
             new_prompts = self._crossover(self.prompts, self.scores)
             prompts = self.prompts + new_prompts
-            scores = self.scores + self.task.evaluate(new_prompts, self.predictor).tolist()
+            scores = (
+                self.scores
+                + self.task.evaluate(
+                    new_prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples
+                ).tolist()
+            )
 
             # sort scores and prompts
             self.prompts = [prompt for _, prompt in sorted(zip(scores, prompts), reverse=True)][: len(self.prompts)]
