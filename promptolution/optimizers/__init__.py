@@ -39,11 +39,9 @@ def get_optimizer(
     Raises:
         ValueError: If an unknown optimizer type is specified in the config.
     """
-    if config.optimizer == "dummy":
-        return DummyOptimizer(*args, **kwargs)
-
     if optimizer is None:
         optimizer = config.optimizer
+
 
     if include_task_desc is None:
         include_task_desc = config.include_task_desc
@@ -51,22 +49,25 @@ def get_optimizer(
     if config is not None and meta_prompt is None:
         meta_prompt = config.meta_prompt
 
-    if config.optimizer == "evopromptde":
+    if optimizer == "dummy":
+        return DummyOptimizer(*args, **kwargs)
+
+    if optimizer == "evopromptde":
         prompt_template = EVOPROMPT_DE_TEMPLATE_TD if include_task_desc else EVOPROMPT_DE_TEMPLATE
         prompt_template = meta_prompt if meta_prompt else prompt_template
         donor_random = kwargs.get("donor_random", config.donor_random if config is not None else None)
         return EvoPromptDE(donor_random=donor_random, prompt_template=prompt_template, *args, **kwargs)
 
-    if config.optimizer == "evopromptga":
+    if optimizer == "evopromptga":
         prompt_template = EVOPROMPT_GA_TEMPLATE_TD if config.include_task_desc else EVOPROMPT_GA_TEMPLATE
         prompt_template = config.meta_prompt if meta_prompt else prompt_template
         selection_mode = kwargs.get("selection_mode", config.selection_mode if config is not None else None)
         return EvoPromptGA(selection_mode=selection_mode, prompt_template=prompt_template, *args, **kwargs)
 
-    if config.optimizer == "opro":
+    if optimizer == "opro":
         prompt_template = OPRO_TEMPLATE
         prompt_template = config.meta_prompt if config.meta_prompt else prompt_template
         n_samples = kwargs.get("n_samples", config.n_ds_samples_to_meta if config is not None else None)
         return Opro(prompt_template=prompt_template, n_samples=n_samples, *args, **kwargs)
 
-    raise ValueError(f"Unknown optimizer: {config.optimizer}")
+    raise ValueError(f"Unknown optimizer: {optimizer}")
