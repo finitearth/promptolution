@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "promptolution"
-version = "1.0.0"
+version = "1.0.2"
 description = ""
 authors = ["Tom Zehle, Moritz Schlager, Timo Heiß"]
 readme = "README.md"
