@@ -2,10 +2,10 @@
 
 import json
 from pathlib import Path
-import pandas as pd
 from typing import Callable, Dict, List, Literal, Optional
 
 import numpy as np
+import pandas as pd
 from sklearn.metrics import accuracy_score
 
 from promptolution.predictors.base_predictor import BasePredictor

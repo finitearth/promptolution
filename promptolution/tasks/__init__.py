@@ -39,7 +39,6 @@ def get_task(
         - For all other tasks, a ClassificationTask instance is created.
         - The task description is loaded from a 'description.json' file in the dataset path.
     """
-
     if ds_path is None:
         ds_path = config.ds_path
     if task_name is None:
