@@ -1,6 +1,15 @@
 # Release Notes
 
-### Release v1.0.0
+## Release v1.0.1
+### What's changed
+#### Added features
+* Enable reading tasks from a pandas dataframe
+
+#### Further Changes:
+* deleted experiment files from the repo folders (logs, configs, etc.)
+* improved opros meta-prompt
+
+## Release v1.0.0
 ### What's changed
 #### Added Features:
 * Classes for Exemplar selection (Random and RandomSearch)
