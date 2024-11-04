@@ -39,7 +39,8 @@ class Opro(BaseOptimizer):
         self.meta_prompt = self.meta_prompt.replace("<task_description>", self.task.description)
 
         self.scores = [
-            self.task.evaluate(p, self.predictor, subsample=True, n_samples=self.n_eval_samples)[0] for p in self.prompts
+            self.task.evaluate(p, self.predictor, subsample=True, n_samples=self.n_eval_samples)[0]
+            for p in self.prompts
         ]
 
     def _sample_examples(self):
@@ -61,7 +62,10 @@ class Opro(BaseOptimizer):
             str: The formatted string of previous prompts and their scores.
         """
         return "".join(
-            [f"The old instruction was:\n{prompt}\nIt scored: {score}\n\n" for prompt, score in zip(self.prompts, self.scores)]
+            [
+                f"The old instruction was:\n{prompt}\nIt scored: {score}\n\n"
+                for prompt, score in zip(self.prompts, self.scores)
+            ]
         )
 
     def optimize(self, n_steps: int) -> List[str]:

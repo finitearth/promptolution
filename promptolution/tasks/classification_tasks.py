@@ -79,7 +79,7 @@ class ClassificationTask(BaseTask):
         metric: Callable = accuracy_score,
     ) -> "ClassificationTask":
         """Create a ClassificationTask instance from a pandas DataFrame.
-        
+
         Args:
             df (pd.DataFrame): Input DataFrame containing the data
             x_column (str): Name of the column containing input texts
@@ -90,12 +90,12 @@ class ClassificationTask(BaseTask):
             seed (int): Random seed for reproducibility
             split (Literal["dev", "test"]): Dataset split to use
             metric (Callable): Metric to use for evaluation
-            
+
         Returns:
             ClassificationTask: A new instance initialized with the DataFrame data
         """
         instance = cls.__new__(cls)
-        
+
         # Initialize basic attributes
         instance.task_id = task_id
         instance.path = None
@@ -104,21 +104,21 @@ class ClassificationTask(BaseTask):
         instance.initial_population = initial_prompts or []
         instance.metric = metric
         instance.split = split
-        
+
         # Sort classes by frequency
         value_counts = df[y_column].value_counts()
         instance.classes = value_counts.index.tolist()
-        
+
         # Create a mapping from class labels to integers
         label_to_int = {label: i for i, label in enumerate(instance.classes)}
-        
+
         # Set data attributes
         instance.xs = df[x_column].values
         instance.ys = df[y_column].map(label_to_int).values  # Convert labels to integers
-        
+
         # Set seed
         instance.reset_seed(seed)
-        
+
         return instance
 
     def __str__(self):

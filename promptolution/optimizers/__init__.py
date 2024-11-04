@@ -42,7 +42,6 @@ def get_optimizer(
     if optimizer is None:
         optimizer = config.optimizer
 
-
     if include_task_desc is None:
         include_task_desc = config.include_task_desc
 
