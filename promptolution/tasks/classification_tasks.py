@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Callable, Dict, List, Literal, Optional
 
 import numpy as np
+import pandas as pd
 from sklearn.metrics import accuracy_score
 
 from promptolution.predictors.base_predictor import BasePredictor
@@ -63,6 +64,62 @@ class ClassificationTask(BaseTask):
         self.metric = metric
         self._parse_task()
         self.reset_seed(seed)
+
+    @classmethod
+    def from_dataframe(
+        cls,
+        df: pd.DataFrame,
+        description: str,
+        x_column: str = "x",
+        y_column: str = "y",
+        task_id: str = "Classification Task",
+        initial_prompts: List[str] = None,
+        seed: int = 42,
+        split: Literal["dev", "test"] = "dev",
+        metric: Callable = accuracy_score,
+    ) -> "ClassificationTask":
+        """Create a ClassificationTask instance from a pandas DataFrame.
+
+        Args:
+            df (pd.DataFrame): Input DataFrame containing the data
+            x_column (str): Name of the column containing input texts
+            y_column (str): Name of the column containing labels
+            task_id (str): Unique identifier for the task
+            description (str, optional): Description of the task
+            initial_prompts (List[str], optional): Initial set of prompts
+            seed (int): Random seed for reproducibility
+            split (Literal["dev", "test"]): Dataset split to use
+            metric (Callable): Metric to use for evaluation
+
+        Returns:
+            ClassificationTask: A new instance initialized with the DataFrame data
+        """
+        instance = cls.__new__(cls)
+
+        # Initialize basic attributes
+        instance.task_id = task_id
+        instance.path = None
+        instance.dataset_json = None
+        instance.description = description
+        instance.initial_population = initial_prompts or []
+        instance.metric = metric
+        instance.split = split
+
+        # Sort classes by frequency
+        value_counts = df[y_column].value_counts()
+        instance.classes = value_counts.index.tolist()
+
+        # Create a mapping from class labels to integers
+        label_to_int = {label: i for i, label in enumerate(instance.classes)}
+
+        # Set data attributes
+        instance.xs = df[x_column].values
+        instance.ys = df[y_column].map(label_to_int).values  # Convert labels to integers
+
+        # Set seed
+        instance.reset_seed(seed)
+
+        return instance
 
     def __str__(self):
         """Convert task to string representation, returning the task id."""

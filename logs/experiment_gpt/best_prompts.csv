@@ -1,8 +1,0 @@
-,prompt,task,score
-0,"Choose a word from World, Sports, Business and Tech to categorize the given text.",agnews,1.0
-1,"Classify the provided text as either ""positive"" or ""negative"" based on its emotional sentiment.",cr,1.0
-2,"Ascertain the underlying emotional tone of the input text, categorizing it as either unambiguously positive, unambiguously negative, neutral, or a nuanced blend of both sentiment options.",mr,1.0
-3,"Determine the sentiment of the given text by labeling it as 'terrible', 'bad', 'okay', 'good', or 'great' according to the author's expressed emotions.",sst-5,0.8
-4,"Label the provided sentence or comment as ""positive"" or ""negative"" based on its tone and sentiment.",sst2,1.0
-5,"Given an expression, you need to judge whether it represents subjective or objective opinion by assessing the context and meaning.",subj,0.9
-6,"Identify the most suitable category (Description, Entity, Expression, Human, Location, or Number) for the provided text or question.",trec,0.95

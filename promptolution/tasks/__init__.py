@@ -39,16 +39,15 @@ def get_task(
         - For all other tasks, a ClassificationTask instance is created.
         - The task description is loaded from a 'description.json' file in the dataset path.
     """
-    if config.task_name == "dummy":
-        task = DummyTask()
-        return task
-
     if ds_path is None:
         ds_path = config.ds_path
     if task_name is None:
         task_name = config.task_name
     if random_seed is None:
         random_seed = config.random_seed
+    if task_name == "dummy":
+        task = DummyTask()
+        return task
     task_description_path = Path(ds_path)
     task = ClassificationTask(task_description_path, task_name, split=split, seed=random_seed)
 

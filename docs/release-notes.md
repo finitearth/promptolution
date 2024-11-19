@@ -1,7 +1,23 @@
 # Release Notes
 
-## Release v1.0.0
+## Release v1.1.0
+### What's changed
+#### Added features
+* Enable reading tasks from a pandas dataframe
 
+#### Further Changes:
+* deleted experiment files from the repo folders (logs, configs, etc.)
+* improved opros meta-prompt
+
+## Release v1.0.1
+### What's changed
+#### Added features
+-
+
+#### Further Changes:
+* fixed release notes
+
+## Release v1.0.0
 ### What's changed
 #### Added Features:
 * exemplar selection module, classes for exemplar selection (Random and RandomSearch)
@@ -79,15 +95,4 @@
 * Added experiment results and evaluation notebooks
 
 **Full Changelog**: [here](https://github.com/finitearth/promptolution/commits/0.1.0)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-coming soon...
->>>>>>> main
-=======
-coming soon...
->>>>>>> parent of e23dd74 (Chore/docs release notes (#18))
-=======
->>>>>>> parent of 25639c9 (Merge branch dev accepting all incoming changes)
-=======
->>>>>>> 4aa104bdeab206bf1a7032f3ce7edc4fa9de5411
+
