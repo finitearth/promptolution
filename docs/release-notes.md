@@ -1,17 +1,18 @@
 # Release Notes
 
-### Release v1.0.0
+## Release v1.0.0
+
 ### What's changed
 #### Added Features:
-* Classes for Exemplar selection (Random and RandomSearch)
+* exemplar selection module, classes for exemplar selection (Random and RandomSearch)
 * helper functions: run_experiment, run_optimization and run_evaluation
 
 #### Further Changes:
-* removed deepinfra helper functions, as the langchain-community libary is now working as intended
+* removed deepinfra helper functions as langchain-community libary is now working as intended
 * added license
 * added release notes :)
 
-**Full Changelog**: [here](https://github.com/finitearth/promptolution/compare/v0..20...v1.0.0)
+**Full Changelog**: [here](https://github.com/finitearth/promptolution/compare/v0.2.0...v1.0.0)
 
 ## Release v0.2.0
 
@@ -20,7 +21,6 @@
 * Prompt creation utility function
 * Prompt variation utility function
 * New optimizer: OPro (see [arXiv paper](https://arxiv.org/abs/2309.03409))
-
 
 #### Further Changes:
 * Workflows for automated build, deployment & release
@@ -80,6 +80,7 @@
 
 **Full Changelog**: [here](https://github.com/finitearth/promptolution/commits/0.1.0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 coming soon...
 >>>>>>> main
@@ -88,3 +89,5 @@ coming soon...
 >>>>>>> parent of e23dd74 (Chore/docs release notes (#18))
 =======
 >>>>>>> parent of 25639c9 (Merge branch dev accepting all incoming changes)
+=======
+>>>>>>> 4aa104bdeab206bf1a7032f3ce7edc4fa9de5411
