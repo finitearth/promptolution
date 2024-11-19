@@ -56,7 +56,6 @@ class ClassificationTask(BaseTask):
         self.task_id: str = task_id
         self.path: Path = dataset_path
         self.dataset_json: Dict = json.loads((dataset_path / Path("description.json")).read_text())
-        self.path: Path = dataset_path
         self.description: Optional[str] = None
         self.initial_population: Optional[List[str]] = None
         self.xs: Optional[np.ndarray] = np.array([])
