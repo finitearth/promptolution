@@ -1,6 +1,6 @@
 # Release Notes
 
-## Release v1.0.2
+## Release v1.1.0
 ### What's changed
 #### Added features
 * Enable reading tasks from a pandas dataframe
@@ -9,7 +9,7 @@
 * deleted experiment files from the repo folders (logs, configs, etc.)
 * improved opros meta-prompt
 
-## Release v1.0.2
+## Release v1.0.1
 ### What's changed
 #### Added features
 -
