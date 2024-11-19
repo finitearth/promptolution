@@ -8,7 +8,7 @@
 #### Further Changes:
 * deleted experiment files from the repo folders (logs, configs, etc.)
 * improved opros meta-prompt
-* added support for python versions from 3.9 onswards (previously 3.11)
+* added support for python versions from 3.9 onwards (previously 3.11)
 
 ## Release v1.0.1
 ### What's changed
