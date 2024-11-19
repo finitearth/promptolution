@@ -1,7 +1,9 @@
 """Module for classification tasks."""
 
 import json
+import json
 from pathlib import Path
+from typing import Callable, Dict, List, Literal, Optional
 from typing import Callable, Dict, List, Literal, Optional
 
 import numpy as np
@@ -21,6 +23,7 @@ class ClassificationTask(BaseTask):
     Attributes:
         task_id (str): Unique identifier for the task.
         path (Path): Path to the dataset description JSON file, and initial prompts.
+        path (Path): Path to the dataset description JSON file, and initial prompts.
         dataset_json (Dict): Dictionary containing dataset information.
         description (Optional[str]): Description of the task.
         initial_population (Optional[List[str]]): Initial set of prompts.
@@ -28,7 +31,9 @@ class ClassificationTask(BaseTask):
         ys (Optional[np.ndarray]): Ground truth labels for the task.
         classes (Optional[List]): List of possible class labels.
         seed (int): Random seed for reproducibility.
+        seed (int): Random seed for reproducibility.
         split (Literal["dev", "test"]): Dataset split to use.
+        metric (Callable): Metric to use as an evaluation score for the prompts.
         metric (Callable): Metric to use as an evaluation score for the prompts.
 
     Inherits from:
@@ -48,11 +53,15 @@ class ClassificationTask(BaseTask):
         Args:
             task_id (str): Unique identifier for the task.
             dataset_path (str): Path to the dataset description JSON file.
+            dataset_path (str): Path to the dataset description JSON file.
             seed (int, optional): Random seed for reproducibility. Defaults to 42.
             split (Literal["dev", "test"], optional): Dataset split to use. Defaults to "dev".
             metric (Callable): Metric to use as an evaluation score for the prompts. Defaults to sklearn's accuracy.
+            metric (Callable): Metric to use as an evaluation score for the prompts. Defaults to sklearn's accuracy.
         """
         self.task_id: str = task_id
+        self.path: Path = dataset_path
+        self.dataset_json: Dict = json.loads((dataset_path / Path("description.json")).read_text())
         self.path: Path = dataset_path
         self.dataset_json: Dict = json.loads((dataset_path / Path("description.json")).read_text())
         self.description: Optional[str] = None
@@ -61,6 +70,7 @@ class ClassificationTask(BaseTask):
         self.ys: Optional[np.ndarray] = None
         self.classes: Optional[List] = None
         self.split: Literal["dev", "test"] = split
+        self.metric = metric
         self.metric = metric
         self._parse_task()
         self.reset_seed(seed)
@@ -173,6 +183,9 @@ class ClassificationTask(BaseTask):
             subsample (bool, optional): Whether to use subsampling.
             If set to true, samples a different subset per call. Defaults to False.
             return_seq (bool, optional): whether to return the generating sequence
+            subsample (bool, optional): Whether to use subsampling.
+            If set to true, samples a different subset per call. Defaults to False.
+            return_seq (bool, optional): whether to return the generating sequence
 
         Returns:
             np.ndarray: Array of accuracy scores for each prompt.
@@ -189,6 +202,17 @@ class ClassificationTask(BaseTask):
         ys_subsample = self.ys[indices]
 
         # Make predictions on the subsample
+        preds = predictor.predict(prompts, xs_subsample, return_seq=return_seq)
+
+        if return_seq:
+            preds, seqs = preds
+
+        scores = np.array([self.metric(ys_subsample, pred) for pred in preds])
+
+        if return_seq:
+            return scores, seqs
+
+        return scores
         preds = predictor.predict(prompts, xs_subsample, return_seq=return_seq)
 
         if return_seq:
