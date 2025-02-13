@@ -19,7 +19,7 @@ scikit-learn = "^1.5.2"
 [tool.poetry.group.dev.dependencies]
 matplotlib = "^3.9.2"
 seaborn = "^0.13.2"
-transformers = "^4.44.0"
+transformers = "^4.48.0"
 black = "^24.4.2"
 flake8 = "^7.1.0"
 isort = "^5.13.2"
