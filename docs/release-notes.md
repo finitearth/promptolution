@@ -2,6 +2,7 @@
 
 ## Release v1.1.1
 ### What's Changed
+#### Further Changes:
 - deleted poetry.lock
 - updated transformers dependency: bumped from 4.46.3 to 4.48.0 
 
