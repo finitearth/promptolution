@@ -35,5 +35,4 @@ runs:
         key: ${{ runner.os }}-poetry-${{ inputs.poetry-version }}-${{ hashFiles('**/poetry.lock') }}
     - name: Install dependencies
       run: poetry install --no-interaction --no-root --only ${{ inputs.groups }}
-      if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
       shell: bash
