@@ -35,7 +35,13 @@ def main():
     start_time = time.time()
 
     task = get_task(config, split="dev")
-    llm = get_llm(config.evaluation_llm, token=config.api_token)
+    if "vllm" in args.model:
+        llm = get_llm(
+            config.evaluation_llm,
+            model_storage_path=args.model_storage_path,
+        )
+    else:
+        llm = get_llm(config.evaluation_llm, token=config.api_token)
 
     predictor = Classificator(llm, classes=task.classes)
 
