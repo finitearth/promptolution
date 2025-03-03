@@ -27,7 +27,14 @@ class VLLM:
     """
 
     def __init__(
-        self, model_id: str, batch_size=8, max_tokens=256, temperature=0.1, top_p=0.9, model_storage_path=None
+        self,
+        model_id: str,
+        batch_size: int = 8,
+        max_tokens: int = 256,
+        temperature: float = 0.1,
+        top_p: float = 0.9,
+        model_storage_path: str = None,
+        token: str = None,
     ):
         """Initialize the VLLM with a specific model.
 
@@ -38,6 +45,7 @@ class VLLM:
             temperature (float, optional): Sampling temperature. Defaults to 0.1.
             top_p (float, optional): Top-p sampling parameter. Defaults to 0.9.
             model_storage_path (str, optional): Directory to store the model. Defaults to None.
+            token: (str, optional): Token for accessing the model - not used in implementation yet.
 
         Note:
             This method sets up a vLLM engine with specified parameters for efficient inference.
