@@ -1,6 +1,6 @@
 """Test script for measuring raw LLM inference performance on a dataset."""
 import time
-import json
+from tqdm import tqdm
 from logging import Logger
 import argparse
 import pandas as pd
@@ -16,60 +16,76 @@ logger = Logger(__name__)
 
 def main():
     """Run inference test on a dataset using a specified LLM."""
-    parser = argparse.ArgumentParser(description="Test LLM inference performance")
+    parser = argparse.ArgumentParser()
     parser.add_argument("--model", type=str)
     parser.add_argument("--output", type=str)
-    parser.add_argument("--dataset", type=str, default="agnews")
+    parser.add_argument("--datasets", type=list, default=["agnews", "subj"])
     parser.add_argument("--token", type=str, default=None)
     parser.add_argument("--model-storage-path", type=str, default=None)
     args = parser.parse_args()
 
-    config = Config(
-        evaluation_llm=args.model,
-        ds_path=f"data_sets/cls/{args.dataset}/",
-        task_name=args.dataset,
-        api_token=args.token,
-        n_eval_samples=200,
-    )
-
     start_time = time.time()
 
-    task = get_task(config, split="dev")
     if "vllm" in args.model:
         llm = get_llm(
-            config.evaluation_llm,
+            args.model,
             model_storage_path=args.model_storage_path,
         )
     else:
-        llm = get_llm(config.evaluation_llm, token=config.api_token)
+        llm = get_llm(args.model, args.token)
 
-    predictor = Classificator(llm, classes=task.classes)
+    results = pd.DataFrame()
 
-    prompt = task.initial_population[0]
+    for dataset in args.datasets:
+        config = Config(
+            evaluation_llm=args.model,
+            ds_path=f"data_sets/cls/{dataset}/",
+            task_name=dataset,
+            api_token=args.token,
+            n_eval_samples=200,
+        )
 
-    xs = task.xs[:config.n_eval_samples]
-    ys = task.ys[:config.n_eval_samples]
+        task = get_task(config, split="dev")
+        predictor = Classificator(llm, classes=task.classes)
 
-    preds, seqs = predictor.predict(prompt, xs, return_seq=True)
+        prompt = task.initial_population
 
-    scores = []
-    for i in range(len(xs)):
-        scores.append(1 if preds[0][i] == ys[i] else 0)
+        xs = task.xs[:config.n_eval_samples]
+        ys = task.ys[:config.n_eval_samples]
 
-    # clean up the sequences
-    seqs = [seq.replace("\n", "").strip() for seq in seqs]
+        for prompt in tqdm(task.initial_population):
+            preds, seqs = predictor.predict(prompt, xs, return_seq=True)
 
-    df = pd.DataFrame(dict(prompt=task.initial_population[0], seq=seqs, score=scores))
+            scores = []
+            for i in range(len(xs)):
+                scores.append(1 if preds[0][i] == ys[i] else 0)
+
+            # clean up the sequences
+            seqs = [seq.replace("\n", "").strip() for seq in seqs]
+
+            # if single prompts should be stored
+            # df = pd.DataFrame(dict(prompt=prompt, seq=seqs, score=scores))
+            # df.to_csv(args.output + "_detailed", index=False)
+
+            accuracy = np.array(scores).mean()
+
+            results = pd.concat([results,
+                                pd.DataFrame(
+                                    dict(
+                                        model=args.model,
+                                        dataset=dataset,
+                                        prompt=prompt,
+                                        accuracy=accuracy,
+                                        n_samples=len(xs),
+                                    ),
+                                    index=[0],
+                                )]
+                                )
 
     total_inference_time = time.time() - start_time
-
-    accuracy = np.array(scores).mean()
-
-    print(f"Overall Acc {accuracy:.4f}")
-    print(f"Used model {args.model} on dataset {args.dataset}")
     print(f"Total inference took {total_inference_time:.2f} seconds")
 
-    df.to_csv(args.output, index=False)
+    results.to_csv(args.output, mode="a", header=False, index=False)
 
 
 if __name__ == "__main__":
