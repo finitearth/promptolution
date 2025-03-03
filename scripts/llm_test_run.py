@@ -69,23 +69,20 @@ def main():
 
             accuracy = np.array(scores).mean()
 
-            results = pd.concat([results,
-                                pd.DataFrame(
-                                    dict(
-                                        model=args.model,
-                                        dataset=dataset,
-                                        prompt=prompt,
-                                        accuracy=accuracy,
-                                        n_samples=len(xs),
-                                    ),
-                                    index=[0],
-                                )]
-                                )
+            results = pd.DataFrame(
+                dict(
+                    model=args.model,
+                    dataset=dataset,
+                    prompt=prompt,
+                    accuracy=accuracy,
+                    n_samples=len(xs),
+                ),
+                index=[0],
+            )
+            results.to_csv(args.output, mode="a", header=False, index=False)
 
     total_inference_time = time.time() - start_time
     print(f"Total inference took {total_inference_time:.2f} seconds")
-
-    results.to_csv(args.output, mode="a", header=False, index=False)
 
 
 if __name__ == "__main__":
