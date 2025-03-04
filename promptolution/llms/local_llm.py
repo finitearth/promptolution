@@ -8,8 +8,10 @@ except ImportError as e:
     logger = logging.getLogger(__name__)
     logger.warning(f"Could not import torch or transformers in local_llm.py: {e}")
 
+from promptolution.llms.base_llm import BaseLLM
 
-class LocalLLM:
+
+class LocalLLM(BaseLLM):
     """A class for running language models locally using the Hugging Face Transformers library.
 
     This class sets up a text generation pipeline with specified model parameters

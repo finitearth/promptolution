@@ -3,9 +3,15 @@
 
 from logging import INFO, Logger
 
-import torch
-from transformers import AutoTokenizer
-from vllm import LLM, SamplingParams
+try:
+    import torch
+    from transformers import AutoTokenizer
+    from vllm import LLM, SamplingParams
+except ImportError as e:
+    import logging
+
+    logger = logging.getLogger(__name__)
+    logger.warning(f"Could not import vllm, torch or transformers in vllm.py: {e}")
 
 from promptolution.llms.base_llm import BaseLLM
 
@@ -32,39 +38,56 @@ class VLLM(BaseLLM):
         self,
         model_id: str,
         batch_size: int = 8,
-        max_tokens: int = 256,
+        max_generated_tokens: int = 256,
         temperature: float = 0.1,
         top_p: float = 0.9,
         model_storage_path: str = None,
         token: str = None,
+        dtype: str = "float16",
+        tensor_parallel_size: int = 1,
+        gpu_memory_utilization: float = 0.95,
+        max_model_len: int = 2048,
+        trust_remote_code: bool = False,
     ):
         """Initialize the VLLM with a specific model.
 
         Args:
             model_id (str): The identifier of the model to use.
             batch_size (int, optional): The batch size for text generation. Defaults to 8.
-            max_tokens (int, optional): Maximum number of tokens to generate. Defaults to 256.
+            max_generated_tokens (int, optional): Maximum number of tokens to generate. Defaults to 256.
             temperature (float, optional): Sampling temperature. Defaults to 0.1.
             top_p (float, optional): Top-p sampling parameter. Defaults to 0.9.
             model_storage_path (str, optional): Directory to store the model. Defaults to None.
             token: (str, optional): Token for accessing the model - not used in implementation yet.
+            dtype (str, optional): Data type for model weights. Defaults to "float16".
+            tensor_parallel_size (int, optional): Number of GPUs for tensor parallelism. Defaults to 1.
+            gpu_memory_utilization (float, optional): Fraction of GPU memory to use. Defaults to 0.95.
+            max_model_len (int, optional): Maximum sequence length for the model. Defaults to 2048.
+            trust_remote_code (bool, optional): Whether to trust remote code. Defaults to False.
 
         Note:
             This method sets up a vLLM engine with specified parameters for efficient inference.
         """
+        self.batch_size = batch_size
+        self.dtype = dtype
+        self.tensor_parallel_size = tensor_parallel_size
+        self.gpu_memory_utilization = gpu_memory_utilization
+        self.max_model_len = max_model_len
+        self.trust_remote_code = trust_remote_code
+
         # Configure sampling parameters
-        self.sampling_params = SamplingParams(temperature=temperature, top_p=top_p, max_tokens=max_tokens)
+        self.sampling_params = SamplingParams(temperature=temperature, top_p=top_p, max_tokens=max_generated_tokens)
 
         # Initialize the vLLM engine
         self.llm = LLM(
             model=model_id,
             tokenizer=model_id,
-            dtype="float16",
-            tensor_parallel_size=1,
-            gpu_memory_utilization=0.95,
-            max_model_len=2048,
+            dtype=self.dtype,
+            tensor_parallel_size=self.tensor_parallel_size,
+            gpu_memory_utilization=self.gpu_memory_utilization,
+            max_model_len=self.max_model_len,
             download_dir=model_storage_path,
-            trust_remote_code=True,
+            trust_remote_code=self.trust_remote_code,
         )
 
         # Initialize tokenizer separately for potential pre-processing
