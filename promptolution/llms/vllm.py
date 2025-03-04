@@ -7,11 +7,13 @@ import torch
 from transformers import AutoTokenizer
 from vllm import LLM, SamplingParams
 
+from promptolution.llms.base_llm import BaseLLM
+
 logger = Logger(__name__)
 logger.setLevel(INFO)
 
 
-class VLLM:
+class VLLM(BaseLLM):
     """A class for running language models using the vLLM library.
 
     This class sets up a vLLM inference engine with specified model parameters
