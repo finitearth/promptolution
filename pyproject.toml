@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "promptolution"
-version = "1.1.1"
+version = "1.2.0"
 description = ""
 authors = ["Tom Zehle, Moritz Schlager, Timo Heiß"]
 readme = "README.md"
@@ -15,6 +15,7 @@ langchain-community = "^0.2.12"
 pandas = "^2.2.2"
 tqdm = "^4.66.5"
 scikit-learn = "^1.5.2"
+vllm = "^0.7.3"
 
 [tool.poetry.group.dev.dependencies]
 matplotlib = "^3.9.2"

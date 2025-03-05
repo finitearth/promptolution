@@ -3,6 +3,7 @@
 from .api_llm import APILLM
 from .base_llm import DummyLLM
 from .local_llm import LocalLLM
+from .vllm import VLLM
 
 
 def get_llm(model_id: str, *args, **kwargs):
@@ -10,13 +11,15 @@ def get_llm(model_id: str, *args, **kwargs):
 
     This function supports three types of language models:
     1. DummyLLM: A mock LLM for testing purposes.
-    2. LocalLLM: For running models locally (identified by 'local' in the model_id).
-    3. APILLM: For API-based models (default if not matching other types).
+    2. LocalLLM: For running models locally.
+    3. VLLM: For running models using the vLLM library.
+    4. APILLM: For API-based models (default if not matching other types).
 
     Args:
         model_id (str): Identifier for the model to use. Special cases:
                         - "dummy" for DummyLLM
                         - "local-{model_name}" for LocalLLM
+                        - "vllm-{model_name}" for VLLM
                         - Any other string for APILLM
         *args: Variable length argument list passed to the LLM constructor.
         **kwargs: Arbitrary keyword arguments passed to the LLM constructor.
@@ -29,4 +32,7 @@ def get_llm(model_id: str, *args, **kwargs):
     if "local" in model_id:
         model_id = "-".join(model_id.split("-")[1:])
         return LocalLLM(model_id, *args, **kwargs)
+    if "vllm" in model_id:
+        model_id = "-".join(model_id.split("-")[1:])
+        return VLLM(model_id, *args, **kwargs)
     return APILLM(model_id, *args, **kwargs)
