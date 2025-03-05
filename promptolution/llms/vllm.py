@@ -44,7 +44,7 @@ class VLLM(BaseLLM):
         model_storage_path: str = None,
         token: str = None,
         dtype: str = "auto",
-        tensor_parallel_size: int = None,
+        tensor_parallel_size: int = 1,
         gpu_memory_utilization: float = 0.95,
         max_model_len: int = 1024,
         trust_remote_code: bool = False,
