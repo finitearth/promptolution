@@ -110,8 +110,7 @@ class VLLM(BaseLLM):
                 [
                     {
                         "role": "system",
-                        "content": "You are a helpful, harmless, and honest assistant. "
-                        "You answer the user's questions accurately and fairly.",
+                        "content": "You are a helpful assistant.",
                     },
                     {"role": "user", "content": input},
                 ],
