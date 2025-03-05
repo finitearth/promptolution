@@ -121,11 +121,7 @@ class VLLM(BaseLLM):
             for input in inputs
         ]
 
-        prompts_2 = prompts.copy()
-
-        prompts_all = prompts + prompts_2
-
-        outputs = self.llm.generate(prompts_all, self.sampling_params)
+        outputs = self.llm.generate(prompts, self.sampling_params)
         responses = [output.outputs[0].text for output in outputs]
 
         return responses

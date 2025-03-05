@@ -2,7 +2,6 @@
 
 from .api_llm import APILLM
 from .base_llm import DummyLLM
-from .cb_vllm import ContinuousBatchVLLM
 from .local_llm import LocalLLM
 from .vllm import VLLM
 
@@ -33,9 +32,6 @@ def get_llm(model_id: str, *args, **kwargs):
     if "local" in model_id:
         model_id = "-".join(model_id.split("-")[1:])
         return LocalLLM(model_id, *args, **kwargs)
-    if "cbvllm" in model_id:
-        model_id = "-".join(model_id.split("-")[1:])
-        return ContinuousBatchVLLM(model_id, *args, **kwargs)
     if "vllm" in model_id:
         model_id = "-".join(model_id.split("-")[1:])
         return VLLM(model_id, *args, **kwargs)
