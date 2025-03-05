@@ -120,20 +120,13 @@ class VLLM(BaseLLM):
             )
             for input in inputs
         ]
-        # outputs = self.llm.generate(prompts, self.sampling_params)
-        # responses = [output.outputs[0].text for output in outputs]
-        optimal_batch_size = 100
 
-        responses = []
-        for i in range(0, len(prompts), optimal_batch_size):
-            batch = prompts[i : i + optimal_batch_size]  # noqa: E203
-            outputs = self.llm.generate(batch, self.sampling_params)
-            batch_responses = [output.outputs[0].text for output in outputs]
-            responses.extend(batch_responses)
+        prompts_2 = prompts.copy()
 
-            # Explicitly clean up between batches
-            if i + optimal_batch_size < len(prompts):
-                torch.cuda.empty_cache()
+        prompts_all = prompts + prompts_2
+
+        outputs = self.llm.generate(prompts_all, self.sampling_params)
+        responses = [output.outputs[0].text for output in outputs]
 
         return responses
 
