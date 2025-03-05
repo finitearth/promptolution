@@ -1,10 +1,19 @@
 # Release Notes
 
+## Release v1.2.0
+### What's changed
+#### Added features
+* New LLM wrapper: VLLM for local inference with batches
+
+**Full Changelog**: [here](https://github.com/finitearth/promptolution/compare/v1.1.1...v1.2.0)
+
 ## Release v1.1.1
 ### What's Changed
 #### Further Changes:
 - deleted poetry.lock
-- updated transformers dependency: bumped from 4.46.3 to 4.48.0 
+- updated transformers dependency: bumped from 4.46.3 to 4.48.0
+
+**Full Changelog**: [here](https://github.com/finitearth/promptolution/compare/v1.1.0...v1.1.1)
 
 ## Release v1.1.0
 ### What's changed
@@ -16,6 +25,8 @@
 * improved opros meta-prompt
 * added support for python versions from 3.9 onwards (previously 3.11)
 
+**Full Changelog**: [here](https://github.com/finitearth/promptolution/compare/v1.0.1...v1.1.0)
+
 ## Release v1.0.1
 ### What's changed
 #### Added features
@@ -23,6 +34,8 @@
 
 #### Further Changes:
 * fixed release notes
+
+**Full Changelog**: [here](https://github.com/finitearth/promptolution/compare/v1.0.0...v1.0.1)
 
 ## Release v1.0.0
 ### What's changed
