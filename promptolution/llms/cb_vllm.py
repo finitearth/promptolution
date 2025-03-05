@@ -72,7 +72,6 @@ class ContinuousBatchVLLM(BaseLLM):
             temperature=temperature,
             top_p=top_p,
             max_tokens=max_generated_tokens,
-            early_stopping=True,
         )
 
         logger.info(f"Initializing continuous batching vLLM with model {model_id}")
