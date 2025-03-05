@@ -37,7 +37,7 @@ class VLLM(BaseLLM):
     def __init__(
         self,
         model_id: str,
-        batch_size: int = 8,
+        batch_size: int = 64,
         max_generated_tokens: int = 256,
         temperature: float = 0.1,
         top_p: float = 0.9,
@@ -92,7 +92,6 @@ class VLLM(BaseLLM):
 
         # Initialize tokenizer separately for potential pre-processing
         self.tokenizer = AutoTokenizer.from_pretrained(model_id)
-        self.batch_size = batch_size
 
     def get_response(self, inputs: list[str]):
         """Generate responses for a list of prompts using the vLLM engine.
@@ -121,10 +120,15 @@ class VLLM(BaseLLM):
             for input in inputs
         ]
 
-        outputs = self.llm.generate(prompts, self.sampling_params)
-        responses = [output.outputs[0].text for output in outputs]
+        # generate responses for self.batch_size prompts at the same time
+        all_responses = []
+        for i in range(0, len(prompts), self.batch_size):
+            batch = prompts[i : i + self.batch_size]
+            outputs = self.llm.generate(batch, self.sampling_params)
+            responses = [output.outputs[0].text for output in outputs]
+            all_responses.extend(responses)
 
-        return responses
+        return all_responses
 
     def __del__(self):
         """Cleanup method to delete the LLM instance and free up GPU memory."""
