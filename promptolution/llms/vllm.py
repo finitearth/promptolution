@@ -43,10 +43,10 @@ class VLLM(BaseLLM):
         top_p: float = 0.9,
         model_storage_path: str = None,
         token: str = None,
-        dtype: str = "float16",
-        tensor_parallel_size: int = 1,
+        dtype: str = "auto",
+        tensor_parallel_size: int = None,
         gpu_memory_utilization: float = 0.95,
-        max_model_len: int = 2048,
+        max_model_len: int = 1024,
         trust_remote_code: bool = False,
     ):
         """Initialize the VLLM with a specific model.
