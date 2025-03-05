@@ -21,6 +21,7 @@ def main():
     parser.add_argument("--output", type=str)
     parser.add_argument("--datasets", type=list, default=["agnews", "subj"])
     parser.add_argument("--token", type=str, default=None)
+    parser.add_argument("--batch-size", type=int, default=64)
     parser.add_argument("--model-storage-path", type=str, default=None)
     args = parser.parse_args()
 
@@ -29,6 +30,7 @@ def main():
     if "vllm" in args.model:
         llm = get_llm(
             args.model,
+            batch_size=args.batch_size,
             model_storage_path=args.model_storage_path,
         )
     else:
