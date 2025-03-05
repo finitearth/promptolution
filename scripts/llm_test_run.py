@@ -22,11 +22,18 @@ def main():
     parser.add_argument("--datasets", type=list, default=["agnews", "subj"])
     parser.add_argument("--token", type=str, default=None)
     parser.add_argument("--model-storage-path", type=str, default=None)
+    parser.add_argument("--concurrent-requests", type=int, default=8)
     args = parser.parse_args()
 
     start_time = time.time()
 
-    if "vllm" in args.model:
+    if "cbvllm" in args.model:
+        llm = get_llm(
+            args.model,
+            model_storage_path=args.model_storage_path,
+            concurrent_requests=args.concurrent_requests,
+        )
+    elif "vllm" in args.model:
         llm = get_llm(
             args.model,
             model_storage_path=args.model_storage_path,
