@@ -1,5 +1,10 @@
 # Release Notes
 
+## Release v1.2.1
+### What's changed
+#### Added features
+* New features for the VLLM Wrapper (automatic batch size determination, accepting kwargs and token count)
+
 ## Release v1.2.0
 ### What's changed
 #### Added features
