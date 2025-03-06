@@ -83,11 +83,10 @@ def main():
                 index=[0],
             )
             results.to_csv(args.output, mode="a", header=False, index=False)
-            print(llm.get_token_count())
-        llm.reset_token_count()
 
     total_inference_time = time.time() - start_time
-    print(f"Total inference took {total_inference_time:.2f} seconds")
+    print(f"Total inference took {total_inference_time:.2f} seconds and required {llm.get_token_count()} tokens.")
+    print(f"Results saved to {args.output}")
 
 
 if __name__ == "__main__":
