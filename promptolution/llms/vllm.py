@@ -103,7 +103,8 @@ class VLLM(BaseLLM):
         if batch_size is None:
             gpu_blocks = self.llm.llm_engine.model_executor.cache_config.num_gpu_blocks
             block_size = self.llm.llm_engine.model_executor.cache_config.block_size
-            self.batch_size = (gpu_blocks * block_size / self.max_model_len) * 0.95
+            self.batch_size = int((gpu_blocks * block_size / self.max_model_len) * 0.95)
+            logger.info(f"Batch size set to {self.batch_size} based on GPU memory.")
         else:
             self.batch_size = batch_size
 
