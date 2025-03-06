@@ -13,6 +13,8 @@ from langchain_community.chat_models.deepinfra import ChatDeepInfra, ChatDeepInf
 from langchain_core.messages import HumanMessage
 from langchain_openai import ChatOpenAI
 
+from promptolution.llms.base_llm import BaseLLM
+
 logger = Logger(__name__)
 logger.setLevel(INFO)
 
@@ -46,7 +48,7 @@ async def invoke_model(prompt, model, semaphore):
                 await asyncio.sleep(delay)
 
 
-class APILLM:
+class APILLM(BaseLLM):
     """A class to interface with various language models through their respective APIs.
 
     This class supports Claude (Anthropic), GPT (OpenAI), and LLaMA (DeepInfra) models.

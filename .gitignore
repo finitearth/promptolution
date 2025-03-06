@@ -6,4 +6,5 @@ rsync_exclude.txt
 __pycache__/
 temp/
 dist/
+outputs/
 poetry.lock
