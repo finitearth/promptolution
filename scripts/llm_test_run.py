@@ -23,6 +23,7 @@ def main():
     parser.add_argument("--token", default=None)
     parser.add_argument("--batch-size", default=None)
     parser.add_argument("--revision", default="main")
+    parser.add_argument("--max-model-len", default=None)
     parser.add_argument("--model-storage-path", default=None)
     args = parser.parse_args()
 
@@ -32,6 +33,7 @@ def main():
         llm = get_llm(
             args.model,
             batch_size=args.batch_size,
+            max_model_len=args.max_model_len,
             model_storage_path=args.model_storage_path,
             revision=args.revision,
         )
