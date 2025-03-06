@@ -29,11 +29,14 @@ def main():
 
     start_time = time.time()
 
+    if args.max_model_len is not None:
+        max_model_len = int(args.max_model_len)
+
     if "vllm" in args.model:
         llm = get_llm(
             args.model,
             batch_size=args.batch_size,
-            max_model_len=args.max_model_len,
+            max_model_len=max_model_len,
             model_storage_path=args.model_storage_path,
             revision=args.revision,
         )
