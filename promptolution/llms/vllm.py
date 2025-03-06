@@ -32,22 +32,25 @@ class VLLM(BaseLLM):
 
     Methods:
         get_response: Generate responses for a list of prompts.
+        get_token_count: Get the current count of input and output tokens.
+        reset_token_count: Reset the token counters to zero.
     """
 
     def __init__(
         self,
         model_id: str,
-        batch_size: int = 64,
+        batch_size: int | None = None,
         max_generated_tokens: int = 256,
         temperature: float = 0.1,
         top_p: float = 0.9,
-        model_storage_path: str = None,
-        token: str = None,
+        model_storage_path: str | None = None,
+        token: str | None = None,
         dtype: str = "auto",
         tensor_parallel_size: int = 1,
         gpu_memory_utilization: float = 0.95,
         max_model_len: int = 2048,
         trust_remote_code: bool = False,
+        **kwargs,
     ):
         """Initialize the VLLM with a specific model.
 
@@ -64,31 +67,45 @@ class VLLM(BaseLLM):
             gpu_memory_utilization (float, optional): Fraction of GPU memory to use. Defaults to 0.95.
             max_model_len (int, optional): Maximum sequence length for the model. Defaults to 2048.
             trust_remote_code (bool, optional): Whether to trust remote code. Defaults to False.
+            **kwargs: Additional keyword arguments to pass to the LLM class initialization.
 
         Note:
             This method sets up a vLLM engine with specified parameters for efficient inference.
         """
-        self.batch_size = batch_size
         self.dtype = dtype
         self.tensor_parallel_size = tensor_parallel_size
         self.gpu_memory_utilization = gpu_memory_utilization
         self.max_model_len = max_model_len
         self.trust_remote_code = trust_remote_code
 
+        # Initialize token counters
+        self.input_token_count = 0
+        self.output_token_count = 0
+
         # Configure sampling parameters
         self.sampling_params = SamplingParams(temperature=temperature, top_p=top_p, max_tokens=max_generated_tokens)
 
-        # Initialize the vLLM engine
-        self.llm = LLM(
-            model=model_id,
-            tokenizer=model_id,
-            dtype=self.dtype,
-            tensor_parallel_size=self.tensor_parallel_size,
-            gpu_memory_utilization=self.gpu_memory_utilization,
-            max_model_len=self.max_model_len,
-            download_dir=model_storage_path,
-            trust_remote_code=self.trust_remote_code,
-        )
+        # Initialize the vLLM engine with both explicit parameters and any additional kwargs
+        llm_params = {
+            "model": model_id,
+            "tokenizer": model_id,
+            "dtype": self.dtype,
+            "tensor_parallel_size": self.tensor_parallel_size,
+            "gpu_memory_utilization": self.gpu_memory_utilization,
+            "max_model_len": self.max_model_len,
+            "download_dir": model_storage_path,
+            "trust_remote_code": self.trust_remote_code,
+            **kwargs,
+        }
+
+        self.llm = LLM(**llm_params)
+
+        if batch_size is None:
+            gpu_blocks = self.llm.llm_engine.model_executor.cache_config.num_gpu_blocks
+            block_size = self.llm.llm_engine.model_executor.cache_config.block_size
+            self.batch_size = (gpu_blocks * block_size / self.max_model_len) * 0.95
+        else:
+            self.batch_size = batch_size
 
         # Initialize tokenizer separately for potential pre-processing
         self.tokenizer = AutoTokenizer.from_pretrained(model_id)
@@ -104,6 +121,7 @@ class VLLM(BaseLLM):
 
         Note:
             This method uses vLLM's batched generation capabilities for efficient inference.
+            It also counts input and output tokens.
         """
         prompts = [
             self.tokenizer.apply_chat_template(
@@ -119,15 +137,44 @@ class VLLM(BaseLLM):
             for input in inputs
         ]
 
+        # Count input tokens
+        for prompt in prompts:
+            input_tokens = self.tokenizer.encode(prompt)
+            self.input_token_count += len(input_tokens)
+
         # generate responses for self.batch_size prompts at the same time
         all_responses = []
         for i in range(0, len(prompts), self.batch_size):
             batch = prompts[i : i + self.batch_size]
             outputs = self.llm.generate(batch, self.sampling_params)
             responses = [output.outputs[0].text for output in outputs]
+
+            # Count output tokens
+            for response in responses:
+                output_tokens = self.tokenizer.encode(response)
+                self.output_token_count += len(output_tokens)
+
             all_responses.extend(responses)
 
         return all_responses
+
+    def get_token_count(self):
+        """Get the current count of input and output tokens.
+
+        Returns:
+            dict: A dictionary containing the input and output token counts.
+        """
+        return {
+            "input_tokens": self.input_token_count,
+            "output_tokens": self.output_token_count,
+            "total_tokens": self.input_token_count + self.output_token_count,
+        }
+
+    def reset_token_count(self):
+        """Reset the token counters to zero."""
+        self.input_token_count = 0
+        self.output_token_count = 0
+        logger.info("Token counters have been reset.")
 
     def __del__(self):
         """Cleanup method to delete the LLM instance and free up GPU memory."""
