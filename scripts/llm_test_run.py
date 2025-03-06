@@ -22,6 +22,7 @@ def main():
     parser.add_argument("--datasets", default=["agnews", "subj"])
     parser.add_argument("--token", default=None)
     parser.add_argument("--batch-size", default=None)
+    parser.add_argument("--revision", default="main")
     parser.add_argument("--model-storage-path", default=None)
     args = parser.parse_args()
 
@@ -32,7 +33,7 @@ def main():
             args.model,
             batch_size=args.batch_size,
             model_storage_path=args.model_storage_path,
-            revision="main",
+            revision=args.revision,
         )
     else:
         llm = get_llm(args.model, args.token)
