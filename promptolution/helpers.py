@@ -1,5 +1,6 @@
 """Helper functions for the usage of the libary."""
 from logging import Logger
+from pathlib import Path
 from typing import List
 
 import numpy as np

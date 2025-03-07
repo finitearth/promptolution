@@ -38,7 +38,7 @@ class ClassificationTask(BaseTask):
 
     def __init__(
         self,
-        dataset_path: Path,
+        dataset: Path,
         task_id: str = "Classification Task",
         seed: int = 42,
         split: Literal["dev", "test"] = "dev",
@@ -48,14 +48,14 @@ class ClassificationTask(BaseTask):
 
         Args:
             task_id (str): Unique identifier for the task.
-            dataset_path (str): Path to the dataset description JSON file.
+            dataset (str): Path to the dataset description JSON file.
             seed (int, optional): Random seed for reproducibility. Defaults to 42.
             split (Literal["dev", "test"], optional): Dataset split to use. Defaults to "dev".
             metric (Callable): Metric to use as an evaluation score for the prompts. Defaults to sklearn's accuracy.
         """
         self.task_id: str = task_id
-        self.path: Path = dataset_path
-        self.dataset_json: Dict = json.loads((dataset_path / Path("description.json")).read_text())
+        self.path: Path = dataset
+        self.dataset_json: Dict = json.loads((dataset / Path("description.json")).read_text())
         self.description: Optional[str] = None
         self.initial_population: Optional[List[str]] = None
         self.xs: Optional[np.ndarray] = np.array([])
@@ -111,11 +111,12 @@ class ClassificationTask(BaseTask):
         instance.classes = value_counts.index.tolist()
 
         # Create a mapping from class labels to integers
-        label_to_int = {label: i for i, label in enumerate(instance.classes)}
+        # label_to_int = {label: i for i, label in enumerate(instance.classes)}
 
         # Set data attributes
         instance.xs = df[x_column].values
-        instance.ys = df[y_column].map(label_to_int).values  # Convert labels to integers
+        # instance.ys = df[y_column].map(label_to_int).values  # Convert labels to integers
+        instance.ys = df[y_column].values
 
         # Set seed
         instance.reset_seed(seed)

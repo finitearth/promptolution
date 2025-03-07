@@ -2,7 +2,9 @@
 import configparser
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, Literal, Optional
+from typing import Any, Dict, List, Literal, Optional, Union
+
+import pandas as pd
 
 
 @dataclass
@@ -14,7 +16,7 @@ class Config:
 
     Attributes:
         task_name (str): Name of the task. Should not be None if used.
-        ds_path (str): Path to the dataset. Should not be None if used.
+        dataset (str or pd.DataFrame): Path to the dataset or a pandas DataFrame.
         n_steps (int): Number of optimization steps. Should not be None if used.
         optimizer (str): Name of the optimizer to use. Should not be None if used.
         meta_llm (str): Name of the meta language model. Should not be None if used.
@@ -44,7 +46,9 @@ class Config:
     """
 
     task_name: str = None
-    ds_path: Path = None
+    dataset: Union[Path, pd.DataFrame] = None
+    dataset_description: Optional[str] = None
+    init_prompts: Optional[List[str]] = None
     optimizer: str = None
     meta_llm: str = None
     downstream_llm: str = None
