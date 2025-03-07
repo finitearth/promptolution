@@ -72,6 +72,8 @@ class VLLM(BaseLLM):
         Note:
             This method sets up a vLLM engine with specified parameters for efficient inference.
         """
+        super().__init__()
+
         self.dtype = dtype
         self.tensor_parallel_size = tensor_parallel_size
         self.gpu_memory_utilization = gpu_memory_utilization

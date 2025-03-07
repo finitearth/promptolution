@@ -35,6 +35,8 @@ class LocalLLM(BaseLLM):
             This method sets up a text generation pipeline with bfloat16 precision,
             automatic device mapping, and specific generation parameters.
         """
+        super().__init__()
+
         self.pipeline = transformers.pipeline(
             "text-generation",
             model=model_id,

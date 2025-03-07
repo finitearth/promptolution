@@ -73,6 +73,7 @@ class APILLM(BaseLLM):
         Raises:
             ValueError: If an unknown model identifier is provided.
         """
+        super().__init__()
         if "claude" in model_id:
             self.model = ChatAnthropic(model=model_id, api_key=token)
         elif "gpt" in model_id:
