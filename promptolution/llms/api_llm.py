@@ -80,7 +80,7 @@ class APILLM(BaseLLM):
         else:
             self.model = ChatDeepInfra(model_name=model_id, deepinfra_api_token=token)
 
-    def get_response(self, prompts: List[str]) -> List[str]:
+    def _get_response(self, prompts: List[str]) -> List[str]:
         """Get responses for a list of prompts in a synchronous manner.
 
         This method includes retry logic for handling connection errors and rate limits.

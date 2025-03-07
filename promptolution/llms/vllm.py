@@ -78,10 +78,6 @@ class VLLM(BaseLLM):
         self.max_model_len = max_model_len
         self.trust_remote_code = trust_remote_code
 
-        # Initialize token counters
-        self.input_token_count = 0
-        self.output_token_count = 0
-
         # Configure sampling parameters
         self.sampling_params = SamplingParams(temperature=temperature, top_p=top_p, max_tokens=max_generated_tokens)
 
@@ -111,7 +107,7 @@ class VLLM(BaseLLM):
         # Initialize tokenizer separately for potential pre-processing
         self.tokenizer = AutoTokenizer.from_pretrained(model_id)
 
-    def get_response(self, inputs: list[str]):
+    def _get_response(self, inputs: list[str]):
         """Generate responses for a list of prompts using the vLLM engine.
 
         Args:
@@ -150,32 +146,9 @@ class VLLM(BaseLLM):
             outputs = self.llm.generate(batch, self.sampling_params)
             responses = [output.outputs[0].text for output in outputs]
 
-            # Count output tokens
-            for response in responses:
-                output_tokens = self.tokenizer.encode(response)
-                self.output_token_count += len(output_tokens)
-
             all_responses.extend(responses)
 
         return all_responses
-
-    def get_token_count(self):
-        """Get the current count of input and output tokens.
-
-        Returns:
-            dict: A dictionary containing the input and output token counts.
-        """
-        return {
-            "input_tokens": self.input_token_count,
-            "output_tokens": self.output_token_count,
-            "total_tokens": self.input_token_count + self.output_token_count,
-        }
-
-    def reset_token_count(self):
-        """Reset the token counters to zero."""
-        self.input_token_count = 0
-        self.output_token_count = 0
-        logger.info("Token counters have been reset.")
 
     def __del__(self):
         """Cleanup method to delete the LLM instance and free up GPU memory."""

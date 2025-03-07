@@ -48,7 +48,7 @@ class LocalLLM(BaseLLM):
         self.pipeline.tokenizer.pad_token_id = self.pipeline.tokenizer.eos_token_id
         self.pipeline.tokenizer.padding_side = "left"
 
-    def get_response(self, prompts: list[str]):
+    def _get_response(self, prompts: list[str]):
         """Generate responses for a list of prompts using the local language model.
 
         Args:

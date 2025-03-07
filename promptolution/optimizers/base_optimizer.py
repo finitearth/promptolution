@@ -61,18 +61,24 @@ class BaseOptimizer(ABC):
 
     def _on_step_end(self):
         """Call all registered callbacks at the end of each optimization step."""
+        continue_optimization = True
         for callback in self.callbacks:
-            callback.on_step_end(self)
+            continue_optimization &= callback.on_step_end(self)  # if any callback returns False, end the optimization
+
+        return continue_optimization
 
     def _on_epoch_end(self):
         """Call all registered callbacks at the end of each optimization epoch."""
+        continue_optimization = True
         for callback in self.callbacks:
-            callback.on_epoch_end(self)
+            continue_optimization &= callback._on_epoch_end(self)  # if any callback returns False, end the optimization
+
+        return continue_optimization
 
     def _on_train_end(self):
         """Call all registered callbacks at the end of the entire optimization process."""
         for callback in self.callbacks:
-            callback.on_train_end(self)
+            callback._on_train_end(self)
 
 
 class DummyOptimizer(BaseOptimizer):
@@ -111,4 +117,5 @@ class DummyOptimizer(BaseOptimizer):
         self._on_step_end()
         self._on_epoch_end()
         self._on_train_end()
+
         return self.prompts

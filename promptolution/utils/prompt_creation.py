@@ -56,7 +56,7 @@ def create_prompts_from_samples(task: BaseTask, llm: BaseLLM, meta_prompt: str =
     """
     if isinstance(task, ClassificationTask):
         # if classification task sample such that all classes are represented
-        unique_classes, counts = np.unique(task.ys, return_counts=True)
+        unique_labels, counts = np.unique(task.ys, return_counts=True)
         proportions = counts / len(task.ys)
         samples_per_class = np.round(proportions * n_samples).astype(int)
         samples_per_class = np.maximum(samples_per_class, 1)
@@ -64,8 +64,8 @@ def create_prompts_from_samples(task: BaseTask, llm: BaseLLM, meta_prompt: str =
         # sample
         xs = []
         ys = []
-        for cls, n_samples in zip(unique_classes, samples_per_class):
-            indices = np.where(task.ys == cls)[0]
+        for label, n_samples in zip(unique_labels, samples_per_class):
+            indices = np.where(task.ys == label)[0]
             indices = np.random.choice(indices, n_samples, replace=False)
             xs.extend(task.xs[indices])
             ys.extend(task.ys[indices])
@@ -78,9 +78,9 @@ def create_prompts_from_samples(task: BaseTask, llm: BaseLLM, meta_prompt: str =
 
     meta_prompt = PROMPT_CREATION_TEMPLATE if meta_prompt is None else meta_prompt
     examples = "\n\n".join([f"Input: {x}\nOutput: {y}" for x, y in zip(xs, ys)])
-    meta_prompt = meta_prompt.replace("<input_output_pairs", examples)
-
+    meta_prompt = meta_prompt.replace("<input_output_pairs>", examples)
     prompt = llm.get_response([meta_prompt])[0]
     prompt = prompt.split("</prompt>")[0].split("<prompt>")[-1]
+    prompt = prompt.strip()
 
     return prompt

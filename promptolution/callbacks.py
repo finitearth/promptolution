@@ -14,24 +14,33 @@ class Callback:
 
         Args:
         optimizer: The optimizer object that called the callback.
+
+        Returns:
+            Bool: True if the optimization should continue, False if it should stop.
         """
-        pass
+        return True
 
     def on_epoch_end(self, optimizer):
         """Called at the end of each optimization epoch.
 
         Args:
         optimizer: The optimizer object that called the callback.
+
+        Returns:
+            Bool: True if the optimization should continue, False if it should stop.
         """
-        pass
+        return True
 
     def on_train_end(self, optimizer):
         """Called at the end of the entire optimization process.
 
         Args:
         optimizer: The optimizer object that called the callback.
+
+        Returns:
+            Bool: True if the optimization should continue, False if it should stop.
         """
-        pass
+        return True
 
 
 class LoggerCallback(Callback):
@@ -57,6 +66,8 @@ class LoggerCallback(Callback):
             self.logger.critical(f"*** Prompt {i}: Score: {score}")
             self.logger.critical(f"{prompt}")
 
+        return True
+
     def on_train_end(self, optimizer, logs=None):
         """Log information at the end of training.
 
@@ -65,6 +76,8 @@ class LoggerCallback(Callback):
         logs: Additional information to log.
         """
         self.logger.critical(f"Training ended - {logs}")
+
+        return True
 
 
 class CSVCallback(Callback):
@@ -105,13 +118,15 @@ class CSVCallback(Callback):
         )
         df.to_csv(self.path, mode="a", header=False, index=False)
 
+        return True
+
     def on_train_end(self, optimizer):
         """Called at the end of training.
 
         Args:
         optimizer: The optimizer object that called the callback.
         """
-        pass
+        return True
 
 
 class BestPromptCallback(Callback):
@@ -138,6 +153,8 @@ class BestPromptCallback(Callback):
         if optimizer.scores[0] > self.best_score:
             self.best_score = optimizer.scores[0]
             self.best_prompt = optimizer.prompts[0]
+
+        return True
 
     def get_best_prompt(self):
         """Get the best prompt and score achieved during optimization.
@@ -173,6 +190,8 @@ class ProgressBarCallback(Callback):
         """
         self.pbar.update(1)
 
+        return True
+
     def on_train_end(self, optimizer):
         """Close the progress bar at the end of training.
 
@@ -180,3 +199,23 @@ class ProgressBarCallback(Callback):
         optimizer: The optimizer object that called the callback.
         """
         self.pbar.close()
+
+        return True
+
+
+class TokenCountCallback(Callback):
+    """Callback for stopping optimization based on the total token count."""
+
+    def __init__(self, max_tokens_for_termination):
+        """Initialize the TokenCountCallback."""
+        self.max_tokens_for_termination = max_tokens_for_termination
+
+    def on_step_end(self, optimizer):
+        """Check if the total token count exceeds the maximum allowed. If so, stop the optimization."""
+        token_counts = optimizer.predictor.llm.get_token_count()
+        total_token_count = token_counts["total_tokens"]
+
+        if total_token_count > self.max_tokens_for_termination:
+            return False
+
+        return True
