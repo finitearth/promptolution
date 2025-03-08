@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 from promptolution.config import Config
 from promptolution.llms import get_llm
-from promptolution.predictors import Classificator
+from promptolution.predictors import FirstOccurrenceClassificator
 from promptolution.tasks import get_task
 from tqdm import tqdm
 
@@ -56,7 +56,7 @@ for dataset in args.datasets:
     )
 
     task = get_task(config, split="dev")
-    predictor = Classificator(llm, classes=task.classes)
+    predictor = FirstOccurrenceClassificator(llm, classes=task.classes)
 
     prompts = [task.initial_population[0]]
 
