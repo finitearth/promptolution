@@ -17,7 +17,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--model")
 parser.add_argument("--model-storage-path", default="../models/")
 parser.add_argument("--optimizer", default="evoprompt_de")
-parser.add_argument("--n-steps", default=10)
+parser.add_argument("--n-steps", type=int, default=10)
 args = parser.parse_args()
 
 config = Config(
