@@ -31,7 +31,7 @@ def main():
 
     llm = get_llm(
         config.meta_llm,
-        max_model_len=512,
+        max_model_len=2000,
         model_storage_path="../models/",
         revision="main"
     )
