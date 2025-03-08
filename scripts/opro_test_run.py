@@ -16,13 +16,13 @@ logger = Logger(__name__)
 def main():
     """Run a test run for the Opro optimizer."""
     config = Config(
-        meta_llm="meta-llama/Meta-Llama-3-8B-Instruct",
+        meta_llm="vllm-shuyuej/Llama-3.3-70B-Instruct-GPTQ",
         ds_path="data_sets/agnews",
         task_name="agnews",
         n_steps=10,
         optimizer="opro",
-        downstream_llm="meta-llama/Meta-Llama-3-8B-Instruct",
-        evaluation_llm="meta-llama/Meta-Llama-3-8B-Instruct",
+        downstream_llm="vllm-shuyuej/Llama-3.3-70B-Instruct-GPTQ",
+        evaluation_llm="vllm-shuyuej/Llama-3.3-70B-Instruct-GPTQ",
 
     )
     task = get_task(config, split="dev")
@@ -37,7 +37,7 @@ def main():
         callbacks=[LoggerCallback(logger)],
         n_samples=5,
     )
-    prompts = optimizer.optimize(n_steps=10)
+    prompts = optimizer.optimize(n_steps=2)
 
     logger.info(f"Optimized prompts: {prompts}")
 
