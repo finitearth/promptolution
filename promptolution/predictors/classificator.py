@@ -44,7 +44,7 @@ class Classificator(BasePredictor):
         response = []
         for pred in preds:
             predicted_class = self.classes[0]  # use first class as default pred
-            for word in pred.split(" "):
+            for word in pred.split():
                 word = "".join([c for c in word if c.isalnum()])
                 if word in self.classes:
                     predicted_class = word
