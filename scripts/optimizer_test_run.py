@@ -47,7 +47,6 @@ if args.optimizer == "evoprompt_de":
         task=task,
         predictor=predictor,
         callbacks=[LoggerCallback(logger)],
-        n_samples=5,
     )
 elif args.optimizer == "evoprompt_ga":
     optimizer = EvoPromptGA(
@@ -56,7 +55,6 @@ elif args.optimizer == "evoprompt_ga":
         task=task,
         predictor=predictor,
         callbacks=[LoggerCallback(logger)],
-        n_samples=5,
     )
 else:
     optimizer = Opro(
