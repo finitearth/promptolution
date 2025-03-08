@@ -15,18 +15,19 @@ logger = Logger(__name__)
 
 def main():
     """Run a test run for the Opro optimizer."""
+    llm_name = "vllm-Qwen/Qwen2.5-14B-Instruct-GPTQ-Int4"
+
     config = Config(
-        meta_llm="vllm-Qwen/Qwen2.5-14B-Instruct-GPTQ-Int4",
+        meta_llm=llm_name,
         ds_path="data_sets/cls/agnews",
         task_name="agnews",
         n_steps=10,
         optimizer="opro",
-        downstream_llm="vllm-Qwen/Qwen2.5-14B-Instruct-GPTQ-Int4",
-        evaluation_llm="vllm-Qwen/Qwen2.5-14B-Instruct-GPTQ-Int4",
+        downstream_llm=llm_name,
+        evaluation_llm=llm_name,
 
     )
     task = get_task(config, split="dev")
-    predictor = get_predictor(config.evaluation_llm, classes=task.classes)
 
     llm = get_llm(
         config.meta_llm,
@@ -34,6 +35,7 @@ def main():
         model_storage_path="../models/",
         revision="main"
     )
+    predictor = get_predictor(llm, classes=task.classes)
     optimizer = Opro(
         llm,
         initial_prompts=task.initial_population,

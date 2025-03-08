@@ -6,7 +6,7 @@ from .base_predictor import DummyPredictor
 from .classificator import FirstOccurrenceClassificator, MarkerBasedClassificator
 
 
-def get_predictor(name, type: str = "first_occurrence", *args, **kwargs):
+def get_predictor(downstream_llm=None, type: str = "first_occurrence", *args, **kwargs):
     """Factory function to create and return a predictor instance based on the provided name.
 
     This function supports two types of predictors:
@@ -32,10 +32,8 @@ def get_predictor(name, type: str = "first_occurrence", *args, **kwargs):
         >>> dummy_pred = get_predictor("dummy", classes=["A", "B", "C"])
         >>> real_pred = get_predictor("gpt-3.5-turbo", classes=["positive", "negative"])
     """
-    if name == "dummy":
+    if downstream_llm is None:
         return DummyPredictor("", *args, **kwargs)
-
-    downstream_llm = get_llm(name)
 
     if type == "first_occurrence":
         return FirstOccurrenceClassificator(downstream_llm, *args, **kwargs)
