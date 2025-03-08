@@ -9,7 +9,7 @@ from promptolution.config import Config
 from promptolution.exemplar_selectors import get_exemplar_selector
 from promptolution.llms import get_llm
 from promptolution.optimizers import get_optimizer
-from promptolution.predictors import Classificator
+from promptolution.predictors import FirstOccurrenceClassificator
 from promptolution.tasks import get_task
 
 
@@ -38,7 +38,7 @@ def run_optimization(config: Config):
     """
     task = get_task(config)
     llm = get_llm(config.meta_llm, token=config.api_token)
-    predictor = Classificator(llm, classes=task.classes)
+    predictor = FirstOccurrenceClassificator(llm, classes=task.classes)
 
     if config.init_pop_size:
         init_pop = np.random.choice(task.initial_population, size=config.init_pop_size, replace=True)
@@ -76,7 +76,7 @@ def run_evaluation(config: Config, prompts: List[str]):
     task = get_task(config, split="test")
 
     llm = get_llm(config.evaluation_llm, token=config.api_token)
-    predictor = Classificator(llm, classes=task.classes)
+    predictor = FirstOccurrenceClassificator(llm, classes=task.classes)
 
     scores = task.evaluate(prompts, predictor, subsample=True, n_samples=config.n_eval_samples)
     df = pd.DataFrame(dict(prompt=prompts, score=scores))
