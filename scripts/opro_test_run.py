@@ -17,7 +17,7 @@ def main():
     """Run a test run for the Opro optimizer."""
     config = Config(
         meta_llm="vllm-shuyuej/Llama-3.3-70B-Instruct-GPTQ",
-        ds_path="data_sets/agnews",
+        ds_path="data_sets/cls/agnews",
         task_name="agnews",
         n_steps=10,
         optimizer="opro",
