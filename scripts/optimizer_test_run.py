@@ -42,7 +42,7 @@ predictor = get_predictor(llm, classes=task.classes)
 
 if args.optimizer == "evoprompt_de":
     optimizer = EvoPromptDE(
-        llm,
+        meta_llm=llm,
         initial_prompts=task.initial_population,
         task=task,
         predictor=predictor,
@@ -51,7 +51,7 @@ if args.optimizer == "evoprompt_de":
     )
 elif args.optimizer == "evoprompt_ga":
     optimizer = EvoPromptGA(
-        llm,
+        meta_llm=llm,
         initial_prompts=task.initial_population,
         task=task,
         predictor=predictor,
@@ -60,7 +60,7 @@ elif args.optimizer == "evoprompt_ga":
     )
 else:
     optimizer = Opro(
-        llm,
+        meta_llm=llm,
         initial_prompts=task.initial_population,
         task=task,
         predictor=predictor,
