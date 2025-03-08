@@ -7,7 +7,7 @@ import numpy as np
 from promptolution.llms.base_llm import BaseLLM
 from promptolution.tasks.base_task import BaseTask
 from promptolution.tasks.classification_tasks import ClassificationTask
-from promptolution.templates import PROMPT_CREATION_TEMPLATE, PROMPT_VARIATION_TEMPLATE
+from promptolution.templates import PROMPT_CREATION_TEMPLATE, PROMPT_CREATION_TEMPLATE_TD, PROMPT_VARIATION_TEMPLATE
 
 
 def create_prompt_variation(prompt: Union[List[str], str], llm: BaseLLM, meta_prompt: str = None) -> List[str]:
@@ -35,7 +35,9 @@ def create_prompt_variation(prompt: Union[List[str], str], llm: BaseLLM, meta_pr
     return varied_prompts
 
 
-def create_prompts_from_samples(task: BaseTask, llm: BaseLLM, meta_prompt: str = None, n_samples: int = 3) -> List[str]:
+def create_prompts_from_samples(
+    task: BaseTask, llm: BaseLLM, meta_prompt: str = None, n_samples: int = 3, task_description: str = None
+) -> List[str]:
     """Generate a set of prompts from dataset examples sampled from a given task.
 
     Idea taken from the paper Zhou et al. (2021) https://arxiv.org/pdf/2211.01910
@@ -50,6 +52,7 @@ def create_prompts_from_samples(task: BaseTask, llm: BaseLLM, meta_prompt: str =
         meta_prompt (str): The meta prompt to use for generating the prompts.
         If None, a default meta prompt is used.
         n_samples (int): The number of samples to use for generating prompts.
+        task_description (str): The description of the task to include in the prompt.
 
     Returns:
         List[str]: A list of generated prompts.
@@ -76,7 +79,10 @@ def create_prompts_from_samples(task: BaseTask, llm: BaseLLM, meta_prompt: str =
         xs = task.xs[indices].tolist()
         ys = task.ys[indices].tolist()
 
-    meta_prompt = PROMPT_CREATION_TEMPLATE if meta_prompt is None else meta_prompt
+    if meta_prompt is None:
+        meta_prompt = PROMPT_CREATION_TEMPLATE
+    if task_description is None:
+        meta_prompt = PROMPT_CREATION_TEMPLATE_TD.replace("<task_desc>", task_description)
     examples = "\n\n".join([f"Input: {x}\nOutput: {y}" for x, y in zip(xs, ys)])
     meta_prompt = meta_prompt.replace("<input_output_pairs>", examples)
     prompt = llm.get_response([meta_prompt])[0]

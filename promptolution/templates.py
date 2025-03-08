@@ -114,3 +114,11 @@ Include the name of the output classes in the prompt.
 <input_output_pairs>
 
 The instruction was"""
+
+PROMPT_CREATION_TEMPLATE_TD = """You are asked to give the corresponding prompt that gives the following outputs given these inputs for the following task: <task_desc>.
+Return it starting with <prompt> and ending with </prompt> tags.
+Include the name of the output classes in the prompt.
+
+<input_output_pairs>
+
+The instruction was"""
