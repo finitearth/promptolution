@@ -56,6 +56,7 @@ class Config:
     include_task_desc: bool = True
     donor_random: bool = False
     random_seed: int = 42
+    model_storage_path: Optional[Path] = Path("../models/")
     selection_mode: Optional[Literal["random", "wheel", "tour"]] = "random"
     meta_bs: Optional[int] = None
     downstream_bs: Optional[int] = None

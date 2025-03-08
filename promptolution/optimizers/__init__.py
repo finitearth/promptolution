@@ -51,9 +51,13 @@ def get_optimizer(
     if optimizer == "dummy":
         return DummyOptimizer(*args, **kwargs)
     if config.optimizer == "evopromptde":
-        return EvoPromptDE(donor_random=config.donor_random, *args, **kwargs)
+        if include_task_desc:
+            return EvoPromptDE(prompt_template=EVOPROMPT_DE_TEMPLATE_TD, *args, **kwargs)
+        return EvoPromptDE(prompt_template=EVOPROMPT_DE_TEMPLATE, *args, **kwargs)
     if config.optimizer == "evopromptga":
-        return EvoPromptGA(selection_mode=config.selection_mode, *args, **kwargs)
+        if include_task_desc:
+            return EvoPromptGA(prompt_template=EVOPROMPT_GA_TEMPLATE_TD, *args, **kwargs)
+        return EvoPromptGA(prompt_template=EVOPROMPT_GA_TEMPLATE, *args, **kwargs)
     if config.optimizer == "opro":
-        return Opro(*args, **kwargs)
+        return Opro(prompt_template=OPRO_TEMPLATE, *args, **kwargs)
     raise ValueError(f"Unknown optimizer: {config.optimizer}")

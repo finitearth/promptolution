@@ -3,7 +3,7 @@
 import asyncio
 import time
 from logging import INFO, Logger
-from typing import List
+from typing import Any, List
 
 import nest_asyncio
 import openai
@@ -63,7 +63,7 @@ class APILLM(BaseLLM):
         get_response_async: Asynchronously get responses for a list of prompts.
     """
 
-    def __init__(self, model_id: str, token: str = None):
+    def __init__(self, model_id: str, token: str = None, **kwargs: Any):
         """Initialize the APILLM with a specific model.
 
         Args:

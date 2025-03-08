@@ -27,7 +27,7 @@ def run_experiment(config: Config):
     return df
 
 
-def run_optimization(config: Config):
+def run_optimization(config: Config, callbacks: List = None):
     """Run the optimization phase of the experiment.
 
     Args:
@@ -37,7 +37,7 @@ def run_optimization(config: Config):
         List[str]: The optimized list of prompts.
     """
     task = get_task(config)
-    llm = get_llm(config.meta_llm, token=config.api_token)
+    llm = get_llm(config.meta_llm, token=config.api_token, model_storage_path=config.model_storage_path)
     predictor = FirstOccurrenceClassificator(llm, classes=task.classes)
 
     if config.init_pop_size:
@@ -52,6 +52,7 @@ def run_optimization(config: Config):
         task=task,
         predictor=predictor,
         n_eval_samples=config.n_eval_samples,
+        callbacks=callbacks,
     )
 
     prompts = optimizer.optimize(n_steps=config.n_steps)
