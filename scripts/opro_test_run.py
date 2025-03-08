@@ -28,7 +28,12 @@ def main():
     task = get_task(config, split="dev")
     predictor = get_predictor(config.evaluation_llm, classes=task.classes)
 
-    llm = get_llm(config.meta_llm, model_storage_path="../models/")
+    llm = get_llm(
+        config.meta_llm,
+        max_model_len=512,
+        model_storage_path="../models/",
+        revision="main"
+    )
     optimizer = Opro(
         llm,
         initial_prompts=task.initial_population,
