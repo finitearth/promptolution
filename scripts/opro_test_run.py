@@ -16,13 +16,13 @@ logger = Logger(__name__)
 def main():
     """Run a test run for the Opro optimizer."""
     config = Config(
-        meta_llm="vllm-shuyuej/Llama-3.3-70B-Instruct-GPTQ",
+        meta_llm="vllm-Qwen/Qwen2.5-14B-Instruct-GPTQ-Int4",
         ds_path="data_sets/cls/agnews",
         task_name="agnews",
         n_steps=10,
         optimizer="opro",
-        downstream_llm="vllm-shuyuej/Llama-3.3-70B-Instruct-GPTQ",
-        evaluation_llm="vllm-shuyuej/Llama-3.3-70B-Instruct-GPTQ",
+        downstream_llm="vllm-Qwen/Qwen2.5-14B-Instruct-GPTQ-Int4",
+        evaluation_llm="vllm-Qwen/Qwen2.5-14B-Instruct-GPTQ-Int4",
 
     )
     task = get_task(config, split="dev")
