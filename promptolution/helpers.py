@@ -9,7 +9,7 @@ from promptolution.config import Config
 from promptolution.exemplar_selectors import get_exemplar_selector
 from promptolution.llms import get_llm
 from promptolution.optimizers import get_optimizer
-from promptolution.predictors import FirstOccurrenceClassificator
+from promptolution.predictors import FirstOccurrenceClassificator, MarkerBasedClassificator
 from promptolution.tasks import get_task
 
 
@@ -38,7 +38,12 @@ def run_optimization(config: Config, callbacks: List = None):
     """
     task = get_task(config)
     llm = get_llm(config.meta_llm, token=config.api_token, model_storage_path=config.model_storage_path)
-    predictor = FirstOccurrenceClassificator(llm, classes=task.classes)
+    if config.predictor == "MarkerBasedClassificator":
+        predictor = MarkerBasedClassificator(llm, classes=task.classes)
+    elif config.predictor == "FirstOccurenceClassificator":
+        predictor = FirstOccurrenceClassificator(llm, classes=task.classes)
+    else:
+        raise ValueError(f"Predictor {config.predictor} not supported.")
 
     if config.init_pop_size:
         init_pop = np.random.choice(task.initial_population, size=config.init_pop_size, replace=True)
@@ -53,6 +58,7 @@ def run_optimization(config: Config, callbacks: List = None):
         predictor=predictor,
         n_eval_samples=config.n_eval_samples,
         callbacks=callbacks,
+        task_description=predictor.extraction_description,
     )
 
     prompts = optimizer.optimize(n_steps=config.n_steps)

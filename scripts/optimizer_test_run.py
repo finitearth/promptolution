@@ -22,11 +22,11 @@ config = Config(
     meta_llm=args.model,
     ds_path="data_sets/cls/agnews",
     task_name="agnews",
+    predictor = "MarkerBasedClassificator",
     n_steps=args.n_steps,
     optimizer=args.optimizer,
     downstream_llm=args.model,
     evaluation_llm=args.model,
-    include_task_desc=True,
     api_token=args.token,
     model_storage_path=args.model_storage_path,
 )
