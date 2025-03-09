@@ -59,6 +59,7 @@ class LoggerCallback(Callback):
         """Initialize the LoggerCallback."""
         self.logger = logger
         self.step = 0
+        self.step_time = time.time()
 
     def on_step_end(self, optimizer):
         """Log information about the current step."""
@@ -116,11 +117,12 @@ class CSVCallback(Callback):
                 "step": [self.step] * len(optimizer.prompts),
                 "input_tokens": [optimizer.meta_llm.input_token_count] * len(optimizer.prompts),
                 "output_tokens": [optimizer.meta_llm.output_token_count] * len(optimizer.prompts),
-                "time_elapsed": [time.time() - optimizer.start_time] * len(optimizer.prompts),
+                "time_elapsed": [time.time() - self.step_time] * len(optimizer.prompts),
                 "score": optimizer.scores,
                 "prompt": optimizer.prompts,
             }
         )
+        self.step_time = time.time()
 
         if not os.path.exists(self.dir + "step_results.csv"):
             df.to_csv(self.dir + "step_results.csv", index=False)
