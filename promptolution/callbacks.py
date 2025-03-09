@@ -136,14 +136,15 @@ class CSVCallback(Callback):
         optimizer: The optimizer object that called the callback.
         """
         df = pd.DataFrame(
-            {
-                "steps": self.step,
-                "input_tokens": optimizer.meta_llm.input_token_count,
-                "output_tokens": optimizer.meta_llm.output_token_count,
-                "time_elapsed": time.time() - optimizer.start_time,
-                "score": np.array(optimizer.scores).mean(),
-                "best_prompts": str(optimizer.prompts),
-            }
+            dict(
+                steps=self.step,
+                input_tokens=optimizer.meta_llm.input_token_count,
+                output_tokens=optimizer.meta_llm.output_token_count,
+                time_elapsed=time.time() - optimizer.start_time,
+                score=np.array(optimizer.scores).mean(),
+                best_prompts=str(optimizer.prompts),
+            ),
+            index=[0],
         )
 
         if not os.path.exists(self.dir + "train_results.csv"):
