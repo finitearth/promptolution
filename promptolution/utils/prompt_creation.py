@@ -89,7 +89,7 @@ def create_prompts_from_samples(
 
         if meta_prompt is None:
             meta_prompt = PROMPT_CREATION_TEMPLATE
-        if task_description is None:
+        if task_description is not None:
             meta_prompt = PROMPT_CREATION_TEMPLATE_TD.replace("<task_desc>", task_description)
         examples = "\n\n".join([f"Input: {x}\nOutput: {y}" for x, y in zip(xs, ys)])
         meta_prompt = meta_prompt.replace("<input_output_pairs>", examples)
