@@ -77,7 +77,10 @@ class LoggerCallback(Callback):
         optimizer: The optimizer object that called the callback.
         logs: Additional information to log.
         """
-        self.logger.critical(f"Training ended - {logs}")
+        if logs is None:
+            self.logger.critical("Training ended")
+        else:
+            self.logger.critical(f"Training ended - {logs}")
 
         return True
 
@@ -103,6 +106,8 @@ class CSVCallback(Callback):
 
         self.dir = dir
         self.step = 0
+        self.input_tokens = 0
+        self.output_tokens = 0
         self.step_time = time.time()
 
     def on_step_end(self, optimizer):
@@ -115,14 +120,16 @@ class CSVCallback(Callback):
         df = pd.DataFrame(
             {
                 "step": [self.step] * len(optimizer.prompts),
-                "input_tokens": [optimizer.meta_llm.input_token_count] * len(optimizer.prompts),
-                "output_tokens": [optimizer.meta_llm.output_token_count] * len(optimizer.prompts),
+                "input_tokens": [optimizer.meta_llm.input_token_count - self.input_tokens] * len(optimizer.prompts),
+                "output_tokens": [optimizer.meta_llm.output_token_count - self.output_tokens] * len(optimizer.prompts),
                 "time_elapsed": [time.time() - self.step_time] * len(optimizer.prompts),
                 "score": optimizer.scores,
                 "prompt": optimizer.prompts,
             }
         )
         self.step_time = time.time()
+        self.input_tokens = optimizer.meta_llm.input_token_count
+        self.output_tokens = optimizer.meta_llm.input_token_count
 
         if not os.path.exists(self.dir + "step_results.csv"):
             df.to_csv(self.dir + "step_results.csv", index=False)
