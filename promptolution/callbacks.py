@@ -59,7 +59,6 @@ class LoggerCallback(Callback):
         """Initialize the LoggerCallback."""
         self.logger = logger
         self.step = 0
-        self.step_time = time.time()
 
     def on_step_end(self, optimizer):
         """Log information about the current step."""
@@ -104,6 +103,7 @@ class CSVCallback(Callback):
 
         self.dir = dir
         self.step = 0
+        self.step_time = time.time()
 
     def on_step_end(self, optimizer):
         """Save prompts and scores to csv.
