@@ -129,7 +129,7 @@ class CSVCallback(Callback):
         )
         self.step_time = time.time()
         self.input_tokens = optimizer.meta_llm.input_token_count
-        self.output_tokens = optimizer.meta_llm.input_token_count
+        self.output_tokens = optimizer.meta_llm.output_token_count
 
         if not os.path.exists(self.dir + "step_results.csv"):
             df.to_csv(self.dir + "step_results.csv", index=False)
