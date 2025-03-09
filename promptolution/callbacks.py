@@ -2,6 +2,7 @@
 
 import os
 import time
+from typing import Literal
 
 import numpy as np
 import pandas as pd
@@ -242,7 +243,11 @@ class ProgressBarCallback(Callback):
 class TokenCountCallback(Callback):
     """Callback for stopping optimization based on the total token count."""
 
-    def __init__(self, max_tokens_for_termination, token_type_for_termination):
+    def __init__(
+        self,
+        max_tokens_for_termination: int,
+        token_type_for_termination: Literal["input_tokens", "output_tokens", "total_tokens"],
+    ):
         """Initialize the TokenCountCallback.
 
         Args:
