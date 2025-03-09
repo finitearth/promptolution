@@ -41,7 +41,6 @@ class BaseOptimizer(ABC):
         self.callbacks = callbacks
         self.predictor = predictor
         self.n_eval_samples = n_eval_samples
-        self.start_time = time.time()
 
     @abstractmethod
     def optimize(self, n_steps: int) -> List[str]:

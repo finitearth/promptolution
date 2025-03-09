@@ -1,9 +1,12 @@
 """Base module for LLMs in the promptolution library."""
 
+import logging
 from abc import ABC, abstractmethod
 from typing import List
 
 import numpy as np
+
+logger = logging.getLogger(__name__)
 
 
 class BaseLLM(ABC):
@@ -45,6 +48,7 @@ class BaseLLM(ABC):
             inputs (List[str]): A list of input prompts.
             outputs (List[str]): A list of generated responses.
         """
+        logger.warning("Token count is approximated using word count split by whitespace, not an actual tokenizer.")
         input_tokens = sum([len(i.split()) for i in inputs])
         output_tokens = sum([len(o.split()) for o in outputs])
         self.input_token_count += input_tokens

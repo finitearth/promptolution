@@ -108,6 +108,7 @@ class CSVCallback(Callback):
         self.step = 0
         self.input_tokens = 0
         self.output_tokens = 0
+        self.start_time = time.time()
         self.step_time = time.time()
 
     def on_step_end(self, optimizer):
@@ -149,7 +150,7 @@ class CSVCallback(Callback):
                 steps=self.step,
                 input_tokens=optimizer.meta_llm.input_token_count,
                 output_tokens=optimizer.meta_llm.output_token_count,
-                time_elapsed=time.time() - optimizer.start_time,
+                time_elapsed=time.time() - self.start_time,
                 score=np.array(optimizer.scores).mean(),
                 best_prompts=str(optimizer.prompts),
             ),
@@ -241,16 +242,21 @@ class ProgressBarCallback(Callback):
 class TokenCountCallback(Callback):
     """Callback for stopping optimization based on the total token count."""
 
-    def __init__(self, max_tokens_for_termination):
-        """Initialize the TokenCountCallback."""
+    def __init__(self, max_tokens_for_termination, token_type_for_termination):
+        """Initialize the TokenCountCallback.
+
+        Args:
+        max_tokens_for_termination (int): Maximum number of tokens which is allowed befor the algorithm is stopped.
+        token_type_for_termination (str): Can be one of either "input_tokens", "output_tokens" or "total_tokens".
+        """
         self.max_tokens_for_termination = max_tokens_for_termination
+        self.token_type_for_termination = token_type_for_termination
 
     def on_step_end(self, optimizer):
         """Check if the total token count exceeds the maximum allowed. If so, stop the optimization."""
         token_counts = optimizer.predictor.llm.get_token_count()
-        total_token_count = token_counts["total_tokens"]
 
-        if total_token_count > self.max_tokens_for_termination:
+        if token_counts[self.token_type_for_termination] > self.max_tokens_for_termination:
             return False
 
         return True

@@ -1,36 +1,31 @@
 """Module for LLM predictors."""
 
-from promptolution.llms import get_llm
+from typing import Literal
 
 from .base_predictor import DummyPredictor
 from .classificator import FirstOccurrenceClassificator, MarkerBasedClassificator
 
 
-def get_predictor(downstream_llm=None, type: str = "first_occurrence", *args, **kwargs):
-    """Factory function to create and return a predictor instance based on the provided name.
+def get_predictor(
+    downstream_llm=None, type: Literal["first_occurence", "marker"] = "first_occurrence", *args, **kwargs
+):
+    """Factory function to create and return a predictor instance.
 
-    This function supports two types of predictors:
-    1. DummyPredictor: A mock predictor for testing purposes.
-    2. FirstOccurrenceClassificator: A real predictor using a language model for classification tasks.
+    This function supports three types of predictors:
+    1. DummyPredictor: A mock predictor for testing purposes when no downstream_llm is provided.
+    2. FirstOccurrenceClassificator: A predictor that classifies based on first occurrence of the label.
+    3. MarkerBasedClassificator: A predictor that classifies based on a marker.
 
     Args:
-        name (str): Identifier for the predictor to use. Special case:
-                    - "dummy" for DummyPredictor
-                    - Any other string for FirstOccurrenceClassificator with the specified LLM
-        type ()
+        downstream_llm: The language model to use for prediction. If None, returns a DummyPredictor.
+        type (Literal["first_occurrence", "marker"]): The type of predictor to create:
+                    - "first_occurrence" (default) for FirstOccurrenceClassificator
+                    - "marker" for MarkerBasedClassificator
         *args: Variable length argument list passed to the predictor constructor.
         **kwargs: Arbitrary keyword arguments passed to the predictor constructor.
 
     Returns:
-        An instance of DummyPredictor or FirstOccurrenceClassificator based on the name.
-
-    Notes:
-        - For non-dummy predictors, this function calls get_llm to obtain the language model.
-        - The batch_size for the language model is currently commented out and not used.
-
-    Examples:
-        >>> dummy_pred = get_predictor("dummy", classes=["A", "B", "C"])
-        >>> real_pred = get_predictor("gpt-3.5-turbo", classes=["positive", "negative"])
+        An instance of DummyPredictor, FirstOccurrenceClassificator, or MarkerBasedClassificator.
     """
     if downstream_llm is None:
         return DummyPredictor("", *args, **kwargs)
@@ -39,3 +34,5 @@ def get_predictor(downstream_llm=None, type: str = "first_occurrence", *args, **
         return FirstOccurrenceClassificator(downstream_llm, *args, **kwargs)
     elif type == "marker":
         return MarkerBasedClassificator(downstream_llm, *args, **kwargs)
+    else:
+        raise ValueError(f"Invalid predictor type: '{type}'")
