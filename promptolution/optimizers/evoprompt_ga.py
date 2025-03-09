@@ -77,7 +77,10 @@ class EvoPromptGA(BaseOptimizer):
             self.prompts = [prompt for _, prompt in sorted(zip(scores, prompts), reverse=True)][: len(self.prompts)]
             self.scores = sorted(scores, reverse=True)[: len(self.prompts)]
 
-            self._on_step_end()
+            continue_optimization = self._on_step_end()
+            if not continue_optimization:
+                break
+
         return self.prompts
 
     def _crossover(self, prompts, scores) -> str:

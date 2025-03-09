@@ -89,7 +89,11 @@ class EvoPromptDE(BaseOptimizer):
                     self.prompts[i] = child_prompts[i]
                     self.scores[i] = child_scores[i]
 
-            self._on_step_end()
+            continue_optimization = self._on_step_end()
+
+            if not continue_optimization:
+                break
 
         self._on_train_end()
+
         return self.prompts

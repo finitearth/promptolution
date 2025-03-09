@@ -36,7 +36,6 @@ class Opro(BaseOptimizer):
         self.meta_prompt = prompt_template if prompt_template else OPRO_TEMPLATE
 
         super().__init__(**args)
-        self.meta_prompt = self.meta_prompt.replace("<task_description>", self.task.description)
 
         self.scores = [
             self.task.evaluate(p, self.predictor, subsample=True, n_samples=self.n_eval_samples)[0]
@@ -89,7 +88,9 @@ class Opro(BaseOptimizer):
             self.prompts.append(prompt)
             self.scores.append(score)
 
-            self._on_step_end()
+            continue_optimization = self._on_step_end()
+            if not continue_optimization:
+                break
 
         self._on_epoch_end()
 
