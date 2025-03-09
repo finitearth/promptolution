@@ -10,6 +10,7 @@
 * introduced "MarkerBasedClassifcator"
 * automatic task description creation
 * use task description in prompt creation
+* implement CSV callbacks
 
 **Full Changelog**: [here](https://github.com/finitearth/promptolution/compare/v1.2.0...v1.3.0)
 
