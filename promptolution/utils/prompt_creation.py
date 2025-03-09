@@ -42,6 +42,7 @@ def create_prompts_from_samples(
     n_samples: int = 3,
     task_description: str = None,
     n_prompts: int = 1,
+    get_uniform_labels: bool = False,
 ) -> List[str]:
     """Generate a set of prompts from dataset examples sampled from a given task.
 
@@ -59,13 +60,14 @@ def create_prompts_from_samples(
         n_samples (int): The number of samples to use for generating prompts.
         task_description (str): The description of the task to include in the prompt.
         n_prompts (int): The number of prompts to generate.
+        get_uniform_labels (bool): If True, samples are selected such that all classes are represented.
 
     Returns:
         List[str]: A list of generated prompts.
     """
     meta_prompts = []
     for _ in range(n_prompts):
-        if isinstance(task, ClassificationTask):
+        if isinstance(task, ClassificationTask) and get_uniform_labels:
             # if classification task sample such that all classes are represented
             unique_labels, counts = np.unique(task.ys, return_counts=True)
             proportions = counts / len(task.ys)
