@@ -2,6 +2,7 @@
 import argparse
 import time
 from logging import Logger
+import os
 
 import numpy as np
 import pandas as pd
@@ -13,13 +14,10 @@ from tqdm import tqdm
 
 logger = Logger(__name__)
 
-# TODO: Align this script with how we import datasets in capo
-
-
 """Run inference test on a dataset using a specified LLM."""
 parser = argparse.ArgumentParser()
 parser.add_argument("--model")
-parser.add_argument("--output")
+parser.add_argument("--output-dir", default="results/")
 parser.add_argument("--datasets", default=["subj"])
 parser.add_argument("--token", default=None)
 parser.add_argument("--batch-size", default=None)
@@ -27,6 +25,9 @@ parser.add_argument("--revision", default="main")
 parser.add_argument("--max-model-len", default=None)
 parser.add_argument("--model-storage-path", default=None)
 args = parser.parse_args()
+
+# make sure the output directory exist
+os.makedirs(args.output_dir, exist_ok=True)
 
 start_time = time.time()
 
@@ -75,7 +76,7 @@ for dataset in args.datasets:
 
         # if single prompts should be stored
         # df = pd.DataFrame(dict(prompt=prompt, seq=seqs, score=scores))
-        # df.to_csv(args.output + "_detailed", index=False)
+        # df.to_csv(args.output_dir + "results_detailed.csv", index=False)
 
         accuracy = np.array(scores).mean()
 
@@ -89,10 +90,14 @@ for dataset in args.datasets:
             ),
             index=[0],
         )
-        results.to_csv(args.output, mode="a", header=False, index=False)
+
+        if not os.path.exists(args.output_dir + "llm_test_results.csv"):
+            results.to_csv(args.output_dir + "llm_test_results.csv", index=False)
+        else:
+            results.to_csv(args.output_dir + "llm_test_results.csv", mode="a", header=False, index=False)
 
 total_inference_time = time.time() - start_time
 print(
     f"Total inference took {total_inference_time:.2f} seconds and required {llm.get_token_count()} tokens."
 )
-print(f"Results saved to {args.output}")
+print(f"Results saved to {args.output_dir}")

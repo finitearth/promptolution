@@ -1,7 +1,9 @@
 """Callback classes for logging, saving, and tracking optimization progress."""
 
 import os
+import time
 
+import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
@@ -86,24 +88,20 @@ class CSVCallback(Callback):
     This callback saves prompts and scores at each step to a CSV file.
 
     Attributes:
-        path (str): The path to the CSV file.
+        dir (str): Directory the CSV file is saved to.
         step (int): The current step number.
     """
 
-    def __init__(self, path):
+    def __init__(self, dir):
         """Initialize the CSVCallback.
 
         Args:
-        path (str): The path to the CSV file.
+        dir (str): Directory the CSV file is saved to.
         """
-        # if dir does not exist
-        if not os.path.exists(os.path.dirname(path)):
-            os.makedirs(os.path.dirname(path))
+        if not os.path.exists(dir):
+            os.makedirs(dir)
 
-        # create file in path with header: "step,prompt,score"
-        with open(path, "w") as f:
-            f.write("step,prompt,score\n")
-        self.path = path
+        self.dir = dir
         self.step = 0
 
     def on_step_end(self, optimizer):
@@ -114,9 +112,20 @@ class CSVCallback(Callback):
         """
         self.step += 1
         df = pd.DataFrame(
-            {"step": [self.step] * len(optimizer.prompts), "prompt": optimizer.prompts, "score": optimizer.scores}
+            {
+                "step": [self.step] * len(optimizer.prompts),
+                "input_tokens": [optimizer.meta_llm.input_token_count] * len(optimizer.prompts),
+                "output_tokens": [optimizer.meta_llm.output_token_count] * len(optimizer.prompts),
+                "time_elapsed": [time.time() - optimizer.start_time] * len(optimizer.prompts),
+                "score": optimizer.scores,
+                "prompt": optimizer.prompts,
+            }
         )
-        df.to_csv(self.path, mode="a", header=False, index=False)
+
+        if not os.path.exists(self.dir + "step_results.csv"):
+            df.to_csv(self.dir + "step_results.csv", index=False)
+        else:
+            df.to_csv(self.dir + "step_results.csv", mode="a", header=False, index=False)
 
         return True
 
@@ -126,6 +135,22 @@ class CSVCallback(Callback):
         Args:
         optimizer: The optimizer object that called the callback.
         """
+        df = pd.DataFrame(
+            {
+                "steps": self.step,
+                "input_tokens": optimizer.meta_llm.input_token_count,
+                "output_tokens": optimizer.meta_llm.output_token_count,
+                "time_elapsed": time.time() - optimizer.start_time,
+                "score": np.array(optimizer.scores).mean(),
+                "best_prompts": str(optimizer.prompts),
+            }
+        )
+
+        if not os.path.exists(self.dir + "train_results.csv"):
+            df.to_csv(self.dir + "train_results.csv", index=False)
+        else:
+            df.to_csv(self.dir + "train_results.csv", mode="a", header=False, index=False)
+
         return True
 
 
