@@ -75,12 +75,12 @@ class MarkerBasedClassificator(BasePredictor):
         BasePredictor: The base class for predictors in the promptolution library.
     """
 
-    def __init__(self, llm, classes, marker="<final_answer>", *args, **kwargs):
+    def __init__(self, llm, classes=None, marker="<final_answer>", *args, **kwargs):
         """Initialize the Classificator.
 
         Args:
             llm: The language model to use for predictions.
-            classes (List[str]): The list of valid class labels.
+            classes (List[str]): The list of valid class labels. If None, does not force any class.
             marker (str): The marker to use for extracting the class label.
             *args, **kwargs: Additional arguments for the BasePredictor.
         """
@@ -101,11 +101,11 @@ class MarkerBasedClassificator(BasePredictor):
         """
         response = []
         for pred in preds:
-            predicted_class = pred.split(self.marker)[-1].strip()
-            if predicted_class not in self.classes:
-                predicted_class = self.classes[0]
+            pred = pred.split(self.marker)[-1].strip()
+            if self.classes is not None and pred not in self.classes:
+                pred = self.classes[0]
 
-            response.append(predicted_class)
+            response.append(pred)
 
         response = np.array(response).reshape(*shape)
         return response
