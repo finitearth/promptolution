@@ -1,7 +1,10 @@
 """Callback classes for logging, saving, and tracking optimization progress."""
 
 import os
+import time
+from typing import Literal
 
+import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
@@ -14,24 +17,33 @@ class Callback:
 
         Args:
         optimizer: The optimizer object that called the callback.
+
+        Returns:
+            Bool: True if the optimization should continue, False if it should stop.
         """
-        pass
+        return True
 
     def on_epoch_end(self, optimizer):
         """Called at the end of each optimization epoch.
 
         Args:
         optimizer: The optimizer object that called the callback.
+
+        Returns:
+            Bool: True if the optimization should continue, False if it should stop.
         """
-        pass
+        return True
 
     def on_train_end(self, optimizer):
         """Called at the end of the entire optimization process.
 
         Args:
         optimizer: The optimizer object that called the callback.
+
+        Returns:
+            Bool: True if the optimization should continue, False if it should stop.
         """
-        pass
+        return True
 
 
 class LoggerCallback(Callback):
@@ -57,6 +69,8 @@ class LoggerCallback(Callback):
             self.logger.critical(f"*** Prompt {i}: Score: {score}")
             self.logger.critical(f"{prompt}")
 
+        return True
+
     def on_train_end(self, optimizer, logs=None):
         """Log information at the end of training.
 
@@ -64,7 +78,12 @@ class LoggerCallback(Callback):
         optimizer: The optimizer object that called the callback.
         logs: Additional information to log.
         """
-        self.logger.critical(f"Training ended - {logs}")
+        if logs is None:
+            self.logger.critical("Training ended")
+        else:
+            self.logger.critical(f"Training ended - {logs}")
+
+        return True
 
 
 class CSVCallback(Callback):
@@ -73,25 +92,25 @@ class CSVCallback(Callback):
     This callback saves prompts and scores at each step to a CSV file.
 
     Attributes:
-        path (str): The path to the CSV file.
+        dir (str): Directory the CSV file is saved to.
         step (int): The current step number.
     """
 
-    def __init__(self, path):
+    def __init__(self, dir):
         """Initialize the CSVCallback.
 
         Args:
-        path (str): The path to the CSV file.
+        dir (str): Directory the CSV file is saved to.
         """
-        # if dir does not exist
-        if not os.path.exists(os.path.dirname(path)):
-            os.makedirs(os.path.dirname(path))
+        if not os.path.exists(dir):
+            os.makedirs(dir)
 
-        # create file in path with header: "step,prompt,score"
-        with open(path, "w") as f:
-            f.write("step,prompt,score\n")
-        self.path = path
+        self.dir = dir
         self.step = 0
+        self.input_tokens = 0
+        self.output_tokens = 0
+        self.start_time = time.time()
+        self.step_time = time.time()
 
     def on_step_end(self, optimizer):
         """Save prompts and scores to csv.
@@ -101,9 +120,25 @@ class CSVCallback(Callback):
         """
         self.step += 1
         df = pd.DataFrame(
-            {"step": [self.step] * len(optimizer.prompts), "prompt": optimizer.prompts, "score": optimizer.scores}
+            {
+                "step": [self.step] * len(optimizer.prompts),
+                "input_tokens": [optimizer.meta_llm.input_token_count - self.input_tokens] * len(optimizer.prompts),
+                "output_tokens": [optimizer.meta_llm.output_token_count - self.output_tokens] * len(optimizer.prompts),
+                "time_elapsed": [time.time() - self.step_time] * len(optimizer.prompts),
+                "score": optimizer.scores,
+                "prompt": optimizer.prompts,
+            }
         )
-        df.to_csv(self.path, mode="a", header=False, index=False)
+        self.step_time = time.time()
+        self.input_tokens = optimizer.meta_llm.input_token_count
+        self.output_tokens = optimizer.meta_llm.output_token_count
+
+        if not os.path.exists(self.dir + "step_results.csv"):
+            df.to_csv(self.dir + "step_results.csv", index=False)
+        else:
+            df.to_csv(self.dir + "step_results.csv", mode="a", header=False, index=False)
+
+        return True
 
     def on_train_end(self, optimizer):
         """Called at the end of training.
@@ -111,7 +146,24 @@ class CSVCallback(Callback):
         Args:
         optimizer: The optimizer object that called the callback.
         """
-        pass
+        df = pd.DataFrame(
+            dict(
+                steps=self.step,
+                input_tokens=optimizer.meta_llm.input_token_count,
+                output_tokens=optimizer.meta_llm.output_token_count,
+                time_elapsed=time.time() - self.start_time,
+                score=np.array(optimizer.scores).mean(),
+                best_prompts=str(optimizer.prompts),
+            ),
+            index=[0],
+        )
+
+        if not os.path.exists(self.dir + "train_results.csv"):
+            df.to_csv(self.dir + "train_results.csv", index=False)
+        else:
+            df.to_csv(self.dir + "train_results.csv", mode="a", header=False, index=False)
+
+        return True
 
 
 class BestPromptCallback(Callback):
@@ -138,6 +190,8 @@ class BestPromptCallback(Callback):
         if optimizer.scores[0] > self.best_score:
             self.best_score = optimizer.scores[0]
             self.best_prompt = optimizer.prompts[0]
+
+        return True
 
     def get_best_prompt(self):
         """Get the best prompt and score achieved during optimization.
@@ -173,6 +227,8 @@ class ProgressBarCallback(Callback):
         """
         self.pbar.update(1)
 
+        return True
+
     def on_train_end(self, optimizer):
         """Close the progress bar at the end of training.
 
@@ -180,3 +236,32 @@ class ProgressBarCallback(Callback):
         optimizer: The optimizer object that called the callback.
         """
         self.pbar.close()
+
+        return True
+
+
+class TokenCountCallback(Callback):
+    """Callback for stopping optimization based on the total token count."""
+
+    def __init__(
+        self,
+        max_tokens_for_termination: int,
+        token_type_for_termination: Literal["input_tokens", "output_tokens", "total_tokens"],
+    ):
+        """Initialize the TokenCountCallback.
+
+        Args:
+        max_tokens_for_termination (int): Maximum number of tokens which is allowed befor the algorithm is stopped.
+        token_type_for_termination (str): Can be one of either "input_tokens", "output_tokens" or "total_tokens".
+        """
+        self.max_tokens_for_termination = max_tokens_for_termination
+        self.token_type_for_termination = token_type_for_termination
+
+    def on_step_end(self, optimizer):
+        """Check if the total token count exceeds the maximum allowed. If so, stop the optimization."""
+        token_counts = optimizer.predictor.llm.get_token_count()
+
+        if token_counts[self.token_type_for_termination] > self.max_tokens_for_termination:
+            return False
+
+        return True

@@ -1,5 +1,6 @@
 """Base class for prompt optimizers."""
 
+import time
 from abc import ABC, abstractmethod
 from typing import Callable, List
 
@@ -61,13 +62,19 @@ class BaseOptimizer(ABC):
 
     def _on_step_end(self):
         """Call all registered callbacks at the end of each optimization step."""
+        continue_optimization = True
         for callback in self.callbacks:
-            callback.on_step_end(self)
+            continue_optimization &= callback.on_step_end(self)  # if any callback returns False, end the optimization
+
+        return continue_optimization
 
     def _on_epoch_end(self):
         """Call all registered callbacks at the end of each optimization epoch."""
+        continue_optimization = True
         for callback in self.callbacks:
-            callback.on_epoch_end(self)
+            continue_optimization &= callback.on_epoch_end(self)  # if any callback returns False, end the optimization
+
+        return continue_optimization
 
     def _on_train_end(self):
         """Call all registered callbacks at the end of the entire optimization process."""
@@ -111,4 +118,5 @@ class DummyOptimizer(BaseOptimizer):
         self._on_step_end()
         self._on_epoch_end()
         self._on_train_end()
+
         return self.prompts

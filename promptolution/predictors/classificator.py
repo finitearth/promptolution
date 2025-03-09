@@ -7,7 +7,7 @@ import numpy as np
 from promptolution.predictors.base_predictor import BasePredictor
 
 
-class Classificator(BasePredictor):
+class FirstOccurrenceClassificator(BasePredictor):
     """A predictor class for classification tasks using language models.
 
     This class takes a language model and a list of classes, and provides a method
@@ -33,6 +33,10 @@ class Classificator(BasePredictor):
         """
         super().__init__(llm)
         self.classes = classes
+        self.extraction_description = (
+            f"The task is to classify the texts into one of those classes: {', '.join(classes)}."
+            "The first occurrence of a valid class label in the prediction is used as the predicted class."
+        )
 
     def _extract_preds(self, preds: List[str], shape: Tuple[int, int]) -> np.ndarray:
         """Extract class labels from the predictions, based on the list of valid class labels.
@@ -44,11 +48,62 @@ class Classificator(BasePredictor):
         response = []
         for pred in preds:
             predicted_class = self.classes[0]  # use first class as default pred
-            for word in pred.split(" "):
+            for word in pred.split():
                 word = "".join([c for c in word if c.isalnum()])
                 if word in self.classes:
                     predicted_class = word
                     break
+
+            response.append(predicted_class)
+
+        response = np.array(response).reshape(*shape)
+        return response
+
+
+class MarkerBasedClassificator(BasePredictor):
+    """A predictor class for classification tasks using language models.
+
+    This class takes a language model and a list of classes, and provides a method
+    to predict classes for given prompts and input data. The class labels are extracted.
+
+    Attributes:
+        llm: The language model used for generating predictions.
+        classes (List[str]): The list of valid class labels.
+        marker (str): The marker to use for extracting the class label.
+
+    Inherits from:
+        BasePredictor: The base class for predictors in the promptolution library.
+    """
+
+    def __init__(self, llm, classes, marker="<final_answer>", *args, **kwargs):
+        """Initialize the Classificator.
+
+        Args:
+            llm: The language model to use for predictions.
+            classes (List[str]): The list of valid class labels.
+            marker (str): The marker to use for extracting the class label.
+            *args, **kwargs: Additional arguments for the BasePredictor.
+        """
+        super().__init__(llm)
+        self.classes = classes
+        self.marker = marker
+        self.extraction_description = (
+            f"The task is to classify the texts into one of those classes: {','.join(classes)}."
+            f"The class label is extracted from the text following the marker: {marker}."
+        )
+
+    def _extract_preds(self, preds: List[str], shape: Tuple[int, int]) -> np.ndarray:
+        """Extract class labels from the predictions, by extracting the text following the marker.
+
+        Args:
+            preds: The raw predictions from the language model.
+            shape: The shape of the output array: (n_prompts, n_samples).
+        """
+        response = []
+        for pred in preds:
+            predicted_class = pred.split(self.marker)[-1].strip()
+            if predicted_class not in self.classes:
+                predicted_class = self.classes[0]
 
             response.append(predicted_class)
 

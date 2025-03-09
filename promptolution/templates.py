@@ -86,8 +86,21 @@ Prompt 2: <prompt2>
 
 1."""
 
-OPRO_TEMPLATE = """Your task is to generate an instruction for the following task:
-<task_description>
+OPRO_TEMPLATE = """Your task is to generate an instruction.
+
+Below are some previous instructions with their scores. The score ranges from 0 to 100.
+
+<old_instructions>
+
+Here are some examples of the target dataset:
+<examples>
+
+Generate a new instruction bracketed with <prompt> and ending it with </prompt> that is different from all the instructions above and has a higher score than all the instructions above. The instruction should be concise, effective, and generally applicable to the task described.
+
+Your new instruction:"""
+
+OPRO_TEMPLATE_TD = """Your task is to generate an instruction for the following task:
+<task_desc>
 
 Below are some previous instructions with their scores. The score ranges from 0 to 100.
 
@@ -108,6 +121,14 @@ Input: <prev_prompt>
 Output:"""
 
 PROMPT_CREATION_TEMPLATE = """You are asked to give the corresponding prompt that gives the following outputs given these inputs.
+Return it starting with <prompt> and ending with </prompt> tags.
+Include the name of the output classes in the prompt.
+
+<input_output_pairs>
+
+The instruction was"""
+
+PROMPT_CREATION_TEMPLATE_TD = """You are asked to give the corresponding prompt that gives the following outputs given these inputs for the following task: <task_desc>.
 Return it starting with <prompt> and ending with </prompt> tags.
 Include the name of the output classes in the prompt.
 

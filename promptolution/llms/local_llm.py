@@ -35,6 +35,8 @@ class LocalLLM(BaseLLM):
             This method sets up a text generation pipeline with bfloat16 precision,
             automatic device mapping, and specific generation parameters.
         """
+        super().__init__()
+
         self.pipeline = transformers.pipeline(
             "text-generation",
             model=model_id,
@@ -48,7 +50,7 @@ class LocalLLM(BaseLLM):
         self.pipeline.tokenizer.pad_token_id = self.pipeline.tokenizer.eos_token_id
         self.pipeline.tokenizer.padding_side = "left"
 
-    def get_response(self, prompts: list[str]):
+    def _get_response(self, prompts: list[str]):
         """Generate responses for a list of prompts using the local language model.
 
         Args:

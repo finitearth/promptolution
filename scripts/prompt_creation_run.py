@@ -21,7 +21,7 @@ def main():
     llm = get_llm("meta-llama/Meta-Llama-3-8B-Instruct")
     task = get_task(config, split="dev")
 
-    predictor = get_predictor("meta-llama/Meta-Llama-3-8B-Instruct", classes=task.classes)
+    predictor = get_predictor(llm, classes=task.classes)
 
     init_prompts = create_prompts_from_samples(task, llm)
     logger.critical(f"Initial prompts: {init_prompts}")
