@@ -1,5 +1,6 @@
 """Base class for prompt optimizers."""
 
+import time
 from abc import ABC, abstractmethod
 from typing import Callable, List
 

@@ -2,7 +2,7 @@
 import argparse
 from logging import Logger
 
-from promptolution.callbacks import LoggerCallback
+from promptolution.callbacks import LoggerCallback, CSVCallback
 from promptolution.helpers import run_optimization
 
 from promptolution.config import Config
@@ -22,7 +22,7 @@ config = Config(
     meta_llm=args.model,
     ds_path="data_sets/cls/agnews",
     task_name="agnews",
-    predictor = "MarkerBasedClassificator",
+    predictor="FirstOccurenceClassificator",
     n_steps=args.n_steps,
     optimizer=args.optimizer,
     downstream_llm=args.model,
@@ -31,6 +31,6 @@ config = Config(
     model_storage_path=args.model_storage_path,
 )
 
-prompts = run_optimization(config, callbacks=[LoggerCallback(logger)])
+prompts = run_optimization(config, callbacks=[LoggerCallback(logger), CSVCallback(f"results/{args.model}/")])
 
 logger.info(f"Optimized prompts: {prompts}")
