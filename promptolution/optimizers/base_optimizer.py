@@ -79,7 +79,7 @@ class BaseOptimizer(ABC):
     def _on_train_end(self):
         """Call all registered callbacks at the end of the entire optimization process."""
         for callback in self.callbacks:
-            callback._on_train_end(self)
+            callback.on_train_end(self)
 
 
 class DummyOptimizer(BaseOptimizer):

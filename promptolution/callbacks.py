@@ -85,8 +85,6 @@ class LoggerCallback(Callback):
 
         return True
 
-        return True
-
 
 class CSVCallback(Callback):
     """Callback for saving optimization progress to a CSV file.
