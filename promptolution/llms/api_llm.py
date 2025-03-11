@@ -138,5 +138,6 @@ class APILLM(BaseLLM):
 
         for prompt in prompts:
             tasks.append(invoke_model(prompt, self.model, semaphore))
+
         responses = await asyncio.gather(*tasks)
         return responses
