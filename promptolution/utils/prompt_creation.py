@@ -63,33 +63,38 @@ def create_prompts_from_samples(
     Returns:
         List[str]: A list of generated prompts.
     """
-    if isinstance(task, ClassificationTask):
-        # if classification task sample such that all classes are represented
-        unique_labels, counts = np.unique(task.ys, return_counts=True)
-        proportions = counts / len(task.ys)
-        samples_per_class = np.round(proportions * n_samples).astype(int)
-        samples_per_class = np.maximum(samples_per_class, 1)
+    meta_prompts = []
+    for _ in range(n_prompts):
+        if isinstance(task, ClassificationTask):
+            # if classification task sample such that all classes are represented
+            unique_labels, counts = np.unique(task.ys, return_counts=True)
+            proportions = counts / len(task.ys)
+            samples_per_class = np.round(proportions * n_samples).astype(int)
+            samples_per_class = np.maximum(samples_per_class, 1)
 
-        # sample
-        xs = []
-        ys = []
-        for label, n_samples in zip(unique_labels, samples_per_class):
-            indices = np.where(task.ys == label)[0]
-            indices = np.random.choice(indices, n_samples, replace=False)
-            xs.extend(task.xs[indices])
-            ys.extend(task.ys[indices])
+            # sample
+            xs = []
+            ys = []
+            for label, n_samples in zip(unique_labels, samples_per_class):
+                indices = np.where(task.ys == label)[0]
+                indices = np.random.choice(indices, n_samples, replace=False)
+                xs.extend(task.xs[indices])
+                ys.extend(task.ys[indices])
 
-    else:
-        # if not classification task, sample randomly
-        indices = np.random.choice(len(task.xs), n_samples, replace=False)
-        xs = task.xs[indices].tolist()
-        ys = task.ys[indices].tolist()
+        else:
+            # if not classification task, sample randomly
+            indices = np.random.choice(len(task.xs), n_samples, replace=False)
+            xs = task.xs[indices].tolist()
+            ys = task.ys[indices].tolist()
 
-    meta_prompt = PROMPT_CREATION_TEMPLATE if meta_prompt is None else meta_prompt
-    examples = "\n\n".join([f"Input: {x}\nOutput: {y}" for x, y in zip(xs, ys)])
-    meta_prompt = meta_prompt.replace("<input_output_pairs>", examples)
-    prompt = llm.get_response([meta_prompt])[0]
-    prompt = prompt.split("</prompt>")[0].split("<prompt>")[-1]
-    prompt = prompt.strip()
+        if meta_prompt is None:
+            meta_prompt = PROMPT_CREATION_TEMPLATE
+        if task_description is None:
+            meta_prompt = PROMPT_CREATION_TEMPLATE_TD.replace("<task_desc>", task_description)
+        examples = "\n\n".join([f"Input: {x}\nOutput: {y}" for x, y in zip(xs, ys)])
+        meta_prompt = meta_prompt.replace("<input_output_pairs>", examples)
+        meta_prompts.append(meta_prompt)
+    prompts = llm.get_response(meta_prompts)
+    prompts = [prompt.split("</prompt>")[0].split("<prompt>")[-1].strip() for prompt in prompts]
 
-    return prompt
+    return prompts
