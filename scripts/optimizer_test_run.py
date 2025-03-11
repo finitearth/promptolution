@@ -16,6 +16,7 @@ parser.add_argument("--model-storage-path", default="../models/")
 parser.add_argument("--optimizer", default="evopromptde")
 parser.add_argument("--n-steps", type=int, default=10)
 parser.add_argument("--token", default=None)
+parser.add_argument("--seed", type=int, default=187)
 args = parser.parse_args()
 
 config = Config(
@@ -29,8 +30,9 @@ config = Config(
     evaluation_llm=args.model,
     api_token=args.token,
     model_storage_path=args.model_storage_path,
+    random_seed=args.seed,
 )
 
-prompts = run_optimization(config, callbacks=[LoggerCallback(logger), CSVCallback(f"results/{args.model}/")])
+prompts = run_optimization(config, callbacks=[LoggerCallback(logger), CSVCallback(f"results/seedingtest/{args.model}/")])
 
 logger.info(f"Optimized prompts: {prompts}")

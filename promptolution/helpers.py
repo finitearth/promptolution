@@ -37,7 +37,9 @@ def run_optimization(config: Config, callbacks: List = None):
         List[str]: The optimized list of prompts.
     """
     task = get_task(config)
-    llm = get_llm(config.meta_llm, token=config.api_token, model_storage_path=config.model_storage_path)
+    llm = get_llm(
+        config.meta_llm, token=config.api_token, model_storage_path=config.model_storage_path, seed=config.random_seed
+    )
     if config.predictor == "MarkerBasedClassificator":
         predictor = MarkerBasedClassificator(llm, classes=task.classes)
     elif config.predictor == "FirstOccurenceClassificator":
