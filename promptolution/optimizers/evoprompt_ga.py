@@ -81,6 +81,7 @@ class EvoPromptGA(BaseOptimizer):
             if not continue_optimization:
                 break
 
+        self._on_train_end()
         return self.prompts
 
     def _crossover(self, prompts, scores) -> str:
