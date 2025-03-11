@@ -33,6 +33,9 @@ config = Config(
     random_seed=args.seed,
 )
 
-prompts = run_optimization(config, callbacks=[LoggerCallback(logger), CSVCallback(f"results/seedingtest/{args.model}/")])
+if args.token is None:
+    prompts = run_optimization(config, callbacks=[LoggerCallback(logger), CSVCallback(f"results/seedingtest/{args.model}/")])
+else:
+    prompts = run_optimization(config, callbacks=[LoggerCallback(logger), CSVCallback(f"results/seedingtest/{args.model}/")], use_token=True)
 
 logger.info(f"Optimized prompts: {prompts}")

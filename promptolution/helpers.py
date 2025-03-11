@@ -27,7 +27,7 @@ def run_experiment(config: Config):
     return df
 
 
-def run_optimization(config: Config, callbacks: List = None):
+def run_optimization(config: Config, callbacks: List = None, use_token: bool = False):
     """Run the optimization phase of the experiment.
 
     Args:
@@ -37,9 +37,10 @@ def run_optimization(config: Config, callbacks: List = None):
         List[str]: The optimized list of prompts.
     """
     task = get_task(config)
-    llm = get_llm(
-        config.meta_llm, token=config.api_token, model_storage_path=config.model_storage_path, seed=config.random_seed
-    )
+    if use_token:
+        llm = get_llm(config.meta_llm, token=config.api_token)
+    else:
+        llm = get_llm(config.meta_llm, model_storage_path=config.model_storage_path, seed=config.random_seed)
     if config.predictor == "MarkerBasedClassificator":
         predictor = MarkerBasedClassificator(llm, classes=task.classes)
     elif config.predictor == "FirstOccurenceClassificator":
