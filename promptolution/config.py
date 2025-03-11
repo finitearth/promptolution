@@ -19,15 +19,17 @@ class Config:
         dataset (str or pd.DataFrame): Path to the dataset or a pandas DataFrame.
         n_steps (int): Number of optimization steps. Should not be None if used.
         optimizer (str): Name of the optimizer to use. Should not be None if used.
+        predictor (str): Name of the predictor to use. Defaults to "FirstOccurenceClassificator".
         meta_llm (str): Name of the meta language model. Should not be None if used.
         downstream_llm (str): Name of the downstream language model. Should not be None if used.
         evaluation_llm (str): Name of the evaluation language model. Should not be None if used.
         init_pop_size (int): Initial population size. Defaults to 10.
         logging_dir (str): Directory for logging. Defaults to "logs/run.csv".
         experiment_name (str): Name of the experiment. Defaults to "experiment".
-        include_task_desc (bool): Whether to include task description. Defaults to False.
+        task_description (str): Task Description fed to the optimizer. Defaults to None.
         donor_random (bool): Whether to use random donor prompts for EvoPromptDE. Defaults to False.
         random_seed (int): Random seed for reproducibility. Defaults to 42.
+        model_storage_path (str): Path to the model storage directory (used for VLLM). Defaults to "../models/".
         selection_mode (str): Selection mode for EvoPromptGA. Defaults to "random".
         meta_bs (int): Batch size for local meta LLM. Should not be None if llm is run locally. Defaults to None.
         downstream_bs (int): Batch size for local downstream LLM.
@@ -50,6 +52,7 @@ class Config:
     dataset_description: Optional[str] = None
     init_prompts: Optional[List[str]] = None
     optimizer: str = None
+    predictor: Literal["MarkerBasedClassificator", "FirstOccurenceClassificator"] = "FirstOccurenceClassificator"
     meta_llm: str = None
     downstream_llm: str = None
     evaluation_llm: str = None
@@ -57,9 +60,10 @@ class Config:
     init_pop_size: int = None
     logging_dir: Path = Path("logs/run.csv")
     experiment_name: str = "experiment"
-    include_task_desc: bool = True
+    task_description: str = None
     donor_random: bool = False
     random_seed: int = 42
+    model_storage_path: Optional[Path] = Path("../models/")
     selection_mode: Optional[Literal["random", "wheel", "tour"]] = "random"
     meta_bs: Optional[int] = None
     downstream_bs: Optional[int] = None

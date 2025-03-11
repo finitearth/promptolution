@@ -7,4 +7,5 @@ __pycache__/
 temp/
 dist/
 outputs/
+results/
 poetry.lock

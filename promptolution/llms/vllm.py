@@ -2,6 +2,7 @@
 
 
 from logging import INFO, Logger
+from typing import List
 
 try:
     import torch
@@ -32,8 +33,7 @@ class VLLM(BaseLLM):
 
     Methods:
         get_response: Generate responses for a list of prompts.
-        get_token_count: Get the current count of input and output tokens.
-        reset_token_count: Reset the token counters to zero.
+        update_token_count: Update the token count based on the given inputs and outputs.
     """
 
     def __init__(
@@ -72,6 +72,8 @@ class VLLM(BaseLLM):
         Note:
             This method sets up a vLLM engine with specified parameters for efficient inference.
         """
+        super().__init__()
+
         self.dtype = dtype
         self.tensor_parallel_size = tensor_parallel_size
         self.gpu_memory_utilization = gpu_memory_utilization
@@ -149,6 +151,21 @@ class VLLM(BaseLLM):
             all_responses.extend(responses)
 
         return all_responses
+
+    def update_token_count(self, inputs: List[str], outputs: List[str]):
+        """Update the token count based on the given inputs and outputs.
+
+            Uses the tokenizer to count the tokens.
+
+        Args:
+            inputs (List[str]): A list of input prompts.
+            outputs (List[str]): A list of generated responses.
+        """
+        for input in inputs:
+            self.input_token_count += len(self.tokenizer.encode(input))
+
+        for output in outputs:
+            self.output_token_count += len(self.tokenizer.encode(output))
 
     def __del__(self):
         """Cleanup method to delete the LLM instance and free up GPU memory."""

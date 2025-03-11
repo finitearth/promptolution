@@ -6,6 +6,7 @@ from promptolution.templates import (
     EVOPROMPT_GA_TEMPLATE,
     EVOPROMPT_GA_TEMPLATE_TD,
     OPRO_TEMPLATE,
+    OPRO_TEMPLATE_TD,
 )
 
 from .base_optimizer import DummyOptimizer
@@ -15,7 +16,7 @@ from .opro import Opro
 
 
 def get_optimizer(
-    config=None, optimizer: str = None, include_task_desc: bool = None, meta_prompt: str = None, *args, **kwargs
+    config=None, optimizer: str = None, meta_prompt: str = None, task_description: str = None, *args, **kwargs
 ):
     """Factory function to create and return an optimizer instance based on the provided configuration.
 
@@ -30,6 +31,7 @@ def get_optimizer(
                          - Any other string for the specified optimizer class
         include_task_desc (bool): Flag to include task description in the prompt.
         meta_prompt (str): Meta prompt for the optimizer.
+        task_description (str): Task description for the optimizer.
         *args: Variable length argument list passed to the optimizer constructor.
         **kwargs: Arbitrary keyword arguments passed to the optimizer constructor
 
@@ -42,28 +44,28 @@ def get_optimizer(
     if optimizer is None:
         optimizer = config.optimizer
 
-    if include_task_desc is None:
-        include_task_desc = config.include_task_desc
+    if task_description is None:
+        task_description = config.task_description
 
-    if meta_prompt is None and optimizer == "evopromptde" and include_task_desc:
-        meta_prompt = EVOPROMPT_DE_TEMPLATE_TD
-    elif meta_prompt is None and optimizer == "evopromptde":
-        meta_prompt = EVOPROMPT_DE_TEMPLATE
-    elif meta_prompt is None and optimizer == "evopromptga" and include_task_desc:
-        meta_prompt = EVOPROMPT_GA_TEMPLATE_TD
-    elif meta_prompt is None and optimizer == "evopromptga":
-        meta_prompt = EVOPROMPT_GA_TEMPLATE
-    elif meta_prompt is None and optimizer == "opro" and include_task_desc:
-        meta_prompt = OPRO_TEMPLATE
-    elif config is not None and meta_prompt is None:
+    if config is not None and meta_prompt is None:
         meta_prompt = config.meta_prompt
 
     if optimizer == "dummy":
         return DummyOptimizer(*args, **kwargs)
     if config.optimizer == "evopromptde":
-        return EvoPromptDE(donor_random=config.donor_random, prompt_template=meta_prompt, *args, **kwargs)
+        if task_description is not None:
+            return EvoPromptDE(
+                prompt_template=EVOPROMPT_DE_TEMPLATE_TD.replace("<task_desc>", task_description), *args, **kwargs
+            )
+        return EvoPromptDE(prompt_template=EVOPROMPT_DE_TEMPLATE, *args, **kwargs)
     if config.optimizer == "evopromptga":
-        return EvoPromptGA(selection_mode=config.selection_mode, prompt_template=meta_prompt, *args, **kwargs)
+        if task_description is not None:
+            return EvoPromptGA(
+                prompt_template=EVOPROMPT_GA_TEMPLATE_TD.replace("<task_desc>", task_description), *args, **kwargs
+            )
+        return EvoPromptGA(prompt_template=EVOPROMPT_GA_TEMPLATE, *args, **kwargs)
     if config.optimizer == "opro":
-        return Opro(*args, **kwargs)
+        if task_description is not None:
+            return Opro(prompt_template=OPRO_TEMPLATE_TD.replace("<task_desc>", task_description), *args, **kwargs)
+        return Opro(prompt_template=OPRO_TEMPLATE, *args, **kwargs)
     raise ValueError(f"Unknown optimizer: {config.optimizer}")

@@ -1,5 +1,6 @@
 """Base class for prompt optimizers."""
 
+import time
 from abc import ABC, abstractmethod
 from typing import Callable, List
 
@@ -71,7 +72,7 @@ class BaseOptimizer(ABC):
         """Call all registered callbacks at the end of each optimization epoch."""
         continue_optimization = True
         for callback in self.callbacks:
-            continue_optimization &= callback._on_epoch_end(self)  # if any callback returns False, end the optimization
+            continue_optimization &= callback.on_epoch_end(self)  # if any callback returns False, end the optimization
 
         return continue_optimization
 
