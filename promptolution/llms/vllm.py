@@ -44,12 +44,12 @@ class VLLM(BaseLLM):
         temperature: float = 0.1,
         top_p: float = 0.9,
         model_storage_path: str | None = None,
-        token: str | None = None,
         dtype: str = "auto",
         tensor_parallel_size: int = 1,
         gpu_memory_utilization: float = 0.95,
         max_model_len: int = 2048,
         trust_remote_code: bool = False,
+        seed: int = 42,
         **kwargs,
     ):
         """Initialize the VLLM with a specific model.
@@ -67,6 +67,7 @@ class VLLM(BaseLLM):
             gpu_memory_utilization (float, optional): Fraction of GPU memory to use. Defaults to 0.95.
             max_model_len (int, optional): Maximum sequence length for the model. Defaults to 2048.
             trust_remote_code (bool, optional): Whether to trust remote code. Defaults to False.
+            seed (int, optional): Random seed for the model. Defaults to 42.
             **kwargs: Additional keyword arguments to pass to the LLM class initialization.
 
         Note:
@@ -81,7 +82,9 @@ class VLLM(BaseLLM):
         self.trust_remote_code = trust_remote_code
 
         # Configure sampling parameters
-        self.sampling_params = SamplingParams(temperature=temperature, top_p=top_p, max_tokens=max_generated_tokens)
+        self.sampling_params = SamplingParams(
+            temperature=temperature, top_p=top_p, max_tokens=max_generated_tokens, seed=seed
+        )
 
         # Initialize the vLLM engine with both explicit parameters and any additional kwargs
         llm_params = {
@@ -93,6 +96,7 @@ class VLLM(BaseLLM):
             "max_model_len": self.max_model_len,
             "download_dir": model_storage_path,
             "trust_remote_code": self.trust_remote_code,
+            "seed": seed,
             **kwargs,
         }
 
@@ -135,11 +139,6 @@ class VLLM(BaseLLM):
             )
             for input in inputs
         ]
-
-        # Count input tokens
-        for prompt in prompts:
-            input_tokens = self.tokenizer.encode(prompt)
-            self.input_token_count += len(input_tokens)
 
         # generate responses for self.batch_size prompts at the same time
         all_responses = []
