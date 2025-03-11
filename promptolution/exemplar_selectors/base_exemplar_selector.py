@@ -1,7 +1,6 @@
 """Base class for exemplar selectors."""
 
 from abc import ABC, abstractmethod
-from typing import Any, List, Tuple
 
 from promptolution.predictors.base_predictor import BasePredictor
 from promptolution.tasks.base_task import BaseTask
