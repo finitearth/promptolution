@@ -96,7 +96,6 @@ def create_prompts_from_samples(
         examples = "\n\n".join([f"Input: {x}\nOutput: {y}" for x, y in zip(xs, ys)])
         meta_prompt = meta_prompt_template.replace("<input_output_pairs>", examples)
         meta_prompts.append(meta_prompt)
-
     prompts = llm.get_response(meta_prompts)
     prompts = [prompt.split("</prompt>")[0].split("<prompt>")[-1].strip() for prompt in prompts]
 

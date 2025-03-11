@@ -75,7 +75,7 @@ def run_evaluation(df: pd.DataFrame, config: Config, prompts: List[str]):
     Returns:
         pd.DataFrame: A DataFrame containing the prompts and their scores.
     """
-    task = ClassificationTask()
+    task = ClassificationTask(df, description=config.task_description)
 
     llm = get_llm(config.evaluation_llm, token=config.api_token)
     predictor = FirstOccurrenceClassificator(llm, classes=task.classes)

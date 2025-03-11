@@ -20,7 +20,11 @@ class Callback:
 
         Returns:
             Bool: True if the optimization should continue, False if it should stop.
+
+        Returns:
+            Bool: True if the optimization should continue, False if it should stop.
         """
+        return True
         return True
 
     def on_epoch_end(self, optimizer):
@@ -31,7 +35,11 @@ class Callback:
 
         Returns:
             Bool: True if the optimization should continue, False if it should stop.
+
+        Returns:
+            Bool: True if the optimization should continue, False if it should stop.
         """
+        return True
         return True
 
     def on_train_end(self, optimizer):
@@ -42,7 +50,11 @@ class Callback:
 
         Returns:
             Bool: True if the optimization should continue, False if it should stop.
+
+        Returns:
+            Bool: True if the optimization should continue, False if it should stop.
         """
+        return True
         return True
 
 
@@ -72,6 +84,8 @@ class LoggerCallback(Callback):
 
         return True
 
+        return True
+
     def on_train_end(self, optimizer, logs=None):
         """Log information at the end of training.
 
@@ -87,6 +101,8 @@ class LoggerCallback(Callback):
 
         return True
 
+        return True
+
 
 class CSVCallback(Callback):
     """Callback for saving optimization progress to a CSV file.
@@ -94,6 +110,7 @@ class CSVCallback(Callback):
     This callback saves prompts and scores at each step to a CSV file.
 
     Attributes:
+        dir (str): Directory the CSV file is saved to.
         dir (str): Directory the CSV file is saved to.
         step (int): The current step number.
     """
@@ -103,10 +120,14 @@ class CSVCallback(Callback):
 
         Args:
         dir (str): Directory the CSV file is saved to.
+        dir (str): Directory the CSV file is saved to.
         """
         if not os.path.exists(dir):
             os.makedirs(dir)
+        if not os.path.exists(dir):
+            os.makedirs(dir)
 
+        self.dir = dir
         self.dir = dir
         self.step = 0
         self.input_tokens = 0
@@ -196,6 +217,8 @@ class BestPromptCallback(Callback):
 
         return True
 
+        return True
+
     def get_best_prompt(self):
         """Get the best prompt and score achieved during optimization.
 
@@ -229,6 +252,8 @@ class ProgressBarCallback(Callback):
         optimizer: The optimizer object that called the callback.
         """
         self.pbar.update(1)
+
+        return True
 
         return True
 
