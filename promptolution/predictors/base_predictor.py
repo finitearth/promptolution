@@ -49,10 +49,22 @@ class BasePredictor:
             prompts = [prompts]
 
         outputs = self.llm.get_response([prompt + "\n" + x for prompt in prompts for x in xs])
-        preds = self._extract_preds(outputs, (len(prompts), len(xs)))
+        preds = self._extract_preds(outputs)
+
+        shape = (len(prompts), len(xs))
+        outputs = np.array(outputs).reshape(shape)
+        preds = preds.reshape(shape)
+        xs = np.array(xs)
 
         if return_seq:
-            return preds, [i + "\n" + o for i, o in zip(xs, outputs)]
+            seqs = []
+            for o in outputs:
+                seqs.append([f"{x}\n{oo}" for x, oo in zip(xs, o)])
+
+            seqs = np.array(seqs)
+            # seqs = np.array([''.join(str(i) for i in zip(xs, o)) for o in outputs])
+
+            return preds, seqs
 
         return preds
 
