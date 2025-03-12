@@ -108,6 +108,7 @@ class CSVCallback(Callback):
             os.makedirs(dir)
 
         self.dir = dir
+        self.dir = dir
         self.step = 0
         self.input_tokens = 0
         self.output_tokens = 0

@@ -2,7 +2,7 @@
 import configparser
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, Literal, Optional
+from typing import Any, Dict, List, Literal, Optional
 
 
 @dataclass
@@ -22,6 +22,7 @@ class Config:
         downstream_llm (str): Name of the downstream language model. Should not be None if used.
         evaluation_llm (str): Name of the evaluation language model. Should not be None if used.
         init_pop_size (int): Initial population size. Defaults to 10.
+        initial_prompts (List[str]): Initial prompts for the optimizer. Defaults to None.
         logging_dir (str): Directory for logging. Defaults to "logs/run.csv".
         experiment_name (str): Name of the experiment. Defaults to "experiment".
         task_description (str): Task Description fed to the optimizer. Defaults to None.
@@ -54,6 +55,7 @@ class Config:
     evaluation_llm: str = None
     n_steps: int = None
     init_pop_size: int = None
+    initial_prompts: List[str] = None
     logging_dir: Path = Path("logs/run.csv")
     experiment_name: str = "experiment"
     task_description: str = None

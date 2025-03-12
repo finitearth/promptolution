@@ -43,8 +43,6 @@ class DummyTask(BaseTask):
     This task generates random evaluation scores for given prompts.
 
     Attributes:
-        task_id (str): Identifier for the task, set to "dummy".
-        dataset_json (None): Placeholder for dataset information.
         initial_population (List[str]): List of initial prompts.
         description (str): Description of the dummy task.
         xs (np.ndarray): Array of dummy input data.
@@ -54,8 +52,6 @@ class DummyTask(BaseTask):
 
     def __init__(self):
         """Initialize the DummyTask."""
-        self.task_id = "dummy"
-        self.dataset_json = None
         self.initial_population = ["Some", "initial", "prompts", "that", "will", "do", "the", "trick"]
         self.description = "This is a dummy task for testing purposes."
         self.xs = np.array(["This is a test", "This is another test", "This is a third test"])

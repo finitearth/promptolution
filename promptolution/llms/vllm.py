@@ -1,23 +1,19 @@
 """Module for running language models locally using the vLLM library."""
 
 
-from logging import INFO, Logger
+from logging import Logger
 from typing import List
+
+from promptolution.llms.base_llm import BaseLLM
+
+logger = Logger(__name__)
 
 try:
     import torch
     from transformers import AutoTokenizer
     from vllm import LLM, SamplingParams
 except ImportError as e:
-    import logging
-
-    logger = logging.getLogger(__name__)
     logger.warning(f"Could not import vllm, torch or transformers in vllm.py: {e}")
-
-from promptolution.llms.base_llm import BaseLLM
-
-logger = Logger(__name__)
-logger.setLevel(INFO)
 
 
 class VLLM(BaseLLM):

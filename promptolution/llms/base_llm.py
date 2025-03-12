@@ -99,11 +99,7 @@ class DummyLLM(BaseLLM):
     complex natural language processing.
     """
 
-    def __init__(self, *args, **kwargs):
-        """Initialize the DummyLLM."""
-        pass
-
-    def get_response(self, prompts: str) -> str:
+    def _get_response(self, prompts: str) -> str:
         """Generate random responses for the given prompts.
 
         This method creates silly, random responses enclosed in <prompt> tags.
@@ -119,13 +115,13 @@ class DummyLLM(BaseLLM):
         if isinstance(prompts, str):
             prompts = [prompts]
         results = []
-        for _ in prompts:
+        for p in prompts:
             r = np.random.rand()
             if r < 0.3:
-                results += [f"Joooo wazzuppp <prompt>hier gehts los {r} </prompt>"]
-            if 0.3 <= r < 0.6:
-                results += [f"was das hier? <prompt>peter lustig{r}</prompt>"]
+                results += [f"Joooo wazzuppp <prompt>hier gehts los {r} </prompt> {p}"]
+            elif 0.3 <= r < 0.6:
+                results += [f"was das hier? <prompt>peter lustig{r}</prompt> {p}"]
             else:
-                results += [f"hier ist ein <prompt>test{r}</prompt>"]
+                results += [f"hier ist ein <prompt>test{r}</prompt> {p}"]
 
         return results
