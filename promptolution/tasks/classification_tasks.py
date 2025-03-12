@@ -31,6 +31,7 @@ class ClassificationTask(BaseTask):
         self,
         df: pd.DataFrame,
         description: str,
+        initial_prompts: List[str] = None,
         x_column: str = "x",
         y_column: str = "y",
         metric: Callable = accuracy_score,
@@ -40,6 +41,7 @@ class ClassificationTask(BaseTask):
         Args:
             df (pd.DataFrame): Input DataFrame containing the data
             description (str): Description of the task
+            initial_prompts (List[str], optional): Initial set of prompts to start optimization with. Defaults to None.
             x_column (str, optional): Name of the column containing input texts. Defaults to "x".
             y_column (str, optional): Name of the column containing labels. Defaults to "y".
             seed (int, optional): Random seed for reproducibility. Defaults to 42.
@@ -47,6 +49,7 @@ class ClassificationTask(BaseTask):
         """
         super().__init__()
         self.description = description
+        self.initial_prompts = initial_prompts
         self.metric = metric
 
         df[y_column] = df[y_column].str.lower()
