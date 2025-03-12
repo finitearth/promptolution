@@ -41,9 +41,9 @@ df["target"] = df["label_text"]
 
 task = ClassificationTask(
     df,
-    "The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories.",
-    "input",
-    "target",
+    description="The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories.",
+    x_column="input",
+    y_column="target",
 )
 
 initial_prompts = [
