@@ -36,9 +36,17 @@ class EvoPromptGA(BaseOptimizer):
         AssertionError: If an invalid selection mode is provided.
     """
 
-    def __init__(self, prompt_template: str = None, meta_llm: BaseLLM = None, selection_mode: str = "wheel", **args):
+    def __init__(
+        self,
+        prompt_template: str = None,
+        meta_llm: BaseLLM = None,
+        selection_mode: str = "wheel",
+        n_eval_samples: int = 20,
+        **args,
+    ):
         """Initialize the EvoPromptGA optimizer."""
         self.prompt_template = prompt_template
+        self.n_eval_samples = n_eval_samples
         assert meta_llm is not None, "Meta_llm is required"
         self.meta_llm = meta_llm
         assert selection_mode in ["random", "wheel", "tour"], "Invalid selection mode."

@@ -34,7 +34,6 @@ class BaseOptimizer(ABC):
         task: BaseTask,
         callbacks: list[Callable] = [],
         predictor: BasePredictor = None,
-        n_eval_samples: int = 20,
         verbosity: int = 0,
     ):
         """Initialize the BaseOptimizer."""
@@ -42,7 +41,6 @@ class BaseOptimizer(ABC):
         self.task = task
         self.callbacks = callbacks
         self.predictor = predictor
-        self.n_eval_samples = n_eval_samples
         self.verbosity = verbosity
 
     @abstractmethod
