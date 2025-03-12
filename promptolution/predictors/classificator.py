@@ -32,7 +32,9 @@ class FirstOccurrenceClassificator(BasePredictor):
             classes (List[str]): The list of valid class labels.
         """
         super().__init__(llm)
+        assert all([c.islower() for c in classes]), "Class labels should be lowercase."
         self.classes = classes
+
         self.extraction_description = (
             f"The task is to classify the texts into one of those classes: {', '.join(classes)}."
             "The first occurrence of a valid class label in the prediction is used as the predicted class."
@@ -48,7 +50,7 @@ class FirstOccurrenceClassificator(BasePredictor):
         for pred in preds:
             predicted_class = self.classes[0]  # use first class as default pred
             for word in pred.split():
-                word = "".join([c for c in word if c.isalnum()])
+                word = "".join([c for c in word if c.isalnum()]).lower()
                 if word in self.classes:
                     predicted_class = word
                     break
@@ -85,12 +87,13 @@ class MarkerBasedClassificator(BasePredictor):
             *args, **kwargs: Additional arguments for the BasePredictor.
         """
         super().__init__(llm)
-        assert all([c.islower() for c in classes]), "Class labels should be lowercase."
         self.classes = classes
         self.begin_marker = begin_marker
         self.end_marker = end_marker
 
-        if self.classes is not None:
+        if classes is not None:
+            assert all([c.islower() for c in classes]), "Class labels should be lowercase."
+
             self.extraction_description = (
                 f"The task is to classify the texts into one of those classes: {','.join(classes)}."
                 f"The class label is extracted from the text that are between these markers: {begin_marker} and {end_marker}."
