@@ -2,7 +2,7 @@
 
 import asyncio
 import time
-from logging import INFO, Logger
+from logging import Logger
 from typing import Any, List
 
 import nest_asyncio
@@ -16,7 +16,6 @@ from langchain_openai import ChatOpenAI
 from promptolution.llms.base_llm import BaseLLM
 
 logger = Logger(__name__)
-logger.setLevel(INFO)
 
 
 async def invoke_model(prompt, model, semaphore):

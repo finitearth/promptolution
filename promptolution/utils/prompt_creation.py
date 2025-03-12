@@ -42,6 +42,7 @@ def create_prompts_from_samples(
     n_samples: int = 3,
     task_description: str = None,
     n_prompts: int = 1,
+    get_uniform_labels: bool = False,
 ) -> List[str]:
     """Generate a set of prompts from dataset examples sampled from a given task.
 
@@ -59,13 +60,23 @@ def create_prompts_from_samples(
         n_samples (int): The number of samples to use for generating prompts.
         task_description (str): The description of the task to include in the prompt.
         n_prompts (int): The number of prompts to generate.
+        get_uniform_labels (bool): If True, samples are selected such that all classes are represented.
 
     Returns:
         List[str]: A list of generated prompts.
     """
+    if meta_prompt is None and task_description is None:
+        meta_prompt_template = PROMPT_CREATION_TEMPLATE
+    elif meta_prompt is None and task_description is not None:
+        meta_prompt_template = PROMPT_CREATION_TEMPLATE_TD.replace("<task_desc>", task_description)
+    elif meta_prompt is not None and task_description is None:
+        meta_prompt_template = meta_prompt
+    elif meta_prompt is not None and task_description is not None:
+        meta_prompt_template = meta_prompt.replace("<task_desc>", task_description)
+
     meta_prompts = []
     for _ in range(n_prompts):
-        if isinstance(task, ClassificationTask):
+        if isinstance(task, ClassificationTask) and get_uniform_labels:
             # if classification task sample such that all classes are represented
             unique_labels, counts = np.unique(task.ys, return_counts=True)
             proportions = counts / len(task.ys)
@@ -87,13 +98,10 @@ def create_prompts_from_samples(
             xs = task.xs[indices].tolist()
             ys = task.ys[indices].tolist()
 
-        if meta_prompt is None:
-            meta_prompt = PROMPT_CREATION_TEMPLATE
-        if task_description is None:
-            meta_prompt = PROMPT_CREATION_TEMPLATE_TD.replace("<task_desc>", task_description)
         examples = "\n\n".join([f"Input: {x}\nOutput: {y}" for x, y in zip(xs, ys)])
-        meta_prompt = meta_prompt.replace("<input_output_pairs>", examples)
+        meta_prompt = meta_prompt_template.replace("<input_output_pairs>", examples)
         meta_prompts.append(meta_prompt)
+
     prompts = llm.get_response(meta_prompts)
     prompts = [prompt.split("</prompt>")[0].split("<prompt>")[-1].strip() for prompt in prompts]
 

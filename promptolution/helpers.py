@@ -1,4 +1,5 @@
 """Helper functions for the usage of the libary."""
+
 from logging import Logger
 from typing import List
 
@@ -10,7 +11,7 @@ from promptolution.exemplar_selectors import get_exemplar_selector
 from promptolution.llms import get_llm
 from promptolution.optimizers import get_optimizer
 from promptolution.predictors import FirstOccurrenceClassificator, MarkerBasedClassificator
-from promptolution.tasks import get_task
+from promptolution.tasks import ClassificationTask
 
 
 def run_experiment(config: Config):
@@ -27,7 +28,7 @@ def run_experiment(config: Config):
     return df
 
 
-def run_optimization(config: Config, callbacks: List = None):
+def run_optimization(config: Config, callbacks: List = None, use_token: bool = False):
     """Run the optimization phase of the experiment.
 
     Args:
@@ -36,8 +37,11 @@ def run_optimization(config: Config, callbacks: List = None):
     Returns:
         List[str]: The optimized list of prompts.
     """
-    task = get_task(config)
-    llm = get_llm(config.meta_llm, token=config.api_token, model_storage_path=config.model_storage_path)
+    task = ClassificationTask(config)
+    if use_token:
+        llm = get_llm(config.meta_llm, token=config.api_token)
+    else:
+        llm = get_llm(config.meta_llm, model_storage_path=config.model_storage_path, seed=config.random_seed)
     if config.predictor == "MarkerBasedClassificator":
         predictor = MarkerBasedClassificator(llm, classes=task.classes)
     elif config.predictor == "FirstOccurenceClassificator":
@@ -45,15 +49,10 @@ def run_optimization(config: Config, callbacks: List = None):
     else:
         raise ValueError(f"Predictor {config.predictor} not supported.")
 
-    if config.init_pop_size:
-        init_pop = np.random.choice(task.initial_population, size=config.init_pop_size, replace=True)
-    else:
-        init_pop = task.initial_population
-
     optimizer = get_optimizer(
         config,
         meta_llm=llm,
-        initial_prompts=init_pop,
+        initial_prompts=config.intial_prompts,
         task=task,
         predictor=predictor,
         n_eval_samples=config.n_eval_samples,
@@ -70,7 +69,7 @@ def run_optimization(config: Config, callbacks: List = None):
     return prompts
 
 
-def run_evaluation(config: Config, prompts: List[str]):
+def run_evaluation(df: pd.DataFrame, config: Config, prompts: List[str]):
     """Run the evaluation phase of the experiment.
 
     Args:
@@ -80,7 +79,7 @@ def run_evaluation(config: Config, prompts: List[str]):
     Returns:
         pd.DataFrame: A DataFrame containing the prompts and their scores.
     """
-    task = get_task(config, split="test")
+    task = ClassificationTask(df, description=config.task_description)
 
     llm = get_llm(config.evaluation_llm, token=config.api_token)
     predictor = FirstOccurrenceClassificator(llm, classes=task.classes)

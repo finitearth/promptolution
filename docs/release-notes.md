@@ -1,5 +1,17 @@
 # Release Notes
 
+## Release v1.3.1
+### What's changed
+#### Added features
+* new features for the VLLM Wrapper (accept seeding to ensure reproducibility)
+* fixes in the "MarkerBasedClassificator"
+* fixes in prompt creation and task description handling
+* generalize the Classificator
+* add verbosity and callback handling in EvoPromptGA
+* add timestamp to the callback
+
+**Full Changelog**: [here](https://github.com/finitearth/promptolution/compare/v1.3.0...v1.3.1)
+
 ## Release v1.3.0
 ### What's changed
 #### Added features

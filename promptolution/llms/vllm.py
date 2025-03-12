@@ -1,23 +1,19 @@
 """Module for running language models locally using the vLLM library."""
 
 
-from logging import INFO, Logger
+from logging import Logger
 from typing import List
+
+from promptolution.llms.base_llm import BaseLLM
+
+logger = Logger(__name__)
 
 try:
     import torch
     from transformers import AutoTokenizer
     from vllm import LLM, SamplingParams
 except ImportError as e:
-    import logging
-
-    logger = logging.getLogger(__name__)
     logger.warning(f"Could not import vllm, torch or transformers in vllm.py: {e}")
-
-from promptolution.llms.base_llm import BaseLLM
-
-logger = Logger(__name__)
-logger.setLevel(INFO)
 
 
 class VLLM(BaseLLM):
@@ -44,12 +40,12 @@ class VLLM(BaseLLM):
         temperature: float = 0.1,
         top_p: float = 0.9,
         model_storage_path: str | None = None,
-        token: str | None = None,
         dtype: str = "auto",
         tensor_parallel_size: int = 1,
         gpu_memory_utilization: float = 0.95,
         max_model_len: int = 2048,
         trust_remote_code: bool = False,
+        seed: int = 42,
         **kwargs,
     ):
         """Initialize the VLLM with a specific model.
@@ -61,12 +57,12 @@ class VLLM(BaseLLM):
             temperature (float, optional): Sampling temperature. Defaults to 0.1.
             top_p (float, optional): Top-p sampling parameter. Defaults to 0.9.
             model_storage_path (str, optional): Directory to store the model. Defaults to None.
-            token: (str, optional): Token for accessing the model - not used in implementation yet.
             dtype (str, optional): Data type for model weights. Defaults to "float16".
             tensor_parallel_size (int, optional): Number of GPUs for tensor parallelism. Defaults to 1.
             gpu_memory_utilization (float, optional): Fraction of GPU memory to use. Defaults to 0.95.
             max_model_len (int, optional): Maximum sequence length for the model. Defaults to 2048.
             trust_remote_code (bool, optional): Whether to trust remote code. Defaults to False.
+            seed (int, optional): Random seed for the model. Defaults to 42.
             **kwargs: Additional keyword arguments to pass to the LLM class initialization.
 
         Note:
@@ -81,7 +77,9 @@ class VLLM(BaseLLM):
         self.trust_remote_code = trust_remote_code
 
         # Configure sampling parameters
-        self.sampling_params = SamplingParams(temperature=temperature, top_p=top_p, max_tokens=max_generated_tokens)
+        self.sampling_params = SamplingParams(
+            temperature=temperature, top_p=top_p, max_tokens=max_generated_tokens, seed=seed
+        )
 
         # Initialize the vLLM engine with both explicit parameters and any additional kwargs
         llm_params = {
@@ -93,6 +91,7 @@ class VLLM(BaseLLM):
             "max_model_len": self.max_model_len,
             "download_dir": model_storage_path,
             "trust_remote_code": self.trust_remote_code,
+            "seed": seed,
             **kwargs,
         }
 
@@ -135,11 +134,6 @@ class VLLM(BaseLLM):
             )
             for input in inputs
         ]
-
-        # Count input tokens
-        for prompt in prompts:
-            input_tokens = self.tokenizer.encode(prompt)
-            self.input_token_count += len(input_tokens)
 
         # generate responses for self.batch_size prompts at the same time
         all_responses = []
