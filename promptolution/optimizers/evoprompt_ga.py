@@ -150,11 +150,12 @@ class EvoPromptGA(BaseOptimizer):
             meta_prompt = self.prompt_template.replace("<prompt1>", parent_1).replace("<prompt2>", parent_2)
             meta_prompts.append(meta_prompt)
 
-        child_prompts = self.meta_llm.get_response(meta_prompts, return_seq=self.verbosity > 1)
+        child_prompts = self.meta_llm.get_response(meta_prompts)
         if self.verbosity > 1:
-            child_prompts, seq = child_prompts
-            logger.warning(f"Child sequences: {seq}")
-
+            logger.warning("meta_prompts:")
+            logger.warning(meta_prompts)
+            logger.warning("child_prompts:")
+            logger.warning(child_prompts)
         child_prompts = [prompt.split("<prompt>")[-1].split("</prompt>")[0].strip() for prompt in child_prompts]
 
         return child_prompts
