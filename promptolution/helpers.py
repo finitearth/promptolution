@@ -1,4 +1,5 @@
 """Helper functions for the usage of the libary."""
+
 from logging import Logger
 from typing import List
 
@@ -27,7 +28,6 @@ def run_experiment(config: Config):
     return df
 
 
-
 def run_optimization(config: Config, callbacks: List = None, use_token: bool = False):
     """Run the optimization phase of the experiment.
 
@@ -37,8 +37,7 @@ def run_optimization(config: Config, callbacks: List = None, use_token: bool = F
     Returns:
         List[str]: The optimized list of prompts.
     """
-
-    task = get_task(config)
+    task = ClassificationTask(config)
     if use_token:
         llm = get_llm(config.meta_llm, token=config.api_token)
     else:
