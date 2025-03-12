@@ -34,7 +34,7 @@ callbacks = [
     TokenCountCallback(100000, "input_tokens"),
 ]
 
-df = load_dataset("openai/gsm8k", split="train", revision="main").to_pandas().sample(300, random_state=args.seed)
+df = load_dataset("openai/gsm8k", name="main", split="train", revision="main").to_pandas().sample(300, random_state=args.seed)
 
 df["input"] = df["question"]
 df["target"] = df["answer"].str.extract(r"#### (.*)")
