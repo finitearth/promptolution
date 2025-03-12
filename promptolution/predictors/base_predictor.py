@@ -58,11 +58,10 @@ class BasePredictor:
 
         if return_seq:
             seqs = []
-            for o in outputs:
-                seqs.append([f"{x}\n{oo}" for x, oo in zip(xs, o)])
+            for output in outputs:
+                seqs.append([f"{x}\n{out}" for x, out in zip(xs, output)])
 
             seqs = np.array(seqs)
-            # seqs = np.array([''.join(str(i) for i in zip(xs, o)) for o in outputs])
 
             return preds, seqs
 
