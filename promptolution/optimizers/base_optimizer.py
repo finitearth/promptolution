@@ -4,6 +4,7 @@ import time
 from abc import ABC, abstractmethod
 from typing import Callable, List
 
+from promptolution.predictors.base_predictor import BasePredictor
 from promptolution.tasks.base_task import BaseTask
 
 
@@ -32,15 +33,15 @@ class BaseOptimizer(ABC):
         initial_prompts: list[str],
         task: BaseTask,
         callbacks: list[Callable] = [],
-        predictor=None,
-        n_eval_samples=20,
+        predictor: BasePredictor = None,
+        verbosity: int = 0,
     ):
         """Initialize the BaseOptimizer."""
         self.prompts = initial_prompts
         self.task = task
         self.callbacks = callbacks
         self.predictor = predictor
-        self.n_eval_samples = n_eval_samples
+        self.verbosity = verbosity
 
     @abstractmethod
     def optimize(self, n_steps: int) -> List[str]:

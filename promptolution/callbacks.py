@@ -1,7 +1,7 @@
 """Callback classes for logging, saving, and tracking optimization progress."""
 
 import os
-import time
+from datetime import datetime
 from typing import Literal
 
 import numpy as np
@@ -64,7 +64,8 @@ class LoggerCallback(Callback):
     def on_step_end(self, optimizer):
         """Log information about the current step."""
         self.step += 1
-        self.logger.critical(f"✨Step {self.step} ended✨")
+        time = datetime.now().strftime("%d-%m-%y %H:%M:%S:%f")
+        self.logger.critical(f"{time} - ✨Step {self.step} ended✨")
         for i, (prompt, score) in enumerate(zip(optimizer.prompts, optimizer.scores)):
             self.logger.critical(f"*** Prompt {i}: Score: {score}")
             self.logger.critical(f"{prompt}")
@@ -78,10 +79,11 @@ class LoggerCallback(Callback):
         optimizer: The optimizer object that called the callback.
         logs: Additional information to log.
         """
+        time = datetime.now().strftime("%d-%m-%y %H:%M:%S:%f")
         if logs is None:
-            self.logger.critical("Training ended")
+            self.logger.critical(f"{time} - Training ended")
         else:
-            self.logger.critical(f"Training ended - {logs}")
+            self.logger.critical(f"{time} - Training ended - {logs}")
 
         return True
 
@@ -106,11 +108,12 @@ class CSVCallback(Callback):
             os.makedirs(dir)
 
         self.dir = dir
+        self.dir = dir
         self.step = 0
         self.input_tokens = 0
         self.output_tokens = 0
-        self.start_time = time.time()
-        self.step_time = time.time()
+        self.start_time = datetime.now()
+        self.step_time = datetime.now()
 
     def on_step_end(self, optimizer):
         """Save prompts and scores to csv.
@@ -124,12 +127,12 @@ class CSVCallback(Callback):
                 "step": [self.step] * len(optimizer.prompts),
                 "input_tokens": [optimizer.meta_llm.input_token_count - self.input_tokens] * len(optimizer.prompts),
                 "output_tokens": [optimizer.meta_llm.output_token_count - self.output_tokens] * len(optimizer.prompts),
-                "time_elapsed": [time.time() - self.step_time] * len(optimizer.prompts),
+                "time_elapsed": [(datetime.now() - self.step_time).total_seconds()] * len(optimizer.prompts),
                 "score": optimizer.scores,
                 "prompt": optimizer.prompts,
             }
         )
-        self.step_time = time.time()
+        self.step_time = datetime.now()
         self.input_tokens = optimizer.meta_llm.input_token_count
         self.output_tokens = optimizer.meta_llm.output_token_count
 
@@ -151,7 +154,8 @@ class CSVCallback(Callback):
                 steps=self.step,
                 input_tokens=optimizer.meta_llm.input_token_count,
                 output_tokens=optimizer.meta_llm.output_token_count,
-                time_elapsed=time.time() - self.start_time,
+                time_elapsed=(datetime.now() - self.start_time).total_seconds(),
+                time=datetime.now(),
                 score=np.array(optimizer.scores).mean(),
                 best_prompts=str(optimizer.prompts),
             ),

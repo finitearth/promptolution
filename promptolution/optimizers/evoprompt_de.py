@@ -30,9 +30,17 @@ class EvoPromptDE(BaseOptimizer):
         **args: Additional arguments passed to the BaseOptimizer.
     """
 
-    def __init__(self, prompt_template: str = None, meta_llm: BaseLLM = None, donor_random: bool = False, **args):
+    def __init__(
+        self,
+        prompt_template: str = None,
+        meta_llm: BaseLLM = None,
+        donor_random: bool = False,
+        n_eval_samples: int = 20,
+        **args
+    ):
         """Initialize the EvoPromptDE optimizer."""
         self.prompt_template = prompt_template
+        self.n_eval_samples = n_eval_samples
         self.donor_random = donor_random
         assert meta_llm is not None, "A meta language model must be provided."
         self.meta_llm = meta_llm
