@@ -21,6 +21,7 @@ class ClassificationTask(BaseTask):
         classes (List[str]): List of possible class labels.
         xs (np.ndarray): Array of input data.
         ys (np.ndarray): Array of labels.
+        initial_prompts (List[str]): Initial set of prompts to start optimization with.
         metric (Callable): Metric to use for evaluation.
 
     Inherits from:
