@@ -34,16 +34,16 @@ callbacks = [
     TokenCountCallback(100000, "input_tokens"),
 ]
 
-df = load_dataset("openai/gsm8k", split="train", revision="main").to_pandas().sample(300, random_state=args.seed)
+df = load_dataset("openai/gsm8k", name="main", split="train", revision="main").to_pandas().sample(300, random_state=args.seed)
 
 df["input"] = df["question"]
 df["target"] = df["answer"].str.extract(r"#### (.*)")
 
 task = ClassificationTask(
     df,
-    "The dataset consists of elementary school math word problems that require multi-step reasoning to solve. The task is to solve each word problem and provide the final answer."
-    "input",
-    "target",
+    description="The dataset consists of elementary school math word problems that require multi-step reasoning to solve. The task is to solve each word problem and provide the final answer.",
+    x_column="input",
+    y_column="target",
 )
 
 initial_prompts = [
