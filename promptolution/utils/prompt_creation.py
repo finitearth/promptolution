@@ -65,10 +65,15 @@ def create_prompts_from_samples(
     Returns:
         List[str]: A list of generated prompts.
     """
-    if meta_prompt is None:
+    if meta_prompt is None and task_description is None:
         meta_prompt_template = PROMPT_CREATION_TEMPLATE
-    if task_description is not None:
+    elif meta_prompt is None and task_description is not None:
         meta_prompt_template = PROMPT_CREATION_TEMPLATE_TD.replace("<task_desc>", task_description)
+    elif meta_prompt is not None and task_description is None:
+        meta_prompt_template = meta_prompt
+    elif meta_prompt is not None and task_description is not None:
+        meta_prompt_template = meta_prompt.replace("<task_desc>", task_description)
+
     meta_prompts = []
     for _ in range(n_prompts):
         if isinstance(task, ClassificationTask) and get_uniform_labels:
@@ -96,6 +101,7 @@ def create_prompts_from_samples(
         examples = "\n\n".join([f"Input: {x}\nOutput: {y}" for x, y in zip(xs, ys)])
         meta_prompt = meta_prompt_template.replace("<input_output_pairs>", examples)
         meta_prompts.append(meta_prompt)
+
     prompts = llm.get_response(meta_prompts)
     prompts = [prompt.split("</prompt>")[0].split("<prompt>")[-1].strip() for prompt in prompts]
 
