@@ -21,7 +21,6 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--model")
 parser.add_argument("--model-storage-path", default="../models/")
 parser.add_argument("--output-dir", default="results/evoprompt_ga_test/")
-parser.add_argument("--optimizer", default="evopromptde")
 parser.add_argument("--max-model-len", type=int, default=1024)
 parser.add_argument("--n-steps", type=int, default=2)
 parser.add_argument("--n-eval-samples", type=int, default=20)
@@ -79,7 +78,7 @@ if "vllm" in args.model:
         batch_size=None,
         max_model_len=args.max_model_len,
         model_storage_path=args.model_storage_path,
-        revision=args.revision,
+        revision="main",
     )
 else:
     llm = get_llm(args.model, args.token)
