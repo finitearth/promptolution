@@ -41,9 +41,9 @@ df["target"] = df["answer"].str.extract(r"#### (.*)")
 
 task = ClassificationTask(
     df,
-    "The dataset consists of elementary school math word problems that require multi-step reasoning to solve. The task is to solve each word problem and provide the final answer."
-    "input",
-    "target",
+    description="The dataset consists of elementary school math word problems that require multi-step reasoning to solve. The task is to solve each word problem and provide the final answer.",
+    x_column="input",
+    y_column="target",
 )
 
 initial_prompts = [
