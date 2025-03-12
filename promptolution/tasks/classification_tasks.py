@@ -49,10 +49,9 @@ class ClassificationTask(BaseTask):
         self.description = description
         self.metric = metric
 
-        # Sort classes by frequency
+        df[y_column] = df[y_column].str.lower()
         self.classes = df[y_column].unique()
 
-        # Set data attributes
         self.xs = df[x_column].values
         self.ys = df[y_column].values
 

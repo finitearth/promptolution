@@ -16,6 +16,7 @@ pandas = "^2.2.2"
 tqdm = "^4.66.5"
 scikit-learn = "^1.5.2"
 vllm = "^0.7.3"
+datasets = "^3.3.2"
 
 [tool.poetry.group.dev.dependencies]
 matplotlib = "^3.9.2"

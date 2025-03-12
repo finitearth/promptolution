@@ -1,11 +1,14 @@
 """Module for EvoPromptGA optimizer."""
 
+from logging import Logger
 from typing import List
 
 import numpy as np
 
 from promptolution.llms.base_llm import BaseLLM
 from promptolution.optimizers.base_optimizer import BaseOptimizer
+
+logger = Logger(__name__)
 
 
 class EvoPromptGA(BaseOptimizer):
@@ -56,9 +59,17 @@ class EvoPromptGA(BaseOptimizer):
             List[str]: The optimized list of prompts after all steps.
         """
         # get scores from task
-        self.scores = self.task.evaluate(
-            self.prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples
-        ).tolist()
+        if self.verbosity > 1:
+            self.scores, seq = self.task.evaluate(
+                self.prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples, return_seq=True
+            )
+            self.scores = self.scores.tolist()
+            logger.warning(f"Initial scores: {self.scores}")
+            logger.warning(f"Initial sequences: {seq}")
+        else:
+            self.scores = self.task.evaluate(
+                self.prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples
+            ).tolist()
         # sort prompts by score
         self.prompts = [prompt for _, prompt in sorted(zip(self.scores, self.prompts), reverse=True)]
         self.scores = sorted(self.scores, reverse=True)
@@ -66,12 +77,25 @@ class EvoPromptGA(BaseOptimizer):
         for _ in range(n_steps):
             new_prompts = self._crossover(self.prompts, self.scores)
             prompts = self.prompts + new_prompts
-            scores = (
-                self.scores
-                + self.task.evaluate(
+
+            if self.verbosity > 1:
+                logger.warning(f"Prompts: {prompts}")
+
+            # evaluate new prompts
+            if self.verbosity > 1:
+                new_scores, seq = self.task.evaluate(
+                    prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples, return_seq=True
+                )
+                new_scores = new_scores.tolist()
+                logger.warning(f"Scores: {new_scores}")
+                logger.warning(f"Sequences: {seq}")
+
+            else:
+                new_scores = self.task.evaluate(
                     new_prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples
                 ).tolist()
-            )
+
+            scores = self.scores + new_scores
 
             # sort scores and prompts
             self.prompts = [prompt for _, prompt in sorted(zip(scores, prompts), reverse=True)][: len(self.prompts)]
