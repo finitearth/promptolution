@@ -40,7 +40,6 @@ class VLLM(BaseLLM):
         temperature: float = 0.1,
         top_p: float = 0.9,
         model_storage_path: str | None = None,
-        token: str | None = None,
         dtype: str = "auto",
         tensor_parallel_size: int = 1,
         gpu_memory_utilization: float = 0.95,
@@ -57,7 +56,6 @@ class VLLM(BaseLLM):
             temperature (float, optional): Sampling temperature. Defaults to 0.1.
             top_p (float, optional): Top-p sampling parameter. Defaults to 0.9.
             model_storage_path (str, optional): Directory to store the model. Defaults to None.
-            token: (str, optional): Token for accessing the model - not used in implementation yet.
             dtype (str, optional): Data type for model weights. Defaults to "float16".
             tensor_parallel_size (int, optional): Number of GPUs for tensor parallelism. Defaults to 1.
             gpu_memory_utilization (float, optional): Fraction of GPU memory to use. Defaults to 0.95.
