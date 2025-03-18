@@ -12,18 +12,16 @@ from promptolution.predictors import MarkerBasedClassificator
 from promptolution.optimizers import Opro
 from datasets import load_dataset
 
-from promptolution.config import Config
-
 logger = Logger(__name__)
 
 """Run a test run for any of the implemented optimizers."""
 parser = argparse.ArgumentParser()
 parser.add_argument("--model")
 parser.add_argument("--model-storage-path", default="../models/")
-parser.add_argument("--output-dir", default="results/evoprompt_ga_test/")
-parser.add_argument("--max-model-len", type=int, default=1024)
-parser.add_argument("--n-steps", type=int, default=5)
-parser.add_argument("--n-eval-samples", type=int, default=20)
+parser.add_argument("--output-dir", default="results/opro_test/")
+parser.add_argument("--max-model-len", type=int, default=2048)
+parser.add_argument("--n-steps", type=int, default=999)
+parser.add_argument("--n-eval-samples", type=int, default=300)
 parser.add_argument("--token", default=None)
 parser.add_argument("--seed", type=int, default=187)
 args = parser.parse_args()
@@ -31,7 +29,7 @@ args = parser.parse_args()
 callbacks = [
     LoggerCallback(logger),
     CSVCallback(args.output_dir),
-    TokenCountCallback(100000, "input_tokens"),
+    TokenCountCallback(5000000, "input_tokens"),
 ]
 
 df = load_dataset("SetFit/ag_news", split="train", revision="main").to_pandas().sample(300, random_state=args.seed)
@@ -69,8 +67,7 @@ initial_prompts = [
     "Simply indicate whether this news article is about World, Sports, Business, or Tech. Include your answer between <final_answer> </final_answer> tags.",
 ]
 
-# randomly sample 5 initial prompts
-initial_prompts = random.sample(initial_prompts, 5)
+initial_prompts = random.sample(initial_prompts, 10)
 
 if "vllm" in args.model:
     llm = get_llm(
@@ -95,9 +92,9 @@ optimizer = Opro(
     meta_llm=meta_llm,
     initial_prompts=initial_prompts,
     callbacks=callbacks,
-    n_eval_samples=50,
-    max_num_instructions=10,
-    num_instructions_per_step=2,
+    n_eval_samples=args.n_eval_samples,
+    max_num_instructions=20,
+    num_instructions_per_step=8,
     num_few_shots=3,
     verbosity=2
 )
