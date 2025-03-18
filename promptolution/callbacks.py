@@ -88,32 +88,37 @@ class LoggerCallback(Callback):
         return True
 
 
-class CSVCallback(Callback):
-    """Callback for saving optimization progress to a CSV file.
+class FileOutputCallback(Callback):
+    """Callback for saving optimization progress to a specified file type.
 
-    This callback saves prompts and scores at each step to a CSV file.
+    This callback saves information about each step to a file.
 
     Attributes:
-        dir (str): Directory the CSV file is saved to.
+        dir (str): Directory the file is saved to.
         step (int): The current step number.
+        file_type (str): The type of file to save the output to.
     """
 
-    def __init__(self, dir):
-        """Initialize the CSVCallback.
+    def __init__(self, dir, file_type: Literal["parquet", "csv"] = "parquet"):
+        """Initialize the FileOutputCallback.
 
         Args:
         dir (str): Directory the CSV file is saved to.
+        file_type (str): The type of file to save the output to.
         """
         if not os.path.exists(dir):
             os.makedirs(dir)
 
-        self.dir = dir
-        self.dir = dir
+        self.file_type = file_type
+
+        if file_type == "parquet":
+            self.path = dir + "/step_results.parquet"
+        elif file_type == "csv":
+            self.path = dir + "/step_results.csv"
+        else:
+            raise ValueError(f"File type {file_type} not supported.")
+
         self.step = 0
-        self.input_tokens = 0
-        self.output_tokens = 0
-        self.start_time = datetime.now()
-        self.step_time = datetime.now()
 
     def on_step_end(self, optimizer):
         """Save prompts and scores to csv.
@@ -125,47 +130,24 @@ class CSVCallback(Callback):
         df = pd.DataFrame(
             {
                 "step": [self.step] * len(optimizer.prompts),
-                "input_tokens": [optimizer.meta_llm.input_token_count - self.input_tokens] * len(optimizer.prompts),
-                "output_tokens": [optimizer.meta_llm.output_token_count - self.output_tokens] * len(optimizer.prompts),
-                "time_elapsed": [(datetime.now() - self.step_time).total_seconds()] * len(optimizer.prompts),
+                "input_tokens": [optimizer.meta_llm.input_token_count] * len(optimizer.prompts),
+                "output_tokens": [optimizer.meta_llm.output_token_count] * len(optimizer.prompts),
+                "time": [datetime.now().total_seconds()] * len(optimizer.prompts),
                 "score": optimizer.scores,
                 "prompt": optimizer.prompts,
             }
         )
-        self.step_time = datetime.now()
-        self.input_tokens = optimizer.meta_llm.input_token_count
-        self.output_tokens = optimizer.meta_llm.output_token_count
 
-        if not os.path.exists(self.dir + "step_results.csv"):
-            df.to_csv(self.dir + "step_results.csv", index=False)
-        else:
-            df.to_csv(self.dir + "step_results.csv", mode="a", header=False, index=False)
-
-        return True
-
-    def on_train_end(self, optimizer):
-        """Called at the end of training.
-
-        Args:
-        optimizer: The optimizer object that called the callback.
-        """
-        df = pd.DataFrame(
-            dict(
-                steps=self.step,
-                input_tokens=optimizer.meta_llm.input_token_count,
-                output_tokens=optimizer.meta_llm.output_token_count,
-                time_elapsed=(datetime.now() - self.start_time).total_seconds(),
-                time=datetime.now(),
-                score=np.array(optimizer.scores).mean(),
-                best_prompts=str(optimizer.prompts),
-            ),
-            index=[0],
-        )
-
-        if not os.path.exists(self.dir + "train_results.csv"):
-            df.to_csv(self.dir + "train_results.csv", index=False)
-        else:
-            df.to_csv(self.dir + "train_results.csv", mode="a", header=False, index=False)
+        if self.file_type == "parquet":
+            if self.step == 1:
+                df.to_parquet(self.path, index=False)
+            else:
+                df.to_parquet(self.path, mode="a", index=False)
+        elif self.file_type == "csv":
+            if self.step == 1:
+                df.to_csv(self.path, index=False)
+            else:
+                df.to_csv(self.path, mode="a", header=False, index=False)
 
         return True
 
