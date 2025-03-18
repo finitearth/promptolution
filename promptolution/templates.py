@@ -90,8 +90,7 @@ OPRO_TEMPLATE = """Your task is to generate an instruction.
 
 Below are some previous instructions with their scores. The score ranges from 0 to 100.
 
-<old_instructions>
-
+<instructions>
 Here are some examples of the target dataset:
 <examples>
 
@@ -104,8 +103,7 @@ OPRO_TEMPLATE_TD = """Your task is to generate an instruction for the following 
 
 Below are some previous instructions with their scores. The score ranges from 0 to 100.
 
-<old_instructions>
-
+<instructions>
 Here are some examples of the target dataset:
 <examples>
 

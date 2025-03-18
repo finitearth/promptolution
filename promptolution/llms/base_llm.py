@@ -75,6 +75,14 @@ class BaseLLM(ABC):
 
         return responses
 
+    def set_generation_seed(self, seed: int):
+        """Set the random seed for reproducibility per request.
+
+        Args:
+            seed (int): Random seed value.
+        """
+        pass
+
     @abstractmethod
     def _get_response(self, prompts: List[str]) -> List[str]:
         """Generate responses for the given prompts.
