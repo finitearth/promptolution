@@ -1,8 +1,8 @@
-"""Module for OPRO."""
+"""Module implementing the OPRO (Optimization by PROmpting) technique."""
 
-from typing import List
+from typing import Dict, List, Optional
 
-import numpy as np
+import pandas as pd
 
 from promptolution.llms.base_llm import BaseLLM
 from promptolution.optimizers.base_optimizer import BaseOptimizer
@@ -10,88 +10,124 @@ from promptolution.templates import OPRO_TEMPLATE
 
 
 class Opro(BaseOptimizer):
-    """Opro: Optimization by PROmpting.
+    """OPRO: Optimization by PROmpting.
 
-    Proposed by the paper "Large Language Models as Optimizers" by Yang et. al: https://arxiv.org/abs/2309.03409.
-    This Optimizer works by providing the Meta-LLM with a task-description, as well as previous
-    prompts with their respective score.
+    Implementation of the technique proposed in "Large Language Models as Optimizers"
+    (Yang et al., 2023: https://arxiv.org/abs/2309.03409).
 
-    Attributes:
-        llm (BaseLLM): The Meta-LLM to optimize.
-        n_samples (int): The number of samples from the task dataset to show the Meta-LLM.
-
-    Methods:
-        _sample_examples: Sample examples from the task dataset.
-        _format_old_instructions: Format the previous prompts and their scores.
-        optimize: Optimize the Meta-LLM by providing it with a new prompt.
+    OPRO works by providing a meta-LLM with task descriptions and previous
+    prompt-score pairs to generate improved prompts for a downstream LLM.
     """
 
-    def __init__(self, meta_llm: BaseLLM, n_samples: int = 2, prompt_template: str = None, **args):
-        """Initialize the Opro optimizer."""
-        self.meta_llm = meta_llm
+    def __init__(
+        self,
+        df_few_shots: pd.DataFrame,
+        downstream_llm: BaseLLM,
+        meta_llm: BaseLLM,
+        prompt_template: Optional[str] = None,
+        n_eval_samples: int = 20,
+        max_num_instructions: int = 20,
+        num_instructions_per_step: int = 8,
+        num_few_shots: int = 3,
+        **kwargs,
+    ) -> None:
+        """Initialize the OPRO optimizer.
 
-        assert n_samples > 0, "n_samples must be greater than 0."
-        self.n_samples = n_samples
+        Args:
+            df_few_shots: DataFrame with few-shot examples (must have 'input' and 'target' columns)
+            downstream_llm: LLM that will execute the optimized prompts
+            meta_llm: LLM that generates improved prompts
+            prompt_template: Custom meta prompt template (uses OPRO_TEMPLATE if None)
+            n_eval_samples: Number of samples for evaluating each prompt
+            max_num_instructions: Maximum previous instructions to include in meta prompt
+            num_instructions_per_step: Number of prompts to generate in each step
+            num_few_shots: Number of few-shot examples to include (0 for none)
+            **kwargs: Additional arguments passed to the BaseOptimizer
+        """
+        super().__init__(**kwargs)
+        self.df_few_shots = df_few_shots
+        self.downstream_llm = downstream_llm
+        self.meta_llm = meta_llm
 
         self.meta_prompt = prompt_template if prompt_template else OPRO_TEMPLATE
 
-        super().__init__(**args)
+        if n_eval_samples <= 0:
+            raise ValueError("n_eval_samples must be greater than 0")
 
-        self.scores = [
-            self.task.evaluate(p, self.predictor, subsample=True, n_samples=self.n_eval_samples)[0]
-            for p in self.prompts
-        ]
+        self.n_eval_samples = n_eval_samples
+        self.max_num_instructions = max_num_instructions
+        self.num_instructions_per_step = num_instructions_per_step
+        self.num_few_shots = num_few_shots
 
-    def _sample_examples(self):
-        """Sample examples from the task dataset with their label.
+        # Dictionary to store prompts and their scores
+        self.prompt_score_dict: Dict[str, float] = {}
 
-        Returns:
-            str: The formatted string of sampled examples.
-        """
-        idx = np.random.choice(len(self.task.xs), self.n_samples)
-        sample_x = self.task.xs[idx]
-        sample_y = self.task.ys[idx]
+        # Initialize with existing prompts if any
+        for prompt in self.prompts:
+            if prompt not in self.prompt_score_dict:
+                score = self.task.evaluate(prompt, self.predictor, subsample=True, n_samples=self.n_eval_samples)[0]
+                self.prompt_score_dict[prompt] = score
 
-        return "\n".join([f"Input: {x}\nOutput: {y}" for x, y in zip(sample_x, sample_y)])
-
-    def _format_old_instructions(self):
-        """Format the previous prompts and their respective scores.
+    def _sample_examples(self) -> str:
+        """Sample few-shot examples from the dataset.
 
         Returns:
-            str: The formatted string of previous prompts and their scores.
+            Formatted string of few-shot examples with inputs and expected outputs
         """
-        return "".join(
-            [
-                f"The old instruction was:\n{prompt}\nIt scored: {score}\n\n"
-                for prompt, score in zip(self.prompts, self.scores)
-            ]
-        )
+        if self.num_few_shots <= 0:
+            return ""
+
+        few_shot_samples = self.df_few_shots.sample(min(self.num_few_shots, len(self.df_few_shots)), replace=False)
+
+        sample_inputs = few_shot_samples["input"].values
+        sample_targets = few_shot_samples["target"].values
+
+        return "\n".join([f"Input: {x}\nOutput: {y}" for x, y in zip(sample_inputs, sample_targets)])
+
+    def _format_old_instructions(self) -> str:
+        """Format previous prompts and their scores for the meta prompt.
+
+        Returns:
+            Formatted string of previous prompts and their scores,
+            sorted by ascending score (worse to better)
+        """
+        sorted_instructions = sorted(self.prompt_score_dict.items(), key=lambda x: x[1])[: self.max_num_instructions]
+
+        return "".join([f"text:\n{prompt}\nscore: {score}\n\n" for prompt, score in sorted_instructions])
 
     def optimize(self, n_steps: int) -> List[str]:
-        """Optimize the Meta-LLM by providing it with a new prompt.
+        """Run the OPRO optimization process.
 
         Args:
-            n_steps (int): The number of optimization steps to perform.
+            n_steps: Number of optimization steps to perform
 
         Returns:
-            str: The best prompt found by the optimizer.
+            List of all prompts generated during optimization
         """
         for _ in range(n_steps):
             meta_prompt = self.meta_prompt.replace("<old_instructions>", self._format_old_instructions()).replace(
                 "<examples>", self._sample_examples()
             )
 
-            prompt = self.meta_llm.get_response([meta_prompt])[0]
-            prompt = prompt.split("<prompt>")[-1].split("</prompt>")[0].strip()
-            score = self.task.evaluate(prompt, self.predictor, subsample=True, n_samples=self.n_eval_samples)
+            for _ in range(self.num_instructions_per_step):
+                response = self.meta_llm.get_response([meta_prompt])[0]
 
-            self.prompts.append(prompt)
-            self.scores.append(score)
+                prompt = response.split("<prompt>")[-1].split("</prompt>")[0].strip()
+
+                if prompt in self.prompt_score_dict:
+                    continue
+
+                score = self.task.evaluate(prompt, self.predictor, subsample=True, n_samples=self.n_eval_samples)[0]
+
+                self.prompt_score_dict[prompt] = score
+                self.prompts.append(prompt)
 
             continue_optimization = self._on_step_end()
             if not continue_optimization:
                 break
 
         self._on_epoch_end()
+
+        self.scores = [self.prompt_score_dict[prompt] for prompt in self.prompts]
 
         return self.prompts
