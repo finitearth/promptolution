@@ -69,7 +69,7 @@ class Opro(BaseOptimizer):
         prompt_score_pairs = list(zip(self.prompts, self.scores))
         sorted_pairs = sorted(prompt_score_pairs, key=lambda x: x[1])
 
-        return "".join([f"text:\n{prompt}\nscore: {score}\n\n" for prompt, score in sorted_pairs])
+        return "".join([f"text:\n{prompt}\nscore: {int(100 * round(score, 2))}\n\n" for prompt, score in sorted_pairs])
 
     def _add_prompt_and_score(self, prompt: str, score: float) -> None:
         """Add a prompt and its score to the lists, maintaining max length.
@@ -98,7 +98,7 @@ class Opro(BaseOptimizer):
         Returns:
             List of all prompts generated during optimization
         """
-        self.scores = self.task.evaluate(self.prompts, self.predictor)[0]
+        self.scores = list(self.task.evaluate(self.prompts, self.predictor))
         self.meta_prompt = self.meta_prompt_template.replace("<instructions>", self._format_instructions()).replace(
             "<examples>", self._sample_examples()
         )
@@ -117,7 +117,7 @@ class Opro(BaseOptimizer):
 
                 score = self.task.evaluate(prompt, self.predictor)[0]
 
-                self._add_prompt_and_score(prompt, int(100 * round(score, 2)))
+                self._add_prompt_and_score(prompt, score)
 
                 if self.verbosity > 1:
                     print(f"New Instruction: {prompt}\nScore: {score}\n")
