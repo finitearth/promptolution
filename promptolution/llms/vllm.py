@@ -131,6 +131,7 @@ class VLLM(BaseLLM):
                     {"role": "user", "content": input},
                 ],
                 tokenize=False,
+                add_generation_prompt=True,
             )
             for input in inputs
         ]
