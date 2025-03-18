@@ -21,7 +21,6 @@ parser.add_argument("--model-storage-path", default="../models/")
 parser.add_argument("--output-dir", default="results/opro_test/")
 parser.add_argument("--max-model-len", type=int, default=2048)
 parser.add_argument("--n-steps", type=int, default=999)
-parser.add_argument("--n-eval-samples", type=int, default=300)
 parser.add_argument("--token", default=None)
 parser.add_argument("--seed", type=int, default=187)
 args = parser.parse_args()
@@ -32,7 +31,7 @@ callbacks = [
     TokenCountCallback(5000000, "input_tokens"),
 ]
 
-df = load_dataset("SetFit/ag_news", split="train", revision="main").to_pandas().sample(300, random_state=args.seed)
+df = load_dataset("SetFit/ag_news", split="train", revision="main").to_pandas().sample(200, random_state=args.seed)
 
 df["input"] = df["text"]
 df["target"] = df["label_text"]
@@ -92,7 +91,6 @@ optimizer = Opro(
     meta_llm=meta_llm,
     initial_prompts=initial_prompts,
     callbacks=callbacks,
-    n_eval_samples=args.n_eval_samples,
     max_num_instructions=20,
     num_instructions_per_step=8,
     num_few_shots=3,
