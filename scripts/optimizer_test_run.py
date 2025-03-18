@@ -2,7 +2,7 @@
 import argparse
 from logging import Logger
 
-from promptolution.callbacks import LoggerCallback, CSVCallback
+from promptolution.callbacks import LoggerCallback, FileOutputCallback
 from promptolution.helpers import run_optimization
 
 from promptolution.config import Config
@@ -33,9 +33,6 @@ config = Config(
     random_seed=args.seed,
 )
 
-if args.token is None:
-    prompts = run_optimization(config, callbacks=[LoggerCallback(logger), CSVCallback(f"results/seedingtest/{args.model}/")])
-else:
-    prompts = run_optimization(config, callbacks=[LoggerCallback(logger), CSVCallback(f"results/seedingtest/{args.model}/")], use_token=True)
+prompts = run_optimization(config, callbacks=[LoggerCallback(logger), FileOutputCallback(f"results/seedingtest/{args.model}/", "csv")], use_token=not args.token is None)
 
 logger.info(f"Optimized prompts: {prompts}")
