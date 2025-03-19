@@ -31,7 +31,7 @@ callbacks = [
     TokenCountCallback(5000000, "input_tokens"),
 ]
 
-df = load_dataset("SetFit/ag_news", split="train", revision="main").to_pandas().sample(200, random_state=args.seed)
+df = load_dataset("SetFit/ag_news", split="train", revision="main").to_pandas().sample(300, random_state=args.seed)
 
 df["input"] = df["text"]
 df["target"] = df["label_text"]
