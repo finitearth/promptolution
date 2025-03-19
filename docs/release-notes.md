@@ -10,6 +10,9 @@
 * add verbosity and callback handling in EvoPromptGA
 * add timestamp to the callback
 
+* removed datasets from repo
+* changed task creation (now by default with a dataset)
+
 **Full Changelog**: [here](https://github.com/finitearth/promptolution/compare/v1.3.0...v1.3.1)
 
 ## Release v1.3.0
