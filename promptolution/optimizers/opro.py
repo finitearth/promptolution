@@ -104,15 +104,19 @@ class Opro(BaseOptimizer):
         )
 
         for _ in range(n_steps):
+            duplicate_prompts = 0
             for _ in range(self.num_instructions_per_step):
                 generation_seed = np.random.randint(0, int(1e9))
                 self.meta_llm.set_generation_seed(generation_seed)
 
+                if self.verbosity > 1:
+                    print(f"Seed: {generation_seed}")
                 response = self.meta_llm.get_response([self.meta_prompt])[0]
 
                 prompt = response.split("<prompt>")[-1].split("</prompt>")[0].strip()
 
                 if prompt in self.prompts:
+                    duplicate_prompts += 1
                     continue
 
                 score = self.task.evaluate(prompt, self.predictor)[0]
@@ -131,7 +135,14 @@ class Opro(BaseOptimizer):
                 print(f"New meta prompt:\n{self.meta_prompt}\n")
 
             continue_optimization = self._on_step_end()
+
             if not continue_optimization:
+                break
+
+            # stop optimization if all generated prompts are duplicates (converged)
+            if duplicate_prompts == self.num_instructions_per_step:
+                if self.verbosity > 0:
+                    print("All generated prompts are duplicates. Stopping optimization.")
                 break
 
         self._on_epoch_end()
