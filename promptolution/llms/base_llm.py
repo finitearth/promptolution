@@ -78,7 +78,7 @@ class BaseLLM(ABC):
         if isinstance(system_prompts, str):
             system_prompts = [system_prompts] * len(prompts)
         responses = self._get_response(prompts, system_prompts)
-        self.update_token_count(prompts, responses)
+        self.update_token_count(prompts + system_prompts, responses)
 
         return responses
 
