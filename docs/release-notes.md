@@ -1,5 +1,15 @@
 # Release Notes
 
+## Release v1.3.2
+### What's changed
+#### Added features
+* Allow for configuration and evaluation of system prompts in all LLM-Classes
+* CSV Callback is now FileOutputCallback and able to write Parquet files
+* Fixed LLM-Call templates in VLLM
+* refined OPRO-implementation to be closer to the paper
+
+**Full Changelog**: [here](https://github.com/finitearth/promptolution/compare/v1.3.1...v1.3.2)
+
 ## Release v1.3.1
 ### What's changed
 #### Added features
@@ -9,6 +19,8 @@
 * generalize the Classificator
 * add verbosity and callback handling in EvoPromptGA
 * add timestamp to the callback
+* removed datasets from repo
+* changed task creation (now by default with a dataset)
 
 **Full Changelog**: [here](https://github.com/finitearth/promptolution/compare/v1.3.0...v1.3.1)
 

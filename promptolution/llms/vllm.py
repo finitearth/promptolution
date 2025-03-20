@@ -108,7 +108,7 @@ class VLLM(BaseLLM):
         # Initialize tokenizer separately for potential pre-processing
         self.tokenizer = AutoTokenizer.from_pretrained(model_id)
 
-    def _get_response(self, inputs: list[str]):
+    def _get_response(self, prompts: list[str], system_prompts: list[str]) -> list[str]:
         """Generate responses for a list of prompts using the vLLM engine.
 
         Args:
@@ -126,13 +126,14 @@ class VLLM(BaseLLM):
                 [
                     {
                         "role": "system",
-                        "content": "You are a helpful assistant.",
+                        "content": sys_prompt,
                     },
-                    {"role": "user", "content": input},
+                    {"role": "user", "content": prompt},
                 ],
                 tokenize=False,
+                add_generation_prompt=True,
             )
-            for input in inputs
+            for prompt, sys_prompt in zip(prompts, system_prompts)
         ]
 
         # generate responses for self.batch_size prompts at the same time
@@ -160,6 +161,14 @@ class VLLM(BaseLLM):
 
         for output in outputs:
             self.output_token_count += len(self.tokenizer.encode(output))
+
+    def set_generation_seed(self, seed):
+        """Set the random seed for text generation.
+
+        Args:
+            seed (int): Random seed for text generation.
+        """
+        self.sampling_params.seed = seed
 
     def __del__(self):
         """Cleanup method to delete the LLM instance and free up GPU memory."""

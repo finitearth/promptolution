@@ -50,7 +50,7 @@ class LocalLLM(BaseLLM):
         self.pipeline.tokenizer.pad_token_id = self.pipeline.tokenizer.eos_token_id
         self.pipeline.tokenizer.padding_side = "left"
 
-    def _get_response(self, prompts: list[str]):
+    def _get_response(self, prompts: list[str], system_prompts: list[str]) -> list[str]:
         """Generate responses for a list of prompts using the local language model.
 
         Args:
@@ -63,8 +63,12 @@ class LocalLLM(BaseLLM):
             This method uses torch.no_grad() for inference to reduce memory usage.
             It handles both single and batch inputs, ensuring consistent output format.
         """
+        inputs = []
+        for prompt, sys_prompt in zip(prompts, system_prompts):
+            inputs.append([{"role": "system", "prompt": sys_prompt}, {"role": "user", "prompt": prompt}])
+
         with torch.no_grad():
-            response = self.pipeline(prompts, pad_token_id=self.pipeline.tokenizer.eos_token_id)
+            response = self.pipeline(inputs, pad_token_id=self.pipeline.tokenizer.eos_token_id)
 
         if len(response) != 1:
             response = [r[0] if isinstance(r, list) else r for r in response]

@@ -63,6 +63,7 @@ class ClassificationTask(BaseTask):
         self,
         prompts: List[str],
         predictor: BasePredictor,
+        system_prompts: List[str] = None,
         n_samples: int = 20,
         subsample: bool = False,
         return_seq: bool = False,
@@ -72,13 +73,11 @@ class ClassificationTask(BaseTask):
         Args:
             prompts (List[str]): List of prompts to evaluate.
             predictor (BasePredictor): Predictor to use for evaluation.
+            system_prompts (List[str], optional): List of system prompts to evaluate. Defaults to None.
             n_samples (int, optional): Number of samples to use if subsampling. Defaults to 20.
             subsample (bool, optional): Whether to use subsampling.
             If set to true, samples a different subset per call. Defaults to False.
-            return_seq (bool, optional): whether to return the generating sequence
-            subsample (bool, optional): Whether to use subsampling.
-            If set to true, samples a different subset per call. Defaults to False.
-            return_seq (bool, optional): whether to return the generating sequence
+            return_seq (bool, optional): whether to return the generating sequence.
 
         Returns:
             np.ndarray: Array of accuracy scores for each prompt.
@@ -95,7 +94,7 @@ class ClassificationTask(BaseTask):
         ys_subsample = self.ys[indices]
 
         # Make predictions on the subsample
-        preds = predictor.predict(prompts, xs_subsample, return_seq=return_seq)
+        preds = predictor.predict(prompts, xs_subsample, system_prompts=system_prompts, return_seq=return_seq)
 
         if return_seq:
             preds, seqs = preds

@@ -4,15 +4,13 @@ import argparse
 import random
 from logging import Logger
 
-from promptolution.callbacks import LoggerCallback, FileOutputCallback, TokenCountCallback
-from promptolution.templates import EVOPROMPT_GA_TEMPLATE
+from promptolution.callbacks import LoggerCallback, CSVCallback, TokenCountCallback
+from promptolution.templates import OPRO_TEMPLATE_TD
 from promptolution.helpers import get_llm
 from promptolution.tasks import ClassificationTask
 from promptolution.predictors import MarkerBasedClassificator
-from promptolution.optimizers import EvoPromptGA
+from promptolution.optimizers import Opro
 from datasets import load_dataset
-
-from promptolution.config import Config
 
 logger = Logger(__name__)
 
@@ -20,18 +18,17 @@ logger = Logger(__name__)
 parser = argparse.ArgumentParser()
 parser.add_argument("--model")
 parser.add_argument("--model-storage-path", default="../models/")
-parser.add_argument("--output-dir", default="results/evoprompt_ga_test/")
-parser.add_argument("--max-model-len", type=int, default=1024)
-parser.add_argument("--n-steps", type=int, default=2)
-parser.add_argument("--n-eval-samples", type=int, default=20)
+parser.add_argument("--output-dir", default="results/opro_test/")
+parser.add_argument("--max-model-len", type=int, default=2048)
+parser.add_argument("--n-steps", type=int, default=999)
 parser.add_argument("--token", default=None)
 parser.add_argument("--seed", type=int, default=187)
 args = parser.parse_args()
 
 callbacks = [
     LoggerCallback(logger),
-    FileOutputCallback(args.output_dir, file_type="csv"),
-    TokenCountCallback(100000, "input_tokens"),
+    CSVCallback(args.output_dir),
+    TokenCountCallback(5000000, "input_tokens"),
 ]
 
 df = load_dataset("SetFit/ag_news", split="train", revision="main").to_pandas().sample(300, random_state=args.seed)
@@ -69,8 +66,7 @@ initial_prompts = [
     "Simply indicate whether this news article is about World, Sports, Business, or Tech. Include your answer between <final_answer> </final_answer> tags.",
 ]
 
-# randomly sample 5 initial prompts
-initial_prompts = random.sample(initial_prompts, 5)
+initial_prompts = random.sample(initial_prompts, 10)
 
 if "vllm" in args.model:
     llm = get_llm(
@@ -88,15 +84,17 @@ meta_llm = llm
 
 predictor = MarkerBasedClassificator(downstream_llm, classes=task.classes)
 
-optimizer = EvoPromptGA(
+optimizer = Opro(
     task=task,
-    prompt_template=EVOPROMPT_GA_TEMPLATE,
+    prompt_template=OPRO_TEMPLATE_TD.replace("<task_desc", task.description),
     predictor=predictor,
     meta_llm=meta_llm,
     initial_prompts=initial_prompts,
     callbacks=callbacks,
-    n_eval_samples=args.n_eval_samples,
-    verbosity=2,  # for debugging
+    max_num_instructions=20,
+    num_instructions_per_step=8,
+    num_few_shots=3,
+    verbosity=2
 )
 
 best_prompts = optimizer.optimize(n_steps=args.n_steps)

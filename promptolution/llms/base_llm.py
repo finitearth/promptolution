@@ -6,6 +6,8 @@ from typing import List
 
 import numpy as np
 
+from promptolution.templates import DEFAULT_SYS_PROMPT
+
 logger = logging.getLogger(__name__)
 
 
@@ -54,7 +56,7 @@ class BaseLLM(ABC):
         self.input_token_count += input_tokens
         self.output_token_count += output_tokens
 
-    def get_response(self, prompts: str) -> str:
+    def get_response(self, prompts: List[str], system_prompts: List[str] = None) -> List[str]:
         """Generate responses for the given prompts.
 
         This method calls the _get_response method to generate responses
@@ -64,19 +66,32 @@ class BaseLLM(ABC):
         Args:
             prompts (str or List[str]): Input prompt(s). If a single string is provided,
                                         it's converted to a list containing that string.
+            system_prompts (str or List[str]): System prompt(s) to provide context to the model.
 
         Returns:
             List[str]: A list of generated responses, one for each input prompt.
         """
+        if system_prompts is None:
+            system_prompts = DEFAULT_SYS_PROMPT
         if isinstance(prompts, str):
             prompts = [prompts]
-        responses = self._get_response(prompts)
-        self.update_token_count(prompts, responses)
+        if isinstance(system_prompts, str):
+            system_prompts = [system_prompts] * len(prompts)
+        responses = self._get_response(prompts, system_prompts)
+        self.update_token_count(prompts + system_prompts, responses)
 
         return responses
 
+    def set_generation_seed(self, seed: int):
+        """Set the random seed for reproducibility per request.
+
+        Args:
+            seed (int): Random seed value.
+        """
+        pass
+
     @abstractmethod
-    def _get_response(self, prompts: List[str]) -> List[str]:
+    def _get_response(self, prompts: List[str], system_prompts: List[str] = None) -> List[str]:
         """Generate responses for the given prompts.
 
         This method should be implemented by subclasses to define how
@@ -84,11 +99,12 @@ class BaseLLM(ABC):
 
         Args:
             prompts (List[str]): A list of input prompts.
+            system_prompts (List[str]): A list of system prompts to provide context to the model.
 
         Returns:
             List[str]: A list of generated responses corresponding to the input prompts.
         """
-        pass
+        raise NotImplementedError
 
 
 class DummyLLM(BaseLLM):
