@@ -66,6 +66,8 @@ class LoggerCallback(Callback):
         self.step += 1
         time = datetime.now().strftime("%d-%m-%y %H:%M:%S:%f")
         self.logger.critical(f"{time} - ✨Step {self.step} ended✨")
+        time = datetime.now().strftime("%d-%m-%y %H:%M:%S:%f")
+        self.logger.critical(f"{time} - ✨Step {self.step} ended✨")
         for i, (prompt, score) in enumerate(zip(optimizer.prompts, optimizer.scores)):
             self.logger.critical(f"*** Prompt {i}: Score: {score}")
             self.logger.critical(f"{prompt}")
@@ -80,9 +82,12 @@ class LoggerCallback(Callback):
         logs: Additional information to log.
         """
         time = datetime.now().strftime("%d-%m-%y %H:%M:%S:%f")
+        time = datetime.now().strftime("%d-%m-%y %H:%M:%S:%f")
         if logs is None:
             self.logger.critical(f"{time} - Training ended")
+            self.logger.critical(f"{time} - Training ended")
         else:
+            self.logger.critical(f"{time} - Training ended - {logs}")
             self.logger.critical(f"{time} - Training ended - {logs}")
 
         return True
