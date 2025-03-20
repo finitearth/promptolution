@@ -10,7 +10,7 @@ import openai
 import requests
 from langchain_anthropic import ChatAnthropic
 from langchain_community.chat_models.deepinfra import ChatDeepInfra, ChatDeepInfraException
-from langchain_core.messages import HumanMessage
+from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI
 
 from promptolution.llms.base_llm import BaseLLM
@@ -18,11 +18,12 @@ from promptolution.llms.base_llm import BaseLLM
 logger = Logger(__name__)
 
 
-async def invoke_model(prompt, model, semaphore):
+async def invoke_model(prompt, system_prompt, model, semaphore):
     """Asynchronously invoke a language model with retry logic.
 
     Args:
         prompt (str): The input prompt for the model.
+        system_prompt (str): The system prompt for the model.
         model: The language model to invoke.
         semaphore (asyncio.Semaphore): Semaphore to limit concurrent calls.
 
@@ -39,7 +40,7 @@ async def invoke_model(prompt, model, semaphore):
 
         while attempts < max_retries:
             try:
-                response = await model.ainvoke([HumanMessage(content=prompt)])
+                response = await model.ainvoke([SystemMessage(content=system_prompt), HumanMessage(content=prompt)])
                 return response.content
             except ChatDeepInfraException as e:
                 print(f"DeepInfra error: {e}. Attempt {attempts}/{max_retries}. Retrying in {delay} seconds...")
@@ -80,13 +81,14 @@ class APILLM(BaseLLM):
         else:
             self.model = ChatDeepInfra(model_name=model_id, deepinfra_api_token=token)
 
-    def _get_response(self, prompts: List[str]) -> List[str]:
+    def _get_response(self, prompts: List[str], system_prompts: List[str] = None) -> List[str]:
         """Get responses for a list of prompts in a synchronous manner.
 
         This method includes retry logic for handling connection errors and rate limits.
 
         Args:
             prompts (list[str]): List of input prompts.
+            system_prompts (list[str]): List of system prompts. If not provided, uses default system_prompts
 
         Returns:
             list[str]: List of model responses.

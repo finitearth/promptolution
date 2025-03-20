@@ -1,5 +1,15 @@
 # Release Notes
 
+## Release v1.3.2
+### What's changed
+#### Added features
+* Allow for configuration and evaluation of system prompts in all LLM-Classes
+* CSV Callback is now FileOutputCallback and able to write Parquet files
+
+#### Further Changes:
+* Fixed LLM-Call templates in VLLM
+* refined OPRO-implementation to be closer to the paper
+
 ## Release v1.3.1
 ### What's changed
 #### Added features

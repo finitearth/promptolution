@@ -31,7 +31,9 @@ class BasePredictor:
         """
         self.llm = llm
 
-    def predict(self, prompts: List[str], xs: np.ndarray, return_seq: bool = False) -> np.ndarray:
+    def predict(
+        self, prompts: List[str], xs: np.ndarray, system_prompts: List[str] = None, return_seq: bool = False
+    ) -> np.ndarray:
         """Abstract method to make predictions based on prompts and input data.
 
         Args:
@@ -48,7 +50,9 @@ class BasePredictor:
         if isinstance(prompts, str):
             prompts = [prompts]
 
-        outputs = self.llm.get_response([prompt + "\n" + x for prompt in prompts for x in xs])
+        outputs = self.llm.get_response(
+            [prompt + "\n" + x for prompt in prompts for x in xs], system_prompts=system_prompts
+        )
         preds = self._extract_preds(outputs)
 
         shape = (len(prompts), len(xs))

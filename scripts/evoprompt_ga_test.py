@@ -4,7 +4,7 @@ import argparse
 import random
 from logging import Logger
 
-from promptolution.callbacks import LoggerCallback, CSVCallback, TokenCountCallback
+from promptolution.callbacks import LoggerCallback, FileOutputCallback, TokenCountCallback
 from promptolution.templates import EVOPROMPT_GA_TEMPLATE
 from promptolution.helpers import get_llm
 from promptolution.tasks import ClassificationTask
@@ -30,7 +30,7 @@ args = parser.parse_args()
 
 callbacks = [
     LoggerCallback(logger),
-    CSVCallback(args.output_dir),
+    FileOutputCallback(args.output_dir, file_type="csv"),
     TokenCountCallback(100000, "input_tokens"),
 ]
 

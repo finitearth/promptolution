@@ -21,12 +21,13 @@ class BaseTask(ABC):
         pass
 
     @abstractmethod
-    def evaluate(self, prompts: List[str], predictor) -> np.ndarray:
+    def evaluate(self, prompts: List[str], predictor, system_promtps: List[str] = None) -> np.ndarray:
         """Abstract method to evaluate prompts using a given predictor.
 
         Args:
             prompts (List[str]): List of prompts to evaluate.
             predictor: The predictor to use for evaluation.
+            system_promtps (List[str]): List of system prompts to evaluate.
 
         Returns:
             np.ndarray: Array of evaluation scores for each prompt.
@@ -58,7 +59,7 @@ class DummyTask(BaseTask):
         self.ys = np.array(["positive", "negative", "positive"])
         self.classes = ["negative", "positive"]
 
-    def evaluate(self, prompts: List[str], predictor) -> np.ndarray:
+    def evaluate(self, prompts: List[str], predictor, system_prompts=None) -> np.ndarray:
         """Generate random evaluation scores for the given prompts.
 
         Args:
