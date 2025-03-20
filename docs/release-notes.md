@@ -19,6 +19,7 @@
 * generalize the Classificator
 * add verbosity and callback handling in EvoPromptGA
 * add timestamp to the callback
+
 * removed datasets from repo
 * changed task creation (now by default with a dataset)
 

@@ -77,10 +77,7 @@ class ClassificationTask(BaseTask):
             n_samples (int, optional): Number of samples to use if subsampling. Defaults to 20.
             subsample (bool, optional): Whether to use subsampling.
             If set to true, samples a different subset per call. Defaults to False.
-            return_seq (bool, optional): whether to return the generating sequence
-            subsample (bool, optional): Whether to use subsampling.
-            If set to true, samples a different subset per call. Defaults to False.
-            return_seq (bool, optional): whether to return the generating sequence
+            return_seq (bool, optional): whether to return the generating sequence.
 
         Returns:
             np.ndarray: Array of accuracy scores for each prompt.
