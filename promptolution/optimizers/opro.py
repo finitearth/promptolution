@@ -145,5 +145,5 @@ class Opro(BaseOptimizer):
                     print("All generated prompts are duplicates. Stopping optimization.")
                 break
 
-        self._on_epoch_end()
+        self._on_train_end()
         return self.prompts
