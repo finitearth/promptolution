@@ -1,3 +1,4 @@
+DEFAULT_SYS_PROMPT = "You are a helpful assistant."
 EVOPROMPT_DE_TEMPLATE = """Please follow the instruction step-by-step to generate a better prompt.
 Identifying the different parts between Prompt 1 and Prompt 2:
 Prompt 1: Your task is to classify the comment as one of the following categories: terrible, bad, okay, good, great.
@@ -90,8 +91,7 @@ OPRO_TEMPLATE = """Your task is to generate an instruction.
 
 Below are some previous instructions with their scores. The score ranges from 0 to 100.
 
-<old_instructions>
-
+<instructions>
 Here are some examples of the target dataset:
 <examples>
 
@@ -104,8 +104,7 @@ OPRO_TEMPLATE_TD = """Your task is to generate an instruction for the following 
 
 Below are some previous instructions with their scores. The score ranges from 0 to 100.
 
-<old_instructions>
-
+<instructions>
 Here are some examples of the target dataset:
 <examples>
 

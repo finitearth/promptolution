@@ -7,7 +7,7 @@ from typing import Any, Dict, List, Optional, Union
 
 import numpy as np
 
-from promptolution.config import BaseConfig
+from promptolution.templates import DEFAULT_SYS_PROMPT
 
 logger = logging.getLogger(__name__)
 
@@ -115,7 +115,7 @@ class BaseLLM(ABC):
         self.input_token_count += input_tokens
         self.output_token_count += output_tokens
 
-    def get_response(self, prompts: Union[str, List[str]]) -> List[str]:
+    def get_response(self, prompts: List[str], system_prompts: List[str] = None) -> List[str]:
         """Generate responses for the given prompts.
 
         This method calls the _get_response method to generate responses
@@ -123,33 +123,47 @@ class BaseLLM(ABC):
         input and output tokens.
 
         Args:
-            prompts: Input prompt(s). If a single string is provided,
-                    it's converted to a list containing that string.
+            prompts (str or List[str]): Input prompt(s). If a single string is provided,
+                                        it's converted to a list containing that string.
+            system_prompts (str or List[str]): System prompt(s) to provide context to the model.
 
         Returns:
             List[str]: A list of generated responses, one for each input prompt.
         """
+        if system_prompts is None:
+            system_prompts = DEFAULT_SYS_PROMPT
         if isinstance(prompts, str):
             prompts = [prompts]
-        responses = self._get_response(prompts)
-        self.update_token_count(prompts, responses)
+        if isinstance(system_prompts, str):
+            system_prompts = [system_prompts] * len(prompts)
+        responses = self._get_response(prompts, system_prompts)
+        self.update_token_count(prompts + system_prompts, responses)
 
         return responses
 
+    def set_generation_seed(self, seed: int):
+        """Set the random seed for reproducibility per request.
+
+        Args:
+            seed (int): Random seed value.
+        """
+        pass
+
     @abstractmethod
-    def _get_response(self, prompts: List[str]) -> List[str]:
+    def _get_response(self, prompts: List[str], system_prompts: List[str]) -> List[str]:
         """Generate responses for the given prompts.
 
         This method should be implemented by subclasses to define how
         the LLM generates responses.
 
         Args:
-            prompts: A list of input prompts.
+            prompts (List[str]): A list of input prompts.
+            system_prompts (List[str]): A list of system prompts to provide context to the model.
 
         Returns:
             List[str]: A list of generated responses corresponding to the input prompts.
         """
-        pass
+        raise NotImplementedError
 
 
 class DummyLLM(BaseLLM):
@@ -160,11 +174,7 @@ class DummyLLM(BaseLLM):
     complex natural language processing.
     """
 
-    def __init__(self, *args, **kwargs):
-        """Initialize the DummyLLM."""
-        pass
-
-    def get_response(self, prompts: str) -> str:
+    def _get_response(self, prompts: str) -> str:
         """Generate random responses for the given prompts.
 
         This method creates silly, random responses enclosed in <prompt> tags.
@@ -180,13 +190,13 @@ class DummyLLM(BaseLLM):
         if isinstance(prompts, str):
             prompts = [prompts]
         results = []
-        for _ in prompts:
+        for p in prompts:
             r = np.random.rand()
             if r < 0.3:
-                results += [f"Joooo wazzuppp <prompt>hier gehts los {r} </prompt>"]
-            if 0.3 <= r < 0.6:
-                results += [f"was das hier? <prompt>peter lustig{r}</prompt>"]
+                results += [f"Joooo wazzuppp <prompt>hier gehts los {r} </prompt> {p}"]
+            elif 0.3 <= r < 0.6:
+                results += [f"was das hier? <prompt>peter lustig{r}</prompt> {p}"]
             else:
-                results += [f"hier ist ein <prompt>test{r}</prompt>"]
+                results += [f"hier ist ein <prompt>test{r}</prompt> {p}"]
 
         return results

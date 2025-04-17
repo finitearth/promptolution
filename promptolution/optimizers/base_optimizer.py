@@ -7,6 +7,7 @@ from typing import Any, Callable, Dict, List, Optional, Union
 
 import numpy as np
 
+from promptolution.predictors.base_predictor import BasePredictor
 from promptolution.tasks.base_task import BaseTask
 
 
@@ -94,10 +95,6 @@ class BaseOptimizer(ABC):
         self.task = task
         self.callbacks = callbacks or []
         self.predictor = predictor
-        self.n_eval_samples = kwargs.get("n_eval_samples", self.config.n_eval_samples)
-
-        # Set random seed
-        np.random.seed(self.config.random_seed)
 
     @abstractmethod
     def optimize(self, n_steps: Optional[int] = None) -> List[str]:

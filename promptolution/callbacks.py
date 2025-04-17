@@ -1,34 +1,12 @@
 """Callback classes for logging, saving, and tracking optimization progress."""
 
 import os
-import time
-from abc import ABC, abstractmethod
-from dataclasses import asdict, dataclass, field
-from pathlib import Path
-from typing import Any, Callable, Dict, List, Literal, Optional, Union
+from abc import ABC
+from datetime import datetime
+from typing import Literal
 
-import numpy as np
 import pandas as pd
 from tqdm import tqdm
-
-from promptolution.config import BaseConfig
-
-
-@dataclass
-class CallbackConfig:
-    """Configuration for callback settings.
-
-    This class defines the configuration parameters for callbacks.
-
-    Attributes:
-        callback_name (str): Name of the callback.
-        log_path (Optional[str]): Path to save logs.
-        monitoring_interval (int): Interval for monitoring metrics.
-    """
-
-    callback_name: str = ""
-    log_path: Optional[str] = None
-    monitoring_interval: int = 1
 
 
 class Callback(ABC):
@@ -37,36 +15,16 @@ class Callback(ABC):
     Callbacks can be used to monitor the optimization process, save checkpoints,
     log metrics, or implement early stopping criteria.
 
-    Attributes:
-        config (CallbackConfig): Configuration for the callback.
     """
 
-    config_class = CallbackConfig
-
-    def __init__(self, config: Optional[Union[Dict[str, Any], CallbackConfig]] = None, **kwargs):
+    def __init__(self, **kwargs):
         """Initialize the callback with a configuration.
 
         Args:
             config: Configuration for the callback.
             **kwargs: Additional keyword arguments.
         """
-        # Initialize config (if supported, otherwise silently ignore)
-        if hasattr(self, "config_class"):
-            # Initialize config
-            if config is None:
-                config = {}
-
-            if isinstance(config, dict):
-                # Merge kwargs into config
-                for k, v in kwargs.items():
-                    config[k] = v
-                self.config = self.config_class(**config)
-            else:
-                self.config = config
-                # Override config with kwargs
-                for k, v in kwargs.items():
-                    if hasattr(self.config, k):
-                        setattr(self.config, k, v)
+        pass
 
     def on_step_end(self, optimizer):
         """Called at the end of each optimization step.
@@ -120,7 +78,10 @@ class LoggerCallback(Callback):
     def on_step_end(self, optimizer):
         """Log information about the current step."""
         self.step += 1
-        self.logger.critical(f"✨Step {self.step} ended✨")
+        time = datetime.now().strftime("%d-%m-%y %H:%M:%S:%f")
+        self.logger.critical(f"{time} - ✨Step {self.step} ended✨")
+        time = datetime.now().strftime("%d-%m-%y %H:%M:%S:%f")
+        self.logger.critical(f"{time} - ✨Step {self.step} ended✨")
         for i, (prompt, score) in enumerate(zip(optimizer.prompts, optimizer.scores)):
             self.logger.critical(f"*** Prompt {i}: Score: {score}")
             self.logger.critical(f"{prompt}")
@@ -134,39 +95,49 @@ class LoggerCallback(Callback):
         optimizer: The optimizer object that called the callback.
         logs: Additional information to log.
         """
+        time = datetime.now().strftime("%d-%m-%y %H:%M:%S:%f")
+        time = datetime.now().strftime("%d-%m-%y %H:%M:%S:%f")
         if logs is None:
-            self.logger.critical("Training ended")
+            self.logger.critical(f"{time} - Training ended")
+            self.logger.critical(f"{time} - Training ended")
         else:
-            self.logger.critical(f"Training ended - {logs}")
+            self.logger.critical(f"{time} - Training ended - {logs}")
+            self.logger.critical(f"{time} - Training ended - {logs}")
 
         return True
 
 
-class CSVCallback(Callback):
-    """Callback for saving optimization progress to a CSV file.
+class FileOutputCallback(Callback):
+    """Callback for saving optimization progress to a specified file type.
 
-    This callback saves prompts and scores at each step to a CSV file.
+    This callback saves information about each step to a file.
 
     Attributes:
-        dir (str): Directory the CSV file is saved to.
+        dir (str): Directory the file is saved to.
         step (int): The current step number.
+        file_type (str): The type of file to save the output to.
     """
 
-    def __init__(self, dir):
-        """Initialize the CSVCallback.
+    def __init__(self, dir, file_type: Literal["parquet", "csv"] = "parquet"):
+        """Initialize the FileOutputCallback.
 
         Args:
         dir (str): Directory the CSV file is saved to.
+        file_type (str): The type of file to save the output to.
         """
         if not os.path.exists(dir):
             os.makedirs(dir)
 
-        self.dir = dir
+        self.file_type = file_type
+
+        if file_type == "parquet":
+            self.path = dir + "/step_results.parquet"
+        elif file_type == "csv":
+            self.path = dir + "/step_results.csv"
+        else:
+            raise ValueError(f"File type {file_type} not supported.")
+
         self.step = 0
-        self.input_tokens = 0
-        self.output_tokens = 0
-        self.start_time = time.time()
-        self.step_time = time.time()
 
     def on_step_end(self, optimizer):
         """Save prompts and scores to csv.
@@ -178,46 +149,24 @@ class CSVCallback(Callback):
         df = pd.DataFrame(
             {
                 "step": [self.step] * len(optimizer.prompts),
-                "input_tokens": [optimizer.meta_llm.input_token_count - self.input_tokens] * len(optimizer.prompts),
-                "output_tokens": [optimizer.meta_llm.output_token_count - self.output_tokens] * len(optimizer.prompts),
-                "time_elapsed": [time.time() - self.step_time] * len(optimizer.prompts),
+                "input_tokens": [optimizer.meta_llm.input_token_count] * len(optimizer.prompts),
+                "output_tokens": [optimizer.meta_llm.output_token_count] * len(optimizer.prompts),
+                "time": [datetime.now().total_seconds()] * len(optimizer.prompts),
                 "score": optimizer.scores,
                 "prompt": optimizer.prompts,
             }
         )
-        self.step_time = time.time()
-        self.input_tokens = optimizer.meta_llm.input_token_count
-        self.output_tokens = optimizer.meta_llm.output_token_count
 
-        if not os.path.exists(self.dir + "step_results.csv"):
-            df.to_csv(self.dir + "step_results.csv", index=False)
-        else:
-            df.to_csv(self.dir + "step_results.csv", mode="a", header=False, index=False)
-
-        return True
-
-    def on_train_end(self, optimizer):
-        """Called at the end of training.
-
-        Args:
-        optimizer: The optimizer object that called the callback.
-        """
-        df = pd.DataFrame(
-            dict(
-                steps=self.step,
-                input_tokens=optimizer.meta_llm.input_token_count,
-                output_tokens=optimizer.meta_llm.output_token_count,
-                time_elapsed=time.time() - self.start_time,
-                score=np.array(optimizer.scores).mean(),
-                best_prompts=str(optimizer.prompts),
-            ),
-            index=[0],
-        )
-
-        if not os.path.exists(self.dir + "train_results.csv"):
-            df.to_csv(self.dir + "train_results.csv", index=False)
-        else:
-            df.to_csv(self.dir + "train_results.csv", mode="a", header=False, index=False)
+        if self.file_type == "parquet":
+            if self.step == 1:
+                df.to_parquet(self.path, index=False)
+            else:
+                df.to_parquet(self.path, mode="a", index=False)
+        elif self.file_type == "csv":
+            if self.step == 1:
+                df.to_csv(self.path, index=False)
+            else:
+                df.to_csv(self.path, mode="a", header=False, index=False)
 
         return True
 

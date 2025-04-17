@@ -83,9 +83,9 @@ class BasePredictor(ABC):
         self.llm = llm
 
     def predict(
-        self, prompts: Union[str, List[str]], xs: np.ndarray, return_seq: bool = False
-    ) -> Union[np.ndarray, Tuple[np.ndarray, List[str]]]:
-        """Make predictions based on prompts and input data.
+        self, prompts: List[str], xs: np.ndarray, system_prompts: List[str] = None, return_seq: bool = False
+    ) -> np.ndarray:
+        """Abstract method to make predictions based on prompts and input data.
 
         Args:
             prompts: Prompt or list of prompts to use for prediction.
@@ -98,11 +98,24 @@ class BasePredictor(ABC):
         if isinstance(prompts, str):
             prompts = [prompts]
 
-        outputs = self.llm.get_response([prompt + "\n" + x for prompt in prompts for x in xs])
-        preds = self._extract_preds(outputs, (len(prompts), len(xs)))
+        outputs = self.llm.get_response(
+            [prompt + "\n" + x for prompt in prompts for x in xs], system_prompts=system_prompts
+        )
+        preds = self._extract_preds(outputs)
+
+        shape = (len(prompts), len(xs))
+        outputs = np.array(outputs).reshape(shape)
+        preds = preds.reshape(shape)
+        xs = np.array(xs)
 
         if return_seq:
-            return preds, [i + "\n" + o for i, o in zip(xs, outputs)]
+            seqs = []
+            for output in outputs:
+                seqs.append([f"{x}\n{out}" for x, out in zip(xs, output)])
+
+            seqs = np.array(seqs)
+
+            return preds, seqs
 
         return preds
 
