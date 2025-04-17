@@ -2,11 +2,10 @@
 try:
     import torch
     import transformers
-except ImportError as e:
-    import logging
 
-    logger = logging.getLogger(__name__)
-    logger.warning(f"Could not import torch or transformers in local_llm.py: {e}")
+    imports_successful = True
+except ImportError:
+    imports_successful = False
 
 from promptolution.llms.base_llm import BaseLLM
 
@@ -35,6 +34,11 @@ class LocalLLM(BaseLLM):
             This method sets up a text generation pipeline with bfloat16 precision,
             automatic device mapping, and specific generation parameters.
         """
+        if not imports_successful:
+            raise ImportError(
+                "Could not import at least one of the required libraries: torch, transformers. "
+                "Please ensure they are installed in your environment."
+            )
         super().__init__()
 
         self.pipeline = transformers.pipeline(
@@ -78,8 +82,5 @@ class LocalLLM(BaseLLM):
 
     def __del__(self):
         """Cleanup method to delete the pipeline and free up GPU memory."""
-        try:
-            del self.pipeline
-            torch.cuda.empty_cache()
-        except Exception as e:
-            logger.warning(f"Error during LocalLLM cleanup: {e}")
+        del self.pipeline
+        torch.cuda.empty_cache()

@@ -12,8 +12,10 @@ try:
     import torch
     from transformers import AutoTokenizer
     from vllm import LLM, SamplingParams
-except ImportError as e:
-    logger.warning(f"Could not import vllm, torch or transformers in vllm.py: {e}")
+
+    imports_successful = True
+except ImportError:
+    imports_successful = False
 
 
 class VLLM(BaseLLM):
@@ -68,6 +70,11 @@ class VLLM(BaseLLM):
         Note:
             This method sets up a vLLM engine with specified parameters for efficient inference.
         """
+        if not imports_successful:
+            raise ImportError(
+                "Could not import at least one of the required libraries: torch, transformers, vllm. "
+                "Please ensure they are installed in your environment."
+            )
         super().__init__()
 
         self.dtype = dtype
