@@ -1,62 +1,116 @@
-"""Base class for prompt optimizers."""
+"""Base module for optimizers in the promptolution library."""
 
 import time
 from abc import ABC, abstractmethod
-from typing import Callable, List
+from dataclasses import asdict, dataclass, field
+from typing import Any, Callable, Dict, List, Optional, Union
+
+import numpy as np
 
 from promptolution.tasks.base_task import BaseTask
+
+
+@dataclass
+class OptimizerConfig:
+    """Configuration for optimizer settings.
+
+    This class defines the configuration parameters for optimizers.
+
+    Attributes:
+        optimizer_name (str): Name of the optimizer.
+        n_steps (int): Number of optimization steps.
+        population_size (int): Size of the population to maintain.
+        random_seed (int): Random seed for reproducibility.
+        log_path (Optional[str]): Path to save optimization logs.
+        n_eval_samples (int): Number of samples to use for evaluation.
+    """
+
+    optimizer_name: str = ""
+    n_steps: int = 10
+    population_size: int = 10
+    random_seed: int = 42
+    log_path: Optional[str] = None
+    n_eval_samples: int = 20
+    callbacks: List[str] = field(default_factory=list)
 
 
 class BaseOptimizer(ABC):
     """Abstract base class for prompt optimizers.
 
     This class defines the basic structure and interface for prompt optimization algorithms.
-    Concrete optimizer implementations should inherit from this class and implement
-    the `optimize` method.
+    It follows the Hugging Face-style interface pattern while maintaining compatibility
+    with the existing API.
 
     Attributes:
+        config (OptimizerConfig): Configuration for the optimizer.
         prompts (List[str]): List of current prompts being optimized.
         task (BaseTask): The task object used for evaluating prompts.
         callbacks (List[Callable]): List of callback functions to be called during optimization.
         predictor: The predictor used for prompt evaluation (if applicable).
-
-    Args:
-        initial_prompts (List[str]): Initial set of prompts to start optimization with.
-        task (BaseTask): Task object for prompt evaluation.
-        callbacks (List[Callable], optional): List of callback functions. Defaults to an empty list.
-        predictor (optional): Predictor for prompt evaluation. Defaults to None.
     """
+
+    config_class = OptimizerConfig
 
     def __init__(
         self,
-        initial_prompts: list[str],
-        task: BaseTask,
-        callbacks: list[Callable] = [],
+        initial_prompts: List[str] = None,
+        task: BaseTask = None,
+        callbacks: List[Callable] = None,
         predictor=None,
-        n_eval_samples=20,
+        config: Optional[Union[Dict[str, Any], OptimizerConfig]] = None,
+        **kwargs
     ):
-        """Initialize the BaseOptimizer."""
-        self.prompts = initial_prompts
+        """Initialize the optimizer with a configuration and/or direct parameters.
+
+        This constructor supports both the new config-based initialization and
+        the legacy parameter-based initialization.
+
+        Args:
+            initial_prompts: Initial set of prompts to start optimization with.
+            task: Task object for prompt evaluation.
+            callbacks: List of callback functions.
+            predictor: Predictor for prompt evaluation.
+            config: Configuration for the optimizer.
+            **kwargs: Additional parameters, passed to config if config is provided.
+        """
+        # Initialize config
+        if config is None:
+            config = {}
+
+        if isinstance(config, dict):
+            # Merge kwargs into config
+            for k, v in kwargs.items():
+                config[k] = v
+            self.config = self.config_class(**config)
+        else:
+            self.config = config
+            # Override config with kwargs
+            for k, v in kwargs.items():
+                if hasattr(self.config, k):
+                    setattr(self.config, k, v)
+
+        # Set up optimizer state
+        self.prompts = initial_prompts or []
         self.task = task
-        self.callbacks = callbacks
+        self.callbacks = callbacks or []
         self.predictor = predictor
-        self.n_eval_samples = n_eval_samples
+        self.n_eval_samples = kwargs.get("n_eval_samples", self.config.n_eval_samples)
+
+        # Set random seed
+        np.random.seed(self.config.random_seed)
 
     @abstractmethod
-    def optimize(self, n_steps: int) -> List[str]:
-        """Abstract method to perform the optimization process.
+    def optimize(self, n_steps: Optional[int] = None) -> List[str]:
+        """Perform the optimization process.
 
         This method should be implemented by concrete optimizer classes to define
         the specific optimization algorithm.
 
         Args:
-            n_steps (int): Number of optimization steps to perform.
+            n_steps: Number of optimization steps to perform. If None, uses the value from config.
 
         Returns:
-            List[str]: The optimized list of prompts after all steps.
-
-        Raises:
-            NotImplementedError: If not implemented by a concrete class.
+            The optimized list of prompts after all steps.
         """
         raise NotImplementedError
 

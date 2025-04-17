@@ -2,21 +2,77 @@
 
 import os
 import time
-from typing import Literal
+from abc import ABC, abstractmethod
+from dataclasses import asdict, dataclass, field
+from pathlib import Path
+from typing import Any, Callable, Dict, List, Literal, Optional, Union
 
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
+from promptolution.config import BaseConfig
 
-class Callback:
-    """Base class for optimization callbacks."""
+
+@dataclass
+class CallbackConfig:
+    """Configuration for callback settings.
+
+    This class defines the configuration parameters for callbacks.
+
+    Attributes:
+        callback_name (str): Name of the callback.
+        log_path (Optional[str]): Path to save logs.
+        monitoring_interval (int): Interval for monitoring metrics.
+    """
+
+    callback_name: str = ""
+    log_path: Optional[str] = None
+    monitoring_interval: int = 1
+
+
+class Callback(ABC):
+    """Base class for optimization callbacks.
+
+    Callbacks can be used to monitor the optimization process, save checkpoints,
+    log metrics, or implement early stopping criteria.
+
+    Attributes:
+        config (CallbackConfig): Configuration for the callback.
+    """
+
+    config_class = CallbackConfig
+
+    def __init__(self, config: Optional[Union[Dict[str, Any], CallbackConfig]] = None, **kwargs):
+        """Initialize the callback with a configuration.
+
+        Args:
+            config: Configuration for the callback.
+            **kwargs: Additional keyword arguments.
+        """
+        # Initialize config (if supported, otherwise silently ignore)
+        if hasattr(self, "config_class"):
+            # Initialize config
+            if config is None:
+                config = {}
+
+            if isinstance(config, dict):
+                # Merge kwargs into config
+                for k, v in kwargs.items():
+                    config[k] = v
+                self.config = self.config_class(**config)
+            else:
+                self.config = config
+                # Override config with kwargs
+                for k, v in kwargs.items():
+                    if hasattr(self.config, k):
+                        setattr(self.config, k, v)
 
     def on_step_end(self, optimizer):
         """Called at the end of each optimization step.
 
         Args:
-        optimizer: The optimizer object that called the callback.
+            optimizer: The optimizer object that called the callback.
 
         Returns:
             Bool: True if the optimization should continue, False if it should stop.
@@ -27,7 +83,7 @@ class Callback:
         """Called at the end of each optimization epoch.
 
         Args:
-        optimizer: The optimizer object that called the callback.
+            optimizer: The optimizer object that called the callback.
 
         Returns:
             Bool: True if the optimization should continue, False if it should stop.
@@ -38,7 +94,7 @@ class Callback:
         """Called at the end of the entire optimization process.
 
         Args:
-        optimizer: The optimizer object that called the callback.
+            optimizer: The optimizer object that called the callback.
 
         Returns:
             Bool: True if the optimization should continue, False if it should stop.

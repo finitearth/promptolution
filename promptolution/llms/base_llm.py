@@ -2,25 +2,86 @@
 
 import logging
 from abc import ABC, abstractmethod
-from typing import List
+from dataclasses import asdict, dataclass, field
+from typing import Any, Dict, List, Optional, Union
 
 import numpy as np
 
+from promptolution.config import BaseConfig
+
 logger = logging.getLogger(__name__)
+
+
+@dataclass
+class LLMModelConfig:
+    """Configuration class for language models.
+
+    This class defines the configuration parameters for language models.
+
+    Attributes:
+        model_name_or_path (str): The name or path of the model.
+        api_base (Optional[str]): The base URL for API requests.
+        api_token (Optional[str]): The API token for authentication.
+        model_kwargs (Dict[str, Any]): Additional keyword arguments for model initialization.
+        max_tokens (Optional[int]): Maximum number of tokens to generate.
+        temperature (float): The sampling temperature.
+        top_p (float): The nucleus sampling probability.
+        batch_size (Optional[int]): Batch size for processing requests.
+    """
+
+    model_name_or_path: str = ""
+    api_base: Optional[str] = None
+    api_token: Optional[str] = None
+    model_kwargs: Dict[str, Any] = field(default_factory=dict)
+    max_tokens: Optional[int] = None
+    temperature: float = 0.7
+    top_p: float = 0.9
+    batch_size: Optional[int] = None
 
 
 class BaseLLM(ABC):
     """Abstract base class for Language Models in the promptolution library.
 
     This class defines the interface that all concrete LLM implementations should follow.
+    It's designed to track which configuration parameters are actually used.
 
-    Methods:
-        get_response: An abstract method that should be implemented by subclasses
-                      to generate responses for given prompts.
+    Attributes:
+        config (LLMModelConfig): Configuration for the language model.
+        input_token_count (int): Count of input tokens processed.
+        output_token_count (int): Count of output tokens generated.
     """
 
+    config_class = LLMModelConfig
+
     def __init__(self, *args, **kwargs):
-        """Initialize the LLM."""
+        """Initialize the LLM with a configuration or direct parameters.
+
+        This constructor supports both config-based and direct parameter initialization
+        for backward compatibility.
+
+        Args:
+            *args: Positional arguments (for backward compatibility).
+            **kwargs: Keyword arguments either for direct parameters or config fields.
+        """
+        # Get configuration, either directly or from kwargs
+        config = kwargs.pop("config", None)
+
+        # Initialize config
+        if config is None:
+            # Check if first positional arg is a config
+            if args and isinstance(args[0], self.config_class):
+                self.config = args[0]
+            else:
+                # Create config from kwargs
+                self.config = self.config_class(**kwargs)
+        elif isinstance(config, dict):
+            # Create config from dict
+            self.config = self.config_class(**config)
+        else:
+            # Use provided config object
+            self.config = config
+
+        # Initialize token counters
         self.input_token_count = 0
         self.output_token_count = 0
 
@@ -54,7 +115,7 @@ class BaseLLM(ABC):
         self.input_token_count += input_tokens
         self.output_token_count += output_tokens
 
-    def get_response(self, prompts: str) -> str:
+    def get_response(self, prompts: Union[str, List[str]]) -> List[str]:
         """Generate responses for the given prompts.
 
         This method calls the _get_response method to generate responses
@@ -62,8 +123,8 @@ class BaseLLM(ABC):
         input and output tokens.
 
         Args:
-            prompts (str or List[str]): Input prompt(s). If a single string is provided,
-                                        it's converted to a list containing that string.
+            prompts: Input prompt(s). If a single string is provided,
+                    it's converted to a list containing that string.
 
         Returns:
             List[str]: A list of generated responses, one for each input prompt.
@@ -83,7 +144,7 @@ class BaseLLM(ABC):
         the LLM generates responses.
 
         Args:
-            prompts (List[str]): A list of input prompts.
+            prompts: A list of input prompts.
 
         Returns:
             List[str]: A list of generated responses corresponding to the input prompts.
