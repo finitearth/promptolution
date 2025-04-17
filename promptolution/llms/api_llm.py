@@ -71,13 +71,13 @@ class APILLM(BaseLLM):
 
         self.semaphore = asyncio.Semaphore(max_concurrent_calls)
 
-    def _get_response(self, prompts: List[str], system_prompts: List[str] = None) -> List[str]:
+    def _get_response(self, prompts: List[str], system_prompts: List[str]) -> List[str]:
         # Setup for async execution in sync context
         loop = asyncio.get_event_loop()
         responses = loop.run_until_complete(self._get_response_async(prompts, system_prompts))
         return responses
 
-    async def _get_response_async(self, prompts: List[str], system_prompts: List[str] = None) -> List[str]:
+    async def _get_response_async(self, prompts: List[str], system_prompts: List[str]) -> List[str]:
         tasks = [
             _invoke_model(prompt, system_prompt, self.max_tokens, self.model_id, self.client, self.semaphore)
             for prompt, system_prompt in zip(prompts, system_prompts)
