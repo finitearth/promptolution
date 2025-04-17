@@ -1,35 +1,11 @@
-"""Base module for tasks in the promptolution library."""
+"""Base module for tasks."""
 
 from abc import ABC, abstractmethod
-from dataclasses import asdict, dataclass, field
-from typing import Any, Dict, List, Optional, Union
+from typing import List
 
 import numpy as np
 
-
-@dataclass
-class TaskConfig:
-    """Configuration for task settings.
-
-    This class defines the configuration parameters for tasks.
-
-    Attributes:
-        task_name (str): Name of the task.
-        dataset_path (Optional[str]): Path to the dataset.
-        dataset_description (Optional[str]): Description of the dataset.
-        classes (Optional[List[str]]): List of class labels for classification tasks.
-        initial_prompts (Optional[List[str]]): List of initial prompts for the task.
-        evaluation_metric (str): Metric used for evaluating prompt performance.
-        num_eval_samples (int): Number of samples to use for evaluation.
-    """
-
-    task_name: str = ""
-    dataset_path: Optional[str] = None
-    dataset_description: Optional[str] = None
-    classes: List[str] = field(default_factory=list)
-    initial_prompts: List[str] = field(default_factory=list)
-    evaluation_metric: str = "accuracy"
-    num_eval_samples: int = 20
+from promptolution.config import ExperimentConfig
 
 
 class BaseTask(ABC):
@@ -37,66 +13,30 @@ class BaseTask(ABC):
 
     This class defines the interface that all concrete task implementations should follow.
 
-    Attributes:
-        config (TaskConfig): Configuration for the task.
-        xs (np.ndarray): Input examples for the task.
-        ys (np.ndarray): Labels or target outputs for the task.
-        initial_population (List[str]): Initial prompt population for optimization.
+    Methods:
+        evaluate: An abstract method that should be implemented by subclasses
+                  to evaluate prompts using a given predictor.
     """
 
-    config_class = TaskConfig
-
-    def __init__(self, *args, **kwargs):
-        """Initialize the task with a configuration or direct parameters.
-
-        This constructor supports both the new config-based initialization and
-        the legacy parameter-based initialization.
-
-        Args:
-            *args: Positional arguments (for backward compatibility).
-            **kwargs: Keyword arguments either for config fields or direct parameters.
-        """
-        # Get configuration if provided
-        config = kwargs.pop("config", None)
-
-        # Initialize config
-        if config is None:
-            # Check if first arg is a config
-            if args and isinstance(args[0], self.config_class):
-                self.config = args[0]
-            else:
-                # Create config from kwargs
-                self.config = self.config_class(**kwargs)
-        elif isinstance(config, dict):
-            # Create config from dict
-            self.config = self.config_class(**config)
-        else:
-            # Use provided config object
-            self.config = config
-
-        # Initialize task properties
-        self.xs = np.array([])
-        self.ys = np.array([])
-        self.initial_population = self.config.initial_prompts or []
-
-    def _load_data(self):
-        """Load task data from the dataset path.
-
-        This method should be implemented by subclasses to load task-specific data.
-        """
-        pass
+    def __init__(self, config: ExperimentConfig = None):
+        """Initialize the BaseTask."""
+        if config is not None:
+            config.apply_to(self)
 
     @abstractmethod
     def evaluate(self, prompts: List[str], predictor, system_promtps: List[str] = None) -> np.ndarray:
         """Abstract method to evaluate prompts using a given predictor.
 
         Args:
-            prompts: List of prompts to evaluate.
+            prompts (List[str]): List of prompts to evaluate.
             predictor: The predictor to use for evaluation.
             system_promtps (List[str]): List of system prompts to evaluate.
 
         Returns:
             np.ndarray: Array of evaluation scores for each prompt.
+
+        Raises:
+            NotImplementedError: If not implemented by a subclass.
         """
         raise NotImplementedError
 

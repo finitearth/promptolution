@@ -12,20 +12,18 @@ pandas = "^2.2.2"
 tqdm = "^4.66.5"
 scikit-learn = "^1.5.2"
 
-[tool.poetry.group.requests.dependencies]
+[tool.poetry.group.api.dependencies]
 openai = "^1.0.0"
 requests = "^2.31.0"
 
 [tool.poetry.group.vllm.dependencies]
-vllm = "^0.7.3"
-pytest = "^8.3.5"
+vllm = "^0.8.2"
 
 [tool.poetry.group.transformers.dependencies]
 transformers = "^4.48.0"
 
 [tool.poetry.group.dev.dependencies]
-matplotlib = "^3.9.2"
-seaborn = "^0.13.2"
+pytest = "^8.3.5"
 black = "^24.4.2"
 flake8 = "^7.1.0"
 isort = "^5.13.2"

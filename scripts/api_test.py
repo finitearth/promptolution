@@ -46,7 +46,7 @@ initial_prompts = [
     "Conduct a thorough analysis of the provided news article and classify it as belonging to one of these four categories: World, Sports, Business, or Tech. Your answer should be presented within <final_answer> </final_answer> markers.",
 ]
 
-llm = APILLM(api_url=args.base_url, model_id=args.model, token=args.token)
+llm = APILLM(api_url=args.base_url, llm=args.model, token=args.token)
 downstream_llm = llm
 meta_llm = llm
 

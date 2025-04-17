@@ -1,5 +1,6 @@
 """Module for prompt optimizers."""
 
+from promptolution.config import ExperimentConfig
 from promptolution.templates import (
     EVOPROMPT_DE_TEMPLATE,
     EVOPROMPT_DE_TEMPLATE_TD,
@@ -16,56 +17,50 @@ from .opro import Opro
 
 
 def get_optimizer(
-    config=None, optimizer: str = None, meta_prompt: str = None, task_description: str = None, *args, **kwargs
+    predictor, meta_llm, task, optimizer=None, meta_prompt=None, task_description=None, config: ExperimentConfig = None
 ):
-    """Factory function to create and return an optimizer instance based on the provided configuration.
-
-    This function selects and instantiates the appropriate optimizer class based on the
-    'optimizer' field in the config object. Alternatively you can pass the relevant parameters.
-    It supports three types of optimizers: 'dummy', 'evopromptde', 'evopromptga', and 'opro'.
+    """Creates and returns an optimizer instance based on provided parameters.
 
     Args:
-        config (Config): Configuration object containing the optimizer type.
-        optimizer (str): Identifier for the optimizer to use. Special cases:
-                         - "dummy" for DummyOptimizer
-                         - Any other string for the specified optimizer class
-        include_task_desc (bool): Flag to include task description in the prompt.
-        meta_prompt (str): Meta prompt for the optimizer.
-        task_description (str): Task description for the optimizer.
-        *args: Variable length argument list passed to the optimizer constructor.
-        **kwargs: Arbitrary keyword arguments passed to the optimizer constructor
+        optimizer: String identifying which optimizer to use
+        meta_prompt: Meta prompt text for the optimizer
+        task_description: Description of the task for the optimizer
+        config: Configuration object with default parameters
 
     Returns:
-        An instance of the specified optimizer class.
+        An optimizer instance
 
     Raises:
-        ValueError: If an unknown optimizer type is specified in the config.
+        ValueError: If an unknown optimizer type is specified
     """
     if optimizer is None:
         optimizer = config.optimizer
-
     if task_description is None:
         task_description = config.task_description
-
-    if config is not None and meta_prompt is None:
+    if meta_prompt is None and hasattr(config, "meta_prompt"):
         meta_prompt = config.meta_prompt
 
     if optimizer == "dummy":
-        return DummyOptimizer(*args, **kwargs)
+        return DummyOptimizer(predictor=predictor, config=config)
+
     if config.optimizer == "evopromptde":
-        if task_description is not None:
-            return EvoPromptDE(
-                prompt_template=EVOPROMPT_DE_TEMPLATE_TD.replace("<task_desc>", task_description), *args, **kwargs
-            )
-        return EvoPromptDE(prompt_template=EVOPROMPT_DE_TEMPLATE, *args, **kwargs)
+        template = (
+            EVOPROMPT_DE_TEMPLATE_TD.replace("<task_desc>", task_description)
+            if task_description
+            else EVOPROMPT_DE_TEMPLATE
+        )
+        return EvoPromptDE(predictor=predictor, meta_llm=meta_llm, task=task, prompt_template=template, config=config)
+
     if config.optimizer == "evopromptga":
-        if task_description is not None:
-            return EvoPromptGA(
-                prompt_template=EVOPROMPT_GA_TEMPLATE_TD.replace("<task_desc>", task_description), *args, **kwargs
-            )
-        return EvoPromptGA(prompt_template=EVOPROMPT_GA_TEMPLATE, *args, **kwargs)
+        template = (
+            EVOPROMPT_GA_TEMPLATE_TD.replace("<task_desc>", task_description)
+            if task_description
+            else EVOPROMPT_GA_TEMPLATE
+        )
+        return EvoPromptGA(predictor=predictor, meta_llm=meta_llm, task=task, prompt_template=template, config=config)
+
     if config.optimizer == "opro":
-        if task_description is not None:
-            return Opro(prompt_template=OPRO_TEMPLATE_TD.replace("<task_desc>", task_description), *args, **kwargs)
-        return Opro(prompt_template=OPRO_TEMPLATE, *args, **kwargs)
+        template = OPRO_TEMPLATE_TD.replace("<task_desc>", task_description) if task_description else OPRO_TEMPLATE
+        return Opro(predictor=predictor, meta_llm=meta_llm, task=task, prompt_template=template, config=config)
+
     raise ValueError(f"Unknown optimizer: {config.optimizer}")

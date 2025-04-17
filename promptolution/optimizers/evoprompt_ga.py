@@ -5,6 +5,7 @@ from typing import List
 
 import numpy as np
 
+from promptolution.config import ExperimentConfig
 from promptolution.llms.base_llm import BaseLLM
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 
@@ -30,7 +31,6 @@ class EvoPromptGA(BaseOptimizer):
         prompt_template (str): Template for meta-prompts.
         meta_llm: Language model for child prompt generation.
         selection_mode (str, optional): Parent selection method. Defaults to "wheel".
-        **args: Additional arguments passed to the BaseOptimizer.
 
     Raises:
         AssertionError: If an invalid selection mode is provided.
@@ -38,11 +38,14 @@ class EvoPromptGA(BaseOptimizer):
 
     def __init__(
         self,
+        predictor,
         prompt_template: str = None,
         meta_llm: BaseLLM = None,
         selection_mode: str = "wheel",
         n_eval_samples: int = 20,
-        **args,
+        task=None,
+        callbacks=None,
+        config: ExperimentConfig = None,
     ):
         """Initialize the EvoPromptGA optimizer."""
         self.prompt_template = prompt_template
@@ -51,21 +54,9 @@ class EvoPromptGA(BaseOptimizer):
         self.meta_llm = meta_llm
         assert selection_mode in ["random", "wheel", "tour"], "Invalid selection mode."
         self.selection_mode = selection_mode
-        super().__init__(**args)
+        super().__init__(predictor=predictor, task=task, callbacks=callbacks, config=config)
 
-    def optimize(self, n_steps: int) -> List[str]:
-        """Perform the optimization process for a specified number of steps.
-
-        This method iteratively improves the prompts using genetic algorithm techniques.
-        It evaluates prompts, performs crossover to generate new prompts, and selects
-        the best prompts for the next generation.
-
-        Args:
-            n_steps (int): Number of optimization steps to perform.
-
-        Returns:
-            List[str]: The optimized list of prompts after all steps.
-        """
+    def _pre_optimization_loop(self):
         # get scores from task
         if self.verbosity > 1:
             self.scores, seq = self.task.evaluate(
@@ -82,39 +73,34 @@ class EvoPromptGA(BaseOptimizer):
         self.prompts = [prompt for _, prompt in sorted(zip(self.scores, self.prompts), reverse=True)]
         self.scores = sorted(self.scores, reverse=True)
 
-        for _ in range(n_steps):
-            new_prompts = self._crossover(self.prompts, self.scores)
-            prompts = self.prompts + new_prompts
+    def _step(self) -> List[str]:
+        new_prompts = self._crossover(self.prompts, self.scores)
+        prompts = self.prompts + new_prompts
 
-            if self.verbosity > 1:
-                logger.warning(f"Prompts: {prompts}")
+        if self.verbosity > 1:
+            logger.warning(f"Prompts: {prompts}")
 
-            # evaluate new prompts
-            if self.verbosity > 1:
-                new_scores, seq = self.task.evaluate(
-                    prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples, return_seq=True
-                )
-                new_scores = new_scores.tolist()
-                logger.warning(f"Scores: {new_scores}")
-                logger.warning(f"Sequences: {seq}")
+        # evaluate new prompts
+        if self.verbosity > 1:
+            new_scores, seq = self.task.evaluate(
+                prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples, return_seq=True
+            )
+            new_scores = new_scores.tolist()
+            logger.warning(f"Scores: {new_scores}")
+            logger.warning(f"Sequences: {seq}")
 
-            else:
-                new_scores = self.task.evaluate(
-                    new_prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples
-                ).tolist()
+        else:
+            new_scores = self.task.evaluate(
+                new_prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples
+            ).tolist()
 
-            scores = self.scores + new_scores
+        scores = self.scores + new_scores
 
-            # sort scores and prompts
-            self.prompts = [prompt for _, prompt in sorted(zip(scores, prompts), reverse=True)][: len(self.prompts)]
-            self.scores = sorted(scores, reverse=True)[: len(self.prompts)]
+        # sort scores and prompts
+        self.prompts = [prompt for _, prompt in sorted(zip(scores, prompts), reverse=True)][: len(self.prompts)]
+        self.scores = sorted(scores, reverse=True)[: len(self.prompts)]
 
-            continue_optimization = self._on_step_end()
-            if not continue_optimization:
-                break
-
-        self._on_train_end()
-        return self.prompts
+        return self.promtps
 
     def _crossover(self, prompts, scores) -> str:
         """Perform crossover operation to generate new child prompts.

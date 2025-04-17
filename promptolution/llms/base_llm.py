@@ -7,36 +7,10 @@ from typing import Any, Dict, List, Optional, Union
 
 import numpy as np
 
+from promptolution.config import ExperimentConfig
 from promptolution.templates import DEFAULT_SYS_PROMPT
 
 logger = logging.getLogger(__name__)
-
-
-@dataclass
-class LLMModelConfig:
-    """Configuration class for language models.
-
-    This class defines the configuration parameters for language models.
-
-    Attributes:
-        model_name_or_path (str): The name or path of the model.
-        api_base (Optional[str]): The base URL for API requests.
-        api_token (Optional[str]): The API token for authentication.
-        model_kwargs (Dict[str, Any]): Additional keyword arguments for model initialization.
-        max_tokens (Optional[int]): Maximum number of tokens to generate.
-        temperature (float): The sampling temperature.
-        top_p (float): The nucleus sampling probability.
-        batch_size (Optional[int]): Batch size for processing requests.
-    """
-
-    model_name_or_path: str = ""
-    api_base: Optional[str] = None
-    api_token: Optional[str] = None
-    model_kwargs: Dict[str, Any] = field(default_factory=dict)
-    max_tokens: Optional[int] = None
-    temperature: float = 0.7
-    top_p: float = 0.9
-    batch_size: Optional[int] = None
 
 
 class BaseLLM(ABC):
@@ -51,36 +25,19 @@ class BaseLLM(ABC):
         output_token_count (int): Count of output tokens generated.
     """
 
-    config_class = LLMModelConfig
-
-    def __init__(self, *args, **kwargs):
+    def __init__(self, config: ExperimentConfig = None):
         """Initialize the LLM with a configuration or direct parameters.
 
         This constructor supports both config-based and direct parameter initialization
         for backward compatibility.
 
         Args:
+            config (Optional[Union[Dict[str, Any], LLMModelConfig]]): Configuration for the LLM.
             *args: Positional arguments (for backward compatibility).
             **kwargs: Keyword arguments either for direct parameters or config fields.
         """
-        # Get configuration, either directly or from kwargs
-        config = kwargs.pop("config", None)
-
-        # Initialize config
-        if config is None:
-            # Check if first positional arg is a config
-            if args and isinstance(args[0], self.config_class):
-                self.config = args[0]
-            else:
-                # Create config from kwargs
-                self.config = self.config_class(**kwargs)
-        elif isinstance(config, dict):
-            # Create config from dict
-            self.config = self.config_class(**config)
-        else:
-            # Use provided config object
-            self.config = config
-
+        if config is not None:
+            config.apply_to(self)
         # Initialize token counters
         self.input_token_count = 0
         self.output_token_count = 0

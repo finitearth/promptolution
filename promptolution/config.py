@@ -1,10 +1,6 @@
 """Configuration class for the promptolution library."""
-import warnings
 from logging import Logger
-from pathlib import Path
-from typing import Any, Dict, List, Literal, Optional, Set, Union
-
-import pandas as pd
+from typing import Set
 
 logger = Logger(__name__)
 
@@ -18,58 +14,9 @@ class ExperimentConfig:
 
     def __init__(self, **kwargs):
         """Initialize the configuration with the provided keyword arguments."""
-        # Track which attributes are actually used
         self._used_attributes: Set[str] = set()
-
-        # Task settings
-        self.task_name: Optional[str] = None
-        self.dataset: Optional[Union[Path, pd.DataFrame]] = None
-        self.dataset_description: Optional[str] = None
-        self.init_prompts: Optional[List[str]] = None
-        self.task_description: Optional[str] = None
-        self.n_eval_samples: int = 20
-        self.n_ds_samples_to_meta: int = 2
-        self.prepend_exemplars: bool = False
-        self.n_exemplars: int = 5
-        self.exemplar_selector: Optional[str] = None
-        self.classes: Optional[List[str]] = None
-
-        # LLM settings
-        self.meta_llm: Optional[str] = None
-        self.downstream_llm: Optional[str] = None
-        self.evaluation_llm: Optional[str] = None
-        self.meta_bs: Optional[int] = None
-        self.downstream_bs: Optional[int] = None
-        self.api_token: Optional[str] = None
-        self.meta_prompt: Optional[str] = None
-        self.model_storage_path: Optional[Path] = Path("../models/")
-
-        # Optimizer settings
-        self.optimizer: Optional[str] = None
-        self.n_steps: Optional[int] = None
-        self.init_pop_size: Optional[int] = None
-        self.donor_random: bool = False
-        self.selection_mode: Literal["random", "wheel", "tour"] = "random"
-
-        # Predictor settings
-        self.predictor: Literal[
-            "MarkerBasedClassificator", "FirstOccurenceClassificator"
-        ] = "FirstOccurenceClassificator"
-
-        # Set default values from class variables
-        for key, value in self.__class__.__dict__.items():
-            if not key.startswith("_") and not callable(value):
-                setattr(self, key, value)
-
-        # Set attributes from kwargs
         for key, value in kwargs.items():
-            if hasattr(self, key):
-                setattr(self, key, value)
-            else:
-                warnings.warn(f"Unexpected configuration parameter '{key}'")
-
-        # Validate after initialization
-        self._validate()
+            setattr(self, key, value)
 
     def __getattribute__(self, name):
         """Override attribute access to track used attributes."""
@@ -81,16 +28,28 @@ class ExperimentConfig:
 
         return value
 
-    def _validate(self):
-        """Validate the configuration settings."""
-        # Validate LLM settings
-        if self.meta_llm is not None:
-            if "local" in self.meta_llm and self.meta_bs is None:
-                raise ValueError("'meta_bs' must be specified for local meta_llm")
-            if self.downstream_llm and "local" in self.downstream_llm and self.downstream_bs is None:
-                raise ValueError("'downstream_bs' must be specified for local downstream_llm")
-        if self.api_token is None:
-            warnings.warn("No API token provided. Using default tokens from token files.")
+    def apply_to(self, obj):
+        """Apply matching attributes from this config to an existing object.
+
+        Examines each attribute of the target object and updates it if a matching
+        attribute exists in the config.
+
+        Args:
+            obj: The object to update with config values
+
+        Returns:
+            The updated object
+        """
+        for attr_name in dir(obj):
+            if attr_name.startswith("_") or not isinstance(
+                getattr(obj, attr_name), (str, int, float, list, type(None))
+            ):
+                continue
+
+            if hasattr(self, attr_name) and getattr(self, attr_name) is not None:
+                setattr(obj, attr_name, getattr(self, attr_name))
+
+        return obj
 
     def validate(self):
         """Check if any attributes were not used and run validation.
@@ -101,13 +60,3 @@ class ExperimentConfig:
         unused_attributes = all_attributes - self._used_attributes
         if unused_attributes:
             logger.warning(f"Unused configuration attributes: {unused_attributes}")
-
-        self._validate()
-
-    def to_dict(self) -> Dict[str, Any]:
-        """Convert the configuration to a dictionary.
-
-        Returns:
-            Dict: Configuration as a dictionary.
-        """
-        return {k: v for k, v in self.__dict__.items() if not k.startswith("_")}

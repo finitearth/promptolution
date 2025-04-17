@@ -23,12 +23,13 @@ class LocalLLM(BaseLLM):
         get_response: Generate responses for a list of prompts.
     """
 
-    def __init__(self, model_id: str, batch_size=8):
+    def __init__(self, model_id: str, batch_size=8, config=None):
         """Initialize the LocalLLM with a specific model.
 
         Args:
             model_id (str): The identifier of the model to use (e.g., "gpt2", "facebook/opt-1.3b").
             batch_size (int, optional): The batch size for text generation. Defaults to 8.
+            config (ExperimentConfig, optional): ExperimentConfig overwriting defaults.
 
         Note:
             This method sets up a text generation pipeline with bfloat16 precision,
@@ -53,6 +54,8 @@ class LocalLLM(BaseLLM):
         )
         self.pipeline.tokenizer.pad_token_id = self.pipeline.tokenizer.eos_token_id
         self.pipeline.tokenizer.padding_side = "left"
+
+        super().__init__(config)
 
     def _get_response(self, prompts: list[str], system_prompts: list[str]) -> list[str]:
         """Generate responses for a list of prompts using the local language model.

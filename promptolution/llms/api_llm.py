@@ -13,6 +13,7 @@ except ImportError:
 from logging import Logger
 from typing import Any, List
 
+from promptolution.config import ExperimentConfig
 from promptolution.llms.base_llm import BaseLLM
 
 logger = Logger(__name__)
@@ -44,17 +45,23 @@ class APILLM(BaseLLM):
     """
 
     def __init__(
-        self, api_url: str, model_id: str, token: str = None, max_concurrent_calls=50, max_tokens=512, **kwargs: Any
+        self,
+        api_url: str = None,
+        llm: str = None,
+        token: str = None,
+        max_concurrent_calls=50,
+        max_tokens=512,
+        config: ExperimentConfig = None,
     ):
         """Initialize the APILLM with a specific model and API configuration.
 
         Args:
             api_url (str): The base URL for the API endpoint.
-            model_id (str): Identifier for the model to use.
+            llm (str): Identifier for the model to use.
             token (str, optional): API key for authentication. Defaults to None.
             max_concurrent_calls (int, optional): Maximum number of concurrent API calls. Defaults to 50.
             max_tokens (int, optional): Maximum number of tokens in model responses. Defaults to 512.
-            **kwargs (Any): Additional parameters to pass to the API client.
+            config (ExperimentConfig, optional): ExperimentConfig overwriting defaults.
 
         Raises:
             ImportError: If required libraries are not installed.
@@ -64,12 +71,16 @@ class APILLM(BaseLLM):
                 "Could not import at least one of the required libraries: openai, asyncio. "
                 "Please ensure they are installed in your environment."
             )
-        super().__init__()
-        self.model_id = model_id
-        self.client = AsyncOpenAI(base_url=api_url, api_key=token, **kwargs)
+
+        self.api_url = api_url
+        self.llm = llm
+        self.token = token
+        self.max_concurrent_calls = max_concurrent_calls
         self.max_tokens = max_tokens
 
-        self.semaphore = asyncio.Semaphore(max_concurrent_calls)
+        super().__init__(config=config)
+        self.client = AsyncOpenAI(base_url=self.api_url, api_key=self.token)
+        self.semaphore = asyncio.Semaphore(self.max_concurrent_calls)
 
     def _get_response(self, prompts: List[str], system_prompts: List[str]) -> List[str]:
         # Setup for async execution in sync context
@@ -79,7 +90,7 @@ class APILLM(BaseLLM):
 
     async def _get_response_async(self, prompts: List[str], system_prompts: List[str]) -> List[str]:
         tasks = [
-            _invoke_model(prompt, system_prompt, self.max_tokens, self.model_id, self.client, self.semaphore)
+            _invoke_model(prompt, system_prompt, self.max_tokens, self.llm, self.client, self.semaphore)
             for prompt, system_prompt in zip(prompts, system_prompts)
         ]
         responses = await asyncio.gather(*tasks)

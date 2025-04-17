@@ -1,7 +1,5 @@
 # Release Notes
 
-<<<<<<< HEAD
-=======
 ## Release v1.3.2
 ### What's changed
 #### Added features
@@ -26,7 +24,6 @@
 
 **Full Changelog**: [here](https://github.com/finitearth/promptolution/compare/v1.3.0...v1.3.1)
 
->>>>>>> 5d33d9788105d1d5010ece2a5fa420733dd235a4
 ## Release v1.3.0
 ### What's changed
 #### Added features

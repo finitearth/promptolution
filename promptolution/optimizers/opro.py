@@ -4,6 +4,7 @@ from typing import Dict, List, Optional
 
 import numpy as np
 
+from promptolution.config import ExperimentConfig
 from promptolution.llms.base_llm import BaseLLM
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 from promptolution.templates import OPRO_TEMPLATE
@@ -21,12 +22,15 @@ class Opro(BaseOptimizer):
 
     def __init__(
         self,
+        predictor,
         meta_llm: BaseLLM,
         prompt_template: Optional[str] = None,
         max_num_instructions: int = 20,
         num_instructions_per_step: int = 8,
         num_few_shots: int = 3,
-        **kwargs,
+        task=None,
+        callbacks=None,
+        config: ExperimentConfig = None,
     ) -> None:
         """Initialize the OPRO optimizer.
 
@@ -37,15 +41,18 @@ class Opro(BaseOptimizer):
             max_num_instructions: Maximum previous instructions to include in meta prompt
             num_instructions_per_step: Number of prompts to generate in each step
             num_few_shots: Number of few-shot examples to include (0 for none)
-            **kwargs: Additional arguments passed to the BaseOptimizer
+            task: Task object for prompt evaluation
+            callbacks: List of callback functions
+            predictor: Predictor for prompt evaluation
+            config: ExperimentConfig overwriting default parameters
         """
-        super().__init__(**kwargs)
         self.meta_llm = meta_llm
 
         self.meta_prompt_template = prompt_template if prompt_template else OPRO_TEMPLATE
         self.max_num_instructions = max_num_instructions
         self.num_instructions_per_step = num_instructions_per_step
         self.num_few_shots = num_few_shots
+        super().__init__(predictor=predictor, task=task, callbacks=callbacks, config=config)
 
     def _sample_examples(self) -> str:
         """Sample few-shot examples from the dataset.
@@ -89,61 +96,41 @@ class Opro(BaseOptimizer):
         self.prompts = [self.prompts[i] for i in keep_indices]
         self.scores = [self.scores[i] for i in keep_indices]
 
-    def optimize(self, n_steps: int) -> List[str]:
-        """Run the OPRO optimization process.
-
-        Args:
-            n_steps: Number of optimization steps to perform
-
-        Returns:
-            List of all prompts generated during optimization
-        """
+    def _pre_optimization_loop(self):
         self.scores = list(self.task.evaluate(self.prompts, self.predictor))
         self.meta_prompt = self.meta_prompt_template.replace("<instructions>", self._format_instructions()).replace(
             "<examples>", self._sample_examples()
         )
 
-        for _ in range(n_steps):
-            duplicate_prompts = 0
-            for _ in range(self.num_instructions_per_step):
-                generation_seed = np.random.randint(0, int(1e9))
-                self.meta_llm.set_generation_seed(generation_seed)
-
-                if self.verbosity > 1:
-                    print(f"Seed: {generation_seed}")
-                response = self.meta_llm.get_response([self.meta_prompt])[0]
-
-                prompt = response.split("<prompt>")[-1].split("</prompt>")[0].strip()
-
-                if prompt in self.prompts:
-                    duplicate_prompts += 1
-                    continue
-
-                score = self.task.evaluate(prompt, self.predictor)[0]
-
-                self._add_prompt_and_score(prompt, score)
-
-                if self.verbosity > 1:
-                    print(f"New Instruction: {prompt}\nScore: {score}\n")
-
-            # Update meta prompt
-            self.meta_prompt = self.meta_prompt_template.replace("<instructions>", self._format_instructions()).replace(
-                "<examples>", self._sample_examples()
-            )
+    def _step(self) -> List[str]:
+        duplicate_prompts = 0
+        for _ in range(self.num_instructions_per_step):
+            generation_seed = np.random.randint(0, int(1e9))
+            self.meta_llm.set_generation_seed(generation_seed)
 
             if self.verbosity > 1:
-                print(f"New meta prompt:\n{self.meta_prompt}\n")
+                print(f"Seed: {generation_seed}")
+            response = self.meta_llm.get_response([self.meta_prompt])[0]
 
-            continue_optimization = self._on_step_end()
+            prompt = response.split("<prompt>")[-1].split("</prompt>")[0].strip()
 
-            if not continue_optimization:
-                break
+            if prompt in self.prompts:
+                duplicate_prompts += 1
+                continue
 
-            # stop optimization if all generated prompts are duplicates (converged)
-            if duplicate_prompts == self.num_instructions_per_step:
-                if self.verbosity > 0:
-                    print("All generated prompts are duplicates. Stopping optimization.")
-                break
+            score = self.task.evaluate(prompt, self.predictor)[0]
 
-        self._on_train_end()
+            self._add_prompt_and_score(prompt, score)
+
+            if self.verbosity > 1:
+                print(f"New Instruction: {prompt}\nScore: {score}\n")
+
+        # Update meta prompt
+        self.meta_prompt = self.meta_prompt_template.replace("<instructions>", self._format_instructions()).replace(
+            "<examples>", self._sample_examples()
+        )
+
+        if self.verbosity > 1:
+            print(f"New meta prompt:\n{self.meta_prompt}\n")
+
         return self.prompts
