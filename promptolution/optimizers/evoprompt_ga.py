@@ -100,7 +100,7 @@ class EvoPromptGA(BaseOptimizer):
         self.prompts = [prompt for _, prompt in sorted(zip(scores, prompts), reverse=True)][: len(self.prompts)]
         self.scores = sorted(scores, reverse=True)[: len(self.prompts)]
 
-        return self.promtps
+        return self.prompts
 
     def _crossover(self, prompts, scores) -> str:
         """Perform crossover operation to generate new child prompts.
