@@ -4,9 +4,12 @@ from typing import List
 
 import numpy as np
 
+from promptolution.callbacks import BaseCallback
 from promptolution.config import ExperimentConfig
 from promptolution.llms.base_llm import BaseLLM
 from promptolution.optimizers.base_optimizer import BaseOptimizer
+from promptolution.predictors.base_predictor import BasePredictor
+from promptolution.tasks.base_task import BaseTask
 
 
 class EvoPromptDE(BaseOptimizer):
@@ -34,14 +37,14 @@ class EvoPromptDE(BaseOptimizer):
 
     def __init__(
         self,
-        predictor,
-        task,
+        predictor: BasePredictor,
+        task: BaseTask,
         initial_prompts: List[str],
         prompt_template: str,
         meta_llm: BaseLLM,
         donor_random: bool = False,
         n_eval_samples: int = 20,
-        callbacks=None,
+        callbacks: List[BaseCallback] = None,
         config: ExperimentConfig = None,
     ):
         """Initialize the EvoPromptDE optimizer."""

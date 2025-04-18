@@ -1,4 +1,4 @@
-"""Module for running language models locally using the Hugging Face Transformers library."""
+"""Module for running LLMs locally using the Hugging Face Transformers library."""
 try:
     import torch
     import transformers

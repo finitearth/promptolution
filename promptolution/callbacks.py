@@ -9,7 +9,7 @@ import pandas as pd
 from tqdm import tqdm
 
 
-class Callback(ABC):
+class BaseCallback(ABC):
     """Base class for optimization callbacks.
 
     Callbacks can be used to monitor the optimization process, save checkpoints,
@@ -60,7 +60,7 @@ class Callback(ABC):
         return True
 
 
-class LoggerCallback(Callback):
+class LoggerCallback(BaseCallback):
     """Callback for logging optimization progress.
 
     This callback logs information about each step, epoch, and the end of training.
@@ -107,7 +107,7 @@ class LoggerCallback(Callback):
         return True
 
 
-class FileOutputCallback(Callback):
+class FileOutputCallback(BaseCallback):
     """Callback for saving optimization progress to a specified file type.
 
     This callback saves information about each step to a file.
@@ -171,7 +171,7 @@ class FileOutputCallback(Callback):
         return True
 
 
-class BestPromptCallback(Callback):
+class BestPromptCallback(BaseCallback):
     """Callback for tracking the best prompt during optimization.
 
     This callback keeps track of the prompt with the highest score.
@@ -207,7 +207,7 @@ class BestPromptCallback(Callback):
         return self.best_prompt, self.best_score
 
 
-class ProgressBarCallback(Callback):
+class ProgressBarCallback(BaseCallback):
     """Callback for displaying a progress bar during optimization.
 
     This callback uses tqdm to display a progress bar that updates at each step.
@@ -245,7 +245,7 @@ class ProgressBarCallback(Callback):
         return True
 
 
-class TokenCountCallback(Callback):
+class TokenCountCallback(BaseCallback):
     """Callback for stopping optimization based on the total token count."""
 
     def __init__(

@@ -11,8 +11,6 @@ class BaseOptimizer(ABC):
     """Abstract base class for prompt optimizers.
 
     This class defines the basic structure and interface for prompt optimization algorithms.
-    It follows the Hugging Face-style interface pattern while maintaining compatibility
-    with the existing API.
 
     Attributes:
         config (OptimizerConfig): Configuration for the optimizer.
@@ -31,9 +29,6 @@ class BaseOptimizer(ABC):
         config: ExperimentConfig = None,
     ):
         """Initialize the optimizer with a configuration and/or direct parameters.
-
-        This constructor supports both the new config-based initialization and
-        the legacy parameter-based initialization.
 
         Args:
             initial_prompts: Initial set of prompts to start optimization with.

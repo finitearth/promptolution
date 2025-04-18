@@ -4,7 +4,7 @@ import pandas as pd
 from unittest.mock import MagicMock, patch
 
 from promptolution.callbacks import (
-    Callback, LoggerCallback, FileOutputCallback, 
+    BaseCallback, LoggerCallback, FileOutputCallback, 
     BestPromptCallback, ProgressBarCallback, TokenCountCallback
 )
 from tests.mocks.mock_llm import MockLLM
@@ -39,7 +39,7 @@ def mock_logger():
 
 def test_base_callback():
     """Test the base Callback class."""
-    callback = Callback()
+    callback = BaseCallback()
     
     # Test default method implementations
     assert callback.on_step_end(None) is True

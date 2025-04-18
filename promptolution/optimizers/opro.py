@@ -1,12 +1,15 @@
 """Module implementing the OPRO (Optimization by PROmpting) algorithm."""
 
-from typing import Dict, List, Optional
+from typing import List, Optional
 
 import numpy as np
 
+from promptolution.callbacks import BaseCallback
 from promptolution.config import ExperimentConfig
 from promptolution.llms.base_llm import BaseLLM
 from promptolution.optimizers.base_optimizer import BaseOptimizer
+from promptolution.predictors.base_predictor import BasePredictor
+from promptolution.tasks.base_task import BaseTask
 from promptolution.templates import OPRO_TEMPLATE
 
 
@@ -22,15 +25,15 @@ class Opro(BaseOptimizer):
 
     def __init__(
         self,
-        predictor,
-        task,
+        predictor: BasePredictor,
+        task: BaseTask,
         initial_prompts: List[str],
         prompt_template: Optional[str],
         meta_llm: BaseLLM,
         max_num_instructions: int = 20,
         num_instructions_per_step: int = 8,
         num_few_shots: int = 3,
-        callbacks=None,
+        callbacks: List[BaseCallback] = None,
         config: ExperimentConfig = None,
     ) -> None:
         """Initialize the OPRO optimizer.

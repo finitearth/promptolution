@@ -14,8 +14,6 @@ class BasePredictor(ABC):
     """Abstract base class for predictors in the promptolution library.
 
     This class defines the interface that all concrete predictor implementations should follow.
-    It's designed to follow the Hugging Face-style interface pattern while maintaining
-    compatibility with the existing API.
 
     Attributes:
         llm: The language model used for generating predictions.
