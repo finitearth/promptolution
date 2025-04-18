@@ -15,10 +15,10 @@ def sentiment_classes():
 def mock_llm_for_first_occurrence():
     """Fixture providing a MockLLM for FirstOccurrenceClassificator testing."""
     responses = {
-        "Classify: I love this product!": "This text expresses positive sentiment about the product.",
-        "Classify: I hate this product!": "The sentiment here is clearly negative regarding the item.",
-        "Classify: This product is okay.": "The text shows a neutral stance on the product.",
-        "Classify: Interesting product": "The sentiment is hard to determine, but not strongly leaning."
+        "Classify:\nI love this product!": "This text expresses positive sentiment about the product.",
+        "Classify:\nI hate this product!": "The sentiment here is clearly negative regarding the item.",
+        "Classify:\nThis product is okay.": "The text shows a neutral stance on the product.",
+        "Classify:\nInteresting product": "The sentiment is hard to determine, but not strongly leaning."
     }
     return MockLLM(predetermined_responses=responses)
 
@@ -27,11 +27,11 @@ def mock_llm_for_first_occurrence():
 def mock_llm_for_marker_based():
     """Fixture providing a MockLLM for MarkerBasedClassificator testing."""
     responses = {
-        "Classify: I love this product!": "Let me analyze this... <final_answer>positive</final_answer>",
-        "Classify: I hate this product!": "I can detect that this is <final_answer>negative</final_answer> sentiment",
-        "Classify: This product is okay.": "After consideration <final_answer>neutral</final_answer> seems appropriate",
-        "Classify: Interesting product": "Not entirely clear but <final_answer>neutral</final_answer> is best",
-        "Classify: Broken item": "This shows <final_answer>bad</final_answer> sentiment" # Invalid class for testing default
+        "Classify:\nI love this product!": "Let me analyze this... <final_answer>positive</final_answer>",
+        "Classify:\nI hate this product!": "I can detect that this is <final_answer>negative</final_answer> sentiment",
+        "Classify:\nThis product is okay.": "After consideration <final_answer>neutral</final_answer> seems appropriate",
+        "Classify:\nInteresting product": "Not entirely clear but <final_answer>neutral</final_answer> is best",
+        "Classify:\nBroken item": "This shows <final_answer>bad</final_answer> sentiment" # Invalid class for testing default
     }
     return MockLLM(predetermined_responses=responses)
 
@@ -129,8 +129,8 @@ def test_multiple_prompts_with_classificators(mock_llm_for_first_occurrence, sen
     
     # Add responses for a second prompt
     mock_llm_for_first_occurrence.predetermined_responses.update({
-        "Rate: I love this product!": "This deserves a positive rating.",
-        "Rate: I hate this product!": "I would rate this as negative."
+        "Rate:\nI love this product!": "This deserves a positive rating.",
+        "Rate:\nI hate this product!": "I would rate this as negative."
     })
     
     # Test with multiple prompts
