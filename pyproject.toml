@@ -24,18 +24,26 @@ vllm = "^0.8.2"
 transformers = "^4.48.0"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.3.5"
 black = "^24.4.2"
 flake8 = "^7.1.0"
 isort = "^5.13.2"
 pre-commit = "^3.7.1"
 ipykernel = "^6.29.5"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.3.5"
 pytest-cov = "^6.1.1"
+openai = "^1.0.0"
+requests = "^2.31.0"
+vllm = "^0.8.2"
+transformers = "^4.48.0"
 
 [tool.poetry.group.docs.dependencies]
 mkdocs = "^1.6.1"
 mkdocs-material = "^9.5.39"
 mkdocstrings = {version = "^0.26.1", extras = ["python"]}
+jupyter = "^1.1.1"
+nbconvert = "^7.16.6"
 
 [build-system]
 requires = ["poetry-core"]

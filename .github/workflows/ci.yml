@@ -21,7 +21,7 @@ jobs:
       - name: Set up Python and Poetry
         uses: ./.github/actions/python-poetry
         with:
-          groups: main,dev,api,vllm,transformers
+          groups: main,dev,test
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.1
       - name: Run tests
