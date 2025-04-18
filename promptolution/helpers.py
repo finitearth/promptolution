@@ -69,6 +69,7 @@ def run_evaluation(df: pd.DataFrame, config: ExperimentConfig, prompts: List[str
     """Run the evaluation phase of the experiment.
 
     Args:
+        df (pd.DataFrame): Input DataFrame containing the data.
         config (Config): Configuration object for the experiment.
         prompts (List[str]): List of prompts to evaluate.
 
@@ -82,6 +83,6 @@ def run_evaluation(df: pd.DataFrame, config: ExperimentConfig, prompts: List[str
 
     scores = task.evaluate(prompts, predictor)
     df = pd.DataFrame(dict(prompt=prompts, score=scores))
-    df = df.sort_values("score", ascending=False)
+    df = df.sort_values("score", ascending=False, ignore_index=True)
 
     return df
