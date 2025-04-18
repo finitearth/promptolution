@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_call:
 
 permissions:
   contents: write
@@ -21,6 +22,10 @@ jobs:
         uses: ./.github/actions/python-poetry
         with:
           groups: "docs"
+
+      - name: Generate notebook examples
+        run: |
+          poetry run jupyter nbconvert --to markdown --allow-errors --output-dir docs/examples notebooks/*.ipynb
 
       - name: Deploy docs
         run: |

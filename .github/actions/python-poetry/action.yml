@@ -34,5 +34,6 @@ runs:
         path: .venv
         key: ${{ runner.os }}-poetry-${{ inputs.poetry-version }}-${{ hashFiles('**/poetry.lock') }}
     - name: Install dependencies
-      run: poetry install --no-interaction --no-root --only ${{ inputs.groups }}
+      run:
+        poetry install --no-interaction --no-root --only ${{ inputs.groups }}
       shell: bash
