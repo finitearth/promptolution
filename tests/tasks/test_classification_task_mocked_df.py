@@ -1,6 +1,5 @@
-# tests/test_tasks/test_classification_task_mocked_df.py
 import pytest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 import numpy as np
 import pandas as pd
 

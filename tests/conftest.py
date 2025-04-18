@@ -1,6 +1,5 @@
 # tests/conftest.py
 import pytest
-import numpy as np
 
 from promptolution.config import ExperimentConfig
 from tests.mocks.mock_llm import MockLLM

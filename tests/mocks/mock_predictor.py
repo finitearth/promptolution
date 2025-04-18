@@ -1,5 +1,4 @@
-# tests/mocks/mock_predictor.py
-from typing import List, Optional, Tuple, Union
+from typing import List, Optional, Tuple
 import numpy as np
 
 from promptolution.llms.base_llm import BaseLLM

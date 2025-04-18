@@ -1,6 +1,5 @@
-    # tests/mocks/mock_task.py
 import numpy as np
-from typing import List, Optional
+from typing import List
 
 from promptolution.tasks.base_task import BaseTask
 

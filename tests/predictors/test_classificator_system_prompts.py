@@ -1,4 +1,3 @@
-# tests/test_predictors/test_classificator_system_prompts.py
 import pytest
 import numpy as np
 

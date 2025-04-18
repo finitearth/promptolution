@@ -1,5 +1,3 @@
-# tests/llms/test_api_llm.py
-import pytest
 from unittest.mock import MagicMock, patch
 
 from promptolution.llms.api_llm import APILLM

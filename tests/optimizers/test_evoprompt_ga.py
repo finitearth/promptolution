@@ -1,7 +1,4 @@
-# tests/test_optimizers/test_evoprompt_ga.py
 import pytest
-import numpy as np
-from unittest.mock import patch
 
 from promptolution.optimizers.evoprompt_ga import EvoPromptGA
 from promptolution.config import ExperimentConfig

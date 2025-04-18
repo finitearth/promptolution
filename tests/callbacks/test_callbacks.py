@@ -1,10 +1,7 @@
-# tests/test_callbacks/test_callbacks.py
 import os
 import pytest
 import pandas as pd
-import logging
 from unittest.mock import MagicMock, patch
-from datetime import datetime
 
 from promptolution.callbacks import (
     Callback, LoggerCallback, FileOutputCallback, 

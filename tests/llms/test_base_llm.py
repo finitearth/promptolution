@@ -1,9 +1,4 @@
-# tests/test_base_llm.py
-import pytest
-
-from promptolution.llms.base_llm import BaseLLM, DummyLLM
-from tests.mocks.mock_llm import MockLLM
-
+from promptolution.llms.base_llm import DummyLLM
 
 def test_base_llm_token_counting():
     """Test token counting functionality."""

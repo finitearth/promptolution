@@ -1,4 +1,3 @@
-# tests/mocks/mock_optimizer.py
 from unittest.mock import MagicMock
 
 class MockOptimizer:

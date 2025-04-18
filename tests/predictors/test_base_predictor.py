@@ -1,8 +1,6 @@
-# tests/test_predictors/test_base_predictor.py
 import pytest
 import numpy as np
 
-from promptolution.predictors.base_predictor import BasePredictor
 from tests.mocks.mock_llm import MockLLM
 from tests.mocks.mock_predictor import MockPredictor
 

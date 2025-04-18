@@ -1,11 +1,8 @@
-# tests/test_optimizers/test_optimizers_integration.py
 import pytest
-import numpy as np
 
 from promptolution.optimizers.evoprompt_ga import EvoPromptGA
 from promptolution.optimizers.evoprompt_de import EvoPromptDE
 from promptolution.optimizers.opro import Opro
-from promptolution.config import ExperimentConfig
 from tests.mocks.mock_llm import MockLLM
 from tests.mocks.mock_task import MockTask
 from tests.mocks.mock_predictor import MockPredictor

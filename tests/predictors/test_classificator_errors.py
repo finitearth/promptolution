@@ -1,4 +1,3 @@
-# tests/test_predictors/test_classificator_errors.py
 import pytest
 import numpy as np
 
