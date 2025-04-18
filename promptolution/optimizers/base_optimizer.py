@@ -1,10 +1,13 @@
 """Base module for optimizers in the promptolution library."""
 
 from abc import ABC, abstractmethod
-from typing import Any, Callable, Dict, List, Optional, Union
+from logging import getLogger
+from typing import Callable, List
 
 from promptolution.config import ExperimentConfig
 from promptolution.tasks.base_task import BaseTask
+
+logger = getLogger(__name__)
 
 
 class BaseOptimizer(ABC):
@@ -67,7 +70,13 @@ class BaseOptimizer(ABC):
         self._pre_optimization_loop()
 
         for _ in range(n_steps):
-            self.prompts = self._step()
+            try:
+                self.prompts = self._step()
+            except Exception as e:
+                # exit training loop and gracefully fail
+                logger.error(f"Error during optimization step: {e}")
+                logger.error("Exiting optimization loop.")
+                break
 
             # Callbacks at the end of each step
             continue_optimization = self._on_step_end()
