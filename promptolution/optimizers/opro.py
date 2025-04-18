@@ -23,27 +23,28 @@ class Opro(BaseOptimizer):
     def __init__(
         self,
         predictor,
+        task,
+        initial_prompts: List[str],
+        prompt_template: Optional[str],
         meta_llm: BaseLLM,
-        prompt_template: Optional[str] = None,
         max_num_instructions: int = 20,
         num_instructions_per_step: int = 8,
         num_few_shots: int = 3,
-        task=None,
         callbacks=None,
         config: ExperimentConfig = None,
     ) -> None:
         """Initialize the OPRO optimizer.
 
         Args:
-            df_few_shots: DataFrame with few-shot examples (must have 'input' and 'target' columns)
+            predictor: Predictor for prompt evaluation
+            task: Task object for prompt evaluation
             meta_llm: LLM that generates improved prompts
+            initial_prompts: Initial set of prompts to start optimization with
             prompt_template: Custom meta prompt template (uses OPRO_TEMPLATE if None)
             max_num_instructions: Maximum previous instructions to include in meta prompt
             num_instructions_per_step: Number of prompts to generate in each step
             num_few_shots: Number of few-shot examples to include (0 for none)
-            task: Task object for prompt evaluation
             callbacks: List of callback functions
-            predictor: Predictor for prompt evaluation
             config: ExperimentConfig overwriting default parameters
         """
         self.meta_llm = meta_llm
@@ -52,7 +53,9 @@ class Opro(BaseOptimizer):
         self.max_num_instructions = max_num_instructions
         self.num_instructions_per_step = num_instructions_per_step
         self.num_few_shots = num_few_shots
-        super().__init__(predictor=predictor, task=task, callbacks=callbacks, config=config)
+        super().__init__(
+            predictor=predictor, task=task, initial_prompts=initial_prompts, callbacks=callbacks, config=config
+        )
 
     def _sample_examples(self) -> str:
         """Sample few-shot examples from the dataset.
@@ -108,7 +111,7 @@ class Opro(BaseOptimizer):
             generation_seed = np.random.randint(0, int(1e9))
             self.meta_llm.set_generation_seed(generation_seed)
 
-            if self.verbosity > 1:
+            if self.verbosity > 1:  # pragma: no cover
                 print(f"Seed: {generation_seed}")
             response = self.meta_llm.get_response([self.meta_prompt])[0]
 
@@ -122,7 +125,7 @@ class Opro(BaseOptimizer):
 
             self._add_prompt_and_score(prompt, score)
 
-            if self.verbosity > 1:
+            if self.verbosity > 1:  # pragma: no cover
                 print(f"New Instruction: {prompt}\nScore: {score}\n")
 
         # Update meta prompt
@@ -130,7 +133,7 @@ class Opro(BaseOptimizer):
             "<examples>", self._sample_examples()
         )
 
-        if self.verbosity > 1:
+        if self.verbosity > 1:  # pragma: no cover
             print(f"New meta prompt:\n{self.meta_prompt}\n")
 
         return self.prompts

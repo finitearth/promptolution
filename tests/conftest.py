@@ -1,67 +1,61 @@
-"""Test fixtures for promptolution tests."""
-
+# tests/conftest.py
 import pytest
 import numpy as np
-from typing import List
 
-from promptolution.optimizers.base_optimizer import BaseOptimizer, OptimizerConfig
-from promptolution.tasks.base_task import BaseTask, DummyTask
-from promptolution.llms.base_llm import BaseLLM
-from promptolution.predictors.base_predictor import DummyPredictor
+from promptolution.config import ExperimentConfig
+from tests.mocks.mock_llm import MockLLM
+from tests.mocks.mock_task import MockTask
+from tests.mocks.mock_predictor import MockPredictor
 
-
-class DummyLLM(BaseLLM):
-    """A dummy LLM for testing purposes."""
-
-    def __init__(self, *args, **kwargs):
-        """Initialize the DummyLLM."""
-        self.model_id = "dummy"
-        self.responses = [
-            "<prompt>This is an optimized prompt.</prompt>",
-            "<prompt>This is another optimized prompt.</prompt>",
-            "<prompt>This is a third optimized prompt.</prompt>",
-        ]
-        
-    def get_response(self, prompts: List[str]) -> List[str]:
-        """Return dummy responses."""
-        return self.responses[:len(prompts)]
-
-
-@pytest.fixture
-def dummy_task():
-    """Return a dummy task for testing."""
-    return DummyTask()
-
-
-@pytest.fixture
-def dummy_predictor():
-    """Return a dummy predictor for testing."""
-    return DummyPredictor(classes=["positive", "negative"])
-
-
-@pytest.fixture
-def dummy_llm():
-    """Return a dummy LLM for testing."""
-    return DummyLLM()
-
+from tests.mocks.mock_optimizer import MockOptimizer
 
 @pytest.fixture
 def base_optimizer_config():
-    """Return a basic optimizer configuration."""
-    return OptimizerConfig(
+    """Fixture providing a basic optimizer configuration."""
+    return ExperimentConfig(
         optimizer_name="test_optimizer",
         n_steps=5,
         population_size=8,
-        random_seed=42,
-        n_eval_samples=10
+        random_seed=42
     )
 
 
 @pytest.fixture
 def initial_prompts():
-    """Return a list of initial prompts for testing."""
+    """Fixture providing initial prompts for optimizer testing."""
     return [
-        "Classify the following text as positive or negative.",
-        "Determine if the sentiment of the text is positive or negative.",
-        "Is the following text positive or negative?",
+        "Classify the sentiment of the text.",
+        "Determine if the text is positive or negative.",
+        "Analyze the sentiment in the following text."
     ]
+
+
+@pytest.fixture
+def dummy_task():
+    """Fixture providing a dummy task for optimizer testing."""
+    task = MockTask(predetermined_scores=[0.6, 0.7, 0.8])
+    return task
+
+
+@pytest.fixture
+def dummy_predictor():
+    """Fixture providing a dummy predictor for optimizer testing."""
+    return MockPredictor(
+        classes=["positive", "neutral", "negative"]
+    )
+
+
+@pytest.fixture
+def dummy_llm():
+    """Fixture providing a dummy LLM for optimizer testing."""
+    llm = MockLLM()
+    llm._get_response = lambda prompts, system_prompts: [
+        "<prompt>Generated prompt for test</prompt>" for _ in prompts
+    ]
+    return llm
+
+
+@pytest.fixture
+def mock_optimizer():
+    """Fixture providing a MockOptimizer for testing."""
+    return MockOptimizer()

@@ -131,7 +131,7 @@ class DummyLLM(BaseLLM):
     complex natural language processing.
     """
 
-    def _get_response(self, prompts: str) -> str:
+    def _get_response(self, prompts: list[str], system_prompts: list[str]) -> str:
         """Generate random responses for the given prompts.
 
         This method creates silly, random responses enclosed in <prompt> tags.
@@ -144,8 +144,6 @@ class DummyLLM(BaseLLM):
         Returns:
             List[str]: A list of randomly generated responses, one for each input prompt.
         """
-        if isinstance(prompts, str):
-            prompts = [prompts]
         results = []
         for p in prompts:
             r = np.random.rand()

@@ -36,19 +36,22 @@ class EvoPromptDE(BaseOptimizer):
         self,
         predictor,
         task,
-        meta_llm: BaseLLM = None,
-        prompt_template: str = None,
+        initial_prompts: List[str],
+        prompt_template: str,
+        meta_llm: BaseLLM,
         donor_random: bool = False,
         n_eval_samples: int = 20,
+        callbacks=None,
         config: ExperimentConfig = None,
     ):
         """Initialize the EvoPromptDE optimizer."""
         self.prompt_template = prompt_template
         self.n_eval_samples = n_eval_samples
         self.donor_random = donor_random
-        assert meta_llm is not None, "A meta language model must be provided."
         self.meta_llm = meta_llm
-        super().__init__(predictor=predictor, task=task, config=config)
+        super().__init__(
+            predictor=predictor, task=task, initial_prompts=initial_prompts, callbacks=callbacks, config=config
+        )
 
     def _pre_optimization_loop(self):
         self.scores = self.task.evaluate(self.prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples)

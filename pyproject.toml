@@ -11,6 +11,7 @@ numpy = "^1.26.0"
 pandas = "^2.2.2"
 tqdm = "^4.66.5"
 scikit-learn = "^1.5.2"
+fastparquet = "^2024.11.0"
 
 [tool.poetry.group.api.dependencies]
 openai = "^1.0.0"
@@ -29,6 +30,7 @@ flake8 = "^7.1.0"
 isort = "^5.13.2"
 pre-commit = "^3.7.1"
 ipykernel = "^6.29.5"
+pytest-cov = "^6.1.1"
 
 [tool.poetry.group.docs.dependencies]
 mkdocs = "^1.6.1"

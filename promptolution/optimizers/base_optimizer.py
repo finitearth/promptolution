@@ -24,10 +24,10 @@ class BaseOptimizer(ABC):
 
     def __init__(
         self,
-        initial_prompts: List[str] = None,
-        task: BaseTask = None,
+        predictor,
+        task: BaseTask,
+        initial_prompts: List[str],
         callbacks: List[Callable] = None,
-        predictor=None,
         config: ExperimentConfig = None,
     ):
         """Initialize the optimizer with a configuration and/or direct parameters.
@@ -67,7 +67,8 @@ class BaseOptimizer(ABC):
             The optimized list of prompts after all steps.
         """
         # validate config
-        self.config.validate()
+        if self.config is not None:
+            self.config.validate()
         self._pre_optimization_loop()
 
         for _ in range(n_steps):

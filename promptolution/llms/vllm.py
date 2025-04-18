@@ -183,8 +183,3 @@ class VLLM(BaseLLM):
             seed (int): Random seed for text generation.
         """
         self.sampling_params.seed = seed
-
-    def __del__(self):
-        """Cleanup method to delete the LLM instance and free up GPU memory."""
-        del self.llm
-        torch.cuda.empty_cache()

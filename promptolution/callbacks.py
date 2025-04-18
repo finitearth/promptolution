@@ -151,7 +151,7 @@ class FileOutputCallback(Callback):
                 "step": [self.step] * len(optimizer.prompts),
                 "input_tokens": [optimizer.meta_llm.input_token_count] * len(optimizer.prompts),
                 "output_tokens": [optimizer.meta_llm.output_token_count] * len(optimizer.prompts),
-                "time": [datetime.now().total_seconds()] * len(optimizer.prompts),
+                "time": [datetime.now().timestamp()] * len(optimizer.prompts),
                 "score": optimizer.scores,
                 "prompt": optimizer.prompts,
             }
