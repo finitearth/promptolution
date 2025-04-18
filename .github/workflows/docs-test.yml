@@ -1,0 +1,32 @@
+name: Docs
+
+on:
+  push:
+    branches:
+      - main
+  workflow_call:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    concurrency: ci-${{ github.ref }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup python and poetry
+        uses: ./.github/actions/python-poetry
+        with:
+          groups: "docs"
+
+      - name: Generate notebook examples
+        run: |
+          poetry run jupyter nbconvert --to markdown --allow-errors --output-dir docs/examples notebooks/*.ipynb
+
+      - name: Deploy docs
+        run: |
+          poetry run mkdocs gh-deploy --force
