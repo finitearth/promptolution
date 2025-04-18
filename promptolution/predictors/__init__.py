@@ -6,7 +6,7 @@ from .base_predictor import DummyPredictor
 from .classificator import FirstOccurrenceClassificator, MarkerBasedClassificator
 
 
-def get_predictor(downstream_llm=None, type: Literal["first_occurence", "marker"] = "marker", *args, **kwargs):
+def get_predictor(downstream_llm=None, type: Literal["first_occurrence", "marker"] = "marker", *args, **kwargs):
     """Factory function to create and return a predictor instance.
 
     This function supports three types of predictors:
