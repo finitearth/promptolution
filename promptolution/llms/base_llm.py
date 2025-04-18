@@ -62,11 +62,12 @@ class BaseLLM(ABC):
     def update_token_count(self, inputs: List[str], outputs: List[str]):
         """Update the token count based on the given inputs and outputs.
 
+        It uses a simple tokenization method (splitting by whitespace) to count tokens in the base class.
+
         Args:
             inputs (List[str]): A list of input prompts.
             outputs (List[str]): A list of generated responses.
         """
-        logger.warning("Token count is approximated using word count split by whitespace, not an actual tokenizer.")
         input_tokens = sum([len(i.split()) for i in inputs])
         output_tokens = sum([len(o.split()) for o in outputs])
         self.input_token_count += input_tokens

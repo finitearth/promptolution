@@ -19,15 +19,30 @@ from promptolution.llms.base_llm import BaseLLM
 logger = Logger(__name__)
 
 
-async def _invoke_model(prompt, system_prompt, max_tokens, model_id, client, semaphore):
+async def _invoke_model(prompt, system_prompt, max_tokens, model_id, client, semaphore, max_retries=20, retry_delay=5):
     async with semaphore:
         messages = [{"role": "system", "content": system_prompt}, {"role": "user", "content": prompt}]
-        response = await client.chat.completions.create(
-            model=model_id,
-            messages=messages,
-            max_tokens=max_tokens,
-        )
-        return response
+
+        for attempt in range(max_retries + 1):  # +1 for the initial attempt
+            try:
+                response = await client.chat.completions.create(
+                    model=model_id,
+                    messages=messages,
+                    max_tokens=max_tokens,
+                )
+                return response
+            except Exception as e:
+                if attempt < max_retries:
+                    # Calculate exponential backoff with jitter
+                    logger.warning(
+                        f"API call failed (attempt {attempt + 1} / {max_retries + 1}): {str(e)}. "
+                        f"Retrying in {retry_delay:.2f} seconds..."
+                    )
+                    await asyncio.sleep(retry_delay)
+                else:
+                    # Log the final failure and re-raise the exception
+                    logger.error(f"API call failed after {max_retries + 1} attempts: {str(e)}")
+                    raise
 
 
 class APILLM(BaseLLM):

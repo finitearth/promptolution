@@ -58,7 +58,7 @@ def run_optimization(df, config: ExperimentConfig):
 
     prompts = optimizer.optimize(n_steps=config.n_steps)
 
-    if config.prepend_exemplars:
+    if hasattr(config, "prepend_exemplars") and config.prepend_exemplars:
         selector = get_exemplar_selector(config.exemplar_selector, task, predictor)
         prompts = [selector.select_exemplars(p, n_examples=config.n_exemplars) for p in prompts]
 
@@ -77,8 +77,8 @@ def run_evaluation(df: pd.DataFrame, config: ExperimentConfig, prompts: List[str
     """
     task = get_task(df, config)
 
-    llm = get_llm(config)
-    predictor = get_predictor(llm, classes=task.classes)
+    llm = get_llm(config=config)
+    predictor = get_predictor(llm, config=config)
 
     scores = task.evaluate(prompts, predictor)
     df = pd.DataFrame(dict(prompt=prompts, score=scores))

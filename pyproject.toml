@@ -18,7 +18,7 @@ openai = "^1.0.0"
 requests = "^2.31.0"
 
 [tool.poetry.group.vllm.dependencies]
-vllm = "^0.8.2"
+vllm = "^0.8.4"
 
 [tool.poetry.group.transformers.dependencies]
 transformers = "^4.48.0"
