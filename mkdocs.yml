@@ -53,6 +53,8 @@ nav:
     - Tasks: api/tasks.md
     - Callbacks: api/callbacks.md
     - Config: api/config.md
+  - Tutorials:
+    - Getting Started: examples/getting_started.md
 
 markdown_extensions:
   - pymdownx.highlight:

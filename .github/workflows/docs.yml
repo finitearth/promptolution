@@ -22,6 +22,10 @@ jobs:
         with:
           groups: "docs"
 
+      - name: Generate notebook examples
+        run: |
+          poetry run jupyter nbconvert --to markdown --allow-errors --output-dir docs/examples notebooks/*.ipynb
+
       - name: Deploy docs
         run: |
           poetry run mkdocs gh-deploy --force
