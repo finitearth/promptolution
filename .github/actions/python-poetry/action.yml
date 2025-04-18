@@ -10,6 +10,11 @@ inputs:
     description: 'Poetry version to use'
     required: true
     default: 'latest'
+  root:
+    description: 'Whether to install the root package'
+    required: false
+    default: 'true'
+    type: boolean
   groups:
     required: false
     default: 'main'
@@ -34,5 +39,10 @@ runs:
         path: .venv
         key: ${{ runner.os }}-poetry-${{ inputs.poetry-version }}-${{ hashFiles('**/poetry.lock') }}
     - name: Install dependencies
-      run: poetry install --no-interaction --no-root --only ${{ inputs.groups }}
+      run: |
+        if [ "${{ inputs.root }}" = "true" ]; then
+          poetry install --no-interaction --no-root --only ${{ inputs.groups }}
+        else
+          poetry install --no-interaction --only ${{ inputs.groups }}
+        fi
       shell: bash
