@@ -9,5 +9,3 @@ from .llms import get_llm
 from .optimizers import get_optimizer
 from .predictors import get_predictor
 from .tasks import get_task
-
-__version__ = "1.3.0"

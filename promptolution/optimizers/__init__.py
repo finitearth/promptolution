@@ -4,7 +4,7 @@ from typing import Literal
 
 from promptolution.config import ExperimentConfig
 from promptolution.llms.base_llm import BaseLLM
-from promptolution.predictors import BasePredictor
+from promptolution.predictors.base_predictor import BasePredictor
 from promptolution.tasks.base_task import BaseTask
 from promptolution.templates import (
     EVOPROMPT_DE_TEMPLATE,
