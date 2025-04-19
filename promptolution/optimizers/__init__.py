@@ -1,6 +1,11 @@
 """Module for prompt optimizers."""
 
+from typing import Literal
+
 from promptolution.config import ExperimentConfig
+from promptolution.llms.base_llm import BaseLLM
+from promptolution.predictors import BasePredictor
+from promptolution.tasks.base_task import BaseTask
 from promptolution.templates import (
     EVOPROMPT_DE_TEMPLATE,
     EVOPROMPT_DE_TEMPLATE_TD,
@@ -17,11 +22,20 @@ from .opro import Opro
 
 
 def get_optimizer(
-    predictor, meta_llm, task, optimizer=None, meta_prompt=None, task_description=None, config: ExperimentConfig = None
+    predictor: BasePredictor,
+    meta_llm: BaseLLM,
+    task: BaseTask,
+    optimizer: Literal["evopromptde", "evopromptga", "opro"] = None,
+    meta_prompt: str = None,
+    task_description: str = None,
+    config: ExperimentConfig = None,
 ):
     """Creates and returns an optimizer instance based on provided parameters.
 
     Args:
+        predictor: The predictor used for prompt evaluation
+        meta_llm: The language model used for generating meta-prompts
+        task: The task object used for evaluating prompts
         optimizer: String identifying which optimizer to use
         meta_prompt: Meta prompt text for the optimizer
         task_description: Description of the task for the optimizer
