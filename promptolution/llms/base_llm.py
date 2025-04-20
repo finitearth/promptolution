@@ -107,7 +107,6 @@ class BaseLLM(ABC):
 
     @abstractmethod
     def _get_response(self, prompts: List[str], system_prompts: List[str]) -> List[str]:
-
         """Generate responses for the given prompts.
 
         This method should be implemented by subclasses to define how
