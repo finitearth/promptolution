@@ -78,7 +78,6 @@ class VLLM(BaseLLM):
                 "Could not import at least one of the required libraries: torch, transformers, vllm. "
                 "Please ensure they are installed in your environment."
             )
-        super().__init__()
 
         self.dtype = dtype
         self.tensor_parallel_size = tensor_parallel_size
