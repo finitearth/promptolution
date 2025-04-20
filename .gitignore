@@ -9,3 +9,5 @@ dist/
 outputs/
 results/
 poetry.lock
+CLAUDE.md
+**/CLAUDE.local.md

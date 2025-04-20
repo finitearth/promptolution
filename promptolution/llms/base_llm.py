@@ -2,10 +2,12 @@
 
 import logging
 from abc import ABC, abstractmethod
-from typing import List
+from dataclasses import asdict, dataclass, field
+from typing import Any, Dict, List, Optional, Union
 
 import numpy as np
 
+from promptolution.config import ExperimentConfig
 from promptolution.templates import DEFAULT_SYS_PROMPT
 
 logger = logging.getLogger(__name__)
@@ -15,14 +17,28 @@ class BaseLLM(ABC):
     """Abstract base class for Language Models in the promptolution library.
 
     This class defines the interface that all concrete LLM implementations should follow.
+    It's designed to track which configuration parameters are actually used.
 
-    Methods:
-        get_response: An abstract method that should be implemented by subclasses
-                      to generate responses for given prompts.
+    Attributes:
+        config (LLMModelConfig): Configuration for the language model.
+        input_token_count (int): Count of input tokens processed.
+        output_token_count (int): Count of output tokens generated.
     """
 
-    def __init__(self, *args, **kwargs):
-        """Initialize the LLM."""
+    def __init__(self, config: ExperimentConfig = None):
+        """Initialize the LLM with a configuration or direct parameters.
+
+        This constructor supports both config-based and direct parameter initialization
+        for backward compatibility.
+
+        Args:
+            config (Optional[Union[Dict[str, Any], LLMModelConfig]]): Configuration for the LLM.
+            *args: Positional arguments (for backward compatibility).
+            **kwargs: Keyword arguments either for direct parameters or config fields.
+        """
+        if config is not None:
+            config.apply_to(self)
+        # Initialize token counters
         self.input_token_count = 0
         self.output_token_count = 0
 
@@ -46,11 +62,12 @@ class BaseLLM(ABC):
     def update_token_count(self, inputs: List[str], outputs: List[str]):
         """Update the token count based on the given inputs and outputs.
 
+        It uses a simple tokenization method (splitting by whitespace) to count tokens in the base class.
+
         Args:
             inputs (List[str]): A list of input prompts.
             outputs (List[str]): A list of generated responses.
         """
-        logger.warning("Token count is approximated using word count split by whitespace, not an actual tokenizer.")
         input_tokens = sum([len(i.split()) for i in inputs])
         output_tokens = sum([len(o.split()) for o in outputs])
         self.input_token_count += input_tokens
@@ -115,7 +132,7 @@ class DummyLLM(BaseLLM):
     complex natural language processing.
     """
 
-    def _get_response(self, prompts: str) -> str:
+    def _get_response(self, prompts: list[str], system_prompts: list[str]) -> str:
         """Generate random responses for the given prompts.
 
         This method creates silly, random responses enclosed in <prompt> tags.
@@ -128,8 +145,6 @@ class DummyLLM(BaseLLM):
         Returns:
             List[str]: A list of randomly generated responses, one for each input prompt.
         """
-        if isinstance(prompts, str):
-            prompts = [prompts]
         results = []
         for p in prompts:
             r = np.random.rand()

@@ -2,6 +2,7 @@
 
 from abc import ABC, abstractmethod
 
+from promptolution.config import ExperimentConfig
 from promptolution.predictors.base_predictor import BasePredictor
 from promptolution.tasks.base_task import BaseTask
 
@@ -13,15 +14,19 @@ class BaseExemplarSelector(ABC):
     that all exemplar selectors should implement.
     """
 
-    def __init__(self, task: BaseTask, predictor: BasePredictor):
+    def __init__(self, task: BaseTask, predictor: BasePredictor, config: ExperimentConfig = None):
         """Initialize the BaseExemplarSelector.
 
         Args:
             task (BaseTask): An object representing the task to be performed.
             predictor (BasePredictor): An object capable of making predictions based on prompts.
+            config (ExperimentConfig, optional): ExperimentConfig overwriting the defaults
         """
         self.task = task
         self.predictor = predictor
+
+        if config is not None:
+            config.apply_to(self)
 
     @abstractmethod
     def select_exemplars(self, prompt: str, n_examples: int = 5) -> str:

@@ -1,79 +1,118 @@
-"""Base class for prompt optimizers."""
+"""Base module for optimizers in the promptolution library."""
 
-import time
 from abc import ABC, abstractmethod
+from logging import getLogger
 from typing import Callable, List
 
-from promptolution.predictors.base_predictor import BasePredictor
+from promptolution.config import ExperimentConfig
 from promptolution.tasks.base_task import BaseTask
+
+logger = getLogger(__name__)
 
 
 class BaseOptimizer(ABC):
     """Abstract base class for prompt optimizers.
 
     This class defines the basic structure and interface for prompt optimization algorithms.
-    Concrete optimizer implementations should inherit from this class and implement
-    the `optimize` method.
 
     Attributes:
+        config (OptimizerConfig): Configuration for the optimizer.
         prompts (List[str]): List of current prompts being optimized.
         task (BaseTask): The task object used for evaluating prompts.
         callbacks (List[Callable]): List of callback functions to be called during optimization.
         predictor: The predictor used for prompt evaluation (if applicable).
-
-    Args:
-        initial_prompts (List[str]): Initial set of prompts to start optimization with.
-        task (BaseTask): Task object for prompt evaluation.
-        callbacks (List[Callable], optional): List of callback functions. Defaults to an empty list.
-        predictor (optional): Predictor for prompt evaluation. Defaults to None.
     """
 
     def __init__(
         self,
-        initial_prompts: list[str],
+        predictor,
         task: BaseTask,
-        callbacks: list[Callable] = [],
-        predictor: BasePredictor = None,
-        verbosity: int = 0,
+        initial_prompts: List[str],
+        callbacks: List[Callable] = None,
+        config: ExperimentConfig = None,
     ):
-        """Initialize the BaseOptimizer."""
+        """Initialize the optimizer with a configuration and/or direct parameters.
+
+        Args:
+            initial_prompts: Initial set of prompts to start optimization with.
+            task: Task object for prompt evaluation.
+            callbacks: List of callback functions.
+            predictor: Predictor for prompt evaluation.
+            config: Configuration for the optimizer.
+        """
+        # Set up optimizer state
         self.prompts = initial_prompts
         self.task = task
-        self.callbacks = callbacks
+        self.callbacks = callbacks or []
         self.predictor = predictor
-        self.verbosity = verbosity
+        self.verbosity = 0
 
-    @abstractmethod
+        if config is not None:
+            config.apply_to(self)
+
+        self.config = config
+
     def optimize(self, n_steps: int) -> List[str]:
-        """Abstract method to perform the optimization process.
+        """Perform the optimization process.
 
         This method should be implemented by concrete optimizer classes to define
         the specific optimization algorithm.
 
         Args:
-            n_steps (int): Number of optimization steps to perform.
+            n_steps: Number of optimization steps to perform. If None, uses the value from config.
 
         Returns:
-            List[str]: The optimized list of prompts after all steps.
-
-        Raises:
-            NotImplementedError: If not implemented by a concrete class.
+            The optimized list of prompts after all steps.
         """
-        raise NotImplementedError
+        # validate config
+        if self.config is not None:
+            self.config.validate()
+        self._pre_optimization_loop()
+
+        for _ in range(n_steps):
+            try:
+                self.prompts = self._step()
+            except Exception as e:
+                # exit training loop and gracefully fail
+                logger.error(f"Error during optimization step: {e}")
+                logger.error("Exiting optimization loop.")
+                break
+
+            # Callbacks at the end of each step
+            continue_optimization = self._on_step_end()
+            if not continue_optimization:
+                break
+
+        self._on_train_end()
+
+        return self.prompts
+
+    @abstractmethod
+    def _pre_optimization_loop(self):
+        """Prepare for the optimization loop.
+
+        This method should be implemented by concrete optimizer classes to define
+        any setup required before the optimization loop starts.
+        """
+        pass
+
+    @abstractmethod
+    def _step(self):
+        """Perform a single optimization step.
+
+        This method should be implemented by concrete optimizer classes to define
+        the specific optimization step.
+
+        Returns:
+            The optimized list of prompts after the step.
+        """
+        pass
 
     def _on_step_end(self):
         """Call all registered callbacks at the end of each optimization step."""
         continue_optimization = True
         for callback in self.callbacks:
             continue_optimization &= callback.on_step_end(self)  # if any callback returns False, end the optimization
-
-        return continue_optimization
-
-    def _on_epoch_end(self):
-        """Call all registered callbacks at the end of each optimization epoch."""
-        continue_optimization = True
-        for callback in self.callbacks:
-            continue_optimization &= callback.on_epoch_end(self)  # if any callback returns False, end the optimization
 
         return continue_optimization
 
@@ -99,7 +138,7 @@ class DummyOptimizer(BaseOptimizer):
         **kwargs: Arbitrary keyword arguments (unused).
     """
 
-    def __init__(self, initial_prompts, *args, **kwargs):
+    def __init__(self, initial_prompts):
         """Initialize the DummyOptimizer."""
         self.callbacks = []
         self.prompts = initial_prompts
@@ -117,7 +156,6 @@ class DummyOptimizer(BaseOptimizer):
             List[str]: The original list of prompts, unchanged.
         """
         self._on_step_end()
-        self._on_epoch_end()
         self._on_train_end()
 
         return self.prompts

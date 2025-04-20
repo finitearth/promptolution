@@ -21,11 +21,11 @@ jobs:
       - name: Set up Python and Poetry
         uses: ./.github/actions/python-poetry
         with:
-          groups: dev
+          groups: main,dev,test
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.1
-      # - name: Run tests
-      #   run: poetry run python -m pytest
+      - name: Run tests
+        run: poetry run python -m pytest
 
   build:
     runs-on: ubuntu-latest

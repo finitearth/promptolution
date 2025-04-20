@@ -1,12 +1,14 @@
 """Module for Large Language Models."""
 
+from promptolution.config import ExperimentConfig
+
 from .api_llm import APILLM
 from .base_llm import DummyLLM
 from .local_llm import LocalLLM
 from .vllm import VLLM
 
 
-def get_llm(model_id: str, *args, **kwargs):
+def get_llm(model_id: str = None, config: ExperimentConfig = None):
     """Factory function to create and return a language model instance based on the provided model_id.
 
     This function supports three types of language models:
@@ -21,18 +23,20 @@ def get_llm(model_id: str, *args, **kwargs):
                         - "local-{model_name}" for LocalLLM
                         - "vllm-{model_name}" for VLLM
                         - Any other string for APILLM
-        *args: Variable length argument list passed to the LLM constructor.
-        **kwargs: Arbitrary keyword arguments passed to the LLM constructor.
+        config (ExperimentConfig, optional): ExperimentConfig overwriting defaults.
 
     Returns:
         An instance of DummyLLM, LocalLLM, or APILLM based on the model_id.
     """
+    if model_id is None:
+        model_id = config.llm
     if model_id == "dummy":
-        return DummyLLM(*args, **kwargs)
+        return DummyLLM(config)
     if "local" in model_id:
         model_id = "-".join(model_id.split("-")[1:])
-        return LocalLLM(model_id, *args, **kwargs)
+        return LocalLLM(model_id, config)
     if "vllm" in model_id:
         model_id = "-".join(model_id.split("-")[1:])
-        return VLLM(model_id, *args, **kwargs)
-    return APILLM(model_id, *args, **kwargs)
+        return VLLM(model_id, config=config)
+
+    return APILLM(llm=model_id, config=config)

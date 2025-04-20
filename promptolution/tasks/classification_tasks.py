@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import accuracy_score
 
+from promptolution.config import ExperimentConfig
 from promptolution.predictors.base_predictor import BasePredictor
 from promptolution.tasks.base_task import BaseTask
 
@@ -23,6 +24,7 @@ class ClassificationTask(BaseTask):
         ys (np.ndarray): Array of labels.
         initial_prompts (List[str]): Initial set of prompts to start optimization with.
         metric (Callable): Metric to use for evaluation.
+        config (ExperimentConfig): Configuration for the experiment.
 
     Inherits from:
         BaseTask: The base class for tasks in the promptolution library.
@@ -36,6 +38,7 @@ class ClassificationTask(BaseTask):
         x_column: str = "x",
         y_column: str = "y",
         metric: Callable = accuracy_score,
+        config: ExperimentConfig = None,
     ):
         """Initialize the ClassificationTask from a pandas DataFrame.
 
@@ -47,11 +50,13 @@ class ClassificationTask(BaseTask):
             y_column (str, optional): Name of the column containing labels. Defaults to "y".
             seed (int, optional): Random seed for reproducibility. Defaults to 42.
             metric (Callable, optional): Metric to use for evaluation. Defaults to accuracy_score.
+            config (ExperimentConfig, optional): ExperimentConfig overwriting the defaults.
         """
-        super().__init__()
         self.description = description
         self.initial_prompts = initial_prompts
         self.metric = metric
+
+        super().__init__(config)
 
         df[y_column] = df[y_column].str.lower()
         self.classes = df[y_column].unique()
