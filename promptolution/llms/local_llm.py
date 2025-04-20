@@ -40,8 +40,6 @@ class LocalLLM(BaseLLM):
                 "Could not import at least one of the required libraries: torch, transformers. "
                 "Please ensure they are installed in your environment."
             )
-        super().__init__()
-
         self.pipeline = transformers.pipeline(
             "text-generation",
             model=model_id,
