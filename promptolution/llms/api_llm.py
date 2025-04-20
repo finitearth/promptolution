@@ -3,9 +3,7 @@
 
 try:
     import asyncio
-
     from openai import AsyncOpenAI
-
     import_successful = True
 except ImportError:
     import_successful = False
@@ -17,6 +15,7 @@ from promptolution.config import ExperimentConfig
 from promptolution.llms.base_llm import BaseLLM
 
 logger = Logger(__name__)
+
 
 
 async def _invoke_model(prompt, system_prompt, max_tokens, model_id, client, semaphore, max_retries=20, retry_delay=5):
@@ -45,6 +44,7 @@ async def _invoke_model(prompt, system_prompt, max_tokens, model_id, client, sem
                     raise
 
 
+
 class APILLM(BaseLLM):
     """A class to interface with language models through their respective APIs.
 
@@ -58,7 +58,6 @@ class APILLM(BaseLLM):
         max_tokens (int): Maximum number of tokens in model responses.
         semaphore (asyncio.Semaphore): Semaphore to limit concurrent API calls.
     """
-
     def __init__(
         self,
         api_url: str = None,

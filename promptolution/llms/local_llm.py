@@ -54,7 +54,6 @@ class LocalLLM(BaseLLM):
         )
         self.pipeline.tokenizer.pad_token_id = self.pipeline.tokenizer.eos_token_id
         self.pipeline.tokenizer.padding_side = "left"
-
         super().__init__(config)
 
     def _get_response(self, prompts: list[str], system_prompts: list[str]) -> list[str]:

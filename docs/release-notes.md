@@ -12,6 +12,8 @@
 * Added tests for the entire package, covering roughly 80% of the codebase
 * Reworked dependency and import structure to allow the usage of a subset of the package
 
+**Full Changelog**: [here](https://github.com/finitearth/promptolution/compare/v1.3.2...v1.4.0)
+
 ## Release v1.3.2
 ### What's changed
 #### Added features

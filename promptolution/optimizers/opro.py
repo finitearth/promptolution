@@ -103,10 +103,6 @@ class Opro(BaseOptimizer):
         self.scores = [self.scores[i] for i in keep_indices]
 
     def _pre_optimization_loop(self):
-        self.scores = list(self.task.evaluate(self.prompts, self.predictor))
-        self.meta_prompt = self.meta_prompt_template.replace("<instructions>", self._format_instructions()).replace(
-            "<examples>", self._sample_examples()
-        )
 
     def _step(self) -> List[str]:
         duplicate_prompts = 0
@@ -139,4 +135,5 @@ class Opro(BaseOptimizer):
         if self.verbosity > 1:  # pragma: no cover
             print(f"New meta prompt:\n{self.meta_prompt}\n")
 
+        self._on_train_end()
         return self.prompts
