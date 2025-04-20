@@ -33,8 +33,6 @@ class BaseLLM(ABC):
 
         Args:
             config (Optional[Union[Dict[str, Any], LLMModelConfig]]): Configuration for the LLM.
-            *args: Positional arguments (for backward compatibility).
-            **kwargs: Keyword arguments either for direct parameters or config fields.
         """
         if config is not None:
             config.apply_to(self)
