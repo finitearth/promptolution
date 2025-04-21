@@ -62,17 +62,5 @@ Create API Keys for the models you want to use:
 - Detailed logging and callback system for optimization analysis
 
 
-## Getting Started
-Take a look at our getting started notebook: [getting_started.py](https://github.com/finitearth/promptolution/blob/main/notebooks/getting_started.ipynb)
-## Reproduce our Experiments
 
-We provide scripts and configs for all our experiments. Run experiments based on config via:
-
-```
-poetry run python scripts/experiment_runs.py --experiment "configs/<my_experiment>.ini"
-```
-where `<my_experiment>.ini` is a config based on our templates.
-
-
-
-This project was developed for seminar "AutoML in the age of large pre-trained models" at LMU Munich.
+This project was developed for the "AutoML in the age of large pre-trained models" seminar at LMU Munich.
