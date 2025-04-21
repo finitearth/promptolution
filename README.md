@@ -10,13 +10,23 @@ In addition, this repository contains our experiments for the paper "Towards Cos
 
 This project was developed by [Timo Heiß](https://www.linkedin.com/in/timo-heiss/), [Moritz Schlager](https://www.linkedin.com/in/moritz-schlager/) and [Tom Zehle](https://www.linkedin.com/in/tom-zehle/).
 
+## Getting Started
+Take a look at our getting started notebook: [getting_started.ipynb](https://github.com/finitearth/promptolution/blob/main/notebooks/getting_started.ipynb)
+
 ## Installation
 
 Use pip to install our library:
 
 ```
-pip install promptolution
+pip install promptolution[api]
 ```
+
+If you want to run your prompt optimization locally, either via transformers or vLLM, consider running:
+
+```
+pip install promptolution[vllm,transformers]
+```
+
 
 Alternatively, clone the repository, run
 
