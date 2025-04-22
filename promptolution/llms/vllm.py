@@ -4,6 +4,7 @@
 from logging import Logger
 from typing import List
 
+from promptolution.config import ExperimentConfig
 from promptolution.llms.base_llm import BaseLLM
 
 logger = Logger(__name__)
@@ -12,8 +13,10 @@ try:
     import torch
     from transformers import AutoTokenizer
     from vllm import LLM, SamplingParams
-except ImportError as e:
-    logger.warning(f"Could not import vllm, torch or transformers in vllm.py: {e}")
+
+    imports_successful = True
+except ImportError:
+    imports_successful = False
 
 
 class VLLM(BaseLLM):
@@ -46,7 +49,8 @@ class VLLM(BaseLLM):
         max_model_len: int = 2048,
         trust_remote_code: bool = False,
         seed: int = 42,
-        **kwargs,
+        llm_kwargs: dict = None,
+        config: ExperimentConfig = None,
     ):
         """Initialize the VLLM with a specific model.
 
@@ -63,12 +67,17 @@ class VLLM(BaseLLM):
             max_model_len (int, optional): Maximum sequence length for the model. Defaults to 2048.
             trust_remote_code (bool, optional): Whether to trust remote code. Defaults to False.
             seed (int, optional): Random seed for the model. Defaults to 42.
-            **kwargs: Additional keyword arguments to pass to the LLM class initialization.
+            llm_kwargs (dict, optional): Additional keyword arguments for the LLM. Defaults to None.
+            config (ExperimentConfig, optional): ExperimentConfig overwriting defaults.
 
         Note:
             This method sets up a vLLM engine with specified parameters for efficient inference.
         """
-        super().__init__()
+        if not imports_successful:
+            raise ImportError(
+                "Could not import at least one of the required libraries: torch, transformers, vllm. "
+                "Please ensure they are installed in your environment."
+            )
 
         self.dtype = dtype
         self.tensor_parallel_size = tensor_parallel_size
@@ -81,6 +90,8 @@ class VLLM(BaseLLM):
             temperature=temperature, top_p=top_p, max_tokens=max_generated_tokens, seed=seed
         )
 
+        if llm_kwargs is None:
+            llm_kwargs = {}
         # Initialize the vLLM engine with both explicit parameters and any additional kwargs
         llm_params = {
             "model": model_id,
@@ -92,7 +103,7 @@ class VLLM(BaseLLM):
             "download_dir": model_storage_path,
             "trust_remote_code": self.trust_remote_code,
             "seed": seed,
-            **kwargs,
+            **llm_kwargs,
         }
 
         self.llm = LLM(**llm_params)
@@ -107,6 +118,8 @@ class VLLM(BaseLLM):
 
         # Initialize tokenizer separately for potential pre-processing
         self.tokenizer = AutoTokenizer.from_pretrained(model_id)
+
+        super().__init__(config)
 
     def _get_response(self, prompts: list[str], system_prompts: list[str]) -> list[str]:
         """Generate responses for a list of prompts using the vLLM engine.
@@ -169,8 +182,3 @@ class VLLM(BaseLLM):
             seed (int): Random seed for text generation.
         """
         self.sampling_params.seed = seed
-
-    def __del__(self):
-        """Cleanup method to delete the LLM instance and free up GPU memory."""
-        del self.llm
-        torch.cuda.empty_cache()

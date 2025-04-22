@@ -5,6 +5,8 @@ from typing import List
 
 import numpy as np
 
+from promptolution.config import ExperimentConfig
+
 
 class BaseTask(ABC):
     """Abstract base class for tasks in the promptolution library.
@@ -16,9 +18,10 @@ class BaseTask(ABC):
                   to evaluate prompts using a given predictor.
     """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, config: ExperimentConfig = None):
         """Initialize the BaseTask."""
-        pass
+        if config is not None:
+            config.apply_to(self)
 
     @abstractmethod
     def evaluate(self, prompts: List[str], predictor, system_promtps: List[str] = None) -> np.ndarray:

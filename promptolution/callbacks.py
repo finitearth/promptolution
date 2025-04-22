@@ -1,22 +1,36 @@
 """Callback classes for logging, saving, and tracking optimization progress."""
 
 import os
+from abc import ABC
 from datetime import datetime
 from typing import Literal
 
-import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
 
-class Callback:
-    """Base class for optimization callbacks."""
+class BaseCallback(ABC):
+    """Base class for optimization callbacks.
+
+    Callbacks can be used to monitor the optimization process, save checkpoints,
+    log metrics, or implement early stopping criteria.
+
+    """
+
+    def __init__(self, **kwargs):
+        """Initialize the callback with a configuration.
+
+        Args:
+            config: Configuration for the callback.
+            **kwargs: Additional keyword arguments.
+        """
+        pass
 
     def on_step_end(self, optimizer):
         """Called at the end of each optimization step.
 
         Args:
-        optimizer: The optimizer object that called the callback.
+            optimizer: The optimizer object that called the callback.
 
         Returns:
             Bool: True if the optimization should continue, False if it should stop.
@@ -27,7 +41,7 @@ class Callback:
         """Called at the end of each optimization epoch.
 
         Args:
-        optimizer: The optimizer object that called the callback.
+            optimizer: The optimizer object that called the callback.
 
         Returns:
             Bool: True if the optimization should continue, False if it should stop.
@@ -38,7 +52,7 @@ class Callback:
         """Called at the end of the entire optimization process.
 
         Args:
-        optimizer: The optimizer object that called the callback.
+            optimizer: The optimizer object that called the callback.
 
         Returns:
             Bool: True if the optimization should continue, False if it should stop.
@@ -46,7 +60,7 @@ class Callback:
         return True
 
 
-class LoggerCallback(Callback):
+class LoggerCallback(BaseCallback):
     """Callback for logging optimization progress.
 
     This callback logs information about each step, epoch, and the end of training.
@@ -93,7 +107,7 @@ class LoggerCallback(Callback):
         return True
 
 
-class FileOutputCallback(Callback):
+class FileOutputCallback(BaseCallback):
     """Callback for saving optimization progress to a specified file type.
 
     This callback saves information about each step to a file.
@@ -137,7 +151,7 @@ class FileOutputCallback(Callback):
                 "step": [self.step] * len(optimizer.prompts),
                 "input_tokens": [optimizer.meta_llm.input_token_count] * len(optimizer.prompts),
                 "output_tokens": [optimizer.meta_llm.output_token_count] * len(optimizer.prompts),
-                "time": [datetime.now().total_seconds()] * len(optimizer.prompts),
+                "time": [datetime.now().timestamp()] * len(optimizer.prompts),
                 "score": optimizer.scores,
                 "prompt": optimizer.prompts,
             }
@@ -157,7 +171,7 @@ class FileOutputCallback(Callback):
         return True
 
 
-class BestPromptCallback(Callback):
+class BestPromptCallback(BaseCallback):
     """Callback for tracking the best prompt during optimization.
 
     This callback keeps track of the prompt with the highest score.
@@ -193,7 +207,7 @@ class BestPromptCallback(Callback):
         return self.best_prompt, self.best_score
 
 
-class ProgressBarCallback(Callback):
+class ProgressBarCallback(BaseCallback):
     """Callback for displaying a progress bar during optimization.
 
     This callback uses tqdm to display a progress bar that updates at each step.
@@ -231,7 +245,7 @@ class ProgressBarCallback(Callback):
         return True
 
 
-class TokenCountCallback(Callback):
+class TokenCountCallback(BaseCallback):
     """Callback for stopping optimization based on the total token count."""
 
     def __init__(

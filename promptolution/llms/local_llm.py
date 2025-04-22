@@ -1,12 +1,11 @@
-"""Module for running language models locally using the Hugging Face Transformers library."""
+"""Module for running LLMs locally using the Hugging Face Transformers library."""
 try:
     import torch
     import transformers
-except ImportError as e:
-    import logging
 
-    logger = logging.getLogger(__name__)
-    logger.warning(f"Could not import torch or transformers in local_llm.py: {e}")
+    imports_successful = True
+except ImportError:
+    imports_successful = False
 
 from promptolution.llms.base_llm import BaseLLM
 
@@ -24,19 +23,23 @@ class LocalLLM(BaseLLM):
         get_response: Generate responses for a list of prompts.
     """
 
-    def __init__(self, model_id: str, batch_size=8):
+    def __init__(self, model_id: str, batch_size=8, config=None):
         """Initialize the LocalLLM with a specific model.
 
         Args:
             model_id (str): The identifier of the model to use (e.g., "gpt2", "facebook/opt-1.3b").
             batch_size (int, optional): The batch size for text generation. Defaults to 8.
+            config (ExperimentConfig, optional): ExperimentConfig overwriting defaults.
 
         Note:
             This method sets up a text generation pipeline with bfloat16 precision,
             automatic device mapping, and specific generation parameters.
         """
-        super().__init__()
-
+        if not imports_successful:
+            raise ImportError(
+                "Could not import at least one of the required libraries: torch, transformers. "
+                "Please ensure they are installed in your environment."
+            )
         self.pipeline = transformers.pipeline(
             "text-generation",
             model=model_id,
@@ -49,6 +52,7 @@ class LocalLLM(BaseLLM):
         )
         self.pipeline.tokenizer.pad_token_id = self.pipeline.tokenizer.eos_token_id
         self.pipeline.tokenizer.padding_side = "left"
+        super().__init__(config)
 
     def _get_response(self, prompts: list[str], system_prompts: list[str]) -> list[str]:
         """Generate responses for a list of prompts using the local language model.
@@ -78,8 +82,5 @@ class LocalLLM(BaseLLM):
 
     def __del__(self):
         """Cleanup method to delete the pipeline and free up GPU memory."""
-        try:
-            del self.pipeline
-            torch.cuda.empty_cache()
-        except Exception as e:
-            logger.warning(f"Error during LocalLLM cleanup: {e}")
+        del self.pipeline
+        torch.cuda.empty_cache()

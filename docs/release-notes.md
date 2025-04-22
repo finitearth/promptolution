@@ -1,5 +1,19 @@
 # Release Notes
 
+## Release v1.4.0
+### What's changed
+#### Added features
+* Reworked APILLM to allow for calls to any API that follows the OpenAI API format
+* Added graceful failing in optimization runs, allowing to obtain results after an error
+* Reworked configs to ExperimentConfig, allowing to parse any attributes
+
+### Further Changes:
+* Reworked getting started notebook
+* Added tests for the entire package, covering roughly 80% of the codebase
+* Reworked dependency and import structure to allow the usage of a subset of the package
+
+**Full Changelog**: [here](https://github.com/finitearth/promptolution/compare/v1.3.2...v1.4.0)
+
 ## Release v1.3.2
 ### What's changed
 #### Added features
