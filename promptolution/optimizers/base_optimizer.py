@@ -98,7 +98,6 @@ class BaseOptimizer(ABC):
 
     @abstractmethod
     def _step(self) -> List[str]:
-
         """Perform a single optimization step.
 
         This method should be implemented by concrete optimizer classes to define
