@@ -18,11 +18,20 @@ class ExperimentConfig:
         for key, value in kwargs.items():
             setattr(self, key, value)
 
+    def __setattr__(self, name, value):
+        """Override attribute setting to track used attributes."""
+        # Set the attribute using the standard mechanism
+        object.__setattr__(self, name, value)
+        if not name.startswith("_") and not callable(value):
+            self._used_attributes.add(name)
+
     def __getattribute__(self, name):
         """Override attribute access to track used attributes."""
         # Get the attribute using the standard mechanism
-        value = object.__getattribute__(self, name)
-
+        try:
+            value = object.__getattribute__(self, name)
+        except AttributeError:
+            return None
         if not name.startswith("_") and not callable(value):
             self._used_attributes.add(name)
 
