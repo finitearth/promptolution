@@ -34,13 +34,20 @@ class BasePredictor(ABC):
             config.apply_to(self)
 
     def predict(
-        self, prompts: List[str], xs: np.ndarray, system_prompts: List[str] = None, return_seq: bool = False
+        self,
+        prompts: List[str],
+        xs: np.ndarray,
+        system_prompts: List[str] = None,
+        create_cross_product: bool = True,
+        return_seq: bool = False,
     ) -> np.ndarray:
         """Abstract method to make predictions based on prompts and input data.
 
         Args:
             prompts: Prompt or list of prompts to use for prediction.
             xs: Array of input data.
+            system_prompts: List of system prompts to use for the language model.
+            create_cross_product: Whether to create a cross product of prompts and xs.
             return_seq: Whether to return the generating sequence.
 
         Returns:
@@ -49,9 +56,12 @@ class BasePredictor(ABC):
         if isinstance(prompts, str):
             prompts = [prompts]
 
-        outputs = self.llm.get_response(
-            [prompt + "\n" + x for prompt in prompts for x in xs], system_prompts=system_prompts
-        )
+        if create_cross_product:
+            inputs = [prompt + "\n" + x for prompt in prompts for x in xs]
+        else:
+            inputs = [prompt + "\n" + x for prompt, x in zip(prompts, xs)]
+            system_prompts = [system_prompts] * len(xs)
+        outputs = self.llm.get_response(inputs, system_prompts=system_prompts)
         preds = self._extract_preds(outputs)
 
         shape = (len(prompts), len(xs))
