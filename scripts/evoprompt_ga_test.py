@@ -96,7 +96,6 @@ optimizer = EvoPromptGA(
     initial_prompts=initial_prompts,
     callbacks=callbacks,
     n_eval_samples=args.n_eval_samples,
-    verbosity=2,  # for debugging
 )
 
 best_prompts = optimizer.optimize(n_steps=args.n_steps)

@@ -62,18 +62,9 @@ class EvoPromptGA(BaseOptimizer):
         assert self.selection_mode in ["random", "wheel", "tour"], "Invalid selection mode."
 
     def _pre_optimization_loop(self):
-        # get scores from task
-        if self.verbosity > 1:  # pragma: no cover
-            self.scores, seq = self.task.evaluate(
-                self.prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples, return_seq=True
-            )
-            self.scores = self.scores.tolist()
-            logger.warning(f"Initial scores: {self.scores}")
-            logger.warning(f"Initial sequences: {seq}")
-        else:
-            self.scores = self.task.evaluate(
-                self.prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples
-            ).tolist()
+        self.scores = self.task.evaluate(
+            self.prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples
+        ).tolist()
         # sort prompts by score
         self.prompts = [prompt for _, prompt in sorted(zip(self.scores, self.prompts), reverse=True)]
         self.scores = sorted(self.scores, reverse=True)
@@ -82,22 +73,9 @@ class EvoPromptGA(BaseOptimizer):
         new_prompts = self._crossover(self.prompts, self.scores)
         prompts = self.prompts + new_prompts
 
-        if self.verbosity > 1:  # pragma: no cover
-            logger.warning(f"Prompts: {prompts}")
-
-        # evaluate new prompts
-        if self.verbosity > 1:  # pragma: no cover
-            new_scores, seq = self.task.evaluate(
-                prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples, return_seq=True
-            )
-            new_scores = new_scores.tolist()
-            logger.warning(f"Scores: {new_scores}")
-            logger.warning(f"Sequences: {seq}")
-
-        else:
-            new_scores = self.task.evaluate(
-                new_prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples
-            ).tolist()
+        new_scores = self.task.evaluate(
+            new_prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples
+        ).tolist()
 
         scores = self.scores + new_scores
 
@@ -150,11 +128,6 @@ class EvoPromptGA(BaseOptimizer):
             meta_prompts.append(meta_prompt)
 
         child_prompts = self.meta_llm.get_response(meta_prompts)
-        if self.verbosity > 1:  # pragma: no cover
-            logger.warning("meta_prompts:")
-            logger.warning(meta_prompts)
-            logger.warning("child_prompts:")
-            logger.warning(child_prompts)
         child_prompts = [prompt.split("<prompt>")[-1].split("</prompt>")[0].strip() for prompt in child_prompts]
 
         return child_prompts

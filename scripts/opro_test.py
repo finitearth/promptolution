@@ -94,7 +94,6 @@ optimizer = Opro(
     max_num_instructions=20,
     num_instructions_per_step=8,
     num_few_shots=3,
-    verbosity=2
 )
 
 best_prompts = optimizer.optimize(n_steps=args.n_steps)

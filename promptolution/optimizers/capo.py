@@ -7,6 +7,7 @@ from typing import Callable, List, Tuple
 import numpy as np
 import pandas as pd
 
+from promptolution.config import ExperimentConfig
 from promptolution.llms.base_llm import BaseLLM
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 from promptolution.predictors.base_predictor import BasePredictor
@@ -17,7 +18,10 @@ from promptolution.templates import (
     CAPO_FEWSHOT_TEMPLATE,
     CAPO_MUTATION_TEMPLATE,
 )
+from promptolution.utils.test_statistics import get_test_statistic_func
 from promptolution.utils.token_counter import get_token_counter
+
+logger = getLogger(__name__)
 
 
 class CAPOPrompt:
@@ -53,33 +57,33 @@ class CAPOPrompt:
         return self.construct_prompt()
 
 
-class CAPOptimizer(BaseOptimizer):
+class CAPO(BaseOptimizer):
     """Optimizer that evolves prompt instructions using crossover, mutation, and racing based on evaluation scores and statistical tests."""
 
     def __init__(
         self,
-        initial_prompts: List[str],
+        predictor: BasePredictor,
         task: BaseTask,
         meta_llm: BaseLLM,
-        downstream_llm: BaseLLM,
-        length_penalty: float,
-        crossovers_per_iter: int,
-        upper_shots: int,
-        max_n_blocks_eval: int,
-        test_statistic: Callable,
+        initial_prompts: List[str] = None,
+        crossovers_per_iter: int = 4,
+        upper_shots: int = 5,
+        max_n_blocks_eval: int = 10,
+        test_statistic: str = "paired_t_test",
+        alpha: float = 0.05,
+        length_penalty: float = 0.05,
         df_few_shots: pd.DataFrame = None,
-        shuffle_blocks_per_iter: bool = True,
-        crossover_meta_prompt: str = None,
-        mutation_meta_prompt: str = None,
+        crossover_template: str = None,
+        mutation_template: str = None,
         callbacks: List[Callable] = [],
-        predictor: BasePredictor = None,
+        config: ExperimentConfig = None,
     ):
         """Initializes the CAPOptimizer with various parameters for prompt evolution.
 
         Args:
             initial_prompts (List[str]): Initial prompt instructions.
             task (BaseTask): The task instance containing dataset and description.
-            df_few_shots (pd.DataFrame): DataFrame containing few-shot examples. If None, will pop 20 % of datapoints from task.
+            df_few_shots (pd.DataFrame): DataFrame containing few-shot examples. If None, will pop 10% of datapoints from task.
             meta_llm (BaseLLM): The meta language model for crossover/mutation.
             downstream_llm (BaseLLM): The downstream language model used for responses.
             length_penalty (float): Penalty factor for prompt length.
@@ -88,35 +92,41 @@ class CAPOptimizer(BaseOptimizer):
             p_few_shot_reasoning (float): Probability of generating llm-reasoning for few-shot examples, instead of simply using input-output pairs.
             n_trials_generation_reasoning (int): Number of trials to generate reasoning for few-shot examples.
             max_n_blocks_eval (int): Maximum number of evaluation blocks.
-            test_statistic (Callable): Function to test significance between prompts.
-                Inputs are (score_a, score_b, n_evals) and returns True if A is better.
-            shuffle_blocks_per_iter (bool, optional): Whether to shuffle blocks each
-                iteration. Defaults to True.
-            crossover_meta_prompt (str, optional): Template for crossover instructions.
-            mutation_meta_prompt (str, optional): Template for mutation instructions.
+            test_statistic (str): Statistical test to compare prompt performance. Default is "paired_t_test".
+            alpha (float): Significance level for the statistical test.
+            crossover_template (str, optional): Template for crossover instructions.
+            mutation_template (str, optional): Template for mutation instructions.
             callbacks (List[Callable], optional): Callbacks for optimizer events.
             predictor (BasePredictor, optional): Predictor to evaluate prompt
                 performance.
+            config (ExperimentConfig, optional): Configuration for the optimizer.
         """
-        super().__init__(initial_prompts, task, callbacks, predictor)
-        self.df_few_shots = df_few_shots if df_few_shots is not None else task.pop_datapoints(frac=0.2)
         self.meta_llm = meta_llm
-        self.downstream_llm = downstream_llm
+        self.predictor = predictor
+        self.downstream_llm = predictor.llm
 
-        self.crossover_meta_prompt = crossover_meta_prompt or CAPO_CROSSOVER_TEMPLATE
-        self.mutation_meta_prompt = mutation_meta_prompt or CAPO_MUTATION_TEMPLATE
+        self.crossover_template = crossover_template or CAPO_CROSSOVER_TEMPLATE
+        self.mutation_template = mutation_template or CAPO_MUTATION_TEMPLATE
 
-        self.population_size = len(initial_prompts)
         self.crossovers_per_iter = crossovers_per_iter
         self.upper_shots = upper_shots
         self.max_n_blocks_eval = max_n_blocks_eval
-        self.test_statistic = test_statistic
+        self.test_statistic = get_test_statistic_func(test_statistic)
+        self.alpha = alpha
 
-        self.shuffle_blocks_per_iter = shuffle_blocks_per_iter
         self.length_penalty = length_penalty
-        self.token_counter = get_token_counter(downstream_llm)
+        self.token_counter = get_token_counter(self.downstream_llm)
 
         self.scores = np.empty(0)
+        super().__init__(predictor, task, initial_prompts, callbacks, config)
+        self.df_few_shots = df_few_shots or task.pop_datapoints(frac=0.1)
+        if self.max_n_blocks_eval > self.task.n_blocks:
+            logger.warning(
+                f"max_n_blocks_eval ({self.max_n_blocks_eval}) is larger than the number of blocks ({self.task.n_blocks})."
+                f" Setting max_n_blocks_eval to {self.task.n_blocks}."
+            )
+            self.max_n_blocks_eval = self.task.n_blocks
+        self.population_size = len(self.prompts)
 
     def _initialize_population(self, initial_prompts: List[str]) -> List[CAPOPrompt]:
         """Initializes the population of Prompt objects from initial instructions.
@@ -138,9 +148,10 @@ class CAPOptimizer(BaseOptimizer):
     def _create_few_shot_examples(self, instruction: str, num_examples: int) -> List[Tuple[str, str]]:
         if num_examples == 0:
             return []
+
         few_shot_samples = self.df_few_shots.sample(num_examples, replace=False)
-        sample_inputs = few_shot_samples["input"].values
-        sample_targets = few_shot_samples["target"].values
+        sample_inputs = few_shot_samples[self.task.x_column].values
+        sample_targets = few_shot_samples[self.task.y_column].values
         few_shots = [
             CAPO_FEWSHOT_TEMPLATE.replace("<input>", i).replace(
                 "<output>", f"{self.predictor.begin_marker}{t}{self.predictor.end_marker}"
@@ -179,9 +190,8 @@ class CAPOptimizer(BaseOptimizer):
         for _ in range(self.crossovers_per_iter):
             mother, father = random.sample(parents, 2)
             crossover_prompt = (
-                self.crossover_meta_prompt.replace("<mother>", mother.instruction_text)
+                self.crossover_template.replace("<mother>", mother.instruction_text)
                 .replace("<father>", father.instruction_text)
-                .replace("<task_desc>", self.task.description)
                 .strip()
             )
             # collect all crossover prompts then pass them bundled to the meta llm (speedup)
@@ -211,10 +221,7 @@ class CAPOptimizer(BaseOptimizer):
         """
         # collect all mutation prompts then pass them bundled to the meta llm (speedup)
         mutation_prompts = [
-            self.mutation_meta_prompt.replace("<instruction>", prompt.instruction_text).replace(
-                "<task_desc>", self.task.description
-            )
-            for prompt in offsprings
+            self.mutation_template.replace("<instruction>", prompt.instruction_text) for prompt in offsprings
         ]
         new_instructions = self.meta_llm.get_response(mutation_prompts)
 
@@ -246,18 +253,17 @@ class CAPOptimizer(BaseOptimizer):
         Returns:
             List[Prompt]: List of surviving prompts after racing.
         """
-        if self.shuffle_blocks_per_iter:
-            random.shuffle(self.task.blocks)
-
+        self.task.reset_blocks()
         block_scores = []
-        for i, (block_id, _) in enumerate(self.task.blocks):
+        i = 0
+        while len(candidates) > k and i < self.max_n_blocks_eval:
             # new_scores shape: (n_candidates, n_samples)
             new_scores = self.task.evaluate(
-                [c.construct_prompt() for c in candidates], block_id, self.predictor, return_agg_scores=False
+                [c.construct_prompt() for c in candidates], self.predictor, return_agg_scores=False
             )
 
             # subtract length penalty
-            prompt_lengths = np.array([self.token_counter(c) for c in candidates])
+            prompt_lengths = np.array([self.token_counter(c.construct_prompt()) for c in candidates])
             rel_prompt_lengths = prompt_lengths / self.max_prompt_length
 
             new_scores = new_scores - self.length_penalty * rel_prompt_lengths[:, None]
@@ -276,12 +282,12 @@ class CAPOptimizer(BaseOptimizer):
             candidates = list(compress(candidates, n_better < k))
             block_scores = [bs[n_better < k] for bs in block_scores]
 
-            if len(candidates) <= k or i == self.max_n_blocks_eval:
-                break
+            i += 1
+            self.task.increment_blocks()
 
         avg_scores = self.task.evaluate(
-            [c.construct_prompt() for c in candidates]
-        )  # TODO: make sure its getting all the evals!!
+            [c.construct_prompt() for c in candidates], self.predictor, strategy="evaluated"
+        )
         order = np.argsort(-avg_scores)[:k]
         candidates = [candidates[i] for i in order]
         self.scores = avg_scores[order]
@@ -291,7 +297,8 @@ class CAPOptimizer(BaseOptimizer):
     def _pre_optimization_loop(self):
         self.prompt_objects = self._initialize_population(self.prompts)
         self.prompts = [p.construct_prompt() for p in self.prompt_objects]
-        self.max_prompt_length = max(self.token_counter(p) for p in self.prompt_objects)
+        self.max_prompt_length = max(self.token_counter(p) for p in self.prompts)
+        self.task.reset_blocks()
 
     def _step(self) -> List[str]:
         """Perform a single optimization step.

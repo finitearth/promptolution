@@ -114,8 +114,6 @@ class Opro(BaseOptimizer):
             generation_seed = np.random.randint(0, int(1e9))
             self.meta_llm.set_generation_seed(generation_seed)
 
-            if self.verbosity > 1:  # pragma: no cover
-                print(f"Seed: {generation_seed}")
             response = self.meta_llm.get_response([self.meta_prompt])[0]
 
             prompt = response.split("<prompt>")[-1].split("</prompt>")[0].strip()
@@ -128,16 +126,10 @@ class Opro(BaseOptimizer):
 
             self._add_prompt_and_score(prompt, score)
 
-            if self.verbosity > 1:  # pragma: no cover
-                print(f"New Instruction: {prompt}\nScore: {score}\n")
-
         # Update meta prompt
         self.meta_prompt = self.meta_prompt_template.replace("<instructions>", self._format_instructions()).replace(
             "<examples>", self._sample_examples()
         )
-
-        if self.verbosity > 1:  # pragma: no cover
-            print(f"New meta prompt:\n{self.meta_prompt}\n")
 
         self._on_train_end()
         return self.prompts

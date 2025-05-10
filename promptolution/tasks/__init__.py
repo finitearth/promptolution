@@ -18,4 +18,4 @@ def get_task(df: pd.DataFrame, config: ExperimentConfig) -> BaseTask:
     Returns:
         BaseTask: An instance of a task class based on the provided DataFrame and configuration.
     """
-    return ClassificationTask(df, config)
+    return ClassificationTask(df, config=config)

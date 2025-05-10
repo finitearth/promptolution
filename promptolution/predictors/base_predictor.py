@@ -60,14 +60,14 @@ class BasePredictor(ABC):
             inputs = [prompt + "\n" + x for prompt in prompts for x in xs]
         else:
             inputs = [prompt + "\n" + x for prompt, x in zip(prompts, xs)]
-            system_prompts = [system_prompts] * len(xs)
+
         outputs = self.llm.get_response(inputs, system_prompts=system_prompts)
         preds = self._extract_preds(outputs)
-
-        shape = (len(prompts), len(xs))
-        outputs = np.array(outputs).reshape(shape)
-        preds = preds.reshape(shape)
-        xs = np.array(xs)
+        if create_cross_product:
+            shape = (len(prompts), len(xs))
+            outputs = np.array(outputs).reshape(shape)
+            preds = preds.reshape(shape)
+            xs = np.array(xs)
 
         if return_seq:
             seqs = []
