@@ -11,8 +11,7 @@ logger = Logger(__name__)
 
 try:
     from transformers import AutoTokenizer
-
-    from promptolution.llms.vllm import LLM, SamplingParams
+    from vllm import LLM, SamplingParams
 
     imports_successful = True
 except ImportError:

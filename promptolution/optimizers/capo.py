@@ -160,11 +160,10 @@ class CAPO(BaseOptimizer):
         ]
         # Select partition of the examples to generate reasoning from downstream model
         preds, seqs = self.predictor.predict(
-            instruction,
+            [instruction] * num_examples,
             sample_inputs,
             return_seq=True,
         )
-        preds, seqs = preds.reshape(num_examples), seqs.reshape(num_examples)
 
         # Check which predictions are correct and get a single one per example
         for j in range(num_examples):
