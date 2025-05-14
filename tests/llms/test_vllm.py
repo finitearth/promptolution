@@ -1,6 +1,5 @@
 import pytest
 from unittest.mock import MagicMock, patch
-
 from promptolution.llms.vllm import VLLM
 
 @pytest.fixture
@@ -9,8 +8,7 @@ def mock_vllm_dependencies():
     # Mock the key components
     with patch('promptolution.llms.vllm.LLM') as mock_llm_class, \
          patch('promptolution.llms.vllm.SamplingParams') as mock_sampling_params, \
-         patch('promptolution.llms.vllm.AutoTokenizer') as mock_tokenizer_class, \
-         patch('promptolution.llms.vllm.torch') as mock_torch:
+         patch('promptolution.llms.vllm.AutoTokenizer') as mock_tokenizer_class:
         
         # Create and configure mock LLM
         mock_llm = MagicMock()

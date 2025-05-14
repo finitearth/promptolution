@@ -36,16 +36,15 @@ def mock_predictor_with_llm(mock_llm_for_predictor):
 def test_predictor_predict_flow(mock_predictor_with_llm):
     """Test the basic prediction flow from prompt to final prediction."""
     # Input data
-    prompts = ["Classify this text:"]
+    prompts = ["Classify this text:"] * 2
     xs = np.array(["I love this product!", "I hate this product!"])
     
     # Call predict
     predictions = mock_predictor_with_llm.predict(prompts, xs)
-    
     # Verify shape and content of predictions
-    assert predictions.shape == (1, 2)
-    assert predictions[0, 0] == "positive"
-    assert predictions[0, 1] == "negative"
+    assert predictions.shape == (2,)
+    assert predictions[0] == "positive"
+    assert predictions[1] == "negative"
     
     # Verify LLM was called with correct prompts
     assert len(mock_predictor_with_llm.llm.call_history) == 1
@@ -65,20 +64,20 @@ def test_predictor_with_return_seq(mock_predictor_with_llm):
     predictions, sequences = mock_predictor_with_llm.predict(prompts, xs, return_seq=True)
     
     # Verify predictions
-    assert predictions.shape == (1, 1)
-    assert predictions[0, 0] == "neutral"
-    
+    assert predictions.shape == (1,)
+    assert predictions[0] == "neutral"
+
     # Verify sequences
     assert len(sequences) == 1
-    assert isinstance(sequences[0], np.ndarray)
-    assert "This product is okay." in sequences[0][0]
+    assert isinstance(sequences, np.ndarray)
+    assert "This product is okay." in sequences[0]
 
 
 def test_multiple_prompts(mock_predictor_with_llm):
     """Test prediction with multiple prompts."""
     # Input data with multiple prompts
     prompts = ["Classify this text:", "Rate this text:"]
-    xs = np.array(["I love this product!"])
+    xs = np.array(["I love this product!"] * len(prompts))
     
     # Mock LLM responses for the second prompt
     mock_predictor_with_llm.llm.predetermined_responses.update({
@@ -94,6 +93,6 @@ def test_multiple_prompts(mock_predictor_with_llm):
     predictions = mock_predictor_with_llm.predict(prompts, xs)
     
     # Verify shape and content
-    assert predictions.shape == (2, 1)
-    assert predictions[0, 0] == "positive"  # First prompt result
-    assert predictions[1, 0] == "positive"  # Second prompt result
+    assert predictions.shape == (2,)
+    assert predictions[0] == "positive"  # First prompt result
+    assert predictions[1] == "positive"  # Second prompt result

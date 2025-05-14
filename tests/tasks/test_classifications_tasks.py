@@ -56,10 +56,23 @@ def classification_task(sample_classification_df):
     return ClassificationTask(
         df=sample_classification_df,
         description="Sentiment classification task",
-        initial_prompts=initial_prompts,
         x_column="x",
         y_column="y",
-        metric=accuracy_score
+        metric=accuracy_score,
+        subsample_strategy="full"
+    )
+
+@pytest.fixture
+def classification_task_with_subsampling(sample_classification_df):
+    """Fixture providing a ClassificationTask instance with subsampling."""
+    return ClassificationTask(
+        df=sample_classification_df,
+        description="Sentiment classification task",
+        x_column="x",
+        y_column="y",
+        metric=accuracy_score,
+        subsample_strategy="subsample",
+        n_subsamples=2
     )
 
 
@@ -77,7 +90,6 @@ def test_classification_task_initialization(sample_classification_df):
     task = ClassificationTask(
         df=sample_classification_df,
         description="Sentiment classification task",
-        initial_prompts=["Classify:"],
         x_column="x",
         y_column="y"
     )
@@ -88,7 +100,6 @@ def test_classification_task_initialization(sample_classification_df):
     assert set(task.classes) == set(["positive", "neutral", "negative"])
     assert len(task.xs) == 5
     assert len(task.ys) == 5
-    assert task.initial_prompts == ["Classify:"]
     assert task.metric == accuracy_score
 
 
@@ -112,17 +123,14 @@ def test_task_evaluate(classification_task, classifier_predictor):
     assert all(0 <= score <= 1 for score in scores)
 
 
-def test_task_evaluate_with_subsampling(classification_task, classifier_predictor):
+def test_task_evaluate_with_subsampling(classification_task_with_subsampling, classifier_predictor):
     """Test the evaluate method with subsampling."""
     prompts = ["Classify sentiment:"]
     
     # Evaluate with subsampling
-    n_samples = 3
-    scores = classification_task.evaluate(
+    scores = classification_task_with_subsampling.evaluate(
         prompts, 
         classifier_predictor,
-        n_samples=n_samples,
-        subsample=True
     )
     
     # Verify scores
@@ -132,19 +140,15 @@ def test_task_evaluate_with_subsampling(classification_task, classifier_predicto
     with pytest.raises(AssertionError, match=r'.*Arrays are not equal.*'):
         # Use a different random seed to force different subsampling
         np.random.seed(42)
-        scores1 = classification_task.evaluate(
+        scores1 = classification_task_with_subsampling.evaluate(
             prompts, 
             classifier_predictor,
-            n_samples=n_samples,
-            subsample=True
         )
         
         np.random.seed(43)
-        scores2 = classification_task.evaluate(
+        scores2 = classification_task_with_subsampling.evaluate(
             prompts, 
             classifier_predictor,
-            n_samples=n_samples,
-            subsample=True
         )
         
         # This should fail because the subsamples should be different
@@ -159,15 +163,12 @@ def test_task_evaluate_with_return_seq(classification_task, classifier_predictor
     scores, seqs = classification_task.evaluate(
         prompts, 
         classifier_predictor, 
-        n_samples=2,
-        subsample=True,
         return_seq=True
     )
     
     # Verify scores and sequences
     assert scores.shape == (1,)  # One score per prompt
     assert len(seqs) == 1  # One list of sequences per prompt
-    assert len(seqs[0]) == 2  # Two sequences per prompt (n_samples=2)
     
     # Check that sequences contain input text
     for seq in seqs[0]:
@@ -192,7 +193,8 @@ def test_task_evaluate_with_system_prompts(classification_task, classifier_predi
     scores = classification_task.evaluate(
         prompts, 
         classifier_predictor,
-        system_prompts=system_prompts
+        system_prompts=system_prompts,
+        return_agg_scores=True
     )
     
     # Verify scores

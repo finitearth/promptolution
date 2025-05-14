@@ -45,24 +45,24 @@ def test_first_occurrence_classificator(mock_llm_for_first_occurrence, sentiment
     )
     
     # Test with multiple inputs
-    prompts = ["Classify:"]
     xs = np.array(["I love this product!", "I hate this product!", "This product is okay."])
+    prompts = ["Classify:"] * len(xs)
     
     # Make predictions
     predictions = classifier.predict(prompts, xs)
     
     # Verify shape and content
-    assert predictions.shape == (1, 3)
-    assert predictions[0, 0] == "positive"
-    assert predictions[0, 1] == "negative"
-    assert predictions[0, 2] == "neutral"
+    assert predictions.shape == (3,)
+    assert predictions[0] == "positive"
+    assert predictions[1] == "negative"
+    assert predictions[2] == "neutral"
     
     # Test with input that doesn't contain a class directly
     ambiguous_input = np.array(["Interesting product"])
-    ambiguous_predictions = classifier.predict(prompts, ambiguous_input)
+    ambiguous_predictions = classifier.predict(prompts[0], ambiguous_input)
     
     # Should default to first class if no match
-    assert ambiguous_predictions[0, 0] == "positive"
+    assert ambiguous_predictions[0] == "positive"
 
 
 def test_marker_based_classificator(mock_llm_for_marker_based, sentiment_classes):
@@ -76,24 +76,24 @@ def test_marker_based_classificator(mock_llm_for_marker_based, sentiment_classes
     )
     
     # Test with multiple inputs
-    prompts = ["Classify:"]
     xs = np.array(["I love this product!", "I hate this product!", "This product is okay."])
+    prompts = ["Classify:"] * len(xs)
     
     # Make predictions
     predictions = classifier.predict(prompts, xs)
     
     # Verify shape and content
-    assert predictions.shape == (1, 3)
-    assert predictions[0, 0] == "positive"
-    assert predictions[0, 1] == "negative"
-    assert predictions[0, 2] == "neutral"
-    
+    assert predictions.shape == (3,)
+    assert predictions[0] == "positive"
+    assert predictions[1] == "negative"
+    assert predictions[2] == "neutral"
+
     # Test with invalid class label
-    invalid_input = np.array(["Broken item"])
+    invalid_input = np.array(["Broken item"] * len(prompts))
     invalid_predictions = classifier.predict(prompts, invalid_input)
     
     # Should default to first class if invalid
-    assert invalid_predictions[0, 0] == "positive"
+    assert invalid_predictions[0] == "positive"
 
 
 def test_marker_based_without_classes(mock_llm_for_marker_based):
@@ -107,16 +107,16 @@ def test_marker_based_without_classes(mock_llm_for_marker_based):
     )
     
     # Test with multiple inputs
-    prompts = ["Classify:"]
     xs = np.array(["I love this product!", "Broken item"])
+    prompts = ["Classify:"] * len(xs)
     
     # Make predictions
     predictions = classifier.predict(prompts, xs)
     
     # Verify shape and content - should accept any value between markers
-    assert predictions.shape == (1, 2)
-    assert predictions[0, 0] == "positive"
-    assert predictions[0, 1] == "bad"  # Should accept "bad" as it's between markers
+    assert predictions.shape == (2,)
+    assert predictions[0] == "positive"
+    assert predictions[1] == "bad"  # Should accept "bad" as it's between markers
 
 
 def test_multiple_prompts_with_classificators(mock_llm_for_first_occurrence, sentiment_classes):
@@ -134,18 +134,18 @@ def test_multiple_prompts_with_classificators(mock_llm_for_first_occurrence, sen
     })
     
     # Test with multiple prompts
-    prompts = ["Classify:", "Rate:"]
-    xs = np.array(["I love this product!", "I hate this product!"])
+    prompts = ["Classify:", "Classify:", "Rate:", "Rate:"]
+    xs = np.array(["I love this product!", "I hate this product!"] * 2)
     
     # Make predictions
     predictions = classifier.predict(prompts, xs)
     
     # Verify shape and content
-    assert predictions.shape == (2, 2)  # (n_prompts, n_samples)
-    assert predictions[0, 0] == "positive"  # First prompt, first sample
-    assert predictions[0, 1] == "negative"  # First prompt, second sample
-    assert predictions[1, 0] == "positive"  # Second prompt, first sample
-    assert predictions[1, 1] == "negative"  # Second prompt, second sample
+    assert predictions.shape == (4,) 
+    assert predictions[0] == "positive"  # First prompt, first sample
+    assert predictions[1] == "negative"  # First prompt, second sample
+    assert predictions[2] == "positive"  # Second prompt, first sample
+    assert predictions[3] == "negative"  # Second prompt, second sample
 
 
 def test_sequence_return_with_classificators(mock_llm_for_marker_based, sentiment_classes):
@@ -164,11 +164,10 @@ def test_sequence_return_with_classificators(mock_llm_for_marker_based, sentimen
     predictions, sequences = classifier.predict(prompts, xs, return_seq=True)
     
     # Verify predictions
-    assert predictions.shape == (1, 1)
-    assert predictions[0, 0] == "positive"
-    
+    assert predictions.shape == (1,)
+    assert predictions[0] == "positive"
+
     # Verify sequences
     assert len(sequences) == 1
-    assert len(sequences[0]) == 1
-    assert "I love this product!" in sequences[0][0]
-    assert "Let me analyze this..." in sequences[0][0]
+    assert "I love this product!" in sequences[0]
+    assert "Let me analyze this..." in sequences[0]

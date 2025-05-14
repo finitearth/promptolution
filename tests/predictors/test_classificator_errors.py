@@ -36,4 +36,4 @@ def test_marker_based_missing_markers():
     xs = np.array(["Missing markers"])
     predictions = classifier.predict(prompts, xs)
     
-    assert predictions[0, 0] == "positive"  # Should default to first class
+    assert predictions[0] == "positive"  # Should default to first class

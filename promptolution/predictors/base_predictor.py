@@ -38,7 +38,6 @@ class BasePredictor(ABC):
         prompts: List[str],
         xs: np.ndarray,
         system_prompts: List[str] = None,
-        create_cross_product: bool = True,
         return_seq: bool = False,
     ) -> np.ndarray:
         """Abstract method to make predictions based on prompts and input data.
@@ -56,29 +55,15 @@ class BasePredictor(ABC):
         if isinstance(prompts, str):
             prompts = [prompts]
 
-        if create_cross_product:
-            inputs = [prompt + "\n" + x for prompt in prompts for x in xs]
-        else:
-            inputs = [prompt + "\n" + x for prompt, x in zip(prompts, xs)]
-
+        inputs = [prompt + "\n" + x for prompt, x in zip(prompts, xs)]
         outputs = self.llm.get_response(inputs, system_prompts=system_prompts)
         preds = self._extract_preds(outputs)
-        if create_cross_product:
-            shape = (len(prompts), len(xs))
-            outputs = np.array(outputs).reshape(shape)
-            preds = preds.reshape(shape)
-            xs = np.array(xs)
 
         if return_seq:
-            seqs = []
-            for output in outputs:
-                seqs.append([f"{x}\n{out}" for x, out in zip(xs, output)])
-
+            seqs = [f"{x}\n{out}" for x, out in zip(xs, outputs)]
             seqs = np.array(seqs)
 
-            return preds, seqs
-
-        return preds
+        return preds if not return_seq else (preds, seqs)
 
     @abstractmethod
     def _extract_preds(self, preds: List[str], shape: Tuple[int, int]) -> np.ndarray:

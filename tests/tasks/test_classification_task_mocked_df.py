@@ -31,7 +31,6 @@ def test_task_with_mocked_dataframe(mock_dataframe):
     task = ClassificationTask(
         df=mock_dataframe,
         description="Mocked DataFrame test",
-        initial_prompts=["Classify:"],
         x_column="x",
         y_column="y"
     )
@@ -48,10 +47,10 @@ def test_task_with_mocked_dataframe(mock_dataframe):
     )
     
     # Override predict to return controlled values
-    mock_predictor.predict = MagicMock(return_value=np.array([["positive", "negative", "neutral"]]))
+    mock_predictor.predict = MagicMock(return_value=np.array(["positive", "negative", "neutral"]))
     
     # Evaluate
-    scores = task.evaluate(["Classify:"], mock_predictor)
+    scores = task.evaluate(["Classify:"], mock_predictor, return_agg_scores=True)
     
     # Mock predictor.predict should have been called once
     mock_predictor.predict.assert_called_once()

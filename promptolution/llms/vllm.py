@@ -10,9 +10,9 @@ from promptolution.llms.base_llm import BaseLLM
 logger = Logger(__name__)
 
 try:
-    import torch
     from transformers import AutoTokenizer
-    from vllm import LLM, SamplingParams
+
+    from promptolution.llms.vllm import LLM, SamplingParams
 
     imports_successful = True
 except ImportError:
@@ -75,7 +75,7 @@ class VLLM(BaseLLM):
         """
         if not imports_successful:
             raise ImportError(
-                "Could not import at least one of the required libraries: torch, transformers, vllm. "
+                "Could not import at least one of the required libraries: transformers, vllm. "
                 "Please ensure they are installed in your environment."
             )
 

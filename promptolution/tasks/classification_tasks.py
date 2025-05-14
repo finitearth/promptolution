@@ -1,7 +1,6 @@
 """Module for classification tasks."""
 
-from itertools import product
-from typing import Callable, List, Tuple
+from typing import Any, Callable, List, Tuple, Union
 
 import numpy as np
 import pandas as pd
@@ -35,7 +34,6 @@ class ClassificationTask(BaseTask):
         self,
         df: pd.DataFrame,
         description: str = None,
-        initial_prompts: List[str] = None,
         x_column: str = "x",
         y_column: str = "y",
         n_subsamples: int = 30,
@@ -49,7 +47,6 @@ class ClassificationTask(BaseTask):
         Args:
             df (pd.DataFrame): Input DataFrame containing the data
             description (str): Description of the task
-            initial_prompts (List[str], optional): Initial set of prompts to start optimization with. Defaults to None.
             x_column (str, optional): Name of the column containing input texts. Defaults to "x".
             y_column (str, optional): Name of the column containing labels. Defaults to "y".
             n_subsamples (int, optional): Number of subsamples to use. No subsampling if None. Defaults to None.
@@ -59,7 +56,6 @@ class ClassificationTask(BaseTask):
             config (ExperimentConfig, optional): ExperimentConfig overwriting the defaults.
         """
         self.description = description
-        self.initial_prompts = initial_prompts
         self.metric = metric
 
         self.x_column = x_column
@@ -107,101 +103,94 @@ class ClassificationTask(BaseTask):
             indices = np.arange(self.block_idx * self.block_size, (self.block_idx + 1) * self.block_size)
             return self.xs[indices], self.ys[indices]
 
-    def _find_evaluated(
-        self, prompts: List[str], xs: np.ndarray, ys: np.ndarray
-    ) -> Tuple[List[Tuple[str, str]], List[Tuple[str, str]]]:
-        """Find already evaluated prompts in the cache.
+        else:
+            raise ValueError(f"Unknown subsampling strategy: '{strategy}")
 
-        Args:
-            prompts (List[str]): List of prompts to check.
-            xs (np.ndarray): Input data to evaluate.
-            ys (np.ndarray): Labels to evaluate.
+    def _prepare_batch(
+        self, prompts: List[str], xs: np.ndarray, ys: np.ndarray, strategy: str
+    ) -> List[Tuple[str, str, str]]:
+        """Generates (prompt, x, y) keys that require prediction.
 
-        Returns:
-            Tuple[List[Tuple[str, str]], List[Tuple[str, str]]]: A tuple containing two lists:
-                - evaluated: List of prompts and xs that have already been evaluated.
-                - to_evaluate: List of prompts and xs that need to be evaluated.
+        If strategy is "evaluated", returns an empty list.
+        Otherwise, returns keys not found in eval_cache.
         """
-        evaluated = []
-        to_evaluate = []
+        if strategy == "evaluated":
+            return []
 
+        keys_to_predict = []
         for prompt in prompts:
             for x, y in zip(xs, ys):
-                if (prompt, x, y) in self.eval_cache:
-                    evaluated.append((prompt, x, y))
-                else:
-                    to_evaluate.append((prompt, x, y))
+                cache_key = (prompt, x, y)
+                if cache_key not in self.eval_cache:
+                    keys_to_predict.append(cache_key)
+        return keys_to_predict
 
-        return evaluated, to_evaluate
+    def _collect_results_from_cache(
+        self,
+        prompts: List[str],
+        xs: np.ndarray,
+        ys: np.ndarray,
+        return_agg_scores: bool,
+        return_seq: bool,
+    ) -> Union[np.ndarray, Tuple[np.ndarray, Union[List[Any], np.ndarray]]]:
+        """Collects all results for the current batch from the cache and formats them."""
+        scores = []
+        seqs = []
+
+        for prompt in prompts:
+            cache_keys = [(prompt, x, y) for x, y in zip(xs, ys)]
+            scores += [[self.eval_cache.get(key) for key in cache_keys]]
+            seqs += [[self.seq_cache.get(key) for key in cache_keys]]
+        if return_agg_scores:
+            scores = [np.mean(s) for s in scores]
+        scores = np.array(scores)
+        seqs = np.array(seqs)
+
+        return scores if not return_seq else (scores, seqs)
 
     def evaluate(
         self,
-        prompts: List[str],
+        prompts: Union[str, List[str]],
         predictor: BasePredictor,
         system_prompts: List[str] = None,
         return_agg_scores: bool = True,
         return_seq: bool = False,
         strategy: str = None,
-    ) -> np.ndarray:
+    ) -> Union[np.ndarray, Tuple[np.ndarray, Union[List[Any], np.ndarray]]]:
         """Evaluate a set of prompts using a given predictor.
 
-        Args:
-            prompts (List[str]): List of prompts to evaluate.
-            predictor (BasePredictor): Predictor to use for evaluation.
-            system_prompts (List[str], optional): List of system prompts to evaluate. Defaults to None.
-            If set to true, samples a different subset per call. Defaults to False.
-            return_agg_scores (bool, optional): whether to return the aggregated scores. Defaults to True.
-            return_seq (bool, optional): whether to return the generating sequence.
-                Defaults to False.
-            strategy (str, optional): Overwrite the subsampling strategy. Defaults to None.
-
-        Returns:
-            np.ndarray: Array of accuracy scores for each prompt.
+        This method orchestrates subsampling, prediction, caching, and result collection.
         """
-        if isinstance(prompts, str):
-            prompts = [prompts]
+        prompts = [prompts] if isinstance(prompts, str) else prompts
+        strategy = strategy or self.subsample_strategy
 
         xs, ys = self.subsample(strategy=strategy)
-
-        # check if we already evaluated this prompt and x
-        evaluated, to_evaluate = self._find_evaluated(prompts, xs, ys)
-
-        if strategy == "evaluated":
-            to_evaluate = []
-        # evaluate the remaining prompts
-        prompts_to_evaluate, xs_to_evaluate, _ = zip(*to_evaluate) if to_evaluate else ([], [], [])
+        batches = self._prepare_batch(prompts, xs, ys, strategy)
+        prompts_to_evaluate, xs_to_evaluate, ys_to_evaluate = zip(*batches) if batches else ([], [], [])
 
         preds = predictor.predict(
             prompts=prompts_to_evaluate,
             xs=xs_to_evaluate,
             system_prompts=system_prompts,
             return_seq=return_seq,
-            create_cross_product=False,
         )
-        if len(to_evaluate) > 0:
-            for prompt_xy, pred in zip(to_evaluate, preds):
-                _, _, y = prompt_xy
-                if return_seq:
-                    pred, seq = pred
-                    self.seq_cache[prompt_xy] = seq
-                self.eval_cache[prompt_xy] = self.metric([y], [pred])
-
-        # get scores in the same order as the input prompts
-        scores = [
-            [self.eval_cache[(prompt, x, y)] for x, y in zip(xs, ys) if (prompt, x, y) in self.eval_cache]
-            for prompt in prompts
-        ]
-
-        if return_agg_scores:
-            scores = [np.mean(score) for score in scores]
-
-        scores = np.asarray(scores)
 
         if return_seq:
-            seqs = [self.seq_cache[prompt_xy] for prompt_xy in evaluated + to_evaluate]
-            return scores, seqs
+            preds, seqs = preds
 
-        return scores
+        for i, cache_key in enumerate(batches):
+            y_pred, y_true = preds[i], ys_to_evaluate[i]
+            if return_seq:
+                self.seq_cache[cache_key] = seqs[i]
+            self.eval_cache[cache_key] = self.metric([y_pred], [y_true])
+
+        return self._collect_results_from_cache(
+            prompts,
+            xs,
+            ys,
+            return_agg_scores,
+            return_seq,
+        )
 
     def pop_datapoints(self, n: int = None, frac: float = None) -> pd.DataFrame:
         """Pop a number of datapoints from the dataset.
