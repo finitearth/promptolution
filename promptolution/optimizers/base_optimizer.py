@@ -75,7 +75,6 @@ class BaseOptimizer(ABC):
                 # exit training loop and gracefully fail
                 logger.error(f"Error during optimization step: {e}")
                 logger.error("Exiting optimization loop.")
-                raise e
                 break
 
             # Callbacks at the end of each step

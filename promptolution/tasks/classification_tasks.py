@@ -142,7 +142,7 @@ class ClassificationTask(BaseTask):
             scores += [[self.eval_cache.get(key) for key in cache_keys]]
             seqs += [[self.seq_cache.get(key) for key in cache_keys]]
         if return_agg_scores:
-            scores = [np.mean(s) for s in scores if s is not None]
+            scores = [np.nanmean(s) for s in scores]
         scores = np.array(scores)
         seqs = np.array(seqs)
 
