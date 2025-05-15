@@ -58,7 +58,13 @@ class CAPOPrompt:
 
 
 class CAPO(BaseOptimizer):
-    """Optimizer that evolves prompt instructions using crossover, mutation, and racing based on evaluation scores and statistical tests."""
+    """CAPO: Cost-Aware Prompt Optimization.
+
+    This class implements an evolutionary algorithm for optimizing prompts in large language models
+    by incorporating racing techniques and multi-objective optimization. It uses crossover, mutation,
+    and racing based on evaluation scores and statistical tests to improve efficiency while balancing
+    performance with prompt length. It is adapted from the paper "CAPO: Cost-Aware Prompt Optimization" by Zehle et al., 2025.
+    """
 
     def __init__(
         self,
