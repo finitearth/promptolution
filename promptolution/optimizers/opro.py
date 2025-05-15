@@ -131,5 +131,4 @@ class Opro(BaseOptimizer):
             "<examples>", self._sample_examples()
         )
 
-        self._on_train_end()
         return self.prompts

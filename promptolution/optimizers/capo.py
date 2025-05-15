@@ -119,7 +119,7 @@ class CAPO(BaseOptimizer):
 
         self.scores = np.empty(0)
         super().__init__(predictor, task, initial_prompts, callbacks, config)
-        self.df_few_shots = df_few_shots or task.pop_datapoints(frac=0.1)
+        self.df_few_shots = df_few_shots if df_few_shots is not None else task.pop_datapoints(frac=0.1)
         if self.max_n_blocks_eval > self.task.n_blocks:
             logger.warning(
                 f"max_n_blocks_eval ({self.max_n_blocks_eval}) is larger than the number of blocks ({self.task.n_blocks})."

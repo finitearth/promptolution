@@ -139,7 +139,7 @@ class ClassificationTask(BaseTask):
 
         for prompt in prompts:
             cache_keys = [(prompt, x, y) for x, y in zip(xs, ys)]
-            scores += [[self.eval_cache.get(key) for key in cache_keys]]
+            scores += [[self.eval_cache.get(key, np.nan) for key in cache_keys]]
             seqs += [[self.seq_cache.get(key) for key in cache_keys]]
         if return_agg_scores:
             scores = [np.nanmean(s) for s in scores]

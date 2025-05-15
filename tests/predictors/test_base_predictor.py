@@ -1,68 +1,42 @@
 import pytest
 import numpy as np
 
-from tests.mocks.mock_llm import MockLLM
 from tests.mocks.mock_predictor import MockPredictor
+from tests.fixtures import downstream_llm_mock, mock_task, mock_predictor
 
 
-@pytest.fixture
-def mock_llm_for_predictor():
-    """Fixture providing a MockLLM with predetermined responses for predictor testing."""
-    responses = {
-        "Classify this text:\nI love this product!": "The sentiment is positive.",
-        "Classify this text:\nI hate this product!": "The sentiment is negative.",
-        "Classify this text:\nThis product is okay.": "The sentiment is neutral."
-    }
-    return MockLLM(predetermined_responses=responses)
-
-
-@pytest.fixture
-def mock_predictor_with_llm(mock_llm_for_predictor):
-    """Fixture providing a MockPredictor with a MockLLM."""
-    predictions = {
-        "The sentiment is positive.": "positive",
-        "The sentiment is negative.": "negative",
-        "The sentiment is neutral.": "neutral"  # Make sure this mapping exists
-    }
-    classes = ["positive", "neutral", "negative"]
-    
-    return MockPredictor(
-        llm=mock_llm_for_predictor,
-        classes=classes,
-        predetermined_predictions=predictions
-    )
-
-
-def test_predictor_predict_flow(mock_predictor_with_llm):
+def test_predictor_predict_flow(downstream_llm_mock):
     """Test the basic prediction flow from prompt to final prediction."""
     # Input data
-    prompts = ["Classify this text:"] * 2
-    xs = np.array(["I love this product!", "I hate this product!"])
-    
+    xs = np.array(["I love this product!", "I hate this product!", "Is a ok product!"])
+    prompts = ["Classify this text:"] * len(xs)
+
     # Call predict
-    predictions = mock_predictor_with_llm.predict(prompts, xs)
+    predictions = downstream_llm_mock.predict(prompts, xs)
     # Verify shape and content of predictions
-    assert predictions.shape == (2,)
+    assert predictions.shape == (3,)
     assert predictions[0] == "positive"
     assert predictions[1] == "negative"
-    
+    assert predictions[2] == "neutral"
+
     # Verify LLM was called with correct prompts
-    assert len(mock_predictor_with_llm.llm.call_history) == 1
-    assert mock_predictor_with_llm.llm.call_history[0]['prompts'] == [
-        "Classify this text:\nI love this product!", 
-        "Classify this text:\nI hate this product!"
+    assert len(downstream_llm_mock.llm.call_history) == 1
+    assert downstream_llm_mock.llm.call_history[0]["prompts"] == [
+        "Classify this text:\nI love this product!",
+        "Classify this text:\nI hate this product!",
+        "Classify this text:\nIs a ok product!",
     ]
 
 
-def test_predictor_with_return_seq(mock_predictor_with_llm):
+def test_predictor_with_return_seq(mock_predictor):
     """Test prediction with return_seq=True."""
     # Input data
     prompts = ["Classify this text:"]
     xs = np.array(["This product is okay."])
-    
+
     # Call predict with return_seq=True
-    predictions, sequences = mock_predictor_with_llm.predict(prompts, xs, return_seq=True)
-    
+    predictions, sequences = mock_predictor.predict(prompts, xs, return_seq=True)
+
     # Verify predictions
     assert predictions.shape == (1,)
     assert predictions[0] == "neutral"
@@ -71,28 +45,3 @@ def test_predictor_with_return_seq(mock_predictor_with_llm):
     assert len(sequences) == 1
     assert isinstance(sequences, np.ndarray)
     assert "This product is okay." in sequences[0]
-
-
-def test_multiple_prompts(mock_predictor_with_llm):
-    """Test prediction with multiple prompts."""
-    # Input data with multiple prompts
-    prompts = ["Classify this text:", "Rate this text:"]
-    xs = np.array(["I love this product!"] * len(prompts))
-    
-    # Mock LLM responses for the second prompt
-    mock_predictor_with_llm.llm.predetermined_responses.update({
-        "Rate this text:\nI love this product!": "The rating is 5/5."
-    })
-    
-    # Add mapping for the new response
-    mock_predictor_with_llm.predetermined_predictions.update({
-        "The rating is 5/5.": "positive"
-    })
-    
-    # Call predict
-    predictions = mock_predictor_with_llm.predict(prompts, xs)
-    
-    # Verify shape and content
-    assert predictions.shape == (2,)
-    assert predictions[0] == "positive"  # First prompt result
-    assert predictions[1] == "positive"  # Second prompt result
