@@ -3,17 +3,15 @@ import numpy as np
 from unittest.mock import patch
 
 from promptolution.optimizers.evoprompt_de import EvoPromptDE
-from tests.fixtures import meta_llm_mock, initial_prompts, mock_task, mock_predictor
 
-
-def test_evoprompt_de_initialization(meta_llm_mock, initial_prompts, mock_task):
+def test_evoprompt_de_initialization(mock_meta_llm, initial_prompts, mock_task, mock_predictor):
     """Test that EvoPromptDE initializes correctly."""
     optimizer = EvoPromptDE(
         predictor=mock_predictor,
         task=mock_task,
         initial_prompts=initial_prompts,
         prompt_template="Create a new prompt from: <prompt0>, <prompt1>, <prompt2>, <prompt3>",
-        meta_llm=meta_llm_mock,
+        meta_llm=mock_meta_llm,
         donor_random=False,
         n_eval_samples=15,
     )
@@ -25,14 +23,14 @@ def test_evoprompt_de_initialization(meta_llm_mock, initial_prompts, mock_task):
     assert optimizer.prompts == initial_prompts
 
 
-def test_evoprompt_de_pre_optimization_loop(meta_llm_mock, initial_prompts, mock_task):
+def test_evoprompt_de_pre_optimization_loop(mock_meta_llm, initial_prompts, mock_task, mock_predictor):
     """Test the _pre_optimization_loop method."""
     optimizer = EvoPromptDE(
         predictor=mock_predictor,
         task=mock_task,
         initial_prompts=initial_prompts,
         prompt_template="Create a new prompt from: <prompt0>, <prompt1>, <prompt2>, <prompt3>",
-        meta_llm=meta_llm_mock,
+        meta_llm=mock_meta_llm,
     )
 
     # Call pre-optimization loop
@@ -43,14 +41,14 @@ def test_evoprompt_de_pre_optimization_loop(meta_llm_mock, initial_prompts, mock
     assert len(optimizer.scores) == len(initial_prompts)
 
 
-def test_evoprompt_de_step(meta_llm_mock, initial_prompts, mock_task):
+def test_evoprompt_de_step(mock_meta_llm, initial_prompts, mock_task, mock_predictor):
     """Test the _step method."""
     optimizer = EvoPromptDE(
         predictor=mock_predictor,
         task=mock_task,
         initial_prompts=initial_prompts,
         prompt_template="Create a new prompt from: <prompt0>, <prompt1>, <prompt2>, <prompt3>",
-        meta_llm=meta_llm_mock,
+        meta_llm=mock_meta_llm,
         donor_random=False,
     )
 
@@ -70,14 +68,14 @@ def test_evoprompt_de_step(meta_llm_mock, initial_prompts, mock_task):
     assert len(new_prompts) == len(initial_prompts)
 
 
-def test_evoprompt_de_optimize(meta_llm_mock, initial_prompts, mock_task):
+def test_evoprompt_de_optimize(mock_meta_llm, initial_prompts, mock_task, mock_predictor):
     """Test the optimize method."""
     optimizer = EvoPromptDE(
         predictor=mock_predictor,
         task=mock_task,
         initial_prompts=initial_prompts,
         prompt_template="Create a new prompt from: <prompt0>, <prompt1>, <prompt2>, <prompt3>",
-        meta_llm=meta_llm_mock,
+        meta_llm=mock_meta_llm,
     )
 
     # Control randomness

@@ -128,6 +128,13 @@ class CAPO(BaseOptimizer):
             self.max_n_blocks_eval = self.task.n_blocks
         self.population_size = len(self.prompts)
 
+        if hasattr(self.predictor, "begin_marker") and hasattr(self.predictor, "end_marker"):
+            self.target_begin_marker = self.predictor.begin_marker
+            self.target_end_marker = self.predictor.end_marker
+        else:
+            self.target_begin_marker = ""
+            self.target_end_marker = ""
+
     def _initialize_population(self, initial_prompts: List[str]) -> List[CAPOPrompt]:
         """Initializes the population of Prompt objects from initial instructions.
 
@@ -154,7 +161,7 @@ class CAPO(BaseOptimizer):
         sample_targets = few_shot_samples[self.task.y_column].values
         few_shots = [
             CAPO_FEWSHOT_TEMPLATE.replace("<input>", i).replace(
-                "<output>", f"{self.predictor.begin_marker}{t}{self.predictor.end_marker}"
+                "<output>", f"{self.target_begin_marker}{t}{self.target_end_marker}"
             )
             for i, t in zip(sample_inputs, sample_targets)
         ]

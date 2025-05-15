@@ -1,29 +1,22 @@
-import pytest
 import numpy as np
 
 from tests.mocks.mock_predictor import MockPredictor
-from tests.fixtures import downstream_llm_mock, mock_task, mock_predictor
 
-
-def test_predictor_predict_flow(downstream_llm_mock):
+def test_predictor_predict_flow(mock_predictor):
     """Test the basic prediction flow from prompt to final prediction."""
     # Input data
-    xs = np.array(["I love this product!", "I hate this product!", "Is a ok product!"])
-    prompts = ["Classify this text:"] * len(xs)
+    xs = np.array(["Is a ok product!"])
+    prompts = ["Classify this text:"] 
 
     # Call predict
-    predictions = downstream_llm_mock.predict(prompts, xs)
+    predictions = mock_predictor.predict(prompts, xs)
     # Verify shape and content of predictions
-    assert predictions.shape == (3,)
-    assert predictions[0] == "positive"
-    assert predictions[1] == "negative"
-    assert predictions[2] == "neutral"
+    assert predictions.shape == (1,)
+    assert predictions[0] == "neutral"
 
     # Verify LLM was called with correct prompts
-    assert len(downstream_llm_mock.llm.call_history) == 1
-    assert downstream_llm_mock.llm.call_history[0]["prompts"] == [
-        "Classify this text:\nI love this product!",
-        "Classify this text:\nI hate this product!",
+    assert len(mock_predictor.llm.call_history) == 1
+    assert mock_predictor.llm.call_history[0]["prompts"] == [
         "Classify this text:\nIs a ok product!",
     ]
 

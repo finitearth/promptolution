@@ -29,7 +29,7 @@ class MockPredictor(BasePredictor):
             *args, **kwargs: Additional arguments to pass to BasePredictor
         """
         super().__init__(llm=llm, *args, **kwargs)
-        self.classes = classes or ["class_a", "class_b", "class_c"]
+        self.classes = classes or ["neutral", "positive", "negative"]
         self.predetermined_predictions = predetermined_predictions or {}
         self.call_history = []
 

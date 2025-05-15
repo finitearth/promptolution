@@ -1,17 +1,12 @@
-import pytest
-import numpy as np
 from unittest.mock import patch
-
 from promptolution.optimizers.evoprompt_ga import EvoPromptGA
-from promptolution.config import ExperimentConfig
-from tests.fixtures import meta_llm_mock, initial_prompts, mock_task, mock_predictor, experiment_config
 
 
-def test_evoprompt_ga_initialization(meta_llm_mock, initial_prompts, mock_task, experiment_config):
+def test_evoprompt_ga_initialization(mock_meta_llm, initial_prompts, mock_task, experiment_config, mock_predictor):
     """Test that EvoPromptGA initializes correctly."""
     optimizer = EvoPromptGA(
         prompt_template="Combine these prompts to create a better one: <prompt1> and <prompt2>.",
-        meta_llm=meta_llm_mock,
+        meta_llm=mock_meta_llm,
         selection_mode="random",
         config=experiment_config,
         initial_prompts=initial_prompts,
@@ -25,11 +20,11 @@ def test_evoprompt_ga_initialization(meta_llm_mock, initial_prompts, mock_task, 
     assert optimizer.prompts == initial_prompts
 
 
-def test_evoprompt_ga_crossover(meta_llm_mock, initial_prompts, mock_task, experiment_config):
+def test_evoprompt_ga_crossover(mock_meta_llm, initial_prompts, mock_task, experiment_config, mock_predictor):
     """Test the _crossover method."""
     optimizer = EvoPromptGA(
         prompt_template="Combine these prompts to create a better one: <prompt1> and <prompt2>.",
-        meta_llm=meta_llm_mock,
+        meta_llm=mock_meta_llm,
         selection_mode="random",
         config=experiment_config,
         initial_prompts=initial_prompts,
@@ -54,11 +49,11 @@ def test_evoprompt_ga_crossover(meta_llm_mock, initial_prompts, mock_task, exper
     assert len(child_prompts) == len(initial_prompts)
 
 
-def test_evoprompt_ga_step(meta_llm_mock, initial_prompts, mock_task, experiment_config):
+def test_evoprompt_ga_step(mock_meta_llm, initial_prompts, mock_task, experiment_config, mock_predictor):
     """Test the _step method."""
     optimizer = EvoPromptGA(
         prompt_template="Combine these prompts to create a better one: <prompt1> and <prompt2>.",
-        meta_llm=meta_llm_mock,
+        meta_llm=mock_meta_llm,
         selection_mode="random",
         config=experiment_config,
         initial_prompts=initial_prompts,
@@ -81,11 +76,11 @@ def test_evoprompt_ga_step(meta_llm_mock, initial_prompts, mock_task, experiment
     assert len(new_prompts) == len(initial_prompts)
 
 
-def test_evoprompt_ga_optimize(meta_llm_mock, initial_prompts, mock_task, experiment_config):
+def test_evoprompt_ga_optimize(mock_meta_llm, initial_prompts, mock_task, experiment_config, mock_predictor):
     """Test the optimize method."""
     optimizer = EvoPromptGA(
         prompt_template="Combine these prompts to create a better one: <prompt1> and <prompt2>.",
-        meta_llm=meta_llm_mock,
+        meta_llm=mock_meta_llm,
         selection_mode="random",
         config=experiment_config,
         initial_prompts=initial_prompts,

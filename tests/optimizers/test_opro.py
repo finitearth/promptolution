@@ -1,19 +1,16 @@
-import pytest
 import numpy as np
 from unittest.mock import patch
 
 from promptolution.optimizers.opro import Opro
-from tests.fixtures import meta_llm_mock, initial_prompts, mock_task, mock_predictor
 
-
-def test_opro_initialization(meta_llm_mock, initial_prompts, mock_task):
+def test_opro_initialization(mock_meta_llm, initial_prompts, mock_task, mock_predictor):
     """Test that OPRO initializes correctly."""
     optimizer = Opro(
         predictor=mock_predictor,
         task=mock_task,
         initial_prompts=initial_prompts,
         prompt_template="<instructions>\n\n<examples>",
-        meta_llm=meta_llm_mock,
+        meta_llm=mock_meta_llm,
         max_num_instructions=10,
         num_instructions_per_step=4,
         num_few_shots=2,
@@ -27,14 +24,14 @@ def test_opro_initialization(meta_llm_mock, initial_prompts, mock_task):
     assert optimizer.prompts == initial_prompts
 
 
-def test_opro_sample_examples(meta_llm_mock, initial_prompts, mock_task):
+def test_opro_sample_examples(mock_meta_llm, initial_prompts, mock_task, mock_predictor):
     """Test the _sample_examples method."""
     optimizer = Opro(
         predictor=mock_predictor,
         task=mock_task,
         initial_prompts=initial_prompts,
         prompt_template="<instructions>\n\n<examples>",
-        meta_llm=meta_llm_mock,
+        meta_llm=mock_meta_llm,
         num_few_shots=2,
     )
 
@@ -52,14 +49,14 @@ def test_opro_sample_examples(meta_llm_mock, initial_prompts, mock_task):
     assert "Output:" in examples
 
 
-def test_opro_format_instructions(meta_llm_mock, initial_prompts, mock_task):
+def test_opro_format_instructions(mock_meta_llm, initial_prompts, mock_task, mock_predictor):
     """Test the _format_instructions method."""
     optimizer = Opro(
         predictor=mock_predictor,
         task=mock_task,
         initial_prompts=initial_prompts,
         prompt_template="<instructions>\n\n<examples>",
-        meta_llm=meta_llm_mock,
+        meta_llm=mock_meta_llm,
     )
 
     # Set scores for testing
@@ -75,14 +72,14 @@ def test_opro_format_instructions(meta_llm_mock, initial_prompts, mock_task):
     assert "score:" in instructions
 
 
-def test_opro_pre_optimization_loop(meta_llm_mock, initial_prompts, mock_task):
+def test_opro_pre_optimization_loop(mock_meta_llm, initial_prompts, mock_task, mock_predictor):
     """Test the _pre_optimization_loop method."""
     optimizer = Opro(
         predictor=mock_predictor,
         task=mock_task,
         initial_prompts=initial_prompts,
         prompt_template="<instructions>\n\n<examples>",
-        meta_llm=meta_llm_mock,
+        meta_llm=mock_meta_llm,
     )
 
     # Control randomness
@@ -98,14 +95,14 @@ def test_opro_pre_optimization_loop(meta_llm_mock, initial_prompts, mock_task):
     assert isinstance(optimizer.meta_prompt, str)
 
 
-def test_opro_step(meta_llm_mock, initial_prompts, mock_task):
+def test_opro_step(mock_meta_llm, initial_prompts, mock_task, mock_predictor):
     """Test the _step method."""
     optimizer = Opro(
         predictor=mock_predictor,
         task=mock_task,
         initial_prompts=initial_prompts,
         prompt_template="<instructions>Please new Prompt! 🏄🏻‍♀️<examples>",
-        meta_llm=meta_llm_mock,
+        meta_llm=mock_meta_llm,
         num_instructions_per_step=1,
     )
 

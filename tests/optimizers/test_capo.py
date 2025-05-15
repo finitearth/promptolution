@@ -4,7 +4,6 @@ import pandas as pd
 from unittest.mock import patch, MagicMock
 
 from promptolution.optimizers.capo import CAPO, CAPOPrompt
-from tests.fixtures import meta_llm_mock, initial_prompts, mock_task, mock_predictor, df_few_shots
 
 
 def test_capo_prompt_initialization():
@@ -31,14 +30,14 @@ def test_capo_prompt_construct_prompt():
     assert instruction in constructed
 
 
-def test_capo_initialization(meta_llm_mock, mock_predictor, initial_prompts, mock_task, df_few_shots):
+def test_capo_initialization(mock_meta_llm, mock_predictor, initial_prompts, mock_task, mock_df):
     """Test that CAPO initializes correctly."""
     optimizer = CAPO(
         predictor=mock_predictor,
         task=mock_task,
-        meta_llm=meta_llm_mock,
+        meta_llm=mock_meta_llm,
         initial_prompts=initial_prompts,
-        df_few_shots=df_few_shots,
+        df_few_shots=mock_df,
         crossovers_per_iter=3,
         upper_shots=4,
     )
@@ -49,14 +48,14 @@ def test_capo_initialization(meta_llm_mock, mock_predictor, initial_prompts, moc
     assert isinstance(optimizer.df_few_shots, pd.DataFrame)
 
 
-def test_capo_initialize_population(meta_llm_mock, mock_predictor, initial_prompts, mock_task, df_few_shots):
+def test_capo_initialize_population(mock_meta_llm, mock_predictor, initial_prompts, mock_task, mock_df):
     """Test the _initialize_population method."""
     optimizer = CAPO(
         predictor=mock_predictor,
         task=mock_task,
-        meta_llm=meta_llm_mock,
+        meta_llm=mock_meta_llm,
         initial_prompts=initial_prompts,
-        df_few_shots=df_few_shots,
+        df_few_shots=mock_df,
     )
 
     # Mock the _create_few_shot_examples method to simplify
@@ -74,15 +73,15 @@ def test_capo_initialize_population(meta_llm_mock, mock_predictor, initial_promp
     assert all(isinstance(p, CAPOPrompt) for p in population)
 
 
-def test_capo_step(meta_llm_mock, mock_predictor, initial_prompts, mock_task, df_few_shots):
+def test_capo_step(mock_meta_llm, mock_predictor, initial_prompts, mock_task, mock_df):
     """Test the _step method."""
     # Use a smaller population size for the test
     optimizer = CAPO(
         predictor=mock_predictor,
         task=mock_task,
-        meta_llm=meta_llm_mock,
+        meta_llm=mock_meta_llm,
         initial_prompts=initial_prompts,
-        df_few_shots=df_few_shots,
+        df_few_shots=mock_df,
     )
 
     # Create mock prompt objects
@@ -107,14 +106,14 @@ def test_capo_step(meta_llm_mock, mock_predictor, initial_prompts, mock_task, df
     assert all(isinstance(p, str) for p in result)
 
 
-def test_capo_optimize(meta_llm_mock, mock_predictor, initial_prompts, mock_task, df_few_shots):
+def test_capo_optimize(mock_meta_llm, mock_predictor, initial_prompts, mock_task, mock_df):
     """Test the optimize method."""
     optimizer = CAPO(
         predictor=mock_predictor,
         task=mock_task,
-        meta_llm=meta_llm_mock,
+        meta_llm=mock_meta_llm,
         initial_prompts=initial_prompts,
-        df_few_shots=df_few_shots,
+        df_few_shots=mock_df,
     )
 
     # Mock the internal methods to avoid complexity
@@ -135,3 +134,67 @@ def test_capo_optimize(meta_llm_mock, mock_predictor, initial_prompts, mock_task
 
     # Verify method calls
     optimizer._pre_optimization_loop.assert_called_once()
+
+def test_create_few_shots(mock_meta_llm, mock_predictor, initial_prompts, mock_task, mock_df):
+    """Test the _create_few_shot_examples method."""
+    optimizer = CAPO(
+        predictor=mock_predictor,
+        task=mock_task,
+        meta_llm=mock_meta_llm,
+        initial_prompts=initial_prompts,
+        df_few_shots=mock_df,
+    )
+
+    # Call the method
+    few_shot_examples = optimizer._create_few_shot_examples("Classify the sentiment of the text.", 2)
+
+    # Verify results
+    assert len(few_shot_examples) == 2
+    assert all(isinstance(example, str) for example in few_shot_examples)
+
+    few_shot_examples = optimizer._create_few_shot_examples("Classify the sentiment of the text.", 0)
+
+    assert len(few_shot_examples) == 0
+
+def test_crossover(mock_meta_llm, mock_predictor, initial_prompts, mock_task, mock_df):
+    optimizer = CAPO(
+        predictor=mock_predictor,
+        task=mock_task,
+        meta_llm=mock_meta_llm,
+        initial_prompts=initial_prompts,
+        df_few_shots=mock_df,
+        crossovers_per_iter=5
+    )
+
+    offsprings = optimizer._crossover([CAPOPrompt("Instruction 1", ["Example 1"]), CAPOPrompt("Instruction 2", ["Example 2"])])
+    print(offsprings)
+    assert len(offsprings) == 5
+
+def test_mutate(mock_meta_llm, mock_predictor, initial_prompts, mock_task, mock_df):
+    optimizer = CAPO(
+        predictor=mock_predictor,
+        task=mock_task,
+        meta_llm=mock_meta_llm,
+        initial_prompts=initial_prompts,
+        df_few_shots=mock_df,
+    )
+
+    mutated = optimizer._mutate([CAPOPrompt("Instruction 1", ["Example 1"]), CAPOPrompt("Instruction 2", ["Example 2"])])
+    assert len(mutated) == 2
+
+def test_do_racing(mock_meta_llm, mock_predictor, initial_prompts, mock_task, mock_df):
+    optimizer = CAPO(
+        predictor=mock_predictor,
+        task=mock_task,
+        meta_llm=mock_meta_llm,
+        initial_prompts=initial_prompts,
+        df_few_shots=pd.concat([mock_df]*5, ignore_index=True),
+    )
+    optimizer._pre_optimization_loop()
+    survivors = optimizer._do_racing([CAPOPrompt("good instruction", ["Example 1"]), CAPOPrompt("better instruction", ["Example 2"])], 1)
+    assert len(survivors) == 1
+    assert "better instruction" in survivors[0].instruction_text 
+
+    # check that mocktask.reset_blocks was called
+    assert mock_task.reset_blocks.call_count == 2
+    assert mock_task.increment_blocks.call_count == 10

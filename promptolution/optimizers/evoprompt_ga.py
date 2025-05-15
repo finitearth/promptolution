@@ -62,9 +62,7 @@ class EvoPromptGA(BaseOptimizer):
         assert self.selection_mode in ["random", "wheel", "tour"], "Invalid selection mode."
 
     def _pre_optimization_loop(self):
-        self.scores = self.task.evaluate(
-            self.prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples
-        ).tolist()
+        self.scores = self.task.evaluate(self.prompts, self.predictor, return_agg_scores=True).tolist()
         # sort prompts by score
         self.prompts = [prompt for _, prompt in sorted(zip(self.scores, self.prompts), reverse=True)]
         self.scores = sorted(self.scores, reverse=True)
@@ -73,9 +71,7 @@ class EvoPromptGA(BaseOptimizer):
         new_prompts = self._crossover(self.prompts, self.scores)
         prompts = self.prompts + new_prompts
 
-        new_scores = self.task.evaluate(
-            new_prompts, self.predictor, subsample=True, n_samples=self.n_eval_samples
-        ).tolist()
+        new_scores = self.task.evaluate(new_prompts, self.predictor, return_agg_scores=True).tolist()
 
         scores = self.scores + new_scores
 

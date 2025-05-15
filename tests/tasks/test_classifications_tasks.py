@@ -5,51 +5,28 @@ from sklearn.metrics import accuracy_score
 
 from promptolution.tasks.classification_tasks import ClassificationTask
 from promptolution.predictors.classificator import FirstOccurrenceClassificator
-from tests.mocks.mock_llm import MockLLM
-
-from tests.fixtures import mock_llm_for_first_occurrence, mock_llm_for_marker_based, mock_df, mock_task
 
 
-@pytest.fixture
-def classification_task_with_subsampling(sample_classification_df):
-    """Fixture providing a ClassificationTask instance with subsampling."""
-    return ClassificationTask(
-        df=sample_classification_df,
-        description="Sentiment classification task",
-        x_column="x",
-        y_column="y",
-        metric=accuracy_score,
-        subsample_strategy="subsample",
-        n_subsamples=2,
-    )
-
-
-@pytest.fixture
-def classifier_predictor(mock_llm_for_classification):
-    """Fixture providing a FirstOccurrenceClassificator instance."""
-    return FirstOccurrenceClassificator(llm=mock_llm_for_classification, classes=["positive", "neutral", "negative"])
-
-
-def test_classification_task_initialization(sample_classification_df):
+def test_classification_task_initialization(mock_df):
     """Test that ClassificationTask initializes correctly."""
     task = ClassificationTask(
-        df=sample_classification_df, description="Sentiment classification task", x_column="x", y_column="y"
+        df=mock_df, description="Sentiment classification task", x_column="x", y_column="y"
     )
 
     # Verify attributes
     assert task.description == "Sentiment classification task"
     assert len(task.classes) == 3
     assert set(task.classes) == set(["positive", "neutral", "negative"])
-    assert len(task.xs) == 5
-    assert len(task.ys) == 5
+    assert len(task.xs) == 3
+    assert len(task.ys) == 3
     assert task.metric == accuracy_score
 
 
-def test_task_evaluate(classification_task, classifier_predictor):
+def test_task_evaluate(mock_classification_task_with_subsampling, mock_predictor):
     """Test the evaluate method of ClassificationTask."""
     # Evaluate with a single prompt
     prompts = ["Classify sentiment:"]
-    scores = classification_task.evaluate(prompts, classifier_predictor)
+    scores = mock_classification_task_with_subsampling.evaluate(prompts, mock_predictor)
 
     # Verify scores
     assert isinstance(scores, np.ndarray)
@@ -58,21 +35,21 @@ def test_task_evaluate(classification_task, classifier_predictor):
 
     # Evaluate with multiple prompts
     prompts = ["Classify sentiment:", "Rate the text:"]
-    scores = classification_task.evaluate(prompts, classifier_predictor)
+    scores = mock_classification_task_with_subsampling.evaluate(prompts, mock_predictor)
 
     # Verify scores for multiple prompts
     assert scores.shape == (2,)  # Two scores, one per prompt
     assert all(0 <= score <= 1 for score in scores)
 
 
-def test_task_evaluate_with_subsampling(classification_task_with_subsampling, classifier_predictor):
+def test_task_evaluate_with_subsampling(mock_classification_task_with_subsampling, mock_predictor):
     """Test the evaluate method with subsampling."""
     prompts = ["Classify sentiment:"]
 
     # Evaluate with subsampling
-    scores = classification_task_with_subsampling.evaluate(
+    scores = mock_classification_task_with_subsampling.evaluate(
         prompts,
-        classifier_predictor,
+        mock_predictor,
     )
 
     # Verify scores
@@ -82,27 +59,27 @@ def test_task_evaluate_with_subsampling(classification_task_with_subsampling, cl
     with pytest.raises(AssertionError, match=r".*Arrays are not equal.*"):
         # Use a different random seed to force different subsampling
         np.random.seed(42)
-        scores1 = classification_task_with_subsampling.evaluate(
+        scores1 = mock_classification_task_with_subsampling.evaluate(
             prompts,
-            classifier_predictor,
+            mock_predictor,
         )
 
         np.random.seed(43)
-        scores2 = classification_task_with_subsampling.evaluate(
+        scores2 = mock_classification_task_with_subsampling.evaluate(
             prompts,
-            classifier_predictor,
+            mock_predictor,
         )
 
         # This should fail because the subsamples should be different
         np.testing.assert_array_equal(scores1, scores2)
 
 
-def test_task_evaluate_with_return_seq(classification_task, classifier_predictor):
+def test_task_evaluate_with_return_seq(mock_classification_task_with_subsampling, mock_predictor):
     """Test the evaluate method with return_seq=True."""
     prompts = ["Classify sentiment:"]
 
     # Evaluate with return_seq=True
-    scores, seqs = classification_task.evaluate(prompts, classifier_predictor, return_seq=True)
+    scores, seqs = mock_classification_task_with_subsampling.evaluate(prompts, mock_predictor, return_seq=True)
 
     # Verify scores and sequences
     assert scores.shape == (1,)  # One score per prompt
@@ -110,22 +87,50 @@ def test_task_evaluate_with_return_seq(classification_task, classifier_predictor
 
     # Check that sequences contain input text
     for seq in seqs[0]:
-        assert any(sample_text in seq for sample_text in classification_task.xs)
+        assert any(sample_text in seq for sample_text in mock_classification_task_with_subsampling.xs)
 
 
-def test_task_evaluate_with_system_prompts(classification_task, classifier_predictor, mock_llm_for_classification):
+def test_task_evaluate_with_system_prompts(mock_classification_task_with_subsampling, mock_predictor, mock_downstream_llm):
     """Test the evaluate method with system prompts."""
 
     prompts = ["Classify sentiment:"]
     system_prompts = ["Be concise"]
 
     # Evaluate with system prompts
-    scores = classification_task.evaluate(
-        prompts, classifier_predictor, system_prompts=system_prompts, return_agg_scores=True
+    scores = mock_classification_task_with_subsampling.evaluate(
+        prompts, mock_predictor, system_prompts=system_prompts, return_agg_scores=True
     )
 
     # Verify scores
     assert scores.shape == (1,)
 
     # Verify that system prompts were passed through to the LLM
-    assert any(call["system_prompts"] == system_prompts for call in mock_llm_for_classification.call_history)
+    assert any(call["system_prompts"] == system_prompts for call in mock_downstream_llm.call_history)
+
+def test_pop_datapoints(mock_df):
+    task = ClassificationTask(
+        df=mock_df,
+        description="Sentiment classification task",
+        subsample_strategy="sequential_blocks",
+    )
+
+    df = task.pop_datapoints(n=1)
+    assert len(df) == 1
+    assert df["x"].values[0] not in task.xs
+    assert df["y"].values[0] not in task.ys
+
+def test_blocks(mock_df):
+    task = ClassificationTask(
+        df=mock_df,
+        description="Sentiment classification task",
+        subsample_strategy="sequential_blocks",
+        block_size=1
+    )
+
+    # Increment blocks
+    task.increment_blocks()
+    assert task.block_idx == 1
+
+    # Reset blocks
+    task.reset_blocks()
+    assert task.block_idx == 0
