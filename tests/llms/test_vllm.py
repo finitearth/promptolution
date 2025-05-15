@@ -1,5 +1,6 @@
 import pytest
 from unittest.mock import MagicMock, patch
+from promptolution.llms.vllm import VLLM
 
 @pytest.fixture
 def mock_vllm_dependencies():
