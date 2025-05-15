@@ -22,6 +22,7 @@ def test_first_occurrence_classificator(mock_downstream_llm, mock_df):
     assert predictions[2] == "positive"
     assert predictions[3] == "positive"
 
+
 def test_marker_based_classificator(mock_downstream_llm, mock_df):
     """Test the MarkerBasedClassificator."""
     # Create classifier
@@ -73,8 +74,8 @@ def test_marker_based_without_classes(mock_downstream_llm):
     # Verify shape and content - should accept any value between markers
     assert predictions.shape == (4,)
     assert predictions[0] == "positive"
-    assert predictions[1] == "negative" 
-    assert predictions[2] == "neutral" 
+    assert predictions[1] == "negative"
+    assert predictions[2] == "neutral"
     assert predictions[3] == "i dont know"
 
 

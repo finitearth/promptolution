@@ -1,8 +1,10 @@
-import pytest
-import numpy as np
 from unittest.mock import patch
 
+import numpy as np
+import pytest
+
 from promptolution.optimizers.evoprompt_de import EvoPromptDE
+
 
 def test_evoprompt_de_initialization(mock_meta_llm, initial_prompts, mock_task, mock_predictor):
     """Test that EvoPromptDE initializes correctly."""
@@ -18,7 +20,7 @@ def test_evoprompt_de_initialization(mock_meta_llm, initial_prompts, mock_task, 
 
     # Only verify the essential properties
     assert optimizer.prompt_template == "Create a new prompt from: <prompt0>, <prompt1>, <prompt2>, <prompt3>"
-    assert optimizer.donor_random == False
+    assert not optimizer.donor_random
     assert optimizer.n_eval_samples == 15
     assert optimizer.prompts == initial_prompts
 

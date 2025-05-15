@@ -1,7 +1,9 @@
-import numpy as np
 from unittest.mock import patch
 
+import numpy as np
+
 from promptolution.optimizers.opro import Opro
+
 
 def test_opro_initialization(mock_meta_llm, initial_prompts, mock_task, mock_predictor):
     """Test that OPRO initializes correctly."""

@@ -1,17 +1,15 @@
-import pytest
 import numpy as np
 import pandas as pd
+import pytest
 from sklearn.metrics import accuracy_score
 
-from promptolution.tasks.classification_tasks import ClassificationTask
 from promptolution.predictors.classificator import FirstOccurrenceClassificator
+from promptolution.tasks.classification_tasks import ClassificationTask
 
 
 def test_classification_task_initialization(mock_df):
     """Test that ClassificationTask initializes correctly."""
-    task = ClassificationTask(
-        df=mock_df, description="Sentiment classification task", x_column="x", y_column="y"
-    )
+    task = ClassificationTask(df=mock_df, description="Sentiment classification task", x_column="x", y_column="y")
 
     # Verify attributes
     assert task.description == "Sentiment classification task"
@@ -90,7 +88,9 @@ def test_task_evaluate_with_return_seq(mock_classification_task_with_subsampling
         assert any(sample_text in seq for sample_text in mock_classification_task_with_subsampling.xs)
 
 
-def test_task_evaluate_with_system_prompts(mock_classification_task_with_subsampling, mock_predictor, mock_downstream_llm):
+def test_task_evaluate_with_system_prompts(
+    mock_classification_task_with_subsampling, mock_predictor, mock_downstream_llm
+):
     """Test the evaluate method with system prompts."""
 
     prompts = ["Classify sentiment:"]
@@ -107,6 +107,7 @@ def test_task_evaluate_with_system_prompts(mock_classification_task_with_subsamp
     # Verify that system prompts were passed through to the LLM
     assert any(call["system_prompts"] == system_prompts for call in mock_downstream_llm.call_history)
 
+
 def test_pop_datapoints(mock_df):
     task = ClassificationTask(
         df=mock_df,
@@ -119,12 +120,10 @@ def test_pop_datapoints(mock_df):
     assert df["x"].values[0] not in task.xs
     assert df["y"].values[0] not in task.ys
 
+
 def test_blocks(mock_df):
     task = ClassificationTask(
-        df=mock_df,
-        description="Sentiment classification task",
-        subsample_strategy="sequential_blocks",
-        block_size=1
+        df=mock_df, description="Sentiment classification task", subsample_strategy="sequential_blocks", block_size=1
     )
 
     # Increment blocks

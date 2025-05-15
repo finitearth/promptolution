@@ -1,7 +1,8 @@
-import pytest
+from unittest.mock import MagicMock, patch
+
 import numpy as np
 import pandas as pd
-from unittest.mock import patch, MagicMock
+import pytest
 
 from promptolution.optimizers.capo import CAPO, CAPOPrompt
 
@@ -135,6 +136,7 @@ def test_capo_optimize(mock_meta_llm, mock_predictor, initial_prompts, mock_task
     # Verify method calls
     optimizer._pre_optimization_loop.assert_called_once()
 
+
 def test_create_few_shots(mock_meta_llm, mock_predictor, initial_prompts, mock_task, mock_df):
     """Test the _create_few_shot_examples method."""
     optimizer = CAPO(
@@ -156,6 +158,7 @@ def test_create_few_shots(mock_meta_llm, mock_predictor, initial_prompts, mock_t
 
     assert len(few_shot_examples) == 0
 
+
 def test_crossover(mock_meta_llm, mock_predictor, initial_prompts, mock_task, mock_df):
     optimizer = CAPO(
         predictor=mock_predictor,
@@ -163,12 +166,15 @@ def test_crossover(mock_meta_llm, mock_predictor, initial_prompts, mock_task, mo
         meta_llm=mock_meta_llm,
         initial_prompts=initial_prompts,
         df_few_shots=mock_df,
-        crossovers_per_iter=5
+        crossovers_per_iter=5,
     )
 
-    offsprings = optimizer._crossover([CAPOPrompt("Instruction 1", ["Example 1"]), CAPOPrompt("Instruction 2", ["Example 2"])])
+    offsprings = optimizer._crossover(
+        [CAPOPrompt("Instruction 1", ["Example 1"]), CAPOPrompt("Instruction 2", ["Example 2"])]
+    )
     print(offsprings)
     assert len(offsprings) == 5
+
 
 def test_mutate(mock_meta_llm, mock_predictor, initial_prompts, mock_task, mock_df):
     optimizer = CAPO(
@@ -179,8 +185,11 @@ def test_mutate(mock_meta_llm, mock_predictor, initial_prompts, mock_task, mock_
         df_few_shots=mock_df,
     )
 
-    mutated = optimizer._mutate([CAPOPrompt("Instruction 1", ["Example 1"]), CAPOPrompt("Instruction 2", ["Example 2"])])
+    mutated = optimizer._mutate(
+        [CAPOPrompt("Instruction 1", ["Example 1"]), CAPOPrompt("Instruction 2", ["Example 2"])]
+    )
     assert len(mutated) == 2
+
 
 def test_do_racing(mock_meta_llm, mock_predictor, initial_prompts, mock_task, mock_df):
     optimizer = CAPO(
@@ -188,12 +197,14 @@ def test_do_racing(mock_meta_llm, mock_predictor, initial_prompts, mock_task, mo
         task=mock_task,
         meta_llm=mock_meta_llm,
         initial_prompts=initial_prompts,
-        df_few_shots=pd.concat([mock_df]*5, ignore_index=True),
+        df_few_shots=pd.concat([mock_df] * 5, ignore_index=True),
     )
     optimizer._pre_optimization_loop()
-    survivors = optimizer._do_racing([CAPOPrompt("good instruction", ["Example 1"]), CAPOPrompt("better instruction", ["Example 2"])], 1)
+    survivors = optimizer._do_racing(
+        [CAPOPrompt("good instruction", ["Example 1"]), CAPOPrompt("better instruction", ["Example 2"])], 1
+    )
     assert len(survivors) == 1
-    assert "better instruction" in survivors[0].instruction_text 
+    assert "better instruction" in survivors[0].instruction_text
 
     # check that mocktask.reset_blocks was called
     assert mock_task.reset_blocks.call_count == 2

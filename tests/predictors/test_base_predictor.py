@@ -2,11 +2,12 @@ import numpy as np
 
 from tests.mocks.mock_predictor import MockPredictor
 
+
 def test_predictor_predict_flow(mock_predictor):
     """Test the basic prediction flow from prompt to final prediction."""
     # Input data
     xs = np.array(["Is a ok product!"])
-    prompts = ["Classify this text:"] 
+    prompts = ["Classify this text:"]
 
     # Call predict
     predictions = mock_predictor.predict(prompts, xs)
