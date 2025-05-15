@@ -6,9 +6,9 @@ from promptolution.llms.vllm import VLLM
 def mock_vllm_dependencies():
     """Set up comprehensive mocks for VLLM dependencies."""
     # Mock the key components
-    with patch('vllm.LLM') as mock_llm_class, \
-         patch('vllm.SamplingParams') as mock_sampling_params, \
-         patch('transformers.AutoTokenizer') as mock_tokenizer_class:
+    with patch('promptolution.llms.vllm.LLM') as mock_llm_class, \
+         patch('promptolution.llms.vllm.SamplingParams') as mock_sampling_params, \
+         patch('promptolution.llms.vllm.AutoTokenizer') as mock_tokenizer_class:
 
         # Create and configure mock LLM
         mock_llm = MagicMock()
