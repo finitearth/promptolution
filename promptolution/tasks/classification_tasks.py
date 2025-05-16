@@ -16,18 +16,6 @@ class ClassificationTask(BaseTask):
 
     This class handles the loading and management of classification datasets,
     as well as the evaluation of predictors on these datasets.
-
-    Attributes:
-        description (str): Description of the task.
-        classes (List[str]): List of possible class labels.
-        xs (np.ndarray): Array of input data.
-        ys (np.ndarray): Array of labels.
-        initial_prompts (List[str]): Initial set of prompts to start optimization with.
-        metric (Callable): Metric to use for evaluation.
-        config (ExperimentConfig): Configuration for the experiment.
-
-    Inherits from:
-        BaseTask: The base class for tasks in the promptolution library.
     """
 
     def __init__(
@@ -39,6 +27,7 @@ class ClassificationTask(BaseTask):
         n_subsamples: int = 30,
         block_size: int = 30,
         subsample_strategy: str = "full",
+        seed: int = 42,
         metric: Callable = accuracy_score,
         config: ExperimentConfig = None,
     ):
@@ -52,6 +41,7 @@ class ClassificationTask(BaseTask):
             n_subsamples (int, optional): Number of subsamples to use. No subsampling if None. Defaults to None.
             block_size (int, optional): Block size for subsampling. Defaults to None.
             subsample_strategy (str, optional): Subsampling strategy to use. Can be "full", "subsample", "sequential_block" or "random_block". Defaults to None.
+            seed (int, optional): Random seed for reproducibility. Defaults to 42.
             metric (Callable, optional): Metric to use for evaluation. Defaults to accuracy_score.
             config (ExperimentConfig, optional): ExperimentConfig overwriting the defaults.
         """
@@ -70,6 +60,7 @@ class ClassificationTask(BaseTask):
         self.block_size = block_size
         self.block_idx = 0
         self.n_blocks = len(self.xs) // self.block_size
+        self.rng = np.random.default_rng(seed)
         super().__init__(config)
 
         self.eval_cache = {}  # (prompt, x, y): scores per datapoint
@@ -91,11 +82,11 @@ class ClassificationTask(BaseTask):
             return self.xs, self.ys
 
         elif strategy == "subsample":
-            indices = np.random.choice(len(self.xs), self.n_subsamples, replace=False)
+            indices = self.rng.choice(len(self.xs), self.n_subsamples, replace=False)
             return self.xs[indices], self.ys[indices]
 
         elif strategy == "random_block":
-            block_id = np.random.randint(0, len(self.xs) // self.block_size)
+            block_id = self.rng.integers(0, len(self.xs) // self.block_size)
             indices = np.arange(block_id * self.block_size, (block_id + 1) * self.block_size)
             return self.xs[indices], self.ys[indices]
 
@@ -202,10 +193,11 @@ class ClassificationTask(BaseTask):
         Returns:
             pd.DataFrame: DataFrame containing the popped datapoints.
         """
+        assert n is None or frac is None, "Only one of n or frac can be specified."
         if n is not None:
-            indices = np.random.choice(len(self.xs), n, replace=False)
+            indices = self.rng.choice(len(self.xs), n, replace=False)
         elif frac is not None:
-            indices = np.random.choice(len(self.xs), int(len(self.xs) * frac), replace=False)
+            indices = self.rng.choice(len(self.xs), int(len(self.xs) * frac), replace=False)
         else:
             raise ValueError("Either n or frac must be specified.")
 
@@ -221,7 +213,7 @@ class ClassificationTask(BaseTask):
 
         return df
 
-    def increment_blocks(self) -> None:
+    def increment_block_idx(self) -> None:
         """Increment the block index for subsampling."""
         if "block" not in self.subsample_strategy:
             raise ValueError("Block increment is only valid for block subsampling.")
@@ -229,7 +221,7 @@ class ClassificationTask(BaseTask):
         if self.block_idx >= self.n_blocks:
             self.block_idx = 0
 
-    def reset_blocks(self) -> None:
+    def reset_block_idx(self) -> None:
         """Reset the block index for subsampling."""
         if "block" not in self.subsample_strategy:
             raise ValueError("Block reset is only valid for block subsampling.")

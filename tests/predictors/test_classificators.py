@@ -1,4 +1,5 @@
 import numpy as np
+import pytest
 
 from promptolution.predictors.classificator import FirstOccurrenceClassificator, MarkerBasedClassificator
 
@@ -118,3 +119,28 @@ def test_sequence_return_with_classificators(mock_downstream_llm, mock_df):
     # Verify sequences
     assert len(sequences) == 1
     assert "I love this product!" in sequences[0]
+
+
+def test_invalid_class_labels(mock_downstream_llm):
+    """Test that classifier raises an assertion error for invalid class labels."""
+    # Classes should be lowercase
+    invalid_classes = ["Positive", "Neutral", "Negative"]
+
+    # Should raise an assertion error
+    with pytest.raises(AssertionError):
+        FirstOccurrenceClassificator(llm=mock_downstream_llm, classes=invalid_classes)
+
+    with pytest.raises(AssertionError):
+        MarkerBasedClassificator(llm=mock_downstream_llm, classes=invalid_classes)
+
+
+def test_marker_based_missing_markers(mock_downstream_llm):
+    """Test MarkerBasedClassificator behavior when markers are missing."""
+    classifier = MarkerBasedClassificator(llm=mock_downstream_llm, classes=["positive", "neutral", "negative"])
+
+    # When markers are missing, it should default to first class
+    prompts = ["Classify:"]
+    xs = np.array(["Missing markers"])
+    predictions = classifier.predict(prompts, xs)
+
+    assert predictions[0] == "positive"  # Should default to first class
