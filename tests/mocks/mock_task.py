@@ -37,8 +37,8 @@ class MockTask(BaseTask):
         self.initial_prompts = ["Classify:", "Determine:"]
         self.n_blocks = 10
 
-        self.increment_blocks = MagicMock()
-        self.reset_blocks = MagicMock()
+        self.increment_block_idx = MagicMock()
+        self.reset_block_idx = MagicMock()
 
     def evaluate(
         self,
