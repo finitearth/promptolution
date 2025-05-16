@@ -4,7 +4,7 @@
 [![CI](https://github.com/finitearth/promptolution/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/finitearth/promptolution/actions/workflows/ci.yml)
 [![Docs](https://github.com/finitearth/promptolution/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/finitearth/promptolution/actions/workflows/docs.yml)
 <!-- Pytest Coverage Comment:Begin -->
-![Coverage](https://img.shields.io/badge/Coverage-99%25-brightgreen)
+![Coverage](https://img.shields.io/badge/Coverage-91%25-brightgreen)
 <!-- Pytest Coverage Comment:End -->
 
 
