@@ -12,14 +12,15 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
+  checks: write
   pull-requests: write
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout code
         uses: actions/checkout@v3
       - name: Set up Python and Poetry
         uses: ./.github/actions/python-poetry
@@ -30,16 +31,39 @@ jobs:
       - name: Run tests with coverage
         run: |
           poetry run python -m pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=. tests/ | tee pytest-coverage.txt
-      - name: Pytest coverage comment
+      - name: Generate coverage report & comment on PR
+        id: coverageComment
         uses: MishaKav/pytest-coverage-comment@main
         with:
           pytest-coverage-path: ./pytest-coverage.txt
           junitxml-path: ./pytest.xml
+      - name: Update README with coverage badge and report
+        if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+        run: |
+          # Update the coverage HTML report
+          sed -i '/<!-- Pytest Coverage Comment:Begin -->/,/<!-- Pytest Coverage Comment:End -->/c\<!-- Pytest Coverage Comment:Begin -->\n${{ steps.coverageComment.outputs.coverageHtml }}\n<!-- Pytest Coverage Comment:End -->' README.md
+
+          # Update or add the coverage badge
+          if grep -q "!\[Coverage\]" README.md; then
+            sed -i "s|!\[Coverage\](https://img.shields.io/badge/Coverage-[^-]*-[^)]*)|![Coverage](https://img.shields.io/badge/Coverage-${{ steps.coverageComment.outputs.coverage }}-${{ steps.coverageComment.outputs.color }})|g" README.md
+          else
+            # Add badge below the title
+            sed -i "1,/# /s/# \(.*\)/# \1\n\n![Coverage](https://img.shields.io\/badge\/Coverage-${{ steps.coverageComment.outputs.coverage }}-${{ steps.coverageComment.outputs.color }})/g" README.md
+          fi
+      - name: Commit coverage updates to README
+        if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Update coverage badge and report in README [skip ci]"
+          file_pattern: README.md
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
+
   build:
     runs-on: ubuntu-latest
     needs: test
     steps:
-      - name: checkout
+      - name: Checkout code
         uses: actions/checkout@v3
       - name: Set up Python and Poetry
         uses: ./.github/actions/python-poetry

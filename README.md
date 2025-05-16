@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/finitearth/promptolution/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/finitearth/promptolution/actions/workflows/ci.yml)
 [![Docs](https://github.com/finitearth/promptolution/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/finitearth/promptolution/actions/workflows/docs.yml)
+<!-- Pytest Coverage Comment:Begin -->
+<!-- Pytest Coverage Comment:End -->
 
 # Promptolution
 Promptolution is a library that provides a modular and extensible framework for implementing prompt tuning experiments. It offers a user-friendly interface to assemble the core components for various prompt optimization tasks.
