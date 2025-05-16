@@ -1,5 +1,4 @@
 name: CI
-
 on:
   push:
     branches:
@@ -11,6 +10,10 @@ on:
       - dev
   workflow_call:
   workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
 
 jobs:
   test:
@@ -24,23 +27,24 @@ jobs:
           groups: main,dev,test
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.1
-      - name: Run tests
-        run: poetry run python -m pytest
-
+      - name: Run tests with coverage
+        run: |
+          poetry run python -m pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=. tests/ | tee pytest-coverage.txt
+      - name: Pytest coverage comment
+        uses: MishaKav/pytest-coverage-comment@main
+        with:
+          pytest-coverage-path: ./pytest-coverage.txt
+          junitxml-path: ./pytest.xml
   build:
     runs-on: ubuntu-latest
     needs: test
-
     steps:
       - name: checkout
         uses: actions/checkout@v3
-
       - name: Set up Python and Poetry
         uses: ./.github/actions/python-poetry
-
       - name: Build wheel
         run: poetry build --format wheel
-
       - name: Upload wheel
         uses: actions/upload-artifact@v4
         with:
