@@ -41,38 +41,24 @@ jobs:
         with:
           pytest-coverage-path: ./pytest-coverage.txt
           junitxml-path: ./pytest.xml
+          hide-report: true  # Only show the badge in README, not the full report
       
-      - name: Update README with coverage HTML
-        run: |
-          # Extract coverage value and color
-          COVERAGE=$(echo "${{ steps.coverageComment.outputs.coverage }}" | tr -d '%')
-          COLOR="${{ steps.coverageComment.outputs.color }}"
-          
-          # Update the coverage HTML report
-          echo "${{ steps.coverageComment.outputs.coverageHtml }}" > coverage_report.txt
-          sed -i '/<!-- Pytest Coverage Comment:Begin -->/,/<!-- Pytest Coverage Comment:End -->/c\<!-- Pytest Coverage Comment:Begin -->\n'"$(cat coverage_report.txt)"'\n<!-- Pytest Coverage Comment:End -->' README.md
-      
+      # Update README with coverage badge (simpler approach)
       - name: Update README with coverage badge
         run: |
+          # Extract coverage value and color
           COVERAGE="${{ steps.coverageComment.outputs.coverage }}"
           COLOR="${{ steps.coverageComment.outputs.color }}"
-          # Remove % from coverage for URL
-          COVERAGE_URL=$(echo "$COVERAGE" | sed 's/%/%25/g')
+          BADGE_MD="![Coverage](https://img.shields.io/badge/Coverage-${COVERAGE//%/%25}-${COLOR})"
           
-          # Check if badge exists and update it
-          if grep -q "!\[Coverage\]" README.md; then
-            # Use perl instead of sed to avoid % issues
-            perl -i -pe "s|!\[Coverage\]\(https://img\.shields\.io/badge/Coverage-[^-]*-[^)]*\)|![Coverage](https://img.shields.io/badge/Coverage-$COVERAGE_URL-$COLOR)|g" README.md
-          else
-            # Add badge below the title (first line starting with #)
-            awk 'NR==1,/^# / {print} /^# / {print ""; print "![Coverage](https://img.shields.io/badge/Coverage-'"$COVERAGE_URL"'-'"$COLOR"')"; next} {print}' README.md > README.md.new
-            mv README.md.new README.md
-          fi
+          # Replace the content between markers with just the badge
+          perl -i -0pe 's/<!-- Pytest Coverage Comment:Begin -->.*?<!-- Pytest Coverage Comment:End -->/<!-- Pytest Coverage Comment:Begin -->\n'"$BADGE_MD"'\n<!-- Pytest Coverage Comment:End -->/s' README.md
       
+      # Commit README changes
       - name: Commit coverage updates to README
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Update coverage badge and report in README [skip ci]"
+          commit_message: "Update coverage badge in README [skip ci]"
           file_pattern: README.md
           commit_user_name: "github-actions[bot]"
           commit_user_email: "github-actions[bot]@users.noreply.github.com"
