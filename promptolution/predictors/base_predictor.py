@@ -34,13 +34,18 @@ class BasePredictor(ABC):
             config.apply_to(self)
 
     def predict(
-        self, prompts: List[str], xs: np.ndarray, system_prompts: List[str] = None, return_seq: bool = False
+        self,
+        prompts: List[str],
+        xs: np.ndarray,
+        system_prompts: List[str] = None,
+        return_seq: bool = False,
     ) -> np.ndarray:
         """Abstract method to make predictions based on prompts and input data.
 
         Args:
             prompts: Prompt or list of prompts to use for prediction.
             xs: Array of input data.
+            system_prompts: List of system prompts to use for the language model.
             return_seq: Whether to return the generating sequence.
 
         Returns:
@@ -49,26 +54,15 @@ class BasePredictor(ABC):
         if isinstance(prompts, str):
             prompts = [prompts]
 
-        outputs = self.llm.get_response(
-            [prompt + "\n" + x for prompt in prompts for x in xs], system_prompts=system_prompts
-        )
+        inputs = [prompt + "\n" + x for prompt, x in zip(prompts, xs)]
+        outputs = self.llm.get_response(inputs, system_prompts=system_prompts)
         preds = self._extract_preds(outputs)
 
-        shape = (len(prompts), len(xs))
-        outputs = np.array(outputs).reshape(shape)
-        preds = preds.reshape(shape)
-        xs = np.array(xs)
-
         if return_seq:
-            seqs = []
-            for output in outputs:
-                seqs.append([f"{x}\n{out}" for x, out in zip(xs, output)])
-
+            seqs = [f"{x}\n{out}" for x, out in zip(xs, outputs)]
             seqs = np.array(seqs)
 
-            return preds, seqs
-
-        return preds
+        return preds if not return_seq else (preds, seqs)
 
     @abstractmethod
     def _extract_preds(self, preds: List[str], shape: Tuple[int, int]) -> np.ndarray:

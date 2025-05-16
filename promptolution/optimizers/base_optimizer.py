@@ -45,7 +45,6 @@ class BaseOptimizer(ABC):
         self.task = task
         self.callbacks = callbacks or []
         self.predictor = predictor
-        self.verbosity = 0
 
         if config is not None:
             config.apply_to(self)
@@ -97,7 +96,7 @@ class BaseOptimizer(ABC):
         pass
 
     @abstractmethod
-    def _step(self):
+    def _step(self) -> List[str]:
         """Perform a single optimization step.
 
         This method should be implemented by concrete optimizer classes to define

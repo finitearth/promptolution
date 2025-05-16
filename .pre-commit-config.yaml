@@ -1,5 +1,5 @@
 fail_fast: true
-exclude: '^(?!promptolution/).*$|^promptolution/templates.py'
+exclude: '^(?!(promptolution/|tests/)).*$|^promptolution/templates.py'
 repos:
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.18.2

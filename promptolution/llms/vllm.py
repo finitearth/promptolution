@@ -10,7 +10,6 @@ from promptolution.llms.base_llm import BaseLLM
 logger = Logger(__name__)
 
 try:
-    import torch
     from transformers import AutoTokenizer
     from vllm import LLM, SamplingParams
 
@@ -75,7 +74,7 @@ class VLLM(BaseLLM):
         """
         if not imports_successful:
             raise ImportError(
-                "Could not import at least one of the required libraries: torch, transformers, vllm. "
+                "Could not import at least one of the required libraries: transformers, vllm. "
                 "Please ensure they are installed in your environment."
             )
 
@@ -110,7 +109,9 @@ class VLLM(BaseLLM):
 
         if batch_size is None:
             gpu_blocks = self.llm.llm_engine.model_executor.cache_config.num_gpu_blocks
-            block_size = self.llm.llm_engine.model_executor.cache_config.block_size
+            block_size = (
+                self.llm.llm_engine.model_executor.cache_config.block_size
+            )  # TODO rename, block_size is misleading
             self.batch_size = int((gpu_blocks * block_size / self.max_model_len) * 0.95)
             logger.info(f"Batch size set to {self.batch_size} based on GPU memory.")
         else:
