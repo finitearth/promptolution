@@ -46,7 +46,6 @@ class BasePredictor(ABC):
             prompts: Prompt or list of prompts to use for prediction.
             xs: Array of input data.
             system_prompts: List of system prompts to use for the language model.
-            create_cross_product: Whether to create a cross product of prompts and xs.
             return_seq: Whether to return the generating sequence.
 
         Returns:

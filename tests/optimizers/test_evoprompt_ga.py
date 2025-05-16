@@ -1,4 +1,5 @@
 from unittest.mock import patch
+
 from promptolution.optimizers.evoprompt_ga import EvoPromptGA
 
 

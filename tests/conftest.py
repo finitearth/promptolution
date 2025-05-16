@@ -1,12 +1,12 @@
+"""Fixtures for testing."""
+import pandas as pd
 import pytest
 from mocks.mock_llm import MockLLM
+from mocks.mock_predictor import MockPredictor
 from mocks.mock_task import MockTask
 
 from promptolution.config import ExperimentConfig
 from promptolution.tasks.classification_tasks import ClassificationTask
-from mocks.mock_predictor import MockPredictor
-
-import pandas as pd
 
 
 @pytest.fixture
@@ -30,7 +30,6 @@ def experiment_config():
 def mock_task():
     """Fixture providing a MockTask with predetermined scoring behavior."""
 
-    # A function that generates scores based on the prompt
     def score_function(prompt):
         # Prefer longer prompts for testing purposes
         return min(0.9, 0.5 + 0.01 * len(prompt))

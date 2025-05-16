@@ -1,4 +1,6 @@
+"""Mock predictor for testing purposes."""
 from typing import List, Optional, Tuple
+
 import numpy as np
 
 from promptolution.llms.base_llm import BaseLLM
