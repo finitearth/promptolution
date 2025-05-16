@@ -1,5 +1,4 @@
 name: CI
-
 on:
   push:
     branches:
@@ -12,35 +11,79 @@ on:
   workflow_call:
   workflow_dispatch:
 
+permissions:
+  contents: write
+  checks: write
+  pull-requests: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout code
         uses: actions/checkout@v3
+      
       - name: Set up Python and Poetry
         uses: ./.github/actions/python-poetry
         with:
           groups: main,dev,test
+      
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.1
-      - name: Run tests
-        run: poetry run python -m pytest
+      
+      - name: Run tests with coverage
+        run: |
+          poetry run python -m pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=. tests/ | tee pytest-coverage.txt
+      
+      - name: Generate coverage report & comment on PR
+        id: coverageComment
+        uses: MishaKav/pytest-coverage-comment@main
+        with:
+          pytest-coverage-path: ./pytest-coverage.txt
+          junitxml-path: ./pytest.xml
+          hide-report: true
+      
+      - name: Update README with coverage badge
+        run: |
+          cat > update_readme.py << 'EOF'
+          import re
+          coverage = "${{ steps.coverageComment.outputs.coverage }}"
+          color = "${{ steps.coverageComment.outputs.color }}"
+          coverage_url = coverage.replace('%', '%25')
+          badge_md = f"![Coverage](https://img.shields.io/badge/Coverage-{coverage_url}-{color})"
+          with open('README.md', 'r') as f:
+              content = f.read()
+          new_content = re.sub(
+              r'!\[Coverage\]\(https://img\.shields\.io/badge/Coverage-[^)]+\)', 
+              badge_md, 
+              content
+          )
+          with open('README.md', 'w') as f:
+              f.write(new_content)
+          EOF
+          python update_readme.py
+        
+      - name: Commit coverage updates to README
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Update coverage badge in README [skip ci]"
+          file_pattern: README.md
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
 
   build:
     runs-on: ubuntu-latest
     needs: test
-
     steps:
-      - name: checkout
+      - name: Checkout code
         uses: actions/checkout@v3
-
+      
       - name: Set up Python and Poetry
         uses: ./.github/actions/python-poetry
-
+      
       - name: Build wheel
         run: poetry build --format wheel
-
+      
       - name: Upload wheel
         uses: actions/upload-artifact@v4
         with:
