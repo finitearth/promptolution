@@ -43,16 +43,37 @@ jobs:
           junitxml-path: ./pytest.xml
           hide-report: true  # Only show the badge in README, not the full report
       
-      # Update README with coverage badge (simpler approach)
+      # Update README with coverage badge (simpler approach using Python)
       - name: Update README with coverage badge
         run: |
-          # Extract coverage value and color
-          COVERAGE="${{ steps.coverageComment.outputs.coverage }}"
-          COLOR="${{ steps.coverageComment.outputs.color }}"
-          BADGE_MD="![Coverage](https://img.shields.io/badge/Coverage-${COVERAGE//%/%25}-${COLOR})"
+          # Create a Python script to update the README
+          cat > update_readme.py << 'EOF'
+          import re
           
-          # Replace the content between markers with just the badge
-          perl -i -0pe 's/<!-- Pytest Coverage Comment:Begin -->.*?<!-- Pytest Coverage Comment:End -->/<!-- Pytest Coverage Comment:Begin -->\n'"$BADGE_MD"'\n<!-- Pytest Coverage Comment:End -->/s' README.md
+          # Get the badge markdown
+          coverage = "${{ steps.coverageComment.outputs.coverage }}"
+          color = "${{ steps.coverageComment.outputs.color }}"
+          
+          # Format the URL properly with escaped percent signs
+          coverage_url = coverage.replace('%', '%25')
+          badge_md = f"![Coverage](https://img.shields.io/badge/Coverage-{coverage_url}-{color})"
+          
+          # Read the README
+          with open('README.md', 'r') as f:
+              content = f.read()
+          
+          # Replace between markers
+          pattern = r'<!-- Pytest Coverage Comment:Begin -->.*?<!-- Pytest Coverage Comment:End -->'
+          replacement = f'<!-- Pytest Coverage Comment:Begin -->\n{badge_md}\n<!-- Pytest Coverage Comment:End -->'
+          new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
+          
+          # Write the updated README
+          with open('README.md', 'w') as f:
+              f.write(new_content)
+          EOF
+          
+          # Execute the Python script
+          python update_readme.py
       
       # Commit README changes
       - name: Commit coverage updates to README
