@@ -207,5 +207,5 @@ def test_do_racing(mock_meta_llm, mock_predictor, initial_prompts, mock_task, mo
     assert "better instruction" in survivors[0].instruction_text
 
     # check that mocktask.reset_blocks was called
-    assert mock_task.reset_blocks.call_count == 2
-    assert mock_task.increment_blocks.call_count == 10
+    assert mock_task.reset_block_idx.call_count == 2
+    assert mock_task.increment_block_idx.call_count == 10
