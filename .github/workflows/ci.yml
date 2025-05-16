@@ -22,33 +22,53 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      
       - name: Set up Python and Poetry
         uses: ./.github/actions/python-poetry
         with:
           groups: main,dev,test
+      
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.1
+      
       - name: Run tests with coverage
         run: |
           poetry run python -m pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=. tests/ | tee pytest-coverage.txt
+      
       - name: Generate coverage report & comment on PR
         id: coverageComment
         uses: MishaKav/pytest-coverage-comment@main
         with:
           pytest-coverage-path: ./pytest-coverage.txt
           junitxml-path: ./pytest.xml
-      - name: Update README with coverage badge and report
+      
+      - name: Update README with coverage HTML
         run: |
+          # Extract coverage value and color
+          COVERAGE=$(echo "${{ steps.coverageComment.outputs.coverage }}" | tr -d '%')
+          COLOR="${{ steps.coverageComment.outputs.color }}"
+          
           # Update the coverage HTML report
-          sed -i '/<!-- Pytest Coverage Comment:Begin -->/,/<!-- Pytest Coverage Comment:End -->/c\<!-- Pytest Coverage Comment:Begin -->\n${{ steps.coverageComment.outputs.coverageHtml }}\n<!-- Pytest Coverage Comment:End -->' README.md
-
-          # Update or add the coverage badge
+          echo "${{ steps.coverageComment.outputs.coverageHtml }}" > coverage_report.txt
+          sed -i '/<!-- Pytest Coverage Comment:Begin -->/,/<!-- Pytest Coverage Comment:End -->/c\<!-- Pytest Coverage Comment:Begin -->\n'"$(cat coverage_report.txt)"'\n<!-- Pytest Coverage Comment:End -->' README.md
+      
+      - name: Update README with coverage badge
+        run: |
+          COVERAGE="${{ steps.coverageComment.outputs.coverage }}"
+          COLOR="${{ steps.coverageComment.outputs.color }}"
+          # Remove % from coverage for URL
+          COVERAGE_URL=$(echo "$COVERAGE" | sed 's/%/%25/g')
+          
+          # Check if badge exists and update it
           if grep -q "!\[Coverage\]" README.md; then
-            sed -i "s|!\[Coverage\](https://img.shields.io/badge/Coverage-[^-]*-[^)]*)|![Coverage](https://img.shields.io/badge/Coverage-${{ steps.coverageComment.outputs.coverage }}-${{ steps.coverageComment.outputs.color }})|g" README.md
+            # Use perl instead of sed to avoid % issues
+            perl -i -pe "s|!\[Coverage\]\(https://img\.shields\.io/badge/Coverage-[^-]*-[^)]*\)|![Coverage](https://img.shields.io/badge/Coverage-$COVERAGE_URL-$COLOR)|g" README.md
           else
-            # Add badge below the title
-            sed -i "1,/# /s/# \(.*\)/# \1\n\n![Coverage](https://img.shields.io\/badge\/Coverage-${{ steps.coverageComment.outputs.coverage }}-${{ steps.coverageComment.outputs.color }})/g" README.md
+            # Add badge below the title (first line starting with #)
+            awk 'NR==1,/^# / {print} /^# / {print ""; print "![Coverage](https://img.shields.io/badge/Coverage-'"$COVERAGE_URL"'-'"$COLOR"')"; next} {print}' README.md > README.md.new
+            mv README.md.new README.md
           fi
+      
       - name: Commit coverage updates to README
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
@@ -63,10 +83,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      
       - name: Set up Python and Poetry
         uses: ./.github/actions/python-poetry
+      
       - name: Build wheel
         run: poetry build --format wheel
+      
       - name: Upload wheel
         uses: actions/upload-artifact@v4
         with:
