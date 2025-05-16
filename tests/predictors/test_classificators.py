@@ -136,7 +136,7 @@ def test_invalid_class_labels(mock_downstream_llm):
 
 def test_marker_based_missing_markers(mock_downstream_llm):
     """Test MarkerBasedClassificator behavior when markers are missing."""
-    classifier = MarkerBasedClassificator(llm=mock_downstream_llm, classes=["positive", "neutral", "negative"])
+    classifier = MarkerBasedClassificator(llm=mock_downstream_llm, classes=["will", "not", "be", "used"])
 
     # When markers are missing, it should default to first class
     prompts = ["Classify:"]

@@ -127,9 +127,9 @@ def test_blocks(mock_df):
     )
 
     # Increment blocks
-    task.increment_blocks()
+    task.increment_block_idx()
     assert task.block_idx == 1
 
     # Reset blocks
-    task.reset_blocks()
+    task.reset_block_idx()
     assert task.block_idx == 0

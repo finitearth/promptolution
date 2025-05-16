@@ -265,7 +265,7 @@ class CAPO(BaseOptimizer):
         Returns:
             List[Prompt]: List of surviving prompts after racing.
         """
-        self.task.reset_blocks()
+        self.task.reset_block_idx()
         block_scores = []
         i = 0
         while len(candidates) > k and i < self.max_n_blocks_eval:
@@ -295,7 +295,7 @@ class CAPO(BaseOptimizer):
             block_scores = [bs[n_better < k] for bs in block_scores]
 
             i += 1
-            self.task.increment_blocks()
+            self.task.increment_block_idx()
 
         avg_scores = self.task.evaluate(
             [c.construct_prompt() for c in candidates], self.predictor, strategy="evaluated"
@@ -310,7 +310,7 @@ class CAPO(BaseOptimizer):
         self.prompt_objects = self._initialize_population(self.prompts)
         self.prompts = [p.construct_prompt() for p in self.prompt_objects]
         self.max_prompt_length = max(self.token_counter(p) for p in self.prompts)
-        self.task.reset_blocks()
+        self.task.reset_block_idx()
 
     def _step(self) -> List[str]:
         """Perform a single optimization step.
