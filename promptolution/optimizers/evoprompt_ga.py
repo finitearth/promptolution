@@ -47,13 +47,11 @@ class EvoPromptGA(BaseOptimizer):
         meta_llm: BaseLLM,
         initial_prompts: List[str] = None,
         selection_mode: str = "wheel",
-        n_eval_samples: int = 20,
         callbacks: List[BaseCallback] = None,
         config: ExperimentConfig = None,
     ):
         """Initialize the EvoPromptGA optimizer."""
         self.prompt_template = prompt_template
-        self.n_eval_samples = n_eval_samples
         self.meta_llm = meta_llm
         self.selection_mode = selection_mode
         super().__init__(

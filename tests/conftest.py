@@ -94,6 +94,6 @@ def mock_classification_task_with_subsampling(mock_df):
         description="Sentiment classification task",
         x_column="x",
         y_column="y",
-        subsample_strategy="subsample",
+        eval_strategy="subsample",
         n_subsamples=2,
     )

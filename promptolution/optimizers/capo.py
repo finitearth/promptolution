@@ -91,11 +91,9 @@ class CAPO(BaseOptimizer):
             task (BaseTask): The task instance containing dataset and description.
             df_few_shots (pd.DataFrame): DataFrame containing few-shot examples. If None, will pop 10% of datapoints from task.
             meta_llm (BaseLLM): The meta language model for crossover/mutation.
-            downstream_llm (BaseLLM): The downstream language model used for responses.
             length_penalty (float): Penalty factor for prompt length.
             crossovers_per_iter (int): Number of crossover operations per iteration.
             upper_shots (int): Maximum number of few-shot examples per prompt.
-            p_few_shot_reasoning (float): Probability of generating llm-reasoning for few-shot examples, instead of simply using input-output pairs.
             n_trials_generation_reasoning (int): Number of trials to generate reasoning for few-shot examples.
             max_n_blocks_eval (int): Maximum number of evaluation blocks.
             test_statistic (str): Statistical test to compare prompt performance. Default is "paired_t_test".

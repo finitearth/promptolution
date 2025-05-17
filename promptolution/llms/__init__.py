@@ -39,4 +39,4 @@ def get_llm(model_id: str = None, config: ExperimentConfig = None):
         model_id = "-".join(model_id.split("-")[1:])
         return VLLM(model_id, config=config)
 
-    return APILLM(llm=model_id, config=config)
+    return APILLM(model_id=model_id, config=config)

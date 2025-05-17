@@ -8,7 +8,7 @@ from promptolution.callbacks import LoggerCallback, TokenCountCallback, FileOutp
 from promptolution.templates import EVOPROMPT_GA_TEMPLATE
 from promptolution.helpers import get_llm
 from promptolution.tasks import ClassificationTask
-from promptolution.predictors import MarkerBasedClassificator
+from promptolution.predictors import MarkerBasedClassifier
 from promptolution.optimizers import EvoPromptGA
 from datasets import load_dataset
 
@@ -86,7 +86,7 @@ else:
 downstream_llm = llm
 meta_llm = llm
 
-predictor = MarkerBasedClassificator(downstream_llm, classes=None)
+predictor = MarkerBasedClassifier(downstream_llm, classes=None)
 
 optimizer = EvoPromptGA(
     task=task,

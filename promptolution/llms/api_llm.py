@@ -11,7 +11,7 @@ except ImportError:
     import_successful = False
 
 from logging import Logger
-from typing import Any, List
+from typing import List
 
 from promptolution.config import ExperimentConfig
 from promptolution.llms.base_llm import BaseLLM
@@ -62,8 +62,8 @@ class APILLM(BaseLLM):
     def __init__(
         self,
         api_url: str = None,
-        llm: str = None,
-        token: str = None,
+        model_id: str = None,
+        api_key: str = None,
         max_concurrent_calls=50,
         max_tokens=512,
         config: ExperimentConfig = None,
@@ -72,11 +72,11 @@ class APILLM(BaseLLM):
 
         Args:
             api_url (str): The base URL for the API endpoint.
-            llm (str): Identifier for the model to use.
-            token (str, optional): API key for authentication. Defaults to None.
+            model_id (str): Identifier for the model to use.
+            api_key (str, optional): API key for authentication. Defaults to None.
             max_concurrent_calls (int, optional): Maximum number of concurrent API calls. Defaults to 50.
             max_tokens (int, optional): Maximum number of tokens in model responses. Defaults to 512.
-            config (ExperimentConfig, optional): ExperimentConfig overwriting defaults.
+            config (ExperimentConfig, optional): Configuration for the LLM, overriding defaults.
 
         Raises:
             ImportError: If required libraries are not installed.
@@ -88,13 +88,13 @@ class APILLM(BaseLLM):
             )
 
         self.api_url = api_url
-        self.llm = llm
-        self.token = token
+        self.model_id = model_id
+        self.api_key = api_key
         self.max_concurrent_calls = max_concurrent_calls
         self.max_tokens = max_tokens
 
         super().__init__(config=config)
-        self.client = AsyncOpenAI(base_url=self.api_url, api_key=self.token)
+        self.client = AsyncOpenAI(base_url=self.api_url, api_key=self.api_key)
         self.semaphore = asyncio.Semaphore(self.max_concurrent_calls)
 
     def _get_response(self, prompts: List[str], system_prompts: List[str]) -> List[str]:
@@ -105,7 +105,7 @@ class APILLM(BaseLLM):
 
     async def _get_response_async(self, prompts: List[str], system_prompts: List[str]) -> List[str]:
         tasks = [
-            _invoke_model(prompt, system_prompt, self.max_tokens, self.llm, self.client, self.semaphore)
+            _invoke_model(prompt, system_prompt, self.max_tokens, self.model_id, self.client, self.semaphore)
             for prompt, system_prompt in zip(prompts, system_prompts)
         ]
         responses = await asyncio.gather(*tasks)

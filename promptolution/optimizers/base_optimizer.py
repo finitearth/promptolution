@@ -16,7 +16,7 @@ class BaseOptimizer(ABC):
     This class defines the basic structure and interface for prompt optimization algorithms.
 
     Attributes:
-        config (OptimizerConfig): Configuration for the optimizer.
+        config (ExperimentConfig, optional): Configuration for the optimizer, overriding defaults.
         prompts (List[str]): List of current prompts being optimized.
         task (BaseTask): The task object used for evaluating prompts.
         callbacks (List[Callable]): List of callback functions to be called during optimization.
@@ -38,7 +38,7 @@ class BaseOptimizer(ABC):
             task: Task object for prompt evaluation.
             callbacks: List of callback functions.
             predictor: Predictor for prompt evaluation.
-            config: Configuration for the optimizer.
+            config (ExperimentConfig, optional): Configuration for the optimizer, overriding defaults.
         """
         # Set up optimizer state
         self.prompts = initial_prompts
@@ -58,7 +58,7 @@ class BaseOptimizer(ABC):
         the specific optimization algorithm.
 
         Args:
-            n_steps: Number of optimization steps to perform. If None, uses the value from config.
+            n_steps (int): Number of optimization steps to perform.
 
         Returns:
             The optimized list of prompts after all steps.

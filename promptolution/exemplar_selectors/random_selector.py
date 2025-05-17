@@ -24,7 +24,7 @@ class RandomSelector(BaseExemplarSelector):
         self.desired_score = desired_score
         super().__init__(task, predictor, config)
 
-    def select_exemplars(self, prompt, n_examples: int = 5):
+    def select_exemplars(self, prompt: str, n_examples: int = 5) -> str:
         """Select exemplars using a random selection strategy.
 
         This method generates random examples and selects those that are evaluated as correct

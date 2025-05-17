@@ -32,7 +32,7 @@ class BaseLLM(ABC):
         for backward compatibility.
 
         Args:
-            config (Optional[Union[Dict[str, Any], LLMModelConfig]]): Configuration for the LLM.
+            config (ExperimentConfig, optional): Configuration for the LLM, overriding defaults.
         """
         if config is not None:
             config.apply_to(self)

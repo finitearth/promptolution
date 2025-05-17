@@ -65,15 +65,14 @@ class BasePredictor(ABC):
         return preds if not return_seq else (preds, seqs)
 
     @abstractmethod
-    def _extract_preds(self, preds: List[str], shape: Tuple[int, int]) -> np.ndarray:
+    def _extract_preds(self, preds: List[str]) -> np.ndarray:
         """Extract class labels from the predictions, based on the list of valid class labels.
 
         Args:
             preds: The raw predictions from the language model.
-            shape: The shape of the output array: (n_prompts, n_samples).
 
         Returns:
-            np.ndarray: Extracted predictions with shape (n_prompts, n_samples).
+            np.ndarray: Extracted predictions.
         """
         raise NotImplementedError
 

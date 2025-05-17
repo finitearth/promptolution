@@ -8,7 +8,7 @@ from promptolution.config import ExperimentConfig
 from promptolution.predictors.base_predictor import BasePredictor
 
 
-class FirstOccurrenceClassificator(BasePredictor):
+class FirstOccurrenceClassifier(BasePredictor):
     """A predictor class for classification tasks using language models.
 
     This class takes a language model and a list of classes, and provides a method
@@ -20,19 +20,19 @@ class FirstOccurrenceClassificator(BasePredictor):
     Attributes:
         llm: The language model used for generating predictions.
         classes (List[str]): The list of valid class labels.
-        config (ExperimentConfig): Experiment configuration overwriting defaults.
+        config (ExperimentConfig, optional): Configuration for the classifier, overriding defaults.
 
     Inherits from:
         BasePredictor: The base class for predictors in the promptolution library.
     """
 
     def __init__(self, llm, classes, config: ExperimentConfig = None):
-        """Initialize the Classificator.
+        """Initialize the FirstOccurrenceClassifier.
 
         Args:
             llm: The language model to use for predictions.
             classes (List[str]): The list of valid class labels.
-            config: Experiment configuration overwriting defaults.
+            config (ExperimentConfig, optional): Configuration for the classifier, overriding defaults.
         """
         assert all([c.islower() for c in classes]), "Class labels should be lowercase."
         self.classes = classes
@@ -65,7 +65,7 @@ class FirstOccurrenceClassificator(BasePredictor):
         return response
 
 
-class MarkerBasedClassificator(BasePredictor):
+class MarkerBasedClassifier(BasePredictor):
     """A predictor class for classification tasks using language models.
 
     This class takes a language model and a list of classes, and provides a method
@@ -88,14 +88,14 @@ class MarkerBasedClassificator(BasePredictor):
         end_marker="</final_answer>",
         config: ExperimentConfig = None,
     ):
-        """Initialize the Classificator.
+        """Initialize the MarkerBasedClassifier.
 
         Args:
             llm: The language model to use for predictions.
             classes (List[str]): The list of valid class labels. If None, does not force any class.
             begin_marker (str): The marker to use for extracting the class label.
             end_marker (str): The marker to use for extracting the class label.
-            config: Experiment configuration overwriting defaults.
+            config (ExperimentConfig, optional): Configuration for the classifier, overriding defaults.
         """
         self.classes = classes
         self.begin_marker = begin_marker
