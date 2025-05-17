@@ -1,6 +1,6 @@
 """Module for EvoPromptGA optimizer."""
 
-from logging import Logger
+
 from typing import List
 
 import numpy as np
@@ -8,11 +8,12 @@ import numpy as np
 from promptolution.callbacks import BaseCallback
 from promptolution.config import ExperimentConfig
 from promptolution.llms.base_llm import BaseLLM
+from promptolution.logging import get_logger
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 from promptolution.predictors.base_predictor import BasePredictor
 from promptolution.tasks.base_task import BaseTask
 
-logger = Logger(__name__)
+logger = get_logger(__name__)
 
 
 class EvoPromptGA(BaseOptimizer):

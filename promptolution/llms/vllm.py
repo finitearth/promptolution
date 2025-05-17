@@ -1,13 +1,13 @@
 """Module for running language models locally using the vLLM library."""
 
 
-from logging import Logger
 from typing import List
 
 from promptolution.config import ExperimentConfig
 from promptolution.llms.base_llm import BaseLLM
+from promptolution.logging import get_logger
 
-logger = Logger(__name__)
+logger = get_logger(__name__)
 
 try:
     from transformers import AutoTokenizer

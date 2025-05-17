@@ -12,8 +12,6 @@ from promptolution.predictors import MarkerBasedClassifier
 from promptolution.optimizers import EvoPromptGA
 from datasets import load_dataset
 
-from promptolution.config import Config
-
 logger = Logger(__name__)
 
 """Run a test run for any of the implemented optimizers."""

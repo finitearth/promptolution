@@ -1,6 +1,5 @@
 """Helper functions for the usage of the libary."""
 
-from logging import getLogger
 from typing import List, Literal
 
 import pandas as pd
@@ -12,6 +11,7 @@ from promptolution.llms.api_llm import APILLM
 from promptolution.llms.base_llm import BaseLLM
 from promptolution.llms.local_llm import LocalLLM
 from promptolution.llms.vllm import VLLM
+from promptolution.logging import get_logger
 from promptolution.optimizers.capo import CAPO
 from promptolution.optimizers.evoprompt_de import EvoPromptDE
 from promptolution.optimizers.evoprompt_ga import EvoPromptGA
@@ -31,7 +31,7 @@ from promptolution.templates import (
     OPRO_TEMPLATE_TD,
 )
 
-logger = getLogger(__name__)
+logger = get_logger(__name__)
 
 
 def run_experiment(df: pd.DataFrame, config: ExperimentConfig):

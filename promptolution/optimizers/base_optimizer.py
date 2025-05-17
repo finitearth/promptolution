@@ -1,13 +1,13 @@
 """Base module for optimizers in the promptolution library."""
 
 from abc import ABC, abstractmethod
-from logging import getLogger
 from typing import Callable, List
 
 from promptolution.config import ExperimentConfig
+from promptolution.logging import get_logger
 from promptolution.tasks.base_task import BaseTask
 
-logger = getLogger(__name__)
+logger = get_logger(__name__)
 
 
 class BaseOptimizer(ABC):

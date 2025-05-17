@@ -1,16 +1,13 @@
 """Base module for LLMs in the promptolution library."""
 
-import logging
 from abc import ABC, abstractmethod
-from dataclasses import asdict, dataclass, field
-from typing import Any, Dict, List, Optional, Union
-
-import numpy as np
+from typing import List
 
 from promptolution.config import ExperimentConfig
+from promptolution.logging import get_logger
 from promptolution.templates import DEFAULT_SYS_PROMPT
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 class BaseLLM(ABC):
