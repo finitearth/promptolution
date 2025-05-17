@@ -1,11 +1,10 @@
 """Module for classification predictors."""
 
-from typing import List, Tuple
+from typing import List
 
 import numpy as np
 
-from promptolution.config import ExperimentConfig
-from promptolution.predictors.base_predictor import BasePredictor
+from promptolution import BasePredictor, ExperimentConfig
 
 
 class FirstOccurrenceClassifier(BasePredictor):

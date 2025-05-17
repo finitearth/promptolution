@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from promptolution.predictors.classifier import FirstOccurrenceClassifier, MarkerBasedClassifier
+from promptolution import FirstOccurrenceClassifier, MarkerBasedClassifier
 
 
 def test_first_occurrence_classifier(mock_downstream_llm, mock_df):

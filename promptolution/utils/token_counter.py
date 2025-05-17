@@ -2,9 +2,9 @@
 
 This module provides a function to count the number of tokens in a given text.
 """
-from logging import Logger
+from promptolution import get_logger
 
-logger = Logger(__name__)
+logger = get_logger(__name__)
 
 
 def get_token_counter(llm):

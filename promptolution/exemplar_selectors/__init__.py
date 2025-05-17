@@ -1,8 +1,10 @@
 """Module for exemplar selectors."""
 
-from typing import Literal
+# Re-export the factory function from helpers
+from ..helpers import get_exemplar_selector
+from .base_exemplar_selector import BaseExemplarSelector
+from .random_search_selector import RandomSearchSelector
+from .random_selector import RandomSelector
 
-from promptolution.exemplar_selectors.random_search_selector import RandomSearchSelector
-from promptolution.exemplar_selectors.random_selector import RandomSelector
-from promptolution.predictors.base_predictor import BasePredictor
-from promptolution.tasks.base_task import BaseTask
+# Define what symbols are exported by default when using 'from promptolution.exemplar_selectors import *'
+__all__ = ["BaseExemplarSelector", "RandomSelector", "RandomSearchSelector", "get_exemplar_selector"]

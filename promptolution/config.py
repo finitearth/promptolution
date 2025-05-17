@@ -1,6 +1,7 @@
 """Configuration class for the promptolution library."""
-from logging import get_logger
 from typing import Set
+
+from promptolution import get_logger
 
 logger = get_logger(__name__)
 

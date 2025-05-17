@@ -2,13 +2,9 @@
 
 import logging
 from abc import ABC, abstractmethod
-from dataclasses import asdict, dataclass, field
-from typing import Any, Dict, List, Optional, Union
+from typing import List
 
-import numpy as np
-
-from promptolution.config import ExperimentConfig
-from promptolution.templates import DEFAULT_SYS_PROMPT
+from promptolution import DEFAULT_SYS_PROMPT, ExperimentConfig
 
 logger = logging.getLogger(__name__)
 

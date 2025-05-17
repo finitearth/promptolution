@@ -1,27 +1,27 @@
 """Implementation of the CAPO (Cost-Aware Prompt Optimization) algorithm."""
 import random
 from itertools import compress
-from logging import getLogger
 from typing import Callable, List, Tuple
 
 import numpy as np
 import pandas as pd
 
-from promptolution.config import ExperimentConfig
-from promptolution.llms.base_llm import BaseLLM
-from promptolution.optimizers.base_optimizer import BaseOptimizer
-from promptolution.predictors.base_predictor import BasePredictor
-from promptolution.tasks.base_task import BaseTask
-from promptolution.templates import (
+from promptolution import (
     CAPO_CROSSOVER_TEMPLATE,
     CAPO_DOWNSTREAM_TEMPLATE,
     CAPO_FEWSHOT_TEMPLATE,
     CAPO_MUTATION_TEMPLATE,
+    BaseLLM,
+    BaseOptimizer,
+    BasePredictor,
+    BaseTask,
+    ExperimentConfig,
+    get_logger,
+    get_test_statistic_func,
+    get_token_counter,
 )
-from promptolution.utils.test_statistics import get_test_statistic_func
-from promptolution.utils.token_counter import get_token_counter
 
-logger = getLogger(__name__)
+logger = get_logger(__name__)
 
 
 class CAPOPrompt:
