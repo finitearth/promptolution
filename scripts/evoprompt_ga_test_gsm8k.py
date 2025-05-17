@@ -5,8 +5,6 @@ import random
 from logging import Logger
 from datasets import load_dataset
 
-<<<<<<< HEAD
-=======
 from promptolution import (
     LoggerCallback,
     TokenCountCallback,
@@ -19,7 +17,6 @@ from promptolution import (
 )
 
 
->>>>>>> 68b2c632feb71e1ee80ff587c350462f28e14749
 logger = Logger(__name__)
 
 """Run a test run for any of the implemented optimizers."""
