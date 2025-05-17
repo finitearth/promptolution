@@ -1,10 +1,8 @@
 import numpy as np
-import pandas as pd
 import pytest
 from sklearn.metrics import accuracy_score
 
-from promptolution.predictors.classifier import FirstOccurrenceClassifier
-from promptolution.tasks.classification_tasks import ClassificationTask
+from promptolution import ClassificationTask
 
 
 def test_classification_task_initialization(mock_df):

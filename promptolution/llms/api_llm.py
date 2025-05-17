@@ -10,13 +10,13 @@ try:
 except ImportError:
     import_successful = False
 
-from logging import Logger
 from typing import List
 
 from promptolution.config import ExperimentConfig
 from promptolution.llms.base_llm import BaseLLM
+from promptolution.logging import get_logger
 
-logger = Logger(__name__)
+logger = get_logger(__name__)
 
 
 async def _invoke_model(prompt, system_prompt, max_tokens, model_id, client, semaphore, max_retries=20, retry_delay=5):

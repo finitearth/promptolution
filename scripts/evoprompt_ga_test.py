@@ -3,15 +3,23 @@
 import argparse
 import random
 from logging import Logger
-
-from promptolution.callbacks import LoggerCallback, FileOutputCallback, TokenCountCallback
-from promptolution.templates import EVOPROMPT_GA_TEMPLATE
-from promptolution.helpers import get_llm
-from promptolution.tasks import ClassificationTask
-from promptolution.predictors import MarkerBasedClassifier
-from promptolution.optimizers import EvoPromptGA
 from datasets import load_dataset
 
+<<<<<<< HEAD
+=======
+from promptolution import (
+    LoggerCallback,
+    TokenCountCallback,
+    FileOutputCallback,
+    EVOPROMPT_GA_TEMPLATE,
+    get_llm,
+    ClassificationTask,
+    MarkerBasedClassifier,
+    EvoPromptGA
+)
+
+
+>>>>>>> 68b2c632feb71e1ee80ff587c350462f28e14749
 logger = Logger(__name__)
 
 """Run a test run for any of the implemented optimizers."""

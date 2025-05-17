@@ -3,14 +3,17 @@
 import argparse
 from logging import Logger
 
-from promptolution.callbacks import LoggerCallback
-from promptolution.templates import EVOPROMPT_GA_TEMPLATE
-from promptolution.tasks import ClassificationTask
-from promptolution.predictors import MarkerBasedClassifier
-from promptolution.optimizers import EvoPromptGA
+
 from datasets import load_dataset
 
-from promptolution.llms.api_llm import APILLM
+from promptolution import (
+    LoggerCallback,
+    EVOPROMPT_GA_TEMPLATE,
+    ClassificationTask,
+    MarkerBasedClassifier,
+    EvoPromptGA,
+    APILLM
+)
 
 logger = Logger(__name__)
 

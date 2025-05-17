@@ -1,6 +1,5 @@
 """Module for EvoPromptGA optimizer."""
 
-
 from typing import List
 
 import numpy as np

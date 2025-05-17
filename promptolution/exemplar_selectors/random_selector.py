@@ -1,8 +1,6 @@
 """Random exemplar selector."""
 
-from promptolution.exemplar_selectors.base_exemplar_selector import BaseExemplarSelector
-from promptolution.predictors.base_predictor import BasePredictor
-from promptolution.tasks.base_task import BaseTask
+from promptolution import BaseExemplarSelector, BasePredictor, BaseTask
 
 
 class RandomSelector(BaseExemplarSelector):

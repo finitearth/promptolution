@@ -5,7 +5,7 @@ from typing import List
 
 import numpy as np
 
-from promptolution.config import ExperimentConfig
+from promptolution import ExperimentConfig
 
 
 class BaseTask(ABC):

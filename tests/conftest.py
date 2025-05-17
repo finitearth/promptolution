@@ -5,8 +5,7 @@ from mocks.mock_llm import MockLLM
 from mocks.mock_predictor import MockPredictor
 from mocks.mock_task import MockTask
 
-from promptolution.config import ExperimentConfig
-from promptolution.tasks.classification_tasks import ClassificationTask
+from promptolution import ClassificationTask, ExperimentConfig
 
 
 @pytest.fixture

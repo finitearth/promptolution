@@ -2,7 +2,7 @@
 
 from typing import List, Optional
 
-from promptolution.llms.base_llm import BaseLLM
+from promptolution import BaseLLM
 
 
 class MockLLM(BaseLLM):

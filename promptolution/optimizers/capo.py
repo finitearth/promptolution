@@ -18,8 +18,7 @@ from promptolution.templates import (
     CAPO_FEWSHOT_TEMPLATE,
     CAPO_MUTATION_TEMPLATE,
 )
-from promptolution.utils.test_statistics import get_test_statistic_func
-from promptolution.utils.token_counter import get_token_counter
+from promptolution.utils import get_test_statistic_func, get_token_counter
 
 logger = get_logger(__name__)
 

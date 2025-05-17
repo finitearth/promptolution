@@ -1,6 +1,9 @@
 """Module for task-related functions and classes."""
-import pandas as pd
 
-from promptolution.config import ExperimentConfig
-from promptolution.tasks.base_task import BaseTask
-from promptolution.tasks.classification_tasks import ClassificationTask
+# Re-export the factory function from helpers
+from ..helpers import get_task
+from .base_task import BaseTask
+from .classification_tasks import ClassificationTask
+
+# Define what symbols are exported by default when using 'from promptolution.tasks import *'
+__all__ = ["BaseTask", "ClassificationTask", "get_task"]

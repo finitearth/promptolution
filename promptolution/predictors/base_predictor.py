@@ -1,13 +1,11 @@
 """Base module for predictors in the promptolution library."""
 
 from abc import ABC, abstractmethod
-from dataclasses import asdict, dataclass, field
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import List, Optional
 
 import numpy as np
 
-from promptolution.config import ExperimentConfig
-from promptolution.llms.base_llm import BaseLLM
+from promptolution import BaseLLM, ExperimentConfig
 
 
 class BasePredictor(ABC):
