@@ -35,13 +35,13 @@ async def _invoke_model(prompt, system_prompt, max_tokens, model_id, client, sem
                 if attempt < max_retries:
                     # Calculate exponential backoff with jitter
                     logger.warning(
-                        f"API call failed (attempt {attempt + 1} / {max_retries + 1}): {str(e)}. "
+                        f"⚠️ API call failed (attempt {attempt + 1} / {max_retries + 1}): {str(e)}. "
                         f"Retrying in {retry_delay:.2f} seconds..."
                     )
                     await asyncio.sleep(retry_delay)
                 else:
                     # Log the final failure and re-raise the exception
-                    logger.error(f"API call failed after {max_retries + 1} attempts: {str(e)}")
+                    logger.error(f"❌ API call failed after {max_retries + 1} attempts: {str(e)}")
                     raise
 
 

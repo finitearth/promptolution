@@ -23,7 +23,7 @@ def get_token_counter(llm):
     if hasattr(llm, "tokenizer"):
         token_counter = lambda x: len(llm.tokenizer(x)["input_ids"])
     else:
-        logger.warning("The LLM does not have a tokenizer. Using simple token count.")
+        logger.warning("⚠️ The LLM does not have a tokenizer. Using simple token count.")
         token_counter = lambda x: len(x.split())
 
     return token_counter
