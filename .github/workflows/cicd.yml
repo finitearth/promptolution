@@ -64,6 +64,18 @@ jobs:
         git tag -a v${{ needs.check-version.outputs.version }} -m "Release v${{ needs.check-version.outputs.version }}"
         git push origin v${{ needs.check-version.outputs.version }}
 
+    - name: Set release notes file path
+      id: release-notes
+      run: echo "RELEASE_NOTES_PATH=./docs/release-notes/v${{ needs.check-version.outputs.version }}.md" >> $GITHUB_ENV
+
+    - name: Check if release notes file exists
+      id: check-release-notes
+      run: |
+        if [ ! -f "$RELEASE_NOTES_PATH" ]; then
+          echo "Error: Release notes file does not exist at path: $RELEASE_NOTES_PATH"
+          exit 1
+        fi
+
     - name: Create GitHub Release
       uses: actions/create-release@v1
       env:
@@ -71,8 +83,14 @@ jobs:
       with:
         tag_name: v${{ needs.check-version.outputs.version }}
         release_name: Release v${{ needs.check-version.outputs.version }}
+        body_path: ${{ env.RELEASE_NOTES_PATH }}
         draft: false
         prerelease: false
+
+  create-docs:
+    needs: create-release
+    name: Create and Deploy Documentation
+    uses: ./.github/workflows/docs.yml
 
   publish-to-pypi:
     needs: [build, check-version, create-release]
