@@ -1,9 +1,6 @@
 name: CICD
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
@@ -11,8 +8,20 @@ jobs:
     name: Run Tests, Pre-Commits, and Build Python package
     uses: ./.github/workflows/ci.yml
 
-  check-version:
+  check-branch:
     needs: build
+    name: Check Branch
+    runs-on: ubuntu-latest
+    steps:
+    - name: Fail if branch is not main
+      run: |
+        if [[ "${{ github.ref }}" != "refs/heads/main" ]]; then
+          echo "This workflow can only be run on the main branch."
+          exit 1
+        fi
+
+  check-version:
+    needs: check-branch
     runs-on: ubuntu-latest
     permissions:
       contents: read
