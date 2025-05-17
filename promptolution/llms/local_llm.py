@@ -7,7 +7,7 @@ try:
 except ImportError:
     imports_successful = False
 
-from promptolution import BaseLLM
+from promptolution.llms.base_llm import BaseLLM
 
 
 class LocalLLM(BaseLLM):

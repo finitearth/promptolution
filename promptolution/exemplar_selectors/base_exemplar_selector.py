@@ -2,7 +2,9 @@
 
 from abc import ABC, abstractmethod
 
-from promptolution import BasePredictor, BaseTask, ExperimentConfig
+from promptolution.config import ExperimentConfig
+from promptolution.predictors.base_predictor import BasePredictor
+from promptolution.tasks.base_task import BaseTask
 
 
 class BaseExemplarSelector(ABC):

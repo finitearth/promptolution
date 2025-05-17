@@ -6,7 +6,9 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import accuracy_score
 
-from promptolution import BasePredictor, BaseTask, ExperimentConfig
+from promptolution.config import ExperimentConfig
+from promptolution.predictors.base_predictor import BasePredictor
+from promptolution.tasks.base_task import BaseTask
 
 
 class ClassificationTask(BaseTask):

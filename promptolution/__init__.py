@@ -1,6 +1,15 @@
 """Promptolution: A framework for prompt optimization and a zoo of prompt optimization algorithms."""
 
 # Import main configuration classes
+# callbacks
+from .callbacks import (
+    BaseCallback,
+    BestPromptCallback,
+    FileOutputCallback,
+    LoggerCallback,
+    ProgressBarCallback,
+    TokenCountCallback,
+)
 from .config import ExperimentConfig
 from .exemplar_selectors.base_exemplar_selector import BaseExemplarSelector
 from .exemplar_selectors.random_search_selector import RandomSearchSelector
@@ -27,7 +36,7 @@ from .llms.vllm import VLLM
 # Import logging utilities
 from .logging import get_logger, setup_logging
 from .optimizers.base_optimizer import BaseOptimizer
-from .optimizers.capo import CAPO
+from .optimizers.capo import CAPO, CAPOPrompt
 from .optimizers.evoprompt_de import EvoPromptDE
 from .optimizers.evoprompt_ga import EvoPromptGA
 from .optimizers.opro import Opro
