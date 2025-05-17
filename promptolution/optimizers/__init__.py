@@ -17,7 +17,6 @@ from promptolution.templates import (
     OPRO_TEMPLATE_TD,
 )
 
-from .base_optimizer import DummyOptimizer
 from .capo import CAPO
 from .evoprompt_de import EvoPromptDE
 from .evoprompt_ga import EvoPromptGA

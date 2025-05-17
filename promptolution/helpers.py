@@ -12,12 +12,11 @@ from promptolution.llms.api_llm import APILLM
 from promptolution.llms.base_llm import BaseLLM
 from promptolution.llms.local_llm import LocalLLM
 from promptolution.llms.vllm import VLLM
-from promptolution.optimizers.base_optimizer import DummyOptimizer
 from promptolution.optimizers.capo import CAPO
 from promptolution.optimizers.evoprompt_de import EvoPromptDE
 from promptolution.optimizers.evoprompt_ga import EvoPromptGA
 from promptolution.optimizers.opro import Opro
-from promptolution.predictors.base_predictor import BasePredictor, DummyPredictor
+from promptolution.predictors.base_predictor import BasePredictor
 from promptolution.predictors.classifier import FirstOccurrenceClassifier, MarkerBasedClassifier
 from promptolution.tasks.base_task import BaseTask
 from promptolution.tasks.classification_tasks import ClassificationTask
@@ -115,21 +114,19 @@ def get_llm(model_id: str = None, config: ExperimentConfig = None):
     """Factory function to create and return a language model instance based on the provided model_id.
 
     This function supports three types of language models:
-    1. DummyLLM: A mock LLM for testing purposes.
-    2. LocalLLM: For running models locally.
-    3. VLLM: For running models using the vLLM library.
-    4. APILLM: For API-based models (default if not matching other types).
+    1. LocalLLM: For running models locally.
+    2. VLLM: For running models using the vLLM library.
+    3. APILLM: For API-based models (default if not matching other types).
 
     Args:
         model_id (str): Identifier for the model to use. Special cases:
-                        - "dummy" for DummyLLM
                         - "local-{model_name}" for LocalLLM
                         - "vllm-{model_name}" for VLLM
                         - Any other string for APILLM
         config (ExperimentConfig, optional): ExperimentConfig overwriting defaults.
 
     Returns:
-        An instance of DummyLLM, LocalLLM, or APILLM based on the model_id.
+        An instance of LocalLLM, or APILLM based on the model_id.
     """
     if model_id is None:
         model_id = config.llm
@@ -232,9 +229,6 @@ def get_optimizer(
         template = OPRO_TEMPLATE_TD.replace("<task_desc>", task_description) if task_description else OPRO_TEMPLATE
         return Opro(predictor=predictor, meta_llm=meta_llm, task=task, prompt_template=template, config=config)
 
-    if optimizer == "dummy":
-        return DummyOptimizer(predictor=predictor, config=config)
-
     raise ValueError(f"Unknown optimizer: {config.optimizer}")
 
 
@@ -264,12 +258,11 @@ def get_predictor(downstream_llm=None, type: Literal["first_occurrence", "marker
     """Factory function to create and return a predictor instance.
 
     This function supports three types of predictors:
-    1. DummyPredictor: A mock predictor for testing purposes when no downstream_llm is provided.
-    2. FirstOccurrenceClassifier: A predictor that classifies based on first occurrence of the label.
-    3. MarkerBasedClassifier: A predictor that classifies based on a marker.
+    1. FirstOccurrenceClassifier: A predictor that classifies based on first occurrence of the label.
+    2. MarkerBasedClassifier: A predictor that classifies based on a marker.
 
     Args:
-        downstream_llm: The language model to use for prediction. If None, returns a DummyPredictor.
+        downstream_llm: The language model to use for prediction.
         type (Literal["first_occurrence", "marker"]): The type of predictor to create:
                     - "first_occurrence" (default) for FirstOccurrenceClassifier
                     - "marker" for MarkerBasedClassifier
@@ -277,11 +270,8 @@ def get_predictor(downstream_llm=None, type: Literal["first_occurrence", "marker
         **kwargs: Arbitrary keyword arguments passed to the predictor constructor.
 
     Returns:
-        An instance of DummyPredictor, FirstOccurrenceClassifier, or MarkerBasedClassifier.
+        An instance of FirstOccurrenceClassifier or MarkerBasedClassifier.
     """
-    if downstream_llm is None:
-        return DummyPredictor("", *args, **kwargs)
-
     if type == "first_occurrence":
         return FirstOccurrenceClassifier(downstream_llm, *args, **kwargs)
     elif type == "marker":
