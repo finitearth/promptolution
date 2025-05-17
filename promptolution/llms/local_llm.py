@@ -59,6 +59,7 @@ class LocalLLM(BaseLLM):
 
         Args:
             prompts (list[str]): A list of input prompts.
+            system_prompts (list[str]): A list of system prompts to guide the model's behavior.
 
         Returns:
             list[str]: A list of generated responses corresponding to the input prompts.

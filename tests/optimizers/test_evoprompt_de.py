@@ -1,9 +1,6 @@
 from unittest.mock import patch
 
-import numpy as np
-import pytest
-
-from promptolution.optimizers.evoprompt_de import EvoPromptDE
+from promptolution import EvoPromptDE
 
 
 def test_evoprompt_de_initialization(mock_meta_llm, initial_prompts, mock_task, mock_predictor):

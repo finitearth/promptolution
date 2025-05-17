@@ -31,8 +31,7 @@ class EvoPromptDE(BaseOptimizer):
         prompt_template (str): Template for meta-prompts.
         meta_llm: Language model for child prompt generation.
         donor_random (bool, optional): Whether to use a random donor. Defaults to False.
-        n_eval_samples (int, optional): Number of samples for evaluation. Defaults to 20.
-        config (ExperimentConfig, optional): Configuration for the experiment.
+        config (ExperimentConfig, optional): Configuration for the optimizer, overriding defaults.
     """
 
     def __init__(
@@ -43,13 +42,11 @@ class EvoPromptDE(BaseOptimizer):
         meta_llm: BaseLLM,
         initial_prompts: List[str] = None,
         donor_random: bool = False,
-        n_eval_samples: int = 20,
         callbacks: List[BaseCallback] = None,
         config: ExperimentConfig = None,
     ):
         """Initialize the EvoPromptDE optimizer."""
         self.prompt_template = prompt_template
-        self.n_eval_samples = n_eval_samples
         self.donor_random = donor_random
         self.meta_llm = meta_llm
         super().__init__(

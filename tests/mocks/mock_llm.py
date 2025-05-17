@@ -1,5 +1,4 @@
 """Simplified MockLLM class for testing purposes."""
-
 from typing import List, Optional
 
 from promptolution.llms.base_llm import BaseLLM

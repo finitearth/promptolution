@@ -3,14 +3,18 @@
 import argparse
 import random
 from logging import Logger
-
-from promptolution.callbacks import LoggerCallback, CSVCallback, TokenCountCallback
-from promptolution.templates import OPRO_TEMPLATE_TD
-from promptolution.helpers import get_llm
-from promptolution.tasks import ClassificationTask
-from promptolution.predictors import MarkerBasedClassificator
-from promptolution.optimizers import Opro
 from datasets import load_dataset
+
+from promptolution import (
+    LoggerCallback,
+    CSVCallback,
+    TokenCountCallback,
+    OPRO_TEMPLATE_TD,
+    get_llm,
+    ClassificationTask,
+    MarkerBasedClassifier,
+    Opro
+)
 
 logger = Logger(__name__)
 
@@ -82,7 +86,7 @@ else:
 downstream_llm = llm
 meta_llm = llm
 
-predictor = MarkerBasedClassificator(downstream_llm, classes=task.classes)
+predictor = MarkerBasedClassifier(downstream_llm, classes=task.classes)
 
 optimizer = Opro(
     task=task,

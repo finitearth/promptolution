@@ -1,10 +1,8 @@
 from unittest.mock import MagicMock, patch
 
-import numpy as np
 import pandas as pd
-import pytest
 
-from promptolution.optimizers.capo import CAPO, CAPOPrompt
+from promptolution import CAPO, CAPOPrompt
 
 
 def test_capo_prompt_initialization():

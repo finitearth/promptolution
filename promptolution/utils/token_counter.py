@@ -2,9 +2,9 @@
 
 This module provides a function to count the number of tokens in a given text.
 """
-from logging import Logger
+from promptolution.logging import get_logger
 
-logger = Logger(__name__)
+logger = get_logger(__name__)
 
 
 def get_token_counter(llm):
@@ -23,7 +23,7 @@ def get_token_counter(llm):
     if hasattr(llm, "tokenizer"):
         token_counter = lambda x: len(llm.tokenizer(x)["input_ids"])
     else:
-        logger.warning("The LLM does not have a tokenizer. Using simple token count.")
+        logger.warning("⚠️ The LLM does not have a tokenizer. Using simple token count.")
         token_counter = lambda x: len(x.split())
 
     return token_counter

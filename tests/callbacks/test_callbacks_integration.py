@@ -4,7 +4,7 @@ from unittest.mock import MagicMock, patch
 import pandas as pd
 import pytest
 
-from promptolution.callbacks import (
+from promptolution import (
     BaseCallback,
     BestPromptCallback,
     FileOutputCallback,

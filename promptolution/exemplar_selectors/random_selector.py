@@ -1,6 +1,7 @@
 """Random exemplar selector."""
 
-from promptolution.exemplar_selectors.base_exemplar_selector import BaseExemplarSelector
+from promptolution.config import ExperimentConfig
+from promptolution.exemplar_selectors import BaseExemplarSelector
 from promptolution.predictors.base_predictor import BasePredictor
 from promptolution.tasks.base_task import BaseTask
 
@@ -12,19 +13,21 @@ class RandomSelector(BaseExemplarSelector):
     those that are evaluated as correct until the desired number of exemplars is reached.
     """
 
-    def __init__(self, task: BaseTask, predictor: BasePredictor, desired_score: int = 1, config=None):
+    def __init__(
+        self, task: BaseTask, predictor: BasePredictor, desired_score: int = 1, config: ExperimentConfig = None
+    ):
         """Initialize the RandomSelector.
 
         Args:
             task (BaseTask): An object representing the task to be performed.
             predictor (BasePredictor): An object capable of making predictions based on prompts.
             desired_score (int, optional): The desired score for the exemplars. Defaults to 1.
-            config: ExperimentConfig overriding the defaults
+            config (ExperimentConfig, optional): Configuration for the selector, overriding defaults.
         """
         self.desired_score = desired_score
         super().__init__(task, predictor, config)
 
-    def select_exemplars(self, prompt, n_examples: int = 5):
+    def select_exemplars(self, prompt: str, n_examples: int = 5) -> str:
         """Select exemplars using a random selection strategy.
 
         This method generates random examples and selects those that are evaluated as correct

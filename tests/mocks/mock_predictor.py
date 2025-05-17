@@ -3,8 +3,7 @@ from typing import List, Optional, Tuple
 
 import numpy as np
 
-from promptolution.llms.base_llm import BaseLLM
-from promptolution.predictors.base_predictor import BasePredictor
+from promptolution import BaseLLM, BasePredictor
 
 
 class MockPredictor(BasePredictor):

@@ -1,7 +1,6 @@
 """Implementation of the CAPO (Cost-Aware Prompt Optimization) algorithm."""
 import random
 from itertools import compress
-from logging import getLogger
 from typing import Callable, List, Tuple
 
 import numpy as np
@@ -9,6 +8,7 @@ import pandas as pd
 
 from promptolution.config import ExperimentConfig
 from promptolution.llms.base_llm import BaseLLM
+from promptolution.logging import get_logger
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 from promptolution.predictors.base_predictor import BasePredictor
 from promptolution.tasks.base_task import BaseTask
@@ -21,7 +21,7 @@ from promptolution.templates import (
 from promptolution.utils.test_statistics import get_test_statistic_func
 from promptolution.utils.token_counter import get_token_counter
 
-logger = getLogger(__name__)
+logger = get_logger(__name__)
 
 
 class CAPOPrompt:
@@ -91,11 +91,9 @@ class CAPO(BaseOptimizer):
             task (BaseTask): The task instance containing dataset and description.
             df_few_shots (pd.DataFrame): DataFrame containing few-shot examples. If None, will pop 10% of datapoints from task.
             meta_llm (BaseLLM): The meta language model for crossover/mutation.
-            downstream_llm (BaseLLM): The downstream language model used for responses.
             length_penalty (float): Penalty factor for prompt length.
             crossovers_per_iter (int): Number of crossover operations per iteration.
             upper_shots (int): Maximum number of few-shot examples per prompt.
-            p_few_shot_reasoning (float): Probability of generating llm-reasoning for few-shot examples, instead of simply using input-output pairs.
             n_trials_generation_reasoning (int): Number of trials to generate reasoning for few-shot examples.
             max_n_blocks_eval (int): Maximum number of evaluation blocks.
             test_statistic (str): Statistical test to compare prompt performance. Default is "paired_t_test".
@@ -128,7 +126,7 @@ class CAPO(BaseOptimizer):
         self.df_few_shots = df_few_shots if df_few_shots is not None else task.pop_datapoints(frac=0.1)
         if self.max_n_blocks_eval > self.task.n_blocks:
             logger.warning(
-                f"max_n_blocks_eval ({self.max_n_blocks_eval}) is larger than the number of blocks ({self.task.n_blocks})."
+                f"ℹ️ max_n_blocks_eval ({self.max_n_blocks_eval}) is larger than the number of blocks ({self.task.n_blocks})."
                 f" Setting max_n_blocks_eval to {self.task.n_blocks}."
             )
             self.max_n_blocks_eval = self.task.n_blocks
