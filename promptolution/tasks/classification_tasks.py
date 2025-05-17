@@ -56,9 +56,7 @@ class ClassificationTask(BaseTask):
         self.eval_strategy = eval_strategy
         self.n_subsamples = n_subsamples
         self.block_idx = 0
-        # Use n_subsamples as the block size for consistency
-        self.block_size = n_subsamples
-        self.n_blocks = len(self.xs) // self.block_size
+        self.n_blocks = len(self.xs) // self.n_subsamples
         self.rng = np.random.default_rng(seed)
         super().__init__(config)
 

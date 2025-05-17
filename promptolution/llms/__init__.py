@@ -6,37 +6,3 @@ from .api_llm import APILLM
 from .base_llm import DummyLLM
 from .local_llm import LocalLLM
 from .vllm import VLLM
-
-
-def get_llm(model_id: str = None, config: ExperimentConfig = None):
-    """Factory function to create and return a language model instance based on the provided model_id.
-
-    This function supports three types of language models:
-    1. DummyLLM: A mock LLM for testing purposes.
-    2. LocalLLM: For running models locally.
-    3. VLLM: For running models using the vLLM library.
-    4. APILLM: For API-based models (default if not matching other types).
-
-    Args:
-        model_id (str): Identifier for the model to use. Special cases:
-                        - "dummy" for DummyLLM
-                        - "local-{model_name}" for LocalLLM
-                        - "vllm-{model_name}" for VLLM
-                        - Any other string for APILLM
-        config (ExperimentConfig, optional): ExperimentConfig overwriting defaults.
-
-    Returns:
-        An instance of DummyLLM, LocalLLM, or APILLM based on the model_id.
-    """
-    if model_id is None:
-        model_id = config.llm
-    if model_id == "dummy":
-        return DummyLLM(config)
-    if "local" in model_id:
-        model_id = "-".join(model_id.split("-")[1:])
-        return LocalLLM(model_id, config)
-    if "vllm" in model_id:
-        model_id = "-".join(model_id.split("-")[1:])
-        return VLLM(model_id, config=config)
-
-    return APILLM(model_id=model_id, config=config)

@@ -123,7 +123,7 @@ def test_pop_datapoints(mock_df):
 
 def test_blocks(mock_df):
     task = ClassificationTask(
-        df=mock_df, description="Sentiment classification task", eval_strategy="sequential_blocks", block_size=1
+        df=mock_df, description="Sentiment classification task", eval_strategy="sequential_blocks", n_subsamples=1
     )
 
     # Increment blocks
