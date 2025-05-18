@@ -4,6 +4,7 @@ from typing import List, Literal
 
 import pandas as pd
 
+from promptolution import get_logger
 from promptolution.config import ExperimentConfig
 from promptolution.exemplar_selectors.random_search_selector import RandomSearchSelector
 from promptolution.exemplar_selectors.random_selector import RandomSelector
@@ -11,13 +12,12 @@ from promptolution.llms.api_llm import APILLM
 from promptolution.llms.base_llm import BaseLLM
 from promptolution.llms.local_llm import LocalLLM
 from promptolution.llms.vllm import VLLM
-from promptolution.logging import get_logger
-from promptolution.optimizers.capo import CAPO
+from promptolution.optimizers import CAPO
 from promptolution.optimizers.evoprompt_de import EvoPromptDE
 from promptolution.optimizers.evoprompt_ga import EvoPromptGA
 from promptolution.optimizers.opro import Opro
+from promptolution.predictors import FirstOccurrenceClassifier, MarkerBasedClassifier
 from promptolution.predictors.base_predictor import BasePredictor
-from promptolution.predictors.classifier import FirstOccurrenceClassifier, MarkerBasedClassifier
 from promptolution.tasks.base_task import BaseTask
 from promptolution.tasks.classification_tasks import ClassificationTask
 from promptolution.templates import (

@@ -2,7 +2,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from promptolution import VLLM
+from promptolution.llms import VLLM
 
 
 @pytest.fixture

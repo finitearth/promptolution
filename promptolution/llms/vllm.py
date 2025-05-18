@@ -3,9 +3,9 @@
 
 from typing import List
 
+from promptolution import get_logger
 from promptolution.config import ExperimentConfig
 from promptolution.llms.base_llm import BaseLLM
-from promptolution.logging import get_logger
 
 logger = get_logger(__name__)
 

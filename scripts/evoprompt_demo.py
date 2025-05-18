@@ -5,6 +5,7 @@ import random
 from logging import Logger
 from datasets import load_dataset
 
+<<<<<<< HEAD:scripts/evoprompt_ga_test.py
 from promptolution import (
     LoggerCallback,
     TokenCountCallback,
@@ -17,6 +18,8 @@ from promptolution import (
 )
 
 
+=======
+>>>>>>> origin/main:scripts/evoprompt_demo.py
 logger = Logger(__name__)
 
 """Run a test run for any of the implemented optimizers."""
@@ -98,6 +101,10 @@ optimizer = EvoPromptGA(
     meta_llm=meta_llm,
     initial_prompts=initial_prompts,
     callbacks=callbacks,
+<<<<<<< HEAD:scripts/evoprompt_ga_test.py
+=======
+    n_eval_samples=args.n_eval_samples,
+>>>>>>> origin/main:scripts/evoprompt_demo.py
 )
 
 best_prompts = optimizer.optimize(n_steps=args.n_steps)

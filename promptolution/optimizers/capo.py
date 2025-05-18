@@ -6,9 +6,9 @@ from typing import Callable, List, Tuple
 import numpy as np
 import pandas as pd
 
+from promptolution import get_logger
 from promptolution.config import ExperimentConfig
 from promptolution.llms.base_llm import BaseLLM
-from promptolution.logging import get_logger
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 from promptolution.predictors.base_predictor import BasePredictor
 from promptolution.tasks.base_task import BaseTask
@@ -18,8 +18,7 @@ from promptolution.templates import (
     CAPO_FEWSHOT_TEMPLATE,
     CAPO_MUTATION_TEMPLATE,
 )
-from promptolution.utils.test_statistics import get_test_statistic_func
-from promptolution.utils.token_counter import get_token_counter
+from promptolution.utils import TestStatistics, get_test_statistic_func, get_token_counter
 
 logger = get_logger(__name__)
 
@@ -75,8 +74,8 @@ class CAPO(BaseOptimizer):
         crossovers_per_iter: int = 4,
         upper_shots: int = 5,
         max_n_blocks_eval: int = 10,
-        test_statistic: str = "paired_t_test",
-        alpha: float = 0.05,
+        test_statistic: TestStatistics = "paired_t_test",
+        alpha: float = 0.2,
         length_penalty: float = 0.05,
         df_few_shots: pd.DataFrame = None,
         crossover_template: str = None,
@@ -87,26 +86,24 @@ class CAPO(BaseOptimizer):
         """Initializes the CAPOptimizer with various parameters for prompt evolution.
 
         Args:
-            initial_prompts (List[str]): Initial prompt instructions.
+            predictor (BasePredictor): The predictor for evaluating prompt performance.
             task (BaseTask): The task instance containing dataset and description.
-            df_few_shots (pd.DataFrame): DataFrame containing few-shot examples. If None, will pop 10% of datapoints from task.
             meta_llm (BaseLLM): The meta language model for crossover/mutation.
-            length_penalty (float): Penalty factor for prompt length.
+            initial_prompts (List[str]): Initial prompt instructions.
             crossovers_per_iter (int): Number of crossover operations per iteration.
             upper_shots (int): Maximum number of few-shot examples per prompt.
-            n_trials_generation_reasoning (int): Number of trials to generate reasoning for few-shot examples.
+            p_few_shot_reasoning (float): Probability of generating llm-reasoning for few-shot examples, instead of simply using input-output pairs.
             max_n_blocks_eval (int): Maximum number of evaluation blocks.
-            test_statistic (str): Statistical test to compare prompt performance. Default is "paired_t_test".
+            test_statistic (TestStatistics): Statistical test to compare prompt performance. Default is "paired_t_test".
             alpha (float): Significance level for the statistical test.
+            length_penalty (float): Penalty factor for prompt length.
+            df_few_shots (pd.DataFrame): DataFrame containing few-shot examples. If None, will pop 10% of datapoints from task.
             crossover_template (str, optional): Template for crossover instructions.
             mutation_template (str, optional): Template for mutation instructions.
             callbacks (List[Callable], optional): Callbacks for optimizer events.
-            predictor (BasePredictor, optional): Predictor to evaluate prompt
-                performance.
             config (ExperimentConfig, optional): Configuration for the optimizer.
         """
         self.meta_llm = meta_llm
-        self.predictor = predictor
         self.downstream_llm = predictor.llm
 
         self.crossover_template = crossover_template or CAPO_CROSSOVER_TEMPLATE
@@ -282,7 +279,7 @@ class CAPO(BaseOptimizer):
 
             # boolean matrix C_ij indicating if candidate j is better than candidate i
             comparison_matrix = np.array(
-                [[self.test_statistic(other_score, score) for other_score in scores] for score in scores]
+                [[self.test_statistic(other_score, score, self.alpha) for other_score in scores] for score in scores]
             )
 
             # Sum along rows to get number of better scores for each candidate

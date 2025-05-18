@@ -2,7 +2,7 @@ from unittest.mock import MagicMock, patch
 
 import pandas as pd
 
-from promptolution import CAPO, CAPOPrompt
+from promptolution.optimizers import CAPO, CAPOPrompt
 
 
 def test_capo_prompt_initialization():

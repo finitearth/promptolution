@@ -2,7 +2,7 @@ import numpy as np
 import pytest
 from sklearn.metrics import accuracy_score
 
-from promptolution import ClassificationTask
+from promptolution.tasks import ClassificationTask
 
 
 def test_classification_task_initialization(mock_df):

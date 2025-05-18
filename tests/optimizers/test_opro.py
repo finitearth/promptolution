@@ -2,7 +2,7 @@ from unittest.mock import patch
 
 import numpy as np
 
-from promptolution import Opro
+from promptolution.optimizers import Opro
 
 
 def test_opro_initialization(mock_meta_llm, initial_prompts, mock_task, mock_predictor):
