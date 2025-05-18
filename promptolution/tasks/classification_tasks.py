@@ -1,6 +1,6 @@
 """Module for classification tasks."""
 
-from typing import Any, Callable, List, Tuple, Union
+from typing import Any, Callable, List, Literal, Tuple, Union
 
 import numpy as np
 import pandas as pd
@@ -26,7 +26,7 @@ class ClassificationTask(BaseTask):
         y_column: str = "y",
         n_subsamples: int = 30,
         block_size: int = 30,
-        subsample_strategy: str = "full",
+        subsample_strategy: Literal["full", "subsample", "sequential_block", "random_block"] = "full",
         seed: int = 42,
         metric: Callable = accuracy_score,
         config: ExperimentConfig = None,
@@ -40,7 +40,13 @@ class ClassificationTask(BaseTask):
             y_column (str, optional): Name of the column containing labels. Defaults to "y".
             n_subsamples (int, optional): Number of subsamples to use. No subsampling if None. Defaults to None.
             block_size (int, optional): Block size for subsampling. Defaults to None.
-            subsample_strategy (str, optional): Subsampling strategy to use. Can be "full", "subsample", "sequential_block" or "random_block". Defaults to None.
+            subsample_strategy (str, optional): Subsampling strategy to use. Options:
+                - "full": Uses the entire dataset for evaluation.
+                - "evaluated": Uses only previously evaluated datapoints from the cache.
+                - "subsample": Randomly selects n_subsamples datapoints without replacement.
+                - "sequential_block": Uses a block of block_size consecutive datapoints, advancing through blocks sequentially.
+                - "random_block": Randomly selects a block of block_size consecutive datapoints.
+                Defaults to "full".  # TODO in other pull request this is renamed to eval_strategy and we do not use block_size
             seed (int, optional): Random seed for reproducibility. Defaults to 42.
             metric (Callable, optional): Metric to use for evaluation. Defaults to accuracy_score.
             config (ExperimentConfig, optional): ExperimentConfig overwriting the defaults.
@@ -66,7 +72,9 @@ class ClassificationTask(BaseTask):
         self.eval_cache = {}  # (prompt, x, y): scores per datapoint
         self.seq_cache = {}  # (prompt, x, y): generating sequence per datapoint
 
-    def subsample(self, strategy: str = None) -> Tuple[np.ndarray, np.ndarray]:
+    def subsample(
+        self, strategy: Literal["full", "subsample", "sequential_block", "random_block"] = None
+    ) -> Tuple[np.ndarray, np.ndarray]:
         """Subsample the dataset based on the specified parameters.
 
         Args:
@@ -95,7 +103,7 @@ class ClassificationTask(BaseTask):
             return self.xs[indices], self.ys[indices]
 
         else:
-            raise ValueError(f"Unknown subsampling strategy: '{strategy}")
+            raise ValueError(f"Unknown subsampling strategy: '{strategy}'")
 
     def _prepare_batch(
         self, prompts: List[str], xs: np.ndarray, ys: np.ndarray, strategy: str

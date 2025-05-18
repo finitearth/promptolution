@@ -76,7 +76,7 @@ class CAPO(BaseOptimizer):
         upper_shots: int = 5,
         max_n_blocks_eval: int = 10,
         test_statistic: str = "paired_t_test",
-        alpha: float = 0.05,
+        alpha: float = 0.2,
         length_penalty: float = 0.05,
         df_few_shots: pd.DataFrame = None,
         crossover_template: str = None,
@@ -108,7 +108,6 @@ class CAPO(BaseOptimizer):
             config (ExperimentConfig, optional): Configuration for the optimizer.
         """
         self.meta_llm = meta_llm
-        self.predictor = predictor
         self.downstream_llm = predictor.llm
 
         self.crossover_template = crossover_template or CAPO_CROSSOVER_TEMPLATE
@@ -284,7 +283,7 @@ class CAPO(BaseOptimizer):
 
             # boolean matrix C_ij indicating if candidate j is better than candidate i
             comparison_matrix = np.array(
-                [[self.test_statistic(other_score, score) for other_score in scores] for score in scores]
+                [[self.test_statistic(other_score, score, self.alpha) for other_score in scores] for score in scores]
             )
 
             # Sum along rows to get number of better scores for each candidate

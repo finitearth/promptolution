@@ -5,18 +5,14 @@ import random
 from logging import Logger
 
 from promptolution.callbacks import LoggerCallback, TokenCountCallback, FileOutputCallback
-from promptolution.templates import EVOPROMPT_GA_TEMPLATE
 from promptolution.helpers import get_llm
 from promptolution.tasks import ClassificationTask
 from promptolution.predictors import MarkerBasedClassificator
-from promptolution.optimizers import EvoPromptGA
+from promptolution.optimizers import CAPO
 from datasets import load_dataset
-
-from promptolution.config import Config
 
 logger = Logger(__name__)
 
-"""Run a test run for any of the implemented optimizers."""
 parser = argparse.ArgumentParser()
 parser.add_argument("--model")
 parser.add_argument("--model-storage-path", default="../models/")
@@ -88,9 +84,8 @@ meta_llm = llm
 
 predictor = MarkerBasedClassificator(downstream_llm, classes=None)
 
-optimizer = EvoPromptGA(
+optimizer = CAPO(
     task=task,
-    prompt_template=EVOPROMPT_GA_TEMPLATE,
     predictor=predictor,
     meta_llm=meta_llm,
     initial_prompts=initial_prompts,
