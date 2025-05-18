@@ -1,5 +1,5 @@
 ## Release vX.X.X
-### What's Changed
+### What's changed
 
 #### Added features:
 *
