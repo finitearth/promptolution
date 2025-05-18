@@ -46,7 +46,11 @@ def run_optimization(df, config: ExperimentConfig):
     """
     llm = get_llm(config=config)
     predictor = get_predictor(llm, config=config)
+
     config.task_description = config.task_description + " " + predictor.extraction_description
+    if config.optimizer == "capo" and config.subsample_strategy is None:
+        logger.info("CAPO requires block evaluation strategy. Setting it to 'sequential_block'.")
+        config.subsample_strategy = "sequential_block"
 
     task = get_task(df, config)
     optimizer = get_optimizer(
@@ -55,7 +59,7 @@ def run_optimization(df, config: ExperimentConfig):
         task=task,
         config=config,
     )
-
+    logger.info("Starting optimization...")
     prompts = optimizer.optimize(n_steps=config.n_steps)
 
     if hasattr(config, "prepend_exemplars") and config.prepend_exemplars:
@@ -80,7 +84,7 @@ def run_evaluation(df: pd.DataFrame, config: ExperimentConfig, prompts: List[str
 
     llm = get_llm(config=config)
     predictor = get_predictor(llm, config=config)
-
+    logger.info("Starting evaluation...")
     scores = task.evaluate(prompts, predictor)
     df = pd.DataFrame(dict(prompt=prompts, score=scores))
     df = df.sort_values("score", ascending=False, ignore_index=True)

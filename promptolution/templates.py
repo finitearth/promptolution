@@ -134,3 +134,30 @@ Include the name of the output classes in the prompt.
 <input_output_pairs>
 
 The instruction was"""
+
+
+CAPO_DOWNSTREAM_TEMPLATE = """<instruction>
+
+<few_shots>
+
+Input:"""
+
+CAPO_FEWSHOT_TEMPLATE = """Input:
+<input>
+Output:
+<output>"""
+
+CAPO_CROSSOVER_TEMPLATE = """You receive two prompts for the following task: <task_desc>
+Please merge the two prompts into a single coherent prompt. Maintain the key linguistic features from both original prompts:
+Prompt 1: <mother>
+Prompt 2: <father>
+
+Return the new prompt in the following format:
+<prompt>new prompt</prompt>"""
+
+CAPO_MUTATION_TEMPLATE = """You receive a prompt for the following task: <task_desc>
+Please rephrase the prompt, preserving its core meaning while substantially varying the linguistic style.
+Prompt: <instruction>
+
+Return the new prompt in the following format:
+<prompt>new prompt</prompt>"""

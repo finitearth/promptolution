@@ -1,75 +1,83 @@
-from typing import List
+"""Simplified MockLLM class for testing purposes."""
+
+from typing import List, Optional
 
 from promptolution.llms.base_llm import BaseLLM
 
 
 class MockLLM(BaseLLM):
     """Mock LLM for testing purposes.
-    
+
     This class allows precise control over responses for testing without loading actual models.
+    Simplified to work with list-based responses only.
     """
-    
-    def __init__(self, predetermined_responses=None, *args, **kwargs):
+
+    def __init__(self, predetermined_responses=None, add_prompt_tags=False, *args, **kwargs):
         """Initialize the MockLLM with optional predetermined responses.
-        
+
         Args:
-            predetermined_responses (Dict or List): Mapping from prompts to responses,
-                or a list of responses to return in sequence.
+            predetermined_responses (List): List of responses to return in sequence.
+                If None, will return generic mock responses.
+            add_prompt_tags (bool): Whether to wrap responses in <prompt> tags
             *args, **kwargs: Arguments to pass to BaseLLM.
         """
         super().__init__(*args, **kwargs)
-        self.predetermined_responses = predetermined_responses or {}
+
+        # Set up response list
+        if predetermined_responses is None:
+            self.responses = []
+        else:
+            self.responses = list(predetermined_responses)  # Ensure it's a list
+
+        # Add prompt tags if requested
+        if add_prompt_tags:
+            self.responses = [
+                f"<prompt>{r}</prompt>" if not (r.startswith("<prompt>") and r.endswith("</prompt>")) else r
+                for r in self.responses
+            ]
+
         self.call_history = []
         self.response_index = 0
-    
-    def _get_response(self, prompts: List[str], system_prompts: List[str]) -> List[str]:
+        self._generation_seed = None
+
+    def _get_response(self, prompts: List[str], system_prompts: Optional[List[str]] = None) -> List[str]:
         """Generate predetermined responses for the given prompts.
-        
+
         Records the inputs for later verification in tests.
-        
+
         Args:
             prompts (List[str]): Input prompts
-            system_prompts (List[str]): System prompts
-            
+            system_prompts (Optional[List[str]]): System prompts, defaults to None
+
         Returns:
             List[str]: Predetermined responses
         """
         # Record the call for test assertions
-        self.call_history.append({
-            'prompts': prompts,
-            'system_prompts': system_prompts
-        })
-        
-        # Handle case where there's a single system prompt for multiple prompts
-        if len(system_prompts) == 1 and len(prompts) > 1:
-            system_prompts = system_prompts * len(prompts)
-        
+        self.call_history.append({"prompts": prompts, "system_prompts": system_prompts})
+
         results = []
         for i, prompt in enumerate(prompts):
-            # Handle dictionary-based responses
-            if isinstance(self.predetermined_responses, dict):
-                # Try exact match first
-                if prompt in self.predetermined_responses:
-                    results.append(self.predetermined_responses[prompt])
-                # Try system prompt combination
-                elif i < len(system_prompts) and (prompt, system_prompts[i]) in self.predetermined_responses:
-                    results.append(self.predetermined_responses[(prompt, system_prompts[i])])
-                # Default response
-                else:
-                    results.append(f"Mock response for: {prompt}")
-            # Handle list-based responses (return in sequence)
-            elif isinstance(self.predetermined_responses, list):
-                if self.response_index < len(self.predetermined_responses):
-                    results.append(self.predetermined_responses[self.response_index])
-                    self.response_index += 1
-                else:
-                    results.append(f"Mock response for: {prompt}")
-            # Default fallback
+            # Return the next response from the list if available
+            if self.response_index < len(self.responses):
+                results.append(self.responses[self.response_index])
+                self.response_index += 1
             else:
-                results.append(f"Mock response for: {prompt}")
-                
+                # Default response if we've exhausted the list
+                if hasattr(self, "add_prompt_tags") and getattr(self, "add_prompt_tags"):
+                    results.append(f"<prompt>Mock response for: {prompt}</prompt>")
+                else:
+                    results.append(f"Mock response for: {prompt}")
+
         return results
-    
+
+    def set_generation_seed(self, seed: int) -> None:
+        """Set the generation seed (no-op, just for API compatibility).
+
+        Args:
+            seed: Random seed value
+        """
+        self._generation_seed = seed
+
     def reset(self):
         """Reset the call history and response index."""
         self.call_history = []
