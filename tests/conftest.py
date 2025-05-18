@@ -5,7 +5,7 @@ from mocks.mock_llm import MockLLM
 from mocks.mock_predictor import MockPredictor
 from mocks.mock_task import MockTask
 
-from promptolution import ExperimentConfig
+from promptolution.config import ExperimentConfig
 from promptolution.tasks import ClassificationTask
 
 
