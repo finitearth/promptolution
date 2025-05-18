@@ -78,7 +78,7 @@ class BaseLLM(ABC):
         Args:
             prompts (str or List[str]): Input prompt(s). If a single string is provided,
                                         it's converted to a list containing that string.
-            system_prompts (str or List[str]): System prompt(s) to provide context to the model.
+            system_prompts (Optional, str or List[str]): System prompt(s) to provide context to the model.
 
         Returns:
             List[str]: A list of generated responses, one for each input prompt.
