@@ -18,7 +18,7 @@ from promptolution.templates import (
     CAPO_FEWSHOT_TEMPLATE,
     CAPO_MUTATION_TEMPLATE,
 )
-from promptolution.utils.test_statistics import get_test_statistic_func
+from promptolution.utils.test_statistics import TestStatistics, get_test_statistic_func
 from promptolution.utils.token_counter import get_token_counter
 
 logger = getLogger(__name__)
@@ -75,7 +75,7 @@ class CAPO(BaseOptimizer):
         crossovers_per_iter: int = 4,
         upper_shots: int = 5,
         max_n_blocks_eval: int = 10,
-        test_statistic: str = "paired_t_test",
+        test_statistic: TestStatistics = "paired_t_test",
         alpha: float = 0.2,
         length_penalty: float = 0.05,
         df_few_shots: pd.DataFrame = None,
@@ -98,7 +98,7 @@ class CAPO(BaseOptimizer):
             p_few_shot_reasoning (float): Probability of generating llm-reasoning for few-shot examples, instead of simply using input-output pairs.
             n_trials_generation_reasoning (int): Number of trials to generate reasoning for few-shot examples.
             max_n_blocks_eval (int): Maximum number of evaluation blocks.
-            test_statistic (str): Statistical test to compare prompt performance. Default is "paired_t_test".
+            test_statistic (TestStatistics): Statistical test to compare prompt performance. Default is "paired_t_test".
             alpha (float): Significance level for the statistical test.
             crossover_template (str, optional): Template for crossover instructions.
             mutation_template (str, optional): Template for mutation instructions.

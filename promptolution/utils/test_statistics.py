@@ -7,8 +7,10 @@ from typing import Literal
 import numpy as np
 from scipy.stats import ttest_rel
 
+TestStatistics = Literal["paired_t_test"]
 
-def get_test_statistic_func(name: Literal["paired_t_test"]) -> callable:
+
+def get_test_statistic_func(name: TestStatistics) -> callable:
     """
     Get the test statistic function based on the name provided.
 
@@ -21,7 +23,7 @@ def get_test_statistic_func(name: Literal["paired_t_test"]) -> callable:
     if name == "paired_t_test":
         return paired_t_test
     else:
-        raise ValueError(f"Unknown test statistic function: {name}. Should be one of ['paired_t_test'].")
+        raise ValueError(f"Unknown test statistic function: {name}. Should be one of {TestStatistics.__args__}.")
 
 
 def paired_t_test(
