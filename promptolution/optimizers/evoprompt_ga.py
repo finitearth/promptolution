@@ -4,10 +4,10 @@ from typing import List
 
 import numpy as np
 
+from promptolution import get_logger
 from promptolution.callbacks import BaseCallback
 from promptolution.config import ExperimentConfig
 from promptolution.llms.base_llm import BaseLLM
-from promptolution.logging import get_logger
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 from promptolution.predictors.base_predictor import BasePredictor
 from promptolution.tasks.base_task import BaseTask
