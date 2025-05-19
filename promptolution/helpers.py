@@ -272,8 +272,8 @@ def get_predictor(
     Args:
         downstream_llm: The language model to use for prediction.
         type (Literal["first_occurrence", "marker"]): The type of predictor to create:
-                    - "first_occurrence" (default) for FirstOccurrenceClassifier
-                    - "marker" for MarkerBasedClassifier
+                    - "first_occurrence" for FirstOccurrenceClassifier
+                    - "marker" (default) for MarkerBasedClassifier
         *args: Variable length argument list passed to the predictor constructor.
         **kwargs: Arbitrary keyword arguments passed to the predictor constructor.
 
