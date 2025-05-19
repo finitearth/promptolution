@@ -41,12 +41,12 @@ For more details a comprehensive **documentation** with API reference is availab
 
 ### Featured Optimizers
 
-|   **Name**    |                    **Paper**                     | **init prompts** | **Exploration** | **Costs** | **Convergence Speed** | **Parallelizable** | **Utilizes Fewshot Examples** |
-| :-----------: | :----------------------------------------------: | :--------------: | :-------------: | :-------: | :-------------------: | :----------------: | :---------------------------: |
-|    `CAPO`     | [Zehle et al.](https://arxiv.org/abs/2504.16005) |    _required_    |       👍        |    💲     |         ⚡⚡          |         ✅         |              ✅               |
-| `EvoPromptDE` |  [Guo et al.](https://arxiv.org/abs/2309.08532)  |    _required_    |       👍        |   💲💲    |         ⚡⚡          |         ✅         |              ❌               |
-| `EvoPromptGA` |  [Guo et al.](https://arxiv.org/abs/2309.08532)  |    _required_    |       👍        |   💲💲    |         ⚡⚡          |         ✅         |              ❌               |
-|    `OPRO`     | [Yang et al.](https://arxiv.org/abs/2309.03409)  |    _optional_    |       👎        |   💲💲    |          ⚡           |         ❌         |              ❌               |
+|   **Name**    |                    **Paper**                     | **init prompts** | **Exploration** | **Costs**  | **Parallelizable** | **Utilizes Fewshot Examples** |
+| :-----------: | :----------------------------------------------: | :--------------: | :-------------: | :-------: | :-------------------: | :---------------------------: |
+|    `CAPO`     | [Zehle et al.](https://arxiv.org/abs/2504.16005) |    _required_    |       👍        |    💲     |        ✅         |              ✅               |
+| `EvoPromptDE` |  [Guo et al.](https://arxiv.org/abs/2309.08532)  |    _required_    |       👍        |   💲💲    |               ✅         |              ❌               |
+| `EvoPromptGA` |  [Guo et al.](https://arxiv.org/abs/2309.08532)  |    _required_    |       👍        |   💲💲    |               ✅         |              ❌               |
+|    `OPRO`     | [Yang et al.](https://arxiv.org/abs/2309.03409)  |    _optional_    |       👎        |   💲💲    |                  ❌         |              ❌               |
 
 ### Core Components
 
