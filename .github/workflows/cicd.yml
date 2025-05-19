@@ -61,21 +61,17 @@ jobs:
   create-release:
     needs: check-version
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      id-token: write
     steps:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
-
+        token: ${{ secrets.PAT_TOKEN }}
     - name: Create and push tag
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git tag -a v${{ needs.check-version.outputs.version }} -m "Release v${{ needs.check-version.outputs.version }}"
         git push origin v${{ needs.check-version.outputs.version }}
-
     - name: Set release notes file path
       id: release-notes
       run: echo "RELEASE_NOTES_PATH=./docs/release-notes/v${{ needs.check-version.outputs.version }}.md" >> $GITHUB_ENV
