@@ -3,17 +3,18 @@
 import argparse
 import random
 from logging import Logger
+
 from datasets import load_dataset
 
 from promptolution import (
-    LoggerCallback,
-    CSVCallback,
-    TokenCountCallback,
     OPRO_TEMPLATE_TD,
-    get_llm,
     ClassificationTask,
+    CSVCallback,
+    LoggerCallback,
     MarkerBasedClassifier,
-    Opro
+    Opro,
+    TokenCountCallback,
+    get_llm,
 )
 
 logger = Logger(__name__)

@@ -3,17 +3,13 @@
 import argparse
 from logging import Logger
 
-
 from datasets import load_dataset
+from promptolution.callbacks import LoggerCallback
 
-from promptolution import (
-    LoggerCallback,
-    CAPO_TEMPLATE,
-    ClassificationTask,
-    MarkerBasedClassifier,
-    CAPO,
-    APILLM
-)
+from promptolution.llms import APILLM
+from promptolution.optimizers import CAPO
+from promptolution.predictors import MarkerBasedClassifier
+from promptolution.tasks import ClassificationTask
 
 logger = Logger(__name__)
 
@@ -56,9 +52,8 @@ predictor = MarkerBasedClassifier(downstream_llm, classes=task.classes)
 
 callbacks = [LoggerCallback(logger)]
 
-optimizer = Capo(
+optimizer = CAPO(
     task=task,
-    prompt_template=EVOPROMPT_GA_TEMPLATE,
     predictor=predictor,
     meta_llm=meta_llm,
     initial_prompts=initial_prompts,

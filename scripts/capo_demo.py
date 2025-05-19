@@ -4,12 +4,13 @@ import argparse
 import random
 from logging import Logger
 
-from promptolution.callbacks import LoggerCallback, TokenCountCallback, FileOutputCallback
-from promptolution.helpers import get_llm
-from promptolution.tasks import ClassificationTask
-from promptolution.predictors import MarkerBasedClassifier
-from promptolution.optimizers import CAPO
 from datasets import load_dataset
+from promptolution.callbacks import FileOutputCallback, LoggerCallback, TokenCountCallback
+from promptolution.helpers import get_llm
+
+from promptolution.optimizers import CAPO
+from promptolution.predictors import MarkerBasedClassifier
+from promptolution.tasks import ClassificationTask
 
 logger = Logger(__name__)
 
@@ -30,7 +31,11 @@ callbacks = [
     TokenCountCallback(100000, "input_tokens"),
 ]
 
-df = load_dataset("openai/gsm8k", name="main", split="train", revision="main").to_pandas().sample(300, random_state=args.seed)
+df = (
+    load_dataset("openai/gsm8k", name="main", split="train", revision="main")
+    .to_pandas()
+    .sample(300, random_state=args.seed)
+)
 
 df["input"] = df["question"]
 df["target"] = df["answer"].str.extract(r"#### (.*)")

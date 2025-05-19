@@ -45,7 +45,7 @@ plugins:
 
 nav:
   - Home: index.md
-  - Release Notes: 
+  - Release Notes:
     - Overview: release-notes.md
     - v1.4.0: release-notes/v1.4.0.md
     - v1.3.2: release-notes/v1.3.2.md

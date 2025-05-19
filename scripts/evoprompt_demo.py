@@ -3,26 +3,22 @@
 import argparse
 import random
 from logging import Logger
+
 from datasets import load_dataset
 
-<<<<<<< HEAD:scripts/evoprompt_ga_test.py
 from promptolution import (
-    LoggerCallback,
-    TokenCountCallback,
-    FileOutputCallback,
     EVOPROMPT_GA_TEMPLATE,
-    get_llm,
     ClassificationTask,
+    EvoPromptGA,
+    FileOutputCallback,
+    LoggerCallback,
     MarkerBasedClassifier,
-    EvoPromptGA
+    TokenCountCallback,
+    get_llm,
 )
 
-
-=======
->>>>>>> origin/main:scripts/evoprompt_demo.py
 logger = Logger(__name__)
 
-"""Run a test run for any of the implemented optimizers."""
 parser = argparse.ArgumentParser()
 parser.add_argument("--model")
 parser.add_argument("--model-storage-path", default="../models/")
@@ -101,10 +97,6 @@ optimizer = EvoPromptGA(
     meta_llm=meta_llm,
     initial_prompts=initial_prompts,
     callbacks=callbacks,
-<<<<<<< HEAD:scripts/evoprompt_ga_test.py
-=======
-    n_eval_samples=args.n_eval_samples,
->>>>>>> origin/main:scripts/evoprompt_demo.py
 )
 
 best_prompts = optimizer.optimize(n_steps=args.n_steps)
