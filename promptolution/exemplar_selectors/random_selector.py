@@ -1,4 +1,5 @@
 """Random exemplar selector."""
+
 from typing import TYPE_CHECKING
 
 from promptolution.exemplar_selectors.base_exemplar_selector import BaseExemplarSelector

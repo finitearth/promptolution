@@ -1,9 +1,11 @@
 """Base module for tasks."""
 
+
 from abc import ABC, abstractmethod
-from typing import TYPE_CHECKING, List
 
 import numpy as np
+
+from typing import TYPE_CHECKING, List
 
 if TYPE_CHECKING:
     from promptolution.utils.config import ExperimentConfig

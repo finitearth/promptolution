@@ -1,4 +1,5 @@
 """Fixtures for testing."""
+
 import pandas as pd
 import pytest
 from mocks.mock_llm import MockLLM

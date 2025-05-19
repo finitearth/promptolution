@@ -2,10 +2,11 @@
 Implementation of statistical significance tests used in the racing algorithm.
 Contains paired t-test functionality to compare prompt performance and determine statistical significance between candidates.
 """
-from typing import Literal
 
 import numpy as np
 from scipy.stats import ttest_rel
+
+from typing import Literal
 
 TestStatistics = Literal["paired_t_test"]
 

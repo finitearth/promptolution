@@ -1,10 +1,11 @@
 """Module for classification tasks."""
 
-from typing import TYPE_CHECKING, Any, Callable, List, Literal, Tuple, Union
 
 import numpy as np
 import pandas as pd
 from sklearn.metrics import accuracy_score
+
+from typing import TYPE_CHECKING, Any, Callable, List, Literal, Tuple, Union
 
 from promptolution.tasks.base_task import BaseTask
 

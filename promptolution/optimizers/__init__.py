@@ -1,5 +1,6 @@
 """Module for prompt optimizers."""
 
+
 from promptolution.optimizers.capo import CAPO
 from promptolution.optimizers.evoprompt_de import EvoPromptDE
 from promptolution.optimizers.evoprompt_ga import EvoPromptGA

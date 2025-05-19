@@ -1,8 +1,9 @@
 """Module for EvoPromptGA optimizer."""
 
-from typing import TYPE_CHECKING, List
 
 import numpy as np
+
+from typing import TYPE_CHECKING, List
 
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 

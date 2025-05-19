@@ -1,4 +1,5 @@
 """Configuration class for the promptolution library."""
+
 from typing import Set
 
 from promptolution.utils.logging import get_logger

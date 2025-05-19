@@ -4,6 +4,8 @@ from unittest.mock import MagicMock, patch
 import pandas as pd
 import pytest
 
+from tests.mocks.mock_llm import MockLLM
+
 from promptolution.utils import (
     BestPromptCallback,
     FileOutputCallback,
@@ -11,7 +13,6 @@ from promptolution.utils import (
     ProgressBarCallback,
     TokenCountCallback,
 )
-from tests.mocks.mock_llm import MockLLM
 
 
 @pytest.fixture

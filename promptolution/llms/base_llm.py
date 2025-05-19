@@ -1,6 +1,8 @@
 """Base module for LLMs in the promptolution library."""
 
+
 from abc import ABC, abstractmethod
+
 from typing import TYPE_CHECKING, List
 
 if TYPE_CHECKING:

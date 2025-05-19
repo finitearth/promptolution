@@ -1,5 +1,6 @@
 """Mock Optimizer for Testing."""
 
+
 from unittest.mock import MagicMock
 
 from promptolution.optimizers.base_optimizer import BaseOptimizer

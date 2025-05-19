@@ -1,8 +1,9 @@
 """Module for classification predictors."""
 
-from typing import TYPE_CHECKING, List
 
 import numpy as np
+
+from typing import TYPE_CHECKING, List
 
 from promptolution.predictors.base_predictor import BasePredictor
 
