@@ -1,5 +1,4 @@
 fail_fast: true
-# exclude: '^(?!(promptolution/|tests/)).*$'
 repos:
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.18.2
