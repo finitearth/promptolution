@@ -62,6 +62,7 @@ jobs:
     needs: check-version
     runs-on: ubuntu-latest
     permissions:
+      contents: write
       id-token: write
     steps:
     - uses: actions/checkout@v3
@@ -107,6 +108,8 @@ jobs:
     needs: [build, check-version, create-release]
     name: Publish Python package to PyPI
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
     - uses: actions/checkout@v3
 
