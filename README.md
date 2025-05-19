@@ -37,7 +37,7 @@ to install the necessary dependencies. You might need to install [pipx](https://
 ## Usage
 
 To get started right away, take a look at our [getting started notebook](https://github.com/finitearth/promptolution/blob/main/notebooks/getting_started.ipynb).
-For more details a comprehensive **documentation** with API reference is availabe at https://finitearth.github.io/promptolution/.
+For more details, a comprehensive **documentation** with API reference is availabe at https://finitearth.github.io/promptolution/.
 
 ### Featured Optimizers
 
