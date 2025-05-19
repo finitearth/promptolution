@@ -10,7 +10,7 @@
 
 Promptolution is a library that provides a modular and extensible framework for implementing prompt tuning for single tasks and larger experiments. It offers a user-friendly interface to assemble the core components for various prompt optimization tasks.
 
-This project was developed by [Timo Heiß](https://www.linkedin.com/in/timo-heiss/), [Moritz Schlager](https://www.linkedin.com/in/moritz-schlager/) and [Tom Zehle](https://www.linkedin.com/in/tom-zehle/) as part of their studies as LMU Munich.
+This project was developed by [Timo Heiß](https://www.linkedin.com/in/timo-heiss/), [Moritz Schlager](https://www.linkedin.com/in/moritz-schlager/) and [Tom Zehle](https://www.linkedin.com/in/tom-zehle/) as part of a study program at LMU Munich.
 
 ## Installation
 
