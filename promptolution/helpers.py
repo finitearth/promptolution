@@ -70,9 +70,9 @@ def run_optimization(df: pd.DataFrame, config: "ExperimentConfig") -> List[str]:
     predictor = get_predictor(llm, config=config)
 
     config.task_description = config.task_description + " " + predictor.extraction_description
-    if config.optimizer == "capo" and config.subsample_strategy is None:
-        logger.info("📌 CAPO requires block evaluation strategy. Setting it to 'sequential_block'.")
-        config.subsample_strategy = "sequential_block"
+    if config.optimizer == "capo" and (config.eval_strategy is None or "block" not in config.eval_strategy):
+        logger.warning("📌 CAPO requires block evaluation strategy. Setting it to 'sequential_block'.")
+        config.eval_strategy = "sequential_block"
 
     task = get_task(df, config)
     optimizer = get_optimizer(
@@ -81,7 +81,7 @@ def run_optimization(df: pd.DataFrame, config: "ExperimentConfig") -> List[str]:
         task=task,
         config=config,
     )
-    logger.info("🔥 Starting optimization...")
+    logger.warning("🔥 Starting optimization...")
     prompts = optimizer.optimize(n_steps=config.n_steps)
 
     if hasattr(config, "prepend_exemplars") and config.prepend_exemplars:
@@ -103,11 +103,10 @@ def run_evaluation(df: pd.DataFrame, config: "ExperimentConfig", prompts: List[s
         pd.DataFrame: A DataFrame containing the prompts and their scores.
     """
     task = get_task(df, config)
-
     llm = get_llm(config=config)
     predictor = get_predictor(llm, config=config)
-    logger.info("📊 Starting evaluation...")
-    scores = task.evaluate(prompts, predictor)
+    logger.warning("📊 Starting evaluation...")
+    scores = task.evaluate(prompts, predictor, eval_strategy="full")
     df = pd.DataFrame(dict(prompt=prompts, score=scores))
     df = df.sort_values("score", ascending=False, ignore_index=True)
 
@@ -133,7 +132,7 @@ def get_llm(model_id: str = None, config: "ExperimentConfig" = None) -> "BaseLLM
         An instance of LocalLLM, or APILLM based on the model_id.
     """
     if model_id is None:
-        model_id = config.llm
+        model_id = config.model_id
     if "local" in model_id:
         model_id = "-".join(model_id.split("-")[1:])
         return LocalLLM(model_id, config)

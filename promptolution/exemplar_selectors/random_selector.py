@@ -1,9 +1,12 @@
 """Random exemplar selector."""
+from typing import TYPE_CHECKING
 
 from promptolution.exemplar_selectors.base_exemplar_selector import BaseExemplarSelector
-from promptolution.predictors.base_predictor import BasePredictor
-from promptolution.tasks.base_task import BaseTask
-from promptolution.utils.config import ExperimentConfig
+
+if TYPE_CHECKING:
+    from promptolution.predictors.base_predictor import BasePredictor
+    from promptolution.tasks.base_task import BaseTask
+    from promptolution.utils.config import ExperimentConfig
 
 
 class RandomSelector(BaseExemplarSelector):

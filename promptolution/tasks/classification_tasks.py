@@ -27,7 +27,6 @@ class ClassificationTask(BaseTask):
         x_column: str = "x",
         y_column: str = "y",
         n_subsamples: int = 30,
-        block_size: int = 30,
         eval_strategy: Literal["full", "subsample", "sequential_block", "random_block"] = "full",
         seed: int = 42,
         metric: Callable = accuracy_score,
@@ -41,7 +40,6 @@ class ClassificationTask(BaseTask):
             x_column (str, optional): Name of the column containing input texts. Defaults to "x".
             y_column (str, optional): Name of the column containing labels. Defaults to "y".
             n_subsamples (int, optional): Number of subsamples to use. No subsampling if None. Defaults to None.
-            block_size (int, optional): Block size for subsampling. Defaults to None.
             eval_strategy (str, optional): Subsampling strategy to use. Options:
                 - "full": Uses the entire dataset for evaluation.
                 - "evaluated": Uses only previously evaluated datapoints from the cache.

@@ -6,7 +6,10 @@ try:
     imports_successful = True
 except ImportError:
     imports_successful = False
+from typing import TYPE_CHECKING
 
+if TYPE_CHECKING:
+    from promptolution.utils.config import ExperimentConfig
 from promptolution.llms.base_llm import BaseLLM
 
 
@@ -23,7 +26,7 @@ class LocalLLM(BaseLLM):
         get_response: Generate responses for a list of prompts.
     """
 
-    def __init__(self, model_id: str, batch_size=8, config=None):
+    def __init__(self, model_id: str, batch_size: int = 8, config: "ExperimentConfig" = None):
         """Initialize the LocalLLM with a specific model.
 
         Args:

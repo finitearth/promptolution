@@ -297,7 +297,7 @@ class CAPO(BaseOptimizer):
             self.task.increment_block_idx()
 
         avg_scores = self.task.evaluate(
-            [c.construct_prompt() for c in candidates], self.predictor, strategy="evaluated"
+            [c.construct_prompt() for c in candidates], self.predictor, eval_strategy="evaluated"
         )
         order = np.argsort(-avg_scores)[:k]
         candidates = [candidates[i] for i in order]

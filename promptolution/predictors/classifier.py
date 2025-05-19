@@ -1,11 +1,13 @@
 """Module for classification predictors."""
 
-from typing import List
+from typing import TYPE_CHECKING, List
 
 import numpy as np
 
 from promptolution.predictors.base_predictor import BasePredictor
-from promptolution.utils.config import ExperimentConfig
+
+if TYPE_CHECKING:
+    from promptolution.utils.config import ExperimentConfig
 
 
 class FirstOccurrenceClassifier(BasePredictor):
