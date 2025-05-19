@@ -1,12 +1,14 @@
 """Callback classes for logging, saving, and tracking optimization progress."""
 
+
 import os
 from abc import ABC
 from datetime import datetime
-from typing import Literal
 
 import pandas as pd
 from tqdm import tqdm
+
+from typing import Literal
 
 
 class BaseCallback(ABC):

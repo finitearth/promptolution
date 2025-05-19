@@ -1,5 +1,7 @@
 """Logging configuration for the promptolution library."""
+
 import logging
+
 from typing import Optional
 
 

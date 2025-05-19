@@ -1,8 +1,10 @@
 """Mock task for testing purposes."""
-from typing import List
+
 from unittest.mock import MagicMock
 
 import numpy as np
+
+from typing import List
 
 from promptolution.tasks.base_task import BaseTask
 

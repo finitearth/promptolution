@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING, List
 if TYPE_CHECKING:
     from promptolution.utils.config import ExperimentConfig
 
+
 from promptolution.llms.base_llm import BaseLLM
 from promptolution.utils.logging import get_logger
 

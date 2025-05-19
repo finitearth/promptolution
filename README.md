@@ -6,7 +6,7 @@
 ![Code Style](https://img.shields.io/badge/Code%20Style-black-black)
 ![Python Versions](https://img.shields.io/badge/Python%20Versions-≥3.9-blue)
 
-# Promptolution
+
 
 Promptolution is a library that provides a modular and extensible framework for implementing prompt tuning for single tasks and larger experiments. It offers a user-friendly interface to assemble the core components for various prompt optimization tasks.
 

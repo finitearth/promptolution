@@ -1,5 +1,6 @@
 """Test run for the Opro optimizer."""
 
+
 import argparse
 import random
 from logging import Logger

@@ -1,6 +1,8 @@
 """Base class for exemplar selectors."""
 
+
 from abc import ABC, abstractmethod
+
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:

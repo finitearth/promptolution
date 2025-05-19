@@ -55,6 +55,10 @@ line-length = 120
 [tool.isort]
 line_length = 120
 profile = "black"
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "TYPING", "FIRSTPARTY", "PROMPTOLUTION", "LOCALFOLDER"]
+known_typing = ["typing"]
+known_promptolution = ["promptolution"]
+lines_between_sections = 1
 
 [tool.pydocstyle]
 convention = "google"

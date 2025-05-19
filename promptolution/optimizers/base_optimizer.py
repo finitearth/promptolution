@@ -1,6 +1,8 @@
 """Base module for optimizers in the promptolution library."""
 
+
 from abc import ABC, abstractmethod
+
 from typing import TYPE_CHECKING, Callable, List
 
 if TYPE_CHECKING:

@@ -1,8 +1,9 @@
 """Utility functions for prompt creation."""
 
-from typing import TYPE_CHECKING, List, Union
 
 import numpy as np
+
+from typing import TYPE_CHECKING, List, Union
 
 if TYPE_CHECKING:
     from promptolution.llms.base_llm import BaseLLM

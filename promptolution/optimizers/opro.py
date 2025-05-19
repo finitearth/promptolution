@@ -1,8 +1,9 @@
 """Module implementing the OPRO (Optimization by PROmpting) algorithm."""
 
-from typing import TYPE_CHECKING, List, Optional
 
 import numpy as np
+
+from typing import TYPE_CHECKING, List, Optional
 
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 from promptolution.optimizers.templates import OPRO_TEMPLATE

@@ -1,17 +1,19 @@
 """Implementation of the CAPO (Cost-Aware Prompt Optimization) algorithm."""
+
 import random
 from itertools import compress
-from typing import TYPE_CHECKING, Callable, List, Tuple
 
 import numpy as np
 import pandas as pd
+
+from typing import TYPE_CHECKING, Callable, List, Tuple
 
 if TYPE_CHECKING:
     from promptolution.llms.base_llm import BaseLLM
     from promptolution.predictors.base_predictor import BasePredictor
     from promptolution.tasks.base_task import BaseTask
-    from promptolution.utils.test_statistics import TestStatistics
     from promptolution.utils.config import ExperimentConfig
+    from promptolution.utils.test_statistics import TestStatistics
 
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 from promptolution.optimizers.templates import (
