@@ -71,7 +71,7 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git tag -a v${{ needs.check-version.outputs.version }} -m "Release v${{ needs.check-version.outputs.version }}"
-        git push origin v${{ needs.check-version.outputs.version }}
+        git push origin v${{ needs.check-version.outputs.version }} --force
     - name: Set release notes file path
       id: release-notes
       run: echo "RELEASE_NOTES_PATH=./docs/release-notes/v${{ needs.check-version.outputs.version }}.md" >> $GITHUB_ENV
