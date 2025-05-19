@@ -6,9 +6,9 @@ from typing import Callable, List, Tuple
 import numpy as np
 import pandas as pd
 
-from promptolution.logging import get_logger
 from promptolution.config import ExperimentConfig
 from promptolution.llms.base_llm import BaseLLM
+from promptolution.logging import get_logger
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 from promptolution.predictors.base_predictor import BasePredictor
 from promptolution.tasks.base_task import BaseTask
