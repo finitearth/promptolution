@@ -70,7 +70,7 @@ Release notes for each version of the library can be found [here](https://finite
 
 ## Contributing
 
-The first step to contributing is to open an issue describing the bug, feature or enhancements. Ensure the issue is clearly described, assigned and properly tagged. All work should be linked to an open issue.
+The first step to contributing is to open an issue describing the bug, feature, or enhancements. Ensure the issue is clearly described, assigned, and properly tagged. All work should be linked to an open issue.
 
 ### Code Style and Linting
 
