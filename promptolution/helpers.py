@@ -4,7 +4,7 @@ from typing import List, Literal
 
 import pandas as pd
 
-from promptolution import get_logger
+from promptolution.logging import get_logger
 from promptolution.config import ExperimentConfig
 from promptolution.exemplar_selectors.random_search_selector import RandomSearchSelector
 from promptolution.exemplar_selectors.random_selector import RandomSelector

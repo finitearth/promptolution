@@ -1,6 +1,6 @@
 from unittest.mock import MagicMock, patch
 
-from promptolution import APILLM
+from promptolution.llms import APILLM
 
 
 def test_api_llm_initialization():
