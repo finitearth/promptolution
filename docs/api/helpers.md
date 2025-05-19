@@ -1,5 +1,5 @@
-# Callbacks
+# Helpers
 
-::: promptolution.callbacks
+::: promptolution.helpers
     options:
       show_submodules: true

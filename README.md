@@ -10,7 +10,7 @@
 
 Promptolution is a library that provides a modular and extensible framework for implementing prompt tuning for single tasks and larger experiments. It offers a user-friendly interface to assemble the core components for various prompt optimization tasks.
 
-This project was developed by [Timo Heiß](https://www.linkedin.com/in/timo-heiss/), [Moritz Schlager](https://www.linkedin.com/in/moritz-schlager/) and [Tom Zehle](https://www.linkedin.com/in/tom-zehle/) as part of their studies as LMU Munich.
+This project was developed by [Timo Heiß](https://www.linkedin.com/in/timo-heiss/), [Moritz Schlager](https://www.linkedin.com/in/moritz-schlager/) and [Tom Zehle](https://www.linkedin.com/in/tom-zehle/) as part of a study program at LMU Munich.
 
 ## Installation
 
@@ -36,8 +36,8 @@ to install the necessary dependencies. You might need to install [pipx](https://
 
 ## Usage
 
-To get started right a way take a look at our [getting started notebook](https://github.com/finitearth/promptolution/blob/main/notebooks/getting_started.ipynb).
-For more details a comprehensive **documentation** with API reference is availabe at https://finitearth.github.io/promptolution/.
+To get started right away, take a look at our [getting started notebook](https://github.com/finitearth/promptolution/blob/main/notebooks/getting_started.ipynb).
+For more details, a comprehensive **documentation** with API reference is availabe at https://finitearth.github.io/promptolution/.
 
 ### Featured Optimizers
 
@@ -50,10 +50,10 @@ For more details a comprehensive **documentation** with API reference is availab
 
 ### Core Components
 
-- Task: Encapsulates initial prompts, dataset features, targets, and evaluation methods.
-- Predictor: Implements the prediction logic, interfacing between the Task and LLM components.
-- LLM: Unifies the process of obtaining responses from language models, whether locally hosted or accessed via API.
-- Optimizer: Implements prompt optimization algorithms, utilizing the other components during the optimization process.
+- `Task`: Encapsulates initial prompts, dataset features, targets, and evaluation methods.
+- `Predictor`: Implements the prediction logic, interfacing between the `Task` and `LLM` components.
+- `LLM`: Unifies the process of obtaining responses from language models, whether locally hosted or accessed via API.
+- `Optimizer`: Implements prompt optimization algorithms, utilizing the other components during the optimization process.
 
 ### Key Features
 
@@ -66,11 +66,11 @@ For more details a comprehensive **documentation** with API reference is availab
 
 ## Changelog
 
-https://finitearth.github.io/promptolution/release-notes/
+Release notes for each version of the library can be found [here](https://finitearth.github.io/promptolution/release-notes/)
 
 ## Contributing
 
-The first step to contributing is to open an issue describing the bug, feature or enhancements. Ensure the issue is clearly described, assigned and properly tagged. All work should be linked to an open issue.
+The first step to contributing is to open an issue describing the bug, feature, or enhancements. Ensure the issue is clearly described, assigned, and properly tagged. All work should be linked to an open issue.
 
 ### Code Style and Linting
 

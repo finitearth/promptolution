@@ -65,8 +65,9 @@ nav:
     - Optimizers: api/optimizers.md
     - Predictors: api/predictors.md
     - Tasks: api/tasks.md
-    - Callbacks: api/callbacks.md
-    - Config: api/config.md
+    - Helpers: api/helpers.md
+    - Utils: api/utils.md
+    - Exemplar Selectors: api/exemplar_selectors.md
   - Tutorials:
     - Getting Started: examples/getting_started.md
 
