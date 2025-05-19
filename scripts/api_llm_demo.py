@@ -4,12 +4,12 @@ import argparse
 from logging import Logger
 
 from datasets import load_dataset
-from promptolution.callbacks import LoggerCallback
 
 from promptolution.llms import APILLM
 from promptolution.optimizers import CAPO
 from promptolution.predictors import MarkerBasedClassifier
 from promptolution.tasks import ClassificationTask
+from promptolution.utils import LoggerCallback
 
 logger = Logger(__name__)
 

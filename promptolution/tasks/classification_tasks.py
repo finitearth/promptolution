@@ -56,17 +56,17 @@ class ClassificationTask(BaseTask):
 
         self.x_column = x_column
         self.y_column = y_column
-
-        self.xs = df[x_column].values
-        self.ys = df[y_column].str.lower().values
-        self.classes = df[y_column].unique()
-
         self.eval_strategy = eval_strategy
         self.n_subsamples = n_subsamples
+        super().__init__(config)
+
+        self.xs = df[self.x_column].values
+        self.ys = df[self.y_column].str.lower().values
+        self.classes = np.unique(self.ys)
+
         self.block_idx = 0
         self.n_blocks = len(self.xs) // self.n_subsamples
         self.rng = np.random.default_rng(seed)
-        super().__init__(config)
 
         self.eval_cache = {}  # (prompt, x, y): scores per datapoint
         self.seq_cache = {}  # (prompt, x, y): generating sequence per datapoint

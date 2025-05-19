@@ -1,51 +1,41 @@
 """Test run for the Opro optimizer."""
 
 import argparse
-import random
 from logging import Logger
 
 from datasets import load_dataset
 
-from promptolution import (
-    OPRO_TEMPLATE_TD,
-    ClassificationTask,
-    CSVCallback,
-    LoggerCallback,
-    MarkerBasedClassifier,
-    Opro,
-    TokenCountCallback,
-    get_llm,
-)
+from promptolution.llms import VLLM
+from promptolution.optimizers import OPRO_TEMPLATE_TD, Opro
+from promptolution.predictors import MarkerBasedClassifier
+from promptolution.tasks import ClassificationTask
+from promptolution.utils import FileOutputCallback, LoggerCallback, TokenCountCallback
 
 logger = Logger(__name__)
 
 """Run a test run for any of the implemented optimizers."""
 parser = argparse.ArgumentParser()
-parser.add_argument("--model")
+parser.add_argument("--model", default="meta-llama/Meta-Llama-3-8B-Instruct")
 parser.add_argument("--model-storage-path", default="../models/")
 parser.add_argument("--output-dir", default="results/opro_test/")
 parser.add_argument("--max-model-len", type=int, default=2048)
 parser.add_argument("--n-steps", type=int, default=999)
-parser.add_argument("--token", default=None)
 parser.add_argument("--seed", type=int, default=187)
 args = parser.parse_args()
 
 callbacks = [
     LoggerCallback(logger),
-    CSVCallback(args.output_dir),
+    FileOutputCallback(args.output_dir, file_type="csv"),
     TokenCountCallback(5000000, "input_tokens"),
 ]
 
 df = load_dataset("SetFit/ag_news", split="train", revision="main").to_pandas().sample(300, random_state=args.seed)
 
-df["input"] = df["text"]
-df["target"] = df["label_text"]
-
 task = ClassificationTask(
     df,
     description="The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories.",
-    x_column="input",
-    y_column="target",
+    x_column="text",
+    y_column="label_text",
 )
 
 initial_prompts = [
@@ -57,32 +47,12 @@ initial_prompts = [
     "Please review the following news content and classify it into one of these categories: World, Sports, Business, or Tech. Your answer must be formatted with <final_answer> </final_answer> tags.",
     "Based on the content, determine if this news article falls under World, Sports, Business, or Tech category. Return only your classification within <final_answer> </final_answer>.",
     "Examine this news article and identify its primary category (World, Sports, Business, or Tech). Your final classification should be enclosed between <final_answer> </final_answer> markers.",
-    "In this task, you must categorize a news article into one of four classes: World, Sports, Business, or Tech. Remember to place your answer between <final_answer> </final_answer> tags for proper evaluation.",
-    "Read the provided news excerpt carefully and assign it to either World, Sports, Business, or Tech category. Ensure your answer appears between <final_answer> </final_answer> tags.",
-    "Considering the main subject matter, classify this news article as World, Sports, Business, or Tech. Format your response with <final_answer> </final_answer>.",
-    "Determine the appropriate category for this news article from the following options: World, Sports, Business, or Tech. Your selected category must be placed within <final_answer> </final_answer> markers.",
-    "After analyzing the given news article, assign it to the most suitable category: World, Sports, Business, or Tech. Your classification should be enclosed in <final_answer> </final_answer> tags.",
-    "Your objective is to classify the news article into one of the following categories: World, Sports, Business, or Tech based on its primary focus. Submit your answer between <final_answer> </final_answer> tags.",
-    "Which category best describes this news article: World, Sports, Business, or Tech? Provide your answer inside <final_answer> </final_answer> markers.",
-    "As a content classifier, determine if the following news article belongs to World, Sports, Business, or Tech news. Place your answer within <final_answer> </final_answer> tags.",
-    "Evaluate the following news article and indicate whether it primarily concerns World, Sports, Business, or Tech topics. Your classification must appear between <final_answer> </final_answer>.",
-    "Given a news article, your task is to determine its primary category from World, Sports, Business, or Tech. The final classification must be provided between <final_answer> </final_answer> tags.",
-    "Conduct a thorough analysis of the provided news article and classify it as belonging to one of these four categories: World, Sports, Business, or Tech. Your answer should be presented within <final_answer> </final_answer> markers.",
-    "Simply indicate whether this news article is about World, Sports, Business, or Tech. Include your answer between <final_answer> </final_answer> tags.",
 ]
 
-initial_prompts = random.sample(initial_prompts, 10)
 
-if "vllm" in args.model:
-    llm = get_llm(
-        args.model,
-        batch_size=None,
-        max_model_len=args.max_model_len,
-        model_storage_path=args.model_storage_path,
-        revision="main",
-    )
-else:
-    llm = get_llm(args.model, args.token)
+llm = VLLM(
+    model_id=args.model, model_storage_path=args.model_storage_path, max_model_len=args.max_model_len, seed=args.seed
+)
 
 downstream_llm = llm
 meta_llm = llm
