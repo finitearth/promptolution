@@ -2,12 +2,12 @@ from unittest.mock import patch
 
 import numpy as np
 
-from promptolution.optimizers import Opro
+from promptolution.optimizers import OPRO
 
 
 def test_opro_initialization(mock_meta_llm, initial_prompts, mock_task, mock_predictor):
     """Test that OPRO initializes correctly."""
-    optimizer = Opro(
+    optimizer = OPRO(
         predictor=mock_predictor,
         task=mock_task,
         initial_prompts=initial_prompts,
@@ -28,7 +28,7 @@ def test_opro_initialization(mock_meta_llm, initial_prompts, mock_task, mock_pre
 
 def test_opro_sample_examples(mock_meta_llm, initial_prompts, mock_task, mock_predictor):
     """Test the _sample_examples method."""
-    optimizer = Opro(
+    optimizer = OPRO(
         predictor=mock_predictor,
         task=mock_task,
         initial_prompts=initial_prompts,
@@ -53,7 +53,7 @@ def test_opro_sample_examples(mock_meta_llm, initial_prompts, mock_task, mock_pr
 
 def test_opro_format_instructions(mock_meta_llm, initial_prompts, mock_task, mock_predictor):
     """Test the _format_instructions method."""
-    optimizer = Opro(
+    optimizer = OPRO(
         predictor=mock_predictor,
         task=mock_task,
         initial_prompts=initial_prompts,
@@ -76,7 +76,7 @@ def test_opro_format_instructions(mock_meta_llm, initial_prompts, mock_task, moc
 
 def test_opro_pre_optimization_loop(mock_meta_llm, initial_prompts, mock_task, mock_predictor):
     """Test the _pre_optimization_loop method."""
-    optimizer = Opro(
+    optimizer = OPRO(
         predictor=mock_predictor,
         task=mock_task,
         initial_prompts=initial_prompts,
@@ -99,7 +99,7 @@ def test_opro_pre_optimization_loop(mock_meta_llm, initial_prompts, mock_task, m
 
 def test_opro_step(mock_meta_llm, initial_prompts, mock_task, mock_predictor):
     """Test the _step method."""
-    optimizer = Opro(
+    optimizer = OPRO(
         predictor=mock_predictor,
         task=mock_task,
         initial_prompts=initial_prompts,

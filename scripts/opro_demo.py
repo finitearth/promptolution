@@ -6,7 +6,7 @@ from logging import Logger
 from datasets import load_dataset
 
 from promptolution.llms import VLLM
-from promptolution.optimizers import OPRO_TEMPLATE_TD, Opro
+from promptolution.optimizers import OPRO, OPRO_TEMPLATE_TD
 from promptolution.predictors import MarkerBasedClassifier
 from promptolution.tasks import ClassificationTask
 from promptolution.utils import FileOutputCallback, LoggerCallback, TokenCountCallback
@@ -59,7 +59,7 @@ meta_llm = llm
 
 predictor = MarkerBasedClassifier(downstream_llm, classes=task.classes)
 
-optimizer = Opro(
+optimizer = OPRO(
     task=task,
     prompt_template=OPRO_TEMPLATE_TD.replace("<task_desc", task.description),
     predictor=predictor,

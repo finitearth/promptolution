@@ -15,7 +15,7 @@ if TYPE_CHECKING:
     from promptolution.utils.config import ExperimentConfig
 
 
-class Opro(BaseOptimizer):
+class OPRO(BaseOptimizer):
     """OPRO: Optimization by PROmpting.
 
     Implementation of the technique proposed in "Large Language Models as Optimizers"

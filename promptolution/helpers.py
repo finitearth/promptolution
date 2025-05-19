@@ -20,7 +20,7 @@ from promptolution.llms.vllm import VLLM
 from promptolution.optimizers.capo import CAPO
 from promptolution.optimizers.evoprompt_de import EvoPromptDE
 from promptolution.optimizers.evoprompt_ga import EvoPromptGA
-from promptolution.optimizers.opro import Opro
+from promptolution.optimizers.opro import OPRO
 from promptolution.optimizers.templates import (
     CAPO_CROSSOVER_TEMPLATE,
     CAPO_MUTATION_TEMPLATE,
@@ -230,7 +230,7 @@ def get_optimizer(
 
     if config.optimizer == "opro":
         template = OPRO_TEMPLATE_TD.replace("<task_desc>", task_description) if task_description else OPRO_TEMPLATE
-        return Opro(predictor=predictor, meta_llm=meta_llm, task=task, prompt_template=template, config=config)
+        return OPRO(predictor=predictor, meta_llm=meta_llm, task=task, prompt_template=template, config=config)
 
     raise ValueError(f"Unknown optimizer: {config.optimizer}")
 

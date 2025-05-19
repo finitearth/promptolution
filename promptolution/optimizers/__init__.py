@@ -3,7 +3,7 @@
 from promptolution.optimizers.capo import CAPO
 from promptolution.optimizers.evoprompt_de import EvoPromptDE
 from promptolution.optimizers.evoprompt_ga import EvoPromptGA
-from promptolution.optimizers.opro import Opro
+from promptolution.optimizers.opro import OPRO
 from promptolution.optimizers.templates import (
     CAPO_CROSSOVER_TEMPLATE,
     CAPO_DOWNSTREAM_TEMPLATE,
