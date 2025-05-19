@@ -1,5 +1,6 @@
 import numpy as np
 import pytest
+
 from promptolution.helpers import FirstOccurrenceClassifier, MarkerBasedClassifier
 
 

@@ -3,8 +3,8 @@ from unittest.mock import MagicMock, patch
 import numpy as np
 import pandas as pd
 import pytest
-from promptolution.helpers import run_evaluation, run_experiment, run_optimization
 
+from promptolution.helpers import run_evaluation, run_experiment, run_optimization
 from promptolution.utils import ExperimentConfig
 from tests.mocks.mock_llm import MockLLM
 from tests.mocks.mock_predictor import MockPredictor
