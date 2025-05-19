@@ -50,10 +50,10 @@ For more details, a comprehensive **documentation** with API reference is availa
 
 ### Core Components
 
-- Task: Encapsulates initial prompts, dataset features, targets, and evaluation methods.
-- Predictor: Implements the prediction logic, interfacing between the Task and LLM components.
-- LLM: Unifies the process of obtaining responses from language models, whether locally hosted or accessed via API.
-- Optimizer: Implements prompt optimization algorithms, utilizing the other components during the optimization process.
+- `Task`: Encapsulates initial prompts, dataset features, targets, and evaluation methods.
+- `Predictor`: Implements the prediction logic, interfacing between the `Task` and `LLM` components.
+- `LLM`: Unifies the process of obtaining responses from language models, whether locally hosted or accessed via API.
+- `Optimizer`: Implements prompt optimization algorithms, utilizing the other components during the optimization process.
 
 ### Key Features
 
