@@ -1,12 +1,14 @@
 """Base module for predictors in the promptolution library."""
 
 from abc import ABC, abstractmethod
-from typing import List, Optional
-
-import numpy as np
+from typing import TYPE_CHECKING, List
 
 from promptolution.llms.base_llm import BaseLLM
-from promptolution.utils.config import ExperimentConfig
+
+if TYPE_CHECKING:
+    from promptolution.utils.config import ExperimentConfig
+
+import numpy as np
 
 
 class BasePredictor(ABC):
@@ -20,7 +22,7 @@ class BasePredictor(ABC):
         config (ExperimentConfig): Experiment configuration overwriting defaults
     """
 
-    def __init__(self, llm: Optional[BaseLLM] = None, config: ExperimentConfig = None):
+    def __init__(self, llm: "BaseLLM", config: "ExperimentConfig" = None):
         """Initialize the predictor with a language model and configuration.
 
         Args:

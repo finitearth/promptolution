@@ -1,16 +1,18 @@
 """Module implementing the OPRO (Optimization by PROmpting) algorithm."""
 
-from typing import List, Optional
+from typing import TYPE_CHECKING, List, Optional
 
 import numpy as np
 
-from promptolution.llms.base_llm import BaseLLM
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 from promptolution.optimizers.templates import OPRO_TEMPLATE
-from promptolution.predictors.base_predictor import BasePredictor
-from promptolution.tasks.base_task import BaseTask
-from promptolution.utils.callbacks import BaseCallback
-from promptolution.utils.config import ExperimentConfig
+
+if TYPE_CHECKING:
+    from promptolution.llms.base_llm import BaseLLM
+    from promptolution.predictors.base_predictor import BasePredictor
+    from promptolution.tasks.base_task import BaseTask
+    from promptolution.utils.callbacks import BaseCallback
+    from promptolution.utils.config import ExperimentConfig
 
 
 class Opro(BaseOptimizer):
@@ -25,16 +27,16 @@ class Opro(BaseOptimizer):
 
     def __init__(
         self,
-        predictor: BasePredictor,
-        task: BaseTask,
+        predictor: "BasePredictor",
+        task: "BaseTask",
         prompt_template: Optional[str],
-        meta_llm: BaseLLM,
+        meta_llm: "BaseLLM",
         initial_prompts: List[str] = None,
         max_num_instructions: int = 20,
         num_instructions_per_step: int = 8,
         num_few_shots: int = 3,
-        callbacks: List[BaseCallback] = None,
-        config: ExperimentConfig = None,
+        callbacks: List["BaseCallback"] = None,
+        config: "ExperimentConfig" = None,
     ) -> None:
         """Initialize the OPRO optimizer.
 
@@ -48,7 +50,7 @@ class Opro(BaseOptimizer):
             num_instructions_per_step: Number of prompts to generate in each step
             num_few_shots: Number of few-shot examples to include (0 for none)
             callbacks: List of callback functions
-            config: ExperimentConfig overwriting default parameters
+            config: "ExperimentConfig" overwriting default parameters
         """
         self.meta_llm = meta_llm
 

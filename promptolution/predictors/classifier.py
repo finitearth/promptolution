@@ -26,7 +26,7 @@ class FirstOccurrenceClassifier(BasePredictor):
         BasePredictor: The base class for predictors in the promptolution library.
     """
 
-    def __init__(self, llm, classes, config: ExperimentConfig = None):
+    def __init__(self, llm, classes, config: "ExperimentConfig" = None):
         """Initialize the FirstOccurrenceClassifier.
 
         Args:
@@ -86,7 +86,7 @@ class MarkerBasedClassifier(BasePredictor):
         classes=None,
         begin_marker="<final_answer>",
         end_marker="</final_answer>",
-        config: ExperimentConfig = None,
+        config: "ExperimentConfig" = None,
     ):
         """Initialize the MarkerBasedClassifier.
 

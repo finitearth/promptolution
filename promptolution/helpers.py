@@ -1,13 +1,20 @@
 """Helper functions for the usage of the libary."""
 
-from typing import List, Literal
+from typing import TYPE_CHECKING, List, Literal
+
+if TYPE_CHECKING:
+    from promptolution.exemplar_selectors.base_exemplar_selector import BaseExemplarSelector
+    from promptolution.llms.base_llm import BaseLLM
+    from promptolution.optimizers.base_optimizer import BaseOptimizer
+    from promptolution.predictors.base_predictor import BasePredictor
+    from promptolution.tasks.base_task import BaseTask
+    from promptolution.utils.config import ExperimentConfig
 
 import pandas as pd
 
 from promptolution.exemplar_selectors.random_search_selector import RandomSearchSelector
 from promptolution.exemplar_selectors.random_selector import RandomSelector
 from promptolution.llms.api_llm import APILLM
-from promptolution.llms.base_llm import BaseLLM
 from promptolution.llms.local_llm import LocalLLM
 from promptolution.llms.vllm import VLLM
 from promptolution.optimizers.capo import CAPO
@@ -24,17 +31,14 @@ from promptolution.optimizers.templates import (
     OPRO_TEMPLATE,
     OPRO_TEMPLATE_TD,
 )
-from promptolution.predictors.base_predictor import BasePredictor
 from promptolution.predictors.classifier import FirstOccurrenceClassifier, MarkerBasedClassifier
-from promptolution.tasks.base_task import BaseTask
 from promptolution.tasks.classification_tasks import ClassificationTask
-from promptolution.utils.config import ExperimentConfig
 from promptolution.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
 
-def run_experiment(df: pd.DataFrame, config: ExperimentConfig):
+def run_experiment(df: pd.DataFrame, config: "ExperimentConfig"):
     """Run a full experiment based on the provided configuration.
 
     Args:
@@ -53,7 +57,7 @@ def run_experiment(df: pd.DataFrame, config: ExperimentConfig):
     return df_prompt_scores
 
 
-def run_optimization(df, config: ExperimentConfig):
+def run_optimization(df: pd.DataFrame, config: "ExperimentConfig") -> List[str]:
     """Run the optimization phase of the experiment.
 
     Args:
@@ -87,7 +91,7 @@ def run_optimization(df, config: ExperimentConfig):
     return prompts
 
 
-def run_evaluation(df: pd.DataFrame, config: ExperimentConfig, prompts: List[str]):
+def run_evaluation(df: pd.DataFrame, config: "ExperimentConfig", prompts: List[str]) -> pd.DataFrame:
     """Run the evaluation phase of the experiment.
 
     Args:
@@ -110,7 +114,7 @@ def run_evaluation(df: pd.DataFrame, config: ExperimentConfig, prompts: List[str
     return df
 
 
-def get_llm(model_id: str = None, config: ExperimentConfig = None):
+def get_llm(model_id: str = None, config: "ExperimentConfig" = None) -> "BaseLLM":
     """Factory function to create and return a language model instance based on the provided model_id.
 
     This function supports three types of language models:
@@ -123,7 +127,7 @@ def get_llm(model_id: str = None, config: ExperimentConfig = None):
                         - "local-{model_name}" for LocalLLM
                         - "vllm-{model_name}" for VLLM
                         - Any other string for APILLM
-        config (ExperimentConfig, optional): ExperimentConfig overwriting defaults.
+        config (ExperimentConfig, optional): "ExperimentConfig" overwriting defaults.
 
     Returns:
         An instance of LocalLLM, or APILLM based on the model_id.
@@ -140,7 +144,7 @@ def get_llm(model_id: str = None, config: ExperimentConfig = None):
     return APILLM(model_id=model_id, config=config)
 
 
-def get_task(df: pd.DataFrame, config: ExperimentConfig) -> BaseTask:
+def get_task(df: pd.DataFrame, config: "ExperimentConfig") -> "BaseTask":
     """Get the task based on the provided DataFrame and configuration.
 
     So far only ClassificationTask is supported.
@@ -156,14 +160,14 @@ def get_task(df: pd.DataFrame, config: ExperimentConfig) -> BaseTask:
 
 
 def get_optimizer(
-    predictor: BasePredictor,
-    meta_llm: BaseLLM,
-    task: BaseTask,
+    predictor: "BasePredictor",
+    meta_llm: "BaseLLM",
+    task: "BaseTask",
     optimizer: Literal["evopromptde", "evopromptga", "opro"] = None,
     meta_prompt: str = None,
     task_description: str = None,
-    config: ExperimentConfig = None,
-):
+    config: "ExperimentConfig" = None,
+) -> "BaseOptimizer":
     """Creates and returns an optimizer instance based on provided parameters.
 
     Args:
@@ -232,7 +236,9 @@ def get_optimizer(
     raise ValueError(f"Unknown optimizer: {config.optimizer}")
 
 
-def get_exemplar_selector(name: Literal["random", "random_search"], task: BaseTask, predictor: BasePredictor):
+def get_exemplar_selector(
+    name: Literal["random", "random_search"], task: "BaseTask", predictor: "BasePredictor"
+) -> "BaseExemplarSelector":
     """Factory function to get an exemplar selector based on the given name.
 
     Args:
@@ -254,7 +260,9 @@ def get_exemplar_selector(name: Literal["random", "random_search"], task: BaseTa
         raise ValueError(f"Unknown exemplar selector: {name}")
 
 
-def get_predictor(downstream_llm=None, type: Literal["first_occurrence", "marker"] = "marker", *args, **kwargs):
+def get_predictor(
+    downstream_llm=None, type: Literal["first_occurrence", "marker"] = "marker", *args, **kwargs
+) -> "BasePredictor":
     """Factory function to create and return a predictor instance.
 
     This function supports three types of predictors:

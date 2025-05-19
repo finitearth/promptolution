@@ -1,12 +1,18 @@
 """Implementation of the CAPO (Cost-Aware Prompt Optimization) algorithm."""
 import random
 from itertools import compress
-from typing import Callable, List, Tuple
+from typing import TYPE_CHECKING, Callable, List, Tuple
 
 import numpy as np
 import pandas as pd
 
-from promptolution.llms.base_llm import BaseLLM
+if TYPE_CHECKING:
+    from promptolution.llms.base_llm import BaseLLM
+    from promptolution.predictors.base_predictor import BasePredictor
+    from promptolution.tasks.base_task import BaseTask
+    from promptolution.utils.test_statistics import TestStatistics
+    from promptolution.utils.config import ExperimentConfig
+
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 from promptolution.optimizers.templates import (
     CAPO_CROSSOVER_TEMPLATE,
@@ -14,11 +20,8 @@ from promptolution.optimizers.templates import (
     CAPO_FEWSHOT_TEMPLATE,
     CAPO_MUTATION_TEMPLATE,
 )
-from promptolution.predictors.base_predictor import BasePredictor
-from promptolution.tasks.base_task import BaseTask
-from promptolution.utils.config import ExperimentConfig
 from promptolution.utils.logging import get_logger
-from promptolution.utils.test_statistics import TestStatistics, get_test_statistic_func
+from promptolution.utils.test_statistics import get_test_statistic_func
 from promptolution.utils.token_counter import get_token_counter
 
 logger = get_logger(__name__)
@@ -68,21 +71,21 @@ class CAPO(BaseOptimizer):
 
     def __init__(
         self,
-        predictor: BasePredictor,
-        task: BaseTask,
-        meta_llm: BaseLLM,
+        predictor: "BasePredictor",
+        task: "BaseTask",
+        meta_llm: "BaseLLM",
         initial_prompts: List[str] = None,
         crossovers_per_iter: int = 4,
         upper_shots: int = 5,
         max_n_blocks_eval: int = 10,
-        test_statistic: TestStatistics = "paired_t_test",
+        test_statistic: "TestStatistics" = "paired_t_test",
         alpha: float = 0.2,
         length_penalty: float = 0.05,
         df_few_shots: pd.DataFrame = None,
         crossover_template: str = None,
         mutation_template: str = None,
         callbacks: List[Callable] = [],
-        config: ExperimentConfig = None,
+        config: "ExperimentConfig" = None,
     ):
         """Initializes the CAPOptimizer with various parameters for prompt evolution.
 

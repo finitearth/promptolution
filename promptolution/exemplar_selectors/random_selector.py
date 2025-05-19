@@ -14,7 +14,7 @@ class RandomSelector(BaseExemplarSelector):
     """
 
     def __init__(
-        self, task: BaseTask, predictor: BasePredictor, desired_score: int = 1, config: ExperimentConfig = None
+        self, task: "BaseTask", predictor: "BasePredictor", desired_score: int = 1, config: "ExperimentConfig" = None
     ):
         """Initialize the RandomSelector.
 

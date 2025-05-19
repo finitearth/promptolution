@@ -1,10 +1,13 @@
 """Base module for LLMs in the promptolution library."""
 
 from abc import ABC, abstractmethod
-from typing import List
+from typing import TYPE_CHECKING, List
+
+if TYPE_CHECKING:
+    from promptolution.utils.config import ExperimentConfig
 
 from promptolution.optimizers.templates import DEFAULT_SYS_PROMPT
-from promptolution.utils import ExperimentConfig, get_logger
+from promptolution.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -21,7 +24,7 @@ class BaseLLM(ABC):
         output_token_count (int): Count of output tokens generated.
     """
 
-    def __init__(self, config: ExperimentConfig = None):
+    def __init__(self, config: "ExperimentConfig" = None):
         """Initialize the LLM with a configuration or direct parameters.
 
         This constructor supports both config-based and direct parameter initialization

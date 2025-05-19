@@ -1,10 +1,12 @@
 """Base class for exemplar selectors."""
 
 from abc import ABC, abstractmethod
+from typing import TYPE_CHECKING
 
-from promptolution.predictors.base_predictor import BasePredictor
-from promptolution.tasks.base_task import BaseTask
-from promptolution.utils.config import ExperimentConfig
+if TYPE_CHECKING:
+    from promptolution.predictors.base_predictor import BasePredictor
+    from promptolution.tasks.base_task import BaseTask
+    from promptolution.utils.config import ExperimentConfig
 
 
 class BaseExemplarSelector(ABC):
@@ -14,13 +16,13 @@ class BaseExemplarSelector(ABC):
     that all exemplar selectors should implement.
     """
 
-    def __init__(self, task: BaseTask, predictor: BasePredictor, config: ExperimentConfig = None):
+    def __init__(self, task: "BaseTask", predictor: "BasePredictor", config: "ExperimentConfig" = None):
         """Initialize the BaseExemplarSelector.
 
         Args:
             task (BaseTask): An object representing the task to be performed.
             predictor (BasePredictor): An object capable of making predictions based on prompts.
-            config (ExperimentConfig, optional): ExperimentConfig overwriting the defaults
+            config (ExperimentConfig, optional): "ExperimentConfig" overwriting the defaults
         """
         self.task = task
         self.predictor = predictor

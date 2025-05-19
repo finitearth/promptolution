@@ -1,10 +1,12 @@
 """Base module for optimizers in the promptolution library."""
 
 from abc import ABC, abstractmethod
-from typing import Callable, List
+from typing import TYPE_CHECKING, Callable, List
 
-from promptolution.tasks.base_task import BaseTask
-from promptolution.utils.config import ExperimentConfig
+if TYPE_CHECKING:
+    from promptolution.tasks.base_task import BaseTask
+    from promptolution.utils.config import ExperimentConfig
+
 from promptolution.utils.logging import get_logger
 
 logger = get_logger(__name__)
@@ -26,10 +28,10 @@ class BaseOptimizer(ABC):
     def __init__(
         self,
         predictor,
-        task: BaseTask,
+        task: "BaseTask",
         initial_prompts: List[str],
         callbacks: List[Callable] = None,
-        config: ExperimentConfig = None,
+        config: "ExperimentConfig" = None,
     ):
         """Initialize the optimizer with a configuration and/or direct parameters.
 

@@ -49,7 +49,7 @@ class VLLM(BaseLLM):
         trust_remote_code: bool = False,
         seed: int = 42,
         llm_kwargs: dict = None,
-        config: ExperimentConfig = None,
+        config: "ExperimentConfig" = None,
     ):
         """Initialize the VLLM with a specific model.
 

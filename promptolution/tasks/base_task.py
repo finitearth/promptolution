@@ -5,7 +5,7 @@ from typing import List
 
 import numpy as np
 
-from promptolution.utils import ExperimentConfig
+from promptolution.utils.config import ExperimentConfig
 
 
 class BaseTask(ABC):
@@ -18,7 +18,7 @@ class BaseTask(ABC):
                   to evaluate prompts using a given predictor.
     """
 
-    def __init__(self, config: ExperimentConfig = None):
+    def __init__(self, config: "ExperimentConfig" = None):
         """Initialize the BaseTask."""
         if config is not None:
             config.apply_to(self)

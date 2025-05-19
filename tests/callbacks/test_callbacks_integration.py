@@ -3,15 +3,14 @@ from unittest.mock import MagicMock, patch
 
 import pandas as pd
 import pytest
-from promptolution.callbacks import (
-    BaseCallback,
+
+from promptolution.utils import (
     BestPromptCallback,
     FileOutputCallback,
     LoggerCallback,
     ProgressBarCallback,
     TokenCountCallback,
 )
-
 from tests.mocks.mock_llm import MockLLM
 
 
@@ -40,16 +39,6 @@ def mock_logger():
     logger = MagicMock()
     logger.critical = MagicMock()
     return logger
-
-
-def test_base_callback():
-    """Test the base Callback class."""
-    callback = BaseCallback()
-
-    # Test default method implementations
-    assert callback.on_step_end(None) is True
-    assert callback.on_epoch_end(None) is True
-    assert callback.on_train_end(None) is True
 
 
 def test_logger_callback(mock_optimizer, mock_logger):
@@ -188,7 +177,7 @@ def test_best_prompt_callback(mock_optimizer):
 
 def test_progress_bar_callback():
     """Test the ProgressBarCallback class."""
-    with patch("promptolution.callbacks.tqdm") as mock_tqdm:
+    with patch("promptolution.utils.callbacks.tqdm") as mock_tqdm:
         mock_pbar = MagicMock()
         mock_tqdm.return_value = mock_pbar
 

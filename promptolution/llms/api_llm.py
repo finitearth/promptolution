@@ -10,10 +10,13 @@ try:
 except ImportError:
     import_successful = False
 
-from typing import List
+from typing import TYPE_CHECKING, List
 
 from promptolution.llms.base_llm import BaseLLM
-from promptolution.utils.config import ExperimentConfig
+
+if TYPE_CHECKING:
+    from promptolution.utils.config import ExperimentConfig
+
 from promptolution.utils.logging import get_logger
 
 logger = get_logger(__name__)
@@ -66,7 +69,7 @@ class APILLM(BaseLLM):
         api_key: str = None,
         max_concurrent_calls=50,
         max_tokens=512,
-        config: ExperimentConfig = None,
+        config: "ExperimentConfig" = None,
     ):
         """Initialize the APILLM with a specific model and API configuration.
 

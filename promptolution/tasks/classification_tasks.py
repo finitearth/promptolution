@@ -1,14 +1,16 @@
 """Module for classification tasks."""
 
-from typing import Any, Callable, List, Literal, Tuple, Union
+from typing import TYPE_CHECKING, Any, Callable, List, Literal, Tuple, Union
 
 import numpy as np
 import pandas as pd
 from sklearn.metrics import accuracy_score
 
-from promptolution.predictors.base_predictor import BasePredictor
 from promptolution.tasks.base_task import BaseTask
-from promptolution.utils.config import ExperimentConfig
+
+if TYPE_CHECKING:
+    from promptolution.predictors.base_predictor import BasePredictor
+    from promptolution.utils.config import ExperimentConfig
 
 
 class ClassificationTask(BaseTask):
@@ -29,7 +31,7 @@ class ClassificationTask(BaseTask):
         eval_strategy: Literal["full", "subsample", "sequential_block", "random_block"] = "full",
         seed: int = 42,
         metric: Callable = accuracy_score,
-        config: ExperimentConfig = None,
+        config: "ExperimentConfig" = None,
     ):
         """Initialize the ClassificationTask from a pandas DataFrame.
 
@@ -149,7 +151,7 @@ class ClassificationTask(BaseTask):
     def evaluate(
         self,
         prompts: Union[str, List[str]],
-        predictor: BasePredictor,
+        predictor: "BasePredictor",
         system_prompts: List[str] = None,
         return_agg_scores: bool = True,
         return_seq: bool = False,

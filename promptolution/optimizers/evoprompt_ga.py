@@ -1,15 +1,18 @@
 """Module for EvoPromptGA optimizer."""
 
-from typing import List
+from typing import TYPE_CHECKING, List
 
 import numpy as np
 
-from promptolution.llms.base_llm import BaseLLM
 from promptolution.optimizers.base_optimizer import BaseOptimizer
-from promptolution.predictors.base_predictor import BasePredictor
-from promptolution.tasks.base_task import BaseTask
-from promptolution.utils.callbacks import BaseCallback
-from promptolution.utils.config import ExperimentConfig
+
+if TYPE_CHECKING:
+    from promptolution.llms.base_llm import BaseLLM
+    from promptolution.predictors.base_predictor import BasePredictor
+    from promptolution.tasks.base_task import BaseTask
+    from promptolution.utils.callbacks import BaseCallback
+    from promptolution.utils.config import ExperimentConfig
+
 from promptolution.utils.logging import get_logger
 
 logger = get_logger(__name__)
@@ -41,14 +44,14 @@ class EvoPromptGA(BaseOptimizer):
 
     def __init__(
         self,
-        predictor: BasePredictor,
-        task: BaseTask,
+        predictor: "BasePredictor",
+        task: "BaseTask",
         prompt_template: str,
-        meta_llm: BaseLLM,
+        meta_llm: "BaseLLM",
         initial_prompts: List[str] = None,
         selection_mode: str = "wheel",
-        callbacks: List[BaseCallback] = None,
-        config: ExperimentConfig = None,
+        callbacks: List["BaseCallback"] = None,
+        config: "ExperimentConfig" = None,
     ):
         """Initialize the EvoPromptGA optimizer."""
         self.prompt_template = prompt_template

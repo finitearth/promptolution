@@ -4,7 +4,7 @@ from unittest.mock import MagicMock
 
 import numpy as np
 
-from promptolution.tasks import BaseTask
+from promptolution.tasks.base_task import BaseTask
 
 
 class MockTask(BaseTask):

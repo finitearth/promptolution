@@ -29,7 +29,7 @@ class LocalLLM(BaseLLM):
         Args:
             model_id (str): The identifier of the model to use (e.g., "gpt2", "facebook/opt-1.3b").
             batch_size (int, optional): The batch size for text generation. Defaults to 8.
-            config (ExperimentConfig, optional): ExperimentConfig overwriting defaults.
+            config (ExperimentConfig, optional): "ExperimentConfig" overwriting defaults.
 
         Note:
             This method sets up a text generation pipeline with bfloat16 precision,

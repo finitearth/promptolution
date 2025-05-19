@@ -1,15 +1,17 @@
 """Module for EvoPromptDE optimizer."""
 
-from typing import List
+from typing import TYPE_CHECKING, List
 
 import numpy as np
 
-from promptolution.llms.base_llm import BaseLLM
 from promptolution.optimizers.base_optimizer import BaseOptimizer
-from promptolution.predictors.base_predictor import BasePredictor
-from promptolution.tasks.base_task import BaseTask
-from promptolution.utils.callbacks import BaseCallback
-from promptolution.utils.config import ExperimentConfig
+
+if TYPE_CHECKING:
+    from promptolution.llms.base_llm import BaseLLM
+    from promptolution.predictors.base_predictor import BasePredictor
+    from promptolution.tasks.base_task import BaseTask
+    from promptolution.utils.callbacks import BaseCallback
+    from promptolution.utils.config import ExperimentConfig
 
 
 class EvoPromptDE(BaseOptimizer):
@@ -36,14 +38,14 @@ class EvoPromptDE(BaseOptimizer):
 
     def __init__(
         self,
-        predictor: BasePredictor,
-        task: BaseTask,
+        predictor: "BasePredictor",
+        task: "BaseTask",
         prompt_template: str,
-        meta_llm: BaseLLM,
+        meta_llm: "BaseLLM",
         initial_prompts: List[str] = None,
         donor_random: bool = False,
-        callbacks: List[BaseCallback] = None,
-        config: ExperimentConfig = None,
+        callbacks: List["BaseCallback"] = None,
+        config: "ExperimentConfig" = None,
     ):
         """Initialize the EvoPromptDE optimizer."""
         self.prompt_template = prompt_template
