@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "promptolution"
-version = "1.4.0"
+version = "2.0.0"
 description = "A framework for prompt optimization and a zoo of prompt optimization algorithms."
 authors = ["Tom Zehle, Moritz Schlager, Timo Heiß"]
 readme = "README.md"
