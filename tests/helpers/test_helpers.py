@@ -216,7 +216,7 @@ def test_run_evaluation(mock_get_task, mock_get_predictor, mock_get_llm, sample_
     mock_get_llm.assert_called_once_with(config=experiment_config)
     mock_get_predictor.assert_called_once_with(mock_llm, config=experiment_config)
     mock_get_task.assert_called_once_with(sample_df, experiment_config)
-    mock_task.evaluate.assert_called_once_with(prompts, mock_predictor)
+    mock_task.evaluate.assert_called_once_with(prompts, mock_predictor, eval_strategy="full")
 
 
 @patch("promptolution.helpers.run_optimization")

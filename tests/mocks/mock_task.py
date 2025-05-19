@@ -44,7 +44,7 @@ class MockTask(BaseTask):
         self,
         prompts: List[str],
         predictor,
-        strategy: str = "subsample",
+        eval_strategy: str = "subsample",
         system_prompts: List[str] = None,
         return_agg_scores: bool = False,
         return_seq: bool = False,
@@ -68,7 +68,7 @@ class MockTask(BaseTask):
                 "prompts": prompts,
                 "predictor": predictor,
                 "system_prompts": system_prompts,
-                "strategy": strategy,
+                "eval_strategy": eval_strategy,
                 "return_agg_scores": return_agg_scores,
                 "return_seq": return_seq,
             }
