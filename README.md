@@ -66,7 +66,7 @@ For more details, a comprehensive **documentation** with API reference is availa
 
 ## Changelog
 
-https://finitearth.github.io/promptolution/release-notes/
+Release notes for each version of the library can be found [here](https://finitearth.github.io/promptolution/release-notes/)
 
 ## Contributing
 
