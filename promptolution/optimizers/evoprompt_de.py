@@ -1,15 +1,18 @@
 """Module for EvoPromptDE optimizer."""
 
-from typing import List
 
 import numpy as np
 
-from promptolution.callbacks import BaseCallback
-from promptolution.config import ExperimentConfig
-from promptolution.llms.base_llm import BaseLLM
+from typing import TYPE_CHECKING, List
+
 from promptolution.optimizers.base_optimizer import BaseOptimizer
-from promptolution.predictors.base_predictor import BasePredictor
-from promptolution.tasks.base_task import BaseTask
+
+if TYPE_CHECKING:
+    from promptolution.llms.base_llm import BaseLLM
+    from promptolution.predictors.base_predictor import BasePredictor
+    from promptolution.tasks.base_task import BaseTask
+    from promptolution.utils.callbacks import BaseCallback
+    from promptolution.utils.config import ExperimentConfig
 
 
 class EvoPromptDE(BaseOptimizer):
@@ -31,25 +34,22 @@ class EvoPromptDE(BaseOptimizer):
         prompt_template (str): Template for meta-prompts.
         meta_llm: Language model for child prompt generation.
         donor_random (bool, optional): Whether to use a random donor. Defaults to False.
-        n_eval_samples (int, optional): Number of samples for evaluation. Defaults to 20.
-        config (ExperimentConfig, optional): Configuration for the experiment.
+        config (ExperimentConfig, optional): Configuration for the optimizer, overriding defaults.
     """
 
     def __init__(
         self,
-        predictor: BasePredictor,
-        task: BaseTask,
+        predictor: "BasePredictor",
+        task: "BaseTask",
         prompt_template: str,
-        meta_llm: BaseLLM,
+        meta_llm: "BaseLLM",
         initial_prompts: List[str] = None,
         donor_random: bool = False,
-        n_eval_samples: int = 20,
-        callbacks: List[BaseCallback] = None,
-        config: ExperimentConfig = None,
+        callbacks: List["BaseCallback"] = None,
+        config: "ExperimentConfig" = None,
     ):
         """Initialize the EvoPromptDE optimizer."""
         self.prompt_template = prompt_template
-        self.n_eval_samples = n_eval_samples
         self.donor_random = donor_random
         self.meta_llm = meta_llm
         super().__init__(

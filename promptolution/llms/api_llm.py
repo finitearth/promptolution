@@ -10,13 +10,17 @@ try:
 except ImportError:
     import_successful = False
 
-from logging import Logger
-from typing import Any, List
 
-from promptolution.config import ExperimentConfig
+from typing import TYPE_CHECKING, List
+
 from promptolution.llms.base_llm import BaseLLM
 
-logger = Logger(__name__)
+if TYPE_CHECKING:
+    from promptolution.utils.config import ExperimentConfig
+
+from promptolution.utils.logging import get_logger
+
+logger = get_logger(__name__)
 
 
 async def _invoke_model(prompt, system_prompt, max_tokens, model_id, client, semaphore, max_retries=20, retry_delay=5):
@@ -35,13 +39,13 @@ async def _invoke_model(prompt, system_prompt, max_tokens, model_id, client, sem
                 if attempt < max_retries:
                     # Calculate exponential backoff with jitter
                     logger.warning(
-                        f"API call failed (attempt {attempt + 1} / {max_retries + 1}): {str(e)}. "
+                        f"⚠️ API call failed (attempt {attempt + 1} / {max_retries + 1}): {str(e)}. "
                         f"Retrying in {retry_delay:.2f} seconds..."
                     )
                     await asyncio.sleep(retry_delay)
                 else:
                     # Log the final failure and re-raise the exception
-                    logger.error(f"API call failed after {max_retries + 1} attempts: {str(e)}")
+                    logger.error(f"❌ API call failed after {max_retries + 1} attempts: {str(e)}")
                     raise
 
 
@@ -62,21 +66,21 @@ class APILLM(BaseLLM):
     def __init__(
         self,
         api_url: str = None,
-        llm: str = None,
-        token: str = None,
+        model_id: str = None,
+        api_key: str = None,
         max_concurrent_calls=50,
         max_tokens=512,
-        config: ExperimentConfig = None,
+        config: "ExperimentConfig" = None,
     ):
         """Initialize the APILLM with a specific model and API configuration.
 
         Args:
             api_url (str): The base URL for the API endpoint.
-            llm (str): Identifier for the model to use.
-            token (str, optional): API key for authentication. Defaults to None.
+            model_id (str): Identifier for the model to use.
+            api_key (str, optional): API key for authentication. Defaults to None.
             max_concurrent_calls (int, optional): Maximum number of concurrent API calls. Defaults to 50.
             max_tokens (int, optional): Maximum number of tokens in model responses. Defaults to 512.
-            config (ExperimentConfig, optional): ExperimentConfig overwriting defaults.
+            config (ExperimentConfig, optional): Configuration for the LLM, overriding defaults.
 
         Raises:
             ImportError: If required libraries are not installed.
@@ -88,13 +92,13 @@ class APILLM(BaseLLM):
             )
 
         self.api_url = api_url
-        self.llm = llm
-        self.token = token
+        self.model_id = model_id
+        self.api_key = api_key
         self.max_concurrent_calls = max_concurrent_calls
         self.max_tokens = max_tokens
 
         super().__init__(config=config)
-        self.client = AsyncOpenAI(base_url=self.api_url, api_key=self.token)
+        self.client = AsyncOpenAI(base_url=self.api_url, api_key=self.api_key)
         self.semaphore = asyncio.Semaphore(self.max_concurrent_calls)
 
     def _get_response(self, prompts: List[str], system_prompts: List[str]) -> List[str]:
@@ -105,7 +109,7 @@ class APILLM(BaseLLM):
 
     async def _get_response_async(self, prompts: List[str], system_prompts: List[str]) -> List[str]:
         tasks = [
-            _invoke_model(prompt, system_prompt, self.max_tokens, self.llm, self.client, self.semaphore)
+            _invoke_model(prompt, system_prompt, self.max_tokens, self.model_id, self.client, self.semaphore)
             for prompt, system_prompt in zip(prompts, system_prompts)
         ]
         responses = await asyncio.gather(*tasks)

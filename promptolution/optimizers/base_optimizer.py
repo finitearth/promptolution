@@ -1,13 +1,17 @@
 """Base module for optimizers in the promptolution library."""
 
+
 from abc import ABC, abstractmethod
-from logging import getLogger
-from typing import Callable, List
 
-from promptolution.config import ExperimentConfig
-from promptolution.tasks.base_task import BaseTask
+from typing import TYPE_CHECKING, Callable, List
 
-logger = getLogger(__name__)
+if TYPE_CHECKING:
+    from promptolution.tasks.base_task import BaseTask
+    from promptolution.utils.config import ExperimentConfig
+
+from promptolution.utils.logging import get_logger
+
+logger = get_logger(__name__)
 
 
 class BaseOptimizer(ABC):
@@ -16,7 +20,7 @@ class BaseOptimizer(ABC):
     This class defines the basic structure and interface for prompt optimization algorithms.
 
     Attributes:
-        config (OptimizerConfig): Configuration for the optimizer.
+        config (ExperimentConfig, optional): Configuration for the optimizer, overriding defaults.
         prompts (List[str]): List of current prompts being optimized.
         task (BaseTask): The task object used for evaluating prompts.
         callbacks (List[Callable]): List of callback functions to be called during optimization.
@@ -26,10 +30,10 @@ class BaseOptimizer(ABC):
     def __init__(
         self,
         predictor,
-        task: BaseTask,
+        task: "BaseTask",
         initial_prompts: List[str],
         callbacks: List[Callable] = None,
-        config: ExperimentConfig = None,
+        config: "ExperimentConfig" = None,
     ):
         """Initialize the optimizer with a configuration and/or direct parameters.
 
@@ -38,7 +42,7 @@ class BaseOptimizer(ABC):
             task: Task object for prompt evaluation.
             callbacks: List of callback functions.
             predictor: Predictor for prompt evaluation.
-            config: Configuration for the optimizer.
+            config (ExperimentConfig, optional): Configuration for the optimizer, overriding defaults.
         """
         # Set up optimizer state
         self.prompts = initial_prompts
@@ -58,7 +62,7 @@ class BaseOptimizer(ABC):
         the specific optimization algorithm.
 
         Args:
-            n_steps: Number of optimization steps to perform. If None, uses the value from config.
+            n_steps (int): Number of optimization steps to perform.
 
         Returns:
             The optimized list of prompts after all steps.
@@ -73,9 +77,9 @@ class BaseOptimizer(ABC):
                 self.prompts = self._step()
             except Exception as e:
                 # exit training loop and gracefully fail
-                logger.error(f"Error during optimization step: {e}")
-                logger.error("Exiting optimization loop.")
-                break
+                logger.error(f"⛔ Error during optimization step: {e}")
+                logger.error("⚠️ Exiting optimization loop.")
+                continue_optimization = False
 
             # Callbacks at the end of each step
             continue_optimization = self._on_step_end()
@@ -119,42 +123,3 @@ class BaseOptimizer(ABC):
         """Call all registered callbacks at the end of the entire optimization process."""
         for callback in self.callbacks:
             callback.on_train_end(self)
-
-
-class DummyOptimizer(BaseOptimizer):
-    """A dummy optimizer that doesn't perform any actual optimization.
-
-    This optimizer simply returns the initial prompts without modification.
-    It's useful for testing or as a baseline comparison.
-
-    Attributes:
-        prompts (List[str]): List of prompts (unchanged from initialization).
-        callbacks (List[Callable]): Empty list of callbacks.
-
-    Args:
-        initial_prompts (List[str]): Initial set of prompts.
-        *args: Variable length argument list (unused).
-        **kwargs: Arbitrary keyword arguments (unused).
-    """
-
-    def __init__(self, initial_prompts):
-        """Initialize the DummyOptimizer."""
-        self.callbacks = []
-        self.prompts = initial_prompts
-
-    def optimize(self, n_steps) -> list[str]:
-        """Simulate an optimization process without actually modifying the prompts.
-
-        This method calls the callback methods to simulate a complete optimization
-        cycle, but returns the initial prompts unchanged.
-
-        Args:
-            n_steps (int): Number of optimization steps (unused in this implementation).
-
-        Returns:
-            List[str]: The original list of prompts, unchanged.
-        """
-        self._on_step_end()
-        self._on_train_end()
-
-        return self.prompts

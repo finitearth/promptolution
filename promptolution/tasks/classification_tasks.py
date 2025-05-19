@@ -1,14 +1,17 @@
 """Module for classification tasks."""
 
-from typing import Any, Callable, List, Literal, Tuple, Union
 
 import numpy as np
 import pandas as pd
 from sklearn.metrics import accuracy_score
 
-from promptolution.config import ExperimentConfig
-from promptolution.predictors.base_predictor import BasePredictor
+from typing import TYPE_CHECKING, Any, Callable, List, Literal, Tuple, Union
+
 from promptolution.tasks.base_task import BaseTask
+
+if TYPE_CHECKING:
+    from promptolution.predictors.base_predictor import BasePredictor
+    from promptolution.utils.config import ExperimentConfig
 
 
 class ClassificationTask(BaseTask):
@@ -25,11 +28,10 @@ class ClassificationTask(BaseTask):
         x_column: str = "x",
         y_column: str = "y",
         n_subsamples: int = 30,
-        block_size: int = 30,
-        subsample_strategy: Literal["full", "subsample", "sequential_block", "random_block"] = "full",
+        eval_strategy: Literal["full", "subsample", "sequential_block", "random_block"] = "full",
         seed: int = 42,
         metric: Callable = accuracy_score,
-        config: ExperimentConfig = None,
+        config: "ExperimentConfig" = None,
     ):
         """Initialize the ClassificationTask from a pandas DataFrame.
 
@@ -39,41 +41,39 @@ class ClassificationTask(BaseTask):
             x_column (str, optional): Name of the column containing input texts. Defaults to "x".
             y_column (str, optional): Name of the column containing labels. Defaults to "y".
             n_subsamples (int, optional): Number of subsamples to use. No subsampling if None. Defaults to None.
-            block_size (int, optional): Block size for subsampling. Defaults to None.
-            subsample_strategy (str, optional): Subsampling strategy to use. Options:
+            eval_strategy (str, optional): Subsampling strategy to use. Options:
                 - "full": Uses the entire dataset for evaluation.
                 - "evaluated": Uses only previously evaluated datapoints from the cache.
                 - "subsample": Randomly selects n_subsamples datapoints without replacement.
                 - "sequential_block": Uses a block of block_size consecutive datapoints, advancing through blocks sequentially.
                 - "random_block": Randomly selects a block of block_size consecutive datapoints.
-                Defaults to "full".  # TODO in other pull request this is renamed to eval_strategy and we do not use block_size
+                Defaults to "full".
             seed (int, optional): Random seed for reproducibility. Defaults to 42.
             metric (Callable, optional): Metric to use for evaluation. Defaults to accuracy_score.
-            config (ExperimentConfig, optional): ExperimentConfig overwriting the defaults.
+            config (ExperimentConfig, optional): Configuration for the task, overriding defaults.
         """
         self.description = description
         self.metric = metric
 
         self.x_column = x_column
         self.y_column = y_column
-
-        self.xs = df[x_column].values
-        self.ys = df[y_column].str.lower().values
-        self.classes = df[y_column].unique()
-
-        self.subsample_strategy = subsample_strategy
+        self.eval_strategy = eval_strategy
         self.n_subsamples = n_subsamples
-        self.block_size = block_size
-        self.block_idx = 0
-        self.n_blocks = len(self.xs) // self.block_size
-        self.rng = np.random.default_rng(seed)
         super().__init__(config)
+
+        self.xs = df[self.x_column].values
+        self.ys = df[self.y_column].str.lower().values
+        self.classes = np.unique(self.ys)
+
+        self.block_idx = 0
+        self.n_blocks = len(self.xs) // self.n_subsamples
+        self.rng = np.random.default_rng(seed)
 
         self.eval_cache = {}  # (prompt, x, y): scores per datapoint
         self.seq_cache = {}  # (prompt, x, y): generating sequence per datapoint
 
     def subsample(
-        self, strategy: Literal["full", "subsample", "sequential_block", "random_block"] = None
+        self, eval_strategy: Literal["full", "subsample", "sequential_block", "random_block"] = None
     ) -> Tuple[np.ndarray, np.ndarray]:
         """Subsample the dataset based on the specified parameters.
 
@@ -83,37 +83,37 @@ class ClassificationTask(BaseTask):
         Returns:
             Tuple[np.ndarray, np.ndarray]: Subsampled input data and labels.
         """
-        if strategy is None:
-            strategy = self.subsample_strategy
+        if eval_strategy is None:
+            eval_strategy = self.eval_strategy
 
-        if strategy in ["full", "evaluated"]:
+        if eval_strategy in ["full", "evaluated"]:
             return self.xs, self.ys
 
-        elif strategy == "subsample":
+        elif eval_strategy == "subsample":
             indices = self.rng.choice(len(self.xs), self.n_subsamples, replace=False)
             return self.xs[indices], self.ys[indices]
 
-        elif strategy == "random_block":
-            block_id = self.rng.integers(0, len(self.xs) // self.block_size)
-            indices = np.arange(block_id * self.block_size, (block_id + 1) * self.block_size)
+        elif eval_strategy == "random_block":
+            block_id = self.rng.integers(0, len(self.xs) // self.n_subsamples)
+            indices = np.arange(block_id * self.n_subsamples, (block_id + 1) * self.n_subsamples)
             return self.xs[indices], self.ys[indices]
 
-        elif strategy == "sequential_block":
-            indices = np.arange(self.block_idx * self.block_size, (self.block_idx + 1) * self.block_size)
+        elif eval_strategy == "sequential_block":
+            indices = np.arange(self.block_idx * self.n_subsamples, (self.block_idx + 1) * self.n_subsamples)
             return self.xs[indices], self.ys[indices]
 
         else:
-            raise ValueError(f"Unknown subsampling strategy: '{strategy}'")
+            raise ValueError(f"Unknown subsampling strategy: '{eval_strategy}")
 
     def _prepare_batch(
-        self, prompts: List[str], xs: np.ndarray, ys: np.ndarray, strategy: str
+        self, prompts: List[str], xs: np.ndarray, ys: np.ndarray, eval_strategy: str
     ) -> List[Tuple[str, str, str]]:
         """Generates (prompt, x, y) keys that require prediction.
 
         If strategy is "evaluated", returns an empty list.
         Otherwise, returns keys not found in eval_cache.
         """
-        if strategy == "evaluated":
+        if eval_strategy == "evaluated":
             return []
 
         keys_to_predict = []
@@ -150,21 +150,21 @@ class ClassificationTask(BaseTask):
     def evaluate(
         self,
         prompts: Union[str, List[str]],
-        predictor: BasePredictor,
+        predictor: "BasePredictor",
         system_prompts: List[str] = None,
         return_agg_scores: bool = True,
         return_seq: bool = False,
-        strategy: str = None,
+        eval_strategy: str = None,
     ) -> Union[np.ndarray, Tuple[np.ndarray, Union[List[Any], np.ndarray]]]:
         """Evaluate a set of prompts using a given predictor.
 
         This method orchestrates subsampling, prediction, caching, and result collection.
         """
         prompts = [prompts] if isinstance(prompts, str) else prompts
-        strategy = strategy or self.subsample_strategy
+        eval_strategy = eval_strategy or self.eval_strategy
 
-        xs, ys = self.subsample(strategy=strategy)
-        batches = self._prepare_batch(prompts, xs, ys, strategy)
+        xs, ys = self.subsample(eval_strategy=eval_strategy)
+        batches = self._prepare_batch(prompts, xs, ys, eval_strategy)
         prompts_to_evaluate, xs_to_evaluate, ys_to_evaluate = zip(*batches) if batches else ([], [], [])
 
         preds = predictor.predict(
@@ -216,21 +216,29 @@ class ClassificationTask(BaseTask):
         self.xs = np.delete(self.xs, indices)
         self.ys = np.delete(self.ys, indices)
 
-        self.n_blocks = len(self.xs) // self.block_size
+        self.n_blocks = len(self.xs) // self.n_subsamples
         self.block_idx = min(self.block_idx, self.n_blocks - 1)
 
         return df
 
     def increment_block_idx(self) -> None:
-        """Increment the block index for subsampling."""
-        if "block" not in self.subsample_strategy:
+        """Increment the block index for subsampling.
+
+        Raises:
+            ValueError: If the eval_strategy does not contain "block".
+        """
+        if "block" not in self.eval_strategy:
             raise ValueError("Block increment is only valid for block subsampling.")
         self.block_idx += 1
         if self.block_idx >= self.n_blocks:
             self.block_idx = 0
 
     def reset_block_idx(self) -> None:
-        """Reset the block index for subsampling."""
-        if "block" not in self.subsample_strategy:
+        """Reset the block index for subsampling.
+
+        Raises:
+            ValueError: If the eval_strategy does not contain "block".
+        """
+        if "block" not in self.eval_strategy:
             raise ValueError("Block reset is only valid for block subsampling.")
         self.block_idx = 0

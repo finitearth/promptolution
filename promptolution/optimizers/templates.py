@@ -1,4 +1,7 @@
+"""Meta-prompt templates for different prompt optimization methods."""
+
 DEFAULT_SYS_PROMPT = "You are a helpful assistant."
+
 EVOPROMPT_DE_TEMPLATE = """Please follow the instruction step-by-step to generate a better prompt.
 Identifying the different parts between Prompt 1 and Prompt 2:
 Prompt 1: Your task is to classify the comment as one of the following categories: terrible, bad, okay, good, great.

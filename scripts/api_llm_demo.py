@@ -1,16 +1,16 @@
 """Test run for the Opro optimizer."""
 
+
 import argparse
 from logging import Logger
 
-from promptolution.callbacks import LoggerCallback
-from promptolution.templates import EVOPROMPT_GA_TEMPLATE
-from promptolution.tasks import ClassificationTask
-from promptolution.predictors import MarkerBasedClassificator
-from promptolution.optimizers import EvoPromptGA
 from datasets import load_dataset
 
-from promptolution.llms.api_llm import APILLM
+from promptolution.llms import APILLM
+from promptolution.optimizers import CAPO
+from promptolution.predictors import MarkerBasedClassifier
+from promptolution.tasks import ClassificationTask
+from promptolution.utils import LoggerCallback
 
 logger = Logger(__name__)
 
@@ -45,22 +45,20 @@ initial_prompts = [
     "Conduct a thorough analysis of the provided news article and classify it as belonging to one of these four categories: World, Sports, Business, or Tech. Your answer should be presented within <final_answer> </final_answer> markers.",
 ]
 
-llm = APILLM(api_url=args.base_url, llm=args.model, token=args.token)
+llm = APILLM(api_url=args.base_url, model_id=args.model, api_key=args.token)
 downstream_llm = llm
 meta_llm = llm
 
-predictor = MarkerBasedClassificator(downstream_llm, classes=task.classes)
+predictor = MarkerBasedClassifier(downstream_llm, classes=task.classes)
 
 callbacks = [LoggerCallback(logger)]
 
-optimizer = EvoPromptGA(
+optimizer = CAPO(
     task=task,
-    prompt_template=EVOPROMPT_GA_TEMPLATE,
     predictor=predictor,
     meta_llm=meta_llm,
     initial_prompts=initial_prompts,
     callbacks=callbacks,
-    n_eval_samples=20,
 )
 
 best_prompts = optimizer.optimize(n_steps=args.n_steps)

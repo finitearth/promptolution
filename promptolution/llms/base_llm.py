@@ -1,16 +1,17 @@
 """Base module for LLMs in the promptolution library."""
 
-import logging
+
 from abc import ABC, abstractmethod
-from dataclasses import asdict, dataclass, field
-from typing import Any, Dict, List, Optional, Union
 
-import numpy as np
+from typing import TYPE_CHECKING, List
 
-from promptolution.config import ExperimentConfig
-from promptolution.templates import DEFAULT_SYS_PROMPT
+if TYPE_CHECKING:
+    from promptolution.utils.config import ExperimentConfig
 
-logger = logging.getLogger(__name__)
+from promptolution.optimizers.templates import DEFAULT_SYS_PROMPT
+from promptolution.utils.logging import get_logger
+
+logger = get_logger(__name__)
 
 
 class BaseLLM(ABC):
@@ -25,14 +26,14 @@ class BaseLLM(ABC):
         output_token_count (int): Count of output tokens generated.
     """
 
-    def __init__(self, config: ExperimentConfig = None):
+    def __init__(self, config: "ExperimentConfig" = None):
         """Initialize the LLM with a configuration or direct parameters.
 
         This constructor supports both config-based and direct parameter initialization
         for backward compatibility.
 
         Args:
-            config (Optional[Union[Dict[str, Any], LLMModelConfig]]): Configuration for the LLM.
+            config (ExperimentConfig, optional): Configuration for the LLM, overriding defaults.
         """
         if config is not None:
             config.apply_to(self)
@@ -81,7 +82,7 @@ class BaseLLM(ABC):
         Args:
             prompts (str or List[str]): Input prompt(s). If a single string is provided,
                                         it's converted to a list containing that string.
-            system_prompts (str or List[str]): System prompt(s) to provide context to the model.
+            system_prompts (Optional, str or List[str]): System prompt(s) to provide context to the model.
 
         Returns:
             List[str]: A list of generated responses, one for each input prompt.
@@ -120,37 +121,3 @@ class BaseLLM(ABC):
             List[str]: A list of generated responses corresponding to the input prompts.
         """
         raise NotImplementedError
-
-
-class DummyLLM(BaseLLM):
-    """A dummy implementation of the BaseLLM for testing purposes.
-
-    This class generates random responses for given prompts, simulating
-    the behavior of a language model without actually performing any
-    complex natural language processing.
-    """
-
-    def _get_response(self, prompts: list[str], system_prompts: list[str]) -> str:
-        """Generate random responses for the given prompts.
-
-        This method creates silly, random responses enclosed in <prompt> tags.
-        It's designed for testing and demonstration purposes.
-
-        Args:
-            prompts (str or List[str]): Input prompt(s). If a single string is provided,
-                                        it's converted to a list containing that string.
-
-        Returns:
-            List[str]: A list of randomly generated responses, one for each input prompt.
-        """
-        results = []
-        for p in prompts:
-            r = np.random.rand()
-            if r < 0.3:
-                results += [f"Joooo wazzuppp <prompt>hier gehts los {r} </prompt> {p}"]
-            elif 0.3 <= r < 0.6:
-                results += [f"was das hier? <prompt>peter lustig{r}</prompt> {p}"]
-            else:
-                results += [f"hier ist ein <prompt>test{r}</prompt> {p}"]
-
-        return results

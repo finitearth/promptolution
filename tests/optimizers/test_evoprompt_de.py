@@ -3,7 +3,7 @@ from unittest.mock import patch
 import numpy as np
 import pytest
 
-from promptolution.optimizers.evoprompt_de import EvoPromptDE
+from promptolution.optimizers import EvoPromptDE
 
 
 def test_evoprompt_de_initialization(mock_meta_llm, initial_prompts, mock_task, mock_predictor):
@@ -15,13 +15,11 @@ def test_evoprompt_de_initialization(mock_meta_llm, initial_prompts, mock_task, 
         prompt_template="Create a new prompt from: <prompt0>, <prompt1>, <prompt2>, <prompt3>",
         meta_llm=mock_meta_llm,
         donor_random=False,
-        n_eval_samples=15,
     )
 
     # Only verify the essential properties
     assert optimizer.prompt_template == "Create a new prompt from: <prompt0>, <prompt1>, <prompt2>, <prompt3>"
     assert not optimizer.donor_random
-    assert optimizer.n_eval_samples == 15
     assert optimizer.prompts == initial_prompts
 
 

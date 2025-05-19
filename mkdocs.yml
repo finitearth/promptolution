@@ -45,7 +45,7 @@ plugins:
 
 nav:
   - Home: index.md
-  - Release Notes: 
+  - Release Notes:
     - Overview: release-notes.md
     - v1.4.0: release-notes/v1.4.0.md
     - v1.3.2: release-notes/v1.3.2.md
@@ -65,8 +65,9 @@ nav:
     - Optimizers: api/optimizers.md
     - Predictors: api/predictors.md
     - Tasks: api/tasks.md
-    - Callbacks: api/callbacks.md
-    - Config: api/config.md
+    - Helpers: api/helpers.md
+    - Utils: api/utils.md
+    - Exemplar Selectors: api/exemplar_selectors.md
   - Tutorials:
     - Getting Started: examples/getting_started.md
 

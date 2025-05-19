@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from promptolution.optimizers.evoprompt_ga import EvoPromptGA
+from promptolution.optimizers import EvoPromptGA
 
 
 def test_evoprompt_ga_initialization(mock_meta_llm, initial_prompts, mock_task, experiment_config, mock_predictor):

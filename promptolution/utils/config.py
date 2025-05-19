@@ -1,8 +1,10 @@
 """Configuration class for the promptolution library."""
-from logging import Logger
+
 from typing import Set
 
-logger = Logger(__name__)
+from promptolution.utils.logging import get_logger
+
+logger = get_logger(__name__)
 
 
 class ExperimentConfig:
@@ -68,4 +70,4 @@ class ExperimentConfig:
         all_attributes = {k for k in self.__dict__ if not k.startswith("_")}
         unused_attributes = all_attributes - self._used_attributes
         if unused_attributes:
-            logger.warning(f"Unused configuration attributes: {unused_attributes}")
+            logger.warning(f"⚠️ Unused configuration attributes: {unused_attributes}")

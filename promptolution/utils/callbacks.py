@@ -1,12 +1,14 @@
 """Callback classes for logging, saving, and tracking optimization progress."""
 
+
 import os
 from abc import ABC
 from datetime import datetime
-from typing import Literal
 
 import pandas as pd
 from tqdm import tqdm
+
+from typing import Literal
 
 
 class BaseCallback(ABC):
@@ -79,12 +81,10 @@ class LoggerCallback(BaseCallback):
         """Log information about the current step."""
         self.step += 1
         time = datetime.now().strftime("%d-%m-%y %H:%M:%S:%f")
-        self.logger.critical(f"{time} - ✨Step {self.step} ended✨")
-        time = datetime.now().strftime("%d-%m-%y %H:%M:%S:%f")
-        self.logger.critical(f"{time} - ✨Step {self.step} ended✨")
+        self.logger.critical(f"{time} - ✨ Step {self.step} ended ✨")
         for i, (prompt, score) in enumerate(zip(optimizer.prompts, optimizer.scores)):
-            self.logger.critical(f"*** Prompt {i}: Score: {score}")
-            self.logger.critical(f"{prompt}")
+            self.logger.critical(f"📝 Prompt {i}: Score: {score}")
+            self.logger.critical(f"💬 {prompt}")
 
         return True
 
@@ -96,13 +96,10 @@ class LoggerCallback(BaseCallback):
         logs: Additional information to log.
         """
         time = datetime.now().strftime("%d-%m-%y %H:%M:%S:%f")
-        time = datetime.now().strftime("%d-%m-%y %H:%M:%S:%f")
         if logs is None:
-            self.logger.critical(f"{time} - Training ended")
-            self.logger.critical(f"{time} - Training ended")
+            self.logger.critical(f"{time} - 🏁 Training ended")
         else:
-            self.logger.critical(f"{time} - Training ended - {logs}")
-            self.logger.critical(f"{time} - Training ended - {logs}")
+            self.logger.critical(f"{time} - 🏁 Training ended - {logs}")
 
         return True
 

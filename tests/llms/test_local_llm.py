@@ -2,7 +2,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from promptolution.llms.local_llm import LocalLLM
+from promptolution.llms import LocalLLM
 
 
 @pytest.fixture

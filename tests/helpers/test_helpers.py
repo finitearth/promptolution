@@ -4,11 +4,12 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from promptolution.config import ExperimentConfig
-from promptolution.helpers import run_evaluation, run_experiment, run_optimization
 from tests.mocks.mock_llm import MockLLM
 from tests.mocks.mock_predictor import MockPredictor
 from tests.mocks.mock_task import MockTask
+
+from promptolution.helpers import run_evaluation, run_experiment, run_optimization
+from promptolution.utils import ExperimentConfig
 
 
 @pytest.fixture
@@ -216,7 +217,7 @@ def test_run_evaluation(mock_get_task, mock_get_predictor, mock_get_llm, sample_
     mock_get_llm.assert_called_once_with(config=experiment_config)
     mock_get_predictor.assert_called_once_with(mock_llm, config=experiment_config)
     mock_get_task.assert_called_once_with(sample_df, experiment_config)
-    mock_task.evaluate.assert_called_once_with(prompts, mock_predictor)
+    mock_task.evaluate.assert_called_once_with(prompts, mock_predictor, eval_strategy="full")
 
 
 @patch("promptolution.helpers.run_optimization")

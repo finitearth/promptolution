@@ -7,6 +7,12 @@ try:
 except ImportError:
     imports_successful = False
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from promptolution.utils.config import ExperimentConfig
+
+
 from promptolution.llms.base_llm import BaseLLM
 
 
@@ -23,13 +29,13 @@ class LocalLLM(BaseLLM):
         get_response: Generate responses for a list of prompts.
     """
 
-    def __init__(self, model_id: str, batch_size=8, config=None):
+    def __init__(self, model_id: str, batch_size: int = 8, config: "ExperimentConfig" = None):
         """Initialize the LocalLLM with a specific model.
 
         Args:
             model_id (str): The identifier of the model to use (e.g., "gpt2", "facebook/opt-1.3b").
             batch_size (int, optional): The batch size for text generation. Defaults to 8.
-            config (ExperimentConfig, optional): ExperimentConfig overwriting defaults.
+            config (ExperimentConfig, optional): "ExperimentConfig" overwriting defaults.
 
         Note:
             This method sets up a text generation pipeline with bfloat16 precision,
@@ -59,6 +65,7 @@ class LocalLLM(BaseLLM):
 
         Args:
             prompts (list[str]): A list of input prompts.
+            system_prompts (list[str]): A list of system prompts to guide the model's behavior.
 
         Returns:
             list[str]: A list of generated responses corresponding to the input prompts.

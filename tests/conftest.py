@@ -1,12 +1,13 @@
 """Fixtures for testing."""
+
 import pandas as pd
 import pytest
 from mocks.mock_llm import MockLLM
 from mocks.mock_predictor import MockPredictor
 from mocks.mock_task import MockTask
 
-from promptolution.config import ExperimentConfig
-from promptolution.tasks.classification_tasks import ClassificationTask
+from promptolution.tasks import ClassificationTask
+from promptolution.utils import ExperimentConfig
 
 
 @pytest.fixture
@@ -94,6 +95,6 @@ def mock_classification_task_with_subsampling(mock_df):
         description="Sentiment classification task",
         x_column="x",
         y_column="y",
-        subsample_strategy="subsample",
+        eval_strategy="subsample",
         n_subsamples=2,
     )

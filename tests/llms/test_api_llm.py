@@ -1,6 +1,6 @@
 from unittest.mock import MagicMock, patch
 
-from promptolution.llms.api_llm import APILLM
+from promptolution.llms import APILLM
 
 
 def test_api_llm_initialization():
@@ -17,7 +17,9 @@ def test_api_llm_initialization():
         mock_asyncio.Semaphore.return_value = mock_semaphore
 
         # Create APILLM instance
-        api_llm = APILLM(api_url="https://api.example.com", llm="gpt-4", token="test-token", max_concurrent_calls=10)
+        api_llm = APILLM(
+            api_url="https://api.example.com", model_id="gpt-4", api_key="test-token", max_concurrent_calls=10
+        )
 
         # Verify AsyncOpenAI was called correctly
         mock_client_class.assert_called_once()
@@ -30,5 +32,5 @@ def test_api_llm_initialization():
 
         # Verify instance attributes
         assert api_llm.api_url == "https://api.example.com"
-        assert api_llm.llm == "gpt-4"
+        assert api_llm.model_id == "gpt-4"
         assert api_llm.max_concurrent_calls == 10

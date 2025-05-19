@@ -1,9 +1,12 @@
 """Mock Optimizer for Testing."""
 
+
 from unittest.mock import MagicMock
 
+from promptolution.optimizers.base_optimizer import BaseOptimizer
 
-class MockOptimizer:
+
+class MockOptimizer(BaseOptimizer):
     """Mock optimizer for testing callbacks and other components.
 
     This class simulates an optimizer without requiring actual optimization processes.

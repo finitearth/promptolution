@@ -1,10 +1,8 @@
 import numpy as np
-import pandas as pd
 import pytest
 from sklearn.metrics import accuracy_score
 
-from promptolution.predictors.classificator import FirstOccurrenceClassificator
-from promptolution.tasks.classification_tasks import ClassificationTask
+from promptolution.tasks import ClassificationTask
 
 
 def test_classification_task_initialization(mock_df):
@@ -112,7 +110,7 @@ def test_pop_datapoints(mock_df):
     task = ClassificationTask(
         df=mock_df,
         description="Sentiment classification task",
-        subsample_strategy="sequential_blocks",
+        eval_strategy="sequential_blocks",
     )
 
     df = task.pop_datapoints(n=1)
@@ -123,7 +121,7 @@ def test_pop_datapoints(mock_df):
 
 def test_blocks(mock_df):
     task = ClassificationTask(
-        df=mock_df, description="Sentiment classification task", subsample_strategy="sequential_blocks", block_size=1
+        df=mock_df, description="Sentiment classification task", eval_strategy="sequential_blocks", n_subsamples=1
     )
 
     # Increment blocks

@@ -1,13 +1,16 @@
 """Module for running language models locally using the vLLM library."""
 
 
-from logging import Logger
-from typing import List
+from typing import TYPE_CHECKING, List
 
-from promptolution.config import ExperimentConfig
+if TYPE_CHECKING:
+    from promptolution.utils.config import ExperimentConfig
+
+
 from promptolution.llms.base_llm import BaseLLM
+from promptolution.utils.logging import get_logger
 
-logger = Logger(__name__)
+logger = get_logger(__name__)
 
 try:
     from transformers import AutoTokenizer
@@ -49,7 +52,7 @@ class VLLM(BaseLLM):
         trust_remote_code: bool = False,
         seed: int = 42,
         llm_kwargs: dict = None,
-        config: ExperimentConfig = None,
+        config: "ExperimentConfig" = None,
     ):
         """Initialize the VLLM with a specific model.
 
@@ -67,7 +70,7 @@ class VLLM(BaseLLM):
             trust_remote_code (bool, optional): Whether to trust remote code. Defaults to False.
             seed (int, optional): Random seed for the model. Defaults to 42.
             llm_kwargs (dict, optional): Additional keyword arguments for the LLM. Defaults to None.
-            config (ExperimentConfig, optional): ExperimentConfig overwriting defaults.
+            config (ExperimentConfig, optional): Configuration for the LLM, overriding defaults.
 
         Note:
             This method sets up a vLLM engine with specified parameters for efficient inference.
@@ -108,12 +111,9 @@ class VLLM(BaseLLM):
         self.llm = LLM(**llm_params)
 
         if batch_size is None:
-            gpu_blocks = self.llm.llm_engine.model_executor.cache_config.num_gpu_blocks
-            block_size = (
-                self.llm.llm_engine.model_executor.cache_config.block_size
-            )  # TODO rename, block_size is misleading
-            self.batch_size = int((gpu_blocks * block_size / self.max_model_len) * 0.95)
-            logger.info(f"Batch size set to {self.batch_size} based on GPU memory.")
+            cache_config = self.llm.llm_engine.model_executor.cache_config
+            self.batch_size = int((cache_config.gpu_blocks * cache_config.block_size / self.max_model_len) * 0.95)
+            logger.info(f"🚀 Batch size set to {self.batch_size} based on GPU memory.")
         else:
             self.batch_size = batch_size
 
@@ -127,6 +127,7 @@ class VLLM(BaseLLM):
 
         Args:
             prompts (list[str]): A list of input prompts.
+            system_prompts (list[str]): A list of system prompts to guide the model's behavior.
 
         Returns:
             list[str]: A list of generated responses corresponding to the input prompts.

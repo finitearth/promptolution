@@ -1,27 +1,32 @@
 """Implementation of the CAPO (Cost-Aware Prompt Optimization) algorithm."""
+
 import random
 from itertools import compress
-from logging import getLogger
-from typing import Callable, List, Tuple
 
 import numpy as np
 import pandas as pd
 
-from promptolution.config import ExperimentConfig
-from promptolution.llms.base_llm import BaseLLM
+from typing import TYPE_CHECKING, Callable, List, Tuple
+
+if TYPE_CHECKING:
+    from promptolution.llms.base_llm import BaseLLM
+    from promptolution.predictors.base_predictor import BasePredictor
+    from promptolution.tasks.base_task import BaseTask
+    from promptolution.utils.config import ExperimentConfig
+    from promptolution.utils.test_statistics import TestStatistics
+
 from promptolution.optimizers.base_optimizer import BaseOptimizer
-from promptolution.predictors.base_predictor import BasePredictor
-from promptolution.tasks.base_task import BaseTask
-from promptolution.templates import (
+from promptolution.optimizers.templates import (
     CAPO_CROSSOVER_TEMPLATE,
     CAPO_DOWNSTREAM_TEMPLATE,
     CAPO_FEWSHOT_TEMPLATE,
     CAPO_MUTATION_TEMPLATE,
 )
-from promptolution.utils.test_statistics import TestStatistics, get_test_statistic_func
+from promptolution.utils.logging import get_logger
+from promptolution.utils.test_statistics import get_test_statistic_func
 from promptolution.utils.token_counter import get_token_counter
 
-logger = getLogger(__name__)
+logger = get_logger(__name__)
 
 
 class CAPOPrompt:
@@ -68,43 +73,40 @@ class CAPO(BaseOptimizer):
 
     def __init__(
         self,
-        predictor: BasePredictor,
-        task: BaseTask,
-        meta_llm: BaseLLM,
+        predictor: "BasePredictor",
+        task: "BaseTask",
+        meta_llm: "BaseLLM",
         initial_prompts: List[str] = None,
         crossovers_per_iter: int = 4,
         upper_shots: int = 5,
         max_n_blocks_eval: int = 10,
-        test_statistic: TestStatistics = "paired_t_test",
+        test_statistic: "TestStatistics" = "paired_t_test",
         alpha: float = 0.2,
         length_penalty: float = 0.05,
         df_few_shots: pd.DataFrame = None,
         crossover_template: str = None,
         mutation_template: str = None,
         callbacks: List[Callable] = [],
-        config: ExperimentConfig = None,
+        config: "ExperimentConfig" = None,
     ):
         """Initializes the CAPOptimizer with various parameters for prompt evolution.
 
         Args:
-            initial_prompts (List[str]): Initial prompt instructions.
+            predictor (BasePredictor): The predictor for evaluating prompt performance.
             task (BaseTask): The task instance containing dataset and description.
-            df_few_shots (pd.DataFrame): DataFrame containing few-shot examples. If None, will pop 10% of datapoints from task.
             meta_llm (BaseLLM): The meta language model for crossover/mutation.
-            downstream_llm (BaseLLM): The downstream language model used for responses.
-            length_penalty (float): Penalty factor for prompt length.
+            initial_prompts (List[str]): Initial prompt instructions.
             crossovers_per_iter (int): Number of crossover operations per iteration.
             upper_shots (int): Maximum number of few-shot examples per prompt.
             p_few_shot_reasoning (float): Probability of generating llm-reasoning for few-shot examples, instead of simply using input-output pairs.
-            n_trials_generation_reasoning (int): Number of trials to generate reasoning for few-shot examples.
             max_n_blocks_eval (int): Maximum number of evaluation blocks.
             test_statistic (TestStatistics): Statistical test to compare prompt performance. Default is "paired_t_test".
             alpha (float): Significance level for the statistical test.
+            length_penalty (float): Penalty factor for prompt length.
+            df_few_shots (pd.DataFrame): DataFrame containing few-shot examples. If None, will pop 10% of datapoints from task.
             crossover_template (str, optional): Template for crossover instructions.
             mutation_template (str, optional): Template for mutation instructions.
             callbacks (List[Callable], optional): Callbacks for optimizer events.
-            predictor (BasePredictor, optional): Predictor to evaluate prompt
-                performance.
             config (ExperimentConfig, optional): Configuration for the optimizer.
         """
         self.meta_llm = meta_llm
@@ -127,7 +129,7 @@ class CAPO(BaseOptimizer):
         self.df_few_shots = df_few_shots if df_few_shots is not None else task.pop_datapoints(frac=0.1)
         if self.max_n_blocks_eval > self.task.n_blocks:
             logger.warning(
-                f"max_n_blocks_eval ({self.max_n_blocks_eval}) is larger than the number of blocks ({self.task.n_blocks})."
+                f"ℹ️ max_n_blocks_eval ({self.max_n_blocks_eval}) is larger than the number of blocks ({self.task.n_blocks})."
                 f" Setting max_n_blocks_eval to {self.task.n_blocks}."
             )
             self.max_n_blocks_eval = self.task.n_blocks
@@ -297,7 +299,7 @@ class CAPO(BaseOptimizer):
             self.task.increment_block_idx()
 
         avg_scores = self.task.evaluate(
-            [c.construct_prompt() for c in candidates], self.predictor, strategy="evaluated"
+            [c.construct_prompt() for c in candidates], self.predictor, eval_strategy="evaluated"
         )
         order = np.argsort(-avg_scores)[:k]
         candidates = [candidates[i] for i in order]

@@ -1,16 +1,23 @@
 """Utility functions for prompt creation."""
 
-from typing import List, Union
 
 import numpy as np
 
-from promptolution.llms.base_llm import BaseLLM
-from promptolution.tasks.base_task import BaseTask
+from typing import TYPE_CHECKING, List, Union
+
+if TYPE_CHECKING:
+    from promptolution.llms.base_llm import BaseLLM
+    from promptolution.tasks.base_task import BaseTask
+
+from promptolution.optimizers.templates import (
+    PROMPT_CREATION_TEMPLATE,
+    PROMPT_CREATION_TEMPLATE_TD,
+    PROMPT_VARIATION_TEMPLATE,
+)
 from promptolution.tasks.classification_tasks import ClassificationTask
-from promptolution.templates import PROMPT_CREATION_TEMPLATE, PROMPT_CREATION_TEMPLATE_TD, PROMPT_VARIATION_TEMPLATE
 
 
-def create_prompt_variation(prompt: Union[List[str], str], llm: BaseLLM, meta_prompt: str = None) -> List[str]:
+def create_prompt_variation(prompt: Union[List[str], str], llm: "BaseLLM", meta_prompt: str = None) -> List[str]:
     """Generate a variation of the given prompt(s) while keeping the semantic meaning.
 
     Idea taken from the paper Zhou et al. (2021) https://arxiv.org/pdf/2211.01910
@@ -36,8 +43,8 @@ def create_prompt_variation(prompt: Union[List[str], str], llm: BaseLLM, meta_pr
 
 
 def create_prompts_from_samples(
-    task: BaseTask,
-    llm: BaseLLM,
+    task: "BaseTask",
+    llm: "BaseLLM",
     meta_prompt: str = None,
     n_samples: int = 3,
     task_description: str = None,
