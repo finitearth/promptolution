@@ -1,9 +1,9 @@
 """Random exemplar selector."""
 
-from promptolution.config import ExperimentConfig
-from promptolution.exemplar_selectors import BaseExemplarSelector
+from promptolution.exemplar_selectors.base_exemplar_selector import BaseExemplarSelector
 from promptolution.predictors.base_predictor import BasePredictor
 from promptolution.tasks.base_task import BaseTask
+from promptolution.utils.config import ExperimentConfig
 
 
 class RandomSelector(BaseExemplarSelector):

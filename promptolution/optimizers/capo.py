@@ -6,19 +6,20 @@ from typing import Callable, List, Tuple
 import numpy as np
 import pandas as pd
 
-from promptolution.config import ExperimentConfig
 from promptolution.llms.base_llm import BaseLLM
-from promptolution.logging import get_logger
 from promptolution.optimizers.base_optimizer import BaseOptimizer
-from promptolution.predictors.base_predictor import BasePredictor
-from promptolution.tasks.base_task import BaseTask
-from promptolution.templates import (
+from promptolution.optimizers.templates import (
     CAPO_CROSSOVER_TEMPLATE,
     CAPO_DOWNSTREAM_TEMPLATE,
     CAPO_FEWSHOT_TEMPLATE,
     CAPO_MUTATION_TEMPLATE,
 )
-from promptolution.utils import TestStatistics, get_test_statistic_func, get_token_counter
+from promptolution.predictors.base_predictor import BasePredictor
+from promptolution.tasks.base_task import BaseTask
+from promptolution.utils.config import ExperimentConfig
+from promptolution.utils.logging import get_logger
+from promptolution.utils.test_statistics import TestStatistics, get_test_statistic_func
+from promptolution.utils.token_counter import get_token_counter
 
 logger = get_logger(__name__)
 

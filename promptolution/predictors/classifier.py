@@ -4,8 +4,8 @@ from typing import List
 
 import numpy as np
 
-from promptolution.config import ExperimentConfig
 from promptolution.predictors.base_predictor import BasePredictor
+from promptolution.utils.config import ExperimentConfig
 
 
 class FirstOccurrenceClassifier(BasePredictor):

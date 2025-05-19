@@ -1,5 +1,5 @@
 """Random search exemplar selector."""
-from promptolution.exemplar_selectors import BaseExemplarSelector
+from promptolution.exemplar_selectors.base_exemplar_selector import BaseExemplarSelector
 
 
 class RandomSearchSelector(BaseExemplarSelector):

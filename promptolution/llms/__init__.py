@@ -1,6 +1,5 @@
 """Module for Large Language Models."""
 
-from .api_llm import APILLM
-from .base_llm import BaseLLM
-from .local_llm import LocalLLM
-from .vllm import VLLM
+from promptolution.llms.api_llm import APILLM
+from promptolution.llms.local_llm import LocalLLM
+from promptolution.llms.vllm import VLLM

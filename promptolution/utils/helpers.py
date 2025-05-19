@@ -4,23 +4,17 @@ from typing import List, Literal
 
 import pandas as pd
 
-from promptolution.config import ExperimentConfig
 from promptolution.exemplar_selectors.random_search_selector import RandomSearchSelector
 from promptolution.exemplar_selectors.random_selector import RandomSelector
 from promptolution.llms.api_llm import APILLM
 from promptolution.llms.base_llm import BaseLLM
 from promptolution.llms.local_llm import LocalLLM
 from promptolution.llms.vllm import VLLM
-from promptolution.logging import get_logger
-from promptolution.optimizers import CAPO
+from promptolution.optimizers.capo import CAPO
 from promptolution.optimizers.evoprompt_de import EvoPromptDE
 from promptolution.optimizers.evoprompt_ga import EvoPromptGA
 from promptolution.optimizers.opro import Opro
-from promptolution.predictors import FirstOccurrenceClassifier, MarkerBasedClassifier
-from promptolution.predictors.base_predictor import BasePredictor
-from promptolution.tasks.base_task import BaseTask
-from promptolution.tasks.classification_tasks import ClassificationTask
-from promptolution.templates import (
+from promptolution.optimizers.templates import (
     CAPO_CROSSOVER_TEMPLATE,
     CAPO_MUTATION_TEMPLATE,
     EVOPROMPT_DE_TEMPLATE,
@@ -30,6 +24,12 @@ from promptolution.templates import (
     OPRO_TEMPLATE,
     OPRO_TEMPLATE_TD,
 )
+from promptolution.predictors.base_predictor import BasePredictor
+from promptolution.predictors.classifier import FirstOccurrenceClassifier, MarkerBasedClassifier
+from promptolution.tasks.base_task import BaseTask
+from promptolution.tasks.classification_tasks import ClassificationTask
+from promptolution.utils.config import ExperimentConfig
+from promptolution.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

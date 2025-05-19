@@ -8,10 +8,10 @@ from datasets import load_dataset
 
 from promptolution import (
     LoggerCallback,
-    EVOPROMPT_GA_TEMPLATE,
+    CAPO_TEMPLATE,
     ClassificationTask,
     MarkerBasedClassifier,
-    EvoPromptGA,
+    CAPO,
     APILLM
 )
 
@@ -56,7 +56,7 @@ predictor = MarkerBasedClassifier(downstream_llm, classes=task.classes)
 
 callbacks = [LoggerCallback(logger)]
 
-optimizer = EvoPromptGA(
+optimizer = Capo(
     task=task,
     prompt_template=EVOPROMPT_GA_TEMPLATE,
     predictor=predictor,

@@ -3,9 +3,9 @@
 from abc import ABC, abstractmethod
 from typing import Callable, List
 
-from promptolution.config import ExperimentConfig
-from promptolution.logging import get_logger
 from promptolution.tasks.base_task import BaseTask
+from promptolution.utils.config import ExperimentConfig
+from promptolution.utils.logging import get_logger
 
 logger = get_logger(__name__)
 

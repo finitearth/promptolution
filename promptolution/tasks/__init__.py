@@ -1,3 +1,2 @@
 """Module for task-related functions and classes."""
-from .base_task import BaseTask
-from .classification_tasks import ClassificationTask
+from promptolution.tasks.classification_tasks import ClassificationTask

@@ -3,7 +3,7 @@ from typing import List, Optional, Tuple
 
 import numpy as np
 
-from promptolution.llms import BaseLLM
+from promptolution.llms.base_llm import BaseLLM
 from promptolution.predictors import BasePredictor
 
 

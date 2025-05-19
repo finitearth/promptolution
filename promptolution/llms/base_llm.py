@@ -3,9 +3,8 @@
 from abc import ABC, abstractmethod
 from typing import List
 
-from promptolution import get_logger
-from promptolution.config import ExperimentConfig
-from promptolution.templates import DEFAULT_SYS_PROMPT
+from promptolution.optimizers.templates import DEFAULT_SYS_PROMPT
+from promptolution.utils import ExperimentConfig, get_logger
 
 logger = get_logger(__name__)
 

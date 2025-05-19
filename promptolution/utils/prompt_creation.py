@@ -5,9 +5,13 @@ from typing import List, Union
 import numpy as np
 
 from promptolution.llms.base_llm import BaseLLM
+from promptolution.optimizers.templates import (
+    PROMPT_CREATION_TEMPLATE,
+    PROMPT_CREATION_TEMPLATE_TD,
+    PROMPT_VARIATION_TEMPLATE,
+)
 from promptolution.tasks.base_task import BaseTask
 from promptolution.tasks.classification_tasks import ClassificationTask
-from promptolution.templates import PROMPT_CREATION_TEMPLATE, PROMPT_CREATION_TEMPLATE_TD, PROMPT_VARIATION_TEMPLATE
 
 
 def create_prompt_variation(prompt: Union[List[str], str], llm: BaseLLM, meta_prompt: str = None) -> List[str]:

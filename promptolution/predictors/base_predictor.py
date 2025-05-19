@@ -5,8 +5,8 @@ from typing import List, Optional
 
 import numpy as np
 
-from promptolution.config import ExperimentConfig
 from promptolution.llms.base_llm import BaseLLM
+from promptolution.utils.config import ExperimentConfig
 
 
 class BasePredictor(ABC):
