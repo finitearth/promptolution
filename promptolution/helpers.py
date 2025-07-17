@@ -1,7 +1,10 @@
 """Helper functions for the usage of the libary."""
 
 
-from typing import TYPE_CHECKING, List, Literal
+from typing import TYPE_CHECKING, Callable, List, Literal
+
+from promptolution.tasks.judge_tasks import JudgeTask
+from promptolution.tasks.reward_tasks import RewardTask
 
 if TYPE_CHECKING:
     from promptolution.exemplar_selectors.base_exemplar_selector import BaseExemplarSelector
@@ -75,7 +78,7 @@ def run_optimization(df: pd.DataFrame, config: "ExperimentConfig") -> List[str]:
         logger.warning("📌 CAPO requires block evaluation strategy. Setting it to 'sequential_block'.")
         config.eval_strategy = "sequential_block"
 
-    task = get_task(df, config)
+    task = get_task(df, config, judge_llm=llm)
     optimizer = get_optimizer(
         predictor=predictor,
         meta_llm=llm,
@@ -103,8 +106,8 @@ def run_evaluation(df: pd.DataFrame, config: "ExperimentConfig", prompts: List[s
     Returns:
         pd.DataFrame: A DataFrame containing the prompts and their scores.
     """
-    task = get_task(df, config)
     llm = get_llm(config=config)
+    task = get_task(df, config, judge_llm=llm)
     predictor = get_predictor(llm, config=config)
     logger.warning("📊 Starting evaluation...")
     scores = task.evaluate(prompts, predictor, eval_strategy="full")
@@ -144,7 +147,13 @@ def get_llm(model_id: str = None, config: "ExperimentConfig" = None) -> "BaseLLM
     return APILLM(model_id=model_id, config=config)
 
 
-def get_task(df: pd.DataFrame, config: "ExperimentConfig") -> "BaseTask":
+def get_task(
+    df: pd.DataFrame,
+    config: "ExperimentConfig",
+    task_type: Literal["classification", "reward", "judge"] = None,
+    judge_llm: "BaseLLM" = None,
+    reward_function: Callable = None,
+) -> "BaseTask":
     """Get the task based on the provided DataFrame and configuration.
 
     So far only ClassificationTask is supported.
@@ -156,6 +165,18 @@ def get_task(df: pd.DataFrame, config: "ExperimentConfig") -> "BaseTask":
     Returns:
         BaseTask: An instance of a task class based on the provided DataFrame and configuration.
     """
+    if task_type is None:
+        task_type = config.task_type
+
+    if task_type == "reward":
+        return RewardTask(
+            df=df,
+            reward_function=reward_function,
+            config=config,
+        )
+    elif task_type == "judge":
+        return JudgeTask(df, judge_llm=judge_llm, config=config)
+
     return ClassificationTask(df, config=config)
 
 

@@ -7,10 +7,10 @@ from promptolution.tasks import ClassificationTask
 
 def test_classification_task_initialization(mock_df):
     """Test that ClassificationTask initializes correctly."""
-    task = ClassificationTask(df=mock_df, description="Sentiment classification task", x_column="x", y_column="y")
+    task = ClassificationTask(df=mock_df, task_description="Sentiment classification task", x_column="x", y_column="y")
 
     # Verify attributes
-    assert task.description == "Sentiment classification task"
+    assert task.task_description == "Sentiment classification task"
     assert len(task.classes) == 3
     assert set(task.classes) == set(["positive", "neutral", "negative"])
     assert len(task.xs) == 3
@@ -109,7 +109,7 @@ def test_task_evaluate_with_system_prompts(
 def test_pop_datapoints(mock_df):
     task = ClassificationTask(
         df=mock_df,
-        description="Sentiment classification task",
+        task_description="Sentiment classification task",
         eval_strategy="sequential_blocks",
     )
 
@@ -121,7 +121,7 @@ def test_pop_datapoints(mock_df):
 
 def test_blocks(mock_df):
     task = ClassificationTask(
-        df=mock_df, description="Sentiment classification task", eval_strategy="sequential_blocks", n_subsamples=1
+        df=mock_df, task_description="Sentiment classification task", eval_strategy="sequential_blocks", n_subsamples=1
     )
 
     # Increment blocks

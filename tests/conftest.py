@@ -31,9 +31,9 @@ def experiment_config():
 def mock_task():
     """Fixture providing a MockTask with predetermined scoring behavior."""
 
-    def score_function(prompt):
+    def score_function(pred):
         # Prefer longer prompts for testing purposes
-        return min(0.9, 0.5 + 0.01 * len(prompt))
+        return len(pred)
 
     return MockTask(predetermined_scores=score_function)
 
@@ -92,7 +92,7 @@ def mock_classification_task_with_subsampling(mock_df):
     """Fixture providing a ClassificationTask instance with subsampling."""
     return ClassificationTask(
         df=mock_df,
-        description="Sentiment classification task",
+        task_description="Sentiment classification task",
         x_column="x",
         y_column="y",
         eval_strategy="subsample",

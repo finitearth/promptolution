@@ -5,6 +5,8 @@ import numpy as np
 
 from typing import TYPE_CHECKING, List, Union
 
+from promptolution.utils.formatting import extract_from_tag
+
 if TYPE_CHECKING:
     from promptolution.llms.base_llm import BaseLLM
     from promptolution.tasks.base_task import BaseTask
@@ -36,8 +38,7 @@ def create_prompt_variation(prompt: Union[List[str], str], llm: "BaseLLM", meta_
     if isinstance(prompt, str):
         prompt = [prompt]
     varied_prompts = llm.get_response([meta_prompt.replace("<prev_prompt>", p) for p in prompt])
-
-    varied_prompts = [p.split("</prompt>")[0].split("<prompt>")[-1] for p in varied_prompts]
+    varied_prompts = extract_from_tag(varied_prompts, "<prompt>", "</prompt>")
 
     return varied_prompts
 
@@ -110,6 +111,6 @@ def create_prompts_from_samples(
         meta_prompts.append(meta_prompt)
 
     prompts = llm.get_response(meta_prompts)
-    prompts = [prompt.split("</prompt>")[0].split("<prompt>")[-1].strip() for prompt in prompts]
+    prompts = extract_from_tag(prompts, "<prompt>", "</prompt>")
 
     return prompts

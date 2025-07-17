@@ -34,7 +34,7 @@ df = load_dataset("SetFit/ag_news", split="train", revision="main").to_pandas().
 
 task = ClassificationTask(
     df,
-    description="The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories.",
+    task_description="The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. The task is to classify each news article into one of the four categories.",
     x_column="text",
     y_column="label_text",
     eval_strategy="subsample",

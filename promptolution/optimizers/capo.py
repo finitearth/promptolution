@@ -8,6 +8,8 @@ import pandas as pd
 
 from typing import TYPE_CHECKING, Callable, List, Tuple
 
+from promptolution.utils.formatting import extract_from_tag
+
 if TYPE_CHECKING:
     from promptolution.llms.base_llm import BaseLLM
     from promptolution.predictors.base_predictor import BasePredictor
@@ -218,7 +220,7 @@ class CAPO(BaseOptimizer):
 
         offsprings = []
         for instruction, examples in zip(child_instructions, offspring_few_shots):
-            instruction = instruction.split("<prompt>")[-1].split("</prompt>")[0].strip()
+            instruction = extract_from_tag(instruction, "<prompt>", "</prompt>")
             offsprings.append(CAPOPrompt(instruction, examples))
 
         return offsprings
@@ -240,7 +242,7 @@ class CAPO(BaseOptimizer):
 
         mutated = []
         for new_instruction, prompt in zip(new_instructions, offsprings):
-            new_instruction = new_instruction.split("<prompt>")[-1].split("</prompt>")[0].strip()
+            new_instruction = extract_from_tag(new_instruction, "<prompt>", "</prompt>")
             p = random.random()
 
             if p < 1 / 3 and len(prompt.few_shots) < self.upper_shots:  # add a random few shot

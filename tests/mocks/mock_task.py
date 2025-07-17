@@ -3,6 +3,7 @@
 from unittest.mock import MagicMock
 
 import numpy as np
+import pandas as pd
 
 from typing import List
 
@@ -24,7 +25,13 @@ class MockTask(BaseTask):
                 or a list of scores to return in sequence, or a function
                 that generates scores based on prompts.
         """
-        super().__init__()
+        super().__init__(
+            df=pd.DataFrame(
+                {"x": ["Sample text 1", "Sample text 2", "Sample text 3"], "y": ["positive", "negative", "neutral"]}
+            ),
+            x_column="x",
+            y_column="y",
+        )
         self.predetermined_scores = predetermined_scores or {}
         self.call_history = []
         self.score_index = 0
@@ -34,76 +41,95 @@ class MockTask(BaseTask):
         # Default attributes similar to ClassificationTask
         self.description = "Mock classification task"
         self.classes = ["positive", "neutral", "negative"]
-        self.xs = np.array(["Sample text 1", "Sample text 2", "Sample text 3"])
-        self.ys = np.array(["positive", "negative", "neutral"])
         self.initial_prompts = ["Classify:", "Determine:"]
         self.n_blocks = 10
 
         self.increment_block_idx = MagicMock()
         self.reset_block_idx = MagicMock()
 
-    def evaluate(
-        self,
-        prompts: List[str],
-        predictor,
-        eval_strategy: str = "subsample",
-        system_prompts: List[str] = None,
-        return_agg_scores: bool = False,
-        return_seq: bool = False,
-    ) -> np.ndarray:
-        """Evaluate prompts with predetermined scores.
+    def _calculate_score(self, x: np.ndarray, y: np.ndarray, pred: np.ndarray, **kwargs) -> float:
+        """Calculate the score for a single prediction.
 
         Args:
-            prompts: List of prompts to evaluate
-            predictor: Predictor (ignored in mock)
-            system_prompts: System prompts (ignored in mock)
-            subsample: Whether to subsample (ignored in mock)
-            n_samples: Number of samples (ignored in mock)
-            return_seq: Whether to return sequences
+            x: Input data (not used in mock)
+            y: Ground truth labels (not used in mock)
+            pred: Predicted labels
 
         Returns:
-            np.ndarray of scores, and optionally sequences
+            Score based on predetermined scores or a default logic.
         """
-        # Record the call
-        self.call_history.append(
-            {
-                "prompts": prompts,
-                "predictor": predictor,
-                "system_prompts": system_prompts,
-                "eval_strategy": eval_strategy,
-                "return_agg_scores": return_agg_scores,
-                "return_seq": return_seq,
-            }
-        )
+        if isinstance(self.predetermined_scores, dict):
+            return self.predetermined_scores.get(pred, 0.5)
+        elif isinstance(self.predetermined_scores, list):
+            self.score_index += 1
+            return self.predetermined_scores[(self.score_index - 1) % len(self.predetermined_scores)]
+        elif callable(self.predetermined_scores):
+            return self.predetermined_scores(x)
+        else:
+            return len(pred)
 
-        scores = []
-        for prompt in prompts:
-            # Handle different types of predetermined_scores
-            if callable(self.predetermined_scores):
-                # If it's a function, call it with the prompt
-                score = self.predetermined_scores(prompt)
-            elif isinstance(self.predetermined_scores, dict) and prompt in self.predetermined_scores:
-                # If it's a dict, look up the prompt
-                score = self.predetermined_scores[prompt]
-            elif isinstance(self.predetermined_scores, list):
-                # If it's a list, return items in sequence (cycling if needed)
-                if self.score_index < len(self.predetermined_scores):
-                    score = self.predetermined_scores[self.score_index]
-                    self.score_index = (self.score_index + 1) % len(self.predetermined_scores)
-                else:
-                    score = 0.5  # Default score
-            else:
-                # Generate a somewhat predictable score based on prompt length
-                # (longer prompts get slightly higher scores)
-                score = 0.5 + 0.01 * (len(prompt) % 10)
+    # def evaluate(
+    #     self,
+    #     prompts: List[str],
+    #     predictor,
+    #     eval_strategy: str = "subsample",
+    #     system_prompts: List[str] = None,
+    #     return_agg_scores: bool = False,
+    #     return_seq: bool = False,
+    # ) -> np.ndarray:
+    #     """Evaluate prompts with predetermined scores.
 
-            scores.append(score)
+    #     Args:
+    #         prompts: List of prompts to evaluate
+    #         predictor: Predictor (ignored in mock)
+    #         system_prompts: System prompts (ignored in mock)
+    #         subsample: Whether to subsample (ignored in mock)
+    #         n_samples: Number of samples (ignored in mock)
+    #         return_seq: Whether to return sequences
 
-        scores_array = np.array(scores)
+    #     Returns:
+    #         np.ndarray of scores, and optionally sequences
+    #     """
+    #     # Record the call
+    #     self.call_history.append(
+    #         {
+    #             "prompts": prompts,
+    #             "predictor": predictor,
+    #             "system_prompts": system_prompts,
+    #             "eval_strategy": eval_strategy,
+    #             "return_agg_scores": return_agg_scores,
+    #             "return_seq": return_seq,
+    #         }
+    #     )
 
-        if return_seq:
-            # Generate dummy sequences
-            seqs = [[f"Input: {x}\nOutput: {prompt}" for x in self.xs] for prompt in prompts]
-            return scores_array, seqs
+    #     scores = []
+    #     for prompt in prompts:
+    #         # Handle different types of predetermined_scores
+    #         if callable(self.predetermined_scores):
+    #             # If it's a function, call it with the prompt
+    #             score = self.predetermined_scores(prompt)
+    #         elif isinstance(self.predetermined_scores, dict) and prompt in self.predetermined_scores:
+    #             # If it's a dict, look up the prompt
+    #             score = self.predetermined_scores[prompt]
+    #         elif isinstance(self.predetermined_scores, list):
+    #             # If it's a list, return items in sequence (cycling if needed)
+    #             if self.score_index < len(self.predetermined_scores):
+    #                 score = self.predetermined_scores[self.score_index]
+    #                 self.score_index = (self.score_index + 1) % len(self.predetermined_scores)
+    #             else:
+    #                 score = 0.5  # Default score
+    #         else:
+    #             # Generate a somewhat predictable score based on prompt length
+    #             # (longer prompts get slightly higher scores)
+    #             score = 0.5 + 0.01 * (len(prompt) % 10)
 
-        return scores_array
+    #         scores.append(score)
+
+    #     scores_array = np.array(scores)
+
+    #     if return_seq:
+    #         # Generate dummy sequences
+    #         seqs = [[f"Input: {x}\nOutput: {prompt}" for x in self.xs] for prompt in prompts]
+    #         return scores_array, seqs
+
+    #     return scores_array

@@ -6,6 +6,7 @@ import numpy as np
 from typing import TYPE_CHECKING, List
 
 from promptolution.predictors.base_predictor import BasePredictor
+from promptolution.utils.formatting import extract_from_tag
 
 if TYPE_CHECKING:
     from promptolution.utils.config import ExperimentConfig
@@ -124,7 +125,7 @@ class MarkerBasedClassifier(BasePredictor):
         """
         response = []
         for pred in preds:
-            pred = pred.split(self.begin_marker)[-1].split(self.end_marker)[0].strip().lower()
+            pred = extract_from_tag(pred, self.begin_marker, self.end_marker).lower()
             if self.classes is not None and pred not in self.classes:
                 pred = self.classes[0]
 
