@@ -10,8 +10,7 @@ from promptolution.tasks.base_task import BaseTask
 from promptolution.utils.formatting import extract_from_tag
 from promptolution.utils.logging import get_logger
 
-if TYPE_CHECKING:
-    from promptolution.predictors.base_predictor import BasePredictor
+if TYPE_CHECKING:  # pragma: no cover
     from promptolution.utils.config import ExperimentConfig
 
 logger = get_logger(__name__)
@@ -47,8 +46,8 @@ Task:
 Input:
 {input}
 
-Response:
-{response}
+Prediction:
+{prediction}
 
 Evaluate how well the response addresses the input for the given task. Consider correctness, relevance, and completeness.
 
@@ -76,11 +75,11 @@ class JudgeTask(BaseTask):
         config: "ExperimentConfig" = None,
     ):
         """Initialize the JudgeTask."""
-        self.description = task_description
         super().__init__(
             df=df,
             x_column=x_column,
             y_column=y_column,
+            task_description=task_description,
             n_subsamples=n_subsamples,
             eval_strategy=eval_strategy,
             seed=seed,
@@ -96,12 +95,7 @@ class JudgeTask(BaseTask):
         else:
             prompt = JUDGE_PROMPT_WITHOUT_GROUND_TRUTH
 
-        prompt = (
-            prompt.replace("{task}", self.task_description)
-            .replace("{input}", x)
-            .replace("{prediction}", pred)
-            .replace("{response}", pred)
-        )
+        prompt = prompt.replace("{task}", self.task_description).replace("{input}", x).replace("{prediction}", pred)
         return prompt
 
     def _calculate_score(self, x: np.ndarray, y: np.ndarray, pred: np.ndarray) -> float:

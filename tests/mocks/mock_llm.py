@@ -23,11 +23,7 @@ class MockLLM(BaseLLM):
         """
         super().__init__(*args, **kwargs)
 
-        # Set up response list
-        if predetermined_responses is None:
-            self.responses = []
-        else:
-            self.responses = list(predetermined_responses)  # Ensure it's a list
+        self.responses = predetermined_responses or []
 
         # Add prompt tags if requested
         if add_prompt_tags:
@@ -58,9 +54,11 @@ class MockLLM(BaseLLM):
         results = []
         for i, prompt in enumerate(prompts):
             # Return the next response from the list if available
-            if self.response_index < len(self.responses):
+            if self.response_index < len(self.responses) and isinstance(self.responses, list):
                 results.append(self.responses[self.response_index])
                 self.response_index += 1
+            elif prompt in self.responses and isinstance(self.responses, dict):
+                results.append(self.responses[prompt])
             else:
                 # Default response if we've exhausted the list
                 if hasattr(self, "add_prompt_tags") and getattr(self, "add_prompt_tags"):

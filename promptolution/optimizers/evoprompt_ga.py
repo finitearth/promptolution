@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING, List
 
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from promptolution.llms.base_llm import BaseLLM
     from promptolution.predictors.base_predictor import BasePredictor
     from promptolution.tasks.base_task import BaseTask

@@ -7,6 +7,8 @@ from mocks.mock_predictor import MockPredictor
 from mocks.mock_task import MockTask
 
 from promptolution.tasks import ClassificationTask
+from promptolution.tasks.judge_tasks import JudgeTask
+from promptolution.tasks.reward_tasks import RewardTask
 from promptolution.utils import ExperimentConfig
 
 
@@ -97,4 +99,100 @@ def mock_classification_task_with_subsampling(mock_df):
         y_column="y",
         eval_strategy="subsample",
         n_subsamples=2,
+    )
+
+
+@pytest.fixture
+def simple_reward_function():
+    """A simple reward function for testing RewardTask."""
+
+    def reward_func(prediction: str) -> float:
+        print(prediction)
+        if "great" in prediction.lower() or "perfect" in prediction.lower():
+            return 1.0
+        elif "ok" in prediction.lower():
+            return 0.5
+        else:
+            return 0.0
+
+    return reward_func
+
+
+@pytest.fixture
+def mock_reward_task(mock_df, simple_reward_function):
+    """Fixture providing a RewardTask instance."""
+    return RewardTask(
+        df=mock_df,
+        reward_function=simple_reward_function,
+        x_column="x",
+        task_description="Evaluate text quality",
+        n_subsamples=2,
+        eval_strategy="full",  # Using "full" for initial clarity, can be changed in specific tests
+        seed=42,
+    )
+
+
+@pytest.fixture
+def mock_reward_task_no_x_column(simple_reward_function):
+    """Fixture providing a RewardTask instance without a meaningful x_column."""
+    # Create a DataFrame where 'x' is just a placeholder, not used for prompt construction directly
+    df_no_x_data = {
+        "id_col": list(range(5)),
+        "dummy_input": ["", "", "", "", ""],  # Or just 0, 1, 2, 3, 4
+        "some_attribute": ["A", "B", "C", "D", "E"],
+    }
+    df_no_x = pd.DataFrame(df_no_x_data)
+    return RewardTask(
+        df=df_no_x,
+        reward_function=simple_reward_function,
+        x_column="dummy_input",  # The x_column is still technically provided but contains empty strings or Nones
+        task_description="Generate and evaluate jokes without explicit input text.",
+        n_subsamples=3,
+        eval_strategy="subsample",
+        seed=42,
+    )
+
+
+@pytest.fixture
+def mock_judge_llm():
+    """Fixture providing a MockLLM configured for judge responses."""
+    # Responses containing the final_score tag
+    responses = [
+        "<final_score>5.0</final_score>",  # Perfect match
+        "<final_score>-5.0</final_score>",  # Completely incorrect
+        "<final_score>0.0</final_score>",  # Partially correct
+        "<final_score>1.0</final_score>",  # Default/Other
+        "<final_score>3.0</final_score>",  # Another specific score
+        "This response does not contain a score tag.",  # For parsing error test
+    ]
+    return MockLLM(predetermined_responses=responses)
+
+
+@pytest.fixture
+def mock_judge_task_with_y(mock_df, mock_judge_llm):
+    """Fixture providing a JudgeTask instance with y_column."""
+    return JudgeTask(
+        df=mock_df,
+        x_column="x",
+        y_column="y",
+        judge_llm=mock_judge_llm,
+        task_description="Evaluate sentiment prediction quality.",
+        n_subsamples=2,
+        eval_strategy="full",
+        seed=42,
+    )
+
+
+@pytest.fixture
+def mock_judge_task_no_y(mock_df, mock_judge_llm):
+    """Fixture providing a JudgeTask instance without y_column."""
+    # Use mock_df, but ensure y_column is explicitly None for this task instance
+    return JudgeTask(
+        df=mock_df,
+        x_column="x",
+        judge_llm=mock_judge_llm,
+        task_description="Evaluate joke quality (no ground truth).",
+        n_subsamples=2,
+        eval_strategy="subsample",  # Test with subsampling here
+        seed=42,
     )

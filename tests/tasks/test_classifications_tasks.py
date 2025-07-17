@@ -131,3 +131,84 @@ def test_blocks(mock_df):
     # Reset blocks
     task.reset_block_idx()
     assert task.block_idx == 0
+
+
+def test_classification_task_evaluate_random_block(mock_df, mock_predictor):
+    """Test the evaluate method with 'random_block' subsampling for ClassificationTask."""
+    # Create a task instance specifically for random_block testing
+    # Ensure n_subsamples creates meaningful blocks with the mock_df (3 items)
+    # If n_subsamples=1, we'd have 3 blocks. If n_subsamples=2, we'd have 2 blocks (block 0: item 0,1; block 1: item 2)
+    task = ClassificationTask(
+        df=mock_df,
+        task_description="Sentiment classification",
+        x_column="x",
+        y_column="y",
+        n_subsamples=1,  # Each item is its own block for easy verification
+        eval_strategy="random_block",
+        seed=42,
+    )
+    prompts = ["Classify sentiment:"]
+
+    # Run evaluation multiple times to ensure different blocks are selected
+    # We'll collect the specific 'x' values that were evaluated in each run
+    evaluated_x_sets = []
+    for _ in range(5):  # Run several times to hit different random blocks
+        # Reset predictor's call history for each iteration to see what was evaluated
+        mock_predictor.call_history = []
+        task.evaluate(prompts, mock_predictor)
+        # Extract the 'xs' that were passed to the predictor for this evaluation run
+        if mock_predictor.call_history:
+            evaluated_x_sets.append(tuple(mock_predictor.call_history[0]["preds"]))
+        else:
+            evaluated_x_sets.append(tuple())  # Append empty tuple if no calls (e.g., empty subsample)
+
+    # Verify that at least some different blocks were selected
+    assert len(set(evaluated_x_sets)) > 1, "Should select different random blocks across evaluations"
+
+
+def test_classification_task_evaluate_sequential_block(mock_df, mock_predictor):
+    """Test the evaluate method with 'sequential_block' subsampling for ClassificationTask."""
+    # Create a task instance specifically for sequential_block testing
+    task = ClassificationTask(
+        df=mock_df,
+        task_description="Sentiment classification",
+        x_column="x",
+        y_column="y",
+        n_subsamples=1,  # Each item is its own block
+        eval_strategy="sequential_block",
+        seed=42,
+    )
+    prompts = ["Classify sentiment:"]
+
+    # Reset block index before starting
+    task.reset_block_idx()
+    assert task.block_idx == 0
+
+    # Evaluate for each block sequentially and check evaluated 'x' values
+    expected_x_sequence = [
+        "This review is not negative, so my answer is <final_answer>positive</final_answer>",
+        "This review is not positive, so my answer is <final_answer>negative</final_answer>",
+        "This review is neither positive nor negative, so my answer is <final_answer>neutral</final_answer>",
+    ]
+
+    for i in range(task.n_blocks):
+        mock_predictor.call_history = []  # Clear history for each evaluation
+        task.evaluate(prompts, mock_predictor)
+
+        # Check the 'xs' that were evaluated
+        assert len(mock_predictor.call_history) == 1  # Predictor called once
+        assert mock_predictor.call_history[0]["preds"][0] == expected_x_sequence[i]
+
+        task.increment_block_idx()
+        # Verify block_idx wraps around if it exceeds n_blocks
+        if i < task.n_blocks - 1:
+            assert task.block_idx == i + 1
+        else:  # After the last block, it should wrap to 0
+            assert task.block_idx == 0
+
+    # Test increment_block_idx and reset_block_idx for non-block strategies raise ValueError
+    task_full_strategy = ClassificationTask(df=mock_df, x_column="x", y_column="y", eval_strategy="full")
+    with pytest.raises(ValueError, match="Block increment is only valid for block subsampling."):
+        task_full_strategy.increment_block_idx()
+    with pytest.raises(ValueError, match="Block reset is only valid for block subsampling."):
+        task_full_strategy.reset_block_idx()

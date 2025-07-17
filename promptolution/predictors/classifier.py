@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, List
 from promptolution.predictors.base_predictor import BasePredictor
 from promptolution.utils.formatting import extract_from_tag
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from promptolution.utils.config import ExperimentConfig
 
 

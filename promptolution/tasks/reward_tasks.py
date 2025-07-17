@@ -8,8 +8,7 @@ from typing import TYPE_CHECKING, Callable, Literal, Optional
 
 from promptolution.tasks.base_task import BaseTask
 
-if TYPE_CHECKING:
-    from promptolution.predictors.base_predictor import BasePredictor
+if TYPE_CHECKING:  # pragma: no cover
     from promptolution.utils.config import ExperimentConfig
 
 

@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 
 from typing import TYPE_CHECKING, List
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from promptolution.utils.config import ExperimentConfig
 
 from promptolution.optimizers.templates import DEFAULT_SYS_PROMPT

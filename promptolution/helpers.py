@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING, Callable, List, Literal
 from promptolution.tasks.judge_tasks import JudgeTask
 from promptolution.tasks.reward_tasks import RewardTask
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from promptolution.exemplar_selectors.base_exemplar_selector import BaseExemplarSelector
     from promptolution.llms.base_llm import BaseLLM
     from promptolution.optimizers.base_optimizer import BaseOptimizer

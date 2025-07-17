@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING, List
 
 from promptolution.llms.base_llm import BaseLLM
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from promptolution.utils.config import ExperimentConfig
 
 import numpy as np

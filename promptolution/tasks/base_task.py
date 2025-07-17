@@ -6,9 +6,9 @@ from abc import ABC, abstractmethod
 import numpy as np
 import pandas as pd
 
-from typing import TYPE_CHECKING, Any, Callable, List, Literal, Optional, Tuple, Union
+from typing import TYPE_CHECKING, Any, List, Literal, Optional, Tuple, Union
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from promptolution.predictors.base_predictor import BasePredictor
     from promptolution.utils.config import ExperimentConfig
 
@@ -27,7 +27,6 @@ class BaseTask(ABC):
         n_subsamples (int): Number of subsamples to use for evaluation.
         eval_strategy (Literal): Subsampling strategy ("full", "subsample", "sequential_block", "random_block", "evaluated").
         seed (int): Random seed for reproducibility.
-        metric (Optional[Callable]): The metric function used for evaluation (if applicable).
         eval_cache (dict): Cache for storing evaluation scores per datapoint.
         seq_cache (dict): Cache for storing generating sequences per datapoint.
         block_idx (int): Current block index for sequential block subsampling.
