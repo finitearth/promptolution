@@ -5,12 +5,11 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import accuracy_score
 
-from typing import TYPE_CHECKING, Any, Callable, List, Literal, Tuple, Union
+from typing import TYPE_CHECKING, Callable, Literal
 
 from promptolution.tasks.base_task import BaseTask
 
-if TYPE_CHECKING:
-    from promptolution.predictors.base_predictor import BasePredictor
+if TYPE_CHECKING:  # pragma: no cover
     from promptolution.utils.config import ExperimentConfig
 
 
@@ -66,6 +65,6 @@ class ClassificationTask(BaseTask):
         self.ys = df[self.y_column].str.lower().values  # Ensure y values are lowercase for consistent comparison
         self.classes = np.unique(self.ys)
 
-    def _calculate_score(self, x: np.ndarray, y: np.ndarray, pred: np.ndarray) -> float:
+    def _single_evaluate(self, x: np.ndarray, y: np.ndarray, pred: np.ndarray) -> float:
         """Calculate the score for a single prediction."""
         return self.metric([y], [pred])

@@ -14,35 +14,7 @@ if TYPE_CHECKING:  # pragma: no cover
 
 
 class BaseTask(ABC):
-    """Abstract base class for tasks in the promptolution library.
-
-    This class defines the interface that all concrete task implementations should follow,
-    and provides common functionalities like subsampling and caching.
-
-    Attributes:
-        df (pd.DataFrame): The input DataFrame containing the data.
-        x_column (str): Name of the column containing input texts.
-        y_column (Optional[str]): Name of the column containing labels/ground truth (if applicable).
-        description (str): Description of the task.
-        n_subsamples (int): Number of subsamples to use for evaluation.
-        eval_strategy (Literal): Subsampling strategy ("full", "subsample", "sequential_block", "random_block", "evaluated").
-        seed (int): Random seed for reproducibility.
-        eval_cache (dict): Cache for storing evaluation scores per datapoint.
-        seq_cache (dict): Cache for storing generating sequences per datapoint.
-        block_idx (int): Current block index for sequential block subsampling.
-        n_blocks (int): Total number of blocks for block subsampling.
-        rng (np.random.Generator): Random number generator.
-
-    Methods:
-        evaluate: An abstract method that should be implemented by subclasses
-                  to evaluate prompts using a given predictor.
-        subsample: Subsamples the dataset based on the specified strategy.
-        _prepare_batch: Generates (prompt, x, y) keys that require prediction.
-        _collect_results_from_cache: Collects all results for the current batch from the cache.
-        pop_datapoints: Removes a specified number or fraction of datapoints from the dataset.
-        increment_block_idx: Increments the block index for sequential block subsampling.
-        reset_block_idx: Resets the block index for sequential block subsampling.
-    """
+    """Abstract base class for tasks in the promptolution library."""
 
     def __init__(
         self,
@@ -55,7 +27,18 @@ class BaseTask(ABC):
         seed: int = 42,
         config: "ExperimentConfig" = None,
     ):
-        """Initialize the BaseTask."""
+        """Initialize the BaseTask.
+
+        Args:
+            df (pd.DataFrame): The input DataFrame containing the data.
+            x_column (str): Name of the column containing input texts.
+            y_column (Optional[str]): Name of the column containing labels/ground truth (if applicable).
+            task_description (str): Description of the task.
+            n_subsamples (int): Number of subsamples to use for evaluation.
+            eval_strategy (Literal): Subsampling strategy ("full", "subsample", "sequential_block", "random_block", "evaluated").
+            seed (int): Random seed for reproducibility.
+            config (ExperimentConfig, optional): Configuration for the task, overriding defaults.
+        """
         self.df = df
         self.x_column = x_column
         self.y_column = y_column
@@ -164,7 +147,7 @@ class BaseTask(ABC):
         return scores if not return_seq else (scores, seqs)
 
     @abstractmethod
-    def _calculate_score(self, x: np.ndarray, y: np.ndarray, pred: np.ndarray, **kwargs) -> float:
+    def _single_evaluate(self, x: np.ndarray, y: np.ndarray, pred: np.ndarray) -> float:
         """Abstract method to calculate the score for a single prediction.
 
         This method should be implemented by subclasses based on their specific evaluation logic.
@@ -203,7 +186,7 @@ class BaseTask(ABC):
 
         for i, cache_key in enumerate(batches):
             x, y, y_pred = xs_to_evaluate[i], ys_to_evaluate[i], preds[i]
-            self.eval_cache[cache_key] = self._calculate_score(x, y, y_pred)
+            self.eval_cache[cache_key] = self._single_evaluate(x, y, y_pred)
 
             if return_seq:
                 self.seq_cache[cache_key] = seqs[i]

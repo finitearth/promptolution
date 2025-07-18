@@ -38,7 +38,7 @@ Provide a score from -5 to +5 where:
 
 Return your answer encompased by <final_score></final_score>"""
 
-JUDGE_PROMPT_WITHOUT_GROUND_TRUTH = """You are an expert evaluator. Judge the correctness and appropriateness of the response, for the given task.
+JUDGE_PROMPT_WITHOUT_GROUND_TRUTH = """You are an expert evaluator. Judge the quality of the response, for the given task.
 
 Task:
 {task}
@@ -49,12 +49,12 @@ Input:
 Prediction:
 {prediction}
 
-Evaluate how well the response addresses the input for the given task. Consider correctness, relevance, and completeness.
+Evaluate how well the response addresses the input for the given task. Consider correctness, quality, relevance, completeness, and excellence of execution.
 
 Provide a score from -5 to +5 where:
 - -5: Completely wrong/inappropriate
-- 0: Partially addresses the task
-- +5: Fully correct and appropriate
+- 0: Partially addresses the task with mixed quality
+- +5: Exceptional response that brilliantly solves the task with creativity, insight, or outstanding execution that goes beyond basic correctness
 
 Return your answer encompased by <final_score></final_score>"""
 
@@ -98,7 +98,7 @@ class JudgeTask(BaseTask):
         prompt = prompt.replace("{task}", self.task_description).replace("{input}", x).replace("{prediction}", pred)
         return prompt
 
-    def _calculate_score(self, x: np.ndarray, y: np.ndarray, pred: np.ndarray) -> float:
+    def _single_evaluate(self, x: np.ndarray, y: np.ndarray, pred: np.ndarray) -> float:
         """Calculate the score for a single prediction using the LLM judge."""
         judge_prompt = self._construct_judge_prompt(x, pred, y)
         judge_response = self.judge_llm.get_response(judge_prompt)[0]
@@ -106,7 +106,7 @@ class JudgeTask(BaseTask):
         try:
             score = float(score)
         except (ValueError, TypeError):
-            logger.error(f"Failed to parse score from judge response: {judge_response}. Using 0.0 as default.")
+            logger.error(f"⚠️ Failed to parse score from judge response, using 0 as default:\n'{judge_response}'")
             score = 0.0
 
         return score

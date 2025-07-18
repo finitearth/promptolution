@@ -16,7 +16,7 @@ class RewardTask(BaseTask):
     """A task that evaluates a predictor using a reward function.
 
     This task takes a DataFrame, a column name for input data, and a reward function.
-    The reward function should take a prediction and its corresponding ground truth (if any), and return a reward.
+    The reward function should take a prediction and return a reward.
     """
 
     def __init__(
@@ -30,7 +30,18 @@ class RewardTask(BaseTask):
         seed: int = 42,
         config: "ExperimentConfig" = None,
     ):
-        """Initialize the RewardTask."""
+        """Initialize the RewardTask.
+
+        Args:
+            df (pd.DataFrame): Input DataFrame containing the data.
+            reward_function (Callable): Function that takes a prediction and returns a reward score.
+            x_column (str, optional): Name of the column containing input texts. Defaults to "x".
+            task_description (str, optional): Description of the task.
+            n_subsamples (int, optional): Number of subsamples to use. Defaults to 30.
+            eval_strategy (str, optional): Subsampling strategy to use. Defaults to "full".
+            seed (int, optional): Random seed for reproducibility. Defaults to 42.
+            config (ExperimentConfig, optional): Configuration for the task, overriding defaults.
+        """
         self.reward_function = reward_function
         super().__init__(
             df=df,
@@ -42,6 +53,6 @@ class RewardTask(BaseTask):
             config=config,
         )
 
-    def _calculate_score(self, x: np.ndarray, _: np.ndarray, pred: np.ndarray, **kwargs) -> float:
+    def _single_evaluate(self, x: np.ndarray, y: np.ndarray, pred: np.ndarray) -> float:
         """Calculate the score for a single reward prediction using the reward function."""
         return self.reward_function(pred)

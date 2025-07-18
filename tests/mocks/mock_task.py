@@ -47,7 +47,7 @@ class MockTask(BaseTask):
         self.increment_block_idx = MagicMock()
         self.reset_block_idx = MagicMock()
 
-    def _calculate_score(self, x: np.ndarray, y: np.ndarray, pred: np.ndarray, **kwargs) -> float:
+    def _single_evaluate(self, x: np.ndarray, y: np.ndarray, pred: np.ndarray, **kwargs) -> float:
         """Calculate the score for a single prediction.
 
         Args:
