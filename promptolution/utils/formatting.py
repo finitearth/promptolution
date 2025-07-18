@@ -1,7 +1,7 @@
 """Utils for formatting prompts and outputs."""
+from typing import Union, List
 
-
-def extract_from_tag(text: str, start_tag: str, end_tag: str) -> str:
+def extract_from_tag(text: str, start_tag: str, end_tag: str) -> Union[List[str], str]:
     """Extracts content from a string between specified start and end tags."""
     was_list = True
     if isinstance(text, str):
