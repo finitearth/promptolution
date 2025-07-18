@@ -16,7 +16,6 @@ def test_reward_task_initialization_no_x_column(mock_reward_task_no_x_column, si
     assert mock_reward_task_no_x_column.x_column == "dummy_input"
     assert not mock_reward_task_no_x_column.has_y
     assert len(mock_reward_task_no_x_column.xs) == len(mock_reward_task_no_x_column.df)
-    # The 'dummy_input' column contains empty strings, so xs should reflect that
     assert all(x == "" for x in mock_reward_task_no_x_column.xs)
     assert np.all(mock_reward_task_no_x_column.ys == None)  # noqa: E711
 
@@ -27,10 +26,9 @@ def test_reward_task_evaluate_with_return_seq(mock_reward_task, mock_predictor):
 
     scores, seqs = mock_reward_task.evaluate(prompts, mock_predictor, return_seq=True, return_agg_scores=False)
 
-    assert scores.shape == (1, len(mock_reward_task.xs))  # One prompt, scores for all X
+    assert scores.shape == (1, len(mock_reward_task.xs))
     assert len(seqs) == 1
-    assert len(seqs[0]) == len(mock_reward_task.xs)  # Sequences for each datapoint
+    assert len(seqs[0]) == len(mock_reward_task.xs)
 
-    # Check that sequences contain expected elements
     for seq in seqs[0]:
         assert any(str(x_val) in seq for x_val in mock_reward_task.xs)
