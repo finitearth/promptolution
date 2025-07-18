@@ -7,8 +7,7 @@ def test_create_prompt_variation_single_prompt(mock_meta_llm):
     """Test create_prompt_variation with a single string prompt and default meta-prompt."""
     original_prompt = "Analyze the sentiment of the following text."
 
-    # Configure mock_meta_llm to return a specific response for this test
-    mock_meta_llm.call_history = []  # Reset call history
+    mock_meta_llm.call_history = []
 
     varied_prompts = create_prompt_variation(original_prompt, mock_meta_llm)
 

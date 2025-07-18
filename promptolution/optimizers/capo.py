@@ -86,6 +86,7 @@ class CAPO(BaseOptimizer):
         alpha: float = 0.2,
         length_penalty: float = 0.05,
         check_fs_accuracy: bool = True,
+        create_fs_reasoning: bool = True,
         df_few_shots: pd.DataFrame = None,
         crossover_template: str = None,
         mutation_template: str = None,
@@ -108,6 +109,8 @@ class CAPO(BaseOptimizer):
             length_penalty (float): Penalty factor for prompt length.
             check_fs_accuracy (bool): Whether to check the accuracy of few-shot examples before appending them to the prompt.
                 In cases such as reward tasks, this can be set to False, as no ground truth is available. Default is True.
+            create_fs_reasoning (bool): Whether to create reasoning for few-shot examples using the downstream model,
+                instead of simply using input-output pairs from the few shots DataFrame. Default is True.
             df_few_shots (pd.DataFrame): DataFrame containing few-shot examples. If None, will pop 10% of datapoints from task.
             crossover_template (str, optional): Template for crossover instructions.
             mutation_template (str, optional): Template for mutation instructions.
@@ -130,6 +133,7 @@ class CAPO(BaseOptimizer):
         self.token_counter = get_token_counter(self.downstream_llm)
 
         self.check_fs_accuracy = check_fs_accuracy
+        self.create_fs_reasoning = create_fs_reasoning
 
         self.scores = np.empty(0)
         super().__init__(predictor, task, initial_prompts, callbacks, config)
@@ -179,7 +183,11 @@ class CAPO(BaseOptimizer):
             )
             for i, t in zip(sample_inputs, sample_targets)
         ]
-        # Select partition of the examples to generate reasoning from downstream model
+
+        if not self.create_fs_reasoning:
+            # If we do not create reasoning, return the few-shot examples directly
+            return few_shots
+
         preds, seqs = self.predictor.predict(
             [instruction] * num_examples,
             sample_inputs,
