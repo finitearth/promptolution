@@ -85,6 +85,7 @@ class CAPO(BaseOptimizer):
         test_statistic: "TestStatistics" = "paired_t_test",
         alpha: float = 0.2,
         length_penalty: float = 0.05,
+        check_fs_accuracy: bool = True,
         df_few_shots: pd.DataFrame = None,
         crossover_template: str = None,
         mutation_template: str = None,
@@ -105,6 +106,8 @@ class CAPO(BaseOptimizer):
             test_statistic (TestStatistics): Statistical test to compare prompt performance. Default is "paired_t_test".
             alpha (float): Significance level for the statistical test.
             length_penalty (float): Penalty factor for prompt length.
+            check_fs_accuracy (bool): Whether to check the accuracy of few-shot examples before appending them to the prompt.
+                In cases such as reward tasks, this can be set to False, as no ground truth is available. Default is True.
             df_few_shots (pd.DataFrame): DataFrame containing few-shot examples. If None, will pop 10% of datapoints from task.
             crossover_template (str, optional): Template for crossover instructions.
             mutation_template (str, optional): Template for mutation instructions.
@@ -125,6 +128,8 @@ class CAPO(BaseOptimizer):
 
         self.length_penalty = length_penalty
         self.token_counter = get_token_counter(self.downstream_llm)
+
+        self.check_fs_accuracy = check_fs_accuracy
 
         self.scores = np.empty(0)
         super().__init__(predictor, task, initial_prompts, callbacks, config)
@@ -186,7 +191,7 @@ class CAPO(BaseOptimizer):
             # Process and clean up the generated sequences
             seqs[j] = seqs[j].replace(sample_inputs[j], "").strip()
             # Check if the prediction is correct and add reasoning if so
-            if preds[j] == sample_targets[j]:
+            if preds[j] == sample_targets[j] or not self.check_fs_accuracy:
                 few_shots[j] = CAPO_FEWSHOT_TEMPLATE.replace("<input>", sample_inputs[j]).replace("<output>", seqs[j])
 
         return few_shots
