@@ -47,10 +47,10 @@ def test_judge_task_construct_judge_prompt_without_ground_truth(mock_judge_task_
     assert "<final_score>" in prompt
 
 
-def test_judge_task_calculate_score_successful_parse(mock_judge_task_with_y, mock_judge_llm):
-    """Test _calculate_score correctly parses a valid score from judge LLM response."""
+def test_judge_task_single_evaluate_successful_parse(mock_judge_task_with_y, mock_judge_llm):
+    """Test _single_evaluate correctly parses a valid score from judge LLM response."""
     # Ensure mock_judge_llm provides a specific response for this direct test
-    score = mock_judge_task_with_y._calculate_score(x="any", y="any", pred="any")
+    score = mock_judge_task_with_y._single_evaluate(x="any", y="any", pred="any")
     assert score == 5.0
 
 
