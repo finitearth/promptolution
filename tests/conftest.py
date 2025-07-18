@@ -107,7 +107,6 @@ def simple_reward_function():
     """A simple reward function for testing RewardTask."""
 
     def reward_func(prediction: str) -> float:
-        print(prediction)
         if "great" in prediction.lower() or "perfect" in prediction.lower():
             return 1.0
         elif "ok" in prediction.lower():

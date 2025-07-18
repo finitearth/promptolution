@@ -51,7 +51,6 @@ class MockPredictor(BasePredictor):
 
         results = []
         for pred in preds:
-            print(pred)
             if pred in self.predetermined_predictions:
                 results.append(self.predetermined_predictions[pred])
             else:

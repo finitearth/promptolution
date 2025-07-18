@@ -172,7 +172,6 @@ def test_crossover(mock_meta_llm, mock_predictor, initial_prompts, mock_task, mo
     offsprings = optimizer._crossover(
         [CAPOPrompt("Instruction 1", ["Example 1"]), CAPOPrompt("Instruction 2", ["Example 2"])]
     )
-    print(offsprings)
     assert len(offsprings) == 5
 
 
