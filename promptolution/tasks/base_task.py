@@ -156,8 +156,8 @@ class BaseTask(ABC):
             return scores_arr
 
     @abstractmethod
-    def _single_evaluate(self, x: str, y: str, pred: str) -> float:
-        """Abstract method to calculate the score for a single prediction.
+    def _evaluate(self, xs: List[str], ys: List[str], preds: List[str]) -> List[float]:
+        """Abstract method to calculate the score for a predictions.
 
         This method should be implemented by subclasses based on their specific evaluation logic.
         """
@@ -212,7 +212,6 @@ class BaseTask(ABC):
     ) -> Tuple[np.ndarray, np.ndarray]:
         ...
 
-    # The actual implementation remains the same
     def evaluate(
         self,
         prompts: Union[str, List[str]],
@@ -226,25 +225,32 @@ class BaseTask(ABC):
 
         This method orchestrates subsampling, prediction, caching, and result collection.
         """
+        seqs: List[str] = []
+
         prompts = [prompts] if isinstance(prompts, str) else prompts
         eval_strategy = eval_strategy or self.eval_strategy
         xs, ys = self.subsample(eval_strategy=eval_strategy)
         batches = self._prepare_batch(prompts, xs, ys, eval_strategy=eval_strategy)
         (prompts_to_evaluate, xs_to_evaluate, ys_to_evaluate) = ([], [], []) if not batches else zip(*batches)
+
         if prompts_to_evaluate:
-            preds = predictor.predict(
+            preds_seqs = predictor.predict(
                 prompts=list(prompts_to_evaluate),
-                xs=np.array(xs_to_evaluate),
+                xs=list(xs_to_evaluate),
                 system_prompts=system_prompts,
                 return_seq=return_seq,
             )
         else:
-            preds = (np.array([]), np.array([])) if return_seq else np.array([])
+            preds_seqs = ([], []) if return_seq else []
+
         if return_seq:
-            preds, seqs = preds if isinstance(preds, tuple) else (preds, np.array([]))
+            preds, seqs = preds_seqs if isinstance(preds_seqs, tuple) else (preds_seqs, [])
+        else:
+            preds = preds_seqs
+
+        scores = self._evaluate(list(xs_to_evaluate), list(ys_to_evaluate), list(preds))
         for i, cache_key in enumerate(batches):
-            x, y, y_pred = xs_to_evaluate[i], ys_to_evaluate[i], preds[i]
-            self.eval_cache[cache_key] = self._single_evaluate(str(x), str(y), str(y_pred))
+            self.eval_cache[cache_key] = scores[i]
             if return_seq:
                 self.seq_cache[cache_key] = seqs[i]
 

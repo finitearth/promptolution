@@ -191,7 +191,7 @@ class CAPO(BaseOptimizer):
 
         preds, seqs = self.predictor.predict(
             [instruction] * num_examples,
-            sample_inputs,
+            list(sample_inputs),
             return_seq=True,
         )
 

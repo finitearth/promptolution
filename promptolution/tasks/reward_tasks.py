@@ -4,7 +4,7 @@
 import numpy as np
 import pandas as pd
 
-from typing import TYPE_CHECKING, Callable, Literal, Optional
+from typing import TYPE_CHECKING, Callable, List, Literal, Optional, Union
 
 from promptolution.tasks.base_task import BaseTask
 
@@ -53,6 +53,9 @@ class RewardTask(BaseTask):
             config=config,
         )
 
-    def _single_evaluate(self, x: str, y: str, pred: str) -> float:
+    def _evaluate(
+        self, xs: Union[List[str], np.ndarray], ys: Union[List[str], np.ndarray], preds: Union[List[str], np.ndarray]
+    ) -> List[float]:
         """Calculate the score for a single reward prediction using the reward function."""
-        return self.reward_function(pred)
+        rewards = [self.reward_function(pred) for pred in preds]
+        return rewards

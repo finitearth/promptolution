@@ -34,7 +34,7 @@ class BasePredictor(ABC):
     def predict(
         self,
         prompts: Union[str, List[str]],
-        xs: np.ndarray[Any, Any],
+        xs: List[str],
         system_prompts: Optional[Union[str, List[str]]] = None,
         return_seq: bool = False,
     ) -> Union[np.ndarray[Any, Any], Tuple[np.ndarray[Any, Any], np.ndarray[Any, Any]]]:

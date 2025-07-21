@@ -3,7 +3,7 @@
 import numpy as np
 import pandas as pd
 
-from typing import TYPE_CHECKING, Literal, Optional
+from typing import TYPE_CHECKING, List, Literal, Optional, Union
 
 from promptolution.llms.base_llm import BaseLLM
 from promptolution.tasks.base_task import BaseTask
@@ -72,9 +72,18 @@ class JudgeTask(BaseTask):
         n_subsamples: int = 30,
         eval_strategy: Literal["full", "subsample", "sequential_block", "random_block"] = "full",
         seed: int = 42,
-        config: Optional["ExperimentConfig"] = None,
-    ) -> None:
+        judge_prompt: Optional[str] = None,
+        min_score: float = -5.0,
+        max_score: float = 5.0,
+        config: "ExperimentConfig" = None,
+    ):
         """Initialize the JudgeTask."""
+        if judge_prompt is None:
+            judge_prompt = JUDGE_PROMPT_WITH_GROUND_TRUTH if y_column else JUDGE_PROMPT_WITHOUT_GROUND_TRUTH
+        self.judge_prompt = judge_prompt
+        self.min_score = min_score
+        self.max_score = max_score
+
         super().__init__(
             df=df,
             x_column=x_column,
@@ -91,24 +100,37 @@ class JudgeTask(BaseTask):
     def _construct_judge_prompt(self, x: str, pred: str, y: Optional[str] = None) -> str:
         """Constructs the judge prompt based on whether ground truth is available."""
         if y is not None:
-            prompt = JUDGE_PROMPT_WITH_GROUND_TRUTH.replace("{ground_truth}", str(y))
+            prompt = self.judge_prompt.replace("{ground_truth}", str(y))
         else:
-            prompt = JUDGE_PROMPT_WITHOUT_GROUND_TRUTH
+            prompt = self.judge_prompt
 
         task_description = self.task_description or ""
         prompt = prompt.replace("{task}", task_description).replace("{input}", x).replace("{prediction}", pred)
         return prompt
 
-    def _single_evaluate(self, x: str, y: str, pred: str) -> float:
+    def _evaluate(
+        self, xs: Union[List[str], np.ndarray], ys: Union[List[str], np.ndarray], preds: Union[List[str], np.ndarray]
+    ) -> List[float]:
         """Calculate the score for a single prediction using the LLM judge."""
-        judge_prompt = self._construct_judge_prompt(x, pred, y)
-        judge_response = self.judge_llm.get_response(judge_prompt)[0]
-        score_str = extract_from_tag(judge_response, "<final_score>", "</final_score>")
-        score: float
-        try:
-            score = float(score_str)
-        except (ValueError, TypeError):
-            logger.error(f"⚠️ Failed to parse score from judge response, using 0 as default:\n'{judge_response}'")
-            score = 0.0
+        prompts: List[str] = []
+        for x, y, pred in zip(xs, ys, preds):
+            judge_prompt = self._construct_judge_prompt(x, pred, y)
+            prompts.append(judge_prompt)
+        judge_responses = self.judge_llm.get_response(prompts)
+        scores_str = extract_from_tag(judge_responses, "<final_score>", "</final_score>")
+        scores = []
+        for score_str in scores_str:
+            try:
+                # only numeric chars, - or . are allowed
+                score_str = "".join(filter(lambda c: c.isdigit() or c in "-.", score_str))
+                score = float(score_str)
+                # normalize from [-5, +5] to [0, 1]
+                score = (score + self.min_score) / (self.max_score - self.min_score)
+                score = max(0.0, min(1.0, score))
+            except ValueError:
+                logger.warning(f"Failed to parse score '{score}' as float. Defaulting to 0.0.")
+                score = 0.0
 
-        return score
+            scores.append(score)
+
+        return scores
