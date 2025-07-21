@@ -1,6 +1,6 @@
 """Random exemplar selector."""
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, List, Optional
 
 from promptolution.exemplar_selectors.base_exemplar_selector import BaseExemplarSelector
 
@@ -18,8 +18,12 @@ class RandomSelector(BaseExemplarSelector):
     """
 
     def __init__(
-        self, task: "BaseTask", predictor: "BasePredictor", desired_score: int = 1, config: "ExperimentConfig" = None
-    ):
+        self,
+        task: "BaseTask",
+        predictor: "BasePredictor",
+        desired_score: int = 1,
+        config: Optional["ExperimentConfig"] = None,
+    ) -> None:
         """Initialize the RandomSelector.
 
         Args:
@@ -44,11 +48,9 @@ class RandomSelector(BaseExemplarSelector):
         Returns:
             str: A new prompt that includes the original prompt and the selected exemplars.
         """
-        examples = []
+        examples: List[str] = []
         while len(examples) < n_examples:
-            score, seq = self.task.evaluate(prompt, self.predictor, n_samples=1, return_seq=True)
-            if score == self.desired_score:
-                examples.append(seq[0])
-        prompt = "\n\n".join([prompt] + examples) + "\n\n"
-
-        return prompt
+            score, seq = self.task.evaluate(prompt, self.predictor, eval_strategy="subsample", return_seq=True)
+            if score.item() == self.desired_score:
+                examples.append(seq.item())
+        return "\n\n".join([prompt] + examples) + "\n\n"

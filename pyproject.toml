@@ -29,6 +29,7 @@ flake8 = "^7.1.0"
 isort = "^5.13.2"
 pre-commit = "^3.7.1"
 ipykernel = "^6.29.5"
+mypy = "^1.8.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^8.3.5"
@@ -62,3 +63,11 @@ lines_between_sections = 1
 
 [tool.pydocstyle]
 convention = "google"
+
+[tool.mypy]
+ignore_missing_imports = true
+disable_error_code = ["call-overload", "assignment", "overload-overlap"]
+
+[[tool.mypy.overrides]]
+module = "transformers.*"
+ignore_errors = true

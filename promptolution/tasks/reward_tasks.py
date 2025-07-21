@@ -22,14 +22,14 @@ class RewardTask(BaseTask):
     def __init__(
         self,
         df: pd.DataFrame,
-        reward_function: Callable,
+        reward_function: Callable[[str], float],
         x_column: str = "x",
         task_description: Optional[str] = None,
         n_subsamples: int = 30,
         eval_strategy: Literal["full", "subsample", "sequential_block", "random_block"] = "full",
         seed: int = 42,
-        config: "ExperimentConfig" = None,
-    ):
+        config: Optional["ExperimentConfig"] = None,
+    ) -> None:
         """Initialize the RewardTask.
 
         Args:
@@ -53,6 +53,6 @@ class RewardTask(BaseTask):
             config=config,
         )
 
-    def _single_evaluate(self, x: np.ndarray, y: np.ndarray, pred: np.ndarray) -> float:
+    def _single_evaluate(self, x: str, y: str, pred: str) -> float:
         """Calculate the score for a single reward prediction using the reward function."""
         return self.reward_function(pred)

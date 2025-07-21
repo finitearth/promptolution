@@ -72,8 +72,8 @@ class JudgeTask(BaseTask):
         n_subsamples: int = 30,
         eval_strategy: Literal["full", "subsample", "sequential_block", "random_block"] = "full",
         seed: int = 42,
-        config: "ExperimentConfig" = None,
-    ):
+        config: Optional["ExperimentConfig"] = None,
+    ) -> None:
         """Initialize the JudgeTask."""
         super().__init__(
             df=df,
@@ -95,16 +95,18 @@ class JudgeTask(BaseTask):
         else:
             prompt = JUDGE_PROMPT_WITHOUT_GROUND_TRUTH
 
-        prompt = prompt.replace("{task}", self.task_description).replace("{input}", x).replace("{prediction}", pred)
+        task_description = self.task_description or ""
+        prompt = prompt.replace("{task}", task_description).replace("{input}", x).replace("{prediction}", pred)
         return prompt
 
-    def _single_evaluate(self, x: np.ndarray, y: np.ndarray, pred: np.ndarray) -> float:
+    def _single_evaluate(self, x: str, y: str, pred: str) -> float:
         """Calculate the score for a single prediction using the LLM judge."""
         judge_prompt = self._construct_judge_prompt(x, pred, y)
         judge_response = self.judge_llm.get_response(judge_prompt)[0]
-        score = extract_from_tag(judge_response, "<final_score>", "</final_score>")
+        score_str = extract_from_tag(judge_response, "<final_score>", "</final_score>")
+        score: float
         try:
-            score = float(score)
+            score = float(score_str)
         except (ValueError, TypeError):
             logger.error(f"⚠️ Failed to parse score from judge response, using 0 as default:\n'{judge_response}'")
             score = 0.0

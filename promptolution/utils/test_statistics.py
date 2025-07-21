@@ -6,12 +6,12 @@ Contains paired t-test functionality to compare prompt performance and determine
 import numpy as np
 from scipy.stats import ttest_rel
 
-from typing import Literal
+from typing import Any, Callable, Literal
 
 TestStatistics = Literal["paired_t_test"]
 
 
-def get_test_statistic_func(name: TestStatistics) -> callable:
+def get_test_statistic_func(name: TestStatistics) -> Callable[..., bool]:
     """
     Get the test statistic function based on the name provided.
 
@@ -28,8 +28,8 @@ def get_test_statistic_func(name: TestStatistics) -> callable:
 
 
 def paired_t_test(
-    scores_a: np.ndarray,
-    scores_b: np.ndarray,
+    scores_a: np.ndarray[Any, Any],
+    scores_b: np.ndarray[Any, Any],
     alpha: float = 0.05,
 ) -> bool:
     """
@@ -52,4 +52,4 @@ def paired_t_test(
 
     result = p_value < alpha
 
-    return result
+    return bool(result)

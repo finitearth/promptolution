@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import accuracy_score
 
-from typing import TYPE_CHECKING, Callable, Literal
+from typing import TYPE_CHECKING, Any, Callable, Literal, Optional
 
 from promptolution.tasks.base_task import BaseTask
 
@@ -23,15 +23,15 @@ class ClassificationTask(BaseTask):
     def __init__(
         self,
         df: pd.DataFrame,
-        task_description: str = None,
+        task_description: Optional[str] = None,
         x_column: str = "x",
         y_column: str = "y",
         n_subsamples: int = 30,
         eval_strategy: Literal["full", "subsample", "sequential_block", "random_block"] = "full",
         seed: int = 42,
-        metric: Callable = accuracy_score,
-        config: "ExperimentConfig" = None,
-    ):
+        metric: Callable[[Any, Any], float] = accuracy_score,
+        config: Optional["ExperimentConfig"] = None,
+    ) -> None:
         """Initialize the ClassificationTask from a pandas DataFrame.
 
         Args:
@@ -62,9 +62,11 @@ class ClassificationTask(BaseTask):
             seed=seed,
             config=config,
         )
-        self.ys = df[self.y_column].str.lower().values  # Ensure y values are lowercase for consistent comparison
+        self.ys: np.ndarray[Any, Any] = (
+            df[self.y_column].str.lower().values.astype(str)
+        )  # Ensure y values are lowercase for consistent comparison
         self.classes = np.unique(self.ys)
 
-    def _single_evaluate(self, x: np.ndarray, y: np.ndarray, pred: np.ndarray) -> float:
+    def _single_evaluate(self, x: str, y: str, pred: str) -> float:
         """Calculate the score for a single prediction."""
-        return self.metric([y], [pred])
+        return float(self.metric([y], [pred]))

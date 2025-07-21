@@ -3,7 +3,7 @@
 
 import numpy as np
 
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING, Any, List, Optional
 
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 
@@ -50,11 +50,11 @@ class EvoPromptGA(BaseOptimizer):
         task: "BaseTask",
         prompt_template: str,
         meta_llm: "BaseLLM",
-        initial_prompts: List[str] = None,
+        initial_prompts: Optional[List[str]] = None,
         selection_mode: str = "wheel",
-        callbacks: List["BaseCallback"] = None,
-        config: "ExperimentConfig" = None,
-    ):
+        callbacks: Optional[List["BaseCallback"]] = None,
+        config: Optional["ExperimentConfig"] = None,
+    ) -> None:
         """Initialize the EvoPromptGA optimizer."""
         self.prompt_template = prompt_template
         self.meta_llm = meta_llm
@@ -64,7 +64,7 @@ class EvoPromptGA(BaseOptimizer):
         )
         assert self.selection_mode in ["random", "wheel", "tour"], "Invalid selection mode."
 
-    def _pre_optimization_loop(self):
+    def _pre_optimization_loop(self) -> None:
         self.scores = self.task.evaluate(self.prompts, self.predictor, return_agg_scores=True).tolist()
         # sort prompts by score
         self.prompts = [prompt for _, prompt in sorted(zip(self.scores, self.prompts), reverse=True)]
@@ -74,9 +74,13 @@ class EvoPromptGA(BaseOptimizer):
         new_prompts = self._crossover(self.prompts, self.scores)
         prompts = self.prompts + new_prompts
 
-        new_scores = self.task.evaluate(new_prompts, self.predictor, return_agg_scores=True).tolist()
+        evaluation_result = self.task.evaluate(new_prompts, self.predictor, return_agg_scores=True)
+        if isinstance(evaluation_result, (np.ndarray, list)):
+            new_scores = np.array(evaluation_result)
+        else:
+            new_scores = np.array([float(evaluation_result)])
 
-        scores = self.scores + new_scores
+        scores = np.concatenate([np.array(self.scores), new_scores])
 
         # sort scores and prompts
         self.prompts = [prompt for _, prompt in sorted(zip(scores, prompts), reverse=True)][: len(self.prompts)]
@@ -84,7 +88,7 @@ class EvoPromptGA(BaseOptimizer):
 
         return self.prompts
 
-    def _crossover(self, prompts, scores) -> str:
+    def _crossover(self, prompts: List[str], scores: List[float]) -> List[str]:
         """Perform crossover operation to generate new child prompts.
 
         This method selects parent prompts based on the chosen selection mode,

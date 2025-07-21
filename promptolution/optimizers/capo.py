@@ -6,11 +6,12 @@ from itertools import compress
 import numpy as np
 import pandas as pd
 
-from typing import TYPE_CHECKING, Callable, List, Tuple
+from typing import TYPE_CHECKING, Any, List, Optional, Tuple
 
 from promptolution.utils.formatting import extract_from_tag
 
 if TYPE_CHECKING:  # pragma: no cover
+    from promptolution.utils.callbacks import BaseCallback
     from promptolution.llms.base_llm import BaseLLM
     from promptolution.predictors.base_predictor import BasePredictor
     from promptolution.tasks.base_task import BaseTask
@@ -34,7 +35,7 @@ logger = get_logger(__name__)
 class CAPOPrompt:
     """Represents a prompt consisting of an instruction and few-shot examples."""
 
-    def __init__(self, instruction_text: str, few_shots: List[str]):
+    def __init__(self, instruction_text: str, few_shots: List[str]) -> None:
         """Initializes the Prompt with an instruction and associated examples.
 
         Args:
@@ -59,7 +60,7 @@ class CAPOPrompt:
         )
         return prompt
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Returns the string representation of the prompt."""
         return self.construct_prompt()
 
@@ -78,7 +79,7 @@ class CAPO(BaseOptimizer):
         predictor: "BasePredictor",
         task: "BaseTask",
         meta_llm: "BaseLLM",
-        initial_prompts: List[str] = None,
+        initial_prompts: Optional[List[str]] = None,
         crossovers_per_iter: int = 4,
         upper_shots: int = 5,
         max_n_blocks_eval: int = 10,
@@ -87,12 +88,12 @@ class CAPO(BaseOptimizer):
         length_penalty: float = 0.05,
         check_fs_accuracy: bool = True,
         create_fs_reasoning: bool = True,
-        df_few_shots: pd.DataFrame = None,
-        crossover_template: str = None,
-        mutation_template: str = None,
-        callbacks: List[Callable] = [],
-        config: "ExperimentConfig" = None,
-    ):
+        df_few_shots: Optional[pd.DataFrame] = None,
+        crossover_template: Optional[str] = None,
+        mutation_template: Optional[str] = None,
+        callbacks: Optional[List["BaseCallback"]] = None,
+        config: Optional["ExperimentConfig"] = None,
+    ) -> None:
         """Initializes the CAPOptimizer with various parameters for prompt evolution.
 
         Args:
@@ -135,7 +136,7 @@ class CAPO(BaseOptimizer):
         self.check_fs_accuracy = check_fs_accuracy
         self.create_fs_reasoning = create_fs_reasoning
 
-        self.scores = np.empty(0)
+        self.scores: List[float] = []
         super().__init__(predictor, task, initial_prompts, callbacks, config)
         self.df_few_shots = df_few_shots if df_few_shots is not None else task.pop_datapoints(frac=0.1)
         if self.max_n_blocks_eval > self.task.n_blocks:
@@ -170,12 +171,12 @@ class CAPO(BaseOptimizer):
 
         return population
 
-    def _create_few_shot_examples(self, instruction: str, num_examples: int) -> List[Tuple[str, str]]:
+    def _create_few_shot_examples(self, instruction: str, num_examples: int) -> List[str]:
         if num_examples == 0:
             return []
 
         few_shot_samples = self.df_few_shots.sample(num_examples, replace=False)
-        sample_inputs = few_shot_samples[self.task.x_column].values
+        sample_inputs = few_shot_samples[self.task.x_column].values.astype(str)
         sample_targets = few_shot_samples[self.task.y_column].values
         few_shots = [
             CAPO_FEWSHOT_TEMPLATE.replace("<input>", i).replace(
@@ -226,7 +227,7 @@ class CAPO(BaseOptimizer):
             crossover_prompts.append(crossover_prompt)
             combined_few_shots = mother.few_shots + father.few_shots
             num_few_shots = (len(mother.few_shots) + len(father.few_shots)) // 2
-            offspring_few_shot = random.sample(combined_few_shots, num_few_shots)
+            offspring_few_shot = random.sample(combined_few_shots, num_few_shots) if combined_few_shots else []
             offspring_few_shots.append(offspring_few_shot)
 
         child_instructions = self.meta_llm.get_response(crossover_prompts)
@@ -258,10 +259,11 @@ class CAPO(BaseOptimizer):
             new_instruction = extract_from_tag(new_instruction, "<prompt>", "</prompt>")
             p = random.random()
 
+            new_few_shots: List[str]
             if p < 1 / 3 and len(prompt.few_shots) < self.upper_shots:  # add a random few shot
                 new_few_shot = self._create_few_shot_examples(new_instruction, 1)
                 new_few_shots = prompt.few_shots + new_few_shot
-            if 1 / 3 <= p < 2 / 3 and len(prompt.few_shots) > 0:  # remove a random few shot
+            elif 1 / 3 <= p < 2 / 3 and len(prompt.few_shots) > 0:  # remove a random few shot
                 new_few_shots = random.sample(prompt.few_shots, len(prompt.few_shots) - 1)
             else:  # do not change few shots, but shuffle
                 new_few_shots = prompt.few_shots
@@ -282,7 +284,7 @@ class CAPO(BaseOptimizer):
             List[Prompt]: List of surviving prompts after racing.
         """
         self.task.reset_block_idx()
-        block_scores = []
+        block_scores: List[np.ndarray[Any, Any]] = []
         i = 0
         while len(candidates) > k and i < self.max_n_blocks_eval:
             # new_scores shape: (n_candidates, n_samples)
@@ -294,7 +296,7 @@ class CAPO(BaseOptimizer):
             prompt_lengths = np.array([self.token_counter(c.construct_prompt()) for c in candidates])
             rel_prompt_lengths = prompt_lengths / self.max_prompt_length
 
-            new_scores = new_scores - self.length_penalty * rel_prompt_lengths[:, None]
+            new_scores = (new_scores - self.length_penalty * rel_prompt_lengths[:, np.newaxis]).astype(float)
             block_scores.append(new_scores)
             scores = np.concatenate(block_scores, axis=1)
 
@@ -307,8 +309,9 @@ class CAPO(BaseOptimizer):
             n_better = np.sum(comparison_matrix, axis=1)
 
             # Create mask for survivors and filter candidates
-            candidates = list(compress(candidates, n_better < k))
-            block_scores = [bs[n_better < k] for bs in block_scores]
+            survivor_mask = n_better < k
+            candidates = list(compress(candidates, survivor_mask))
+            block_scores = [bs[survivor_mask] for bs in block_scores]
 
             i += 1
             self.task.increment_block_idx()
@@ -318,14 +321,14 @@ class CAPO(BaseOptimizer):
         )
         order = np.argsort(-avg_scores)[:k]
         candidates = [candidates[i] for i in order]
-        self.scores = avg_scores[order]
+        self.scores = avg_scores[order].tolist()
 
         return candidates
 
-    def _pre_optimization_loop(self):
+    def _pre_optimization_loop(self) -> None:
         self.prompt_objects = self._initialize_population(self.prompts)
         self.prompts = [p.construct_prompt() for p in self.prompt_objects]
-        self.max_prompt_length = max(self.token_counter(p) for p in self.prompts)
+        self.max_prompt_length = max(self.token_counter(p) for p in self.prompts) if self.prompts else 1
         self.task.reset_block_idx()
 
     def _step(self) -> List[str]:

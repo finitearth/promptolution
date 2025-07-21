@@ -10,7 +10,7 @@ class RandomSearchSelector(BaseExemplarSelector):
     evaluates their performance, and selects the best performing set.
     """
 
-    def select_exemplars(self, prompt, n_examples: int = 5, n_trials: int = 5):
+    def select_exemplars(self, prompt: str, n_trials: int = 5) -> str:
         """Select exemplars using a random search strategy.
 
         This method generates multiple sets of random examples, evaluates their performance
@@ -18,20 +18,20 @@ class RandomSearchSelector(BaseExemplarSelector):
 
         Args:
             prompt (str): The input prompt to base the exemplar selection on.
-            n_examples (int, optional): The number of exemplars to select in each trial. Defaults to 5.
             n_trials (int, optional): The number of random trials to perform. Defaults to 5.
 
         Returns:
             str: The best performing prompt, which includes the original prompt and the selected exemplars.
         """
-        best_score = 0
+        best_score = 0.0
         best_prompt = prompt
 
         for _ in range(n_trials):
-            _, seq = self.task.evaluate(prompt, self.predictor, n_samples=n_examples, subsample=True, return_seq=True)
-            prompt_with_examples = "\n\n".join([prompt] + seq) + "\n\n"
+            _, seq = self.task.evaluate(prompt, self.predictor, eval_strategy="subsample", return_seq=True)
+            prompt_with_examples = "\n\n".join([prompt] + [seq.item()]) + "\n\n"
             # evaluate prompts as few shot prompt
-            score = self.task.evaluate(prompt_with_examples, self.predictor, subsample=True)
+            score, _ = self.task.evaluate(prompt_with_examples, self.predictor, eval_strategy="subsample")
+            assert isinstance(score, float), f"Expected float, but got {type(score).__name__}"
             if score > best_score:
                 best_score = score
                 best_prompt = prompt_with_examples

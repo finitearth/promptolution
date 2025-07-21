@@ -3,7 +3,7 @@
 
 from abc import ABC, abstractmethod
 
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING, Any, List, Optional, Tuple, Union
 
 from promptolution.llms.base_llm import BaseLLM
 
@@ -17,14 +17,9 @@ class BasePredictor(ABC):
     """Abstract base class for predictors in the promptolution library.
 
     This class defines the interface that all concrete predictor implementations should follow.
-
-    Attributes:
-        llm: The language model used for generating predictions.
-        classes (List[str]): The list of valid class labels.
-        config (ExperimentConfig): Experiment configuration overwriting defaults
     """
 
-    def __init__(self, llm: "BaseLLM", config: "ExperimentConfig" = None):
+    def __init__(self, llm: "BaseLLM", config: Optional["ExperimentConfig"] = None) -> None:
         """Initialize the predictor with a language model and configuration.
 
         Args:
@@ -32,17 +27,17 @@ class BasePredictor(ABC):
             config: Configuration for the predictor.
         """
         self.llm = llm
-
+        self.extraction_description = ""
         if config is not None:
             config.apply_to(self)
 
     def predict(
         self,
-        prompts: List[str],
-        xs: np.ndarray,
-        system_prompts: List[str] = None,
+        prompts: Union[str, List[str]],
+        xs: np.ndarray[Any, Any],
+        system_prompts: Optional[Union[str, List[str]]] = None,
         return_seq: bool = False,
-    ) -> np.ndarray:
+    ) -> Union[np.ndarray[Any, Any], Tuple[np.ndarray[Any, Any], np.ndarray[Any, Any]]]:
         """Abstract method to make predictions based on prompts and input data.
 
         Args:
@@ -63,12 +58,12 @@ class BasePredictor(ABC):
 
         if return_seq:
             seqs = [f"{x}\n{out}" for x, out in zip(xs, outputs)]
-            seqs = np.array(seqs)
+            return preds, np.array(seqs)
 
-        return preds if not return_seq else (preds, seqs)
+        return preds
 
     @abstractmethod
-    def _extract_preds(self, preds: List[str]) -> np.ndarray:
+    def _extract_preds(self, preds: List[str]) -> np.ndarray[Any, Any]:
         """Extract class labels from the predictions, based on the list of valid class labels.
 
         Args:

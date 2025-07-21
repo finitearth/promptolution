@@ -3,7 +3,7 @@
 
 import numpy as np
 
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING, Any, List, Optional
 
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 from promptolution.optimizers.templates import OPRO_TEMPLATE
@@ -31,14 +31,14 @@ class OPRO(BaseOptimizer):
         self,
         predictor: "BasePredictor",
         task: "BaseTask",
-        prompt_template: Optional[str],
         meta_llm: "BaseLLM",
-        initial_prompts: List[str] = None,
+        initial_prompts: Optional[List[str]] = None,
+        prompt_template: Optional[str] = None,
         max_num_instructions: int = 20,
         num_instructions_per_step: int = 8,
         num_few_shots: int = 3,
-        callbacks: List["BaseCallback"] = None,
-        config: "ExperimentConfig" = None,
+        callbacks: Optional[List["BaseCallback"]] = None,
+        config: Optional["ExperimentConfig"] = None,
     ) -> None:
         """Initialize the OPRO optimizer.
 
@@ -55,8 +55,7 @@ class OPRO(BaseOptimizer):
             config: "ExperimentConfig" overwriting default parameters
         """
         self.meta_llm = meta_llm
-
-        self.meta_prompt_template = prompt_template if prompt_template else OPRO_TEMPLATE
+        self.meta_prompt_template = prompt_template or OPRO_TEMPLATE
         self.max_num_instructions = max_num_instructions
         self.num_instructions_per_step = num_instructions_per_step
         self.num_few_shots = num_few_shots
@@ -126,7 +125,7 @@ class OPRO(BaseOptimizer):
                 duplicate_prompts += 1
                 continue
 
-            score = self.task.evaluate(prompt, self.predictor)[0]
+            score = self.task.evaluate(prompt, self.predictor).item()
 
             self._add_prompt_and_score(prompt, score)
 

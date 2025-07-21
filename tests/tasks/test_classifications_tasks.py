@@ -171,7 +171,6 @@ def test_classification_task_evaluate_sequential_block(mock_df, mock_predictor):
         task.increment_block_idx()
         if i < task.n_blocks - 1:
             assert task.block_idx == i + 1
-            assert task.block_idx == 0
 
     task_full_strategy = ClassificationTask(df=mock_df, x_column="x", y_column="y", eval_strategy="full")
     with pytest.raises(ValueError, match="Block increment is only valid for block subsampling."):

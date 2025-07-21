@@ -3,7 +3,7 @@
 
 import numpy as np
 
-from typing import TYPE_CHECKING, List, Union
+from typing import TYPE_CHECKING, List, Optional, Union
 
 from promptolution.utils.formatting import extract_from_tag
 
@@ -19,7 +19,9 @@ from promptolution.optimizers.templates import (
 from promptolution.tasks.classification_tasks import ClassificationTask
 
 
-def create_prompt_variation(prompt: Union[List[str], str], llm: "BaseLLM", meta_prompt: str = None) -> List[str]:
+def create_prompt_variation(
+    prompt: Union[List[str], str], llm: "BaseLLM", meta_prompt: Optional[str] = None
+) -> List[str]:
     """Generate a variation of the given prompt(s) while keeping the semantic meaning.
 
     Idea taken from the paper Zhou et al. (2021) https://arxiv.org/pdf/2211.01910
@@ -46,9 +48,9 @@ def create_prompt_variation(prompt: Union[List[str], str], llm: "BaseLLM", meta_
 def create_prompts_from_samples(
     task: "BaseTask",
     llm: "BaseLLM",
-    meta_prompt: str = None,
+    meta_prompt: Optional[str] = None,
     n_samples: int = 3,
-    task_description: str = None,
+    task_description: Optional[str] = None,
     n_prompts: int = 1,
     get_uniform_labels: bool = False,
 ) -> List[str]:
@@ -73,14 +75,17 @@ def create_prompts_from_samples(
     Returns:
         List[str]: A list of generated prompts.
     """
-    if meta_prompt is None and task_description is None:
-        meta_prompt_template = PROMPT_CREATION_TEMPLATE
-    elif meta_prompt is None and task_description is not None:
-        meta_prompt_template = PROMPT_CREATION_TEMPLATE_TD.replace("<task_desc>", task_description)
-    elif meta_prompt is not None and task_description is None:
-        meta_prompt_template = meta_prompt
-    elif meta_prompt is not None and task_description is not None:
-        meta_prompt_template = meta_prompt.replace("<task_desc>", task_description)
+    meta_prompt_template: str
+    if meta_prompt is None:
+        if task_description is None:
+            meta_prompt_template = PROMPT_CREATION_TEMPLATE
+        else:
+            meta_prompt_template = PROMPT_CREATION_TEMPLATE_TD.replace("<task_desc>", task_description)
+    else:
+        if task_description is None:
+            meta_prompt_template = meta_prompt
+        else:
+            meta_prompt_template = meta_prompt.replace("<task_desc>", task_description)
 
     meta_prompts = []
     for _ in range(n_prompts):
@@ -92,9 +97,9 @@ def create_prompts_from_samples(
             samples_per_class = np.maximum(samples_per_class, 1)
 
             # sample
-            xs = []
-            ys = []
-            for label, n_samples in zip(unique_labels, samples_per_class):
+            xs: List[str] = []
+            ys: List[str] = []
+            for label, num_samples in zip(unique_labels, samples_per_class):
                 indices = np.where(task.ys == label)[0]
                 indices = np.random.choice(indices, n_samples, replace=False)
                 xs.extend(task.xs[indices])

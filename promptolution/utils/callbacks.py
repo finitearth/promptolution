@@ -8,7 +8,12 @@ from datetime import datetime
 import pandas as pd
 from tqdm import tqdm
 
-from typing import Literal
+from typing import TYPE_CHECKING, Any, Literal, Optional, Tuple
+
+if TYPE_CHECKING:
+    from logging import Logger
+
+    from promptolution.optimizers.base_optimizer import BaseOptimizer
 
 
 class BaseCallback(ABC):
@@ -19,7 +24,7 @@ class BaseCallback(ABC):
 
     """
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """Initialize the callback with a configuration.
 
         Args:
@@ -28,7 +33,7 @@ class BaseCallback(ABC):
         """
         pass
 
-    def on_step_end(self, optimizer):
+    def on_step_end(self, optimizer: "BaseOptimizer") -> bool:
         """Called at the end of each optimization step.
 
         Args:
@@ -39,7 +44,7 @@ class BaseCallback(ABC):
         """
         return True
 
-    def on_epoch_end(self, optimizer):
+    def on_epoch_end(self, optimizer: "BaseOptimizer") -> bool:
         """Called at the end of each optimization epoch.
 
         Args:
@@ -50,7 +55,7 @@ class BaseCallback(ABC):
         """
         return True
 
-    def on_train_end(self, optimizer):
+    def on_train_end(self, optimizer: "BaseOptimizer") -> bool:
         """Called at the end of the entire optimization process.
 
         Args:
@@ -72,12 +77,12 @@ class LoggerCallback(BaseCallback):
         step (int): The current step number.
     """
 
-    def __init__(self, logger):
+    def __init__(self, logger: "Logger") -> None:
         """Initialize the LoggerCallback."""
         self.logger = logger
         self.step = 0
 
-    def on_step_end(self, optimizer):
+    def on_step_end(self, optimizer: "BaseOptimizer") -> bool:
         """Log information about the current step."""
         self.step += 1
         time = datetime.now().strftime("%d-%m-%y %H:%M:%S:%f")
@@ -88,7 +93,7 @@ class LoggerCallback(BaseCallback):
 
         return True
 
-    def on_train_end(self, optimizer, logs=None):
+    def on_train_end(self, optimizer: "BaseOptimizer", logs: Optional[Any] = None) -> bool:
         """Log information at the end of training.
 
         Args:
@@ -115,7 +120,7 @@ class FileOutputCallback(BaseCallback):
         file_type (str): The type of file to save the output to.
     """
 
-    def __init__(self, dir, file_type: Literal["parquet", "csv"] = "parquet"):
+    def __init__(self, dir: str, file_type: Literal["parquet", "csv"] = "parquet") -> None:
         """Initialize the FileOutputCallback.
 
         Args:
@@ -128,15 +133,15 @@ class FileOutputCallback(BaseCallback):
         self.file_type = file_type
 
         if file_type == "parquet":
-            self.path = dir + "/step_results.parquet"
+            self.path = os.path.join(dir, "step_results.parquet")
         elif file_type == "csv":
-            self.path = dir + "/step_results.csv"
+            self.path = os.path.join(dir, "step_results.csv")
         else:
             raise ValueError(f"File type {file_type} not supported.")
 
         self.step = 0
 
-    def on_step_end(self, optimizer):
+    def on_step_end(self, optimizer: "BaseOptimizer") -> bool:
         """Save prompts and scores to csv.
 
         Args:
@@ -146,8 +151,8 @@ class FileOutputCallback(BaseCallback):
         df = pd.DataFrame(
             {
                 "step": [self.step] * len(optimizer.prompts),
-                "input_tokens": [optimizer.meta_llm.input_token_count] * len(optimizer.prompts),
-                "output_tokens": [optimizer.meta_llm.output_token_count] * len(optimizer.prompts),
+                "input_tokens": [optimizer.predictor.llm.input_token_count] * len(optimizer.prompts),
+                "output_tokens": [optimizer.predictor.llm.output_token_count] * len(optimizer.prompts),
                 "time": [datetime.now().timestamp()] * len(optimizer.prompts),
                 "score": optimizer.scores,
                 "prompt": optimizer.prompts,
@@ -178,12 +183,12 @@ class BestPromptCallback(BaseCallback):
         best_score (float): The highest score achieved so far.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialize the BestPromptCallback."""
         self.best_prompt = ""
-        self.best_score = -99999
+        self.best_score = -99999.0
 
-    def on_step_end(self, optimizer):
+    def on_step_end(self, optimizer: "BaseOptimizer") -> bool:
         """Update the best prompt and score if a new high score is achieved.
 
         Args:
@@ -195,7 +200,7 @@ class BestPromptCallback(BaseCallback):
 
         return True
 
-    def get_best_prompt(self):
+    def get_best_prompt(self) -> Tuple[str, float]:
         """Get the best prompt and score achieved during optimization.
 
         Returns:
@@ -213,7 +218,7 @@ class ProgressBarCallback(BaseCallback):
         pbar (tqdm): The tqdm progress bar object.
     """
 
-    def __init__(self, total_steps):
+    def __init__(self, total_steps: int) -> None:
         """Initialize the ProgressBarCallback.
 
         Args:
@@ -221,7 +226,7 @@ class ProgressBarCallback(BaseCallback):
         """
         self.pbar = tqdm(total=total_steps)
 
-    def on_step_end(self, optimizer):
+    def on_step_end(self, optimizer: "BaseOptimizer") -> bool:
         """Update the progress bar at the end of each step.
 
         Args:
@@ -231,7 +236,7 @@ class ProgressBarCallback(BaseCallback):
 
         return True
 
-    def on_train_end(self, optimizer):
+    def on_train_end(self, optimizer: "BaseOptimizer") -> bool:
         """Close the progress bar at the end of training.
 
         Args:
@@ -249,7 +254,7 @@ class TokenCountCallback(BaseCallback):
         self,
         max_tokens_for_termination: int,
         token_type_for_termination: Literal["input_tokens", "output_tokens", "total_tokens"],
-    ):
+    ) -> None:
         """Initialize the TokenCountCallback.
 
         Args:
@@ -259,7 +264,7 @@ class TokenCountCallback(BaseCallback):
         self.max_tokens_for_termination = max_tokens_for_termination
         self.token_type_for_termination = token_type_for_termination
 
-    def on_step_end(self, optimizer):
+    def on_step_end(self, optimizer: "BaseOptimizer") -> bool:
         """Check if the total token count exceeds the maximum allowed. If so, stop the optimization."""
         token_counts = optimizer.predictor.llm.get_token_count()
 
