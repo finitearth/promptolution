@@ -113,7 +113,7 @@ def test_create_prompts_from_samples_random_sampling(mock_df, mock_meta_llm):
     """Test create_prompts_from_samples with random sampling (not ClassificationTask or get_uniform_labels=False)."""
 
     class DummyTask(BaseTask):
-        def _single_evaluate(self, x, y, pred):
+        def _evaluate(self, x, y, pred):
             return 1.0
 
     task = DummyTask(df=mock_df, x_column="x", y_column="y", task_description="Dummy task for random sampling")

@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import accuracy_score
 
-from typing import TYPE_CHECKING, Callable, Literal
+from typing import TYPE_CHECKING, Callable, List, Literal
 
 from promptolution.tasks.base_task import BaseTask
 
@@ -65,6 +65,9 @@ class ClassificationTask(BaseTask):
         self.ys = df[self.y_column].str.lower().values  # Ensure y values are lowercase for consistent comparison
         self.classes = np.unique(self.ys)
 
-    def _single_evaluate(self, x: np.ndarray, y: np.ndarray, pred: np.ndarray) -> float:
+    def _evaluate(self, xs: np.ndarray, ys: np.ndarray, preds: np.ndarray) -> List[float]:
         """Calculate the score for a single prediction."""
-        return self.metric([y], [pred])
+        scores = []
+        for pred, y in zip(preds, ys):
+            scores.append(self.metric([y], [pred]))
+        return scores

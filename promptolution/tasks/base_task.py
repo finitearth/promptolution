@@ -147,8 +147,8 @@ class BaseTask(ABC):
         return scores if not return_seq else (scores, seqs)
 
     @abstractmethod
-    def _single_evaluate(self, x: np.ndarray, y: np.ndarray, pred: np.ndarray) -> float:
-        """Abstract method to calculate the score for a single prediction.
+    def _evaluate(self, xs: np.ndarray, ys: np.ndarray, preds: np.ndarray) -> List[float]:
+        """Abstract method to calculate the score for a predictions.
 
         This method should be implemented by subclasses based on their specific evaluation logic.
         """
@@ -183,10 +183,9 @@ class BaseTask(ABC):
 
         if return_seq:
             preds, seqs = preds
-
+        scores = self._evaluate(xs_to_evaluate, ys_to_evaluate, preds)
         for i, cache_key in enumerate(batches):
-            x, y, y_pred = xs_to_evaluate[i], ys_to_evaluate[i], preds[i]
-            self.eval_cache[cache_key] = self._single_evaluate(x, y, y_pred)
+            self.eval_cache[cache_key] = scores[i]
 
             if return_seq:
                 self.seq_cache[cache_key] = seqs[i]
