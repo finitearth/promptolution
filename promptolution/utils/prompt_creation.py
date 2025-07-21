@@ -108,8 +108,8 @@ def create_prompts_from_samples(
         else:
             # if not classification task, sample randomly
             indices = np.random.choice(len(task.xs), n_samples, replace=False)
-            xs = task.xs[indices].tolist()
-            ys = task.ys[indices].tolist()
+            xs = [task.xs[i] for i in indices]
+            ys = [task.ys[i] for i in indices]
 
         examples = "\n\n".join([f"Input: {x}\nOutput: {y}" for x, y in zip(xs, ys)])
         meta_prompt = meta_prompt_template.replace("<input_output_pairs>", examples)

@@ -49,7 +49,7 @@ class FirstOccurrenceClassifier(BasePredictor):
 
         super().__init__(llm, config)
 
-    def _extract_preds(self, preds: List[str]) -> np.ndarray[Any, np.dtype[np.str_]]:
+    def _extract_preds(self, preds: List[str]) -> List[str]:
         """Extract class labels from the predictions, based on the list of valid class labels.
 
         Args:
@@ -66,8 +66,7 @@ class FirstOccurrenceClassifier(BasePredictor):
 
             result.append(predicted_class)
 
-        response: np.ndarray[Any, np.dtype[np.str_]] = np.array(result, dtype=str)
-        return response
+        return result
 
 
 class MarkerBasedClassifier(BasePredictor):
@@ -118,7 +117,7 @@ class MarkerBasedClassifier(BasePredictor):
 
         super().__init__(llm, config)
 
-    def _extract_preds(self, preds: List[str]) -> np.ndarray[Any, np.dtype[np.str_]]:
+    def _extract_preds(self, preds: List[str]) -> List[str]:
         """Extract class labels from the predictions, by extracting the text following the marker.
 
         Args:
@@ -132,5 +131,4 @@ class MarkerBasedClassifier(BasePredictor):
 
             result.append(pred)
 
-        response: np.ndarray[Any, np.dtype[np.str_]] = np.array(result, dtype=str)
-        return response
+        return result

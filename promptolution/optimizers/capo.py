@@ -194,6 +194,10 @@ class CAPO(BaseOptimizer):
             list(sample_inputs),
             return_seq=True,
         )
+        if isinstance(seqs, str):
+            seqs = [seqs]
+        if isinstance(preds, str):
+            preds = [preds]
 
         # Check which predictions are correct and get a single one per example
         for j in range(num_examples):
@@ -284,11 +288,11 @@ class CAPO(BaseOptimizer):
             List[Prompt]: List of surviving prompts after racing.
         """
         self.task.reset_block_idx()
-        block_scores: List[np.ndarray[Any, Any]] = []
+        block_scores: List[List[float]] = []
         i = 0
         while len(candidates) > k and i < self.max_n_blocks_eval:
             # new_scores shape: (n_candidates, n_samples)
-            new_scores = self.task.evaluate(
+            new_scores: List[float] = self.task.evaluate(
                 [c.construct_prompt() for c in candidates], self.predictor, return_agg_scores=False
             )
 
@@ -296,7 +300,10 @@ class CAPO(BaseOptimizer):
             prompt_lengths = np.array([self.token_counter(c.construct_prompt()) for c in candidates])
             rel_prompt_lengths = prompt_lengths / self.max_prompt_length
 
-            new_scores = (new_scores - self.length_penalty * rel_prompt_lengths[:, np.newaxis]).astype(float)
+            penalized_new_scores = np.array(new_scores) - self.length_penalty * rel_prompt_lengths[:, None]
+
+            new_scores = penalized_new_scores.tolist()
+
             block_scores.append(new_scores)
             scores = np.concatenate(block_scores, axis=1)
 
@@ -311,7 +318,7 @@ class CAPO(BaseOptimizer):
             # Create mask for survivors and filter candidates
             survivor_mask = n_better < k
             candidates = list(compress(candidates, survivor_mask))
-            block_scores = [bs[survivor_mask] for bs in block_scores]
+            block_scores = list(compress(block_scores, survivor_mask))
 
             i += 1
             self.task.increment_block_idx()
@@ -319,9 +326,9 @@ class CAPO(BaseOptimizer):
         avg_scores = self.task.evaluate(
             [c.construct_prompt() for c in candidates], self.predictor, eval_strategy="evaluated"
         )
-        order = np.argsort(-avg_scores)[:k]
+        order = np.argsort(-np.array(avg_scores))[:k]
         candidates = [candidates[i] for i in order]
-        self.scores = avg_scores[order].tolist()
+        self.scores = [avg_scores[i] for i in order]
 
         return candidates
 

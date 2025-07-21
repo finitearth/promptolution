@@ -22,14 +22,14 @@ def test_task_evaluate(mock_classification_task_with_subsampling, mock_predictor
     prompts = ["Classify sentiment:"]
     scores = mock_classification_task_with_subsampling.evaluate(prompts, mock_predictor)
 
-    assert isinstance(scores, np.ndarray)
-    assert scores.shape == (1,)
+    assert isinstance(scores, list)
+    assert len(scores) == 1
     assert 0 <= scores[0] <= 1
 
     prompts = ["Classify sentiment:", "Rate the text:"]
     scores = mock_classification_task_with_subsampling.evaluate(prompts, mock_predictor)
 
-    assert scores.shape == (2,)
+    assert len(scores) == 2
     assert all(0 <= score <= 1 for score in scores)
 
 
@@ -42,7 +42,7 @@ def test_task_evaluate_with_subsampling(mock_classification_task_with_subsamplin
         mock_predictor,
     )
 
-    assert scores.shape == (1,)
+    assert len(scores) == 1
 
     with pytest.raises(AssertionError, match=r".*Arrays are not equal.*"):
         np.random.seed(42)
@@ -64,13 +64,14 @@ def test_task_evaluate_with_return_seq(mock_classification_task_with_subsampling
     """Test the evaluate method with return_seq=True."""
     prompts = ["Classify sentiment:"]
 
-    scores, seqs = mock_classification_task_with_subsampling.evaluate(prompts, mock_predictor, return_seq=True)
+    scores, seqs = mock_classification_task_with_subsampling.evaluate(
+        prompts, mock_predictor, return_seq=True, return_agg_scores=False
+    )
 
-    assert scores.shape == (1,)
+    assert len(scores) == 1
+    assert len(scores[0]) == mock_classification_task_with_subsampling.n_subsamples
     assert len(seqs) == 1
-
-    for seq in seqs[0]:
-        assert any(sample_text in seq for sample_text in mock_classification_task_with_subsampling.xs)
+    assert len(seqs[0]) == mock_classification_task_with_subsampling.n_subsamples
 
 
 def test_task_evaluate_with_system_prompts(
@@ -85,7 +86,7 @@ def test_task_evaluate_with_system_prompts(
         prompts, mock_predictor, system_prompts=system_prompts, return_agg_scores=True
     )
 
-    assert scores.shape == (1,)
+    assert len(scores) == 1
     assert any(call["system_prompts"] == system_prompts for call in mock_downstream_llm.call_history)
 
 

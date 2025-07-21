@@ -58,7 +58,7 @@ class EvoPromptDE(BaseOptimizer):
         )
 
     def _pre_optimization_loop(self) -> None:
-        self.scores = self.task.evaluate(self.prompts, self.predictor, return_agg_scores=True).tolist()
+        self.scores = self.task.evaluate(self.prompts, self.predictor, return_agg_scores=True)
         self.prompts = [prompt for _, prompt in sorted(zip(self.scores, self.prompts), reverse=True)]
         self.scores = sorted(self.scores, reverse=True)
 

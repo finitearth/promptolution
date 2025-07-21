@@ -70,8 +70,8 @@ class OPRO(BaseOptimizer):
             Formatted string of few-shot examples with inputs and expected outputs
         """
         idx = np.random.choice(len(self.task.xs), self.num_few_shots)
-        sample_x = self.task.xs[idx]
-        sample_y = self.task.ys[idx]
+        sample_x = [self.task.xs[i] for i in idx]
+        sample_y = [self.task.ys[i] for i in idx]
 
         return "\n".join([f"Input: {x}\nOutput: {y}" for x, y in zip(sample_x, sample_y)])
 
@@ -125,7 +125,7 @@ class OPRO(BaseOptimizer):
                 duplicate_prompts += 1
                 continue
 
-            score = self.task.evaluate(prompt, self.predictor).item()
+            score = self.task.evaluate(prompt, self.predictor)[0]
 
             self._add_prompt_and_score(prompt, score)
 

@@ -27,11 +27,12 @@ class RandomSearchSelector(BaseExemplarSelector):
         best_prompt = prompt
 
         for _ in range(n_trials):
-            _, seq = self.task.evaluate(prompt, self.predictor, eval_strategy="subsample", return_seq=True)
-            prompt_with_examples = "\n\n".join([prompt] + [seq.item()]) + "\n\n"
+            _, seq = self.task.evaluate(
+                prompt, self.predictor, eval_strategy="subsample", return_seq=True, return_agg_scores=False
+            )
+            prompt_with_examples = "\n\n".join([prompt] + [seq[0][0]]) + "\n\n"
             # evaluate prompts as few shot prompt
-            score, _ = self.task.evaluate(prompt_with_examples, self.predictor, eval_strategy="subsample")
-            assert isinstance(score, float), f"Expected float, but got {type(score).__name__}"
+            score = self.task.evaluate(prompt_with_examples, self.predictor, eval_strategy="subsample")[0]
             if score > best_score:
                 best_score = score
                 best_prompt = prompt_with_examples

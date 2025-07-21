@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import accuracy_score
 
-from typing import TYPE_CHECKING, Any, Callable, List, Literal, Optional, Union
+from typing import TYPE_CHECKING, Any, Callable, List, Literal, Optional
 
 from promptolution.tasks.base_task import BaseTask
 
@@ -62,14 +62,12 @@ class ClassificationTask(BaseTask):
             seed=seed,
             config=config,
         )
-        self.ys: np.ndarray[Any, Any] = (
-            df[self.y_column].str.lower().values.astype(str)
+        self.ys: List[str] = (
+            df[self.y_column].str.lower().values.tolist()
         )  # Ensure y values are lowercase for consistent comparison
         self.classes = np.unique(self.ys)
 
-    def _evaluate(
-        self, xs: Union[List[str], np.ndarray], ys: Union[List[str], np.ndarray], preds: Union[List[str], np.ndarray]
-    ) -> List[float]:
+    def _evaluate(self, xs: List[str], ys: List[str], preds: List[str]) -> List[float]:
         """Calculate the score for a single prediction."""
         scores = []
         for pred, y in zip(preds, ys):

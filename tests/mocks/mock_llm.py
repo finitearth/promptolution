@@ -52,6 +52,8 @@ class MockLLM(BaseLLM):
         self.call_history.append({"prompts": prompts, "system_prompts": system_prompts})
 
         results = []
+        if self.response_index >= len(self.responses):
+            self.response_index = 0
         for i, prompt in enumerate(prompts):
             # Return the next response from the list if available
             if self.response_index < len(self.responses) and isinstance(self.responses, list):
@@ -65,7 +67,6 @@ class MockLLM(BaseLLM):
                     results.append(f"<prompt>Mock response for: {prompt}</prompt>")
                 else:
                     results.append(f"Mock response for: {prompt}")
-
         return results
 
     def set_generation_seed(self, seed: int) -> None:

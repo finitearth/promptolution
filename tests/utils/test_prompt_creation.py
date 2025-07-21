@@ -114,7 +114,7 @@ def test_create_prompts_from_samples_random_sampling(mock_df, mock_meta_llm):
 
     class DummyTask(BaseTask):
         def _evaluate(self, x, y, pred):
-            return 1.0
+            return [1.0] * len(x)
 
     task = DummyTask(df=mock_df, x_column="x", y_column="y", task_description="Dummy task for random sampling")
     n_samples = 2

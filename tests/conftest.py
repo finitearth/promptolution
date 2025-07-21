@@ -33,9 +33,9 @@ def experiment_config():
 def mock_task():
     """Fixture providing a MockTask with predetermined scoring behavior."""
 
-    def score_function(pred):
+    def score_function(preds):
         # Prefer longer prompts for testing purposes
-        return len(pred)
+        return [len(pred) for pred in preds]
 
     return MockTask(predetermined_scores=score_function)
 
@@ -161,7 +161,7 @@ def mock_judge_llm():
         "<final_score>-5.0</final_score>",  # Completely incorrect
         "<final_score>0.0</final_score>",  # Partially correct
         "<final_score>1.0</final_score>",  # Default/Other
-        "<final_score>3.0</final_score>",  # Another specific score
+        "<final_score>2.0</final_score>",  # Another specific score
         "This response does not contain a score tag.",  # For parsing error test
     ]
     return MockLLM(predetermined_responses=responses)

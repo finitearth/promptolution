@@ -53,9 +53,7 @@ class RewardTask(BaseTask):
             config=config,
         )
 
-    def _evaluate(
-        self, xs: Union[List[str], np.ndarray], ys: Union[List[str], np.ndarray], preds: Union[List[str], np.ndarray]
-    ) -> List[float]:
+    def _evaluate(self, xs: List[str], ys: List[str], preds: List[str]) -> List[float]:
         """Calculate the score for a single reward prediction using the reward function."""
         rewards = [self.reward_function(pred) for pred in preds]
         return rewards

@@ -37,7 +37,7 @@ class BasePredictor(ABC):
         xs: List[str],
         system_prompts: Optional[Union[str, List[str]]] = None,
         return_seq: bool = False,
-    ) -> Union[np.ndarray[Any, Any], Tuple[np.ndarray[Any, Any], np.ndarray[Any, Any]]]:
+    ) -> Union[List[str], Tuple[List[str], List[str]]]:
         """Abstract method to make predictions based on prompts and input data.
 
         Args:
@@ -58,18 +58,18 @@ class BasePredictor(ABC):
 
         if return_seq:
             seqs = [f"{x}\n{out}" for x, out in zip(xs, outputs)]
-            return preds, np.array(seqs)
+            return preds, seqs
 
         return preds
 
     @abstractmethod
-    def _extract_preds(self, preds: List[str]) -> np.ndarray[Any, Any]:
+    def _extract_preds(self, preds: List[str]) -> List[str]:
         """Extract class labels from the predictions, based on the list of valid class labels.
 
         Args:
             preds: The raw predictions from the language model.
 
         Returns:
-            np.ndarray: Extracted predictions.
+            List[str]: Extracted class labels from the predictions.
         """
         raise NotImplementedError

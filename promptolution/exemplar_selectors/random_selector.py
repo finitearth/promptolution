@@ -1,5 +1,7 @@
 """Random exemplar selector."""
 
+import numpy as np
+
 from typing import TYPE_CHECKING, List, Optional
 
 from promptolution.exemplar_selectors.base_exemplar_selector import BaseExemplarSelector
@@ -50,7 +52,11 @@ class RandomSelector(BaseExemplarSelector):
         """
         examples: List[str] = []
         while len(examples) < n_examples:
-            score, seq = self.task.evaluate(prompt, self.predictor, eval_strategy="subsample", return_seq=True)
-            if score.item() == self.desired_score:
-                examples.append(seq.item())
+            scores, seqs = self.task.evaluate(
+                prompt, self.predictor, eval_strategy="subsample", return_seq=True, return_agg_scores=False
+            )
+            score = np.mean(scores)
+            seq = seqs[0][0]
+            if score == self.desired_score:
+                examples.append(seq)
         return "\n\n".join([prompt] + examples) + "\n\n"

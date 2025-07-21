@@ -108,9 +108,7 @@ class JudgeTask(BaseTask):
         prompt = prompt.replace("{task}", task_description).replace("{input}", x).replace("{prediction}", pred)
         return prompt
 
-    def _evaluate(
-        self, xs: Union[List[str], np.ndarray], ys: Union[List[str], np.ndarray], preds: Union[List[str], np.ndarray]
-    ) -> List[float]:
+    def _evaluate(self, xs: List[str], ys: List[str], preds: List[str]) -> List[float]:
         """Calculate the score for a single prediction using the LLM judge."""
         prompts: List[str] = []
         for x, y, pred in zip(xs, ys, preds):
@@ -119,16 +117,16 @@ class JudgeTask(BaseTask):
         judge_responses = self.judge_llm.get_response(prompts)
         scores_str = extract_from_tag(judge_responses, "<final_score>", "</final_score>")
         scores = []
-        for score_str in scores_str:
+        for score_str, judge_response in zip(scores_str, judge_responses):
             try:
                 # only numeric chars, - or . are allowed
                 score_str = "".join(filter(lambda c: c.isdigit() or c in "-.", score_str))
                 score = float(score_str)
-                # normalize from [-5, +5] to [0, 1]
-                score = (score + self.min_score) / (self.max_score - self.min_score)
+                # normalize from [min_score, max_score] to [0, 1]
+                score = (score - self.min_score) / (self.max_score - self.min_score)
                 score = max(0.0, min(1.0, score))
             except ValueError:
-                logger.warning(f"Failed to parse score '{score}' as float. Defaulting to 0.0.")
+                logger.warning(f"Failed to parse '{judge_response}' as score. Defaulting to 0.0.")
                 score = 0.0
 
             scores.append(score)
