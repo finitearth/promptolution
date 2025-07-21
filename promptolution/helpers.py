@@ -170,6 +170,7 @@ def get_task(
     final_task_type = task_type or (config.task_type if config else None)
 
     if final_task_type == "reward":
+        reward_function = reward_function or (config.reward_function if config else None)
         assert reward_function is not None, "Reward function must be provided for reward tasks."
         return RewardTask(
             df=df,
