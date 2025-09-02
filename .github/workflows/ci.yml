@@ -33,7 +33,7 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          poetry run python -m pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=. tests/nitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=. tests/ > pytest-coverage.txt
+          poetry run python -m pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=. tests/ > pytest-coverage.txt
 
       - name: Generate coverage report & comment on PR
         id: coverageComment
