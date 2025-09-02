@@ -3,12 +3,13 @@
 
 import numpy as np
 
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING, Any, List, Optional
 
 from promptolution.predictors.base_predictor import BasePredictor
 from promptolution.utils.formatting import extract_from_tag
 
 if TYPE_CHECKING:  # pragma: no cover
+    from promptolution.llms.base_llm import BaseLLM
     from promptolution.utils.config import ExperimentConfig
 
 
@@ -30,7 +31,7 @@ class FirstOccurrenceClassifier(BasePredictor):
         BasePredictor: The base class for predictors in the promptolution library.
     """
 
-    def __init__(self, llm, classes, config: "ExperimentConfig" = None):
+    def __init__(self, llm: "BaseLLM", classes: List[str], config: Optional["ExperimentConfig"] = None) -> None:
         """Initialize the FirstOccurrenceClassifier.
 
         Args:
@@ -48,13 +49,13 @@ class FirstOccurrenceClassifier(BasePredictor):
 
         super().__init__(llm, config)
 
-    def _extract_preds(self, preds: List[str]) -> np.ndarray:
+    def _extract_preds(self, preds: List[str]) -> List[str]:
         """Extract class labels from the predictions, based on the list of valid class labels.
 
         Args:
             preds: The raw predictions from the language model.
         """
-        response = []
+        result = []
         for pred in preds:
             predicted_class = self.classes[0]  # use first class as default pred
             for word in pred.split():
@@ -63,10 +64,9 @@ class FirstOccurrenceClassifier(BasePredictor):
                     predicted_class = word
                     break
 
-            response.append(predicted_class)
+            result.append(predicted_class)
 
-        response = np.array(response)
-        return response
+        return result
 
 
 class MarkerBasedClassifier(BasePredictor):
@@ -86,12 +86,12 @@ class MarkerBasedClassifier(BasePredictor):
 
     def __init__(
         self,
-        llm,
-        classes=None,
-        begin_marker="<final_answer>",
-        end_marker="</final_answer>",
-        config: "ExperimentConfig" = None,
-    ):
+        llm: "BaseLLM",
+        classes: Optional[List[str]] = None,
+        begin_marker: str = "<final_answer>",
+        end_marker: str = "</final_answer>",
+        config: Optional["ExperimentConfig"] = None,
+    ) -> None:
         """Initialize the MarkerBasedClassifier.
 
         Args:
@@ -109,7 +109,7 @@ class MarkerBasedClassifier(BasePredictor):
             assert all([c.islower() for c in classes]), "Class labels should be lowercase."
 
             self.extraction_description = (
-                f"The task is to classify the texts into one of those classes: {','.join(classes)}."
+                f"The task is to classify the texts into one of those classes: {', '.join(classes)}."
                 f"The class label is extracted from the text that are between these markers: {begin_marker} and {end_marker}."
             )
         else:
@@ -117,19 +117,18 @@ class MarkerBasedClassifier(BasePredictor):
 
         super().__init__(llm, config)
 
-    def _extract_preds(self, preds: List[str]) -> np.ndarray:
+    def _extract_preds(self, preds: List[str]) -> List[str]:
         """Extract class labels from the predictions, by extracting the text following the marker.
 
         Args:
             preds: The raw predictions from the language model.
         """
-        response = []
+        result = []
         for pred in preds:
             pred = extract_from_tag(pred, self.begin_marker, self.end_marker).lower()
             if self.classes is not None and pred not in self.classes:
                 pred = self.classes[0]
 
-            response.append(pred)
+            result.append(pred)
 
-        response = np.array(response)
-        return response
+        return result

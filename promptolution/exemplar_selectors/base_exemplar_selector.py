@@ -3,7 +3,7 @@
 
 from abc import ABC, abstractmethod
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Optional
 
 if TYPE_CHECKING:  # pragma: no cover
     from promptolution.predictors.base_predictor import BasePredictor
@@ -18,7 +18,7 @@ class BaseExemplarSelector(ABC):
     that all exemplar selectors should implement.
     """
 
-    def __init__(self, task: "BaseTask", predictor: "BasePredictor", config: "ExperimentConfig" = None):
+    def __init__(self, task: "BaseTask", predictor: "BasePredictor", config: Optional["ExperimentConfig"] = None):
         """Initialize the BaseExemplarSelector.
 
         Args:

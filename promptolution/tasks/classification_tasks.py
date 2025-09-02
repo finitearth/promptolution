@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import accuracy_score
 
-from typing import TYPE_CHECKING, Callable, List, Literal
+from typing import TYPE_CHECKING, Any, Callable, List, Literal, Optional
 
 from promptolution.tasks.base_task import BaseTask
 
@@ -23,15 +23,15 @@ class ClassificationTask(BaseTask):
     def __init__(
         self,
         df: pd.DataFrame,
-        task_description: str = None,
+        task_description: Optional[str] = None,
         x_column: str = "x",
         y_column: str = "y",
         n_subsamples: int = 30,
         eval_strategy: Literal["full", "subsample", "sequential_block", "random_block"] = "full",
         seed: int = 42,
-        metric: Callable = accuracy_score,
-        config: "ExperimentConfig" = None,
-    ):
+        metric: Callable[[Any, Any], float] = accuracy_score,
+        config: Optional["ExperimentConfig"] = None,
+    ) -> None:
         """Initialize the ClassificationTask from a pandas DataFrame.
 
         Args:
@@ -62,10 +62,12 @@ class ClassificationTask(BaseTask):
             seed=seed,
             config=config,
         )
-        self.ys = df[self.y_column].str.lower().values  # Ensure y values are lowercase for consistent comparison
+        self.ys: List[str] = (
+            df[self.y_column].str.lower().values.tolist()
+        )  # Ensure y values are lowercase for consistent comparison
         self.classes = np.unique(self.ys)
 
-    def _evaluate(self, xs: np.ndarray, ys: np.ndarray, preds: np.ndarray) -> List[float]:
+    def _evaluate(self, xs: List[str], ys: List[str], preds: List[str]) -> List[float]:
         """Calculate the score for a single prediction."""
         scores = []
         for pred, y in zip(preds, ys):

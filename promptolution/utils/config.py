@@ -1,6 +1,6 @@
 """Configuration class for the promptolution library."""
 
-from typing import Set
+from typing import Any, Set
 
 from promptolution.utils.logging import get_logger
 
@@ -14,20 +14,20 @@ class ExperimentConfig:
     It provides validation and tracking of used fields.
     """
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """Initialize the configuration with the provided keyword arguments."""
         self._used_attributes: Set[str] = set()
         for key, value in kwargs.items():
             setattr(self, key, value)
 
-    def __setattr__(self, name, value):
+    def __setattr__(self, name: str, value: Any) -> None:
         """Override attribute setting to track used attributes."""
         # Set the attribute using the standard mechanism
         object.__setattr__(self, name, value)
         if not name.startswith("_") and not callable(value):
             self._used_attributes.add(name)
 
-    def __getattribute__(self, name):
+    def __getattribute__(self, name: str) -> Any:
         """Override attribute access to track used attributes."""
         # Get the attribute using the standard mechanism
         try:
@@ -39,7 +39,7 @@ class ExperimentConfig:
 
         return value
 
-    def apply_to(self, obj):
+    def apply_to(self, obj: Any) -> Any:
         """Apply matching attributes from this config to an existing object.
 
         Examines each attribute of the target object and updates it if a matching
@@ -62,7 +62,7 @@ class ExperimentConfig:
 
         return obj
 
-    def validate(self):
+    def validate(self) -> None:
         """Check if any attributes were not used and run validation.
 
         Does not raise an error, but logs a warning if any attributes are unused or validation fails.

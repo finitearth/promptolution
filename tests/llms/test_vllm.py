@@ -4,14 +4,17 @@ import pytest
 
 from promptolution.llms import VLLM
 
+vllm = pytest.importorskip("vllm")
+transformers = pytest.importorskip("transformers")
+
 
 @pytest.fixture
 def mock_vllm_dependencies():
     """Set up comprehensive mocks for VLLM dependencies."""
     # Mock the key components
-    with patch("promptolution.llms.vllm.LLM") as mock_llm_class, patch(
-        "promptolution.llms.vllm.SamplingParams"
-    ) as mock_sampling_params, patch("promptolution.llms.vllm.AutoTokenizer") as mock_tokenizer_class:
+    with patch("vllm.LLM") as mock_llm_class, patch("vllm.SamplingParams") as mock_sampling_params, patch(
+        "transformers.AutoTokenizer"
+    ) as mock_tokenizer_class:
         # Create and configure mock LLM
         mock_llm = MagicMock()
         mock_llm_class.return_value = mock_llm

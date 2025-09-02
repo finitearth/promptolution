@@ -6,12 +6,12 @@ Contains paired t-test functionality to compare prompt performance and determine
 import numpy as np
 from scipy.stats import ttest_rel
 
-from typing import Literal
+from typing import Any, Callable, List, Literal
 
 TestStatistics = Literal["paired_t_test"]
 
 
-def get_test_statistic_func(name: TestStatistics) -> callable:
+def get_test_statistic_func(name: TestStatistics) -> Callable[..., bool]:
     """
     Get the test statistic function based on the name provided.
 
@@ -28,8 +28,8 @@ def get_test_statistic_func(name: TestStatistics) -> callable:
 
 
 def paired_t_test(
-    scores_a: np.ndarray,
-    scores_b: np.ndarray,
+    scores_a: List[float],
+    scores_b: List[float],
     alpha: float = 0.05,
 ) -> bool:
     """
@@ -40,16 +40,18 @@ def paired_t_test(
     - The differences between the pairs are normally distributed (-> n > 30).
 
     Parameters:
-        scores_a (np.ndarray): Array of accuracy scores for candidate A.
-        scores_b (np.ndarray): Array of accuracy scores for candidate B.
+        scores_a (List[float]): Array of accuracy scores for candidate A.
+        scores_b (List[float]): Array of accuracy scores for candidate B.
         alpha (float): Significance level (default 0.05 for 95% confidence).
 
     Returns:
         bool: True if candidate A is significantly better than candidate B, False otherwise.
     """
+    scores_a = np.array(scores_a)
+    scores_b = np.array(scores_b)
 
     _, p_value = ttest_rel(scores_a, scores_b, alternative="greater")
 
     result = p_value < alpha
 
-    return result
+    return bool(result)

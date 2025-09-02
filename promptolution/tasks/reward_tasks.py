@@ -4,7 +4,7 @@
 import numpy as np
 import pandas as pd
 
-from typing import TYPE_CHECKING, Callable, List, Literal, Optional
+from typing import TYPE_CHECKING, Callable, List, Literal, Optional, Union
 
 from promptolution.tasks.base_task import BaseTask
 
@@ -23,14 +23,14 @@ class RewardTask(BaseTask):
     def __init__(
         self,
         df: pd.DataFrame,
-        reward_function: Callable,
+        reward_function: Callable[[str], float],
         x_column: str = "x",
         task_description: Optional[str] = None,
         n_subsamples: int = 30,
         eval_strategy: EvalStrategy = "full",
         seed: int = 42,
-        config: "ExperimentConfig" = None,
-    ):
+        config: Optional["ExperimentConfig"] = None,
+    ) -> None:
         """Initialize the RewardTask.
 
         Args:
@@ -54,7 +54,7 @@ class RewardTask(BaseTask):
             config=config,
         )
 
-    def _evaluate(self, xs: np.ndarray, ys: np.ndarray, preds: np.ndarray) -> List[float]:
+    def _evaluate(self, xs: List[str], ys: List[str], preds: List[str]) -> List[float]:
         """Calculate the score for a single reward prediction using the reward function."""
         rewards = [self.reward_function(pred) for pred in preds]
         return rewards

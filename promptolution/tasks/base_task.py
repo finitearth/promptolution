@@ -6,7 +6,7 @@ from abc import ABC, abstractmethod
 import numpy as np
 import pandas as pd
 
-from typing import TYPE_CHECKING, Any, List, Literal, Optional, Tuple, Union
+from typing import TYPE_CHECKING, Any, Dict, List, Literal, Optional, Tuple, Union, overload
 
 if TYPE_CHECKING:  # pragma: no cover
     from promptolution.predictors.base_predictor import BasePredictor
@@ -25,12 +25,12 @@ class BaseTask(ABC):
         df: pd.DataFrame,
         x_column: str,
         y_column: Optional[str] = None,
-        task_description: str = None,
+        task_description: Optional[str] = None,
         n_subsamples: int = 30,
         eval_strategy: EvalStrategy = "full",
         seed: int = 42,
-        config: "ExperimentConfig" = None,
-    ):
+        config: Optional["ExperimentConfig"] = None,
+    ) -> None:
         """Initialize the BaseTask.
 
         Args:
@@ -55,29 +55,29 @@ class BaseTask(ABC):
         if config is not None:
             config.apply_to(self)
 
-        self.xs = df[self.x_column].values
+        self.xs: List[str] = df[self.x_column].values.astype(str).tolist()
         self.has_y = y_column is not None
-        if self.has_y:
-            self.ys = df[self.y_column].values
+        if self.has_y and y_column is not None:
+            self.ys: List[str] = df[y_column].values.astype(str).tolist()
         else:
             # If no y_column is provided, create a dummy y array
-            self.ys = np.array([None] * len(self.xs))
+            self.ys = [""] * len(self.xs)
 
         self.block_idx = 0
         self.n_blocks = len(self.xs) // self.n_subsamples if self.n_subsamples > 0 else 1
         self.rng = np.random.default_rng(seed)
 
-        self.eval_cache = {}  # (prompt, x, y): scores per datapoint
-        self.seq_cache = {}  # (prompt, x, y): generating sequence per datapoint
+        self.eval_cache: Dict[Tuple[str, str, str], float] = {}  # (prompt, x, y): scores per datapoint
+        self.seq_cache: Dict[Tuple[str, str, str], str] = {}  # (prompt, x, y): generating sequence per datapoint
 
-    def subsample(self, eval_strategy: EvalStrategy = None) -> Tuple[np.ndarray, np.ndarray]:
+    def subsample(self, eval_strategy: EvalStrategy = None) -> Tuple[List[str], List[str]]:
         """Subsample the dataset based on the specified parameters.
 
         Args:
             eval_strategy (EvalStrategy, optional): Subsampling strategy to use instead of self.eval_strategy. Defaults to None.
 
         Returns:
-            Tuple[np.ndarray, np.ndarray]: Subsampled input data and labels.
+            Tuple[List[str], List[str]]: Subsampled input data and labels.
         """
         if eval_strategy is None:
             eval_strategy = self.eval_strategy
@@ -86,24 +86,28 @@ class BaseTask(ABC):
             return self.xs, self.ys
         elif eval_strategy == "subsample":
             indices = self.rng.choice(len(self.xs), min(self.n_subsamples, len(self.xs)), replace=False)
-            return self.xs[indices], self.ys[indices]
+            return [self.xs[i] for i in indices], [self.ys[i] for i in indices]
         elif eval_strategy == "random_block":
             block_id = self.rng.integers(0, self.n_blocks)
             start_idx = block_id * self.n_subsamples
             end_idx = min((block_id + 1) * self.n_subsamples, len(self.xs))
             indices = np.arange(start_idx, end_idx)
-            return self.xs[indices], self.ys[indices]
+            return [self.xs[i] for i in indices], [self.ys[i] for i in indices]
         elif eval_strategy == "sequential_block":
             start_idx = self.block_idx * self.n_subsamples
             end_idx = min((self.block_idx + 1) * self.n_subsamples, len(self.xs))
             indices = np.arange(start_idx, end_idx)
-            return self.xs[indices], self.ys[indices]
+            return [self.xs[i] for i in indices], [self.ys[i] for i in indices]
         else:
             raise ValueError(f"Unknown subsampling strategy: '{eval_strategy}'")
 
     def _prepare_batch(
-        self, prompts: List[str], xs: np.ndarray, ys: np.ndarray, eval_strategy: str
-    ) -> List[Tuple[str, str, Any]]:
+        self,
+        prompts: List[str],
+        xs: List[str],
+        ys: List[str],
+        eval_strategy: Literal["full", "subsample", "sequential_block", "random_block", "evaluated"] = "full",
+    ) -> List[Tuple[str, str, str]]:
         """Generates (prompt, x, y) keys that require prediction.
 
         Returns keys not found in eval_cache.
@@ -113,7 +117,7 @@ class BaseTask(ABC):
         keys_to_predict = []
         for prompt in prompts:
             for x, y in zip(xs, ys):
-                cache_key = (prompt, x, y)
+                cache_key = (prompt, x, str(y))
                 if cache_key not in self.eval_cache:
                     keys_to_predict.append(cache_key)
         return keys_to_predict
@@ -121,12 +125,14 @@ class BaseTask(ABC):
     def _collect_results_from_cache(
         self,
         prompts: List[str],
-        xs: np.ndarray,
-        ys: np.ndarray,
+        xs: List[str],
+        ys: List[str],
         return_agg_scores: bool,
         return_seq: bool,
-    ) -> Union[np.ndarray, Tuple[np.ndarray, Union[List[Any], np.ndarray]]]:
+    ) -> Union[List[float], List[List[float]], Tuple[List[List[float]], List[List[str]]]]:
         """Collects all results for the current batch from the cache and formats them."""
+        assert not (return_agg_scores and return_seq), "Cannot return both aggregated scores and sequences"
+
         scores = []
         seqs = []
 
@@ -135,60 +141,142 @@ class BaseTask(ABC):
             datapoint_seqs = []
             for x, y in zip(xs, ys):
                 cache_key = (prompt, x, y)
-                datapoint_scores.append(self.eval_cache.get(cache_key, np.nan))
-                datapoint_seqs.append(self.seq_cache.get(cache_key))
+                datapoint_scores.append(self.eval_cache[cache_key])
+                if return_seq:
+                    datapoint_seqs.append(self.seq_cache.get(cache_key, ""))
             scores.append(datapoint_scores)
-            seqs.append(datapoint_seqs)
+            if return_seq:
+                seqs.append(datapoint_seqs)
 
         if return_agg_scores:
-            scores = [np.nanmean(s) for s in scores]
-
-        scores = np.array(scores)
-        seqs = np.array(seqs)
+            agg_scores = [np.nanmean(s).item() for s in scores]
+            return agg_scores
 
         return scores if not return_seq else (scores, seqs)
 
     @abstractmethod
-    def _evaluate(self, xs: np.ndarray, ys: np.ndarray, preds: np.ndarray) -> List[float]:
+    def _evaluate(self, xs: List[str], ys: List[str], preds: List[str]) -> List[float]:
         """Abstract method to calculate the score for a predictions.
 
         This method should be implemented by subclasses based on their specific evaluation logic.
         """
         raise NotImplementedError
 
+    @overload
+    def evaluate(
+        self,
+        prompts: List[str],
+        predictor: "BasePredictor",
+        system_prompts: Optional[Union[str, List[str]]] = None,
+        return_agg_scores: Literal[True] = True,
+        return_seq: Literal[False] = False,
+        eval_strategy: Optional[EvalStrategy] = None,
+    ) -> List[float]:
+        ...
+
+    @overload
+    def evaluate(
+        self,
+        prompts: List[str],
+        predictor: "BasePredictor",
+        system_prompts: Optional[Union[str, List[str]]] = None,
+        return_agg_scores: Literal[False] = False,
+        return_seq: Literal[False] = False,
+        eval_strategy: Optional[EvalStrategy] = None,
+    ) -> List[List[float]]:
+        ...
+
+    @overload
+    def evaluate(
+        self,
+        prompts: List[str],
+        predictor: "BasePredictor",
+        system_prompts: Optional[Union[str, List[str]]] = None,
+        return_agg_scores: Literal[False] = False,
+        return_seq: Literal[True] = True,
+        eval_strategy: Optional[EvalStrategy] = None,
+    ) -> Tuple[List[List[float]], List[List[str]]]:
+        ...
+
+    @overload
+    def evaluate(
+        self,
+        prompts: str,
+        predictor: "BasePredictor",
+        system_prompts: Optional[Union[str, List[str]]] = None,
+        return_agg_scores: Literal[True] = True,
+        return_seq: Literal[False] = False,
+        eval_strategy: Optional[EvalStrategy] = None,
+    ) -> List[float]:
+        ...
+
+    @overload
+    def evaluate(
+        self,
+        prompts: str,
+        predictor: "BasePredictor",
+        system_prompts: Optional[Union[str, List[str]]] = None,
+        return_agg_scores: Literal[False] = False,
+        return_seq: Literal[False] = False,
+        eval_strategy: Optional[EvalStrategy] = None,
+    ) -> List[List[float]]:
+        ...
+
+    @overload
+    def evaluate(
+        self,
+        prompts: str,
+        predictor: "BasePredictor",
+        system_prompts: Optional[Union[str, List[str]]] = None,
+        return_agg_scores: Literal[False] = False,
+        return_seq: Literal[True] = True,
+        eval_strategy: Optional[EvalStrategy] = None,
+    ) -> Tuple[List[List[float]], List[List[str]]]:
+        ...
+
     def evaluate(
         self,
         prompts: Union[str, List[str]],
         predictor: "BasePredictor",
-        system_prompts: List[str] = None,
+        system_prompts: Optional[Union[str, List[str]]] = None,
         return_agg_scores: bool = True,
         return_seq: bool = False,
-        eval_strategy: EvalStrategy = None,
-    ) -> Union[np.ndarray, Tuple[np.ndarray, Union[List[Any], np.ndarray]]]:
+        eval_strategy: Optional[EvalStrategy] = None,
+    ) -> Union[List[float], List[List[float]], Tuple[List[List[float]], List[List[str]]]]:
         """Evaluate a set of prompts using a given predictor.
 
         This method orchestrates subsampling, prediction, caching, and result collection.
+
+        Note: Cannot return both aggregated scores and sequences (assertion will fail).
         """
+        assert not (return_agg_scores and return_seq), "Cannot return both aggregated scores and sequences"
+
+        seqs: List[str] = []
+
         prompts = [prompts] if isinstance(prompts, str) else prompts
         eval_strategy = eval_strategy or self.eval_strategy
-
         xs, ys = self.subsample(eval_strategy=eval_strategy)
         batches = self._prepare_batch(prompts, xs, ys, eval_strategy=eval_strategy)
-        (prompts_to_evaluate, xs_to_evaluate, ys_to_evaluate) = zip(*batches) if batches else ([], [], [])
+        (prompts_to_evaluate, xs_to_evaluate, ys_to_evaluate) = ([], [], []) if not batches else zip(*batches)
 
-        preds = predictor.predict(
-            prompts=prompts_to_evaluate,
-            xs=xs_to_evaluate,
-            system_prompts=system_prompts,
-            return_seq=return_seq,
-        )
+        if prompts_to_evaluate:
+            preds_seqs = predictor.predict(
+                prompts=list(prompts_to_evaluate),
+                xs=list(xs_to_evaluate),
+                system_prompts=system_prompts,
+                return_seq=return_seq,
+            )
+        else:
+            preds_seqs = ([], []) if return_seq else []
 
         if return_seq:
-            preds, seqs = preds
-        scores = self._evaluate(xs_to_evaluate, ys_to_evaluate, preds)
+            preds, seqs = preds_seqs if isinstance(preds_seqs, tuple) else (preds_seqs, [])
+        else:
+            preds = preds_seqs
+
+        scores: List[float] = self._evaluate(list(xs_to_evaluate), list(ys_to_evaluate), preds)
         for i, cache_key in enumerate(batches):
             self.eval_cache[cache_key] = scores[i]
-
             if return_seq:
                 self.seq_cache[cache_key] = seqs[i]
 
@@ -200,7 +288,7 @@ class BaseTask(ABC):
             return_seq,
         )
 
-    def pop_datapoints(self, n: int = None, frac: float = None) -> pd.DataFrame:
+    def pop_datapoints(self, n: Optional[int] = None, frac: Optional[float] = None) -> pd.DataFrame:
         """Pop a number of datapoints from the dataset.
 
         Args:
@@ -218,12 +306,12 @@ class BaseTask(ABC):
         else:
             raise ValueError("Either n or frac must be specified.")
 
-        popped_xs = self.xs[indices]
-        popped_ys = self.ys[indices]
+        popped_xs = [self.xs[i] for i in indices]
+        popped_ys = [self.ys[i] for i in indices]
         df_popped = pd.DataFrame({self.x_column: popped_xs, self.y_column: popped_ys})
 
-        self.xs = np.delete(self.xs, indices)
-        self.ys = np.delete(self.ys, indices)
+        self.xs = [x for i, x in enumerate(self.xs) if i not in indices]
+        self.ys = [y for i, y in enumerate(self.ys) if i not in indices]
 
         # Update n_blocks and block_idx based on the new dataset size
         self.n_blocks = len(self.xs) // self.n_subsamples if self.n_subsamples > 0 else 1

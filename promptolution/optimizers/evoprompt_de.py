@@ -3,7 +3,7 @@
 
 import numpy as np
 
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING, Any, List, Optional
 
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 from promptolution.utils.formatting import extract_from_tag
@@ -44,11 +44,11 @@ class EvoPromptDE(BaseOptimizer):
         task: "BaseTask",
         prompt_template: str,
         meta_llm: "BaseLLM",
-        initial_prompts: List[str] = None,
+        initial_prompts: Optional[List[str]] = None,
         donor_random: bool = False,
-        callbacks: List["BaseCallback"] = None,
-        config: "ExperimentConfig" = None,
-    ):
+        callbacks: Optional[List["BaseCallback"]] = None,
+        config: Optional["ExperimentConfig"] = None,
+    ) -> None:
         """Initialize the EvoPromptDE optimizer."""
         self.prompt_template = prompt_template
         self.donor_random = donor_random
@@ -57,7 +57,7 @@ class EvoPromptDE(BaseOptimizer):
             predictor=predictor, task=task, initial_prompts=initial_prompts, callbacks=callbacks, config=config
         )
 
-    def _pre_optimization_loop(self):
+    def _pre_optimization_loop(self) -> None:
         self.scores = self.task.evaluate(self.prompts, self.predictor, return_agg_scores=True)
         self.prompts = [prompt for _, prompt in sorted(zip(self.scores, self.prompts), reverse=True)]
         self.scores = sorted(self.scores, reverse=True)

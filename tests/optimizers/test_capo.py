@@ -191,7 +191,7 @@ def test_mutate(mock_meta_llm, mock_predictor, initial_prompts, mock_task, mock_
 
 
 def test_do_racing(mock_meta_llm, mock_predictor, initial_prompts, mock_df):
-    mock_task = MockTask(predetermined_scores=[0.89, 0.9])
+    mock_task = MockTask(predetermined_scores=[0.89, 0.9] * 3)
     optimizer = CAPO(
         predictor=mock_predictor,
         task=mock_task,
@@ -206,6 +206,5 @@ def test_do_racing(mock_meta_llm, mock_predictor, initial_prompts, mock_df):
     assert len(survivors) == 1
     assert "better instruction" in survivors[0].instruction_text
 
-    # check that mocktask.reset_blocks was called
     assert mock_task.reset_block_idx.call_count == 2
     assert mock_task.increment_block_idx.call_count == 3

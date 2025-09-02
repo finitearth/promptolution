@@ -3,7 +3,7 @@
 import numpy as np
 import pandas as pd
 
-from typing import TYPE_CHECKING, List, Literal, Optional
+from typing import TYPE_CHECKING, List, Literal, Optional, Union
 
 from promptolution.llms.base_llm import BaseLLM
 from promptolution.tasks.base_task import BaseTask
@@ -119,10 +119,11 @@ class JudgeTask(BaseTask):
         else:
             prompt = self.judge_prompt
 
-        prompt = prompt.replace("{task}", self.task_description).replace("{input}", x).replace("{prediction}", pred)
+        task_description = self.task_description or ""
+        prompt = prompt.replace("{task}", task_description).replace("{input}", x).replace("{prediction}", pred)
         return prompt
 
-    def _evaluate(self, xs: np.ndarray, ys: np.ndarray, preds: np.ndarray) -> List[float]:
+    def _evaluate(self, xs: List[str], ys: List[str], preds: List[str]) -> List[float]:
         """Calculate the score for a single prediction using the LLM judge."""
         prompts: List[str] = []
         for x, y, pred in zip(xs, ys, preds):
@@ -131,13 +132,13 @@ class JudgeTask(BaseTask):
         judge_responses = self.judge_llm.get_response(prompts)
         scores_str = extract_from_tag(judge_responses, "<final_score>", "</final_score>")
         scores = []
-        for score in scores_str:
+        for score_str, judge_response in zip(scores_str, judge_responses):
             try:
                 # only numeric chars, - or . are allowed
-                score = "".join(filter(lambda c: c.isdigit() or c in "-.", score))
-                score = float(score)
-                # normalize from [-5, +5] to [0, 1]
-                score = (score + self.min_score) / (self.max_score - self.min_score)
+                score_str = "".join(filter(lambda c: c.isdigit() or c in "-.", score_str))
+                score = float(score_str)
+                # normalize from [min_score, max_score] to [0, 1]
+                score = (score - self.min_score) / (self.max_score - self.min_score)
                 score = max(0.0, min(1.0, score))
             except ValueError:
                 logger.warning(f"Failed to parse score '{score}' as float. Defaulting to a score 0.0.")

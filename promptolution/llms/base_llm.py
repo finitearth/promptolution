@@ -3,10 +3,11 @@
 
 from abc import ABC, abstractmethod
 
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING, Dict, List, Optional, Union
 
 if TYPE_CHECKING:  # pragma: no cover
     from promptolution.utils.config import ExperimentConfig
+    from transformers import PreTrainedTokenizer
 
 from promptolution.optimizers.templates import DEFAULT_SYS_PROMPT
 from promptolution.utils.logging import get_logger
@@ -24,9 +25,10 @@ class BaseLLM(ABC):
         config (LLMModelConfig): Configuration for the language model.
         input_token_count (int): Count of input tokens processed.
         output_token_count (int): Count of output tokens generated.
+        tokenizer (Optional[PreTrainedTokenizer]): The tokenizer for the model.
     """
 
-    def __init__(self, config: "ExperimentConfig" = None):
+    def __init__(self, config: Optional["ExperimentConfig"] = None):
         """Initialize the LLM with a configuration or direct parameters.
 
         This constructor supports both config-based and direct parameter initialization
@@ -40,8 +42,9 @@ class BaseLLM(ABC):
         # Initialize token counters
         self.input_token_count = 0
         self.output_token_count = 0
+        self.tokenizer: Optional[PreTrainedTokenizer] = None
 
-    def get_token_count(self):
+    def get_token_count(self) -> Dict[str, int]:
         """Get the current count of input and output tokens.
 
         Returns:
@@ -53,12 +56,12 @@ class BaseLLM(ABC):
             "total_tokens": self.input_token_count + self.output_token_count,
         }
 
-    def reset_token_count(self):
+    def reset_token_count(self) -> None:
         """Reset the token counters to zero."""
         self.input_token_count = 0
         self.output_token_count = 0
 
-    def update_token_count(self, inputs: List[str], outputs: List[str]):
+    def update_token_count(self, inputs: List[str], outputs: List[str]) -> None:
         """Update the token count based on the given inputs and outputs.
 
         It uses a simple tokenization method (splitting by whitespace) to count tokens in the base class.
@@ -72,7 +75,9 @@ class BaseLLM(ABC):
         self.input_token_count += input_tokens
         self.output_token_count += output_tokens
 
-    def get_response(self, prompts: List[str], system_prompts: List[str] = None) -> List[str]:
+    def get_response(
+        self, prompts: Union[str, List[str]], system_prompts: Optional[Union[str, List[str]]] = None
+    ) -> List[str]:
         """Generate responses for the given prompts.
 
         This method calls the _get_response method to generate responses
@@ -98,7 +103,7 @@ class BaseLLM(ABC):
 
         return responses
 
-    def set_generation_seed(self, seed: int):
+    def set_generation_seed(self, seed: int) -> None:
         """Set the random seed for reproducibility per request.
 
         Args:
