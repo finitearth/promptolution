@@ -13,6 +13,9 @@ if TYPE_CHECKING:  # pragma: no cover
     from promptolution.predictors.base_predictor import BasePredictor
     from promptolution.tasks.base_task import BaseTask
     from promptolution.utils.config import ExperimentConfig
+    from promptolution.tasks.base_task import TaskType
+    from promptolution.optimizers.base_optimizer import OptimizerType
+    from promptolution.predictors.base_predictor import PredictorType
 
 import pandas as pd
 
@@ -64,6 +67,9 @@ def run_experiment(df: pd.DataFrame, config: "ExperimentConfig"):
 def run_optimization(df: pd.DataFrame, config: "ExperimentConfig") -> List[str]:
     """Run the optimization phase of the experiment.
 
+    Configures all LLMs (downstream, meta, and judge) to use
+    the same instance, that is defined in `config.llm`.
+
     Args:
         config (Config): Configuration object for the experiment.
 
@@ -97,6 +103,9 @@ def run_optimization(df: pd.DataFrame, config: "ExperimentConfig") -> List[str]:
 
 def run_evaluation(df: pd.DataFrame, config: "ExperimentConfig", prompts: List[str]) -> pd.DataFrame:
     """Run the evaluation phase of the experiment.
+
+    Configures all LLMs (downstream, meta, and judge) to use
+    the same instance, that is defined in `config.llm`.
 
     Args:
         df (pd.DataFrame): Input DataFrame containing the data.
@@ -150,7 +159,7 @@ def get_llm(model_id: str = None, config: "ExperimentConfig" = None) -> "BaseLLM
 def get_task(
     df: pd.DataFrame,
     config: "ExperimentConfig",
-    task_type: Literal["classification", "reward", "judge"] = None,
+    task_type: TaskType = None,
     judge_llm: "BaseLLM" = None,
     reward_function: Callable = None,
 ) -> "BaseTask":
@@ -184,7 +193,7 @@ def get_optimizer(
     predictor: "BasePredictor",
     meta_llm: "BaseLLM",
     task: "BaseTask",
-    optimizer: Literal["evopromptde", "evopromptga", "opro"] = None,
+    optimizer: OptimizerType = None,
     meta_prompt: str = None,
     task_description: str = None,
     config: "ExperimentConfig" = None,
@@ -281,9 +290,7 @@ def get_exemplar_selector(
         raise ValueError(f"Unknown exemplar selector: {name}")
 
 
-def get_predictor(
-    downstream_llm=None, type: Literal["first_occurrence", "marker"] = "marker", *args, **kwargs
-) -> "BasePredictor":
+def get_predictor(downstream_llm=None, type: PredictorType = "marker", *args, **kwargs) -> "BasePredictor":
     """Factory function to create and return a predictor instance.
 
     This function supports three types of predictors:

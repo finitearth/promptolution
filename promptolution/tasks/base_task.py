@@ -13,6 +13,10 @@ if TYPE_CHECKING:  # pragma: no cover
     from promptolution.utils.config import ExperimentConfig
 
 
+TaskType = Literal["classification", "reward", "judge"]
+EvalStrategy = Literal["full", "subsample", "sequential_block", "random_block"]
+
+
 class BaseTask(ABC):
     """Abstract base class for tasks in the promptolution library."""
 
@@ -23,7 +27,7 @@ class BaseTask(ABC):
         y_column: Optional[str] = None,
         task_description: str = None,
         n_subsamples: int = 30,
-        eval_strategy: Literal["full", "subsample", "sequential_block", "random_block", "evaluated"] = "full",
+        eval_strategy: EvalStrategy = "full",
         seed: int = 42,
         config: "ExperimentConfig" = None,
     ):
@@ -66,13 +70,11 @@ class BaseTask(ABC):
         self.eval_cache = {}  # (prompt, x, y): scores per datapoint
         self.seq_cache = {}  # (prompt, x, y): generating sequence per datapoint
 
-    def subsample(
-        self, eval_strategy: Literal["full", "subsample", "sequential_block", "random_block"] = None
-    ) -> Tuple[np.ndarray, np.ndarray]:
+    def subsample(self, eval_strategy: EvalStrategy = None) -> Tuple[np.ndarray, np.ndarray]:
         """Subsample the dataset based on the specified parameters.
 
         Args:
-            eval_strategy (str, optional): Subsampling strategy to use instead of self.eval_strategy. Defaults to None.
+            eval_strategy (EvalStrategy, optional): Subsampling strategy to use instead of self.eval_strategy. Defaults to None.
 
         Returns:
             Tuple[np.ndarray, np.ndarray]: Subsampled input data and labels.
@@ -161,7 +163,7 @@ class BaseTask(ABC):
         system_prompts: List[str] = None,
         return_agg_scores: bool = True,
         return_seq: bool = False,
-        eval_strategy: str = None,
+        eval_strategy: EvalStrategy = None,
     ) -> Union[np.ndarray, Tuple[np.ndarray, Union[List[Any], np.ndarray]]]:
         """Evaluate a set of prompts using a given predictor.
 

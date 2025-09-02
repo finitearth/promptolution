@@ -11,6 +11,7 @@ from promptolution.utils.formatting import extract_from_tag
 from promptolution.utils.logging import get_logger
 
 if TYPE_CHECKING:  # pragma: no cover
+    from promptolution.tasks.base_task import EvalStrategy
     from promptolution.utils.config import ExperimentConfig
 
 logger = get_logger(__name__)
@@ -38,7 +39,7 @@ Provide a score from -5 to +5 where:
 
 Return your answer encompased by <final_score></final_score>"""
 
-JUDGE_PROMPT_WITHOUT_GROUND_TRUTH = """You are an expert evaluator. Judge the quality of the response, for the given task.
+JUDGE_PROMPT_WITHOUT_GROUND_TRUTH = """You are an expert evaluator. Judge the quality of the prediction, for the given task.
 
 Task:
 {task}
@@ -49,7 +50,7 @@ Input:
 Prediction:
 {prediction}
 
-Evaluate how well the response addresses the input for the given task. Consider correctness, quality, relevance, completeness, and excellence of execution.
+Evaluate how well the prediction addresses the input for the given task. Consider correctness, quality, relevance, completeness, and excellence of execution.
 
 Provide a score from -5 to +5 where:
 - -5: Completely wrong/inappropriate
@@ -70,14 +71,29 @@ class JudgeTask(BaseTask):
         y_column: Optional[str] = None,
         task_description: Optional[str] = None,
         n_subsamples: int = 30,
-        eval_strategy: Literal["full", "subsample", "sequential_block", "random_block"] = "full",
+        eval_strategy: EvalStrategy = "full",
         seed: int = 42,
         judge_prompt: Optional[str] = None,
         min_score: float = -5.0,
         max_score: float = 5.0,
         config: "ExperimentConfig" = None,
     ):
-        """Initialize the JudgeTask."""
+        """Initialize the JudgeTask.
+
+        Args:
+            df (pd.DataFrame): The input DataFrame containing the data.
+            judge_llm (BaseLLM): The LLM judging the predictions.
+            x_column (str): Name of the column containing input texts.
+            y_column (Optional[str]): Name of the column containing labels/ground truth (if applicable).
+            task_description (Optional[str]): Description of the task, parsed to the Judge-LLM and Meta-LLM.
+            n_subsamples (int): Number of subsamples to use for evaluation.
+            eval_strategy (EvalStrategy): Subsampling strategy to use for evaluation.
+            seed (int): Random seed for reproducibility.
+            judge_prompt (Optional[str]): Custom prompt for the judge. Note: The score of the Judge will be extracted inside <final_score> tags.
+            min_score (float): Minimum score for evaluation.
+            max_score (float): Maximum score for evaluation.
+            config (ExperimentConfig, optional): Configuration for the task, overriding defaults.
+        """
         if judge_prompt is None:
             judge_prompt = JUDGE_PROMPT_WITH_GROUND_TRUTH if y_column else JUDGE_PROMPT_WITHOUT_GROUND_TRUTH
         self.judge_prompt = judge_prompt
@@ -94,7 +110,6 @@ class JudgeTask(BaseTask):
             seed=seed,
             config=config,
         )
-        assert judge_llm is not None, "judge_llm must be provided for JudgeTask"
         self.judge_llm = judge_llm
 
     def _construct_judge_prompt(self, x: str, pred: str, y: Optional[str] = None) -> str:
@@ -125,7 +140,7 @@ class JudgeTask(BaseTask):
                 score = (score + self.min_score) / (self.max_score - self.min_score)
                 score = max(0.0, min(1.0, score))
             except ValueError:
-                logger.warning(f"Failed to parse score '{score}' as float. Defaulting to 0.0.")
+                logger.warning(f"Failed to parse score '{score}' as float. Defaulting to a score 0.0.")
                 score = 0.0
 
             scores.append(score)

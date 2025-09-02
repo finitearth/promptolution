@@ -3,7 +3,7 @@
 
 from abc import ABC, abstractmethod
 
-from typing import TYPE_CHECKING, Callable, List
+from typing import TYPE_CHECKING, Callable, List, Literal
 
 if TYPE_CHECKING:  # pragma: no cover
     from promptolution.tasks.base_task import BaseTask
@@ -12,6 +12,8 @@ if TYPE_CHECKING:  # pragma: no cover
 from promptolution.utils.logging import get_logger
 
 logger = get_logger(__name__)
+
+OptimizerType = Literal["evopromptde", "evopromptga", "opro", "capo"]
 
 
 class BaseOptimizer(ABC):
