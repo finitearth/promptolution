@@ -4,7 +4,7 @@
 [![CI](https://github.com/finitearth/promptolution/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/finitearth/promptolution/actions/workflows/ci.yml)
 [![Docs](https://github.com/finitearth/promptolution/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/finitearth/promptolution/actions/workflows/docs.yml)
 ![Code Style](https://img.shields.io/badge/Code%20Style-black-black)
-![Python Versions](https://img.shields.io/badge/Python%20Versions-≥3.9-blue)
+![Python Versions](https://img.shields.io/badge/Python%20Versions-≥3.10-blue)
 
 
 
