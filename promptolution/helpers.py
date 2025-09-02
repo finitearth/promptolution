@@ -161,9 +161,9 @@ def get_llm(model_id: Optional[str] = None, config: Optional["ExperimentConfig"]
 def get_task(
     df: pd.DataFrame,
     config: "ExperimentConfig",
-    task_type: TaskType = None,
-    judge_llm: "BaseLLM" = None,
-    reward_function: Callable = None,
+    task_type: Optional["TaskType"] = None,
+    judge_llm: Optional["BaseLLM"] = None,
+    reward_function: Optional[Callable] = None,
 ) -> "BaseTask":
     """Get the task based on the provided DataFrame and configuration.
 
@@ -198,7 +198,7 @@ def get_optimizer(
     predictor: "BasePredictor",
     meta_llm: "BaseLLM",
     task: "BaseTask",
-    optimizer: Optional[OptimizerType] = None,
+    optimizer: Optional["OptimizerType"] = None,
     task_description: Optional[str] = None,
     config: Optional["ExperimentConfig"] = None,
 ) -> "BaseOptimizer":
@@ -292,7 +292,7 @@ def get_exemplar_selector(
         raise ValueError(f"Unknown exemplar selector: {name}")
 
 
-def get_predictor(downstream_llm=None, type: PredictorType = "marker", *args, **kwargs) -> "BasePredictor":
+def get_predictor(downstream_llm=None, type: "PredictorType" = "marker", *args, **kwargs) -> "BasePredictor":
     """Factory function to create and return a predictor instance.
 
     This function supports three types of predictors:

@@ -71,7 +71,7 @@ class JudgeTask(BaseTask):
         y_column: Optional[str] = None,
         task_description: Optional[str] = None,
         n_subsamples: int = 30,
-        eval_strategy: EvalStrategy = "full",
+        eval_strategy: "EvalStrategy" = "full",
         seed: int = 42,
         judge_prompt: Optional[str] = None,
         min_score: float = -5.0,

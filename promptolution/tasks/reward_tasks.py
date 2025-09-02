@@ -1,10 +1,9 @@
 """Module for Reward tasks."""
 
 
-import numpy as np
 import pandas as pd
 
-from typing import TYPE_CHECKING, Callable, List, Literal, Optional, Union
+from typing import TYPE_CHECKING, Callable, List, Optional
 
 from promptolution.tasks.base_task import BaseTask
 
@@ -27,7 +26,7 @@ class RewardTask(BaseTask):
         x_column: str = "x",
         task_description: Optional[str] = None,
         n_subsamples: int = 30,
-        eval_strategy: EvalStrategy = "full",
+        eval_strategy: "EvalStrategy" = "full",
         seed: int = 42,
         config: Optional["ExperimentConfig"] = None,
     ) -> None:

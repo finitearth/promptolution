@@ -27,7 +27,7 @@ class BaseTask(ABC):
         y_column: Optional[str] = None,
         task_description: Optional[str] = None,
         n_subsamples: int = 30,
-        eval_strategy: EvalStrategy = "full",
+        eval_strategy: "EvalStrategy" = "full",
         seed: int = 42,
         config: Optional["ExperimentConfig"] = None,
     ) -> None:
@@ -70,7 +70,7 @@ class BaseTask(ABC):
         self.eval_cache: Dict[Tuple[str, str, str], float] = {}  # (prompt, x, y): scores per datapoint
         self.seq_cache: Dict[Tuple[str, str, str], str] = {}  # (prompt, x, y): generating sequence per datapoint
 
-    def subsample(self, eval_strategy: EvalStrategy = None) -> Tuple[List[str], List[str]]:
+    def subsample(self, eval_strategy: "EvalStrategy" = None) -> Tuple[List[str], List[str]]:
         """Subsample the dataset based on the specified parameters.
 
         Args:
@@ -170,7 +170,7 @@ class BaseTask(ABC):
         system_prompts: Optional[Union[str, List[str]]] = None,
         return_agg_scores: Literal[True] = True,
         return_seq: Literal[False] = False,
-        eval_strategy: Optional[EvalStrategy] = None,
+        eval_strategy: Optional["EvalStrategy"] = None,
     ) -> List[float]:
         ...
 
@@ -182,7 +182,7 @@ class BaseTask(ABC):
         system_prompts: Optional[Union[str, List[str]]] = None,
         return_agg_scores: Literal[False] = False,
         return_seq: Literal[False] = False,
-        eval_strategy: Optional[EvalStrategy] = None,
+        eval_strategy: Optional["EvalStrategy"] = None,
     ) -> List[List[float]]:
         ...
 
@@ -194,7 +194,7 @@ class BaseTask(ABC):
         system_prompts: Optional[Union[str, List[str]]] = None,
         return_agg_scores: Literal[False] = False,
         return_seq: Literal[True] = True,
-        eval_strategy: Optional[EvalStrategy] = None,
+        eval_strategy: Optional["EvalStrategy"] = None,
     ) -> Tuple[List[List[float]], List[List[str]]]:
         ...
 
@@ -206,7 +206,7 @@ class BaseTask(ABC):
         system_prompts: Optional[Union[str, List[str]]] = None,
         return_agg_scores: Literal[True] = True,
         return_seq: Literal[False] = False,
-        eval_strategy: Optional[EvalStrategy] = None,
+        eval_strategy: Optional["EvalStrategy"] = None,
     ) -> List[float]:
         ...
 
@@ -218,7 +218,7 @@ class BaseTask(ABC):
         system_prompts: Optional[Union[str, List[str]]] = None,
         return_agg_scores: Literal[False] = False,
         return_seq: Literal[False] = False,
-        eval_strategy: Optional[EvalStrategy] = None,
+        eval_strategy: Optional["EvalStrategy"] = None,
     ) -> List[List[float]]:
         ...
 
@@ -230,7 +230,7 @@ class BaseTask(ABC):
         system_prompts: Optional[Union[str, List[str]]] = None,
         return_agg_scores: Literal[False] = False,
         return_seq: Literal[True] = True,
-        eval_strategy: Optional[EvalStrategy] = None,
+        eval_strategy: Optional["EvalStrategy"] = None,
     ) -> Tuple[List[List[float]], List[List[str]]]:
         ...
 
@@ -241,7 +241,7 @@ class BaseTask(ABC):
         system_prompts: Optional[Union[str, List[str]]] = None,
         return_agg_scores: bool = True,
         return_seq: bool = False,
-        eval_strategy: Optional[EvalStrategy] = None,
+        eval_strategy: Optional["EvalStrategy"] = None,
     ) -> Union[List[float], List[List[float]], Tuple[List[List[float]], List[List[str]]]]:
         """Evaluate a set of prompts using a given predictor.
 
