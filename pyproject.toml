@@ -6,7 +6,7 @@ authors = ["Tom Zehle, Moritz Schlager, Timo Heiß"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.10,<3.13"
 numpy = "^1.26.0"
 pandas = "^2.2.2"
 tqdm = "^4.66.5"
@@ -18,7 +18,7 @@ openai = "^1.0.0"
 requests = "^2.31.0"
 
 [tool.poetry.group.vllm.dependencies]
-vllm = "^0.8.3"
+vllm = "^0.10.1.1"
 
 [tool.poetry.group.transformers.dependencies]
 transformers = "^4.48.0"
@@ -36,7 +36,7 @@ pytest = "^8.3.5"
 pytest-cov = "^6.1.1"
 openai = "^1.0.0"
 requests = "^2.31.0"
-vllm = "^0.8.2"
+vllm = "^0.10.1.1"
 transformers = "^4.48.0"
 
 [tool.poetry.group.docs.dependencies]
