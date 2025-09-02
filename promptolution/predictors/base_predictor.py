@@ -3,14 +3,14 @@
 
 from abc import ABC, abstractmethod
 
-from typing import TYPE_CHECKING, Any, List, Optional, Tuple, Union
+from typing import TYPE_CHECKING, List, Literal, Optional, Tuple, Union
 
 from promptolution.llms.base_llm import BaseLLM
 
 if TYPE_CHECKING:  # pragma: no cover
     from promptolution.utils.config import ExperimentConfig
 
-import numpy as np
+PredictorType = Literal["first_occurrence", "marker"]
 
 
 class BasePredictor(ABC):

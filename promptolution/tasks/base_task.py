@@ -13,6 +13,10 @@ if TYPE_CHECKING:  # pragma: no cover
     from promptolution.utils.config import ExperimentConfig
 
 
+TaskType = Literal["classification", "reward", "judge"]
+EvalStrategy = Literal["full", "subsample", "sequential_block", "random_block"]
+
+
 class BaseTask(ABC):
     """Abstract base class for tasks in the promptolution library."""
 
@@ -23,7 +27,7 @@ class BaseTask(ABC):
         y_column: Optional[str] = None,
         task_description: Optional[str] = None,
         n_subsamples: int = 30,
-        eval_strategy: Literal["full", "subsample", "sequential_block", "random_block", "evaluated"] = "full",
+        eval_strategy: EvalStrategy = "full",
         seed: int = 42,
         config: Optional["ExperimentConfig"] = None,
     ) -> None:
@@ -66,14 +70,11 @@ class BaseTask(ABC):
         self.eval_cache: Dict[Tuple[str, str, str], float] = {}  # (prompt, x, y): scores per datapoint
         self.seq_cache: Dict[Tuple[str, str, str], str] = {}  # (prompt, x, y): generating sequence per datapoint
 
-    def subsample(
-        self,
-        eval_strategy: Optional[Literal["full", "subsample", "sequential_block", "random_block", "evaluated"]] = None,
-    ) -> Tuple[List[str], List[str]]:
+    def subsample(self, eval_strategy: EvalStrategy = None) -> Tuple[List[str], List[str]]:
         """Subsample the dataset based on the specified parameters.
 
         Args:
-            eval_strategy (str, optional): Subsampling strategy to use instead of self.eval_strategy. Defaults to None.
+            eval_strategy (EvalStrategy, optional): Subsampling strategy to use instead of self.eval_strategy. Defaults to None.
 
         Returns:
             Tuple[List[str], List[str]]: Subsampled input data and labels.
@@ -169,7 +170,7 @@ class BaseTask(ABC):
         system_prompts: Optional[Union[str, List[str]]] = None,
         return_agg_scores: Literal[True] = True,
         return_seq: Literal[False] = False,
-        eval_strategy: Optional[Literal["full", "subsample", "sequential_block", "random_block", "evaluated"]] = None,
+        eval_strategy: Optional[EvalStrategy] = None,
     ) -> List[float]:
         ...
 
@@ -181,7 +182,7 @@ class BaseTask(ABC):
         system_prompts: Optional[Union[str, List[str]]] = None,
         return_agg_scores: Literal[False] = False,
         return_seq: Literal[False] = False,
-        eval_strategy: Optional[Literal["full", "subsample", "sequential_block", "random_block", "evaluated"]] = None,
+        eval_strategy: Optional[EvalStrategy] = None,
     ) -> List[List[float]]:
         ...
 
@@ -193,11 +194,10 @@ class BaseTask(ABC):
         system_prompts: Optional[Union[str, List[str]]] = None,
         return_agg_scores: Literal[False] = False,
         return_seq: Literal[True] = True,
-        eval_strategy: Optional[Literal["full", "subsample", "sequential_block", "random_block", "evaluated"]] = None,
+        eval_strategy: Optional[EvalStrategy] = None,
     ) -> Tuple[List[List[float]], List[List[str]]]:
         ...
 
-    # Same for single prompt (str) cases
     @overload
     def evaluate(
         self,
@@ -206,7 +206,7 @@ class BaseTask(ABC):
         system_prompts: Optional[Union[str, List[str]]] = None,
         return_agg_scores: Literal[True] = True,
         return_seq: Literal[False] = False,
-        eval_strategy: Optional[Literal["full", "subsample", "sequential_block", "random_block", "evaluated"]] = None,
+        eval_strategy: Optional[EvalStrategy] = None,
     ) -> List[float]:
         ...
 
@@ -218,7 +218,7 @@ class BaseTask(ABC):
         system_prompts: Optional[Union[str, List[str]]] = None,
         return_agg_scores: Literal[False] = False,
         return_seq: Literal[False] = False,
-        eval_strategy: Optional[Literal["full", "subsample", "sequential_block", "random_block", "evaluated"]] = None,
+        eval_strategy: Optional[EvalStrategy] = None,
     ) -> List[List[float]]:
         ...
 
@@ -230,11 +230,10 @@ class BaseTask(ABC):
         system_prompts: Optional[Union[str, List[str]]] = None,
         return_agg_scores: Literal[False] = False,
         return_seq: Literal[True] = True,
-        eval_strategy: Optional[Literal["full", "subsample", "sequential_block", "random_block", "evaluated"]] = None,
+        eval_strategy: Optional[EvalStrategy] = None,
     ) -> Tuple[List[List[float]], List[List[str]]]:
         ...
 
-    # Main implementation with the assertion
     def evaluate(
         self,
         prompts: Union[str, List[str]],
@@ -242,7 +241,7 @@ class BaseTask(ABC):
         system_prompts: Optional[Union[str, List[str]]] = None,
         return_agg_scores: bool = True,
         return_seq: bool = False,
-        eval_strategy: Optional[Literal["full", "subsample", "sequential_block", "random_block", "evaluated"]] = None,
+        eval_strategy: Optional[EvalStrategy] = None,
     ) -> Union[List[float], List[List[float]], Tuple[List[List[float]], List[List[str]]]]:
         """Evaluate a set of prompts using a given predictor.
 

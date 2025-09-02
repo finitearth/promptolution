@@ -9,6 +9,7 @@ from typing import TYPE_CHECKING, Callable, List, Literal, Optional, Union
 from promptolution.tasks.base_task import BaseTask
 
 if TYPE_CHECKING:  # pragma: no cover
+    from promptolution.tasks.base_task import EvalStrategy
     from promptolution.utils.config import ExperimentConfig
 
 
@@ -16,7 +17,7 @@ class RewardTask(BaseTask):
     """A task that evaluates a predictor using a reward function.
 
     This task takes a DataFrame, a column name for input data, and a reward function.
-    The reward function should take a prediction and return a reward.
+    The reward function takes in a prediction as input and returns a scalar reward.
     """
 
     def __init__(
@@ -26,7 +27,7 @@ class RewardTask(BaseTask):
         x_column: str = "x",
         task_description: Optional[str] = None,
         n_subsamples: int = 30,
-        eval_strategy: Literal["full", "subsample", "sequential_block", "random_block"] = "full",
+        eval_strategy: EvalStrategy = "full",
         seed: int = 42,
         config: Optional["ExperimentConfig"] = None,
     ) -> None:
@@ -34,7 +35,7 @@ class RewardTask(BaseTask):
 
         Args:
             df (pd.DataFrame): Input DataFrame containing the data.
-            reward_function (Callable): Function that takes a prediction and returns a reward score.
+            reward_function (Callable): Function that takes a prediction and returns a reward score. Note: The optimizers aim to maximize.
             x_column (str, optional): Name of the column containing input texts. Defaults to "x".
             task_description (str, optional): Description of the task.
             n_subsamples (int, optional): Number of subsamples to use. Defaults to 30.

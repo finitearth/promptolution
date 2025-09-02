@@ -1,7 +1,7 @@
 """Helper functions for the usage of the libary."""
 
 
-from typing import TYPE_CHECKING, Any, Callable, List, Literal, Optional
+from typing import TYPE_CHECKING, Callable, List, Literal, Optional
 
 from promptolution.tasks.judge_tasks import JudgeTask
 from promptolution.tasks.reward_tasks import RewardTask
@@ -13,6 +13,9 @@ if TYPE_CHECKING:  # pragma: no cover
     from promptolution.predictors.base_predictor import BasePredictor
     from promptolution.tasks.base_task import BaseTask
     from promptolution.utils.config import ExperimentConfig
+    from promptolution.tasks.base_task import TaskType
+    from promptolution.optimizers.base_optimizer import OptimizerType
+    from promptolution.predictors.base_predictor import PredictorType
 
 import pandas as pd
 
@@ -64,6 +67,9 @@ def run_experiment(df: pd.DataFrame, config: "ExperimentConfig") -> pd.DataFrame
 def run_optimization(df: pd.DataFrame, config: "ExperimentConfig") -> List[str]:
     """Run the optimization phase of the experiment.
 
+    Configures all LLMs (downstream, meta, and judge) to use
+    the same instance, that is defined in `config.llm`.
+
     Args:
         config (Config): Configuration object for the experiment.
 
@@ -97,6 +103,9 @@ def run_optimization(df: pd.DataFrame, config: "ExperimentConfig") -> List[str]:
 
 def run_evaluation(df: pd.DataFrame, config: "ExperimentConfig", prompts: List[str]) -> pd.DataFrame:
     """Run the evaluation phase of the experiment.
+
+    Configures all LLMs (downstream, meta, and judge) to use
+    the same instance, that is defined in `config.llm`.
 
     Args:
         df (pd.DataFrame): Input DataFrame containing the data.
@@ -152,9 +161,9 @@ def get_llm(model_id: Optional[str] = None, config: Optional["ExperimentConfig"]
 def get_task(
     df: pd.DataFrame,
     config: "ExperimentConfig",
-    task_type: Optional[Literal["classification", "reward", "judge"]] = None,
-    judge_llm: Optional["BaseLLM"] = None,
-    reward_function: Optional[Callable[[str], float]] = None,
+    task_type: TaskType = None,
+    judge_llm: "BaseLLM" = None,
+    reward_function: Callable = None,
 ) -> "BaseTask":
     """Get the task based on the provided DataFrame and configuration.
 
@@ -170,7 +179,8 @@ def get_task(
     final_task_type = task_type or (config.task_type if config else None)
 
     if final_task_type == "reward":
-        reward_function = reward_function or (config.reward_function if config else None)
+        if reward_function is None:
+            reward_function = config.reward_function if config else None
         assert reward_function is not None, "Reward function must be provided for reward tasks."
         return RewardTask(
             df=df,
@@ -188,10 +198,9 @@ def get_optimizer(
     predictor: "BasePredictor",
     meta_llm: "BaseLLM",
     task: "BaseTask",
-    config: Optional["ExperimentConfig"] = None,
-    optimizer: Optional[Literal["evopromptde", "evopromptga", "opro", "capo"]] = None,
-    meta_prompt: Optional[str] = None,
+    optimizer: Optional[OptimizerType] = None,
     task_description: Optional[str] = None,
+    config: Optional["ExperimentConfig"] = None,
 ) -> "BaseOptimizer":
     """Creates and returns an optimizer instance based on provided parameters.
 
@@ -283,9 +292,7 @@ def get_exemplar_selector(
         raise ValueError(f"Unknown exemplar selector: {name}")
 
 
-def get_predictor(
-    downstream_llm: "BaseLLM", type: Literal["first_occurrence", "marker"] = "marker", *args: Any, **kwargs: Any
-) -> "BasePredictor":
+def get_predictor(downstream_llm=None, type: PredictorType = "marker", *args, **kwargs) -> "BasePredictor":
     """Factory function to create and return a predictor instance.
 
     This function supports three types of predictors:
