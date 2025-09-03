@@ -90,6 +90,8 @@ class VLLM(BaseLLM):
         self.max_model_len = max_model_len
         self.trust_remote_code = trust_remote_code
 
+        super().__init__(config)
+
         # Configure sampling parameters
         self.sampling_params = SamplingParams(
             temperature=temperature, top_p=top_p, max_tokens=max_generated_tokens, seed=seed
@@ -131,7 +133,6 @@ class VLLM(BaseLLM):
                 logger.warning("⚠️ Could not determine batch size from GPU memory. Using batch size of 1.")
         else:
             self.batch_size = batch_size
-        super().__init__(config)
 
     def _get_response(self, prompts: List[str], system_prompts: List[str]) -> List[str]:
         """Generate responses for a list of prompts using the vLLM engine.
