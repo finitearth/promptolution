@@ -3,9 +3,11 @@
 
 import numpy as np
 
-from typing import TYPE_CHECKING, List, Union
+from typing import TYPE_CHECKING, List, Optional, Union
 
-if TYPE_CHECKING:
+from promptolution.utils.formatting import extract_from_tag
+
+if TYPE_CHECKING:  # pragma: no cover
     from promptolution.llms.base_llm import BaseLLM
     from promptolution.tasks.base_task import BaseTask
 
@@ -17,7 +19,9 @@ from promptolution.optimizers.templates import (
 from promptolution.tasks.classification_tasks import ClassificationTask
 
 
-def create_prompt_variation(prompt: Union[List[str], str], llm: "BaseLLM", meta_prompt: str = None) -> List[str]:
+def create_prompt_variation(
+    prompt: Union[List[str], str], llm: "BaseLLM", meta_prompt: Optional[str] = None
+) -> List[str]:
     """Generate a variation of the given prompt(s) while keeping the semantic meaning.
 
     Idea taken from the paper Zhou et al. (2021) https://arxiv.org/pdf/2211.01910
@@ -36,8 +40,7 @@ def create_prompt_variation(prompt: Union[List[str], str], llm: "BaseLLM", meta_
     if isinstance(prompt, str):
         prompt = [prompt]
     varied_prompts = llm.get_response([meta_prompt.replace("<prev_prompt>", p) for p in prompt])
-
-    varied_prompts = [p.split("</prompt>")[0].split("<prompt>")[-1] for p in varied_prompts]
+    varied_prompts = extract_from_tag(varied_prompts, "<prompt>", "</prompt>")
 
     return varied_prompts
 
@@ -45,9 +48,9 @@ def create_prompt_variation(prompt: Union[List[str], str], llm: "BaseLLM", meta_
 def create_prompts_from_samples(
     task: "BaseTask",
     llm: "BaseLLM",
-    meta_prompt: str = None,
+    meta_prompt: Optional[str] = None,
     n_samples: int = 3,
-    task_description: str = None,
+    task_description: Optional[str] = None,
     n_prompts: int = 1,
     get_uniform_labels: bool = False,
 ) -> List[str]:
@@ -72,14 +75,17 @@ def create_prompts_from_samples(
     Returns:
         List[str]: A list of generated prompts.
     """
-    if meta_prompt is None and task_description is None:
-        meta_prompt_template = PROMPT_CREATION_TEMPLATE
-    elif meta_prompt is None and task_description is not None:
-        meta_prompt_template = PROMPT_CREATION_TEMPLATE_TD.replace("<task_desc>", task_description)
-    elif meta_prompt is not None and task_description is None:
-        meta_prompt_template = meta_prompt
-    elif meta_prompt is not None and task_description is not None:
-        meta_prompt_template = meta_prompt.replace("<task_desc>", task_description)
+    meta_prompt_template: str
+    if meta_prompt is None:
+        if task_description is None:
+            meta_prompt_template = PROMPT_CREATION_TEMPLATE
+        else:
+            meta_prompt_template = PROMPT_CREATION_TEMPLATE_TD.replace("<task_desc>", task_description)
+    else:
+        if task_description is None:
+            meta_prompt_template = meta_prompt
+        else:
+            meta_prompt_template = meta_prompt.replace("<task_desc>", task_description)
 
     meta_prompts = []
     for _ in range(n_prompts):
@@ -91,9 +97,9 @@ def create_prompts_from_samples(
             samples_per_class = np.maximum(samples_per_class, 1)
 
             # sample
-            xs = []
-            ys = []
-            for label, n_samples in zip(unique_labels, samples_per_class):
+            xs: List[str] = []
+            ys: List[str] = []
+            for label, num_samples in zip(unique_labels, samples_per_class):
                 indices = np.where(task.ys == label)[0]
                 indices = np.random.choice(indices, n_samples, replace=False)
                 xs.extend(task.xs[indices])
@@ -102,14 +108,14 @@ def create_prompts_from_samples(
         else:
             # if not classification task, sample randomly
             indices = np.random.choice(len(task.xs), n_samples, replace=False)
-            xs = task.xs[indices].tolist()
-            ys = task.ys[indices].tolist()
+            xs = [task.xs[i] for i in indices]
+            ys = [task.ys[i] for i in indices]
 
         examples = "\n\n".join([f"Input: {x}\nOutput: {y}" for x, y in zip(xs, ys)])
         meta_prompt = meta_prompt_template.replace("<input_output_pairs>", examples)
         meta_prompts.append(meta_prompt)
 
     prompts = llm.get_response(meta_prompts)
-    prompts = [prompt.split("</prompt>")[0].split("<prompt>")[-1].strip() for prompt in prompts]
+    prompts = extract_from_tag(prompts, "<prompt>", "</prompt>")
 
     return prompts

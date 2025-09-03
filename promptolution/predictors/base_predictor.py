@@ -3,28 +3,23 @@
 
 from abc import ABC, abstractmethod
 
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING, List, Literal, Optional, Tuple, Union
 
 from promptolution.llms.base_llm import BaseLLM
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from promptolution.utils.config import ExperimentConfig
 
-import numpy as np
+PredictorType = Literal["first_occurrence", "marker"]
 
 
 class BasePredictor(ABC):
     """Abstract base class for predictors in the promptolution library.
 
     This class defines the interface that all concrete predictor implementations should follow.
-
-    Attributes:
-        llm: The language model used for generating predictions.
-        classes (List[str]): The list of valid class labels.
-        config (ExperimentConfig): Experiment configuration overwriting defaults
     """
 
-    def __init__(self, llm: "BaseLLM", config: "ExperimentConfig" = None):
+    def __init__(self, llm: "BaseLLM", config: Optional["ExperimentConfig"] = None) -> None:
         """Initialize the predictor with a language model and configuration.
 
         Args:
@@ -32,17 +27,17 @@ class BasePredictor(ABC):
             config: Configuration for the predictor.
         """
         self.llm = llm
-
+        self.extraction_description = ""
         if config is not None:
             config.apply_to(self)
 
     def predict(
         self,
-        prompts: List[str],
-        xs: np.ndarray,
-        system_prompts: List[str] = None,
+        prompts: Union[str, List[str]],
+        xs: List[str],
+        system_prompts: Optional[Union[str, List[str]]] = None,
         return_seq: bool = False,
-    ) -> np.ndarray:
+    ) -> Union[List[str], Tuple[List[str], List[str]]]:
         """Abstract method to make predictions based on prompts and input data.
 
         Args:
@@ -63,18 +58,18 @@ class BasePredictor(ABC):
 
         if return_seq:
             seqs = [f"{x}\n{out}" for x, out in zip(xs, outputs)]
-            seqs = np.array(seqs)
+            return preds, seqs
 
-        return preds if not return_seq else (preds, seqs)
+        return preds
 
     @abstractmethod
-    def _extract_preds(self, preds: List[str]) -> np.ndarray:
+    def _extract_preds(self, preds: List[str]) -> List[str]:
         """Extract class labels from the predictions, based on the list of valid class labels.
 
         Args:
             preds: The raw predictions from the language model.
 
         Returns:
-            np.ndarray: Extracted predictions.
+            List[str]: Extracted class labels from the predictions.
         """
         raise NotImplementedError

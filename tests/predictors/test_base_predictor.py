@@ -37,5 +37,5 @@ def test_predictor_with_return_seq(mock_predictor):
 
     # Verify sequences
     assert len(sequences) == 1
-    assert isinstance(sequences, np.ndarray)
+    assert isinstance(sequences, list)
     assert "This product is okay." in sequences[0]

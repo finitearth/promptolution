@@ -10,14 +10,14 @@ def test_first_occurrence_classifier(mock_downstream_llm, mock_df):
     classifier = FirstOccurrenceClassifier(llm=mock_downstream_llm, classes=mock_df["y"].values)
 
     # Test with multiple inputs
-    xs = np.array(["I love this product!", "I hate this product!", "This product is okay.", "ja ne"])
+    xs = ["I love this product!", "I hate this product!", "This product is okay.", "ja ne"]
     prompts = ["Classify:"] * len(xs)
 
     # Make predictions
     predictions = classifier.predict(prompts, xs)
 
     # Verify shape and content
-    assert predictions.shape == (4,)
+    assert len(predictions) == 4
     assert predictions[0] == "negative"
     assert predictions[1] == "positive"
     assert predictions[2] == "positive"
@@ -42,7 +42,7 @@ def test_marker_based_classifier(mock_downstream_llm, mock_df):
     predictions = classifier.predict(prompts, xs)
 
     # Verify shape and content
-    assert predictions.shape == (3,)
+    assert len(predictions) == 3
     assert predictions[0] == "positive"
     assert predictions[1] == "negative"
     assert predictions[2] == "neutral"
@@ -73,7 +73,7 @@ def test_marker_based_without_classes(mock_downstream_llm):
     predictions = classifier.predict(prompts, xs)
 
     # Verify shape and content - should accept any value between markers
-    assert predictions.shape == (4,)
+    assert len(predictions) == 4
     assert predictions[0] == "positive"
     assert predictions[1] == "negative"
     assert predictions[2] == "neutral"
@@ -93,7 +93,7 @@ def test_multiple_prompts_with_classifiers(mock_downstream_llm, mock_df):
     predictions = classifier.predict(prompts, xs)
 
     # Verify shape and content
-    assert predictions.shape == (4,)
+    assert len(predictions) == 4
     assert predictions[0] == "negative"
     assert predictions[1] == "positive"
     assert predictions[2] == "positive"
@@ -113,7 +113,7 @@ def test_sequence_return_with_classifiers(mock_downstream_llm, mock_df):
     predictions, sequences = classifier.predict(prompts, xs, return_seq=True)
 
     # Verify predictions
-    assert predictions.shape == (1,)
+    assert len(predictions) == 1
     assert predictions[0] == "positive"
 
     # Verify sequences

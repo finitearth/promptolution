@@ -8,21 +8,26 @@ from promptolution.llms import LocalLLM
 @pytest.fixture
 def mock_local_dependencies():
     """Set up mocks for LocalLLM dependencies."""
-    with patch("promptolution.llms.local_llm.transformers") as mock_transformers, patch(
+    with patch("promptolution.llms.local_llm.pipeline") as mock_pipeline_func, patch(
         "promptolution.llms.local_llm.torch"
     ) as mock_torch:
-        # Configure mock pipeline
-        mock_pipeline = MagicMock()
-        mock_pipeline.return_value = [{"generated_text": "Mock response 1"}, {"generated_text": "Mock response 2"}]
-        mock_transformers.pipeline.return_value = mock_pipeline
+        # Create a mock pipeline object (not a list!)
+        mock_pipeline_obj = MagicMock()
 
-        # Configure mock tokenizer
-        mock_pipeline.tokenizer = MagicMock()
-        mock_pipeline.tokenizer.pad_token_id = None
-        mock_pipeline.tokenizer.eos_token_id = 50256
-        mock_pipeline.tokenizer.padding_side = None
+        # Configure the pipeline function to return the pipeline object
+        mock_pipeline_func.return_value = mock_pipeline_obj
 
-        yield {"transformers": mock_transformers, "pipeline": mock_pipeline, "torch": mock_torch}
+        # Configure mock tokenizer on the pipeline object
+        mock_tokenizer = MagicMock()
+        mock_tokenizer.pad_token_id = None
+        mock_tokenizer.eos_token_id = 50256
+        mock_tokenizer.padding_side = None
+        mock_pipeline_obj.tokenizer = mock_tokenizer
+
+        # Configure the pipeline object's __call__ method to return responses
+        mock_pipeline_obj.return_value = [{"generated_text": "Mock response 1"}, {"generated_text": "Mock response 2"}]
+
+        yield {"pipeline": mock_pipeline_func, "torch": mock_torch, "pipeline_obj": mock_pipeline_obj}
 
 
 def test_local_llm_initialization(mock_local_dependencies):
@@ -31,7 +36,7 @@ def test_local_llm_initialization(mock_local_dependencies):
     local_llm = LocalLLM(model_id="gpt2", batch_size=4)
 
     # Verify pipeline was created correctly
-    mock_local_dependencies["transformers"].pipeline.assert_called_once_with(
+    mock_local_dependencies["pipeline"].assert_called_once_with(
         "text-generation",
         model="gpt2",
         model_kwargs={"torch_dtype": mock_local_dependencies["torch"].bfloat16},
@@ -49,26 +54,16 @@ def test_local_llm_initialization(mock_local_dependencies):
 
 def test_local_llm_get_response(mock_local_dependencies):
     """Test that LocalLLM._get_response works correctly."""
-    # Create LocalLLM instance
-    local_llm = LocalLLM(model_id="gpt2")
+    local_llm = LocalLLM(model_id="gpt2", batch_size=4)
 
-    # Mock torch.no_grad context
-    with patch("promptolution.llms.local_llm.torch.no_grad") as mock_no_grad:
-        mock_no_grad.return_value.__enter__ = MagicMock()
-        mock_no_grad.return_value.__exit__ = MagicMock()
+    # Mock prompts
+    prompts = ["Hello, world!", "How are you?"]
+    sys_prompts = ["System prompt 1", "System prompt 2"]
 
-        # Call _get_response
-        prompts = ["Test prompt 1", "Test prompt 2"]
-        system_prompts = ["Be helpful", "Be concise"]
-        responses = local_llm._get_response(prompts, system_prompts)
+    # Call _get_response
+    responses = local_llm._get_response(prompts, system_prompts=sys_prompts)
 
-        # Verify pipeline was called
-        local_llm.pipeline.assert_called_once()
-
-        # Verify torch.no_grad was used
-        mock_no_grad.assert_called_once()
-
-        # Verify responses
-        assert len(responses) == 2
-        assert responses[0] == "Mock response 1"
-        assert responses[1] == "Mock response 2"
+    # Verify the responses are as expected
+    assert len(responses) == 2
+    assert responses[0] == "Mock response 1"
+    assert responses[1] == "Mock response 2"

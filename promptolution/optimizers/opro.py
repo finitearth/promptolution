@@ -3,12 +3,13 @@
 
 import numpy as np
 
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING, Any, List, Optional
 
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 from promptolution.optimizers.templates import OPRO_TEMPLATE
+from promptolution.utils.formatting import extract_from_tag
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from promptolution.llms.base_llm import BaseLLM
     from promptolution.predictors.base_predictor import BasePredictor
     from promptolution.tasks.base_task import BaseTask
@@ -30,14 +31,14 @@ class OPRO(BaseOptimizer):
         self,
         predictor: "BasePredictor",
         task: "BaseTask",
-        prompt_template: Optional[str],
         meta_llm: "BaseLLM",
-        initial_prompts: List[str] = None,
+        initial_prompts: Optional[List[str]] = None,
+        prompt_template: Optional[str] = None,
         max_num_instructions: int = 20,
         num_instructions_per_step: int = 8,
         num_few_shots: int = 3,
-        callbacks: List["BaseCallback"] = None,
-        config: "ExperimentConfig" = None,
+        callbacks: Optional[List["BaseCallback"]] = None,
+        config: Optional["ExperimentConfig"] = None,
     ) -> None:
         """Initialize the OPRO optimizer.
 
@@ -54,8 +55,7 @@ class OPRO(BaseOptimizer):
             config: "ExperimentConfig" overwriting default parameters
         """
         self.meta_llm = meta_llm
-
-        self.meta_prompt_template = prompt_template if prompt_template else OPRO_TEMPLATE
+        self.meta_prompt_template = prompt_template or OPRO_TEMPLATE
         self.max_num_instructions = max_num_instructions
         self.num_instructions_per_step = num_instructions_per_step
         self.num_few_shots = num_few_shots
@@ -70,8 +70,8 @@ class OPRO(BaseOptimizer):
             Formatted string of few-shot examples with inputs and expected outputs
         """
         idx = np.random.choice(len(self.task.xs), self.num_few_shots)
-        sample_x = self.task.xs[idx]
-        sample_y = self.task.ys[idx]
+        sample_x = [self.task.xs[i] for i in idx]
+        sample_y = [self.task.ys[i] for i in idx]
 
         return "\n".join([f"Input: {x}\nOutput: {y}" for x, y in zip(sample_x, sample_y)])
 
@@ -119,7 +119,7 @@ class OPRO(BaseOptimizer):
 
             response = self.meta_llm.get_response([self.meta_prompt])[0]
 
-            prompt = response.split("<prompt>")[-1].split("</prompt>")[0].strip()
+            prompt = extract_from_tag(response, "<prompt>", "</prompt>")
 
             if prompt in self.prompts:
                 duplicate_prompts += 1

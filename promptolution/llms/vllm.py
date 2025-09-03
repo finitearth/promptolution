@@ -1,9 +1,9 @@
 """Module for running language models locally using the vLLM library."""
 
 
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING, Any, Dict, List, Optional
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from promptolution.utils.config import ExperimentConfig
 
 
@@ -13,7 +13,8 @@ from promptolution.utils.logging import get_logger
 logger = get_logger(__name__)
 
 try:
-    from transformers import AutoTokenizer
+    from transformers import AutoTokenizer  # type: ignore
+    from transformers import PreTrainedTokenizer
     from vllm import LLM, SamplingParams
 
     imports_successful = True
@@ -29,7 +30,7 @@ class VLLM(BaseLLM):
 
     Attributes:
         llm (vllm.LLM): The vLLM inference engine.
-        tokenizer (transformers.PreTrainedTokenizer): The tokenizer for the model.
+        tokenizer (PreTrainedTokenizer): The tokenizer for the model.
         sampling_params (vllm.SamplingParams): Parameters for text generation.
 
     Methods:
@@ -37,23 +38,25 @@ class VLLM(BaseLLM):
         update_token_count: Update the token count based on the given inputs and outputs.
     """
 
+    tokenizer: PreTrainedTokenizer
+
     def __init__(
         self,
         model_id: str,
-        batch_size: int | None = None,
+        batch_size: Optional[int] = None,
         max_generated_tokens: int = 256,
         temperature: float = 0.1,
         top_p: float = 0.9,
-        model_storage_path: str | None = None,
+        model_storage_path: Optional[str] = None,
         dtype: str = "auto",
         tensor_parallel_size: int = 1,
         gpu_memory_utilization: float = 0.95,
         max_model_len: int = 2048,
         trust_remote_code: bool = False,
         seed: int = 42,
-        llm_kwargs: dict = None,
-        config: "ExperimentConfig" = None,
-    ):
+        llm_kwargs: Optional[Dict[str, Any]] = None,
+        config: Optional["ExperimentConfig"] = None,
+    ) -> None:
         """Initialize the VLLM with a specific model.
 
         Args:
@@ -87,15 +90,16 @@ class VLLM(BaseLLM):
         self.max_model_len = max_model_len
         self.trust_remote_code = trust_remote_code
 
+        super().__init__(config)
+
         # Configure sampling parameters
         self.sampling_params = SamplingParams(
             temperature=temperature, top_p=top_p, max_tokens=max_generated_tokens, seed=seed
         )
 
-        if llm_kwargs is None:
-            llm_kwargs = {}
+        llm_kwargs = llm_kwargs or {}
         # Initialize the vLLM engine with both explicit parameters and any additional kwargs
-        llm_params = {
+        llm_params: Dict[str, Any] = {
             "model": model_id,
             "tokenizer": model_id,
             "dtype": self.dtype,
@@ -110,19 +114,27 @@ class VLLM(BaseLLM):
 
         self.llm = LLM(**llm_params)
 
-        if batch_size is None:
-            cache_config = self.llm.llm_engine.model_executor.cache_config
-            self.batch_size = int((cache_config.gpu_blocks * cache_config.block_size / self.max_model_len) * 0.95)
-            logger.info(f"🚀 Batch size set to {self.batch_size} based on GPU memory.")
-        else:
-            self.batch_size = batch_size
-
         # Initialize tokenizer separately for potential pre-processing
         self.tokenizer = AutoTokenizer.from_pretrained(model_id)
 
-        super().__init__(config)
+        if batch_size is None:
+            cache_config = self.llm.llm_engine.model_executor.cache_config
+            if (
+                cache_config.num_gpu_blocks is not None
+                and cache_config.block_size is not None
+                and self.max_model_len is not None
+            ):
+                self.batch_size = int(
+                    (cache_config.num_gpu_blocks * cache_config.block_size / self.max_model_len) * 0.95
+                )
+                logger.info(f"🚀 Batch size set to {self.batch_size} based on GPU memory.")
+            else:
+                self.batch_size = 1
+                logger.warning("⚠️ Could not determine batch size from GPU memory. Using batch size of 1.")
+        else:
+            self.batch_size = batch_size
 
-    def _get_response(self, prompts: list[str], system_prompts: list[str]) -> list[str]:
+    def _get_response(self, prompts: List[str], system_prompts: List[str]) -> List[str]:
         """Generate responses for a list of prompts using the vLLM engine.
 
         Args:
@@ -137,16 +149,18 @@ class VLLM(BaseLLM):
             It also counts input and output tokens.
         """
         prompts = [
-            self.tokenizer.apply_chat_template(
-                [
-                    {
-                        "role": "system",
-                        "content": sys_prompt,
-                    },
-                    {"role": "user", "content": prompt},
-                ],
-                tokenize=False,
-                add_generation_prompt=True,
+            str(
+                self.tokenizer.apply_chat_template(
+                    [
+                        {
+                            "role": "system",
+                            "content": sys_prompt,
+                        },
+                        {"role": "user", "content": prompt},
+                    ],
+                    tokenize=False,
+                    add_generation_prompt=True,
+                )
             )
             for prompt, sys_prompt in zip(prompts, system_prompts)
         ]
@@ -162,7 +176,7 @@ class VLLM(BaseLLM):
 
         return all_responses
 
-    def update_token_count(self, inputs: List[str], outputs: List[str]):
+    def update_token_count(self, inputs: List[str], outputs: List[str]) -> None:
         """Update the token count based on the given inputs and outputs.
 
             Uses the tokenizer to count the tokens.
@@ -177,7 +191,7 @@ class VLLM(BaseLLM):
         for output in outputs:
             self.output_token_count += len(self.tokenizer.encode(output))
 
-    def set_generation_seed(self, seed):
+    def set_generation_seed(self, seed: int) -> None:
         """Set the random seed for text generation.
 
         Args:

@@ -3,17 +3,18 @@
 
 import numpy as np
 
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING, Any, List, Optional
 
 from promptolution.optimizers.base_optimizer import BaseOptimizer
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from promptolution.llms.base_llm import BaseLLM
     from promptolution.predictors.base_predictor import BasePredictor
     from promptolution.tasks.base_task import BaseTask
     from promptolution.utils.callbacks import BaseCallback
     from promptolution.utils.config import ExperimentConfig
 
+from promptolution.utils.formatting import extract_from_tag
 from promptolution.utils.logging import get_logger
 
 logger = get_logger(__name__)
@@ -49,11 +50,11 @@ class EvoPromptGA(BaseOptimizer):
         task: "BaseTask",
         prompt_template: str,
         meta_llm: "BaseLLM",
-        initial_prompts: List[str] = None,
+        initial_prompts: Optional[List[str]] = None,
         selection_mode: str = "wheel",
-        callbacks: List["BaseCallback"] = None,
-        config: "ExperimentConfig" = None,
-    ):
+        callbacks: Optional[List["BaseCallback"]] = None,
+        config: Optional["ExperimentConfig"] = None,
+    ) -> None:
         """Initialize the EvoPromptGA optimizer."""
         self.prompt_template = prompt_template
         self.meta_llm = meta_llm
@@ -63,8 +64,8 @@ class EvoPromptGA(BaseOptimizer):
         )
         assert self.selection_mode in ["random", "wheel", "tour"], "Invalid selection mode."
 
-    def _pre_optimization_loop(self):
-        self.scores = self.task.evaluate(self.prompts, self.predictor, return_agg_scores=True).tolist()
+    def _pre_optimization_loop(self) -> None:
+        self.scores = self.task.evaluate(self.prompts, self.predictor, return_agg_scores=True)
         # sort prompts by score
         self.prompts = [prompt for _, prompt in sorted(zip(self.scores, self.prompts), reverse=True)]
         self.scores = sorted(self.scores, reverse=True)
@@ -73,7 +74,7 @@ class EvoPromptGA(BaseOptimizer):
         new_prompts = self._crossover(self.prompts, self.scores)
         prompts = self.prompts + new_prompts
 
-        new_scores = self.task.evaluate(new_prompts, self.predictor, return_agg_scores=True).tolist()
+        new_scores = self.task.evaluate(new_prompts, self.predictor, return_agg_scores=True)
 
         scores = self.scores + new_scores
 
@@ -83,7 +84,7 @@ class EvoPromptGA(BaseOptimizer):
 
         return self.prompts
 
-    def _crossover(self, prompts, scores) -> str:
+    def _crossover(self, prompts: List[str], scores: List[float]) -> List[str]:
         """Perform crossover operation to generate new child prompts.
 
         This method selects parent prompts based on the chosen selection mode,
@@ -126,6 +127,6 @@ class EvoPromptGA(BaseOptimizer):
             meta_prompts.append(meta_prompt)
 
         child_prompts = self.meta_llm.get_response(meta_prompts)
-        child_prompts = [prompt.split("<prompt>")[-1].split("</prompt>")[0].strip() for prompt in child_prompts]
+        child_prompts = extract_from_tag(child_prompts, "<prompt>", "</prompt>")
 
         return child_prompts

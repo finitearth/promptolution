@@ -2,6 +2,8 @@ from unittest.mock import MagicMock, patch
 
 import pandas as pd
 
+from tests.mocks.mock_task import MockTask
+
 from promptolution.optimizers.capo import CAPO, CAPOPrompt
 
 
@@ -170,7 +172,6 @@ def test_crossover(mock_meta_llm, mock_predictor, initial_prompts, mock_task, mo
     offsprings = optimizer._crossover(
         [CAPOPrompt("Instruction 1", ["Example 1"]), CAPOPrompt("Instruction 2", ["Example 2"])]
     )
-    print(offsprings)
     assert len(offsprings) == 5
 
 
@@ -189,7 +190,8 @@ def test_mutate(mock_meta_llm, mock_predictor, initial_prompts, mock_task, mock_
     assert len(mutated) == 2
 
 
-def test_do_racing(mock_meta_llm, mock_predictor, initial_prompts, mock_task, mock_df):
+def test_do_racing(mock_meta_llm, mock_predictor, initial_prompts, mock_df):
+    mock_task = MockTask(predetermined_scores=[0.89, 0.9] * 3)
     optimizer = CAPO(
         predictor=mock_predictor,
         task=mock_task,
@@ -204,6 +206,5 @@ def test_do_racing(mock_meta_llm, mock_predictor, initial_prompts, mock_task, mo
     assert len(survivors) == 1
     assert "better instruction" in survivors[0].instruction_text
 
-    # check that mocktask.reset_blocks was called
     assert mock_task.reset_block_idx.call_count == 2
-    assert mock_task.increment_block_idx.call_count == 10
+    assert mock_task.increment_block_idx.call_count == 3

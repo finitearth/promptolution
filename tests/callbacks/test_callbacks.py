@@ -77,7 +77,7 @@ def test_file_output_callback_csv(mock_optimizer, tmpdir):
 
     # Test initialization
     assert callback.file_type == "csv"
-    assert callback.path == output_dir + "/step_results.csv"
+    assert callback.path == os.path.join(output_dir, "step_results.csv")
     assert callback.step == 0
 
     # Test on_step_end - first step
@@ -114,7 +114,7 @@ def test_file_output_callback_parquet(mock_optimizer, tmpdir):
 
     # Test initialization
     assert callback.file_type == "parquet"
-    assert callback.path == output_dir + "/step_results.parquet"
+    assert callback.path == os.path.join(output_dir, "step_results.parquet")
 
     # Test on_step_end - first step
     result = callback.on_step_end(mock_optimizer)

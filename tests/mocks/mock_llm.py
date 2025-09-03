@@ -23,11 +23,7 @@ class MockLLM(BaseLLM):
         """
         super().__init__(*args, **kwargs)
 
-        # Set up response list
-        if predetermined_responses is None:
-            self.responses = []
-        else:
-            self.responses = list(predetermined_responses)  # Ensure it's a list
+        self.responses = predetermined_responses or []
 
         # Add prompt tags if requested
         if add_prompt_tags:
@@ -56,18 +52,21 @@ class MockLLM(BaseLLM):
         self.call_history.append({"prompts": prompts, "system_prompts": system_prompts})
 
         results = []
+        if self.response_index >= len(self.responses):
+            self.response_index = 0
         for i, prompt in enumerate(prompts):
             # Return the next response from the list if available
-            if self.response_index < len(self.responses):
+            if self.response_index < len(self.responses) and isinstance(self.responses, list):
                 results.append(self.responses[self.response_index])
                 self.response_index += 1
+            elif prompt in self.responses and isinstance(self.responses, dict):
+                results.append(self.responses[prompt])
             else:
                 # Default response if we've exhausted the list
                 if hasattr(self, "add_prompt_tags") and getattr(self, "add_prompt_tags"):
                     results.append(f"<prompt>Mock response for: {prompt}</prompt>")
                 else:
                     results.append(f"Mock response for: {prompt}")
-
         return results
 
     def set_generation_seed(self, seed: int) -> None:

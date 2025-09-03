@@ -1,19 +1,19 @@
 """Module for running LLMs locally using the Hugging Face Transformers library."""
+
 try:
     import torch
-    import transformers
+    from transformers import Pipeline, pipeline
 
     imports_successful = True
 except ImportError:
     imports_successful = False
 
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from promptolution.utils.config import ExperimentConfig
-
+from typing import TYPE_CHECKING, Dict, List, Optional
 
 from promptolution.llms.base_llm import BaseLLM
+
+if TYPE_CHECKING:  # pragma: no cover
+    from promptolution.utils.config import ExperimentConfig
 
 
 class LocalLLM(BaseLLM):
@@ -29,7 +29,7 @@ class LocalLLM(BaseLLM):
         get_response: Generate responses for a list of prompts.
     """
 
-    def __init__(self, model_id: str, batch_size: int = 8, config: "ExperimentConfig" = None):
+    def __init__(self, model_id: str, batch_size: int = 8, config: Optional["ExperimentConfig"] = None) -> None:
         """Initialize the LocalLLM with a specific model.
 
         Args:
@@ -46,7 +46,7 @@ class LocalLLM(BaseLLM):
                 "Could not import at least one of the required libraries: torch, transformers. "
                 "Please ensure they are installed in your environment."
             )
-        self.pipeline = transformers.pipeline(
+        self.pipeline: Pipeline = pipeline(
             "text-generation",
             model=model_id,
             model_kwargs={"torch_dtype": torch.bfloat16},
@@ -56,11 +56,14 @@ class LocalLLM(BaseLLM):
             num_return_sequences=1,
             return_full_text=False,
         )
-        self.pipeline.tokenizer.pad_token_id = self.pipeline.tokenizer.eos_token_id
-        self.pipeline.tokenizer.padding_side = "left"
         super().__init__(config)
+        self.tokenizer = self.pipeline.tokenizer
+        assert self.tokenizer is not None, "Tokenizer must be initialized."
+        self.eos_token_id = self.tokenizer.eos_token_id
+        self.tokenizer.pad_token_id = self.eos_token_id
+        self.tokenizer.padding_side = "left"
 
-    def _get_response(self, prompts: list[str], system_prompts: list[str]) -> list[str]:
+    def _get_response(self, prompts: List[str], system_prompts: List[str]) -> List[str]:
         """Generate responses for a list of prompts using the local language model.
 
         Args:
@@ -74,12 +77,12 @@ class LocalLLM(BaseLLM):
             This method uses torch.no_grad() for inference to reduce memory usage.
             It handles both single and batch inputs, ensuring consistent output format.
         """
-        inputs = []
+        inputs: List[List[Dict[str, str]]] = []
         for prompt, sys_prompt in zip(prompts, system_prompts):
             inputs.append([{"role": "system", "prompt": sys_prompt}, {"role": "user", "prompt": prompt}])
 
         with torch.no_grad():
-            response = self.pipeline(inputs, pad_token_id=self.pipeline.tokenizer.eos_token_id)
+            response = self.pipeline(inputs, pad_token_id=self.eos_token_id)
 
         if len(response) != 1:
             response = [r[0] if isinstance(r, list) else r for r in response]
@@ -87,7 +90,9 @@ class LocalLLM(BaseLLM):
         response = [r["generated_text"] for r in response]
         return response
 
-    def __del__(self):
+    def __del__(self) -> None:
         """Cleanup method to delete the pipeline and free up GPU memory."""
-        del self.pipeline
-        torch.cuda.empty_cache()
+        if hasattr(self, "pipeline"):
+            del self.pipeline
+        if "torch" in globals() and hasattr(torch, "cuda") and torch.cuda.is_available():
+            torch.cuda.empty_cache()

@@ -98,7 +98,7 @@ def test_run_optimization(
     # Verify mocks were called
     mock_get_llm.assert_called_once_with(config=experiment_config)
     mock_get_predictor.assert_called_once_with(mock_llm, config=experiment_config)
-    mock_get_task.assert_called_once_with(sample_df, experiment_config)
+    mock_get_task.assert_called_once_with(sample_df, experiment_config, judge_llm=mock_llm)
     mock_get_optimizer.assert_called_once_with(
         predictor=mock_predictor, meta_llm=mock_llm, task=mock_task, config=experiment_config
     )
@@ -158,7 +158,7 @@ def test_run_optimization_with_exemplars(
     # Verify mocks were called
     mock_get_llm.assert_called_once_with(config=experiment_config_with_exemplars)
     mock_get_predictor.assert_called_once_with(mock_llm, config=experiment_config_with_exemplars)
-    mock_get_task.assert_called_once_with(sample_df, experiment_config_with_exemplars)
+    mock_get_task.assert_called_once_with(sample_df, experiment_config_with_exemplars, judge_llm=mock_llm)
     mock_get_optimizer.assert_called_once_with(
         predictor=mock_predictor, meta_llm=mock_llm, task=mock_task, config=experiment_config_with_exemplars
     )
@@ -216,7 +216,7 @@ def test_run_evaluation(mock_get_task, mock_get_predictor, mock_get_llm, sample_
     # Verify mocks were called
     mock_get_llm.assert_called_once_with(config=experiment_config)
     mock_get_predictor.assert_called_once_with(mock_llm, config=experiment_config)
-    mock_get_task.assert_called_once_with(sample_df, experiment_config)
+    mock_get_task.assert_called_once_with(sample_df, experiment_config, judge_llm=mock_llm)
     mock_task.evaluate.assert_called_once_with(prompts, mock_predictor, eval_strategy="full")
 
 

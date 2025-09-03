@@ -11,3 +11,4 @@ results/
 poetry.lock
 CLAUDE.md
 **/CLAUDE.local.md
+.mypy_cache/

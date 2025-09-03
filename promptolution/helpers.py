@@ -1,15 +1,21 @@
 """Helper functions for the usage of the libary."""
 
 
-from typing import TYPE_CHECKING, List, Literal
+from typing import TYPE_CHECKING, Callable, List, Literal, Optional
 
-if TYPE_CHECKING:
+from promptolution.tasks.judge_tasks import JudgeTask
+from promptolution.tasks.reward_tasks import RewardTask
+
+if TYPE_CHECKING:  # pragma: no cover
     from promptolution.exemplar_selectors.base_exemplar_selector import BaseExemplarSelector
     from promptolution.llms.base_llm import BaseLLM
     from promptolution.optimizers.base_optimizer import BaseOptimizer
     from promptolution.predictors.base_predictor import BasePredictor
     from promptolution.tasks.base_task import BaseTask
     from promptolution.utils.config import ExperimentConfig
+    from promptolution.tasks.base_task import TaskType
+    from promptolution.optimizers.base_optimizer import OptimizerType
+    from promptolution.predictors.base_predictor import PredictorType
 
 import pandas as pd
 
@@ -39,7 +45,7 @@ from promptolution.utils.logging import get_logger
 logger = get_logger(__name__)
 
 
-def run_experiment(df: pd.DataFrame, config: "ExperimentConfig"):
+def run_experiment(df: pd.DataFrame, config: "ExperimentConfig") -> pd.DataFrame:
     """Run a full experiment based on the provided configuration.
 
     Args:
@@ -61,6 +67,9 @@ def run_experiment(df: pd.DataFrame, config: "ExperimentConfig"):
 def run_optimization(df: pd.DataFrame, config: "ExperimentConfig") -> List[str]:
     """Run the optimization phase of the experiment.
 
+    Configures all LLMs (downstream, meta, and judge) to use
+    the same instance, that is defined in `config.llm`.
+
     Args:
         config (Config): Configuration object for the experiment.
 
@@ -70,12 +79,12 @@ def run_optimization(df: pd.DataFrame, config: "ExperimentConfig") -> List[str]:
     llm = get_llm(config=config)
     predictor = get_predictor(llm, config=config)
 
-    config.task_description = config.task_description + " " + predictor.extraction_description
+    config.task_description = (config.task_description or "") + " " + (predictor.extraction_description or "")
     if config.optimizer == "capo" and (config.eval_strategy is None or "block" not in config.eval_strategy):
         logger.warning("📌 CAPO requires block evaluation strategy. Setting it to 'sequential_block'.")
         config.eval_strategy = "sequential_block"
 
-    task = get_task(df, config)
+    task = get_task(df, config, judge_llm=llm)
     optimizer = get_optimizer(
         predictor=predictor,
         meta_llm=llm,
@@ -95,6 +104,9 @@ def run_optimization(df: pd.DataFrame, config: "ExperimentConfig") -> List[str]:
 def run_evaluation(df: pd.DataFrame, config: "ExperimentConfig", prompts: List[str]) -> pd.DataFrame:
     """Run the evaluation phase of the experiment.
 
+    Configures all LLMs (downstream, meta, and judge) to use
+    the same instance, that is defined in `config.llm`.
+
     Args:
         df (pd.DataFrame): Input DataFrame containing the data.
         config (Config): Configuration object for the experiment.
@@ -103,8 +115,8 @@ def run_evaluation(df: pd.DataFrame, config: "ExperimentConfig", prompts: List[s
     Returns:
         pd.DataFrame: A DataFrame containing the prompts and their scores.
     """
-    task = get_task(df, config)
     llm = get_llm(config=config)
+    task = get_task(df, config, judge_llm=llm)
     predictor = get_predictor(llm, config=config)
     logger.warning("📊 Starting evaluation...")
     scores = task.evaluate(prompts, predictor, eval_strategy="full")
@@ -114,7 +126,7 @@ def run_evaluation(df: pd.DataFrame, config: "ExperimentConfig", prompts: List[s
     return df
 
 
-def get_llm(model_id: str = None, config: "ExperimentConfig" = None) -> "BaseLLM":
+def get_llm(model_id: Optional[str] = None, config: Optional["ExperimentConfig"] = None) -> "BaseLLM":
     """Factory function to create and return a language model instance based on the provided model_id.
 
     This function supports three types of language models:
@@ -132,19 +144,27 @@ def get_llm(model_id: str = None, config: "ExperimentConfig" = None) -> "BaseLLM
     Returns:
         An instance of LocalLLM, or APILLM based on the model_id.
     """
-    if model_id is None:
-        model_id = config.model_id
-    if "local" in model_id:
-        model_id = "-".join(model_id.split("-")[1:])
-        return LocalLLM(model_id, config)
-    if "vllm" in model_id:
-        model_id = "-".join(model_id.split("-")[1:])
-        return VLLM(model_id, config=config)
+    final_model_id = model_id or (config.model_id if config else None)
+    if not final_model_id:
+        raise ValueError("model_id must be provided either directly or through config.")
 
-    return APILLM(model_id=model_id, config=config)
+    if "local" in final_model_id:
+        model_name = "-".join(final_model_id.split("-")[1:])
+        return LocalLLM(model_name, config=config)
+    if "vllm" in final_model_id:
+        model_name = "-".join(final_model_id.split("-")[1:])
+        return VLLM(model_name, config=config)
+
+    return APILLM(model_id=final_model_id, config=config)
 
 
-def get_task(df: pd.DataFrame, config: "ExperimentConfig") -> "BaseTask":
+def get_task(
+    df: pd.DataFrame,
+    config: "ExperimentConfig",
+    task_type: Optional["TaskType"] = None,
+    judge_llm: Optional["BaseLLM"] = None,
+    reward_function: Optional[Callable] = None,
+) -> "BaseTask":
     """Get the task based on the provided DataFrame and configuration.
 
     So far only ClassificationTask is supported.
@@ -156,6 +176,21 @@ def get_task(df: pd.DataFrame, config: "ExperimentConfig") -> "BaseTask":
     Returns:
         BaseTask: An instance of a task class based on the provided DataFrame and configuration.
     """
+    final_task_type = task_type or (config.task_type if config else None)
+
+    if final_task_type == "reward":
+        if reward_function is None:
+            reward_function = config.reward_function if config else None
+        assert reward_function is not None, "Reward function must be provided for reward tasks."
+        return RewardTask(
+            df=df,
+            reward_function=reward_function,
+            config=config,
+        )
+    elif final_task_type == "judge":
+        assert judge_llm is not None, "Judge LLM must be provided for judge tasks."
+        return JudgeTask(df, judge_llm=judge_llm, config=config)
+
     return ClassificationTask(df, config=config)
 
 
@@ -163,10 +198,9 @@ def get_optimizer(
     predictor: "BasePredictor",
     meta_llm: "BaseLLM",
     task: "BaseTask",
-    optimizer: Literal["evopromptde", "evopromptga", "opro"] = None,
-    meta_prompt: str = None,
-    task_description: str = None,
-    config: "ExperimentConfig" = None,
+    optimizer: Optional["OptimizerType"] = None,
+    task_description: Optional[str] = None,
+    config: Optional["ExperimentConfig"] = None,
 ) -> "BaseOptimizer":
     """Creates and returns an optimizer instance based on provided parameters.
 
@@ -185,22 +219,18 @@ def get_optimizer(
     Raises:
         ValueError: If an unknown optimizer type is specified
     """
-    if optimizer is None:
-        optimizer = config.optimizer
-    if task_description is None:
-        task_description = config.task_description
-    if meta_prompt is None and hasattr(config, "meta_prompt"):
-        meta_prompt = config.meta_prompt
+    final_optimizer = optimizer or (config.optimizer if config else None)
+    final_task_description = task_description or (config.task_description if config else None)
 
-    if config.optimizer == "capo":
+    if final_optimizer == "capo":
         crossover_template = (
-            CAPO_CROSSOVER_TEMPLATE.replace("<task_desc>", task_description)
-            if task_description
+            CAPO_CROSSOVER_TEMPLATE.replace("<task_desc>", final_task_description)
+            if final_task_description
             else CAPO_CROSSOVER_TEMPLATE
         )
         mutation_template = (
-            CAPO_MUTATION_TEMPLATE.replace("<task_desc>", task_description)
-            if task_description
+            CAPO_MUTATION_TEMPLATE.replace("<task_desc>", final_task_description)
+            if final_task_description
             else CAPO_MUTATION_TEMPLATE
         )
 
@@ -213,27 +243,29 @@ def get_optimizer(
             config=config,
         )
 
-    if config.optimizer == "evopromptde":
+    if final_optimizer == "evopromptde":
         template = (
-            EVOPROMPT_DE_TEMPLATE_TD.replace("<task_desc>", task_description)
-            if task_description
+            EVOPROMPT_DE_TEMPLATE_TD.replace("<task_desc>", final_task_description)
+            if final_task_description
             else EVOPROMPT_DE_TEMPLATE
         )
         return EvoPromptDE(predictor=predictor, meta_llm=meta_llm, task=task, prompt_template=template, config=config)
 
-    if config.optimizer == "evopromptga":
+    if final_optimizer == "evopromptga":
         template = (
-            EVOPROMPT_GA_TEMPLATE_TD.replace("<task_desc>", task_description)
-            if task_description
+            EVOPROMPT_GA_TEMPLATE_TD.replace("<task_desc>", final_task_description)
+            if final_task_description
             else EVOPROMPT_GA_TEMPLATE
         )
         return EvoPromptGA(predictor=predictor, meta_llm=meta_llm, task=task, prompt_template=template, config=config)
 
-    if config.optimizer == "opro":
-        template = OPRO_TEMPLATE_TD.replace("<task_desc>", task_description) if task_description else OPRO_TEMPLATE
+    if final_optimizer == "opro":
+        template = (
+            OPRO_TEMPLATE_TD.replace("<task_desc>", final_task_description) if final_task_description else OPRO_TEMPLATE
+        )
         return OPRO(predictor=predictor, meta_llm=meta_llm, task=task, prompt_template=template, config=config)
 
-    raise ValueError(f"Unknown optimizer: {config.optimizer}")
+    raise ValueError(f"Unknown optimizer: {final_optimizer}")
 
 
 def get_exemplar_selector(
@@ -260,9 +292,7 @@ def get_exemplar_selector(
         raise ValueError(f"Unknown exemplar selector: {name}")
 
 
-def get_predictor(
-    downstream_llm=None, type: Literal["first_occurrence", "marker"] = "marker", *args, **kwargs
-) -> "BasePredictor":
+def get_predictor(downstream_llm=None, type: "PredictorType" = "marker", *args, **kwargs) -> "BasePredictor":
     """Factory function to create and return a predictor instance.
 
     This function supports three types of predictors:
