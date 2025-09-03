@@ -2,7 +2,6 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-# Import the module to test
 from promptolution.llms.vllm import VLLM
 
 vllm = pytest.importorskip("vllm")
