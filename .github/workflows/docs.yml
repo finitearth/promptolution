@@ -30,7 +30,7 @@ jobs:
 
       - name: Generate notebook examples
         run: |
-          poetry run jupyter nbconvert --to markdown --allow-errors --output-dir docs/examples notebooks/*.ipynb
+          poetry run jupyter nbconvert --to markdown --allow-errors --output-dir docs/examples tutorials/*.ipynb
 
       - name: Deploy docs
         run: |

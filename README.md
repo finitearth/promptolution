@@ -1,12 +1,11 @@
 ![promptolution](https://github.com/user-attachments/assets/84c050bd-61a1-4f2e-bc4e-874d9b4a69af)
 
-![Coverage](https://img.shields.io/badge/Coverage-90%25-brightgreen)
+![Coverage](https://img.shields.io/badge/Coverage-91%25-brightgreen)
 [![CI](https://github.com/finitearth/promptolution/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/finitearth/promptolution/actions/workflows/ci.yml)
 [![Docs](https://github.com/finitearth/promptolution/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/finitearth/promptolution/actions/workflows/docs.yml)
 ![Code Style](https://img.shields.io/badge/Code%20Style-black-black)
 ![Python Versions](https://img.shields.io/badge/Python%20Versions-≥3.10-blue)
-
-
+[![Getting Started](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/finitearth/promptolution/blob/main/tutorials/getting_started.ipynb)
 
 Promptolution is a library that provides a modular and extensible framework for implementing prompt tuning for single tasks and larger experiments. It offers a user-friendly interface to assemble the core components for various prompt optimization tasks.
 

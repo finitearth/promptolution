@@ -73,6 +73,8 @@ nav:
     - Exemplar Selectors: api/exemplar_selectors.md
   - Tutorials:
     - Getting Started: examples/getting_started.md
+    - LLM as Judge Tutorial: examples/llm_as_judge_tutorial.md
+    - Reward Task Tutorial: examples/reward_task_tutorial.md
 
 markdown_extensions:
   - pymdownx.highlight:
