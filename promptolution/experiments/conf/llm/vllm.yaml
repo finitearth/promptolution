@@ -1,0 +1,7 @@
+_target_: promptolution.llms.VLLM
+name: vllm
+model_id: vllm-Qwen/Qwen2.5-7B-Instruct   # "vllm-" prefix -> VLLM
+max_model_len: 2048
+# NOTE: temperature is NOT honoured under the bridge (VLLM consumes it locally, not via apply_to);
+# it applies only after the deep-instantiate flip. See bridge.py.
+temperature: 0.7

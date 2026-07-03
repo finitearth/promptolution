@@ -1,0 +1,15 @@
+# @package hydra.launcher
+# Parametrized SLURM launcher (from the hydra-submitit-launcher plugin). Use it on the CLI with:
+#   python -m promptolution.experiments.run -m hydra/launcher=slurm <sweep args>
+# A multirun then becomes ONE SLURM array job. Edit the values for your cluster (or override on CLI).
+defaults:
+  - submitit_slurm
+
+partition: gpu          # <-- set your cluster partition
+gres: gpu:1
+timeout_min: 210
+tasks_per_node: 1
+nodes: 1
+array_parallelism: 16   # max array tasks running concurrently (the %K throttle)
+# qos: mcml
+# additional_parameters: { "mail-type": "END" }

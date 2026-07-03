@@ -1,0 +1,16 @@
+# Real HuggingFace dataset (requires the optional `datasets` package).
+# Mirrors tutorials/api_llm_demo.py so a real run is easy to sanity-check.
+_target_: promptolution.experiments.datasets.load_hf
+name: SetFit/ag_news
+revision: main
+input: text
+target: label_text
+split: train
+n_samples: 200
+task_description: "The dataset contains news articles categorized into four classes: World, Sports, Business, and Tech. Classify each news article into one of the four categories."
+classes: [world, sports, business, tech]
+initial_prompts:
+  - "Classify this news article as World, Sports, Business, or Tech. Provide your answer between <final_answer> and </final_answer> tags."
+  - "Read the following news article and determine which category it belongs to: World, Sports, Business, or Tech. Your classification must be placed between <final_answer> </final_answer> markers."
+  - "Your task is to identify whether this news article belongs to World, Sports, Business, or Tech news. Provide your classification between the markers <final_answer> </final_answer>."
+  - "Conduct a thorough analysis of the provided news article and classify it as belonging to one of these four categories: World, Sports, Business, or Tech. Your answer should be presented within <final_answer> </final_answer> markers."

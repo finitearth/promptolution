@@ -1,0 +1,5 @@
+# Reward task: the reward_function travels with the dataset (e.g. dataset=mbpp) and is read directly
+# by get_task, so it is honoured even under the bridge.
+task_type: reward
+x_column: x
+eval_strategy: full

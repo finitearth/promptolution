@@ -1,0 +1,2 @@
+_target_: promptolution.optimizers.EvoPromptGA   # deep-instantiate target; bridge uses `name` today
+name: evopromptga

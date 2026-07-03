@@ -17,6 +17,7 @@ if TYPE_CHECKING:  # pragma: no cover
     from promptolution.optimizers.base_optimizer import OptimizerType
     from promptolution.predictors.base_predictor import PredictorType
     from promptolution.utils import ExperimentConfig
+    from promptolution.utils.callbacks import BaseCallback
 
 
 import pandas as pd
@@ -38,12 +39,18 @@ from promptolution.utils.logging import get_logger
 logger = get_logger(__name__)
 
 
-def run_experiment(df: pd.DataFrame, config: "ExperimentConfig") -> pd.DataFrame:
+def run_experiment(
+    df: pd.DataFrame,
+    config: "ExperimentConfig",
+    callbacks: Optional[List["BaseCallback"]] = None,
+) -> pd.DataFrame:
     """Run a full experiment based on the provided configuration.
 
     Args:
         df (pd.DataFrame): Input DataFrame containing the data.
         config (Config): Configuration object for the experiment.
+        callbacks (List[BaseCallback], optional): Callbacks forwarded to the optimizer (e.g. for
+            writing per-step results). Optional; existing callers are unaffected.
 
     Returns:
         pd.DataFrame: A DataFrame containing the prompts and their scores.
@@ -51,13 +58,17 @@ def run_experiment(df: pd.DataFrame, config: "ExperimentConfig") -> pd.DataFrame
     # train test split
     train_df = df.sample(frac=0.8, random_state=42)
     test_df = df.drop(train_df.index)
-    prompts = run_optimization(train_df, config)
+    prompts = run_optimization(train_df, config, callbacks=callbacks)
     df_prompt_scores = run_evaluation(test_df, config, prompts)
 
     return df_prompt_scores
 
 
-def run_optimization(df: pd.DataFrame, config: "ExperimentConfig") -> List[Prompt]:
+def run_optimization(
+    df: pd.DataFrame,
+    config: "ExperimentConfig",
+    callbacks: Optional[List["BaseCallback"]] = None,
+) -> List[Prompt]:
     """Run the optimization phase of the experiment.
 
     Configures all LLMs (downstream, meta, and judge) to use
@@ -85,6 +96,7 @@ def run_optimization(df: pd.DataFrame, config: "ExperimentConfig") -> List[Promp
         meta_llm=llm,
         task=task,
         config=config,
+        callbacks=callbacks,
     )
     logger.warning("🔥 Starting optimization...")
     prompts = optimizer.optimize(n_steps=config.n_steps)
@@ -203,6 +215,7 @@ def get_optimizer(
     task: "BaseTask",
     optimizer: Optional["OptimizerType"] = None,
     config: Optional["ExperimentConfig"] = None,
+    callbacks: Optional[List["BaseCallback"]] = None,
 ) -> "BaseOptimizer":
     """Create and return an optimizer instance based on provided parameters.
 
@@ -228,16 +241,23 @@ def get_optimizer(
             meta_llm=meta_llm,
             task=task,
             config=config,
+            callbacks=callbacks,
         )
 
     if final_optimizer == "evopromptde":
-        return EvoPromptDE(predictor=predictor, meta_llm=meta_llm, task=task, config=config)
+        return EvoPromptDE(
+            predictor=predictor, meta_llm=meta_llm, task=task, config=config, callbacks=callbacks
+        )
 
     if final_optimizer == "evopromptga":
-        return EvoPromptGA(predictor=predictor, meta_llm=meta_llm, task=task, config=config)
+        return EvoPromptGA(
+            predictor=predictor, meta_llm=meta_llm, task=task, config=config, callbacks=callbacks
+        )
 
     if final_optimizer == "opro":
-        return OPRO(predictor=predictor, meta_llm=meta_llm, task=task, config=config)
+        return OPRO(
+            predictor=predictor, meta_llm=meta_llm, task=task, config=config, callbacks=callbacks
+        )
 
     raise ValueError(f"Unknown optimizer: {final_optimizer}")
 

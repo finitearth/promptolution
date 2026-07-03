@@ -122,7 +122,7 @@ def test_run_optimization(
     mock_get_predictor.assert_called_once_with(mock_llm, config=experiment_config)
     mock_get_task.assert_called_once_with(sample_df, experiment_config, judge_llm=mock_llm)
     mock_get_optimizer.assert_called_once_with(
-        predictor=mock_predictor, meta_llm=mock_llm, task=mock_task, config=experiment_config
+        predictor=mock_predictor, meta_llm=mock_llm, task=mock_task, config=experiment_config, callbacks=None
     )
     mock_optimizer.optimize.assert_called_once_with(n_steps=experiment_config.n_steps)
 
@@ -182,7 +182,11 @@ def test_run_optimization_with_exemplars(
     mock_get_predictor.assert_called_once_with(mock_llm, config=experiment_config_with_exemplars)
     mock_get_task.assert_called_once_with(sample_df, experiment_config_with_exemplars, judge_llm=mock_llm)
     mock_get_optimizer.assert_called_once_with(
-        predictor=mock_predictor, meta_llm=mock_llm, task=mock_task, config=experiment_config_with_exemplars
+        predictor=mock_predictor,
+        meta_llm=mock_llm,
+        task=mock_task,
+        config=experiment_config_with_exemplars,
+        callbacks=None,
     )
     mock_optimizer.optimize.assert_called_once_with(n_steps=experiment_config_with_exemplars.n_steps)
 

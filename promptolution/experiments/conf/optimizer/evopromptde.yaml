@@ -1,0 +1,2 @@
+_target_: promptolution.optimizers.EvoPromptDE
+name: evopromptde

@@ -1,0 +1,25 @@
+# Top-level experiment config. Pick one option per group (defaults), sweep with -m on the CLI.
+defaults:
+  - llm: mock
+  - optimizer: evopromptga
+  - task: classification
+  - dataset: dummy
+  - predictor: marker
+  - _self_
+
+# Experiment params (fixed here, or swept: `-m random_seed=42,43,44`)
+n_steps: 3
+random_seed: 42
+
+# experiments-layer behaviour
+smoke: false          # true => run fully offline (no LLM); validates plumbing/grids/SLURM
+skip_completed: true  # skip runs whose output dir already has a .finished marker
+
+hydra:
+  job:
+    chdir: false      # keep cwd stable (library-friendly); output dir is absolute
+  run:
+    dir: ${oc.env:PROMPTOLUTION_OUTPUT_DIR,outputs}/single/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: ${oc.env:PROMPTOLUTION_OUTPUT_DIR,outputs}/multirun/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: ${hydra.job.num}

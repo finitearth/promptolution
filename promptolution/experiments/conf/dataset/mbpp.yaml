@@ -1,0 +1,15 @@
+# Demonstrates task-specific custom params/files (Tom's MBPP example): a custom input extractor and a
+# custom reward function ride along with the dataset config via `_target_` + `_partial_`, instantiated
+# by Hydra before the loader runs. Use with task=reward.
+_target_: promptolution.experiments.datasets.load_hf
+name: google-research-datasets/mbpp
+split: train
+input:
+  _target_: promptolution.experiments.datasets.mbpp_input
+  _partial_: true
+target: ""
+reward_columns: [test_list]
+reward_function:
+  _target_: promptolution.experiments.datasets.mbpp_reward
+  _partial_: true
+task_description: "Write a Python function that satisfies the specification and passes the tests."

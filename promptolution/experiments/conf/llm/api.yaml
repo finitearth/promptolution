@@ -1,0 +1,5 @@
+_target_: promptolution.llms.APILLM   # used by deep instantiate later; bridge uses model_id today
+name: api
+model_id: gpt-4o-mini                 # any non vllm-/local- id -> APILLM
+max_tokens: 512
+# Provide credentials via env (e.g. OPENAI_API_KEY) or overrides: +llm.api_url=... +llm.api_key=...

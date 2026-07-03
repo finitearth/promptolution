@@ -1,0 +1,6 @@
+_target_: promptolution.tasks.ClassificationTask   # deep-instantiate target
+task_type: classification                          # bridge selector (-> get_task)
+x_column: x
+y_column: y
+eval_strategy: full
+n_subsamples: 20

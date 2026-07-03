@@ -1,0 +1,18 @@
+# In-memory sentiment dataset for offline smoke runs and tests (no download).
+_target_: promptolution.experiments.datasets.load_inline
+task_description: "Classify the sentiment of the text as positive, negative, or neutral."
+classes: [positive, negative, neutral]
+initial_prompts:
+  - "Classify the sentiment of the text. Put the label between <final_answer> and </final_answer>."
+  - "Is the following text positive, negative, or neutral? Answer in <final_answer> tags."
+  - "Determine the sentiment of the text."
+  - "Sentiment classification task:"
+data:
+  x:
+    - "This product is amazing, I love it!"
+    - "Worst purchase ever, totally disappointed."
+    - "It works as described, nothing special."
+    - "Absolutely fantastic experience."
+    - "Terrible quality, broke immediately."
+    - "Pretty decent for the price."
+  y: [positive, negative, neutral, positive, negative, positive]
