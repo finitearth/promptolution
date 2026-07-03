@@ -1,315 +1,134 @@
-"""Helper functions for the usage of the libary."""
+"""End-to-end experiment runner for promptolution.
 
-from typing import TYPE_CHECKING, Callable, List, Literal, Optional, Union, cast
+Components-as-interface: build your `llm` / `task` / `predictor` / `optimizer` directly, then hand the
+optimizer to :func:`run` to optimize, (optionally) evaluate on a held-out task, and write the per-run
+output contract. :func:`train_test_split` helps carve out a held-out set.
 
-from promptolution.tasks.judge_tasks import JudgeTask
-from promptolution.tasks.reward_tasks import RewardTask
-from promptolution.utils.prompt import Prompt
-from promptolution.utils.prompt_creation import create_prompts_from_task_description
+This module is Hydra-free; the grid layer (`promptolution.experiments`) builds the same components from
+YAML via `instantiate` and calls the same :func:`run`.
+"""
 
-if TYPE_CHECKING:  # pragma: no cover
-    from promptolution.exemplar_selectors.base_exemplar_selector import BaseExemplarSelector
-    from promptolution.llms.base_llm import BaseLLM
-    from promptolution.optimizers.base_optimizer import BaseOptimizer
-    from promptolution.predictors.base_predictor import BasePredictor
-    from promptolution.tasks.base_task import BaseTask
-    from promptolution.tasks.base_task import TaskType
-    from promptolution.optimizers.base_optimizer import OptimizerType
-    from promptolution.predictors.base_predictor import PredictorType
-    from promptolution.utils import ExperimentConfig
-    from promptolution.utils.callbacks import BaseCallback
+from __future__ import annotations
 
+import json
+import subprocess
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import TYPE_CHECKING, List, Optional, Tuple, Union
 
 import pandas as pd
 
-from promptolution.exemplar_selectors.random_search_selector import RandomSearchSelector
-from promptolution.exemplar_selectors.random_selector import RandomSelector
-from promptolution.llms.api_llm import APILLM
-from promptolution.llms.local_llm import LocalLLM
-from promptolution.llms.vllm import VLLM
-from promptolution.optimizers.capo import CAPO
-from promptolution.optimizers.evoprompt_de import EvoPromptDE
-from promptolution.optimizers.evoprompt_ga import EvoPromptGA
-from promptolution.optimizers.opro import OPRO
-from promptolution.predictors.first_occurrence_predictor import FirstOccurrencePredictor
-from promptolution.predictors.maker_based_predictor import MarkerBasedPredictor
-from promptolution.tasks.classification_tasks import ClassificationTask
+from promptolution.utils.callbacks import StepResultsCallback
 from promptolution.utils.logging import get_logger
+from promptolution.utils.prompt import Prompt
+
+if TYPE_CHECKING:  # pragma: no cover
+    from promptolution.optimizers.base_optimizer import BaseOptimizer
+    from promptolution.tasks.base_task import BaseTask
 
 logger = get_logger(__name__)
 
+FINISHED_MARKER = ".finished"
 
-def run_experiment(
-    df: pd.DataFrame,
-    config: "ExperimentConfig",
-    callbacks: Optional[List["BaseCallback"]] = None,
+
+def train_test_split(
+    df: pd.DataFrame, test_frac: float = 0.2, seed: int = 42
+) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    """Split a DataFrame into ``(train_df, test_df)``."""
+    test_df = df.sample(frac=test_frac, random_state=seed)
+    train_df = df.drop(test_df.index)
+    return train_df.reset_index(drop=True), test_df.reset_index(drop=True)
+
+
+def run(
+    optimizer: "BaseOptimizer",
+    n_steps: int,
+    *,
+    test_task: Optional["BaseTask"] = None,
+    output_dir: Optional[Union[str, Path]] = None,
+    name: Optional[str] = None,
+    skip_completed: bool = True,
 ) -> pd.DataFrame:
-    """Run a full experiment based on the provided configuration.
+    """Optimize with a fully-constructed optimizer, then evaluate and (optionally) persist results.
 
     Args:
-        df (pd.DataFrame): Input DataFrame containing the data.
-        config (Config): Configuration object for the experiment.
-        callbacks (List[BaseCallback], optional): Callbacks forwarded to the optimizer (e.g. for
-            writing per-step results). Optional; existing callers are unaffected.
+        optimizer: A constructed optimizer (its train ``Task``, predictor and meta LLM already set).
+        n_steps: Number of optimization steps.
+        test_task: Optional held-out ``Task``; if given, the final prompts are scored on it, otherwise
+            they're scored on the optimizer's own (train) task.
+        output_dir: If set, write ``step_results.parquet`` / ``prompt_scores.parquet`` /
+            ``runinfo.json`` / ``.finished`` here.
+        name: Human-readable experiment name (recorded in ``runinfo.json``).
+        skip_completed: If ``output_dir`` already holds a ``.finished`` marker, skip and return its
+            ``prompt_scores.parquet`` (restart / resume).
 
     Returns:
-        pd.DataFrame: A DataFrame containing the prompts and their scores.
+        DataFrame of ``prompt`` and ``score``, sorted best-first.
     """
-    # train test split
-    train_df = df.sample(frac=0.8, random_state=42)
-    test_df = df.drop(train_df.index)
-    prompts = run_optimization(train_df, config, callbacks=callbacks)
-    df_prompt_scores = run_evaluation(test_df, config, prompts)
+    out = Path(output_dir) if output_dir is not None else None
+    if out is not None:
+        out.mkdir(parents=True, exist_ok=True)
+        if skip_completed and (out / FINISHED_MARKER).exists():
+            logger.warning("⏭️  Skipping finished run: %s", out)
+            return pd.read_parquet(out / "prompt_scores.parquet")
+        optimizer.callbacks = list(optimizer.callbacks) + [StepResultsCallback(str(out / "step_results.parquet"))]
+        _write_runinfo(out, name, status="running")
 
-    return df_prompt_scores
-
-
-def run_optimization(
-    df: pd.DataFrame,
-    config: "ExperimentConfig",
-    callbacks: Optional[List["BaseCallback"]] = None,
-) -> List[Prompt]:
-    """Run the optimization phase of the experiment.
-
-    Configures all LLMs (downstream, meta, and judge) to use
-    the same instance, that is defined in `config.llm`.
-
-    Args:
-        config (Config): Configuration object for the experiment.
-
-    Returns:
-        List[Prompt]: The optimized list of prompts.
-    """
-    llm = get_llm(config=config)
-    predictor = get_predictor(llm, config=config)
-
-    if getattr(config, "prompts") is None:
-        initial_prompts = create_prompts_from_task_description(
-            task_description=config.task_description,
-            llm=llm,
-        )
-        config.prompts = [Prompt(p) for p in initial_prompts]
-
-    task = get_task(df, config, judge_llm=llm)
-    optimizer = get_optimizer(
-        predictor=predictor,
-        meta_llm=llm,
-        task=task,
-        config=config,
-        callbacks=callbacks,
-    )
-    logger.warning("🔥 Starting optimization...")
-    prompts = optimizer.optimize(n_steps=config.n_steps)
-
-    if hasattr(config, "posthoc_exemplar_selection") and config.posthoc_exemplar_selection:
-        selector = get_exemplar_selector(config.exemplar_selector, task, predictor)
-        prompts = [selector.select_exemplars(p, n_examples=config.n_exemplars) for p in prompts]
-    return prompts
+    try:
+        logger.warning("🔥 Starting optimization...")
+        prompts = optimizer.optimize(n_steps=n_steps)
+        scores_df = _evaluate(prompts, optimizer, test_task)
+        if out is not None:
+            scores_df.to_parquet(out / "prompt_scores.parquet", index=False)
+            _write_runinfo(out, name, status="finished")
+            (out / FINISHED_MARKER).write_text(datetime.now(timezone.utc).isoformat())
+            logger.warning("✅ Finished run: %s", out)
+    except Exception as e:  # noqa: BLE001 - record failure, then re-raise
+        if out is not None:
+            _write_runinfo(out, name, status="failed", error=str(e))
+        raise
+    return scores_df
 
 
-def run_evaluation(
-    df: pd.DataFrame, config: "ExperimentConfig", prompts: Union[List[Prompt], List[str]]
-) -> pd.DataFrame:
-    """Run the evaluation phase of the experiment.
-
-    Configures all LLMs (downstream, meta, and judge) to use
-    the same instance, that is defined in `config.llm`.
-
-    Args:
-        df (pd.DataFrame): Input DataFrame containing the data.
-        config (Config): Configuration object for the experiment.
-        prompts (Union[List[Prompt], List[str]]): List of prompts to evaluate.
-
-    Returns:
-        pd.DataFrame: A DataFrame containing the prompts and their scores.
-    """
-    llm = get_llm(config=config)
-    task = get_task(df, config, judge_llm=llm)
-    predictor = get_predictor(llm, config=config)
-    logger.warning("📊 Starting evaluation...")
+def _evaluate(prompts: List, optimizer: "BaseOptimizer", test_task: Optional["BaseTask"]) -> pd.DataFrame:
+    """Score ``prompts`` on ``test_task`` (or the optimizer's own task) and return a sorted table."""
+    task = test_task if test_task is not None else optimizer.task
     if isinstance(prompts[0], str):
-        str_prompts = cast(List[str], prompts)
+        str_prompts = list(prompts)
         prompt_objs = [Prompt(p) for p in str_prompts]
     else:
-        str_prompts = [p.construct_prompt() for p in cast(List[Prompt], prompts)]
-        prompt_objs = cast(List[Prompt], prompts)
-    results = task.evaluate(prompt_objs, predictor, eval_strategy="full")
-    scores = results.agg_scores.tolist()
-    df = pd.DataFrame(dict(prompt=str_prompts, score=scores))
-    df = df.sort_values("score", ascending=False, ignore_index=True)
-
-    return df
-
-
-def get_llm(model_id: Optional[str] = None, config: Optional["ExperimentConfig"] = None) -> "BaseLLM":
-    """Create and return a language model instance based on the provided model_id.
-
-    This function supports three types of language models:
-    1. LocalLLM: For running models locally.
-    2. VLLM: For running models using the vLLM library.
-    3. APILLM: For API-based models (default if not matching other types).
-
-    Args:
-        model_id (str): Identifier for the model to use. Special cases:
-                        - "local-{model_name}" for LocalLLM
-                        - "vllm-{model_name}" for VLLM
-                        - Any other string for APILLM
-        config (ExperimentConfig, optional): "ExperimentConfig" overwriting defaults.
-
-    Returns:
-        An instance of LocalLLM, or APILLM based on the model_id.
-    """
-    final_model_id = model_id or (config.model_id if config else None)
-    if not final_model_id:
-        raise ValueError("model_id must be provided either directly or through config.")
-
-    if "local" in final_model_id:
-        model_name = "-".join(final_model_id.split("-")[1:])
-        return LocalLLM(model_name, config=config)
-    if "vllm" in final_model_id:
-        model_name = "-".join(final_model_id.split("-")[1:])
-        return VLLM(model_name, config=config)
-
-    return APILLM(model_id=final_model_id, config=config)
+        str_prompts = [p.construct_prompt() for p in prompts]
+        prompt_objs = list(prompts)
+    logger.warning("📊 Starting evaluation...")
+    results = task.evaluate(prompt_objs, optimizer.predictor, eval_strategy="full")
+    return pd.DataFrame({"prompt": str_prompts, "score": results.agg_scores.tolist()}).sort_values(
+        "score", ascending=False, ignore_index=True
+    )
 
 
-def get_task(
-    df: pd.DataFrame,
-    config: "ExperimentConfig",
-    task_type: Optional["TaskType"] = None,
-    judge_llm: Optional["BaseLLM"] = None,
-    reward_function: Optional[Callable] = None,
-) -> "BaseTask":
-    """Get the task based on the provided DataFrame and configuration.
-
-    So far only ClassificationTask is supported.
-
-    Args:
-        df (pd.DataFrame): Input DataFrame containing the data.
-        config (ExperimentConfig): Configuration for the experiment.
-
-    Returns:
-        BaseTask: An instance of a task class based on the provided DataFrame and configuration.
-    """
-    final_task_type = task_type or (config.task_type if config else None)
-
-    if final_task_type == "reward":
-        if reward_function is None:
-            reward_function = config.reward_function if config else None
-        assert reward_function is not None, "Reward function must be provided for reward tasks."
-        return RewardTask(
-            df=df,
-            reward_function=reward_function,
-            config=config,
-        )
-    elif final_task_type == "judge":
-        assert judge_llm is not None, "Judge LLM must be provided for judge tasks."
-        return JudgeTask(df, judge_llm=judge_llm, config=config)
-
-    return ClassificationTask(df, config=config)
+def _git_hash() -> Optional[str]:
+    try:
+        return subprocess.check_output(
+            ["git", "rev-parse", "HEAD"],
+            cwd=str(Path(__file__).resolve().parent),
+            stderr=subprocess.DEVNULL,
+            text=True,
+        ).strip()
+    except Exception:  # pragma: no cover - git may be absent
+        return None
 
 
-def get_optimizer(
-    predictor: "BasePredictor",
-    meta_llm: "BaseLLM",
-    task: "BaseTask",
-    optimizer: Optional["OptimizerType"] = None,
-    config: Optional["ExperimentConfig"] = None,
-    callbacks: Optional[List["BaseCallback"]] = None,
-) -> "BaseOptimizer":
-    """Create and return an optimizer instance based on provided parameters.
-
-    Args:
-        predictor: The predictor used for prompt evaluation
-        meta_llm: The language model used for generating meta-prompts
-        task: The task object used for evaluating prompts
-        optimizer: String identifying which optimizer to use
-        meta_prompt: Meta prompt text for the optimizer
-        config: Configuration object with default parameters
-
-    Returns:
-        An optimizer instance
-
-    Raises:
-        ValueError: If an unknown optimizer type is specified
-    """
-    final_optimizer = optimizer or (config.optimizer if config else None)
-
-    if final_optimizer == "capo":
-        return CAPO(
-            predictor=predictor,
-            meta_llm=meta_llm,
-            task=task,
-            config=config,
-            callbacks=callbacks,
-        )
-
-    if final_optimizer == "evopromptde":
-        return EvoPromptDE(
-            predictor=predictor, meta_llm=meta_llm, task=task, config=config, callbacks=callbacks
-        )
-
-    if final_optimizer == "evopromptga":
-        return EvoPromptGA(
-            predictor=predictor, meta_llm=meta_llm, task=task, config=config, callbacks=callbacks
-        )
-
-    if final_optimizer == "opro":
-        return OPRO(
-            predictor=predictor, meta_llm=meta_llm, task=task, config=config, callbacks=callbacks
-        )
-
-    raise ValueError(f"Unknown optimizer: {final_optimizer}")
-
-
-def get_exemplar_selector(
-    name: Literal["random", "random_search"], task: "BaseTask", predictor: "BasePredictor"
-) -> "BaseExemplarSelector":
-    """Get an exemplar selector based on the given name.
-
-    Args:
-        name (str): The name of the exemplar selector to instantiate.
-        task (BaseTask): The task object to be passed to the selector.
-        predictor (BasePredictor): The predictor object to be passed to the selector.
-
-    Returns:
-        BaseExemplarSelector: An instance of the requested exemplar selector.
-
-    Raises:
-        ValueError: If the requested selector name is not found.
-    """
-    if name == "random_search":
-        return RandomSearchSelector(task, predictor)
-    elif name == "random":
-        return RandomSelector(task, predictor)
-    else:
-        raise ValueError(f"Unknown exemplar selector: {name}")
-
-
-def get_predictor(
-    downstream_llm: Optional["BaseLLM"] = None, type: "PredictorType" = "marker", *args, **kwargs
-) -> "BasePredictor":
-    """Create and return a predictor instance.
-
-    This function supports three types of predictors:
-    1. FirstOccurrencePredictor: A predictor that classifies based on first occurrence of the label.
-    2. MarkerBasedPredictor: A predictor that classifies based on a marker.
-
-    Args:
-        downstream_llm: The language model to use for prediction.
-        type (Literal["first_occurrence", "marker"]): The type of predictor to create:
-                    - "first_occurrence" for FirstOccurrencePredictor
-                    - "marker" (default) for MarkerBasedPredictor
-        *args: Variable length argument list passed to the predictor constructor.
-        **kwargs: Arbitrary keyword arguments passed to the predictor constructor.
-
-    Returns:
-        An instance of FirstOccurrencePredictor or MarkerBasedPredictor.
-    """
-    assert downstream_llm is not None, "downstream_llm must be provided to create a predictor."
-    if type == "first_occurrence":
-        return FirstOccurrencePredictor(downstream_llm, *args, **kwargs)
-    elif type == "marker":
-        return MarkerBasedPredictor(downstream_llm, *args, **kwargs)
-    else:
-        raise ValueError(f"Invalid predictor type: '{type}'")
+def _write_runinfo(out: Path, name: Optional[str], status: str, error: Optional[str] = None) -> None:
+    info_path = out / "runinfo.json"
+    existing = json.loads(info_path.read_text()) if info_path.exists() else {}
+    now = datetime.now(timezone.utc).isoformat()
+    info = {
+        **existing,
+        "name": name,
+        "status": status,
+        "git_hash": _git_hash(),
+        "started_at": existing.get("started_at", now),
+        "updated_at": now,
+        "error": error,
+    }
+    info_path.write_text(json.dumps(info, indent=2))

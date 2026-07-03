@@ -15,7 +15,6 @@ from promptolution.utils.token_counter import get_token_counter
 
 if TYPE_CHECKING:  # pragma: no cover
     from promptolution.predictors.base_predictor import BasePredictor
-    from promptolution.utils.config import ExperimentConfig
 
 
 TaskType = Literal["classification", "reward", "judge", "multi"]
@@ -49,7 +48,6 @@ class BaseTask(ABC):
         n_subsamples: int = 30,
         eval_strategy: "EvalStrategy" = "full",
         seed: int = 42,
-        config: Optional["ExperimentConfig"] = None,
     ) -> None:
         """Initialize the BaseTask.
 
@@ -61,7 +59,6 @@ class BaseTask(ABC):
             n_subsamples (int): Number of subsamples to use for evaluation.
             eval_strategy (Literal): Subsampling strategy ("full", "subsample", "sequential_block", "random_block", "evaluated").
             seed (int): Random seed for reproducibility.
-            config (ExperimentConfig, optional): Configuration for the task, overriding defaults.
         """
         self.x_column: str = x_column
         self.y_column: Optional[str] = y_column
@@ -72,9 +69,11 @@ class BaseTask(ABC):
         self.seed: int = seed
 
         super().__init__()
-        if config is not None:
-            config.apply_to(self)
 
+        # Accept anything df-like (e.g. a HuggingFace Dataset from datasets.load_dataset) by
+        # normalizing to a pandas DataFrame. Duck-typed, so `datasets` stays an optional dependency.
+        if hasattr(df, "to_pandas"):
+            df = df.to_pandas()
         self.df = df.drop_duplicates(subset=[self.x_column])
         if len(self.df) != len(df):
             logger.warning(

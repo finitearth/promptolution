@@ -6,7 +6,6 @@ from promptolution.predictors.base_predictor import BasePredictor
 
 if TYPE_CHECKING:  # pragma: no cover
     from promptolution.llms.base_llm import BaseLLM
-    from promptolution.utils.config import ExperimentConfig
 
 
 class FirstOccurrencePredictor(BasePredictor):
@@ -21,19 +20,17 @@ class FirstOccurrencePredictor(BasePredictor):
     Attributes:
         llm: The language model used for generating predictions.
         classes (List[str]): The list of valid class labels.
-        config (ExperimentConfig, optional): Configuration for the classifier, overriding defaults.
 
     Inherits from:
         BasePredictor: The base class for predictors in the promptolution library.
     """
 
-    def __init__(self, llm: "BaseLLM", classes: List[str], config: Optional["ExperimentConfig"] = None) -> None:
+    def __init__(self, llm: "BaseLLM", classes: List[str]) -> None:
         """Initialize the FirstOccurrencePredictor.
 
         Args:
             llm: The language model to use for predictions.
             classes (List[str]): The list of valid class labels.
-            config (ExperimentConfig, optional): Configuration for the classifier, overriding defaults.
         """
         assert all([c.islower() for c in classes]), "Class labels should be lowercase."
         self.classes = classes
@@ -43,7 +40,7 @@ class FirstOccurrencePredictor(BasePredictor):
             "The first occurrence of a valid class label in the prediction is used as the predicted class."
         )
 
-        super().__init__(llm, config)
+        super().__init__(llm)
 
     def _extract_preds(self, preds: List[str]) -> List[str]:
         """Extract class labels from the predictions, based on the list of valid class labels.

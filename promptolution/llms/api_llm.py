@@ -10,7 +10,6 @@ from openai.types.chat import ChatCompletion
 from typing import Any, Dict, List, Optional
 
 from promptolution.llms.base_llm import BaseLLM
-from promptolution.utils.config import ExperimentConfig
 from promptolution.utils.logging import get_logger
 
 logger = get_logger(__name__)
@@ -32,7 +31,6 @@ class APILLM(BaseLLM):
         retry_base_delay_s: float = 1,
         client_kwargs: Optional[Dict[str, Any]] = None,
         call_kwargs: Optional[Dict[str, Any]] = None,
-        config: Optional["ExperimentConfig"] = None,
     ) -> None:
         """Initialize the APILLM.
 
@@ -48,7 +46,6 @@ class APILLM(BaseLLM):
             retry_base_delay_s (float): Base delay in seconds for exponential backoff between retries.
             client_kwargs (Optional[Dict[str, Any]]): Additional keyword arguments passed to `AsyncOpenAI(...)`.
             call_kwargs (Optional[Dict[str, Any]]): Additional keyword arguments passed to `client.chat.completions.create(...)`.
-            config (Optional[ExperimentConfig]): Configuration for the LLM, overriding defaults.
         """
         self.api_url = api_url
         self.model_id = model_id
@@ -64,7 +61,7 @@ class APILLM(BaseLLM):
         self._call_kwargs: Dict[str, Any] = dict(call_kwargs or {})
 
         self.max_concurrent_calls = max_concurrent_calls
-        super().__init__(config=config)
+        super().__init__()
 
         # --- persistent loop + semaphore ---
         self._loop = asyncio.new_event_loop()

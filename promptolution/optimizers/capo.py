@@ -12,7 +12,6 @@ if TYPE_CHECKING:  # pragma: no cover
     from promptolution.llms.base_llm import BaseLLM
     from promptolution.predictors.base_predictor import BasePredictor
     from promptolution.tasks.base_task import BaseTask
-    from promptolution.utils.config import ExperimentConfig
     from promptolution.utils.test_statistics import TestStatistics
 
 from promptolution.optimizers.base_optimizer import BaseOptimizer
@@ -53,7 +52,6 @@ class CAPO(BaseOptimizer):
         create_fs_reasoning: bool = True,
         df_few_shots: Optional[pd.DataFrame] = None,
         callbacks: Optional[List["BaseCallback"]] = None,
-        config: Optional["ExperimentConfig"] = None,
     ) -> None:
         """Initialize the CAPOptimizer with various parameters for prompt evolution.
 
@@ -77,7 +75,6 @@ class CAPO(BaseOptimizer):
                 instead of simply using input-output pairs from the few shots DataFrame. Default is True.
             df_few_shots (pd.DataFrame): DataFrame containing few-shot examples. If None, will pop 10% of datapoints from task.
             callbacks (List[Callable], optional): Callbacks for optimizer events.
-            config (ExperimentConfig, optional): Configuration for the optimizer.
         """
         self.meta_llm = meta_llm
         self.downstream_llm = predictor.llm
@@ -94,7 +91,7 @@ class CAPO(BaseOptimizer):
         self.check_fs_accuracy = check_fs_accuracy
         self.create_fs_reasoning = create_fs_reasoning
 
-        super().__init__(predictor, task, initial_prompts, callbacks, config)
+        super().__init__(predictor, task, initial_prompts, callbacks)
 
         self.crossover_template = self._initialize_meta_template(crossover_template or CAPO_CROSSOVER_TEMPLATE)
         self.mutation_template = self._initialize_meta_template(mutation_template or CAPO_MUTATION_TEMPLATE)

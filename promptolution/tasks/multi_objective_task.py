@@ -55,7 +55,6 @@ class MultiObjectiveTask(BaseTask):
             n_subsamples=primary.n_subsamples,
             eval_strategy=eval_strategy or primary.eval_strategy,
             seed=primary.seed,
-            config=None,
         )
         self.task_type = "multi"
         self.tasks = tasks

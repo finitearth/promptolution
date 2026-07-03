@@ -10,7 +10,6 @@ from promptolution.utils.prompt import Prompt
 if TYPE_CHECKING:  # pragma: no cover
     from promptolution.predictors.base_predictor import BasePredictor
     from promptolution.tasks.base_task import BaseTask
-    from promptolution.utils.config import ExperimentConfig
 
 
 class BaseExemplarSelector(ABC):
@@ -20,19 +19,16 @@ class BaseExemplarSelector(ABC):
     that all exemplar selectors should implement.
     """
 
-    def __init__(self, task: "BaseTask", predictor: "BasePredictor", config: Optional["ExperimentConfig"] = None):
+    def __init__(self, task: "BaseTask", predictor: "BasePredictor"):
         """Initialize the BaseExemplarSelector.
 
         Args:
             task (BaseTask): An object representing the task to be performed.
             predictor (BasePredictor): An object capable of making predictions based on prompts.
-            config (ExperimentConfig, optional): "ExperimentConfig" overwriting the defaults
         """
         self.task = task
         self.predictor = predictor
 
-        if config is not None:
-            config.apply_to(self)
 
     @abstractmethod
     def select_exemplars(self, prompt: Prompt, n_examples: int = 5) -> Prompt:

@@ -272,3 +272,32 @@ class TokenCountCallback(BaseCallback):
             return False
 
         return True
+
+
+class StepResultsCallback(BaseCallback):
+    """Write the per-step optimization trace to a parquet file (engine-agnostic).
+
+    Rewrites the whole file each step, avoiding FileOutputCallback's fastparquet-only append
+    (which crashes under pyarrow). Columns: step, score, prompt, input_tokens, output_tokens, time.
+    """
+
+    def __init__(self, path: str) -> None:
+        super().__init__()
+        self.path = str(path)
+        self.rows: list = []
+        self.step = 0
+
+    def on_step_end(self, optimizer: "BaseOptimizer") -> bool:
+        self.step += 1
+        llm = getattr(getattr(optimizer, "predictor", None), "llm", None)
+        in_tok = getattr(llm, "input_token_count", 0)
+        out_tok = getattr(llm, "output_token_count", 0)
+        ts = datetime.now().timestamp()
+        for prompt, score in zip(optimizer.prompts, optimizer.scores):
+            text = prompt.construct_prompt() if hasattr(prompt, "construct_prompt") else str(prompt)
+            self.rows.append(
+                {"step": self.step, "score": float(score), "prompt": text,
+                 "input_tokens": in_tok, "output_tokens": out_tok, "time": ts}
+            )
+        pd.DataFrame(self.rows).to_parquet(self.path, index=False)
+        return True

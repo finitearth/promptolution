@@ -5,12 +5,10 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import accuracy_score
 
-from typing import TYPE_CHECKING, Any, Callable, List, Literal, Optional
+from typing import Any, Callable, List, Literal, Optional
 
 from promptolution.tasks.base_task import BaseTask
 
-if TYPE_CHECKING:  # pragma: no cover
-    from promptolution.utils.config import ExperimentConfig
 
 
 class ClassificationTask(BaseTask):
@@ -30,7 +28,6 @@ class ClassificationTask(BaseTask):
         eval_strategy: Literal["full", "subsample", "sequential_block", "random_block"] = "full",
         seed: int = 42,
         metric: Callable[[Any, Any], float] = accuracy_score,
-        config: Optional["ExperimentConfig"] = None,
     ) -> None:
         """Initialize the ClassificationTask from a pandas DataFrame.
 
@@ -49,7 +46,6 @@ class ClassificationTask(BaseTask):
                 Defaults to "full".
             seed (int, optional): Random seed for reproducibility. Defaults to 42.
             metric (Callable, optional): Metric to use for evaluation. Defaults to accuracy_score.
-            config (ExperimentConfig, optional): Configuration for the task, overriding defaults.
         """
         self.metric = metric
         super().__init__(
@@ -60,7 +56,6 @@ class ClassificationTask(BaseTask):
             n_subsamples=n_subsamples,
             eval_strategy=eval_strategy,
             seed=seed,
-            config=config,
         )
         self.task_type = "classification"
         self.ys: List[str] = (

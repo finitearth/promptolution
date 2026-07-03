@@ -89,7 +89,6 @@ class ConstantTask(BaseTask):
             eval_strategy="full",
             seed=0,
             task_description="constant",
-            config=None,
         )
 
     def _evaluate(self, xs, ys, preds):

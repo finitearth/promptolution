@@ -14,7 +14,6 @@ if TYPE_CHECKING:  # pragma: no cover
     from promptolution.predictors.base_predictor import BasePredictor
     from promptolution.tasks.base_task import BaseTask
     from promptolution.utils.callbacks import BaseCallback
-    from promptolution.utils.config import ExperimentConfig
 
 from promptolution.utils.formatting import extract_from_tag
 from promptolution.utils.logging import get_logger
@@ -55,13 +54,12 @@ class EvoPromptGA(BaseOptimizer):
         prompt_template: Optional[str] = None,
         selection_mode: str = "wheel",
         callbacks: Optional[List["BaseCallback"]] = None,
-        config: Optional["ExperimentConfig"] = None,
     ) -> None:
         """Initialize the EvoPromptGA optimizer."""
         self.meta_llm = meta_llm
         self.selection_mode = selection_mode
         super().__init__(
-            predictor=predictor, initial_prompts=initial_prompts, task=task, callbacks=callbacks, config=config
+            predictor=predictor, initial_prompts=initial_prompts, task=task, callbacks=callbacks
         )
         self.prompt_template = self._initialize_meta_template(prompt_template or EVOPROMPT_GA_TEMPLATE_TD)
 

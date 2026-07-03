@@ -15,7 +15,6 @@ if TYPE_CHECKING:  # pragma: no cover
     from promptolution.predictors.base_predictor import BasePredictor
     from promptolution.tasks.base_task import BaseTask
     from promptolution.utils.callbacks import BaseCallback
-    from promptolution.utils.config import ExperimentConfig
 
 
 class EvoPromptDE(BaseOptimizer):
@@ -37,7 +36,6 @@ class EvoPromptDE(BaseOptimizer):
         prompt_template (str): Template for meta-prompts.
         meta_llm: Language model for child prompt generation.
         donor_random (bool, optional): Whether to use a random donor. Defaults to False.
-        config (ExperimentConfig, optional): Configuration for the optimizer, overriding defaults.
     """
 
     def __init__(
@@ -49,13 +47,12 @@ class EvoPromptDE(BaseOptimizer):
         prompt_template: Optional[str] = None,
         donor_random: bool = False,
         callbacks: Optional[List["BaseCallback"]] = None,
-        config: Optional["ExperimentConfig"] = None,
     ) -> None:
         """Initialize the EvoPromptDE optimizer."""
         self.donor_random = donor_random
         self.meta_llm = meta_llm
         super().__init__(
-            predictor=predictor, task=task, initial_prompts=initial_prompts, callbacks=callbacks, config=config
+            predictor=predictor, task=task, initial_prompts=initial_prompts, callbacks=callbacks
         )
         self.prompt_template = self._initialize_meta_template(prompt_template or EVOPROMPT_DE_TEMPLATE_TD)
 

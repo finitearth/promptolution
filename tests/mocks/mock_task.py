@@ -29,13 +29,11 @@ class MockTask(BaseTask):
         eval_blocks: dict[str, set[int]] | None = None,
         task_description: str = "Mock classification task",
         evaluate_fn=None,
-        config=None,
     ):
         """Initialize the MockTask with optional overrides for task settings.
 
         Args:
             predetermined_scores: Dict/list/callable for score generation used by _evaluate.
-            config: Optional ExperimentConfig applied to the base class.
             df: Optional dataframe override to seed the task.
             n_subsamples: Number of subsamples to expose through BaseTask.
             eval_strategy: Eval strategy to expose (defaults to "full").
@@ -59,7 +57,6 @@ class MockTask(BaseTask):
             y_column="y",
             eval_strategy=eval_strategy,
             n_subsamples=n_subsamples,
-            config=config,
         )
         self.predetermined_scores = predetermined_scores or {}
         self.call_history = []

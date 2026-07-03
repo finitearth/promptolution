@@ -7,7 +7,6 @@ from promptolution.utils.formatting import extract_from_tag
 
 if TYPE_CHECKING:  # pragma: no cover
     from promptolution.llms.base_llm import BaseLLM
-    from promptolution.utils.config import ExperimentConfig
 
 
 class MarkerBasedPredictor(BasePredictor):
@@ -31,7 +30,6 @@ class MarkerBasedPredictor(BasePredictor):
         classes: Optional[List[str]] = None,
         begin_marker: str = "<final_answer>",
         end_marker: str = "</final_answer>",
-        config: Optional["ExperimentConfig"] = None,
     ) -> None:
         """Initialize the MarkerBasedPredictor.
 
@@ -40,7 +38,6 @@ class MarkerBasedPredictor(BasePredictor):
             classes (List[str]): The list of valid class labels. If None, does not force any class.
             begin_marker (str): The marker to use for extracting the class label.
             end_marker (str): The marker to use for extracting the class label.
-            config (ExperimentConfig, optional): Configuration for the classifier, overriding defaults.
         """
         self.classes = classes
         self.begin_marker = begin_marker
@@ -56,7 +53,7 @@ class MarkerBasedPredictor(BasePredictor):
         else:
             self.extraction_description = f"The class label is extracted from the text that are between these markers: {begin_marker} and {end_marker}."
 
-        super().__init__(llm, config)
+        super().__init__(llm)
 
     def _extract_preds(self, preds: List[str]) -> List[str]:
         """Extract class labels from the predictions, by extracting the text following the marker.

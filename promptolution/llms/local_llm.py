@@ -8,12 +8,9 @@ try:
 except ImportError:
     imports_successful = False
 
-from typing import TYPE_CHECKING, Dict, List, Optional
+from typing import Dict, List
 
 from promptolution.llms.base_llm import BaseLLM
-
-if TYPE_CHECKING:  # pragma: no cover
-    from promptolution.utils.config import ExperimentConfig
 
 
 class LocalLLM(BaseLLM):
@@ -29,13 +26,12 @@ class LocalLLM(BaseLLM):
         get_response: Generate responses for a list of prompts.
     """
 
-    def __init__(self, model_id: str, batch_size: int = 8, config: Optional["ExperimentConfig"] = None) -> None:
+    def __init__(self, model_id: str, batch_size: int = 8) -> None:
         """Initialize the LocalLLM with a specific model.
 
         Args:
             model_id (str): The identifier of the model to use (e.g., "gpt2", "facebook/opt-1.3b").
             batch_size (int, optional): The batch size for text generation. Defaults to 8.
-            config (ExperimentConfig, optional): "ExperimentConfig" overwriting defaults.
 
         Note:
             This method sets up a text generation pipeline with bfloat16 precision,
@@ -56,7 +52,7 @@ class LocalLLM(BaseLLM):
             num_return_sequences=1,
             return_full_text=False,
         )
-        super().__init__(config)
+        super().__init__()
         self.tokenizer = self.pipeline.tokenizer
         assert self.tokenizer is not None, "Tokenizer must be initialized."
         self.eos_token_id = self.tokenizer.eos_token_id

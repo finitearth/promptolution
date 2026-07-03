@@ -12,7 +12,6 @@ from promptolution.utils.logging import get_logger
 if TYPE_CHECKING:  # pragma: no cover
     from promptolution.llms.base_llm import BaseLLM
     from promptolution.tasks.base_task import EvalStrategy
-    from promptolution.utils.config import ExperimentConfig
 
 logger = get_logger(__name__)
 
@@ -76,7 +75,6 @@ class JudgeTask(BaseTask):
         judge_prompt: Optional[str] = None,
         min_score: float = -5.0,
         max_score: float = 5.0,
-        config: "ExperimentConfig" = None,
     ):
         """Initialize the JudgeTask.
 
@@ -92,7 +90,6 @@ class JudgeTask(BaseTask):
             judge_prompt (Optional[str]): Custom prompt for the judge. Note: The score of the Judge will be extracted inside <final_score> tags.
             min_score (float): Minimum score for evaluation.
             max_score (float): Maximum score for evaluation.
-            config (ExperimentConfig, optional): Configuration for the task, overriding defaults.
         """
         if judge_prompt is None:
             judge_prompt = JUDGE_PROMPT_WITH_GROUND_TRUTH if y_column else JUDGE_PROMPT_WITHOUT_GROUND_TRUTH
@@ -108,7 +105,6 @@ class JudgeTask(BaseTask):
             n_subsamples=n_subsamples,
             eval_strategy=eval_strategy,
             seed=seed,
-            config=config,
         )
         self.judge_llm = judge_llm
         self.task_type = "judge"

@@ -3,7 +3,6 @@
 from typing import TYPE_CHECKING, Any, Dict, List, Optional
 
 if TYPE_CHECKING:  # pragma: no cover
-    from promptolution.utils.config import ExperimentConfig
     from transformers import PreTrainedTokenizer
 
 
@@ -55,7 +54,6 @@ class VLLM(BaseLLM):
         trust_remote_code: bool = False,
         seed: int = 42,
         llm_kwargs: Optional[Dict[str, Any]] = None,
-        config: Optional["ExperimentConfig"] = None,
     ) -> None:
         """Initialize the VLLM with a specific model.
 
@@ -73,7 +71,6 @@ class VLLM(BaseLLM):
             trust_remote_code (bool, optional): Whether to trust remote code. Defaults to False.
             seed (int, optional): Random seed for the model. Defaults to 42.
             llm_kwargs (dict, optional): Additional keyword arguments for the LLM. Defaults to None.
-            config (ExperimentConfig, optional): Configuration for the LLM, overriding defaults.
 
         Note:
             This method sets up a vLLM engine with specified parameters for efficient inference.
@@ -90,7 +87,7 @@ class VLLM(BaseLLM):
         self.max_model_len = max_model_len
         self.trust_remote_code = trust_remote_code
 
-        super().__init__(config)
+        super().__init__()
 
         # Configure sampling parameters
         self.sampling_params = SamplingParams(
