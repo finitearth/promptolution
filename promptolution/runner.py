@@ -11,14 +11,13 @@ YAML via `instantiate` and calls the same :func:`run`.
 from __future__ import annotations
 
 import json
-import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import TYPE_CHECKING, List, Optional, Tuple, Union
 
 import pandas as pd
 
-from promptolution.utils.callbacks import StepResultsCallback
+from promptolution.utils.callbacks import FileOutputCallback
 from promptolution.utils.logging import get_logger
 from promptolution.utils.prompt import Prompt
 
@@ -71,7 +70,7 @@ def run(
         if skip_completed and (out / FINISHED_MARKER).exists():
             logger.warning("⏭️  Skipping finished run: %s", out)
             return pd.read_parquet(out / "prompt_scores.parquet")
-        optimizer.callbacks = list(optimizer.callbacks) + [StepResultsCallback(str(out / "step_results.parquet"))]
+        optimizer.callbacks = list(optimizer.callbacks) + [FileOutputCallback(dir=str(out))]
         _write_runinfo(out, name, status="running")
 
     try:
@@ -106,18 +105,6 @@ def _evaluate(prompts: List, optimizer: "BaseOptimizer", test_task: Optional["Ba
     )
 
 
-def _git_hash() -> Optional[str]:
-    try:
-        return subprocess.check_output(
-            ["git", "rev-parse", "HEAD"],
-            cwd=str(Path(__file__).resolve().parent),
-            stderr=subprocess.DEVNULL,
-            text=True,
-        ).strip()
-    except Exception:  # pragma: no cover - git may be absent
-        return None
-
-
 def _write_runinfo(out: Path, name: Optional[str], status: str, error: Optional[str] = None) -> None:
     info_path = out / "runinfo.json"
     existing = json.loads(info_path.read_text()) if info_path.exists() else {}
@@ -126,7 +113,6 @@ def _write_runinfo(out: Path, name: Optional[str], status: str, error: Optional[
         **existing,
         "name": name,
         "status": status,
-        "git_hash": _git_hash(),
         "started_at": existing.get("started_at", now),
         "updated_at": now,
         "error": error,

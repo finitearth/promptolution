@@ -140,36 +140,33 @@ class FileOutputCallback(BaseCallback):
             raise ValueError(f"File type {file_type} not supported.")
 
         self.step = 0
+        self.rows: list = []
 
     def on_step_end(self, optimizer: "BaseOptimizer") -> bool:
-        """Save prompts and scores to csv.
+        """Append this step's rows and rewrite the results file (engine-agnostic).
 
         Args:
         optimizer: The optimizer object that called the callback
         """
         self.step += 1
-        df = pd.DataFrame(
-            {
-                "step": [self.step] * len(optimizer.prompts),
-                "input_tokens": [optimizer.predictor.llm.input_token_count] * len(optimizer.prompts),
-                "output_tokens": [optimizer.predictor.llm.output_token_count] * len(optimizer.prompts),
-                "time": [datetime.now().timestamp()] * len(optimizer.prompts),
-                "score": optimizer.scores,
-                "prompt": [str(p) for p in optimizer.prompts],
-            }
-        )
-
+        ts = datetime.now().timestamp()
+        for score, prompt in zip(optimizer.scores, optimizer.prompts):
+            self.rows.append(
+                {
+                    "step": self.step,
+                    "input_tokens": optimizer.predictor.llm.input_token_count,
+                    "output_tokens": optimizer.predictor.llm.output_token_count,
+                    "time": ts,
+                    "score": score,
+                    "prompt": str(prompt),
+                }
+            )
+        # rewrite the whole file each step -> engine-agnostic (no fastparquet-only append)
+        df = pd.DataFrame(self.rows)
         if self.file_type == "parquet":
-            if self.step == 1:
-                df.to_parquet(self.path, index=False)
-            else:
-                df.to_parquet(self.path, mode="a", index=False)
-        elif self.file_type == "csv":
-            if self.step == 1:
-                df.to_csv(self.path, index=False)
-            else:
-                df.to_csv(self.path, mode="a", header=False, index=False)
-
+            df.to_parquet(self.path, index=False)
+        else:
+            df.to_csv(self.path, index=False)
         return True
 
 
@@ -273,31 +270,3 @@ class TokenCountCallback(BaseCallback):
 
         return True
 
-
-class StepResultsCallback(BaseCallback):
-    """Write the per-step optimization trace to a parquet file (engine-agnostic).
-
-    Rewrites the whole file each step, avoiding FileOutputCallback's fastparquet-only append
-    (which crashes under pyarrow). Columns: step, score, prompt, input_tokens, output_tokens, time.
-    """
-
-    def __init__(self, path: str) -> None:
-        super().__init__()
-        self.path = str(path)
-        self.rows: list = []
-        self.step = 0
-
-    def on_step_end(self, optimizer: "BaseOptimizer") -> bool:
-        self.step += 1
-        llm = getattr(getattr(optimizer, "predictor", None), "llm", None)
-        in_tok = getattr(llm, "input_token_count", 0)
-        out_tok = getattr(llm, "output_token_count", 0)
-        ts = datetime.now().timestamp()
-        for prompt, score in zip(optimizer.prompts, optimizer.scores):
-            text = prompt.construct_prompt() if hasattr(prompt, "construct_prompt") else str(prompt)
-            self.rows.append(
-                {"step": self.step, "score": float(score), "prompt": text,
-                 "input_tokens": in_tok, "output_tokens": out_tok, "time": ts}
-            )
-        pd.DataFrame(self.rows).to_parquet(self.path, index=False)
-        return True
