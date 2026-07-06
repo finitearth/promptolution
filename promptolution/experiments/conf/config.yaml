@@ -1,19 +1,16 @@
-# Top-level experiment config. Pick one option per group (defaults), sweep with -m on the CLI.
+# Top-level experiment config. Pick one option per group (defaults); sweep with -m on the CLI.
+# Every group file is a `_target_` + its constructor params (deep instantiate).
 defaults:
-  - llm: mock
+  - llm: api
   - optimizer: evopromptga
-  - task: classification
-  - dataset: dummy
+  - task: dummy
   - predictor: marker
   - _self_
 
-# Experiment params (fixed here, or swept: `-m random_seed=42,43,44`)
 n_steps: 3
 random_seed: 42
-
-# experiments-layer behaviour
-smoke: false          # true => run fully offline (no LLM); validates plumbing/grids/SLURM
-skip_completed: true  # skip runs whose output dir already has a .finished marker
+test_frac: 0.2        # held-out fraction for evaluation (0 => evaluate on the train split)
+skip_completed: true  # skip a cell whose output dir already has a .finished marker
 
 hydra:
   job:

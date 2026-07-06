@@ -20,19 +20,21 @@ transformers = {version = ">=4.48.0", optional = true}
 accelerate = {version = ">=0.20.0", optional = true}
 hydra-core = {version = ">=1.3.0", optional = true}
 hydra-submitit-launcher = {version = ">=1.2.0", optional = true}
+datasets = {version = ">=2.0.0", optional = true}
 scipy = ">=1.15"
 
 [tool.poetry.extras]
 api = ["openai", "requests"]
 vllm = ["vllm"]
 transformers = ["transformers", "accelerate"]
-experiments = ["hydra-core", "hydra-submitit-launcher"]
+experiments = ["hydra-core", "hydra-submitit-launcher", "datasets"]
 
 [tool.poetry.group.experiments]
 optional = true
 [tool.poetry.group.experiments.dependencies]
 hydra-core = ">=1.3.0"
 hydra-submitit-launcher = ">=1.2.0"
+datasets = ">=2.0.0"
 
 [tool.poetry.group.api]
 optional = true

@@ -1,111 +1,77 @@
-"""Hydra entry point for promptolution experiment grids.
+"""Hydra entry point for promptolution experiment grids (deep instantiate).
 
-Design: the CLI ``@hydra.main`` ``main`` is the grid entry — so Hydra's
-multirun (``-m``) and the submitit SLURM launcher work exactly as intended — but the per-cell work is
-factored into a plain, directly-testable ``execute(cfg)`` seam, with ``compose_experiment`` for
-notebook/programmatic use. The end-user library API ``promptolution.helpers.run_experiment`` stays
-Hydra-free; Hydra lives only in this module (the optional ``[experiments]`` extra).
+`execute(cfg)` builds the components directly from config via `hydra.utils.instantiate`
+(`llm -> predictor(llm) -> task(df) -> optimizer(predictor, meta_llm, task)`), splits the task's
+data into train/test, and hands the optimizer to the shared `promptolution.runner.run`. No
+`ExperimentConfig`, no bridge, no string dispatch.
 
 Usage:
-    python -m promptolution.experiments.run optimizer=capo dataset=agnews          # single run
-    python -m promptolution.experiments.run -m optimizer=capo,opro random_seed=42,43  # grid
-    python -m promptolution.experiments.run -m hydra/launcher=submitit_slurm ...    # SLURM array job
-    python -m promptolution.experiments.run smoke=true                             # offline, no LLM
+    python -m promptolution.experiments.run optimizer=capo task=agnews llm=api
+    python -m promptolution.experiments.run -m optimizer=capo,opro random_seed=42,43   # a grid
 """
 
 from __future__ import annotations
 
 from pathlib import Path
-from typing import List, Optional
+from typing import TYPE_CHECKING, List, Optional
 
-import pandas as pd
-
-from promptolution.experiments import results as results_mod
-from promptolution.experiments.bridge import build_experiment_config
+from promptolution.runner import run, train_test_split
 from promptolution.utils.logging import get_logger
+
+if TYPE_CHECKING:  # pragma: no cover
+    import pandas as pd
 
 logger = get_logger(__name__)
 
 CONFIG_DIR = str(Path(__file__).resolve().parent / "conf")
 
 
-def execute(cfg, out_dir: Optional[Path] = None) -> Path:
-    """Run one grid cell end-to-end; return its output directory.
+def execute(cfg, out_dir: Optional[Path] = None) -> "pd.DataFrame":
+    """Run one experiment cell end-to-end; return the evaluated prompt/score table.
 
-    Steps: resolve the output dir → (optionally skip if already finished) → load the dataset bundle
-    (``instantiate(cfg.dataset)``) → bridge to an ``ExperimentConfig`` → run via the existing
-    ``run_experiment`` (attaching the per-step results callback) → persist outputs + markers.
-
-    ``out_dir`` defaults to Hydra's per-run output dir; it can be passed explicitly for programmatic
-    use / tests (so ``execute`` is testable without a Hydra runtime).
+    Steps: instantiate `llm`, `predictor(llm)`, the dataset `df`, split it, build train/test `Task`s
+    and the `optimizer`, then delegate to `runner.run`. `out_dir` defaults to Hydra's per-run dir but
+    can be passed explicitly (programmatic use / tests).
     """
     from hydra.utils import instantiate
 
     if out_dir is None:
         from hydra.core.hydra_config import HydraConfig
 
-        out_dir = Path(HydraConfig.get().runtime.output_dir)
+        out_dir = HydraConfig.get().runtime.output_dir
     out_dir = Path(out_dir)
-    out_dir.mkdir(parents=True, exist_ok=True)
 
-    if cfg.get("skip_completed", True) and results_mod.is_finished(out_dir):
-        logger.warning("⏭️  Skipping already-finished run: %s", out_dir)
-        return out_dir
+    llm = instantiate(cfg.llm)
+    meta_llm = instantiate(cfg.meta_llm) if cfg.get("meta_llm") is not None else llm
+    predictor = instantiate(cfg.predictor, llm=llm)
 
-    results_mod.write_runinfo(out_dir, cfg, status="running")
-    results_mod.write_resolved_config(out_dir, cfg)
-    try:
-        bundle = instantiate(cfg.dataset)
-        exp = build_experiment_config(cfg, bundle)
+    full_df = instantiate(cfg.task.df)  # the dataset: a _target_ that returns a df (or a df-like)
+    test_frac = float(cfg.get("test_frac", 0.2))
+    if test_frac > 0:
+        train_df, test_df = train_test_split(full_df, test_frac=test_frac, seed=int(cfg.get("random_seed", 42)))
+    else:
+        train_df, test_df = full_df, None
 
-        if cfg.get("smoke", False):
-            result = _smoke_run(bundle, exp, out_dir)
-        else:
-            from promptolution.helpers import run_experiment
+    train_task = instantiate(cfg.task, df=train_df)  # df kwarg overrides the nested df config
+    test_task = instantiate(cfg.task, df=test_df) if test_df is not None else None
 
-            callbacks: List = [results_mod.StepResultsCallback(out_dir)]
-            result = run_experiment(bundle.df, exp, callbacks=callbacks)
+    optimizer = instantiate(cfg.optimizer, predictor=predictor, meta_llm=meta_llm, task=train_task)
 
-        result.to_parquet(out_dir / "prompt_scores.parquet", index=False)
-        results_mod.write_runinfo(out_dir, cfg, status="finished")
-        results_mod.mark_finished(out_dir)
-        logger.warning("✅ Finished run: %s", out_dir)
-    except Exception as e:  # noqa: BLE001 - record failure, then re-raise for the launcher
-        results_mod.write_runinfo(out_dir, cfg, status="failed", error=str(e))
-        logger.error("⛔ Run failed: %s", out_dir, exc_info=e)
-        raise
-    return out_dir
-
-
-def _smoke_run(bundle, exp, out_dir: Path) -> pd.DataFrame:
-    """Offline stand-in for ``run_experiment`` — exercises the full plumbing without an LLM.
-
-    Writes a minimal ``step_results.parquet`` (same schema as ``FileOutputCallback``) and returns a
-    prompt/score table, so single runs, grids, and the SLURM launcher can be validated with no
-    API/GPU. Selected via ``smoke=true``.
-    """
-    prompts = [str(p) for p in (getattr(exp, "prompts", None) or ["mock prompt"])]
-    scores = [round(1.0 - 0.1 * i, 3) for i in range(len(prompts))]
-    pd.DataFrame(
-        {
-            "step": [1] * len(prompts),
-            "score": scores,
-            "prompt": prompts,
-            "input_tokens": [0] * len(prompts),
-            "output_tokens": [0] * len(prompts),
-            "time": [0.0] * len(prompts),
-        }
-    ).to_parquet(out_dir / "step_results.parquet", index=False)
-    return pd.DataFrame({"prompt": prompts, "score": scores}).sort_values(
-        "score", ascending=False, ignore_index=True
+    return run(
+        optimizer,
+        n_steps=int(cfg.n_steps),
+        test_task=test_task,
+        output_dir=str(out_dir),
+        name=cfg.get("name"),
+        skip_completed=bool(cfg.get("skip_completed", True)),
     )
 
 
 def compose_experiment(overrides: Optional[List[str]] = None, config_name: str = "config"):
-    """Compose a single experiment config programmatically (notebooks/tests), without ``@hydra.main``.
+    """Compose an experiment config programmatically (notebooks/tests), without `@hydra.main`.
 
-    Note: Hydra *sweeps* (multirun) are driven by the CLI ``-m`` path, not by ``compose`` — use the
-    ``python -m promptolution.experiments.run -m ...`` entry for grids.
+    Note: Hydra *sweeps* (multirun) run through the CLI `-m`, not `compose`; use `run_grid` (Slice 3)
+    or the CLI for grids.
     """
     from hydra import compose, initialize_config_dir
 

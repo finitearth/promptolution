@@ -1,0 +1,14 @@
+# Small inline sentiment dataset (no download) — handy for smoke runs and tests.
+# The task's `df` is a nested _target_: here pandas.DataFrame built from inline data.
+_target_: promptolution.tasks.ClassificationTask
+df:
+  _target_: pandas.DataFrame
+  _convert_: all        # turn the OmegaConf containers into plain dict/lists for pandas
+  data:
+    x: ["I love it", "Terrible experience", "It is okay", "Absolutely amazing",
+        "Awful and broken", "Not bad at all", "Great stuff", "Poor quality"]
+    y: [positive, negative, neutral, positive, negative, positive, positive, negative]
+x_column: x
+y_column: y
+task_description: "Classify the sentiment of the text as positive, negative, or neutral."
+eval_strategy: full

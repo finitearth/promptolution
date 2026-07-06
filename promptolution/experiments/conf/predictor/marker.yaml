@@ -1,4 +1,3 @@
 _target_: promptolution.predictors.MarkerBasedPredictor
-name: marker
 begin_marker: "<final_answer>"
 end_marker: "</final_answer>"

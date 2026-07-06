@@ -1,3 +1,0 @@
-# Offline placeholder. In smoke mode the LLM is never called; for real runs use llm=api or llm=vllm.
-name: mock
-model_id: mock

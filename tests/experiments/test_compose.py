@@ -1,29 +1,36 @@
-"""Config composition tests (in-process — config building is pure)."""
+"""Config composition + fail-fast tests for the experiments module."""
 
 import pytest
 
-hydra = pytest.importorskip("hydra")
+pytest.importorskip("hydra")
 
 from promptolution.experiments.run import compose_experiment
 
 
 def test_defaults_compose():
     cfg = compose_experiment()
-    assert cfg.optimizer.name == "evopromptga"
-    assert cfg.task.task_type == "classification"
-    assert cfg.dataset._target_.endswith("load_inline")
+    assert cfg.llm._target_.endswith("APILLM")
+    assert cfg.optimizer._target_.endswith("EvoPromptGA")
+    assert cfg.task._target_.endswith("ClassificationTask")
+    assert cfg.task.df._target_ == "pandas.DataFrame"  # dummy task's nested df
     assert cfg.n_steps == 3
-    assert cfg.smoke is False
 
 
-def test_group_override_swaps_option():
-    cfg = compose_experiment(overrides=["optimizer=capo", "llm=vllm"])
-    assert cfg.optimizer.name == "capo"
-    assert cfg.optimizer.length_penalty == 0.05  # capo-specific param present
-    assert cfg.llm.model_id.startswith("vllm-")
+def test_group_and_param_overrides():
+    cfg = compose_experiment(overrides=["optimizer=capo", "task=agnews", "n_steps=5"])
+    assert cfg.optimizer._target_.endswith("CAPO")
+    assert cfg.optimizer.length_penalty == 0.05
+    assert cfg.task.df.path == "SetFit/ag_news"  # agnews task's nested df loader
+    assert cfg.n_steps == 5
 
 
-def test_param_override():
-    cfg = compose_experiment(overrides=["n_steps=7", "random_seed=99"])
-    assert cfg.n_steps == 7
-    assert cfg.random_seed == 99
+def test_bad_param_fails_fast_at_instantiate():
+    """A misspelled param blows up at construction (the constructor is the schema) — not silently."""
+    from hydra.utils import instantiate
+
+    from tests.mocks.mock_llm import MockLLM
+
+    cfg = compose_experiment(overrides=["predictor=marker", "+predictor.begin_markerr=x"])
+    # instantiate wraps the underlying TypeError; assert it raises and names the bad param
+    with pytest.raises(Exception, match="begin_markerr"):
+        instantiate(cfg.predictor, llm=MockLLM())
