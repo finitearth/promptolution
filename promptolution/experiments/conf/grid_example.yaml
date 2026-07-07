@@ -1,0 +1,15 @@
+# A whole grid defined in a FILE (not on the CLI). Run it with:
+#   python -m promptolution.experiments.launch -m --config-name grid_example
+# It inherits the base `config`, picks the task, names the experiment, and declares the sweep.
+defaults:
+  - config
+  - override task: agnews
+  - _self_
+
+name: example_grid
+
+hydra:
+  sweeper:
+    params:
+      optimizer: capo,opro
+      random_seed: 42,43,44

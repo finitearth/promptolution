@@ -1,15 +1,15 @@
-"""Hydra-based experiment gridding for promptolution (deep instantiate).
+"""Hydra-based experiment gridding for promptolution.
 
-Optional add-on (`pip install promptolution[experiments]`). Define a grid of experiments in `conf/`
-(each component group is a `_target_` + params), run it locally or as a SLURM array job; every cell
+Define a grid of experiments in `conf/` (each component group is a `_target_` + params), run it locally or as a SLURM array job; every cell
 builds the components via `instantiate` and executes them through `promptolution.runner.run`.
 
 Entry points:
-- CLI:          `python -m promptolution.experiments.run [overrides...] [-m for grids]`
-- Programmatic: :func:`compose_experiment` + :func:`execute`
+- CLI:          `python -m promptolution.experiments.launch [overrides...] [-m for grids]`
+- Programmatic: :func:`execute` (one run) · :func:`run_grid` (a small local grid — notebook convenience)
+                · :func:`compose_experiment` (build a config)
 """
 
-__all__ = ["execute", "compose_experiment"]
+__all__ = ["execute", "compose_experiment", "run_grid"]
 
 
 def __getattr__(name: str):  # lazy — avoids importing Hydra unless actually used

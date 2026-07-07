@@ -1,5 +1,5 @@
 # Top-level experiment config. Pick one option per group (defaults); sweep with -m on the CLI.
-# Every group file is a `_target_` + its constructor params (deep instantiate).
+# Every group file is a `_target_` + its constructor params.
 defaults:
   - llm: api
   - optimizer: evopromptga
@@ -7,16 +7,20 @@ defaults:
   - predictor: marker
   - _self_
 
+name: ??? # REQUIRED — keys the output folder so a rerun resumes into the SAME folder
 n_steps: 3
 random_seed: 42
-test_frac: 0.2        # held-out fraction for evaluation (0 => evaluate on the train split)
-skip_completed: true  # skip a cell whose output dir already has a .finished marker
+test_frac: 0.2 # held-out fraction for evaluation (0 => evaluate on the train split)
+skip_completed: true # skip a cell whose output dir already has a .finished marker (restart)
 
 hydra:
   job:
-    chdir: false      # keep cwd stable (library-friendly); output dir is absolute
-  run:
-    dir: ${oc.env:PROMPTOLUTION_OUTPUT_DIR,outputs}/single/${now:%Y-%m-%d}/${now:%H-%M-%S}
-  sweep:
-    dir: ${oc.env:PROMPTOLUTION_OUTPUT_DIR,outputs}/multirun/${now:%Y-%m-%d}/${now:%H-%M-%S}
-    subdir: ${hydra.job.num}
+    chdir: false # keep cwd stable (library-friendly); output dir is absolute
+    config:
+      override_dirname: # the per-cell subdir is the swept-params slug; keep secrets/parent out of it
+        exclude_keys: [name, llm.api_key, llm.api_url]
+  run: # single run -> <root>/<name>
+    dir: ${oc.env:PROMPTOLUTION_OUTPUT_DIR,outputs}/${name}
+  sweep: # grid -> <root>/<name>/<cell-slug> ; rerun same name skips finished cells
+    dir: ${oc.env:PROMPTOLUTION_OUTPUT_DIR,outputs}/${name}
+    subdir: ${hydra.job.override_dirname}

@@ -20,6 +20,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING, List, Optional
 
 import hydra
+from omegaconf import OmegaConf
 
 from promptolution.runner import run, train_test_split
 from promptolution.utils.logging import get_logger
@@ -68,7 +69,7 @@ def execute(cfg, out_dir: Optional[Path] = None) -> "pd.DataFrame":
         n_steps=int(cfg.n_steps),
         test_task=test_task,
         output_dir=str(out_dir),
-        name=cfg.get("name"),
+        name=OmegaConf.select(cfg, "name", default=None),  # tolerate an unset name in programmatic use
         skip_completed=bool(cfg.get("skip_completed", True)),
     )
 
@@ -83,6 +84,42 @@ def compose_experiment(overrides: Optional[List[str]] = None, config_name: str =
 
     with initialize_config_dir(version_base=None, config_dir=CONFIG_DIR):
         return compose(config_name=config_name, overrides=overrides or [])
+
+
+def run_grid(
+    grid: dict,
+    *,
+    overrides: Optional[List[str]] = None,
+    name: str = "grid",
+    config_name: str = "config",
+    output_root: Optional[str] = None,
+) -> dict:
+    """Run a grid from Python (no Hydra CLI) — the cartesian product of ``grid`` becomes the cells.
+
+    Args:
+        grid: ``{param: [values]}`` swept axes, e.g. ``{"optimizer": ["capo", "opro"], "random_seed": [42, 43]}``.
+        overrides: fixed overrides applied to every cell, e.g. ``["task=agnews", "llm=api"]``.
+        name: experiment name; cells land under ``<output_root>/<name>/<cell-slug>/``.
+        output_root: defaults to ``$PROMPTOLUTION_OUTPUT_DIR`` or ``"outputs"``.
+
+    Returns:
+        ``{cell_slug: prompt_scores DataFrame}``. Cells with a ``.finished`` marker are skipped (resumable).
+    """
+    import itertools
+    import os
+
+    base = list(overrides or [])
+    output_root = output_root or os.environ.get("PROMPTOLUTION_OUTPUT_DIR", "outputs")
+    keys = list(grid)
+    value_lists = [list(grid[k]) for k in keys]
+
+    results: dict = {}
+    for combo in itertools.product(*value_lists):
+        cell_overrides = base + [f"{k}={v}" for k, v in zip(keys, combo)] + [f"name={name}"]
+        cfg = compose_experiment(overrides=cell_overrides, config_name=config_name)
+        slug = ",".join(f"{k.split('.')[-1]}={v}" for k, v in zip(keys, combo))
+        results[slug] = execute(cfg, out_dir=Path(output_root) / name / slug)
+    return results
 
 
 @hydra.main(version_base=None, config_path="conf", config_name="config")
