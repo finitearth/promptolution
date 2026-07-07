@@ -49,27 +49,46 @@ pip install promptolution[api]
 
 For local inference, add `[transformers]` (HuggingFace) or `[vllm]` (vLLM serving), or both.
 
+Build the components (LLM, task, predictor, optimizer) and optimize:
+
 ```python
 import pandas as pd
-from promptolution.utils import ExperimentConfig
-from promptolution.helpers import run_experiment
+from promptolution.llms import APILLM
+from promptolution.tasks import ClassificationTask
+from promptolution.predictors import MarkerBasedPredictor
+from promptolution.optimizers import CAPO
 
 # DataFrame with columns "x" (input) and "y" (label)
 df = pd.read_csv("your_data.csv")
 
-config = ExperimentConfig(
-    optimizer="capo",
-    task_description="Classify each sentence as subjective or objective.",
-    prompts=["Classify the text as objective or subjective."],
-    n_steps=10,
-    api_url="https://api.openai.com/v1",
-    model_id="gpt-4o-mini",
-    api_key="YOUR_API_KEY",
+llm = APILLM(model_id="gpt-4o-mini", api_url="https://api.openai.com/v1", api_key="YOUR_API_KEY")
+task = ClassificationTask(df, task_description="Classify each sentence as subjective or objective.")
+optimizer = CAPO(
+    predictor=MarkerBasedPredictor(llm),
+    meta_llm=llm,
+    task=task,
+    initial_prompts=["Classify the text as objective or subjective."],
 )
 
-best_prompts = run_experiment(df, config)
+best_prompts = optimizer.optimize(n_steps=10)
 print(best_prompts)
 ```
+
+Want a held-out evaluation + result files (`step_results.parquet`, `prompt_scores.parquet`) + restart?
+Use the runner:
+
+```python
+from promptolution.runner import run, train_test_split
+
+train_df, test_df = train_test_split(df, test_frac=0.2)
+task = ClassificationTask(train_df, task_description="...")
+test_task = ClassificationTask(test_df, task_description=task.task_description)
+optimizer = CAPO(predictor=MarkerBasedPredictor(llm), meta_llm=llm, task=task, initial_prompts=[...])
+best = run(optimizer, n_steps=10, test_task=test_task, output_dir="results/subj", name="subj")
+```
+
+For **config-driven runs and grids** (from YAML/CLI, locally or on SLURM), install `promptolution[experiments]`
+and use `python -m promptolution.experiments.launch` — see the [experiments README](promptolution/experiments/README.md).
 
 Full tutorial: [Getting Started notebook](https://github.com/automl/promptolution/blob/main/tutorials/getting_started.ipynb) · [Docs](https://automl.github.io/promptolution/)
 

@@ -1,79 +1,82 @@
-# `promptolution.experiments` — Hydra-based experiment gridding
+# `promptolution.experiments` — config-driven runs & grids (Hydra)
 
-Define a grid of prompt-optimization experiments once, run it locally or as a single SLURM array job,
-and get per-run outputs + restart for free. This is an **optional** layer — the base library and the
-end-user `run_experiment(df, config)` API stay Hydra-free.
+The **config/CLI layer** over the Hydra-free core runner (`promptolution.runner.run`). Define a run — or a
+whole grid — in `conf/` (each component is a `_target_` + its params), run it locally or as a SLURM array
+job, and get per-run outputs + restart for free. Optional layer:
 
 ```bash
-pip install "promptolution[experiments]"   # hydra-core, hydra-submitit-launcher
+pip install "promptolution[experiments]"   # hydra-core, hydra-submitit-launcher, datasets
 ```
+
+A plain single run needs **no** Hydra — just build the components and call `promptolution.runner.run`
+(see the top-level README). This package is for config-driven runs and grids.
 
 ## Quickstart
 
 ```bash
-# single run (real LLM: pick llm=api or llm=vllm and provide credentials)
-python -m promptolution.experiments.run optimizer=capo dataset=agnews llm=api
+# a single run (needs an LLM: pick llm=api / llm=vllm and provide credentials); `name` is required
+python -m promptolution.experiments.launch name=my_run optimizer=capo task=agnews llm=api
 
-# offline dry run — exercises the whole pipeline with no LLM/GPU
-python -m promptolution.experiments.run smoke=true
-
-# a grid (cartesian product) — 3 x 2 x 3 = 18 runs
-python -m promptolution.experiments.run -m \
-    dataset=agnews,gsm8k,subj optimizer=capo,opro random_seed=42,43,44
+# a grid (cartesian product) via the CLI
+python -m promptolution.experiments.launch -m name=bench optimizer=capo,opro random_seed=42,43,44
 
 # the same grid as ONE SLURM array job
-python -m promptolution.experiments.run -m hydra/launcher=slurm \
-    dataset=agnews,gsm8k optimizer=capo,opro random_seed=42,43,44
+python -m promptolution.experiments.launch -m hydra/launcher=slurm name=bench optimizer=capo,opro
 ```
 
-Programmatic / notebook use (single runs):
+Programmatic (notebooks):
 
 ```python
-from promptolution.experiments import compose_experiment, execute
-cfg = compose_experiment(overrides=["optimizer=capo", "dataset=agnews", "smoke=true"])
-run_dir = execute(cfg, out_dir="/tmp/myrun")
+from promptolution.experiments import run_grid, execute, compose_experiment
+
+# a small local grid (serial — for parallelism/SLURM use the CLI -m)
+results = run_grid({"optimizer": ["capo", "opro"], "random_seed": [42, 43]},
+                   overrides=["task=agnews", "llm=api"], name="bench")
 ```
 
-## How it's wired (instantiate-ready bridge)
+## How it works
 
-`run.py:execute(cfg)` per cell: `instantiate(cfg.dataset)` → `DatasetBundle` → `bridge.build_experiment_config(cfg, bundle)` → `ExperimentConfig` → the existing `run_experiment` (with a `FileOutputCallback` writing into the Hydra run dir).
+`launch.execute(cfg)` builds the components with `hydra.utils.instantiate`:
+`llm → predictor(llm) → task(df) → optimizer(predictor, meta_llm, task)`, splits the task's data into
+train/test, and delegates to `runner.run`.
 
-Config groups (`conf/`): `llm/`, `optimizer/`, `task/`, `dataset/`, `predictor/`. Each option file
-carries a `_target_` (ready for a future switch to deep `hydra.utils.instantiate`) **plus** its params
-and, where the bridge needs it, a `name`. For now the bridge flattens the composed config into the flat
-`ExperimentConfig` that `run_experiment` consumes — so user-facing YAML won't change when we later flip
-to deep instantiate.
+**Config groups** (`conf/`): one `_target_` + params per option.
 
-### Bridge coverage (known limitation)
-Scalar params and keys read directly by promptolution (`optimizer`, `task_type`, `model_id`, `n_steps`,
-`seed`, `reward_function`, …) are honoured. **Callables / locally-consumed params reachable only via
-`ExperimentConfig.apply_to`** — e.g. `ClassificationTask.metric`, `CAPO.test_statistic`,
-`VLLM.temperature` — are not honoured under the bridge (same as today). Non-scalar config keys trigger a
-warning; the temperature-style scalar case is documented in the relevant `conf/llm/*.yaml`. Datasets'
-custom params/callables (`reward_function`, custom `input`/`target` extractors — e.g. `dataset=mbpp`)
-**are** honoured, because they're instantiated at load time, not via `apply_to`.
+```
+conf/
+  config.yaml            defaults + name + n_steps + test_frac + restart/output settings
+  llm/        api · vllm
+  optimizer/  capo · opro · evopromptga · evopromptde
+  task/       dummy · agnews        # the Task carries its data as a nested `df:` _target_
+  predictor/  marker
+  hydra/launcher/ slurm             # -m hydra/launcher=slurm  -> one SLURM array job
+  grid_example.yaml                 # a whole grid defined in a file (hydra.sweeper.params)
+```
+
+### Data lives on the Task
+
+A Task's `df` is a nested `_target_` returning a DataFrame — pandas for files/inline, or
+`datasets.load_dataset` for HuggingFace (a `Dataset` is normalized via `.to_pandas()` in `BaseTask`):
+
+```yaml
+# conf/task/mydata.yaml
+_target_: promptolution.tasks.ClassificationTask
+df: { _target_: pandas.read_parquet, filepath_or_buffer: data/mine.parquet } # or datasets.load_dataset / your own loader
+x_column: text
+y_column: label
+task_description: "..."
+```
+
+Override just the data from the CLI: `task.df.filepath_or_buffer=other.parquet`.
+
+## Restart
+
+`name` is **required** and keys the output folder — `<PROMPTOLUTION_OUTPUT_DIR|outputs>/<name>/` (no
+timestamp). Each grid cell's subdir is the slug of its swept params. Rerunning the same `name` **resumes
+into the same folder**, skipping cells that already wrote a `.finished` marker (`skip_completed: true`).
 
 ## Per-run output contract
 
-Each run directory contains:
-
-| file | written by | purpose |
-|---|---|---|
-| `.hydra/config.yaml`, `overrides.yaml` | Hydra | which cell ran which config (analysis recoverability) |
-| `experiment_config.yaml` | `results.py` | resolved config snapshot |
-| `step_results.parquet` | `results.StepResultsCallback` | per-step trace: `step, score, prompt, input_tokens, output_tokens, time` |
-| `prompt_scores.parquet` | `run.py` | final evaluated prompts + scores |
-| `runinfo.json` | `results.py` | `status`, timestamps, `git_hash`, error (restart metadata) |
-| `.finished` | `results.py` | completion marker → `skip_completed` reruns only unfinished cells |
-
-Grids land under `outputs/multirun/<date>/<time>/<job_num>/` (set `PROMPTOLUTION_OUTPUT_DIR` to relocate).
-
-## Notes for reviewers / future work
-- **Logging ticket:** all run-output writing is localized in `results.py`. There is one adapter today
-  (write to the run dir), so per seam discipline no multi-backend *port* is built yet — the Logging
-  ticket adds the second adapter (parquet/DB/remote) and introduces the port there, in one place.
-- **Analysis ticket:** the output contract above + Hydra's `.hydra/` snapshot make every result folder
-  map back to its exact config; a future `load_results(sweep_dir)` reads them into one tidy DataFrame.
-- **Deep instantiate:** the planned next step is to retire the bridge + `ExperimentConfig` in favour of
-  `instantiate(cfg.optimizer/llm/task)` — `_target_` is already in every group config, so this is a
-  local change in `run.py`/`bridge.py` with no user-facing YAML change.
+Each run dir holds `.hydra/config.yaml` + `overrides.yaml` (Hydra, CLI path only), `step_results.parquet`
+(per-step trace), `prompt_scores.parquet` (final evaluated prompts), `runinfo.json` (status/timestamps),
+and `.finished`.
