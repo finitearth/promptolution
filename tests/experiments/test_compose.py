@@ -4,7 +4,7 @@ import pytest
 
 pytest.importorskip("hydra")
 
-from promptolution.experiments.run import compose_experiment
+from promptolution.experiments.launch import compose_experiment
 
 
 def test_defaults_compose():

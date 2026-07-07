@@ -14,7 +14,7 @@ __all__ = ["execute", "compose_experiment"]
 
 def __getattr__(name: str):  # lazy — avoids importing Hydra unless actually used
     if name in __all__:
-        from promptolution.experiments import run
+        from promptolution.experiments import launch
 
-        return getattr(run, name)
+        return getattr(launch, name)
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

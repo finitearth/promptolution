@@ -14,7 +14,7 @@ from omegaconf import OmegaConf
 
 from tests.mocks.mock_llm import MockLLM
 
-from promptolution.experiments.run import compose_experiment, execute
+from promptolution.experiments.launch import compose_experiment, execute
 from promptolution.tasks.classification_tasks import ClassificationTask
 
 _PROMPTS = ["Classify the sentiment. <final_answer></final_answer>", "Positive, negative or neutral?"]
@@ -34,7 +34,7 @@ def _cfg_with_mock_llm(overrides):
 def test_execute_wiring(tmp_path):
     """execute() builds the right components + splits train/test, and hands them to runner.run."""
     cfg = _cfg_with_mock_llm(["task=dummy", "optimizer=evopromptga", "n_steps=2", "test_frac=0.25"])
-    with patch("promptolution.experiments.run.run") as mock_run:
+    with patch("promptolution.experiments.launch.run") as mock_run:
         mock_run.return_value = pd.DataFrame({"prompt": ["p"], "score": [1.0]})
         execute(cfg, out_dir=tmp_path)
     (optimizer,), kw = mock_run.call_args

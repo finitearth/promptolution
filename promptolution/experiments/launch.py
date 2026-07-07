@@ -1,19 +1,25 @@
-"""Hydra entry point for promptolution experiment grids (deep instantiate).
+"""Config-driven (Hydra) entry point for promptolution runs — a single run or a whole grid.
 
-`execute(cfg)` builds the components directly from config via `hydra.utils.instantiate`
-(`llm -> predictor(llm) -> task(df) -> optimizer(predictor, meta_llm, task)`), splits the task's
-data into train/test, and hands the optimizer to the shared `promptolution.runner.run`. No
-`ExperimentConfig`, no bridge, no string dispatch.
+This is the CLI/config layer over the Hydra-free core runner (`promptolution.runner.run`). `execute(cfg)`
+builds the components directly from config via `hydra.utils.instantiate`
+(`llm -> predictor(llm) -> task(df) -> optimizer(predictor, meta_llm, task)`), splits the task's data
+into train/test, and delegates to `runner.run`. No `ExperimentConfig`, no bridge, no string dispatch.
+
+It lives in the optional `experiments` package because it requires Hydra (the `[experiments]` extra)
+and is cohesive with `conf/`. A plain Python run needs no Hydra — just construct the components and call
+`promptolution.runner.run` directly.
 
 Usage:
-    python -m promptolution.experiments.run optimizer=capo task=agnews llm=api
-    python -m promptolution.experiments.run -m optimizer=capo,opro random_seed=42,43   # a grid
+    python -m promptolution.experiments.launch optimizer=capo task=agnews llm=api   # a single run
+    python -m promptolution.experiments.launch -m optimizer=capo,opro random_seed=42,43   # a grid
 """
 
 from __future__ import annotations
 
 from pathlib import Path
 from typing import TYPE_CHECKING, List, Optional
+
+import hydra
 
 from promptolution.runner import run, train_test_split
 from promptolution.utils.logging import get_logger
@@ -79,17 +85,10 @@ def compose_experiment(overrides: Optional[List[str]] = None, config_name: str =
         return compose(config_name=config_name, overrides=overrides or [])
 
 
-def _build_main():
-    import hydra
-
-    @hydra.main(version_base=None, config_path="conf", config_name="config")
-    def main(cfg) -> None:
-        execute(cfg)
-
-    return main
-
-
-main = _build_main()
+@hydra.main(version_base=None, config_path="conf", config_name="config")
+def main(cfg) -> None:
+    """CLI entry: Hydra composes `cfg` + creates the run dir, then we execute the cell."""
+    execute(cfg)
 
 
 if __name__ == "__main__":
