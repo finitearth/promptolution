@@ -32,7 +32,14 @@ FINISHED_MARKER = ".finished"
 
 
 def train_test_split(df: pd.DataFrame, test_frac: float = 0.2, seed: int = 42) -> Tuple[pd.DataFrame, pd.DataFrame]:
-    """Split a DataFrame into ``(train_df, test_df)``."""
+    """Split a DataFrame into ``(train_df, test_df)``.
+
+    Accepts anything df-like (e.g. a HuggingFace ``Dataset`` straight from ``datasets.load_dataset``),
+    normalizing to pandas first — duck-typed, so ``datasets`` stays an optional dependency.
+    """
+    to_pandas = getattr(df, "to_pandas", None)
+    if to_pandas is not None:
+        df = to_pandas()
     test_df = df.sample(frac=test_frac, random_state=seed)
     train_df = df.drop(test_df.index)
     return train_df.reset_index(drop=True), test_df.reset_index(drop=True)

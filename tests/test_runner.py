@@ -25,6 +25,20 @@ def test_train_test_split_sizes_disjoint_deterministic():
     assert test["x"].tolist() == test2["x"].tolist()  # deterministic
 
 
+def test_train_test_split_normalizes_df_like():
+    # A HuggingFace Dataset has .to_pandas() but no .sample(); it must be normalized first.
+    class _DFLike:
+        def __init__(self, df):
+            self._df = df
+
+        def to_pandas(self):
+            return self._df
+
+    train, test = train_test_split(_DFLike(_df(10)), test_frac=0.2, seed=42)
+    assert isinstance(train, pd.DataFrame) and isinstance(test, pd.DataFrame)
+    assert len(train) == 8 and len(test) == 2
+
+
 def _optimizer(df):
     llm = MockLLM(predetermined_responses=["<final_answer>positive</final_answer>"] * 200)
     task = ClassificationTask(df, task_description="Classify the sentiment.")
