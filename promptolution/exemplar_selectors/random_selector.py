@@ -2,7 +2,7 @@
 
 import numpy as np
 
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING, List
 
 from promptolution.exemplar_selectors.base_exemplar_selector import BaseExemplarSelector
 from promptolution.utils.prompt import Prompt

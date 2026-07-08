@@ -121,7 +121,6 @@ def test_evaluate_with_block_list_updates_blocks(predictor, small_task):
         assert task.prompt_evaluated_blocks[p] == [0, 1]
 
 
-
 def test_block_wraparound_and_get_cache_keys():
     df = pd.DataFrame({"x": ["a", "b"], "y": ["1", "0"]})
     task = MockTask(df=df, eval_strategy="sequential_block", n_subsamples=1)

@@ -10,7 +10,6 @@ from typing import Any, Callable, List, Literal, Optional
 from promptolution.tasks.base_task import BaseTask
 
 
-
 class ClassificationTask(BaseTask):
     """A class representing a classification task in the promptolution library.
 

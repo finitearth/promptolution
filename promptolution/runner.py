@@ -13,9 +13,10 @@ from __future__ import annotations
 import json
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import TYPE_CHECKING, List, Optional, Tuple, Union
 
 import pandas as pd
+
+from typing import TYPE_CHECKING, List, Optional, Tuple, Union
 
 from promptolution.utils.callbacks import FileOutputCallback
 from promptolution.utils.logging import get_logger
@@ -30,9 +31,7 @@ logger = get_logger(__name__)
 FINISHED_MARKER = ".finished"
 
 
-def train_test_split(
-    df: pd.DataFrame, test_frac: float = 0.2, seed: int = 42
-) -> Tuple[pd.DataFrame, pd.DataFrame]:
+def train_test_split(df: pd.DataFrame, test_frac: float = 0.2, seed: int = 42) -> Tuple[pd.DataFrame, pd.DataFrame]:
     """Split a DataFrame into ``(train_df, test_df)``."""
     test_df = df.sample(frac=test_frac, random_state=seed)
     train_df = df.drop(test_df.index)

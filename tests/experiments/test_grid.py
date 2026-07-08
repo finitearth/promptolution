@@ -7,9 +7,9 @@ import pandas as pd
 import pytest
 
 pytest.importorskip("hydra")
-from omegaconf import OmegaConf
+from omegaconf import OmegaConf  # noqa: E402
 
-from promptolution.experiments.launch import compose_experiment, execute, run_grid
+from promptolution.experiments.launch import compose_experiment, execute, run_grid  # noqa: E402
 
 _PROMPTS = ["Classify the sentiment. <final_answer></final_answer>", "Positive, negative or neutral?"]
 
@@ -30,9 +30,9 @@ def test_restart_skips_finished(tmp_path):
     cfg = _cfg_with_mock_llm(["task=dummy", "optimizer=evopromptga", "n_steps=2", "test_frac=0.25"])
     execute(cfg, out_dir=tmp_path)
     assert (tmp_path / ".finished").exists()
-    (tmp_path / "step_results.parquet").unlink()             # remove an output
-    execute(cfg, out_dir=tmp_path)                            # skip_completed default -> skip
-    assert not (tmp_path / "step_results.parquet").exists()   # not regenerated => skipped
+    (tmp_path / "step_results.parquet").unlink()  # remove an output
+    execute(cfg, out_dir=tmp_path)  # skip_completed default -> skip
+    assert not (tmp_path / "step_results.parquet").exists()  # not regenerated => skipped
 
 
 def test_run_grid_expands_and_is_resumable(tmp_path):
@@ -52,8 +52,10 @@ def test_run_grid_expands_and_is_resumable(tmp_path):
         res = run_grid(grid, name="g", output_root=str(tmp_path))
         assert len(res) == 4 and len(ran) == 4  # 2 x 2 product, all executed
         assert set(res) == {
-            "optimizer=capo,random_seed=42", "optimizer=capo,random_seed=43",
-            "optimizer=opro,random_seed=42", "optimizer=opro,random_seed=43",
+            "optimizer=capo,random_seed=42",
+            "optimizer=capo,random_seed=43",
+            "optimizer=opro,random_seed=42",
+            "optimizer=opro,random_seed=43",
         }
         assert (tmp_path / "g" / "optimizer=capo,random_seed=42" / ".finished").exists()
         ran.clear()

@@ -7,8 +7,6 @@ from typing import List, Literal, Optional, Tuple, Union
 
 from promptolution.llms.base_llm import BaseLLM
 
-
-
 PredictorType = Literal["first_occurrence", "marker"]
 
 

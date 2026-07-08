@@ -21,7 +21,6 @@ def test_base_llm_default_and_list_system_prompts():
     assert res_multi == ["Mock response for: p1", "Mock response for: p2"]
 
 
-
 def test_base_llm_set_generation_seed():
     llm = MockLLM()
     llm.set_generation_seed(123)

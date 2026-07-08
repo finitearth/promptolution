@@ -17,10 +17,11 @@ Usage:
 from __future__ import annotations
 
 from pathlib import Path
-from typing import TYPE_CHECKING, List, Optional
 
 import hydra
 from omegaconf import OmegaConf
+
+from typing import TYPE_CHECKING, List, Optional
 
 from promptolution.runner import run, train_test_split
 from promptolution.utils.logging import get_logger
@@ -109,7 +110,7 @@ def run_grid(
     import os
 
     base = list(overrides or [])
-    output_root = output_root or os.environ.get("PROMPTOLUTION_OUTPUT_DIR", "outputs")
+    root = Path(output_root or os.environ.get("PROMPTOLUTION_OUTPUT_DIR") or "outputs")
     keys = list(grid)
     value_lists = [list(grid[k]) for k in keys]
 
@@ -118,7 +119,7 @@ def run_grid(
         cell_overrides = base + [f"{k}={v}" for k, v in zip(keys, combo)] + [f"name={name}"]
         cfg = compose_experiment(overrides=cell_overrides, config_name=config_name)
         slug = ",".join(f"{k.split('.')[-1]}={v}" for k, v in zip(keys, combo))
-        results[slug] = execute(cfg, out_dir=Path(output_root) / name / slug)
+        results[slug] = execute(cfg, out_dir=root / name / slug)
     return results
 
 

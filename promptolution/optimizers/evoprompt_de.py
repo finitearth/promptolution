@@ -51,9 +51,7 @@ class EvoPromptDE(BaseOptimizer):
         """Initialize the EvoPromptDE optimizer."""
         self.donor_random = donor_random
         self.meta_llm = meta_llm
-        super().__init__(
-            predictor=predictor, task=task, initial_prompts=initial_prompts, callbacks=callbacks
-        )
+        super().__init__(predictor=predictor, task=task, initial_prompts=initial_prompts, callbacks=callbacks)
         self.prompt_template = self._initialize_meta_template(prompt_template or EVOPROMPT_DE_TEMPLATE_TD)
 
     def _pre_optimization_loop(self) -> None:

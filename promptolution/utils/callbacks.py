@@ -269,4 +269,3 @@ class TokenCountCallback(BaseCallback):
             return False
 
         return True
-

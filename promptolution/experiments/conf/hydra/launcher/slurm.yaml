@@ -1,6 +1,6 @@
 # @package hydra.launcher
 # Parametrized SLURM launcher (from the hydra-submitit-launcher plugin). Use it on the CLI with:
-#   python -m promptolution.experiments.run -m hydra/launcher=slurm <sweep args>
+#   python -m promptolution.experiments.launch -m hydra/launcher=slurm <sweep args>
 # A multirun then becomes ONE SLURM array job. Edit the values for your cluster (or override on CLI).
 defaults:
   - submitit_slurm

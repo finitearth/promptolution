@@ -109,7 +109,8 @@ Full tutorial: [Getting Started notebook](https://github.com/automl/promptolutio
 * **`Predictor`** – Defines how to extract the answer from the model's response.
 * **`LLM`** – A unified interface handling inference, token counting, and concurrency.
 * **`Optimizer`** – The core component that implements the algorithms that refine prompts.
-* **`ExperimentConfig`** – A configuration abstraction to streamline and parametrize large-scale scientific experiments.
+
+For held-out evaluation, result files, and restart, wrap an optimizer in `promptolution.runner.run`; for config/CLI-driven runs and grids (Hydra, optional), see `promptolution[experiments]`.
 
 ## 🤝 Contributing
 

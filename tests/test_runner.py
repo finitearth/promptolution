@@ -13,18 +13,16 @@ from promptolution.tasks.classification_tasks import ClassificationTask
 
 
 def _df(n=8):
-    return pd.DataFrame(
-        {"x": [f"text number {i}" for i in range(n)], "y": (["positive", "negative"] * n)[:n]}
-    )
+    return pd.DataFrame({"x": [f"text number {i}" for i in range(n)], "y": (["positive", "negative"] * n)[:n]})
 
 
 def test_train_test_split_sizes_disjoint_deterministic():
     df = _df(10)
     train, test = train_test_split(df, test_frac=0.2, seed=42)
     assert len(train) == 8 and len(test) == 2
-    assert set(train["x"]) & set(test["x"]) == set()          # disjoint rows
+    assert set(train["x"]) & set(test["x"]) == set()  # disjoint rows
     train2, test2 = train_test_split(df, test_frac=0.2, seed=42)
-    assert test["x"].tolist() == test2["x"].tolist()          # deterministic
+    assert test["x"].tolist() == test2["x"].tolist()  # deterministic
 
 
 def _optimizer(df):
@@ -49,9 +47,9 @@ def test_run_writes_output_contract(tmp_path):
 
 def test_run_skips_completed(tmp_path):
     run(_optimizer(_df()), n_steps=2, output_dir=tmp_path, name="t")
-    (tmp_path / "step_results.parquet").unlink()              # remove an output
+    (tmp_path / "step_results.parquet").unlink()  # remove an output
     run(_optimizer(_df()), n_steps=2, output_dir=tmp_path, name="t")  # .finished present -> skip
-    assert not (tmp_path / "step_results.parquet").exists()   # not regenerated => skipped
+    assert not (tmp_path / "step_results.parquet").exists()  # not regenerated => skipped
 
 
 def test_run_evaluates_on_test_task(tmp_path):
@@ -61,7 +59,9 @@ def test_run_evaluates_on_test_task(tmp_path):
     train_task = ClassificationTask(train_df, task_description="Classify the sentiment.")
     test_task = ClassificationTask(test_df, task_description=train_task.task_description)
     opt = EvoPromptGA(
-        predictor=MarkerBasedPredictor(llm), meta_llm=llm, task=train_task,
+        predictor=MarkerBasedPredictor(llm),
+        meta_llm=llm,
+        task=train_task,
         initial_prompts=["Classify the sentiment.", "Positive or negative?"],
     )
     result = run(opt, n_steps=2, test_task=test_task, output_dir=tmp_path, name="t")

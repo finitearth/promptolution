@@ -3,7 +3,7 @@
 
 from abc import ABC, abstractmethod
 
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING
 
 from promptolution.utils.prompt import Prompt
 
@@ -28,7 +28,6 @@ class BaseExemplarSelector(ABC):
         """
         self.task = task
         self.predictor = predictor
-
 
     @abstractmethod
     def select_exemplars(self, prompt: Prompt, n_examples: int = 5) -> Prompt:

@@ -22,8 +22,6 @@ def initial_prompts():
     ]
 
 
-
-
 @pytest.fixture
 def mock_task():
     """Fixture providing a MockTask with predetermined scoring behavior."""

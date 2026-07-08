@@ -50,7 +50,8 @@ class BaseOptimizer(ABC):
         if initial_prompts is None:
             # Opt-in convenience: generate initial prompts from the task description via the
             # predictor's LLM. Explicit (logged), only when no prompts were supplied.
-            if getattr(task, "task_description", None) is None:
+            task_description = getattr(task, "task_description", None)
+            if task_description is None:
                 raise ValueError(
                     "Provide `initial_prompts`, or set `task_description` on the task so initial "
                     "prompts can be generated from it."
@@ -58,9 +59,7 @@ class BaseOptimizer(ABC):
             from promptolution.utils.prompt_creation import create_prompts_from_task_description
 
             logger.warning("\U0001f9ec No initial_prompts provided \u2014 generating them from the task description.")
-            initial_prompts = create_prompts_from_task_description(
-                task_description=task.task_description, llm=predictor.llm
-            )
+            initial_prompts = create_prompts_from_task_description(task_description=task_description, llm=predictor.llm)
         if isinstance(initial_prompts[0], str):
             self.prompts = [Prompt(p) for p in initial_prompts]
         else:

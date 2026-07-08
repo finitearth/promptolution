@@ -58,9 +58,7 @@ class EvoPromptGA(BaseOptimizer):
         """Initialize the EvoPromptGA optimizer."""
         self.meta_llm = meta_llm
         self.selection_mode = selection_mode
-        super().__init__(
-            predictor=predictor, initial_prompts=initial_prompts, task=task, callbacks=callbacks
-        )
+        super().__init__(predictor=predictor, initial_prompts=initial_prompts, task=task, callbacks=callbacks)
         self.prompt_template = self._initialize_meta_template(prompt_template or EVOPROMPT_GA_TEMPLATE_TD)
 
         assert self.selection_mode in ["random", "wheel", "tour"], "Invalid selection mode."

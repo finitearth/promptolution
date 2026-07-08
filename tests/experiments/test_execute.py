@@ -10,12 +10,12 @@ import pandas as pd
 import pytest
 
 pytest.importorskip("hydra")
-from omegaconf import OmegaConf
+from omegaconf import OmegaConf  # noqa: E402
 
-from tests.mocks.mock_llm import MockLLM
+from tests.mocks.mock_llm import MockLLM  # noqa: E402
 
-from promptolution.experiments.launch import compose_experiment, execute
-from promptolution.tasks.classification_tasks import ClassificationTask
+from promptolution.experiments.launch import compose_experiment, execute  # noqa: E402
+from promptolution.tasks.classification_tasks import ClassificationTask  # noqa: E402
 
 _PROMPTS = ["Classify the sentiment. <final_answer></final_answer>", "Positive, negative or neutral?"]
 
@@ -40,8 +40,8 @@ def test_execute_wiring(tmp_path):
     (optimizer,), kw = mock_run.call_args
     assert isinstance(optimizer.task, ClassificationTask)
     assert isinstance(optimizer.predictor.llm, MockLLM)
-    assert kw["test_task"] is not None            # test_frac>0 -> a held-out Task was built
-    assert len(optimizer.task.df) < 8             # train split is smaller than the full 8 rows
+    assert kw["test_task"] is not None  # test_frac>0 -> a held-out Task was built
+    assert len(optimizer.task.df) < 8  # train split is smaller than the full 8 rows
 
 
 def test_execute_end_to_end(tmp_path):

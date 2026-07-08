@@ -1,6 +1,6 @@
 """Module for the FirstOccurrencePredictor."""
 
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING, List
 
 from promptolution.predictors.base_predictor import BasePredictor
 

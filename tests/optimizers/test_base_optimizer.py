@@ -72,5 +72,3 @@ def test_base_optimizer_no_callbacks_continues(predictor: MockPredictor, task: M
     opt = SimpleOptimizer(predictor=predictor, task=task)
     opt.optimize(2)
     assert opt.steps == 2
-
-
