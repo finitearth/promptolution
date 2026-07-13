@@ -1,9 +1,9 @@
 """CLI entry: ``python -m promptolution.experiment_grid [overrides...]`` (``-m`` for grids)."""
 
-from hydra.core.hydra_config import HydraConfig
 from pathlib import Path
 
 import hydra
+from hydra.core.hydra_config import HydraConfig
 
 from promptolution.experiment_grid import execute
 

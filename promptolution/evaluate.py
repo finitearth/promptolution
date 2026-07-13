@@ -2,7 +2,7 @@
 
 import pandas as pd
 
-from typing import TYPE_CHECKING, List, Tuple, Union
+from typing import TYPE_CHECKING, List, Tuple, Union, cast
 
 from promptolution.utils.logging import get_logger
 from promptolution.utils.prompt import Prompt
@@ -48,11 +48,11 @@ def evaluate(prompts: Union[List[Prompt], List[str]], task: "BaseTask", predicto
         pd.DataFrame: Columns ``prompt`` and ``score``, best first.
     """
     if isinstance(prompts[0], str):
-        str_prompts = list(prompts)
+        str_prompts = cast(List[str], list(prompts))
         prompt_objs = [Prompt(p) for p in str_prompts]
     else:
-        str_prompts = [p.construct_prompt() for p in prompts]
-        prompt_objs = list(prompts)
+        prompt_objs = cast(List[Prompt], list(prompts))
+        str_prompts = [p.construct_prompt() for p in prompt_objs]
     logger.warning("📊 Starting evaluation...")
     results = task.evaluate(prompt_objs, predictor, eval_strategy="full")
     return pd.DataFrame({"prompt": str_prompts, "score": results.agg_scores.tolist()}).sort_values(
