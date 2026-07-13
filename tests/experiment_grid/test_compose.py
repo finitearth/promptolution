@@ -1,10 +1,8 @@
-"""Config composition + fail-fast tests for the experiments module."""
+"""Config composition + fail-fast tests for the experiment_grid module."""
 
 import pytest
 
-pytest.importorskip("hydra")
-
-from promptolution.experiments.launch import compose_experiment  # noqa: E402
+from promptolution.experiment_grid import compose_experiment
 
 
 def test_defaults_compose():

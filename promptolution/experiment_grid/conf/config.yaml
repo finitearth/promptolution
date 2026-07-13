@@ -8,6 +8,7 @@ defaults:
   - _self_
 
 name: ??? # REQUIRED — keys the output folder so a rerun resumes into the SAME folder
+meta_llm: null # separate LLM config for prompt proposals; null shares `llm`
 n_steps: 3
 random_seed: 42
 test_frac: 0.2 # held-out fraction for evaluation (0 => evaluate on the train split)
