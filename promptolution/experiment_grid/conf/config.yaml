@@ -2,14 +2,14 @@
 # Every group file is a `_target_` + its constructor params.
 defaults:
   - llm: api
-  - optimizer: evopromptga
+  - optimizer: capo
   - task: dummy
   - predictor: marker
   - _self_
 
 name: ??? # REQUIRED — keys the output folder so a rerun resumes into the SAME folder
 meta_llm: null # separate LLM config for prompt proposals; null shares `llm`
-n_steps: 3
+n_steps: 10
 random_seed: 42
 test_frac: 0.2 # held-out fraction for evaluation (0 => evaluate on the train split)
 skip_completed: true # skip a cell whose output dir already has a .finished marker (restart)

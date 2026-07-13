@@ -1,12 +1,19 @@
 # A whole grid defined in a FILE (not on the CLI). Run it with:
-#   python -m promptolution.experiments.launch -m --config-name grid_example
+#   python -m promptolution.experiment_grid -m --config-name grid_example
 # It inherits the base `config`, picks the task, names the experiment, and declares the sweep.
+# Fixed initial prompts: every cell starts identical, so the swept axes stay comparable.
 defaults:
   - config
   - override task: agnews
   - _self_
 
 name: example_grid
+
+optimizer:
+  initial_prompts:
+    - "Classify the news article into one of: world, sports, business, tech."
+    - "Read the article and answer with its topic: world, sports, business or tech."
+    - "Which category does this news story belong to — world, sports, business or tech?"
 
 hydra:
   sweeper:

@@ -1,0 +1,11 @@
+# Your own data from a CSV file. Point it at the file and describe the task:
+#   python -m promptolution.experiment_grid name=my_run task=csv \
+#     task.df.filepath_or_buffer=my_data.csv task.task_description="Classify ... into: a, b."
+_target_: promptolution.tasks.ClassificationTask
+df:
+  _target_: pandas.read_csv
+  filepath_or_buffer: ???
+x_column: x
+y_column: y
+task_description: ???
+eval_strategy: sequential_block

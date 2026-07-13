@@ -33,3 +33,4 @@ def test_yaml_grid_config_composes():
     cfg = compose_experiment(config_name="grid_example")
     assert cfg.name == "example_grid"
     assert cfg.task.df.path == "SetFit/ag_news"  # task=agnews override applied on top of base config
+    assert len(cfg.optimizer.initial_prompts) == 3  # fixed starting prompts -> comparable cells

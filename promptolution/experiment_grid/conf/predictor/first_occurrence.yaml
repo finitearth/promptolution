@@ -1,0 +1,4 @@
+# Classifies by the first valid class label occurring in the response (no answer markers needed).
+# Requires the label list explicitly (lowercase), e.g. +predictor.classes=[world,sports,business,tech]
+_target_: promptolution.predictors.FirstOccurrencePredictor
+classes: ???

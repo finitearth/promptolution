@@ -11,4 +11,4 @@ df:
 x_column: x
 y_column: y
 task_description: "Classify the sentiment of the text as positive, negative, or neutral."
-eval_strategy: full
+eval_strategy: sequential_block # train-time evaluation on blocks; final held-out scores are computed full

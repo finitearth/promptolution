@@ -1,11 +1,11 @@
-# Real HuggingFace dataset. `datasets.load_dataset` returns a Dataset; BaseTask normalizes it to a
-# DataFrame via .to_pandas() (duck-typed, so `datasets` stays an optional dependency).
+# Real HuggingFace dataset (needs the `datasets` package). test[:300] carries all 4 classes,
+# roughly balanced; the train split starts 2-class for the first ~1000 rows.
 _target_: promptolution.tasks.ClassificationTask
 df:
   _target_: datasets.load_dataset
   path: SetFit/ag_news
-  split: train[:300]
+  split: test[:300]
 x_column: text
 y_column: label_text
 task_description: "Classify the news article into one of: world, sports, business, tech."
-eval_strategy: full
+eval_strategy: sequential_block
