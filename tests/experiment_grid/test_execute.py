@@ -31,7 +31,7 @@ def _cfg_with_mock_llm(overrides):
 def test_execute_wiring(tmp_path):
     """execute() builds the right components, splits train/test, and evaluates on the held-out task."""
     cfg = _cfg_with_mock_llm(["name=t", "task=dummy", "optimizer=evopromptga", "n_steps=2", "test_frac=0.25"])
-    with patch("promptolution.experiment_grid.evaluate") as mock_evaluate:
+    with patch("promptolution.experiment_grid.launch_grid.evaluate") as mock_evaluate:
         mock_evaluate.return_value = pd.DataFrame({"prompt": ["p"], "score": [1.0]})
         execute(cfg, out_dir=tmp_path)
     prompts, test_task, predictor = mock_evaluate.call_args[0]
@@ -44,7 +44,7 @@ def test_execute_wiring(tmp_path):
 def test_execute_no_split_evaluates_on_train(tmp_path):
     """test_frac=0 -> no held-out split; evaluation runs on the train task."""
     cfg = _cfg_with_mock_llm(["name=t", "task=dummy", "optimizer=evopromptga", "n_steps=2", "test_frac=0"])
-    with patch("promptolution.experiment_grid.evaluate") as mock_evaluate:
+    with patch("promptolution.experiment_grid.launch_grid.evaluate") as mock_evaluate:
         mock_evaluate.return_value = pd.DataFrame({"prompt": ["p"], "score": [1.0]})
         execute(cfg, out_dir=tmp_path)
     _, task, _ = mock_evaluate.call_args[0]

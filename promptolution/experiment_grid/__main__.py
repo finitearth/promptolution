@@ -5,7 +5,7 @@ from pathlib import Path
 import hydra
 from hydra.core.hydra_config import HydraConfig
 
-from promptolution.experiment_grid import execute
+from promptolution.experiment_grid.launch_grid import execute
 
 
 @hydra.main(version_base=None, config_path="conf", config_name="config")
