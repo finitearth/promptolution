@@ -1,0 +1,30 @@
+name: Regenerate poetry.lock
+
+on:
+  workflow_dispatch:
+
+jobs:
+  regen-lock:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Setup Poetry
+        uses: snok/install-poetry@v1.4.1
+        with:
+          python-version: "3.11"
+
+      - name: Regenerate lock file
+        run: poetry lock
+
+      - name: Commit updated lock file
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "chore: regenerate poetry.lock"
+          file_pattern: poetry.lock
