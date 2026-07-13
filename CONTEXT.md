@@ -10,18 +10,23 @@ An `llm`, `task`, `predictor`, or `optimizer` — a promptolution object built d
 Hydra `instantiate`. Components *are* the interface: single runs and grid cells are both assembled from them.
 _Avoid_: config, module, unit.
 
-**Runner**:
-The one function that executes a single experiment — optimize the optimizer's train **Task**, evaluate the
-best prompts on an optional `test_df`, write the output contract, and handle restart. Shared by single runs
-and every grid **Cell**.
-_Avoid_: engine, executor, pipeline.
+**One-call entry**:
+`optimize(llm, df, task_description)` — the end-user API. Required is only what the library cannot know
+(the LLM and its credentials, the data, what the task is); it builds default **Components**, optimizes,
+and scores on a held-out split. Researchers use **direct construction** or a **Grid** instead.
+_Avoid_: helper, quickstart config.
+
+**Execute**:
+`experiment_grid.execute(cfg, out_dir)` — runs one **Cell** end-to-end: build Components via
+`instantiate`, optimize, evaluate, write the output contract, handle restart.
+_Avoid_: runner (retired), engine, pipeline.
 
 **Cell**:
 One point of a **Grid** — a single fully-specified set of component overrides, i.e. exactly one run.
 _Avoid_: job, node, task (a "task" is a Component).
 
 **Grid**:
-The set of **Cells** formed by sweeping component parameters (Hydra multirun, a YAML sweep, or `run_grid`).
+The set of **Cells** formed by sweeping component parameters (Hydra multirun `-m`, or a YAML sweep file).
 _Avoid_: sweep (use for the act), batch.
 
 **Experiment**:
@@ -35,6 +40,8 @@ _Avoid_: quickstart config, `run_experiment(df, config)` (retired).
 
 ## Flagged ambiguities / retired terms
 
+- **Runner** — *retired* (split). Its optimization/evaluation halves are now `promptolution.optimize` /
+  `promptolution.evaluate`; the output contract and restart moved into `experiment_grid.execute`.
 - **ExperimentConfig** — *retired* (deleted). It was a single flat config bag scattered onto components via
   `apply_to`. Do not reintroduce a global config object; a Component's constructor is its schema.
 - **Bridge** — *retired* (deleted). Was the flat→nested mapping from a composed config onto `ExperimentConfig`.
@@ -47,7 +54,7 @@ _Avoid_: quickstart config, `run_experiment(df, config)` (retired).
 > an `optimizer`, then `optimizer.optimize()`. That's **direct construction**."
 > **Dev:** "And a **Grid**?"
 > **Maintainer:** "Same Components, but declared in YAML and built by `instantiate`. Sweeping them gives
-> **Cells**; the shared **Runner** executes each one. Name the **Experiment** and a rerun resumes into the
+> **Cells**; **Execute** runs each one. Name the **Experiment** and a rerun resumes into the
 > same folder, skipping finished Cells."
 > **Dev:** "Where does the dataset go?"
 > **Maintainer:** "It's the **Task**'s `df`. In Python you pass it; in a grid it's a nested `_target_` on the

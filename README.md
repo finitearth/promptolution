@@ -49,46 +49,46 @@ pip install promptolution[api]
 
 For local inference, add `[transformers]` (HuggingFace) or `[vllm]` (vLLM serving), or both.
 
-Build the components (LLM, task, predictor, optimizer) and optimize:
+Give it the only things it cannot know — your LLM (and credentials), your data, and what the task is —
+and get back scored prompts, best first:
 
 ```python
 import pandas as pd
 from promptolution.llms import APILLM
-from promptolution.tasks import ClassificationTask
-from promptolution.predictors import MarkerBasedPredictor
-from promptolution.optimizers import CAPO
+from promptolution.optimize import optimize
 
 # DataFrame with columns "x" (input) and "y" (label)
 df = pd.read_csv("your_data.csv")
 
 llm = APILLM(model_id="gpt-4o-mini", api_url="https://api.openai.com/v1", api_key="YOUR_API_KEY")
-task = ClassificationTask(df, task_description="Classify each sentence as subjective or objective.")
-optimizer = CAPO(
-    predictor=MarkerBasedPredictor(llm),
-    meta_llm=llm,
-    task=task,
-    initial_prompts=["Classify the text as objective or subjective."],
-)
-
-best_prompts = optimizer.optimize(n_steps=10)
-print(best_prompts)
+scores = optimize(llm, df, task_description="Classify each sentence as subjective or objective.")
+print(scores)  # DataFrame: prompt, score — evaluated on a held-out split
 ```
 
-Want a held-out evaluation + result files (`step_results.parquet`, `prompt_scores.parquet`) + restart?
-Use the runner:
+Everything else is defaulted but overridable (`optimizer=`, `initial_prompts=`, `n_steps=`,
+`test_frac=`, `x_column=`/`y_column=`).
+
+Want full control? Build the components (LLM, task, predictor, optimizer) yourself and compose:
 
 ```python
-from promptolution.runner import run, train_test_split
+from promptolution.evaluate import evaluate, train_test_split
+from promptolution.tasks import ClassificationTask
+from promptolution.predictors import MarkerBasedPredictor
+from promptolution.optimizers import CAPO
 
 train_df, test_df = train_test_split(df, test_frac=0.2)
-task = ClassificationTask(train_df, task_description="...")
-test_task = ClassificationTask(test_df, task_description=task.task_description)
-optimizer = CAPO(predictor=MarkerBasedPredictor(llm), meta_llm=llm, task=task, initial_prompts=[...])
-best = run(optimizer, n_steps=10, test_task=test_task, output_dir="results/subj", name="subj")
+task = ClassificationTask(train_df, task_description="Classify each sentence as subjective or objective.")
+predictor = MarkerBasedPredictor(llm)
+optimizer = CAPO(predictor=predictor, meta_llm=llm, task=task,
+                 initial_prompts=["Classify the text as objective or subjective."])
+
+best_prompts = optimizer.optimize(n_steps=10)
+scores = evaluate(best_prompts, ClassificationTask(test_df, task_description=task.task_description), predictor)
 ```
 
-For **config-driven runs and grids** (from YAML/CLI, locally or on SLURM), install `promptolution[experiments]`
-and use `python -m promptolution.experiments.launch` — see the [experiments README](promptolution/experiments/README.md).
+For **config-driven experiments and grids** (from YAML/CLI, locally or on SLURM, with result files and
+restart), use `python -m promptolution.experiment_grid` — see the
+[experiment_grid README](promptolution/experiment_grid/README.md).
 
 Full tutorial: [Getting Started notebook](https://github.com/automl/promptolution/blob/main/tutorials/getting_started.ipynb) · [Docs](https://automl.github.io/promptolution/)
 
@@ -110,7 +110,7 @@ Full tutorial: [Getting Started notebook](https://github.com/automl/promptolutio
 * **`LLM`** – A unified interface handling inference, token counting, and concurrency.
 * **`Optimizer`** – The core component that implements the algorithms that refine prompts.
 
-For held-out evaluation, result files, and restart, wrap an optimizer in `promptolution.runner.run`; for config/CLI-driven runs and grids (Hydra, optional), see `promptolution[experiments]`.
+The one-call `promptolution.optimize.optimize` builds these with defaults; `promptolution.evaluate.evaluate` scores prompts on a task; config/CLI-driven experiments and grids live in `promptolution.experiment_grid`.
 
 ## 🤝 Contributing
 
