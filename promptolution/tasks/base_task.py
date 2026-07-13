@@ -70,11 +70,6 @@ class BaseTask(ABC):
 
         super().__init__()
 
-        # Accept anything df-like (e.g. a HuggingFace Dataset from datasets.load_dataset) by
-        # normalizing to a pandas DataFrame. Duck-typed, so `datasets` stays an optional dependency.
-        to_pandas = getattr(df, "to_pandas", None)
-        if to_pandas is not None:
-            df = to_pandas()
         self.df = df.drop_duplicates(subset=[self.x_column])
         if len(self.df) != len(df):
             logger.warning(

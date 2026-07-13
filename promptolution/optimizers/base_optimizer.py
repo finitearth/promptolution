@@ -11,6 +11,7 @@ if TYPE_CHECKING:  # pragma: no cover
 
 from promptolution.utils.logging import get_logger
 from promptolution.utils.prompt import Prompt
+from promptolution.utils.prompt_creation import create_prompts_from_task_description
 
 logger = get_logger(__name__)
 
@@ -46,20 +47,16 @@ class BaseOptimizer(ABC):
             initial_prompts: Initial set of prompts to start optimization with.
             callbacks: List of callback functions.
         """
-        # Set up optimizer state
         if initial_prompts is None:
-            # Opt-in convenience: generate initial prompts from the task description via the
-            # predictor's LLM. Explicit (logged), only when no prompts were supplied.
-            task_description = getattr(task, "task_description", None)
-            if task_description is None:
+            if task.task_description is None:
                 raise ValueError(
                     "Provide `initial_prompts`, or set `task_description` on the task so initial "
                     "prompts can be generated from it."
                 )
-            from promptolution.utils.prompt_creation import create_prompts_from_task_description
-
             logger.warning("\U0001f9ec No initial_prompts provided \u2014 generating them from the task description.")
-            initial_prompts = create_prompts_from_task_description(task_description=task_description, llm=predictor.llm)
+            initial_prompts = create_prompts_from_task_description(
+                task_description=task.task_description, llm=predictor.llm
+            )
         if isinstance(initial_prompts[0], str):
             self.prompts = [Prompt(p) for p in initial_prompts]
         else:
@@ -143,11 +140,10 @@ class BaseOptimizer(ABC):
             callback.on_train_end(self)
 
     def _initialize_meta_template(self, template: str) -> str:
-        task_description = getattr(self.task, "task_description")
-        extraction_description = getattr(self.predictor, "extraction_description")
+        task_description = self.task.task_description
         if task_description is None:
             logger.warning("Task description is not provided. Please make sure to include relevant task details.")
             task_description = ""
-        if extraction_description is not None:
-            task_description += "\n" + extraction_description
+        if self.predictor.extraction_description:
+            task_description += "\n" + self.predictor.extraction_description
         return template.replace("<task_desc>", task_description)

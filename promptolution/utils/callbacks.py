@@ -143,7 +143,7 @@ class FileOutputCallback(BaseCallback):
         self.rows: list = []
 
     def on_step_end(self, optimizer: "BaseOptimizer") -> bool:
-        """Append this step's rows and rewrite the results file (engine-agnostic).
+        """Append this step's rows and rewrite the results file.
 
         Args:
         optimizer: The optimizer object that called the callback
