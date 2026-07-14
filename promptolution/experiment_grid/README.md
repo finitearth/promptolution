@@ -8,8 +8,8 @@ promptolution; the extra adds the SLURM launcher plugin and HuggingFace `dataset
 pip install "promptolution[experiments]"   # hydra-submitit-launcher, datasets
 ```
 
-This layer is for reproducible research experiments. For a plain "best prompt for my task" run in
-Python, use the one-call `promptolution.optimize` (see the top-level README).
+This layer is for reproducible research experiments. For a plain single run in Python, build the
+components directly and call `optimizer.optimize()` (see the top-level README).
 
 ## Quickstart
 

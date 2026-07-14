@@ -49,37 +49,20 @@ pip install promptolution[api]
 
 For local inference, add `[transformers]` (HuggingFace) or `[vllm]` (vLLM serving), or both.
 
-Give it the only things it cannot know — your LLM (and credentials), your data, and what the task is —
-and get back scored prompts, best first:
+Build the components (LLM, task, predictor, optimizer) and optimize:
 
 ```python
 import pandas as pd
-import promptolution
 from promptolution.llms import APILLM
-
-# DataFrame with columns "x" (input) and "y" (label)
-df = pd.read_csv("your_data.csv")
-
-llm = APILLM(model_id="gpt-4o-mini", api_url="https://api.openai.com/v1", api_key="YOUR_API_KEY")
-scores = promptolution.optimize(llm, df, task_description="Classify each sentence as subjective or objective.")
-print(scores)  # DataFrame: prompt, score — evaluated on a held-out split
-```
-
-Everything else is defaulted but overridable (`optimizer=`, `initial_prompts=`, `n_steps=`,
-`test_frac=`, `x_column=`/`y_column=`). Scoring saved prompts on (new) data is the second verb:
-
-```python
-scores = promptolution.evaluate(llm, new_df, prompts=["Classify the text as objective or subjective."])
-```
-
-Want full control? Build the components (LLM, task, predictor, optimizer) yourself and compose:
-
-```python
 from promptolution.tasks import ClassificationTask
 from promptolution.predictors import MarkerBasedPredictor
 from promptolution.optimizers import CAPO
 from promptolution.utils import score_prompts, train_test_split
 
+# DataFrame with columns "x" (input) and "y" (label)
+df = pd.read_csv("your_data.csv")
+
+llm = APILLM(model_id="gpt-4o-mini", api_url="https://api.openai.com/v1", api_key="YOUR_API_KEY")
 train_df, test_df = train_test_split(df, test_frac=0.2)
 task = ClassificationTask(train_df, task_description="Classify each sentence as subjective or objective.")
 predictor = MarkerBasedPredictor(llm)
@@ -88,7 +71,12 @@ optimizer = CAPO(predictor=predictor, meta_llm=llm, task=task,
 
 best_prompts = optimizer.optimize(n_steps=10)
 scores = score_prompts(best_prompts, ClassificationTask(test_df, task_description=task.task_description), predictor)
+print(scores)  # DataFrame: prompt, score — evaluated on the held-out split, best first
 ```
+
+The components are the interface: swap the optimizer, predictor, or task (classification, reward-based,
+LLM-as-judge) without touching the rest. `initial_prompts` may be omitted — they are then generated
+from the `task_description`.
 
 For **config-driven experiments and grids** (from YAML/CLI, locally or on SLURM, with result files and
 restart), use `python -m promptolution.experiment_grid` — see the
@@ -114,7 +102,7 @@ Full tutorial: [Getting Started notebook](https://github.com/automl/promptolutio
 * **`LLM`** – A unified interface handling inference, token counting, and concurrency.
 * **`Optimizer`** – The core component that implements the algorithms that refine prompts.
 
-The end-user API builds these with defaults: `promptolution.optimize` finds prompts, `promptolution.evaluate` scores existing ones; config/CLI-driven experiments and grids live in `promptolution.experiment_grid`.
+Split/scoring helpers live in `promptolution.utils` (`train_test_split`, `score_prompts`); config/CLI-driven experiments and grids live in `promptolution.experiment_grid`.
 
 ## 🤝 Contributing
 
