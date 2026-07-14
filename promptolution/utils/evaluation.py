@@ -1,4 +1,4 @@
-"""Evaluate prompts on a task, plus the train/test split helper."""
+"""Component-level evaluation helpers: split off a held-out set, score prompts on a task."""
 
 import pandas as pd
 
@@ -36,7 +36,9 @@ def train_test_split(df: pd.DataFrame, test_frac: float = 0.2, seed: int = 42) -
     return train_df.reset_index(drop=True), test_df.reset_index(drop=True)
 
 
-def evaluate(prompts: Union[List[Prompt], List[str]], task: "BaseTask", predictor: "BasePredictor") -> pd.DataFrame:
+def score_prompts(
+    prompts: Union[List[Prompt], List[str]], task: "BaseTask", predictor: "BasePredictor"
+) -> pd.DataFrame:
     """Score prompts on a task and return a sorted ``prompt``/``score`` table.
 
     Args:

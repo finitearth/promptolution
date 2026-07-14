@@ -10,8 +10,8 @@ from hydra.utils import instantiate
 
 from typing import List, Optional, Union
 
-from promptolution.evaluate import evaluate, train_test_split
 from promptolution.utils.callbacks import FileOutputCallback
+from promptolution.utils.evaluation import score_prompts, train_test_split
 from promptolution.utils.logging import get_logger
 
 logger = get_logger(__name__)
@@ -58,7 +58,7 @@ def execute(cfg, out_dir: Union[str, Path]) -> pd.DataFrame:
     try:
         logger.warning("🔥 Starting optimization...")
         prompts = optimizer.optimize(n_steps=cfg.n_steps)
-        scores_df = evaluate(prompts, test_task, predictor)
+        scores_df = score_prompts(prompts, test_task, predictor)
     except Exception as e:
         info.update(status="failed", finished_at=datetime.now(timezone.utc).isoformat(), error=str(e))
         (out_dir / "runinfo.json").write_text(json.dumps(info, indent=2))

@@ -54,27 +54,31 @@ and get back scored prompts, best first:
 
 ```python
 import pandas as pd
+import promptolution
 from promptolution.llms import APILLM
-from promptolution.optimize import optimize
 
 # DataFrame with columns "x" (input) and "y" (label)
 df = pd.read_csv("your_data.csv")
 
 llm = APILLM(model_id="gpt-4o-mini", api_url="https://api.openai.com/v1", api_key="YOUR_API_KEY")
-scores = optimize(llm, df, task_description="Classify each sentence as subjective or objective.")
+scores = promptolution.optimize(llm, df, task_description="Classify each sentence as subjective or objective.")
 print(scores)  # DataFrame: prompt, score — evaluated on a held-out split
 ```
 
 Everything else is defaulted but overridable (`optimizer=`, `initial_prompts=`, `n_steps=`,
-`test_frac=`, `x_column=`/`y_column=`).
+`test_frac=`, `x_column=`/`y_column=`). Scoring saved prompts on (new) data is the second verb:
+
+```python
+scores = promptolution.evaluate(llm, new_df, prompts=["Classify the text as objective or subjective."])
+```
 
 Want full control? Build the components (LLM, task, predictor, optimizer) yourself and compose:
 
 ```python
-from promptolution.evaluate import evaluate, train_test_split
 from promptolution.tasks import ClassificationTask
 from promptolution.predictors import MarkerBasedPredictor
 from promptolution.optimizers import CAPO
+from promptolution.utils import score_prompts, train_test_split
 
 train_df, test_df = train_test_split(df, test_frac=0.2)
 task = ClassificationTask(train_df, task_description="Classify each sentence as subjective or objective.")
@@ -83,7 +87,7 @@ optimizer = CAPO(predictor=predictor, meta_llm=llm, task=task,
                  initial_prompts=["Classify the text as objective or subjective."])
 
 best_prompts = optimizer.optimize(n_steps=10)
-scores = evaluate(best_prompts, ClassificationTask(test_df, task_description=task.task_description), predictor)
+scores = score_prompts(best_prompts, ClassificationTask(test_df, task_description=task.task_description), predictor)
 ```
 
 For **config-driven experiments and grids** (from YAML/CLI, locally or on SLURM, with result files and
@@ -110,7 +114,7 @@ Full tutorial: [Getting Started notebook](https://github.com/automl/promptolutio
 * **`LLM`** – A unified interface handling inference, token counting, and concurrency.
 * **`Optimizer`** – The core component that implements the algorithms that refine prompts.
 
-The one-call `promptolution.optimize.optimize` builds these with defaults; `promptolution.evaluate.evaluate` scores prompts on a task; config/CLI-driven experiments and grids live in `promptolution.experiment_grid`.
+The end-user API builds these with defaults: `promptolution.optimize` finds prompts, `promptolution.evaluate` scores existing ones; config/CLI-driven experiments and grids live in `promptolution.experiment_grid`.
 
 ## 🤝 Contributing
 

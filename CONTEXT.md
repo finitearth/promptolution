@@ -11,9 +11,10 @@ Hydra `instantiate`. Components *are* the interface: single runs and grid cells 
 _Avoid_: config, module, unit.
 
 **One-call entry**:
-`optimize(llm, df, task_description)` — the end-user API. Required is only what the library cannot know
-(the LLM and its credentials, the data, what the task is); it builds default **Components**, optimizes,
-and scores on a held-out split. Researchers use **direct construction** or a **Grid** instead.
+`promptolution.optimize(llm, df, task_description)` and `promptolution.evaluate(llm, df, prompts)` — the
+end-user API, two verbs at the package root. Required is only what the library cannot know (the LLM and
+its credentials, the data, what the task is); they build default **Components** internally. Researchers
+use **direct construction** or a **Grid** instead.
 _Avoid_: helper, quickstart config.
 
 **Execute**:
@@ -40,8 +41,9 @@ _Avoid_: quickstart config, `run_experiment(df, config)` (retired).
 
 ## Flagged ambiguities / retired terms
 
-- **Runner** — *retired* (split). Its optimization/evaluation halves are now `promptolution.optimize` /
-  `promptolution.evaluate`; the output contract and restart moved into `experiment_grid.execute`.
+- **Runner** — *retired* (split). Its optimization/evaluation halves are now the root functions
+  `promptolution.optimize` / `promptolution.evaluate` (implemented in `api.py`, sharing
+  `utils.evaluation`); the output contract and restart moved into `experiment_grid.execute`.
 - **ExperimentConfig** — *retired* (deleted). It was a single flat config bag scattered onto components via
   `apply_to`. Do not reintroduce a global config object; a Component's constructor is its schema.
 - **Bridge** — *retired* (deleted). Was the flat→nested mapping from a composed config onto `ExperimentConfig`.

@@ -1,14 +1,19 @@
-"""One-call prompt optimization for a classification task."""
+"""The end-user API: optimize prompts for a classification task, evaluate prompts on your data.
+
+Both functions require only what the library cannot know as arguments: the LLM (with its credentials), the data,
+and (for optimization) what the task is. Everything else has working defaults, overridable per call.
+"""
 
 import pandas as pd
 
-from typing import TYPE_CHECKING, Callable, List, Optional
+from typing import TYPE_CHECKING, Callable, List, Optional, Union
 
-from promptolution.evaluate import evaluate, train_test_split
 from promptolution.optimizers.capo import CAPO
 from promptolution.predictors.maker_based_predictor import MarkerBasedPredictor
 from promptolution.tasks.classification_tasks import ClassificationTask
+from promptolution.utils.evaluation import score_prompts, train_test_split
 from promptolution.utils.logging import get_logger
+from promptolution.utils.prompt import Prompt
 
 if TYPE_CHECKING:  # pragma: no cover
     from promptolution.llms.base_llm import BaseLLM
@@ -32,10 +37,9 @@ def optimize(
 ) -> pd.DataFrame:
     """Find the best prompt for a classification task.
 
-    Required is only what the library cannot know: the LLM (with its credentials), the data, and a
-    description of the task. Everything else has working defaults: the data is split, prompts are
-    optimized with CAPO (cost-aware, evaluating on data blocks) starting from prompts generated out of
-    the task description, and the result is scored exactly on the held-out split.
+    The data is split, prompts are optimized with CAPO (cost-aware, evaluating on data blocks)
+    starting from prompts generated out of the task description, and the result is scored exactly
+    on the held-out split.
 
     Args:
         llm (BaseLLM): The language model, used both to run prompts and to propose new ones.
@@ -74,4 +78,28 @@ def optimize(
         test_task = ClassificationTask(test_df, task_description=task_description, x_column=x_column, y_column=y_column)
     else:
         test_task = train_task
-    return evaluate(prompts, test_task, predictor)
+    return score_prompts(prompts, test_task, predictor)
+
+
+def evaluate(
+    llm: "BaseLLM",
+    df: pd.DataFrame,
+    prompts: Union[List[Prompt], List[str]],
+    *,
+    x_column: str = "x",
+    y_column: str = "y",
+) -> pd.DataFrame:
+    """Score existing prompts on your data — e.g. prompts saved from an earlier :func:`optimize` run.
+
+    Args:
+        llm (BaseLLM): The language model that runs the prompts.
+        df (pd.DataFrame): The data to score on (all rows are used; split beforehand if you need to).
+        prompts (Union[List[Prompt], List[str]]): The prompts to score.
+        x_column (str): Column with the input texts.
+        y_column (str): Column with the labels.
+
+    Returns:
+        pd.DataFrame: Columns ``prompt`` and ``score``, best first.
+    """
+    task = ClassificationTask(df, x_column=x_column, y_column=y_column)
+    return score_prompts(prompts, task, MarkerBasedPredictor(llm))

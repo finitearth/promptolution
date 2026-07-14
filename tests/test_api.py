@@ -1,4 +1,4 @@
-"""Tests for the one-call entry promptolution.optimize.optimize()."""
+"""Tests for the end-user API: promptolution.optimize() and promptolution.evaluate()."""
 
 import json
 
@@ -6,7 +6,7 @@ import pandas as pd
 
 from tests.mocks.mock_llm import MockLLM
 
-from promptolution.optimize import optimize
+from promptolution import evaluate, optimize
 from promptolution.optimizers.evoprompt_ga import EvoPromptGA
 
 # One response string serves the meta roles (crossover/mutation, <prompt>) and downstream
@@ -55,3 +55,11 @@ def test_optimize_no_split_evaluates_on_train():
         test_frac=0,
     )
     assert len(result) == 2
+
+
+def test_evaluate_scores_existing_prompts():
+    """The second verb: score saved prompts on (new) data, no components needed."""
+    result = evaluate(_llm(), _df(20), ["Classify the sentiment.", "Positive or negative?"])
+    assert isinstance(result, pd.DataFrame) and {"prompt", "score"} <= set(result.columns)
+    assert len(result) == 2
+    assert result["score"].is_monotonic_decreasing  # best first

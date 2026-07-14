@@ -9,7 +9,7 @@ pip install "promptolution[experiments]"   # hydra-submitit-launcher, datasets
 ```
 
 This layer is for reproducible research experiments. For a plain "best prompt for my task" run in
-Python, use the one-call `promptolution.optimize.optimize` (see the top-level README).
+Python, use the one-call `promptolution.optimize` (see the top-level README).
 
 ## Quickstart
 
