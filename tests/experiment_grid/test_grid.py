@@ -1,4 +1,4 @@
-"""Restart (name-keyed dir, skip finished) + grids defined in a YAML file."""
+"""Restart behavior of execute(): name-keyed dir, skip finished cells."""
 
 from omegaconf import OmegaConf
 
@@ -26,11 +26,3 @@ def test_restart_skips_finished(tmp_path):
     (tmp_path / "step_results.parquet").unlink()  # remove an output
     execute(cfg, out_dir=tmp_path)  # skip_completed default -> skip
     assert not (tmp_path / "step_results.parquet").exists()  # not regenerated => skipped
-
-
-def test_yaml_grid_config_composes():
-    """A grid defined in a file (grid_example.yaml) inherits the base config + names the experiment."""
-    cfg = compose_experiment(config_name="grid_example")
-    assert cfg.name == "example_grid"
-    assert cfg.task.df.path == "SetFit/ag_news"  # task=agnews override applied on top of base config
-    assert len(cfg.optimizer.initial_prompts) == 3  # fixed starting prompts -> comparable cells

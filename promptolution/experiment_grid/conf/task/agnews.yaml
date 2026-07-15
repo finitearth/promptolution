@@ -1,5 +1,4 @@
-# Real HuggingFace dataset (needs the `datasets` package). test[:300] carries all 4 classes,
-# roughly balanced; the train split starts 2-class for the first ~1000 rows.
+# Real HuggingFace dataset (needs the `datasets` package)
 _target_: promptolution.tasks.ClassificationTask
 df:
   _target_: datasets.load_dataset

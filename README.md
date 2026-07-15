@@ -1,4 +1,3 @@
-
 ![Coverage](https://img.shields.io/badge/Coverage-96%25-brightgreen)
 [![CI](https://github.com/automl/promptolution/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/automl/promptolution/actions/workflows/ci.yml)
 [![Docs](https://github.com/automl/promptolution/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/automl/promptolution/actions/workflows/docs.yml)
@@ -19,16 +18,16 @@
 
 ## 🚀 What is Promptolution?
 
-**Promptolution** is a unified, modular framework for prompt optimization built for researchers and advanced practitioners who want full control over their experimental setup. Unlike end-to-end application frameworks with high abstraction, promptolution focuses exclusively on the optimization stage, providing a clean, transparent, and extensible API. It allows for simple prompt optimization for one task up to large-scale reproducible benchmark experiments. 
+**Promptolution** is a unified, modular framework for prompt optimization built for researchers and advanced practitioners who want full control over their experimental setup. Unlike end-to-end application frameworks with high abstraction, promptolution focuses exclusively on the optimization stage, providing a clean, transparent, and extensible API. It allows for simple prompt optimization for one task up to large-scale reproducible benchmark experiments.
 
 <img width="808" height="356" alt="promptolution_framework" src="https://github.com/user-attachments/assets/e3d05493-30e3-4464-b0d6-1d3e3085f575" />
 
 ### Key Features
 
-* Implementation of many current prompt optimizers out of the box.
-* Unified LLM backend supporting API-based models, Local LLMs, and vLLM clusters.
-* Built-in response caching to save costs and parallelized inference for speed.
-* Detailed logging and token usage tracking for granular post-hoc analysis.
+- Implementation of many current prompt optimizers out of the box.
+- Unified LLM backend supporting API-based models, Local LLMs, and vLLM clusters.
+- Built-in response caching to save costs and parallelized inference for speed.
+- Detailed logging and token usage tracking for granular post-hoc analysis.
 
 Have a look at our [Release Notes](https://automl.github.io/promptolution/release-notes/) for the latest updates to promptolution.
 
@@ -74,40 +73,34 @@ scores = score_prompts(best_prompts, ClassificationTask(test_df, task_descriptio
 print(scores)  # DataFrame: prompt, score — evaluated on the held-out split, best first
 ```
 
-The components are the interface: swap the optimizer, predictor, or task (classification, reward-based,
-LLM-as-judge) without touching the rest. `initial_prompts` may be omitted — they are then generated
+The `initial_prompts` may be omitted — they are then generated
 from the `task_description`.
 
-For **config-driven experiments and grids** (from YAML/CLI, locally or on SLURM, with result files and
+For **config-driven experiments and experiment grids** (from YAML/CLI, locally or on SLURM, with result files and
 restart), use `python -m promptolution.experiment_grid` — see the
 [experiment_grid README](promptolution/experiment_grid/README.md).
 
 Full tutorial: [Getting Started notebook](https://github.com/automl/promptolution/blob/main/tutorials/getting_started.ipynb) · [Docs](https://automl.github.io/promptolution/)
 
-
 ## 🧠 Featured Optimizers
 
-| **Name**      | **Paper**                                              | **Init prompts** | **Exploration** | **Costs** | **Parallelizable** | **Few-shot** |
-| ---- | ---- | ---- |----  |----  |  ----|----  |
-| `CAPO`        | [Zehle et al., 2025](https://openreview.net/forum?id=UweaRrg9D0) | required         | 👍              | 💲        | ✅                  | ✅            |
-| `EvoPromptDE` | [Guo et al., 2023](https://openreview.net/forum?id=ZG3RaNIsO8)   | required         | 👍              | 💲💲      | ✅                  | ❌            |
-| `EvoPromptGA` | [Guo et al., 2023](https://openreview.net/forum?id=ZG3RaNIsO8)   | required         | 👍              | 💲💲      | ✅                  | ❌            |
-| `OPRO`        | [Yang et al., 2023](https://openreview.net/forum?id=Bb4VGOWELI)  | optional         | 👎              | 💲💲      | ❌                  | ❌            |
-
+| **Name**      | **Paper**                                                        | **Init prompts** | **Exploration** | **Costs** | **Parallelizable** | **Few-shot** |
+| ------------- | ---------------------------------------------------------------- | ---------------- | --------------- | --------- | ------------------ | ------------ |
+| `CAPO`        | [Zehle et al., 2025](https://openreview.net/forum?id=UweaRrg9D0) | required         | 👍              | 💲        | ✅                 | ✅           |
+| `EvoPromptDE` | [Guo et al., 2023](https://openreview.net/forum?id=ZG3RaNIsO8)   | required         | 👍              | 💲💲      | ✅                 | ❌           |
+| `EvoPromptGA` | [Guo et al., 2023](https://openreview.net/forum?id=ZG3RaNIsO8)   | required         | 👍              | 💲💲      | ✅                 | ❌           |
+| `OPRO`        | [Yang et al., 2023](https://openreview.net/forum?id=Bb4VGOWELI)  | optional         | 👎              | 💲💲      | ❌                 | ❌           |
 
 ## 🏗 Components
 
-* **`Task`** – Manages the dataset, evaluation metrics, and subsampling.
-* **`Predictor`** – Defines how to extract the answer from the model's response.
-* **`LLM`** – A unified interface handling inference, token counting, and concurrency.
-* **`Optimizer`** – The core component that implements the algorithms that refine prompts.
-
-Split/scoring helpers live in `promptolution.utils` (`train_test_split`, `score_prompts`); config/CLI-driven experiments and grids live in `promptolution.experiment_grid`.
+- **`Task`** – Manages the dataset, evaluation metrics, and subsampling.
+- **`Predictor`** – Defines how to extract the answer from the model's response.
+- **`LLM`** – A unified interface handling inference, token counting, and concurrency.
+- **`Optimizer`** – The core component that implements the algorithms that refine prompts.
 
 ## 🤝 Contributing
 
 Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for the workflow, code quality guidelines, and how to run tests.
-
 
 ## 📄 Citation
 
@@ -125,4 +118,4 @@ If you use Promptolution in your research, please cite:
 
 ---
 
-Developed    by **Timo Heiß**, **Moritz Schlager**, **Tom Zehle**, and **Henri Oberpaur** (LMU Munich, MCML, ELLIS, TUM, Uni Freiburg).
+Developed by **Timo Heiß**, **Moritz Schlager**, **Tom Zehle**, and **Henri Oberpaur** (LMU Munich, MCML, ELLIS, TUM, Uni Freiburg).

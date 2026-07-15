@@ -29,6 +29,6 @@ Or clone our GitHub repository:
 - [Optimizers](api/optimizers.md)
 - [Predictors](api/predictors.md)
 - [Tasks](api/tasks.md)
-- [Helpers](api/helpers.md)
+- [Experiment Grid](api/experiment_grid.md)
 - [Utils](api/utils.md)
 - [Exemplar Selectors](api/examplar_selectors.md)

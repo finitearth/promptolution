@@ -15,10 +15,7 @@ logger = get_logger(__name__)
 
 
 def train_test_split(df: pd.DataFrame, test_frac: float = 0.2, seed: int = 42) -> Tuple[pd.DataFrame, pd.DataFrame]:
-    """Split a DataFrame into ``(train_df, test_df)``.
-
-    Accepts anything df-like (e.g. a HuggingFace ``Dataset`` straight from ``datasets.load_dataset``),
-    normalizing to pandas first — duck-typed, so ``datasets`` stays an optional dependency.
+    """Split a DataFrame into a train and test set.
 
     Args:
         df (pd.DataFrame): The data to split (or a df-like with ``.to_pandas()``).
@@ -28,9 +25,8 @@ def train_test_split(df: pd.DataFrame, test_frac: float = 0.2, seed: int = 42) -
     Returns:
         Tuple[pd.DataFrame, pd.DataFrame]: ``(train_df, test_df)``, both with a fresh index.
     """
-    to_pandas = getattr(df, "to_pandas", None)
-    if to_pandas is not None:
-        df = to_pandas()
+    if not isinstance(df, pd.DataFrame):
+        df = df.to_pandas()
     test_df = df.sample(frac=test_frac, random_state=seed)
     train_df = df.drop(test_df.index)
     return train_df.reset_index(drop=True), test_df.reset_index(drop=True)
@@ -39,7 +35,7 @@ def train_test_split(df: pd.DataFrame, test_frac: float = 0.2, seed: int = 42) -
 def score_prompts(
     prompts: Union[List[Prompt], List[str]], task: "BaseTask", predictor: "BasePredictor"
 ) -> pd.DataFrame:
-    """Score prompts on a task and return a sorted ``prompt``/``score`` table.
+    """Score prompts on a task and return a sorted prompt/score table.
 
     Args:
         prompts (Union[List[Prompt], List[str]]): Prompts to score.

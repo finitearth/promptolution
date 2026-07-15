@@ -23,10 +23,9 @@ FINISHED_MARKER = ".finished"
 def execute(cfg, out_dir: Union[str, Path]) -> pd.DataFrame:
     """Run one experiment cell end-to-end; return the evaluated prompt/score table.
 
-    Writes the per-run output contract to ``out_dir``: ``step_results.parquet`` (per-step trace),
-    ``prompt_scores.parquet`` (final scores), ``runinfo.json`` (name/status/timestamps) and a
+    Writes the per-run output to ``out_dir``: per-step trace, final scores, name/status/timestamps and a
     ``.finished`` marker. If ``out_dir`` already holds ``.finished`` and ``cfg.skip_completed`` is
-    set, the run is skipped and its scores returned (restart — see ADR 0002).
+    set, the run is skipped and its scores returned.
 
     Args:
         cfg: A composed experiment config (see ``conf/config.yaml`` for the schema).

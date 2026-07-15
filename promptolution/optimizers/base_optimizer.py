@@ -50,10 +50,10 @@ class BaseOptimizer(ABC):
         if initial_prompts is None:
             if task.task_description is None:
                 raise ValueError(
-                    "Provide `initial_prompts`, or set `task_description` on the task so initial "
+                    "Provide initial_prompts, or set task_description on the task so initial "
                     "prompts can be generated from it."
                 )
-            logger.warning("\U0001f9ec No initial_prompts provided \u2014 generating them from the task description.")
+            logger.warning("\U0001f9ec No initial_prompts provided, generating them from the task description.")
             initial_prompts = create_prompts_from_task_description(
                 task_description=task.task_description, llm=predictor.llm
             )
