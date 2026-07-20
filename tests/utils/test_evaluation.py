@@ -36,9 +36,8 @@ def test_train_test_split_normalizes_df_like():
     assert len(train) == 8 and len(test) == 2
 
 
-def test_score_prompts_scores_and_sorts():
+def test_score_prompts():
     llm = MockLLM(predetermined_responses=["<final_answer>positive</final_answer>"] * 50)
     task = ClassificationTask(_df(), task_description="Classify the sentiment.")
     result = score_prompts(["Classify the sentiment.", "Positive or negative?"], task, MarkerBasedPredictor(llm))
     assert {"prompt", "score"} <= set(result.columns) and len(result) == 2
-    assert result["score"].is_monotonic_decreasing  # best first

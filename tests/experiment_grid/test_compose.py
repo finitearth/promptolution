@@ -1,7 +1,9 @@
 """Config composition + fail-fast tests for the experiment_grid module."""
 
 import pytest
-
+from hydra.errors import InstantiationException
+from hydra.utils import instantiate
+from tests.mocks.mock_llm import MockLLM
 from promptolution.experiment_grid import compose_experiment
 
 
@@ -23,12 +25,8 @@ def test_group_and_param_overrides():
 
 
 def test_bad_param_fails_fast_at_instantiate():
-    """A misspelled param blows up at construction (the constructor is the schema) — not silently."""
-    from hydra.utils import instantiate
-
-    from tests.mocks.mock_llm import MockLLM
-
+    """A misspelled param blows up at construction."""
     cfg = compose_experiment(overrides=["predictor=marker", "+predictor.begin_markerr=x"])
     # instantiate wraps the underlying TypeError; assert it raises and names the bad param
-    with pytest.raises(Exception, match="begin_markerr"):
+    with pytest.raises(InstantiationException, match="begin_markerr"):
         instantiate(cfg.predictor, llm=MockLLM())
