@@ -1,17 +1,14 @@
 """CLI entry: ``python -m promptolution.experiment_grid [overrides...]`` (``-m`` for grids)."""
 
-from pathlib import Path
-
 import hydra
-from hydra.core.hydra_config import HydraConfig
 
 from promptolution.experiment_grid.launch_grid import execute
 
 
 @hydra.main(version_base=None, config_path="conf", config_name="config")
 def main(cfg) -> None:
-    """Execute the cell in the run dir Hydra composed and created."""
-    execute(cfg, Path(HydraConfig.get().runtime.output_dir))
+    """Execute the cell Hydra composed, in the run dir it created (``cfg.out_dir``)."""
+    execute(cfg)
 
 
 if __name__ == "__main__":

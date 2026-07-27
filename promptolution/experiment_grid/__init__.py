@@ -9,6 +9,6 @@ Usage:
     python -m promptolution.experiment_grid -m name=bench optimizer=capo,opro random_seed=42,43  # a grid
 """
 
-from promptolution.experiment_grid.launch_grid import compose_experiment, execute
+from promptolution.experiment_grid.launch_grid import execute
 
-__all__ = ["execute", "compose_experiment"]
+__all__ = ["execute"]

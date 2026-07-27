@@ -1,14 +1,11 @@
-"""Build and run one experiment cell (or compose its config) via Hydra `instantiate`."""
+"""Build and run one experiment cell via Hydra `instantiate`."""
 
 import json
 from datetime import datetime, timezone
 from pathlib import Path
 
 import pandas as pd
-from hydra import compose, initialize_config_dir
 from hydra.utils import instantiate
-
-from typing import List, Optional, Union
 
 from promptolution.utils.callbacks import FileOutputCallback
 from promptolution.utils.evaluation import score_prompts, train_test_split
@@ -16,25 +13,23 @@ from promptolution.utils.logging import get_logger
 
 logger = get_logger(__name__)
 
-CONFIG_DIR = str(Path(__file__).resolve().parent / "conf")
 FINISHED_MARKER = ".finished"
 
 
-def execute(cfg, out_dir: Union[str, Path]) -> pd.DataFrame:
+def execute(cfg) -> pd.DataFrame:
     """Run one experiment cell end-to-end; return the evaluated prompt/score table.
 
-    Writes the per-run output to ``out_dir``: per-step trace, final scores, name/status/timestamps and a
-    ``.finished`` marker. If ``out_dir`` already holds ``.finished`` and ``cfg.skip_completed`` is
-    set, the run is skipped and its scores returned.
+    Writes the per-run output to ``cfg.out_dir``, which Hydra sets per run/cell: per-step trace, final
+    scores, name/status/timestamps and a ``.finished`` marker. If that directory already holds
+    ``.finished`` and ``cfg.skip_completed`` is set, the run is skipped and its scores returned.
 
     Args:
         cfg: A composed experiment config (see ``conf/config.yaml`` for the schema).
-        out_dir (Union[str, Path]): Output directory of this run; the CLI passes Hydra's run dir.
 
     Returns:
         pd.DataFrame: Columns ``prompt`` and ``score``, best first.
     """
-    out_dir = Path(out_dir)
+    out_dir = Path(cfg.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     if cfg.skip_completed and (out_dir / FINISHED_MARKER).exists():
         logger.warning("⏭️  Skipping finished run: %s", out_dir)
@@ -69,17 +64,3 @@ def execute(cfg, out_dir: Union[str, Path]) -> pd.DataFrame:
     (out_dir / FINISHED_MARKER).write_text(info["finished_at"])
     logger.warning("✅ Finished run: %s", out_dir)
     return scores_df
-
-
-def compose_experiment(overrides: Optional[List[str]] = None, config_name: str = "config"):
-    """Compose an experiment config programmatically (notebooks/tests), without the CLI.
-
-    Args:
-        overrides (Optional[List[str]]): Hydra override strings, e.g. ``["task=agnews", "name=run"]``.
-        config_name (str): Name of the top-level config in ``conf/``.
-
-    Returns:
-        The composed config, as `python -m promptolution.experiment_grid` would see it.
-    """
-    with initialize_config_dir(version_base=None, config_dir=CONFIG_DIR):
-        return compose(config_name=config_name, overrides=overrides or [])

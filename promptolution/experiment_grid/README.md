@@ -28,15 +28,16 @@ python -m promptolution.experiment_grid -m name=bench task=agnews optimizer=capo
 python -m promptolution.experiment_grid -m hydra/launcher=slurm name=bench task=agnews optimizer=capo,opro
 ```
 
-Programmatic (notebooks/tests): `compose_experiment(overrides)` builds a config, `execute(cfg, out_dir)`
-runs one cell. Grids run through the Hydra CLI (`-m`).
+Runs and grids go through the Hydra CLI, as above — that is the only entry point to this layer. For a
+single quick optimization in Python, don't come through here at all: build the components directly and
+call `optimizer.optimize()` (top-level README).
 
 ## How it works
 
-`execute(cfg, out_dir)` builds the components with `hydra.utils.instantiate`:
+`execute(cfg)` builds the components with `hydra.utils.instantiate`:
 `llm → predictor(llm) → task(df) → optimizer(predictor, meta_llm, task)`, splits the task's data into
 train/test, optimizes, evaluates the final prompts on the held-out split, and writes the output
-contract (below) to `out_dir`.
+contract (below) to `cfg.out_dir` — the run directory Hydra creates for this cell.
 
 **Config groups** (`conf/`): one `_target_` + params per option.
 
