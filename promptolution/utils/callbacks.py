@@ -26,10 +26,9 @@ class BaseCallback(ABC):
     """
 
     def __init__(self, **kwargs: Any) -> None:
-        """Initialize the callback with a configuration.
+        """Initialize the callback.
 
         Args:
-            config: Configuration for the callback.
             **kwargs: Additional keyword arguments.
         """
         pass

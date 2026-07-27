@@ -17,11 +17,10 @@ class BasePredictor(ABC):
     """
 
     def __init__(self, llm: "BaseLLM") -> None:
-        """Initialize the predictor with a language model and configuration.
+        """Initialize the predictor with a language model.
 
         Args:
             llm: Language model to use for prediction.
-            config: Configuration for the predictor.
         """
         self.llm = llm
         self.extraction_description = ""
@@ -38,7 +37,6 @@ class BasePredictor(ABC):
             prompts: Prompt or list of prompts to use for prediction.
             xs: Array of input data.
             system_prompts: List of system prompts to use for the language model.
-            return_seq: Whether to return the generating sequence.
 
         Returns:
             Array of predictions, optionally with sequences.

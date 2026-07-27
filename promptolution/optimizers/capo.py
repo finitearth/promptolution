@@ -64,7 +64,6 @@ class CAPO(BaseOptimizer):
             mutation_template (str, optional): Template for mutation instructions.
             crossovers_per_iter (int): Number of crossover operations per iteration.
             upper_shots (int): Maximum number of few-shot examples per prompt.
-            p_few_shot_reasoning (float): Probability of generating llm-reasoning for few-shot examples, instead of simply using input-output pairs.
             max_n_blocks_eval (int): Maximum number of evaluation blocks.
             test_statistic (TestStatistics): Statistical test to compare prompt performance. Default is "paired_t_test".
             alpha (float): Significance level for the statistical test.

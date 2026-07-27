@@ -35,7 +35,7 @@ def create_prompt_variation(
         prompt (Union[List[str], str]): The prompt(s) to generate variations of.
         llm (BaseLLM): The language model to use for generating the variations.
         meta_prompt (str): The meta prompt to use for generating the variations.
-        If None, a default meta prompt is used. Should contain <prev_prompt> tag.
+            If None, a default meta prompt is used. Should contain <prev_prompt> tag.
 
     Returns:
         List[str]: A list of generated variations of the input prompt(s).
@@ -68,10 +68,10 @@ def create_prompts_from_samples(
 
     Args:
         task (BaseTask): The task to generate prompts for.
-        Xs and Ys from this object are used to generate the prompts.
+            Xs and Ys from this object are used to generate the prompts.
         llm (BaseLLM): The language model to use for generating the prompts.
         meta_prompt (str): The meta prompt to use for generating the prompts.
-        If None, a default meta prompt is used.
+            If None, a default meta prompt is used.
         n_samples (int): The number of samples to use for generating prompts.
         task_description (str): The description of the task to include in the prompt.
         n_prompts (int): The number of prompts to generate.

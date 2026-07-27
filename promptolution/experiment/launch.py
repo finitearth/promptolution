@@ -11,6 +11,7 @@ from pathlib import Path
 import hydra
 import pandas as pd
 from hydra.utils import instantiate
+from omegaconf import DictConfig
 
 from promptolution.utils.callbacks import FileOutputCallback
 from promptolution.utils.evaluation import evaluate_prompts, train_test_split
@@ -22,7 +23,7 @@ logger = get_logger(__name__)
 FINISHED_MARKER = ".finished"
 
 
-def execute(cfg) -> pd.DataFrame:
+def execute(cfg: DictConfig) -> pd.DataFrame:
     """Run one experiment cell end-to-end, return the evaluated prompt/score table.
 
     Writes the per-run output to ``cfg.out_dir``, which Hydra sets per run/cell: per-step trace, final
@@ -70,7 +71,7 @@ def execute(cfg) -> pd.DataFrame:
 
 
 @hydra.main(version_base=None, config_path="conf", config_name="config")
-def main(cfg) -> None:
+def main(cfg: DictConfig) -> None:
     """Execute the cell Hydra composed, in the run dir it created (``cfg.out_dir``)."""
     execute(cfg)
 
