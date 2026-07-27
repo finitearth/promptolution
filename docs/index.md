@@ -31,4 +31,4 @@ Or clone our GitHub repository:
 - [Tasks](api/tasks.md)
 - [Experiment](api/experiment.md)
 - [Utils](api/utils.md)
-- [Exemplar Selectors](api/examplar_selectors.md)
+- [Exemplar Selectors](api/exemplar_selectors.md)

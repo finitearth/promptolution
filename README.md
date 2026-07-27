@@ -48,7 +48,33 @@ pip install promptolution[api]
 
 For local inference, add `[transformers]` (HuggingFace) or `[vllm]` (vLLM serving), or both.
 
-Build the components (LLM, task, predictor, optimizer) and optimize:
+Promptolution offers three ways to optimize prompts, from a one-line call to full manual control.
+
+### Quickstart: `promptolution.optimize`
+
+For a classification task, `optimize` builds the components for you and asks only for what the
+library cannot know: your data, an LLM and its credentials, and a description of the task.
+
+```python
+import pandas as pd
+from promptolution import optimize
+
+# DataFrame with columns "x" (input) and "y" (label)
+df = pd.read_csv("your_data.csv")
+
+scores = optimize(
+    df,
+    task_description="Classify each sentence as subjective or objective.",
+    model_id="gpt-4o-mini",
+    api_key="YOUR_API_KEY",
+)
+print(scores)  # DataFrame: prompt, score, best first
+```
+
+This covers classification only. For judge or reward tasks, or for full control over every
+component, build them yourself (below).
+
+### Full control: build the components
 
 ```python
 import pandas as pd
@@ -60,25 +86,37 @@ from promptolution.utils import evaluate_prompts, train_test_split
 
 # DataFrame with columns "x" (input) and "y" (label)
 df = pd.read_csv("your_data.csv")
-
-llm = APILLM(model_id="gpt-4o-mini", api_url="https://api.openai.com/v1", api_key="YOUR_API_KEY")
 train_df, test_df = train_test_split(df, test_frac=0.2)
-task = ClassificationTask(train_df, task_description="Classify each sentence as subjective or objective.")
+
+llm = APILLM(
+    model_id="gpt-4o-mini",
+    api_url="https://api.openai.com/v1",
+    api_key="YOUR_API_KEY",
+)
+task = ClassificationTask(
+    train_df, task_description="Classify each sentence as subjective or objective."
+)
 predictor = MarkerBasedPredictor(llm)
-optimizer = CAPO(predictor=predictor, meta_llm=llm, task=task,
-                 initial_prompts=["Classify the text as objective or subjective."])
+optimizer = CAPO(
+    predictor=predictor,
+    meta_llm=llm,
+    task=task,
+    initial_prompts=["Classify the text as objective or subjective."],
+)
 
 best_prompts = optimizer.optimize(n_steps=10)
-scores = evaluate_prompts(best_prompts, ClassificationTask(test_df, task_description=task.task_description), predictor)
-print(scores)  # DataFrame: prompt, score — evaluated on the held-out split, best first
+test_task = ClassificationTask(test_df, task_description=task.task_description)
+scores = evaluate_prompts(best_prompts, test_task, predictor)
+print(scores)  # DataFrame: prompt, score, evaluated on the held-out split, best first
 ```
 
-The `initial_prompts` may be omitted — they are then generated
-from the `task_description`.
+The `initial_prompts` may be omitted; they are then generated from the `task_description`.
 
-For **config-driven experiments and experiment grids** (from YAML/CLI, locally or on SLURM, with result files and
-restart), use `python -m promptolution.experiment` — see the
-[experiment README](promptolution/experiment/README.md).
+### Experiments: config-driven runs & grids (Hydra)
+
+For reproducible research, config-driven runs and experiment grids (from YAML/CLI, locally or on
+SLURM, with result files and restart), use the `promptolution-experiment` CLI: see the
+[experiment docs](https://automl.github.io/promptolution/api/experiment/).
 
 Full tutorial: [Getting Started notebook](https://github.com/automl/promptolution/blob/main/tutorials/getting_started.ipynb) · [Docs](https://automl.github.io/promptolution/)
 
