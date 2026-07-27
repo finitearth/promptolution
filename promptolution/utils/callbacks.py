@@ -4,11 +4,12 @@
 import os
 from abc import ABC
 from datetime import datetime
+from pathlib import Path
 
 import pandas as pd
 from tqdm import tqdm
 
-from typing import TYPE_CHECKING, Any, Literal, Optional, Tuple
+from typing import TYPE_CHECKING, Any, Literal, Optional, Tuple, Union
 
 if TYPE_CHECKING:
     from logging import Logger
@@ -115,16 +116,16 @@ class FileOutputCallback(BaseCallback):
     This callback saves information about each step to a file.
 
     Attributes:
-        dir (str): Directory the file is saved to.
+        dir (Union[str, Path]): Directory the file is saved to.
         step (int): The current step number.
         file_type (str): The type of file to save the output to.
     """
 
-    def __init__(self, dir: str, file_type: Literal["parquet", "csv"] = "parquet") -> None:
+    def __init__(self, dir: Union[str, Path], file_type: Literal["parquet", "csv"] = "parquet") -> None:
         """Initialize the FileOutputCallback.
 
         Args:
-        dir (str): Directory the CSV file is saved to.
+        dir (Union[str, Path]): Directory the CSV file is saved to.
         file_type (str): The type of file to save the output to.
         """
         if not os.path.exists(dir):

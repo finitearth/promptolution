@@ -4,6 +4,9 @@
 `hydra.utils.instantiate` (``llm -> predictor(llm) -> task(df) -> optimizer``), optimizes, evaluates,
 and writes the per-run output contract (results, runinfo, restart marker) — see `README.md`.
 
+For a lightweight, in-memory alternative that skips the CLI and YAML entirely, see
+:func:`promptolution.optimize` (classification only).
+
 Usage:
     promptolution-experiment name=my_run optimizer=capo task=agnews llm=api  # one run
     promptolution-experiment -m name=bench optimizer=capo,opro random_seed=42,43  # a grid
@@ -12,6 +15,6 @@ Usage:
     python -m promptolution.experiment.launch name=my_run optimizer=capo task=agnews llm=api
 """
 
-from promptolution.experiment.launch import execute
+from promptolution.experiment.launch import build_components, execute, optimize
 
-__all__ = ["execute"]
+__all__ = ["execute", "optimize", "build_components"]
