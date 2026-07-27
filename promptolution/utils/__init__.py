@@ -7,7 +7,7 @@ from promptolution.utils.callbacks import (
     ProgressBarCallback,
     TokenCountCallback,
 )
-from promptolution.utils.evaluation import score_prompts, train_test_split
+from promptolution.utils.evaluation import evaluate_prompts, train_test_split
 from promptolution.utils.logging import get_logger, setup_logging
 from promptolution.utils.prompt import Prompt, sort_prompts_by_scores
 from promptolution.utils.prompt_creation import (
@@ -40,7 +40,7 @@ __all__ = [
     "LoggerCallback",
     "ProgressBarCallback",
     "TokenCountCallback",
-    "score_prompts",
+    "evaluate_prompts",
     "train_test_split",
     "get_logger",
     "setup_logging",

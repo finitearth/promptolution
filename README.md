@@ -56,7 +56,7 @@ from promptolution.llms import APILLM
 from promptolution.tasks import ClassificationTask
 from promptolution.predictors import MarkerBasedPredictor
 from promptolution.optimizers import CAPO
-from promptolution.utils import score_prompts, train_test_split
+from promptolution.utils import evaluate_prompts, train_test_split
 
 # DataFrame with columns "x" (input) and "y" (label)
 df = pd.read_csv("your_data.csv")
@@ -69,7 +69,7 @@ optimizer = CAPO(predictor=predictor, meta_llm=llm, task=task,
                  initial_prompts=["Classify the text as objective or subjective."])
 
 best_prompts = optimizer.optimize(n_steps=10)
-scores = score_prompts(best_prompts, ClassificationTask(test_df, task_description=task.task_description), predictor)
+scores = evaluate_prompts(best_prompts, ClassificationTask(test_df, task_description=task.task_description), predictor)
 print(scores)  # DataFrame: prompt, score — evaluated on the held-out split, best first
 ```
 

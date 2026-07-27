@@ -17,10 +17,10 @@ from promptolution.tasks.classification_tasks import ClassificationTask
 def test_execute_wiring(cfg_with_mock_llm, cell_prompts):
     """execute() builds the right components, splits train/test, and evaluates on the held-out task."""
     cfg = cfg_with_mock_llm(["name=t", "task=demo", "optimizer=evopromptga", "n_steps=2", "test_frac=0.25"])
-    with patch("promptolution.experiment.launch.score_prompts") as mock_score_prompts:
-        mock_score_prompts.return_value = pd.DataFrame({"prompt": ["p"], "score": [1.0]})
+    with patch("promptolution.experiment.launch.evaluate_prompts") as mock_evaluate_prompts:
+        mock_evaluate_prompts.return_value = pd.DataFrame({"prompt": ["p"], "score": [1.0]})
         execute(cfg)
-    prompts, test_task, predictor = mock_score_prompts.call_args[0]
+    prompts, test_task, predictor = mock_evaluate_prompts.call_args[0]
     assert len(prompts) == len(cell_prompts)
     assert isinstance(test_task, ClassificationTask)
     assert len(test_task.df) == 2  # 25% of the demo task's 8 rows held out
@@ -30,10 +30,10 @@ def test_execute_wiring(cfg_with_mock_llm, cell_prompts):
 def test_execute_no_split_evaluates_on_train(cfg_with_mock_llm):
     """test_frac=0 -> no held-out split; evaluation runs on the train task."""
     cfg = cfg_with_mock_llm(["name=t", "task=demo", "optimizer=evopromptga", "n_steps=2", "test_frac=0"])
-    with patch("promptolution.experiment.launch.score_prompts") as mock_score_prompts:
-        mock_score_prompts.return_value = pd.DataFrame({"prompt": ["p"], "score": [1.0]})
+    with patch("promptolution.experiment.launch.evaluate_prompts") as mock_evaluate_prompts:
+        mock_evaluate_prompts.return_value = pd.DataFrame({"prompt": ["p"], "score": [1.0]})
         execute(cfg)
-    _, task, _ = mock_score_prompts.call_args[0]
+    _, task, _ = mock_evaluate_prompts.call_args[0]
     assert len(task.df) == 8  # the full demo dataset
 
 

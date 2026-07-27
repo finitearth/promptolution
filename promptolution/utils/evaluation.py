@@ -32,7 +32,7 @@ def train_test_split(df: pd.DataFrame, test_frac: float = 0.2, seed: int = 42) -
     return train_df.reset_index(drop=True), test_df.reset_index(drop=True)
 
 
-def score_prompts(
+def evaluate_prompts(
     prompts: Union[List[Prompt], List[str]], task: "BaseTask", predictor: "BasePredictor"
 ) -> pd.DataFrame:
     """Score prompts on a task and return a sorted prompt/score table.
