@@ -1,4 +1,4 @@
-"""Fixtures for the experiment_grid tests: composing the shipped conf/ and a mock-LLM cell config."""
+"""Fixtures for the experiment tests: composing the shipped conf/ and a mock-LLM cell config."""
 
 from pathlib import Path
 
@@ -6,9 +6,9 @@ import pytest
 from hydra import compose, initialize_config_dir
 from omegaconf import OmegaConf
 
-import promptolution.experiment_grid
+import promptolution.experiment
 
-CONFIG_DIR = str(Path(promptolution.experiment_grid.__file__).resolve().parent / "conf")
+CONFIG_DIR = str(Path(promptolution.experiment.__file__).resolve().parent / "conf")
 
 
 @pytest.fixture

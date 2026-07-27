@@ -1,8 +1,8 @@
-"""CLI entry: ``python -m promptolution.experiment_grid [overrides...]`` (``-m`` for grids)."""
+"""CLI entry: ``python -m promptolution.experiment [overrides...]`` (``-m`` for grids)."""
 
 import hydra
 
-from promptolution.experiment_grid.launch_grid import execute
+from promptolution.experiment.launch_grid import execute
 
 
 @hydra.main(version_base=None, config_path="conf", config_name="config")

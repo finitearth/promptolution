@@ -77,8 +77,8 @@ The `initial_prompts` may be omitted — they are then generated
 from the `task_description`.
 
 For **config-driven experiments and experiment grids** (from YAML/CLI, locally or on SLURM, with result files and
-restart), use `python -m promptolution.experiment_grid` — see the
-[experiment_grid README](promptolution/experiment_grid/README.md).
+restart), use `python -m promptolution.experiment` — see the
+[experiment README](promptolution/experiment/README.md).
 
 Full tutorial: [Getting Started notebook](https://github.com/automl/promptolution/blob/main/tutorials/getting_started.ipynb) · [Docs](https://automl.github.io/promptolution/)
 

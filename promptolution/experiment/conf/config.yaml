@@ -3,7 +3,7 @@
 defaults:
   - llm: api
   - optimizer: capo
-  - task: dummy
+  - task: demo
   - predictor: marker
   - _self_
 

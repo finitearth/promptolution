@@ -1,4 +1,4 @@
-# Your own data from a CSV file. Point it at the file and describe the task:
+# Entry for running an experiment on your own data without hand-authoring a task config.
 _target_: promptolution.tasks.ClassificationTask
 df:
   _target_: pandas.read_csv

@@ -1,4 +1,4 @@
-# `promptolution.experiment_grid` — config-driven runs & grids (Hydra)
+# `promptolution.experiment` — config-driven runs & grids (Hydra)
 
 Define a run or a whole grid in `conf/` (each component is a `_target_` + its params), run it
 locally or as a SLURM array job, and get per-run outputs + the possiblity to restart. Hydra ships with
@@ -15,17 +15,17 @@ components directly and call `optimizer.optimize()` (see the top-level README).
 
 ```bash
 # a single run (needs an LLM: pick llm=api / llm=vllm and provide credentials); `name` is required
-python -m promptolution.experiment_grid name=my_run task=agnews llm=api
+python -m promptolution.experiment name=my_run task=agnews llm=api
 
 # your own data from a CSV
-python -m promptolution.experiment_grid name=my_run task=csv \
+python -m promptolution.experiment name=my_run task=csv \
   task.df.filepath_or_buffer=my_data.csv task.task_description="Classify ... into: a, b."
 
 # a grid (cartesian product) via the CLI
-python -m promptolution.experiment_grid -m name=bench task=agnews optimizer=capo,opro random_seed=42,43,44
+python -m promptolution.experiment -m name=bench task=agnews optimizer=capo,opro random_seed=42,43,44
 
 # the same grid as ONE SLURM array job
-python -m promptolution.experiment_grid -m hydra/launcher=slurm name=bench task=agnews optimizer=capo,opro
+python -m promptolution.experiment -m hydra/launcher=slurm name=bench task=agnews optimizer=capo,opro
 ```
 
 Runs and grids go through the Hydra CLI, as above — that is the only entry point to this layer. For a
@@ -46,7 +46,7 @@ conf/
   config.yaml            defaults + name + n_steps + test_frac + restart/output settings
   llm/        api · vllm
   optimizer/  capo · opro · evopromptga · evopromptde
-  task/       dummy · agnews · csv      # the Task carries its data as a nested `df:` _target_
+  task/       demo · agnews · csv       # the Task carries its data as a nested `df:` _target_
   predictor/  marker · first_occurrence
   hydra/launcher/ slurm             # -m hydra/launcher=slurm  -> one SLURM array job
 ```

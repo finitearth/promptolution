@@ -1,4 +1,4 @@
-"""Config composition + fail-fast tests for the experiment_grid module."""
+"""Config composition + fail-fast tests for the experiment module."""
 
 import pytest
 from hydra.errors import InstantiationException
@@ -12,7 +12,7 @@ def test_defaults_compose(compose_cfg):
     assert cfg.llm._target_.endswith("APILLM")
     assert cfg.optimizer._target_.endswith("CAPO")
     assert cfg.task._target_.endswith("ClassificationTask")
-    assert cfg.task.df._target_ == "pandas.DataFrame"  # dummy task's nested df
+    assert cfg.task.df._target_ == "pandas.DataFrame"  # demo task's nested df
     assert cfg.n_steps == 10
 
 

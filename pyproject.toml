@@ -4,7 +4,7 @@ version = "2.3.0"
 description = "A framework for prompt optimization and a zoo of prompt optimization algorithms."
 authors = ["Tom Zehle, Moritz Schlager, Timo Heiß"]
 readme = "README.md"
-include = [{ path = "promptolution/experiment_grid/conf/**/*.yaml", format = ["sdist", "wheel"] }]
+include = [{ path = "promptolution/experiment/conf/**/*.yaml", format = ["sdist", "wheel"] }]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.13"
