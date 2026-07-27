@@ -5,10 +5,13 @@
 and writes the per-run output contract (results, runinfo, restart marker) — see `README.md`.
 
 Usage:
-    python -m promptolution.experiment name=my_run optimizer=capo task=agnews llm=api  # one run
-    python -m promptolution.experiment -m name=bench optimizer=capo,opro random_seed=42,43  # a grid
+    promptolution-experiment name=my_run optimizer=capo task=agnews llm=api  # one run
+    promptolution-experiment -m name=bench optimizer=capo,opro random_seed=42,43  # a grid
+
+    # no install? the same CLI also runs as a module:
+    python -m promptolution.experiment.launch name=my_run optimizer=capo task=agnews llm=api
 """
 
-from promptolution.experiment.launch_grid import execute
+from promptolution.experiment.launch import execute
 
 __all__ = ["execute"]

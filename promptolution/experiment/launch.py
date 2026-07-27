@@ -1,9 +1,14 @@
-"""Build and run one experiment cell via Hydra `instantiate`."""
+"""Build and run one experiment cell via Hydra `instantiate`; CLI entry point for the module.
+
+``python -m promptolution.experiment [overrides...]`` (``-m`` for grids), or the
+``promptolution-experiment`` console script installed with the package.
+"""
 
 import json
 from datetime import datetime, timezone
 from pathlib import Path
 
+import hydra
 import pandas as pd
 from hydra.utils import instantiate
 
@@ -64,3 +69,13 @@ def execute(cfg) -> pd.DataFrame:
     (out_dir / FINISHED_MARKER).write_text(info["finished_at"])
     logger.warning("✅ Finished run: %s", out_dir)
     return scores_df
+
+
+@hydra.main(version_base=None, config_path="conf", config_name="config")
+def main(cfg) -> None:
+    """Execute the cell Hydra composed, in the run dir it created (``cfg.out_dir``)."""
+    execute(cfg)
+
+
+if __name__ == "__main__":
+    main()
