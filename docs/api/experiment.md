@@ -1,21 +1,17 @@
 # Experiment
 
-Config-driven runs and experiment grids, via Hydra. This layer exists for reproducible research: a
+Config-driven runs and experiment grids, via Hydra. This layer exists for reproducible runs and research: a
 run is fully described by its config, sweeping a grid is a CLI flag rather than a hand-written loop,
 and a killed job resumes into the same output folder instead of starting over.
 
 Define a run or a whole grid in `conf/` (each component is a `_target_` + its params), run it
 locally or as a SLURM array job, and get per-run outputs plus the ability to restart. Hydra ships
-with promptolution; the `experiments` extra adds the SLURM launcher plugin and HuggingFace
+with promptolution, the `experiments` extra adds the SLURM launcher plugin and HuggingFace
 `datasets`:
 
 ```bash
-pip install "promptolution[experiments]"
+pip install "promptolution[experiment]"
 ```
-
-For a one-line call on a DataFrame, see `promptolution.optimize` (README quickstart) instead. For
-full manual control, or for judge/reward tasks, build the components directly (README) and call
-`optimizer.optimize()`.
 
 ## Quickstart
 
@@ -32,15 +28,14 @@ promptolution-experiment -m name=bench task=agnews optimizer=capo,opro random_se
 
 # the same grid as ONE SLURM array job
 promptolution-experiment -m hydra/launcher=slurm name=bench task=agnews optimizer=capo,opro
-```
+````
 
 No install, or want to run straight from a checkout? The same CLI also runs as a module:
 `python -m promptolution.experiment.launch name=my_run task=agnews llm=api`.
 
 ## How it works
 
-`execute(cfg)` builds the components with `hydra.utils.instantiate`:
-`llm → predictor(llm) → task(df) → optimizer(predictor, meta_llm, task)`, splits the task's data into
+`execute(cfg)` builds the components with `hydra.utils.instantiate` from the configs provided in `conf/` and the overrides provided through the CLI, splits the task's data into
 train/test, optimizes, evaluates the final prompts on the held-out split, and writes the output
 contract (below) to `cfg.out_dir`, the run directory Hydra creates for this cell.
 
@@ -74,8 +69,7 @@ Override just the data from the CLI: `task.df.filepath_or_buffer=other.parquet`.
 
 ## Restart
 
-`name` is **required** and keys the output folder: `<PROMPTOLUTION_OUTPUT_DIR|outputs>/<name>/` (no
-timestamp). Each grid cell's subdir is the slug of its swept params. Rerunning the same `name`
+`name` is **required** and keys the output folder `<PROMPTOLUTION_OUTPUT_DIR|outputs>/<name>/`. Each grid cell's subdir is the slug of its swept params. Rerunning the same `name`
 **resumes into the same folder**, skipping cells that already wrote a `.finished` marker
 (`skip_completed: true`).
 

@@ -4,8 +4,16 @@ from pathlib import Path
 
 import pandas as pd
 
-from typing import List, Optional, Union
+from typing import Dict, List, Optional, Type, Union
 
+from promptolution.llms.api_llm import APILLM
+from promptolution.optimizers.base_optimizer import BaseOptimizer
+from promptolution.optimizers.capo import CAPO
+from promptolution.optimizers.evoprompt_de import EvoPromptDE
+from promptolution.optimizers.evoprompt_ga import EvoPromptGA
+from promptolution.optimizers.opro import OPRO
+from promptolution.predictors.maker_based_predictor import MarkerBasedPredictor
+from promptolution.tasks.classification_tasks import ClassificationTask
 from promptolution.utils.callbacks import FileOutputCallback
 from promptolution.utils.evaluation import evaluate_prompts, train_test_split
 from promptolution.utils.logging import get_logger
@@ -13,18 +21,12 @@ from promptolution.utils.runinfo import finish_runinfo, start_runinfo
 
 logger = get_logger(__name__)
 
-OPTIMIZERS = ("capo", "evopromptde", "evopromptga", "opro")
-
-
-def _optimizer_class(name: str):
-    """Resolve an optimizer name to its class.
-
-    Imported lazily: pulling in the predictors/llms packages requires ``openai`` (the optional
-    ``[api]`` extra), and merely importing promptolution must not.
-    """
-    from promptolution.optimizers import CAPO, OPRO, EvoPromptDE, EvoPromptGA
-
-    return {"capo": CAPO, "evopromptde": EvoPromptDE, "evopromptga": EvoPromptGA, "opro": OPRO}[name]
+OPTIMIZERS: Dict[str, Type[BaseOptimizer]] = {
+    "capo": CAPO,
+    "evopromptde": EvoPromptDE,
+    "evopromptga": EvoPromptGA,
+    "opro": OPRO,
+}
 
 
 def optimize(
@@ -86,12 +88,6 @@ def optimize(
     if optimizer not in OPTIMIZERS:
         raise ValueError(f"Unknown optimizer {optimizer!r}. Available: {', '.join(sorted(OPTIMIZERS))}.")
 
-    # imported here, not at module level: these pull in openai (the optional [api] extra), and
-    # merely importing promptolution must not require it
-    from promptolution.llms.api_llm import APILLM
-    from promptolution.predictors.maker_based_predictor import MarkerBasedPredictor
-    from promptolution.tasks.classification_tasks import ClassificationTask
-
     df = data if isinstance(data, pd.DataFrame) else pd.read_csv(data)
     train_df, test_df = train_test_split(df, test_frac=test_frac, seed=random_seed)
 
@@ -111,8 +107,9 @@ def optimize(
         else train_task
     )
 
-    opt = _optimizer_class(optimizer)(
-        predictor=predictor, meta_llm=llm, task=train_task, initial_prompts=initial_prompts
+    # meta_llm is accepted by every concrete optimizer but not declared on BaseOptimizer, hence the ignore
+    opt = OPTIMIZERS[optimizer](
+        predictor=predictor, meta_llm=llm, task=train_task, initial_prompts=initial_prompts  # type: ignore[call-arg]
     )
 
     info = None

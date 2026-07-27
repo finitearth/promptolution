@@ -11,7 +11,7 @@ Install Promptolution with a single command
 
 
 ```python
-! pip install promptolution[api]
+! pip install promptolution
 ```
 
 ## Imports

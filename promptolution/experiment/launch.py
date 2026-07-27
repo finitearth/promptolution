@@ -1,7 +1,9 @@
-"""Build and run one experiment cell via Hydra `instantiate`; CLI entry point for the module.
+"""Entrypoint for running a single experiment cell or a whole experiment grid via Hydra.
 
-``promptolution-experiment [overrides...]`` (``-m`` for grids), or as a module without installing:
-``python -m promptolution.experiment.launch [overrides...]``.
+It builds the components from the configs in `conf/` and the overrides provided through the CLI,
+splits the task's data into train/test, optimizes, evaluates the final prompts on the held-out
+split, and writes the output contract to `cfg.out_dir`, the run directory Hydra creates for this
+cell.
 """
 
 from pathlib import Path
@@ -21,7 +23,7 @@ FINISHED_MARKER = ".finished"
 
 
 def execute(cfg) -> pd.DataFrame:
-    """Run one experiment cell end-to-end; return the evaluated prompt/score table.
+    """Run one experiment cell end-to-end, return the evaluated prompt/score table.
 
     Writes the per-run output to ``cfg.out_dir``, which Hydra sets per run/cell: per-step trace, final
     scores, name/status/timestamps and a ``.finished`` marker. If that directory already holds

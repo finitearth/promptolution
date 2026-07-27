@@ -25,7 +25,7 @@ def _mock_llm():
 
 def _optimize(**kwargs):
     """Run optimize() with the API LLM swapped for a MockLLM."""
-    with patch("promptolution.llms.api_llm.APILLM") as mock_apillm:
+    with patch("promptolution.utils.optimize.APILLM") as mock_apillm:
         mock_apillm.return_value = _mock_llm()
         return optimize(
             _DF,
@@ -57,7 +57,7 @@ def test_optimize_output_dir_writes_results(tmp_path):
 def test_optimize_generates_initial_prompts_from_task_description():
     """initial_prompts is optional; they are generated from the task description instead."""
     with patch("promptolution.optimizers.base_optimizer.create_prompts_from_task_description") as mock_create, patch(
-        "promptolution.llms.api_llm.APILLM"
+        "promptolution.utils.optimize.APILLM"
     ) as mock_apillm:
         mock_create.return_value = list(_PROMPTS)
         mock_apillm.return_value = _mock_llm()

@@ -2,7 +2,7 @@
 name = "promptolution"
 version = "2.3.0"
 description = "A framework for prompt optimization and a zoo of prompt optimization algorithms."
-authors = ["Tom Zehle, Moritz Schlager, Timo Heiß"]
+authors = ["Tom Zehle, Moritz Schlager, Timo Heiß, Henri Oberpaur"]
 readme = "README.md"
 include = [{ path = "promptolution/experiment/conf/**/*.yaml", format = ["sdist", "wheel"] }]
 
@@ -16,8 +16,7 @@ pandas = ">=2.2.2"
 tqdm = ">=4.66.5"
 scikit-learn = ">=1.5.2"
 fastparquet = ">=2024.11.0"
-openai = {version = ">=1.0.0", optional = true}
-requests = {version = ">=2.31.0", optional = true}
+openai = ">=1.0.0"
 vllm = {version = ">=0.13.0", optional = true}
 transformers = {version = ">=4.48.0", optional = true}
 accelerate = {version = ">=0.20.0", optional = true}
@@ -27,22 +26,15 @@ datasets = {version = ">=2.0.0", optional = true}
 scipy = ">=1.15"
 
 [tool.poetry.extras]
-api = ["openai", "requests"]
 vllm = ["vllm"]
 transformers = ["transformers", "accelerate"]
-experiments = ["hydra-submitit-launcher", "datasets"]
+experiment = ["hydra-submitit-launcher", "datasets"]
 
-[tool.poetry.group.experiments]
+[tool.poetry.group.experiment]
 optional = true
-[tool.poetry.group.experiments.dependencies]
+[tool.poetry.group.experiment.dependencies]
 hydra-submitit-launcher = ">=1.2.0"
 datasets = ">=2.0.0"
-
-[tool.poetry.group.api]
-optional = true
-[tool.poetry.group.api.dependencies]
-openai = ">=1.0.0"
-requests = ">=2.31.0"
 
 [tool.poetry.group.vllm]
 optional = true
@@ -66,8 +58,6 @@ mypy = ">=1.8.0"
 [tool.poetry.group.test.dependencies]
 pytest = ">=8.3.5"
 pytest-cov = ">=6.1.1"
-openai = ">=1.0.0"
-requests = ">=2.31.0"
 transformers = ">=4.48.0"
 vllm = ">=0.13.0"
 torch = ">=2.0.0"

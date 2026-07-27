@@ -1,10 +1,10 @@
 ![Coverage](https://img.shields.io/badge/Coverage-95%25-brightgreen)
-[![CI](https://github.com/automl/promptolution/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/automl/promptolution/actions/workflows/ci.yml)
-[![Docs](https://github.com/automl/promptolution/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/automl/promptolution/actions/workflows/docs.yml)
+[![CI](https://github.com/gepromptet/promptolution/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/gepromptet/promptolution/actions/workflows/ci.yml)
+[![Docs](https://github.com/gepromptet/promptolution/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/gepromptet/promptolution/actions/workflows/docs.yml)
 [![PyPI version](https://img.shields.io/pypi/v/promptolution.svg)](https://pypi.org/project/promptolution/)
 ![Code Style](https://img.shields.io/badge/Code%20Style-black-black)
 ![Python Versions](https://img.shields.io/badge/Python%20Versions-%E2%89%A53.10-blue)
-[![Getting Started](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/automl/promptolution/blob/main/tutorials/getting_started.ipynb)
+[![Getting Started](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/gepromptet/promptolution/blob/main/tutorials/getting_started.ipynb)
 
 ![promptolution](https://github.com/user-attachments/assets/84c050bd-61a1-4f2e-bc4e-874d9b4a69af)
 
@@ -29,7 +29,7 @@
 - Built-in response caching to save costs and parallelized inference for speed.
 - Detailed logging and token usage tracking for granular post-hoc analysis.
 
-Have a look at our [Release Notes](https://automl.github.io/promptolution/release-notes/) for the latest updates to promptolution.
+Have a look at our [Release Notes](https://gepromptet.github.io/promptolution/release-notes/) for the latest updates to promptolution.
 
 ## 📚 Scientific Publications Powered by Promptolution
 
@@ -43,7 +43,7 @@ Have a look at our [Release Notes](https://automl.github.io/promptolution/releas
 ## 🔧 Installation and Quickstart
 
 ```
-pip install promptolution[api]
+pip install promptolution
 ```
 
 For local inference, add `[transformers]` (HuggingFace) or `[vllm]` (vLLM serving), or both.
@@ -52,8 +52,7 @@ Promptolution offers three ways to optimize prompts, from a one-line call to ful
 
 ### Quickstart: `promptolution.optimize`
 
-For a classification task, `optimize` builds the components for you and asks only for what the
-library cannot know: your data, an LLM and its credentials, and a description of the task.
+For a classification task, `optimize` builds the components for you. Simply provide your data, an LLM and its credentials, and a description of the task and start optimizing.
 
 ```python
 import pandas as pd
@@ -110,15 +109,15 @@ scores = evaluate_prompts(best_prompts, test_task, predictor)
 print(scores)  # DataFrame: prompt, score, evaluated on the held-out split, best first
 ```
 
-The `initial_prompts` may be omitted; they are then generated from the `task_description`.
+The `initial_prompts` may be omitted, they are then generated from the `task_description`.
 
 ### Experiments: config-driven runs & grids (Hydra)
 
 For reproducible research, config-driven runs and experiment grids (from YAML/CLI, locally or on
 SLURM, with result files and restart), use the `promptolution-experiment` CLI: see the
-[experiment docs](https://automl.github.io/promptolution/api/experiment/).
+[experiment docs](https://gepromptet.github.io/promptolution/api/experiment/).
 
-Full tutorial: [Getting Started notebook](https://github.com/automl/promptolution/blob/main/tutorials/getting_started.ipynb) · [Docs](https://automl.github.io/promptolution/)
+Full tutorial: [Getting Started notebook](https://github.com/gepromptet/promptolution/blob/main/tutorials/getting_started.ipynb) · [Docs](https://gepromptet.github.io/promptolution/)
 
 ## 🧠 Featured Optimizers
 

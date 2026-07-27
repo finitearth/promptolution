@@ -1,6 +1,6 @@
 site_name: Promptolution Documentation
-site_url: https://finitearth.github.io/promptolution/
-repo_url: https://github.com/finitearth/promptolution/
+site_url: https://gepromptet.github.io/promptolution/
+repo_url: https://github.com/gepromptet/promptolution/
 remote_branch: docs
 
 theme:
