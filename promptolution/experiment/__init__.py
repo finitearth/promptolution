@@ -1,8 +1,8 @@
-"""Config-driven (Hydra) experiments for promptolution — a single run or a whole grid.
+"""Config-driven (Hydra) experiments for promptolution: a single run or a whole grid.
 
 :func:`execute` builds the components of one experiment cell from its config via
 `hydra.utils.instantiate` (``llm -> predictor(llm) -> task(df) -> optimizer``), optimizes, evaluates,
-and writes the per-run output contract (results, runinfo, restart marker) — see `README.md`.
+and writes the per-run output contract (results, runinfo, restart marker).
 
 For a lightweight, in-memory alternative that skips the CLI and YAML entirely, see
 :func:`promptolution.optimize` (classification only).
@@ -15,6 +15,6 @@ Usage:
     python -m promptolution.experiment.launch name=my_run optimizer=capo task=agnews llm=api
 """
 
-from promptolution.experiment.launch import build_components, execute, optimize
+from promptolution.experiment.launch import execute
 
-__all__ = ["execute", "optimize", "build_components"]
+__all__ = ["execute"]
