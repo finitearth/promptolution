@@ -23,6 +23,10 @@ Or clone our GitHub repository:
 
 [https://github.com/gepromptet/promptolution](https://github.com/gepromptet/promptolution)
 
+## Guides
+
+- [Running Experiments](guides/experiment.md)
+
 ## API Reference
 
 - [LLMs](api/llms.md)

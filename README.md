@@ -115,7 +115,7 @@ The `initial_prompts` may be omitted, they are then generated from the `task_des
 
 For reproducible research, config-driven runs and experiment grids (from YAML/CLI, locally or on
 SLURM, with result files and restart), use the `promptolution-experiment` CLI: see the
-[experiment docs](https://gepromptet.github.io/promptolution/api/experiment/).
+[experiment guide](https://gepromptet.github.io/promptolution/guides/experiment/).
 
 Full tutorial: [Getting Started notebook](https://github.com/gepromptet/promptolution/blob/main/tutorials/getting_started.ipynb) · [Docs](https://gepromptet.github.io/promptolution/)
 

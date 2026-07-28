@@ -45,6 +45,8 @@ plugins:
 
 nav:
   - Home: index.md
+  - Guides:
+    - Running Experiments: guides/experiment.md
   - Release Notes:
     - Overview: release-notes.md
     - v2.3.0: release-notes/v2.3.0.md
