@@ -1,6 +1,5 @@
-# Small inline sentiment dataset (no download) — handy for smoke runs and tests.
-# The task's `df` is a nested _target_: here pandas.DataFrame built from inline data.
-_target_: promptolution.tasks.ClassificationTask
+# Small inline sentiment dataset (no download), handy for smoke runs and tests.
+# A data option carries the dataset: how to load it, which columns to use, and what the task is.
 df:
   _target_: pandas.DataFrame
   _convert_: all        # turn the OmegaConf containers into plain dict/lists for pandas
@@ -11,4 +10,3 @@ df:
 x_column: x
 y_column: y
 task_description: "Classify the sentiment of the text as positive, negative, or neutral."
-eval_strategy: sequential_block # train-time evaluation on blocks; final held-out scores are computed full

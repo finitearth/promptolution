@@ -1,0 +1,8 @@
+# The task type: what kind of problem the prompts are optimized for.
+# The dataset itself comes from the `data` group, pulled in by the interpolations below.
+_target_: promptolution.tasks.ClassificationTask
+df: ${data.df}
+x_column: ${data.x_column}
+y_column: ${data.y_column}
+task_description: ${data.task_description}
+eval_strategy: sequential_block # train-time evaluation on blocks; final held-out scores are computed full

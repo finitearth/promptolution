@@ -1,9 +1,0 @@
-# Entry for running an experiment on your own data without hand-authoring a task config.
-_target_: promptolution.tasks.ClassificationTask
-df:
-  _target_: pandas.read_csv
-  filepath_or_buffer: ???
-x_column: x
-y_column: y
-task_description: ???
-eval_strategy: sequential_block

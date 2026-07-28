@@ -3,7 +3,8 @@
 defaults:
   - llm: api
   - optimizer: capo
-  - task: demo
+  - data: demo
+  - task: classification
   - predictor: marker
   - _self_
 
@@ -13,6 +14,7 @@ n_steps: 10
 random_seed: 42
 test_frac: 0.2 # held-out fraction for evaluation (0 => evaluate on the train split)
 skip_completed: true # skip a cell whose output dir already has a .finished marker (restart)
+output_root: ${oc.env:PROMPTOLUTION_OUTPUT_DIR,outputs} # where runs are written; set PROMPTOLUTION_OUTPUT_DIR for a machine-wide default, or override here per command
 out_dir: ${hydra:runtime.output_dir} # where this run writes; set by Hydra per run/cell — read it, don't override (overriding splits results from the .hydra/ provenance next to them)
 
 hydra:
@@ -20,9 +22,9 @@ hydra:
     chdir: false # keep cwd stable (library-friendly); output dir is absolute
     config:
       override_dirname: # the per-cell subdir is the swept-params slug; keep secrets/parent out of it
-        exclude_keys: [name, out_dir, llm.api_key, llm.api_url]
-  run: # single run -> <root>/<name>
-    dir: ${oc.env:PROMPTOLUTION_OUTPUT_DIR,outputs}/${name}
-  sweep: # grid -> <root>/<name>/<cell-slug> ; rerun same name skips finished cells
-    dir: ${oc.env:PROMPTOLUTION_OUTPUT_DIR,outputs}/${name}
+        exclude_keys: [name, out_dir, output_root, llm.api_key, llm.api_url]
+  run: # single run -> <output_root>/<name>
+    dir: ${output_root}/${name}
+  sweep: # grid -> <output_root>/<name>/<cell-slug> ; rerun same name skips finished cells
+    dir: ${output_root}/${name}
     subdir: ${hydra.job.override_dirname}

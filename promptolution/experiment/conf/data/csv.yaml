@@ -1,0 +1,13 @@
+# Your own data from a CSV file or URL, read with pandas.
+# The `???` are Hydra's markers for a required value: supply both on the CLI, e.g.
+#   data=csv data.df.filepath_or_buffer=my_data.csv data.task_description="'Classify ... into: a, b.'"
+# Mind the nested quotes: Hydra reads a bare comma as list syntax, so a description containing one
+# has to reach Hydra wrapped in literal single quotes (the outer double quotes are the shell's).
+# Set x_column/y_column too if your columns are not named x and y.
+# For other formats, copy this file and swap the `_target_` (pandas.read_parquet, read_json, ...).
+df:
+  _target_: pandas.read_csv
+  filepath_or_buffer: ???
+x_column: x
+y_column: y
+task_description: ???
