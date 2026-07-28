@@ -73,7 +73,7 @@ Edit `conf/hydra/launcher/slurm.yaml` for your cluster (partition, GPUs, timeout
 | Pick a group option        | `data=agnews`, `optimizer=opro`, `llm=vllm`                    |
 | Change a parameter         | `n_steps=20`, `llm.model_id=gpt-4o`, `optimizer.upper_shots=3` |
 | Add a key the config lacks | `+optimizer.alpha=0.1` (the `+` is required)                   |
-| Send results elsewhere     | `output_root=/scratch/$USER/runs`                              |
+| Send results elsewhere     | `output_root=YOUR_OUTPUT_DIR`                                  |
 | Re-run a finished cell     | `skip_completed=false`                                         |
 | A value containing a comma | `data.task_description="'Classify as a, b, or c.'"`            |
 
