@@ -14,8 +14,10 @@ if TYPE_CHECKING:  # pragma: no cover
 logger = get_logger(__name__)
 
 
-def train_test_split(df: pd.DataFrame, test_frac: float = 0.2, seed: int = 42) -> Tuple[pd.DataFrame, pd.DataFrame]:
-    """Split a DataFrame into a train and test set.
+def dev_test_split(df: pd.DataFrame, test_frac: float = 0.2, seed: int = 42) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    """Split a DataFrame into a dev and test set.
+
+    The optimizer selects prompts on the dev set. The test set is held out for the final evaluation.
 
     Args:
         df (pd.DataFrame): The data to split (or a df-like with ``.to_pandas()``).
@@ -23,13 +25,13 @@ def train_test_split(df: pd.DataFrame, test_frac: float = 0.2, seed: int = 42) -
         seed (int): Random seed for the split.
 
     Returns:
-        Tuple[pd.DataFrame, pd.DataFrame]: ``(train_df, test_df)``, both with a fresh index.
+        Tuple[pd.DataFrame, pd.DataFrame]: ``(dev_df, test_df)``, both with a fresh index.
     """
     if not isinstance(df, pd.DataFrame):
         df = df.to_pandas()
     test_df = df.sample(frac=test_frac, random_state=seed)
-    train_df = df.drop(test_df.index)
-    return train_df.reset_index(drop=True), test_df.reset_index(drop=True)
+    dev_df = df.drop(test_df.index)
+    return dev_df.reset_index(drop=True), test_df.reset_index(drop=True)
 
 
 def evaluate_prompts(

@@ -1,4 +1,0 @@
-_target_: promptolution.llms.APILLM
-model_id: gpt-4o-mini
-max_tokens: 512
-# Provide credentials via env (e.g. OPENAI_API_KEY) or overrides: +llm.api_url=... +llm.api_key=...

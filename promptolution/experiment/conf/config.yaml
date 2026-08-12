@@ -1,7 +1,7 @@
 # Top-level experiment config. Pick one option per group (defaults); sweep with -m on the CLI.
 # Every group file is a `_target_` + its constructor params.
 defaults:
-  - llm: api
+  - llm: gpt-4o-mini
   - optimizer: capo
   - data: demo
   - task: classification

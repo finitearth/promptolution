@@ -24,12 +24,12 @@ promptolution-experiment name=my_run data=agnews
 `name` is required, and it is what keys the output folder. Here is what that command does:
 
 1. **Compose the config.** Hydra reads `conf/config.yaml`, whose `defaults` list picks one option
-   per group (`llm: api`, `optimizer: capo`, `data: demo`, `task: classification`,
+   per group (`llm: gpt-4o-mini`, `optimizer: capo`, `data: demo`, `task: classification`,
    `predictor: marker`). Your `data=agnews` swaps the `data` group's option, so
    `conf/data/agnews.yaml` is used instead of `demo.yaml`. The result is a single merged config.
 2. **Build the components.** Every file consists of a `_target_` plus its constructor arguments. The target is a Python path to a class or function, `hydra.utils.instantiate` calls it with the provided arguments, returning the object.
-3. **Optimize and evaluate.** The task's data is split into train and test, the optimizer runs for `n_steps` on the train split, and the resulting
-   prompts are scored on the held-out split.
+3. **Optimize and evaluate.** The task's data is split into dev and test, the optimizer runs for `n_steps` on the dev split, and the resulting
+   prompts are scored on the held-out test split.
 4. **Write the results.** The run's results are written into `outputs/<name>/` in the format
    described below, where `outputs/` is relative to wherever you ran the command.
 
@@ -70,7 +70,7 @@ Edit `conf/hydra/launcher/slurm.yaml` for your cluster (partition, GPUs, timeout
 
 | What                       | How                                                            |
 | -------------------------- | -------------------------------------------------------------- |
-| Pick a group option        | `data=agnews`, `optimizer=opro`, `llm=vllm`                    |
+| Pick a group option        | `data=agnews`, `optimizer=opro`, `llm=qwen2.5-7b`                    |
 | Change a parameter         | `n_steps=20`, `llm.model_id=gpt-4o`, `optimizer.upper_shots=3` |
 | Add a key the config lacks | `+optimizer.alpha=0.1` (the `+` is required)                   |
 | Send results elsewhere     | `output_root=YOUR_OUTPUT_DIR`                                  |

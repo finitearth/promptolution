@@ -52,23 +52,26 @@ Promptolution offers three ways to optimize prompts, from a one-line call to ful
 
 ### Quickstart: `promptolution.optimize`
 
-For a classification task, `optimize` builds the components for you. Simply provide your data, an LLM and its credentials, and a description of the task and start optimizing.
+For a classification task, `optimize` builds the components for you. Simply provide your data, an LLM and its credentials, and a description of the task and start optimizing. `evaluate` then scores the resulting prompts on data the optimizer never saw.
 
 ```python
 import pandas as pd
-from promptolution import optimize
+from promptolution import optimize, evaluate
+from promptolution.utils import dev_test_split
 
 # DataFrame with columns "x" (input) and "y" (label)
 df = pd.read_csv("your_data.csv")
+dev_df, test_df = dev_test_split(df, test_frac=0.2)
 
-scores = optimize(
-    df,
-    task_description="Classify each sentence as subjective or objective.",
-    model_id="gpt-4o-mini",
-    api_key="YOUR_API_KEY",
-)
+task_description = "Classify each sentence as subjective or objective."
+prompts = optimize(dev_df, task_description, model_id="gpt-4o-mini", api_key="YOUR_API_KEY")
+scores = evaluate(prompts, test_df, task_description, model_id="gpt-4o-mini", api_key="YOUR_API_KEY")
 print(scores)  # DataFrame: prompt, score, best first
 ```
+
+Optimization and evaluation are separate calls, so you can skip the evaluation entirely, score on
+several datasets, or bring your own splits. If your data already ships with splits (as HuggingFace
+datasets usually do), pass them directly instead of calling `dev_test_split`.
 
 This covers classification only. For judge or reward tasks, or for full control over every
 component, build them yourself (below).
@@ -81,11 +84,11 @@ from promptolution.llms import APILLM
 from promptolution.tasks import ClassificationTask
 from promptolution.predictors import MarkerBasedPredictor
 from promptolution.optimizers import CAPO
-from promptolution.utils import evaluate_prompts, train_test_split
+from promptolution.utils import evaluate_prompts, dev_test_split
 
 # DataFrame with columns "x" (input) and "y" (label)
 df = pd.read_csv("your_data.csv")
-train_df, test_df = train_test_split(df, test_frac=0.2)
+dev_df, test_df = dev_test_split(df, test_frac=0.2)
 
 llm = APILLM(
     model_id="gpt-4o-mini",
@@ -93,14 +96,14 @@ llm = APILLM(
     api_key="YOUR_API_KEY",
 )
 task = ClassificationTask(
-    train_df, task_description="Classify each sentence as subjective or objective."
+    dev_df, task_description="Classify each sentence as subjective or objective."
 )
 predictor = MarkerBasedPredictor(llm)
 optimizer = CAPO(
     predictor=predictor,
     meta_llm=llm,
     task=task,
-    initial_prompts=["Classify the text as objective or subjective."],
+    initial_prompts=["Classify the text as objective or subjective.", ...],
 )
 
 best_prompts = optimizer.optimize(n_steps=10)

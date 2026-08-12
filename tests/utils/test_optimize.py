@@ -1,4 +1,4 @@
-"""Tests for promptolution.optimize(): the lightweight, in-memory entry point."""
+"""Tests for promptolution.optimize() and promptolution.evaluate(): the lightweight entry points."""
 
 import json
 from unittest.mock import patch
@@ -8,7 +8,8 @@ import pytest
 
 from tests.mocks.mock_llm import MockLLM
 
-from promptolution import optimize
+from promptolution import evaluate, optimize
+from promptolution.utils.prompt import Prompt
 
 _DF = pd.DataFrame(
     {
@@ -37,19 +38,22 @@ def _optimize(**kwargs):
         )
 
 
-def test_optimize_in_memory_returns_frame_and_writes_nothing(tmp_path, monkeypatch):
+def test_optimize_returns_prompts_and_writes_nothing(tmp_path, monkeypatch):
+    """optimize() returns prompts only; evaluation is a separate call."""
     monkeypatch.chdir(tmp_path)
-    result = _optimize()
-    assert isinstance(result, pd.DataFrame) and {"prompt", "score"} <= set(result.columns)
+    prompts = _optimize()
+    assert isinstance(prompts, list) and len(prompts) == len(_PROMPTS)
+    assert all(isinstance(p, Prompt) for p in prompts)
     assert list(tmp_path.iterdir()) == []  # no output_dir -> nothing written to disk
 
 
-def test_optimize_output_dir_writes_results(tmp_path):
+def test_optimize_output_dir_writes_trace_and_runinfo(tmp_path):
+    """With output_dir, the step trace and run info are written; scores are not, evaluate() does that."""
     out_dir = tmp_path / "run"
-    result = _optimize(output_dir=out_dir)
-    assert isinstance(result, pd.DataFrame) and "score" in result.columns
-    for f in ("prompt_scores.parquet", "step_results.parquet", "runinfo.json"):
+    _optimize(output_dir=out_dir)
+    for f in ("step_results.parquet", "runinfo.json"):
         assert (out_dir / f).exists(), f"missing {f}"
+    assert not (out_dir / "prompt_scores.parquet").exists()  # scoring is no longer optimize()'s job
     info = json.loads((out_dir / "runinfo.json").read_text())
     assert info["status"] == "finished" and info["name"] == "run"  # taken from the output dir's name
 
@@ -61,14 +65,38 @@ def test_optimize_generates_initial_prompts_from_task_description():
     ) as mock_apillm:
         mock_create.return_value = list(_PROMPTS)
         mock_apillm.return_value = _mock_llm()
-        result = optimize(_DF, task_description="Classify the sentiment.", optimizer="evopromptga", n_steps=2)
+        prompts = optimize(_DF, task_description="Classify the sentiment.", optimizer="evopromptga", n_steps=2)
     mock_create.assert_called_once()
-    assert isinstance(result, pd.DataFrame) and len(result) == len(_PROMPTS)
+    assert len(prompts) == len(_PROMPTS)
+
+
+def test_evaluate_scores_prompts_on_held_out_data():
+    """evaluate() takes the prompts optimize() returned and scores them on another split."""
+    with patch("promptolution.utils.optimize.APILLM") as mock_apillm:
+        mock_apillm.return_value = _mock_llm()
+        scores = evaluate(list(_PROMPTS), _DF, task_description="Classify the sentiment.")
+    assert isinstance(scores, pd.DataFrame)
+    assert {"prompt", "score"} <= set(scores.columns) and len(scores) == len(_PROMPTS)
+    assert scores["score"].is_monotonic_decreasing  # best first
+
+
+def test_optimize_then_evaluate_round_trip():
+    """The two entry points compose: prompts out of optimize() go straight into evaluate()."""
+    prompts = _optimize()
+    with patch("promptolution.utils.optimize.APILLM") as mock_apillm:
+        mock_apillm.return_value = _mock_llm()
+        scores = evaluate(prompts, _DF, task_description="Classify the sentiment.")
+    assert len(scores) == len(prompts)
 
 
 def test_optimize_rejects_non_classification_task_type():
     with pytest.raises(NotImplementedError, match="classification"):
         optimize(_DF, task_description="Classify the sentiment.", task_type="judge")
+
+
+def test_evaluate_rejects_non_classification_task_type():
+    with pytest.raises(NotImplementedError, match="classification"):
+        evaluate(list(_PROMPTS), _DF, task_description="Classify the sentiment.", task_type="judge")
 
 
 def test_optimize_rejects_unknown_optimizer():

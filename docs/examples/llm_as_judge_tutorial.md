@@ -45,7 +45,7 @@ import nest_asyncio
 nest_asyncio.apply()  # Required for notebook environments
 ```
 
-## Setting Up Your Experiment
+## Setting Up Your Optimization
 
 ### Prepare the data
 
@@ -129,7 +129,7 @@ config = ExperimentConfig(
 - `optimizer="evopromptga"` - In the classification task we show cased CAPO, here we are using EvoPrompt, a strong evolutionary prompt optimizer.
 - No y column needed - the judge will evaluate quality without ground truth labels!
 
-## Run Your Experiment
+## Optimize Your Prompts
 
 With everything configured, you're ready to optimize your prompts! The run_experiment function will:
 

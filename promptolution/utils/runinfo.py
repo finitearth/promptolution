@@ -18,7 +18,7 @@ def start_runinfo(out_dir: Union[str, Path], name: str) -> Dict[str, Any]:
         Dict[str, Any]: The info dict, to be passed to :func:`finish_runinfo` later.
     """
     info = {"name": name, "status": "running", "started_at": datetime.now(timezone.utc).isoformat()}
-    _write(out_dir, info)
+    write_to_file(out_dir, info)
     return info
 
 
@@ -35,9 +35,15 @@ def finish_runinfo(out_dir: Union[str, Path], info: Dict[str, Any], status: str,
         Dict[str, Any]: The updated info dict.
     """
     info.update(status=status, finished_at=datetime.now(timezone.utc).isoformat(), **extra)
-    _write(out_dir, info)
+    write_to_file(out_dir, info)
     return info
 
 
-def _write(out_dir: Union[str, Path], info: Dict[str, Any]) -> None:
+def write_to_file(out_dir: Union[str, Path], info: Dict[str, Any]) -> None:
+    """Write the run info to runinfo.json in ``out_dir``.
+
+    Args:
+        out_dir (Union[str, Path]): Directory runinfo.json is written to.
+        info (Dict[str, Any]): The run info to serialize.
+    """
     (Path(out_dir) / "runinfo.json").write_text(json.dumps(info, indent=2))

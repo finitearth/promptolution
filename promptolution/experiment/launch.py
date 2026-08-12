@@ -14,7 +14,7 @@ from hydra.utils import instantiate
 from omegaconf import DictConfig
 
 from promptolution.utils.callbacks import FileOutputCallback
-from promptolution.utils.evaluation import evaluate_prompts, train_test_split
+from promptolution.utils.evaluation import dev_test_split, evaluate_prompts
 from promptolution.utils.logging import get_logger
 from promptolution.utils.runinfo import finish_runinfo, start_runinfo
 
@@ -23,7 +23,7 @@ logger = get_logger(__name__)
 FINISHED_MARKER = ".finished"
 
 
-def execute(cfg: DictConfig) -> pd.DataFrame:
+def launch(cfg: DictConfig) -> pd.DataFrame:
     """Run one experiment cell end-to-end, return the evaluated prompt/score table.
 
     Writes the per-run output to ``cfg.out_dir``, which Hydra sets per run/cell: per-step trace, final
@@ -47,7 +47,7 @@ def execute(cfg: DictConfig) -> pd.DataFrame:
     predictor = instantiate(cfg.predictor, llm=llm)
 
     full_df = instantiate(cfg.task.df)  # the dataset: a _target_ that returns a df (or a df-like)
-    train_df, test_df = train_test_split(full_df, test_frac=cfg.test_frac, seed=cfg.random_seed)
+    train_df, test_df = dev_test_split(full_df, test_frac=cfg.test_frac, seed=cfg.random_seed)
     train_task = instantiate(cfg.task, df=train_df)  # df kwarg overrides the nested df config
     test_task = instantiate(cfg.task, df=test_df) if cfg.test_frac > 0 else train_task
 
@@ -73,7 +73,7 @@ def execute(cfg: DictConfig) -> pd.DataFrame:
 @hydra.main(version_base=None, config_path="conf", config_name="config")
 def main(cfg: DictConfig) -> None:
     """Execute the cell Hydra composed, in the run dir it created (``cfg.out_dir``)."""
-    execute(cfg)
+    launch(cfg)
 
 
 if __name__ == "__main__":

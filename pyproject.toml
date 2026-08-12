@@ -2,7 +2,7 @@
 name = "promptolution"
 version = "2.3.0"
 description = "A framework for prompt optimization and a zoo of prompt optimization algorithms."
-authors = ["Tom Zehle, Moritz Schlager, Timo Heiß, Henri Oberpaur"]
+authors = ["Tom Zehle", "Moritz Schlager", "Timo Heiß", "Henri Oberpaur"]
 readme = "README.md"
 include = [{ path = "promptolution/experiment/conf/**/*.yaml", format = ["sdist", "wheel"] }]
 
@@ -29,23 +29,6 @@ scipy = ">=1.15"
 vllm = ["vllm"]
 transformers = ["transformers", "accelerate"]
 experiment = ["hydra-submitit-launcher", "datasets"]
-
-[tool.poetry.group.experiment]
-optional = true
-[tool.poetry.group.experiment.dependencies]
-hydra-submitit-launcher = ">=1.2.0"
-datasets = ">=2.0.0"
-
-[tool.poetry.group.vllm]
-optional = true
-[tool.poetry.group.vllm.dependencies]
-vllm = ">=0.13.0"
-
-[tool.poetry.group.transformers]
-optional = true
-[tool.poetry.group.transformers.dependencies]
-transformers = ">=4.48.0"
-accelerate = ">=0.20.0"
 
 [tool.poetry.group.dev.dependencies]
 black = ">=24.4.2"
