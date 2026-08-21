@@ -1,9 +1,9 @@
 """Entrypoint for running a single experiment cell or a whole experiment grid via Hydra.
 
 It builds the components from the configs in `conf/` and the overrides provided through the CLI,
-splits the task's data into train/test, optimizes, evaluates the final prompts on the held-out
-split, and writes the output contract to `cfg.out_dir`, the run directory Hydra creates for this
-cell.
+splits the task's data into dev/test, optimizes on the dev split, evaluates the final prompts on the
+held-out test split, and writes the output contract to `cfg.out_dir`, the run directory Hydra creates
+for this cell.
 """
 
 from pathlib import Path
@@ -46,12 +46,12 @@ def launch(cfg: DictConfig) -> pd.DataFrame:
     meta_llm = instantiate(cfg.meta_llm) if cfg.meta_llm else llm  # null in config -> share the llm
     predictor = instantiate(cfg.predictor, llm=llm)
 
-    full_df = instantiate(cfg.task.df)  # the dataset: a _target_ that returns a df (or a df-like)
-    train_df, test_df = dev_test_split(full_df, test_frac=cfg.test_frac, seed=cfg.random_seed)
-    train_task = instantiate(cfg.task, df=train_df)  # df kwarg overrides the nested df config
-    test_task = instantiate(cfg.task, df=test_df) if cfg.test_frac > 0 else train_task
+    full_df = instantiate(cfg.df)  # the dataset: a _target_ that returns a df (or a df-like)
+    dev_df, test_df = dev_test_split(full_df, test_frac=cfg.test_frac, seed=cfg.random_seed)
+    dev_task = instantiate(cfg.task, df=dev_df)  # df kwarg overrides the nested df config
+    test_task = instantiate(cfg.task, df=test_df) if cfg.test_frac > 0 else dev_task
 
-    optimizer = instantiate(cfg.optimizer, predictor=predictor, meta_llm=meta_llm, task=train_task)
+    optimizer = instantiate(cfg.optimizer, predictor=predictor, meta_llm=meta_llm, task=dev_task)
     optimizer.callbacks.append(FileOutputCallback(dir=out_dir))
 
     info = start_runinfo(out_dir, cfg.name)
@@ -70,7 +70,7 @@ def launch(cfg: DictConfig) -> pd.DataFrame:
     return scores_df
 
 
-@hydra.main(version_base=None, config_path="conf", config_name="config")
+@hydra.main(version_base=None, config_path="conf", config_name="promptolution")
 def main(cfg: DictConfig) -> None:
     """Execute the cell Hydra composed, in the run dir it created (``cfg.out_dir``)."""
     launch(cfg)

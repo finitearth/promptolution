@@ -1,8 +1,0 @@
-# One option per model, so a sweep like `-m llm=gpt-4o-mini,qwen2.5-7b` crosses providers:
-# each option carries its own _target_ and provider-specific parameters.
-# For a one-off model change no new file is needed, override the id: llm.model_id=gpt-4o
-_target_: promptolution.llms.APILLM
-model_id: gpt-4o-mini
-max_tokens: 512
-# Provide credentials via env (e.g. OPENAI_API_KEY). Passing +llm.api_key=... on the CLI would
-# record the key in this run's .hydra/ config files.

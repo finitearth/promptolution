@@ -16,3 +16,6 @@ token.txt
 .coverage
 .env
 .env.local
+site/
+.pytest_cache/
+.ruff_cache/

@@ -1,18 +1,23 @@
 # Top-level experiment config. Pick one option per group (defaults); sweep with -m on the CLI.
 # Every group file is a `_target_` + its constructor params.
 defaults:
-  - llm: gpt-4o-mini
+  - llm: api_gpt-4o-mini
   - optimizer: capo
-  - data: demo
   - task: classification
   - predictor: marker
+  - df: csv
   - _self_
+  # These come after `_self_` on purpose: the keys below default them to null, and a selected option
+  # has to override that rather than the other way round.
+  - llm@meta_llm: null
+  - llm@judge_llm: null
 
 name: ??? # REQUIRED — keys the output folder so a rerun resumes into the SAME folder
-meta_llm: null # separate LLM config for prompt proposals; null shares `llm`
+meta_llm: null # separate LLM for prompt proposals; null shares `llm`. Set with llm@meta_llm=<option>
+judge_llm: null # only used by task=judge. Set with llm@judge_llm=<option>
 n_steps: 10
 random_seed: 42
-test_frac: 0.2 # held-out fraction for evaluation (0 => evaluate on the train split)
+test_frac: 0.2 # held-out fraction for evaluation (0 => evaluate on the dev split)
 skip_completed: true # skip a cell whose output dir already has a .finished marker (restart)
 output_root: ${oc.env:PROMPTOLUTION_OUTPUT_DIR,outputs} # where runs are written; set PROMPTOLUTION_OUTPUT_DIR for a machine-wide default, or override here per command
 out_dir: ${hydra:runtime.output_dir} # where this run writes; set by Hydra per run/cell — read it, don't override (overriding splits results from the .hydra/ provenance next to them)

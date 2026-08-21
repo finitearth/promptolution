@@ -1,6 +1,0 @@
-# Served locally with vLLM. Note the parameters differ from an API model (max_model_len rather
-# than max_tokens), which is why each model gets its own option rather than one shared file.
-_target_: promptolution.llms.VLLM
-model_id: Qwen/Qwen2.5-7B-Instruct
-max_model_len: 2048
-temperature: 0.7
