@@ -50,7 +50,7 @@ llm:
 ```
 
 Everything else comes from the shipped defaults. `promptolution-experiment --help` lists the options
-each group ships. Those options are worked examples rather than a full parameter list — any
+each group ships. Any
 constructor parameter can be set in your config even if the example omits it, so consult the API
 reference for [LLMs](../api/llms.md), [Optimizers](../api/optimizers.md), [Tasks](../api/tasks.md)
 and [Predictors](../api/predictors.md).
@@ -65,10 +65,9 @@ promptolution-experiment --config-dir ./conf --config-name my_experiment
 
 `name` is required, and it is what keys the output folder. Here is what that command does:
 
-1. **Compose the config.** Hydra reads `conf/config.yaml`, whose `defaults` list picks one option
-   per group (`llm: api`, `optimizer: capo`, `task: classification`, `predictor: marker`). Your
-   `task=my_tickets` swaps the `task` group's option for the one you wrote. The result is a single
-   merged config.
+1. **Compose the config.** Hydra reads your `conf/my_experiment.yaml`, which inherits
+   promptolution's `promptolution.yaml` and its `defaults` list. The keys you set override what those options supply. The result is a single merged
+   config.
 2. **Build the components.** Every file consists of a `_target_` plus its constructor arguments. The target is a Python path to a class or function, `hydra.utils.instantiate` calls it with the provided arguments, returning the object.
 3. **Optimize and evaluate.** The task's data is split into dev and test, the optimizer runs for `n_steps` on the dev split, and the resulting
    prompts are scored on the held-out test split.
@@ -81,12 +80,12 @@ Pass several values for the same key and add `-m` (short for `--multirun`). Hydr
 product, one cell per combination:
 
 ```bash
-promptolution-experiment --config-dir ./conf -m name=bench task=my_tickets \
-  llm.model_id=gpt-4o-mini optimizer=capo,opro random_seed=42,43,44
+promptolution-experiment --config-dir ./conf --config-name my_experiment -m \
+  name=bench optimizer=capo,opro random_seed=42,43,44
 ```
 
 That is six cells (two optimizers times three seeds). Each one gets its own subdirectory under
-`outputs/bench/`, named after the parameters that vary in the sweep:
+`outputs/bench/`, named after the overrides you passed on the command line:
 
 ```
 outputs/bench/
@@ -95,28 +94,40 @@ outputs/bench/
   ...
 ```
 
+Only the swept keys appear here because everything else lives in the config. Any extra override you
+pass on the CLI lands in every cell name too, so keep a sweep's command to the keys that vary.
+
 ## On SLURM
 
 The same grid becomes a single SLURM array job by switching Hydra's launcher:
 
 ```bash
-promptolution-experiment --config-dir ./conf -m hydra/launcher=slurm name=bench \
-  task=my_tickets llm.model_id=gpt-4o-mini optimizer=capo,opro
+promptolution-experiment --config-dir ./conf --config-name my_experiment -m \
+  hydra/launcher=slurm name=bench optimizer=capo,opro
 ```
 
-Edit `conf/hydra/launcher/slurm.yaml` for your cluster (partition, GPUs, timeout,
-`array_parallelism`), or override those on the CLI: `hydra.launcher.partition=gpu`.
+Set your cluster's parameters in your own config:
+
+```yaml
+hydra:
+  launcher:
+    partition: gpu
+    timeout_min: 240
+    array_parallelism: 16
+```
+
+or override them per command: `hydra.launcher.partition=gpu`.
 
 ## Common overrides
 
-| What                       | How                                                         |
-| -------------------------- | ----------------------------------------------------------- |
+| What                       | How                                                                |
+| -------------------------- | ------------------------------------------------------------------ |
 | Pick a group option        | `optimizer=opro`, `llm=vllm_qwen2.5-7b`, `df=huggingface_datasets` |
-| Change a parameter         | `n_steps=20`, `llm.model_id=gpt-4o`, `task.n_subsamples=50` |
-| Fill a second LLM slot     | `llm@meta_llm=api_gpt-4o-mini meta_llm.model_id=gpt-4o`     |
-| Send results elsewhere     | `output_root=YOUR_OUTPUT_DIR`                               |
-| Re-run a finished cell     | `skip_completed=false`                                      |
-| A value containing a comma | `task.task_description="'Classify as a, b, or c.'"`         |
+| Change a parameter         | `n_steps=20`, `llm.model_id=gpt-4o`, `task.n_subsamples=50`        |
+| Fill a second LLM slot     | `llm@meta_llm=api_gpt-4o-mini meta_llm.model_id=gpt-4o`            |
+| Send results elsewhere     | `output_root=YOUR_OUTPUT_DIR`                                      |
+| Re-run a finished cell     | `skip_completed=false`                                             |
+| A value containing a comma | `task.task_description="'Classify as a, b, or c.'"`                |
 
 ## Credentials
 
