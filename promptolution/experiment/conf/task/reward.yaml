@@ -1,0 +1,11 @@
+_target_: promptolution.tasks.RewardTask
+x_column: ???
+y_column: null
+task_description: ???
+reward_function:
+  _target_: ???
+  _partial_: true
+reward_columns: null
+eval_strategy: sequential_block
+n_subsamples: 30
+seed: ${random_seed}

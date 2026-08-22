@@ -2,7 +2,7 @@
 
 import numpy as np
 
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING, List
 
 from promptolution.exemplar_selectors.base_exemplar_selector import BaseExemplarSelector
 from promptolution.utils.prompt import Prompt
@@ -10,7 +10,6 @@ from promptolution.utils.prompt import Prompt
 if TYPE_CHECKING:  # pragma: no cover
     from promptolution.predictors.base_predictor import BasePredictor
     from promptolution.tasks.base_task import BaseTask
-    from promptolution.utils.config import ExperimentConfig
 
 
 class RandomSelector(BaseExemplarSelector):
@@ -25,7 +24,6 @@ class RandomSelector(BaseExemplarSelector):
         task: "BaseTask",
         predictor: "BasePredictor",
         desired_score: int = 1,
-        config: Optional["ExperimentConfig"] = None,
     ) -> None:
         """Initialize the RandomSelector.
 
@@ -33,10 +31,9 @@ class RandomSelector(BaseExemplarSelector):
             task (BaseTask): An object representing the task to be performed.
             predictor (BasePredictor): An object capable of making predictions based on prompts.
             desired_score (int, optional): The desired score for the exemplars. Defaults to 1.
-            config (ExperimentConfig, optional): Configuration for the selector, overriding defaults.
         """
         self.desired_score = desired_score
-        super().__init__(task, predictor, config)
+        super().__init__(task, predictor)
 
     def select_exemplars(self, prompt: Prompt, n_examples: int = 5) -> Prompt:
         """Select exemplars using a random selection strategy.

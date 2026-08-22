@@ -7,11 +7,11 @@ from typing import TYPE_CHECKING, List, Literal, Optional
 if TYPE_CHECKING:  # pragma: no cover
     from promptolution.tasks.base_task import BaseTask
     from promptolution.predictors.base_predictor import BasePredictor
-    from promptolution.utils.config import ExperimentConfig
     from promptolution.utils.callbacks import BaseCallback
 
 from promptolution.utils.logging import get_logger
 from promptolution.utils.prompt import Prompt
+from promptolution.utils.prompt_creation import create_prompts_from_task_description
 
 logger = get_logger(__name__)
 
@@ -24,7 +24,6 @@ class BaseOptimizer(ABC):
     This class defines the basic structure and interface for prompt optimization algorithms.
 
     Attributes:
-        config (ExperimentConfig, optional): Configuration for the optimizer, overriding defaults.
         prompts (List[str]): List of current prompts being optimized.
         task (BaseTask): The task object for evaluating prompts.
         callbacks (List[Callable]): List of callback functions to be called during optimization.
@@ -39,7 +38,6 @@ class BaseOptimizer(ABC):
         task: "BaseTask",
         initial_prompts: Optional[List[str]] = None,
         callbacks: Optional[List["BaseCallback"]] = None,
-        config: Optional["ExperimentConfig"] = None,
     ) -> None:
         """Initialize the optimizer with a configuration and/or direct parameters.
 
@@ -48,16 +46,17 @@ class BaseOptimizer(ABC):
             predictor: Predictor for prompt evaluation.
             initial_prompts: Initial set of prompts to start optimization with.
             callbacks: List of callback functions.
-            config (ExperimentConfig, optional): Configuration for the optimizer, overriding defaults.
         """
-        # Set up optimizer state
-        if config is not None:
-            config.apply_to(self)
-
-        if initial_prompts is None and config is not None and config.prompts is not None:
-            initial_prompts = config.prompts
-
-        assert initial_prompts is not None, "Initial prompts must be provided either directly or through the config."
+        if initial_prompts is None:
+            if task.task_description is None:
+                raise ValueError(
+                    "Provide initial_prompts, or set task_description on the task so initial "
+                    "prompts can be generated from it."
+                )
+            logger.warning("\U0001f9ec No initial_prompts provided, generating them from the task description.")
+            initial_prompts = create_prompts_from_task_description(
+                task_description=task.task_description, llm=predictor.llm
+            )
         if isinstance(initial_prompts[0], str):
             self.prompts = [Prompt(p) for p in initial_prompts]
         else:
@@ -73,7 +72,6 @@ class BaseOptimizer(ABC):
         self.callbacks: List["BaseCallback"] = callbacks or []
         self.predictor = predictor
         self.scores: List[float] = []
-        self.config = config
 
     def optimize(self, n_steps: int) -> List[Prompt]:
         """Perform the optimization process.
@@ -87,9 +85,6 @@ class BaseOptimizer(ABC):
         Returns:
             The optimized list of prompts after all steps.
         """
-        # validate config
-        if self.config is not None:
-            self.config.validate()
         self._pre_optimization_loop()
 
         for _ in range(n_steps):
@@ -145,13 +140,10 @@ class BaseOptimizer(ABC):
             callback.on_train_end(self)
 
     def _initialize_meta_template(self, template: str) -> str:
-        task_description = getattr(self.task, "task_description")
-        extraction_description = getattr(self.predictor, "extraction_description")
-        if self.config is not None and getattr(self.config, "task_description") is not None:
-            task_description = self.config.task_description
+        task_description = self.task.task_description
         if task_description is None:
             logger.warning("Task description is not provided. Please make sure to include relevant task details.")
             task_description = ""
-        if extraction_description is not None:
-            task_description += "\n" + extraction_description
+        if self.predictor.extraction_description:
+            task_description += "\n" + self.predictor.extraction_description
         return template.replace("<task_desc>", task_description)

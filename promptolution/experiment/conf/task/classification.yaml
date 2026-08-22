@@ -1,0 +1,7 @@
+_target_: promptolution.tasks.ClassificationTask
+x_column: ???
+y_column: ???
+task_description: ???
+eval_strategy: sequential_block
+n_subsamples: 30
+seed: ${random_seed}

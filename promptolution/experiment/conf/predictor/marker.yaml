@@ -1,0 +1,4 @@
+_target_: promptolution.predictors.MarkerBasedPredictor
+begin_marker: "<final_answer>"
+end_marker: "</final_answer>"
+classes: null

@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+message: "If you use Promptolution in your research, please cite the paper below."
+title: Promptolution
+abstract: >-
+  A unified, modular framework for prompt optimization, providing a zoo of prompt
+  optimization algorithms, a common LLM backend for API, local and vLLM models, and
+  config-driven experiment grids for reproducible research.
+type: software
+authors:
+  - family-names: Zehle
+    given-names: Tom
+  - family-names: Schlager
+    given-names: Moritz
+  - family-names: Heiß
+    given-names: Timo
+  - family-names: Oberpaur
+    given-names: Henri
+version: 2.3.0
+license: Apache-2.0
+repository-code: "https://github.com/gepromptet/promptolution"
+url: "https://gepromptet.github.io/promptolution/"
+keywords:
+  - prompt optimization
+  - large language models
+  - automated machine learning
+  - natural language processing
+preferred-citation:
+  type: conference-paper
+  title: "promptolution: A unified, modular framework for prompt optimization"
+  authors:
+    - family-names: Zehle
+      given-names: Tom
+    - family-names: Heiß
+      given-names: Timo
+    - family-names: Schlager
+      given-names: Moritz
+    - family-names: Aßenmacher
+      given-names: Matthias
+    - family-names: Feurer
+      given-names: Matthias
+  collection-title: >-
+    Proceedings of the 19th Conference of the European Chapter of the Association for
+    Computational Linguistics (Volume 3: System Demonstrations)
+  year: 2026
+  start: 282
+  end: 296
+  url: "https://aclanthology.org/2026.eacl-demo.21/"

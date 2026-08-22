@@ -1,7 +1,6 @@
 import pandas as pd
 
 from promptolution.tasks.reward_tasks import RewardTask
-from promptolution.utils.config import ExperimentConfig
 from promptolution.utils.prompt import Prompt
 
 
@@ -59,7 +58,6 @@ def test_reward_task_passes_reward_columns():
 def test_reward_task_x_column_from_config(simple_reward_function):
     """Ensure setting an arbitrary x_column name via the config works."""
     df = pd.DataFrame({"my_input": ["a", "b", "c"]})
-    config = ExperimentConfig(x_column="my_input")
-    task = RewardTask(df=df, reward_function=simple_reward_function, config=config)
+    task = RewardTask(df=df, reward_function=simple_reward_function, x_column="my_input")
     assert task.x_column == "my_input"
     assert task.xs == ["a", "b", "c"]

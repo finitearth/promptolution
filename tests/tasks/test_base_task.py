@@ -1,7 +1,6 @@
 import pandas as pd
 import pytest
 
-from tests.mocks.dummy_config import DummyConfig
 from tests.mocks.mock_llm import MockLLM
 from tests.mocks.mock_predictor import MockPredictor
 from tests.mocks.mock_task import MockTask
@@ -120,14 +119,6 @@ def test_evaluate_with_block_list_updates_blocks(predictor, small_task):
     task.evaluate(prompts, predictor)
     for p in prompts:
         assert task.prompt_evaluated_blocks[p] == [0, 1]
-
-
-def test_task_config_applied():
-    cfg = DummyConfig()
-    df = pd.DataFrame({"x": ["a", "b", "c"], "y": ["1", "0", "1"]})
-    task = MockTask(df=df, eval_strategy="sequential_block", n_subsamples=1, config=cfg)
-    assert cfg.applied is True
-    assert hasattr(task, "config_applied")
 
 
 def test_block_wraparound_and_get_cache_keys():

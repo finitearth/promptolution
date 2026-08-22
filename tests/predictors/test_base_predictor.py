@@ -1,9 +1,5 @@
 import numpy as np
 
-from tests.mocks.dummy_config import DummyConfig
-from tests.mocks.mock_llm import MockLLM
-from tests.mocks.mock_predictor import MockPredictor
-
 
 def test_predictor_predict_flow(mock_predictor):
     """Test the basic prediction flow from prompt to final prediction."""
@@ -54,10 +50,3 @@ def test_predictor_system_prompt_string_converted(mock_predictor):
     assert len(preds) == 2
     # call_history should show system_prompts broadcasted
     assert mock_predictor.llm.call_history[-1]["system_prompts"] == ["sys", "sys"]
-
-
-def test_predictor_applies_config():
-    cfg = DummyConfig()
-    predictor = MockPredictor(llm=MockLLM(), config=cfg)
-    assert cfg.applied is True
-    assert getattr(predictor, "config_applied") is True

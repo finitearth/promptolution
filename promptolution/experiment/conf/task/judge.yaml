@@ -1,0 +1,10 @@
+_target_: promptolution.tasks.JudgeTask
+x_column: ???
+y_column: null
+task_description: ???
+judge_llm: ${judge_llm}
+min_score: -5.0
+max_score: 5.0
+eval_strategy: sequential_block
+n_subsamples: 30
+seed: ${random_seed}

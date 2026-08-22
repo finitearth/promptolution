@@ -15,7 +15,6 @@ if TYPE_CHECKING:  # pragma: no cover
     from promptolution.predictors.base_predictor import BasePredictor
     from promptolution.tasks.base_task import BaseTask
     from promptolution.utils.callbacks import BaseCallback
-    from promptolution.utils.config import ExperimentConfig
 
 
 class OPRO(BaseOptimizer):
@@ -39,7 +38,6 @@ class OPRO(BaseOptimizer):
         num_instructions_per_step: int = 8,
         num_few_shots: int = 3,
         callbacks: Optional[List["BaseCallback"]] = None,
-        config: Optional["ExperimentConfig"] = None,
     ) -> None:
         """Initialize the OPRO optimizer.
 
@@ -53,15 +51,12 @@ class OPRO(BaseOptimizer):
             num_instructions_per_step: Number of prompts to generate in each step
             num_few_shots: Number of few-shot examples to include (0 for none)
             callbacks: List of callback functions
-            config: "ExperimentConfig" overwriting default parameters
         """
         self.meta_llm = meta_llm
         self.max_num_instructions = max_num_instructions
         self.num_instructions_per_step = num_instructions_per_step
         self.num_few_shots = num_few_shots
-        super().__init__(
-            predictor=predictor, task=task, initial_prompts=initial_prompts, callbacks=callbacks, config=config
-        )
+        super().__init__(predictor=predictor, task=task, initial_prompts=initial_prompts, callbacks=callbacks)
         self.meta_prompt_template = self._initialize_meta_template(prompt_template or OPRO_TEMPLATE)
 
     def _sample_examples(self) -> str:

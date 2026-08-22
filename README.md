@@ -1,11 +1,10 @@
-
-![Coverage](https://img.shields.io/badge/Coverage-96%25-brightgreen)
-[![CI](https://github.com/automl/promptolution/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/automl/promptolution/actions/workflows/ci.yml)
-[![Docs](https://github.com/automl/promptolution/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/automl/promptolution/actions/workflows/docs.yml)
+![Coverage](https://img.shields.io/badge/Coverage-95%25-brightgreen)
+[![CI](https://github.com/gepromptet/promptolution/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/gepromptet/promptolution/actions/workflows/ci.yml)
+[![Docs](https://github.com/gepromptet/promptolution/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/gepromptet/promptolution/actions/workflows/docs.yml)
 [![PyPI version](https://img.shields.io/pypi/v/promptolution.svg)](https://pypi.org/project/promptolution/)
 ![Code Style](https://img.shields.io/badge/Code%20Style-black-black)
 ![Python Versions](https://img.shields.io/badge/Python%20Versions-%E2%89%A53.10-blue)
-[![Getting Started](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/automl/promptolution/blob/main/tutorials/getting_started.ipynb)
+[![Getting Started](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/gepromptet/promptolution/blob/main/tutorials/getting_started.ipynb)
 
 ![promptolution](https://github.com/user-attachments/assets/84c050bd-61a1-4f2e-bc4e-874d9b4a69af)
 
@@ -19,18 +18,18 @@
 
 ## 🚀 What is Promptolution?
 
-**Promptolution** is a unified, modular framework for prompt optimization built for researchers and advanced practitioners who want full control over their experimental setup. Unlike end-to-end application frameworks with high abstraction, promptolution focuses exclusively on the optimization stage, providing a clean, transparent, and extensible API. It allows for simple prompt optimization for one task up to large-scale reproducible benchmark experiments. 
+**Promptolution** is a unified, modular framework for prompt optimization built for researchers and advanced practitioners who want full control over their experimental setup. Unlike end-to-end application frameworks with high abstraction, promptolution focuses exclusively on the optimization stage, providing a clean, transparent, and extensible API. It allows for simple prompt optimization for one task up to large-scale reproducible benchmark experiments.
 
 <img width="808" height="356" alt="promptolution_framework" src="https://github.com/user-attachments/assets/e3d05493-30e3-4464-b0d6-1d3e3085f575" />
 
 ### Key Features
 
-* Implementation of many current prompt optimizers out of the box.
-* Unified LLM backend supporting API-based models, Local LLMs, and vLLM clusters.
-* Built-in response caching to save costs and parallelized inference for speed.
-* Detailed logging and token usage tracking for granular post-hoc analysis.
+- Implementation of many current prompt optimizers out of the box.
+- Unified LLM backend supporting API-based models, Local LLMs, and vLLM clusters.
+- Built-in response caching to save costs and parallelized inference for speed.
+- Detailed logging and token usage tracking for granular post-hoc analysis.
 
-Have a look at our [Release Notes](https://automl.github.io/promptolution/release-notes/) for the latest updates to promptolution.
+Have a look at our [Release Notes](https://gepromptet.github.io/promptolution/release-notes/) for the latest updates to promptolution.
 
 ## 📚 Scientific Publications Powered by Promptolution
 
@@ -44,58 +43,104 @@ Have a look at our [Release Notes](https://automl.github.io/promptolution/releas
 ## 🔧 Installation and Quickstart
 
 ```
-pip install promptolution[api]
+pip install promptolution
 ```
 
 For local inference, add `[transformers]` (HuggingFace) or `[vllm]` (vLLM serving), or both.
 
+Promptolution offers three ways to optimize prompts, from a one-line call to full manual control.
+
+### Quickstart: `promptolution.optimize`
+
+For a classification task, `optimize` builds the components for you. Simply provide your data, an LLM and its credentials, and a description of the task and start optimizing. `evaluate` then scores the resulting prompts on data the optimizer never saw.
+
 ```python
 import pandas as pd
-from promptolution.utils import ExperimentConfig
-from promptolution.helpers import run_experiment
+from promptolution import optimize, evaluate
+from promptolution.utils import dev_test_split
 
 # DataFrame with columns "x" (input) and "y" (label)
 df = pd.read_csv("your_data.csv")
+dev_df, test_df = dev_test_split(df, test_frac=0.2)
 
-config = ExperimentConfig(
-    optimizer="capo",
-    task_description="Classify each sentence as subjective or objective.",
-    prompts=["Classify the text as objective or subjective."],
-    n_steps=10,
-    api_url="https://api.openai.com/v1",
-    model_id="gpt-4o-mini",
-    api_key="YOUR_API_KEY",
-)
-
-best_prompts = run_experiment(df, config)
-print(best_prompts)
+task_description = "Classify each sentence as subjective or objective."
+prompts = optimize(dev_df, task_description, model_id="gpt-4o-mini", api_key="YOUR_API_KEY")
+scores = evaluate(prompts, test_df, task_description, model_id="gpt-4o-mini", api_key="YOUR_API_KEY")
+print(scores)  # DataFrame: prompt, score, best first
 ```
 
-Full tutorial: [Getting Started notebook](https://github.com/automl/promptolution/blob/main/tutorials/getting_started.ipynb) · [Docs](https://automl.github.io/promptolution/)
+Optimization and evaluation are separate calls, so you can skip the evaluation entirely, score on
+several datasets, or bring your own splits. If your data already ships with splits (as HuggingFace
+datasets usually do), pass them directly instead of calling `dev_test_split`.
 
+This covers classification only. For judge or reward tasks, or for full control over every
+component, build them yourself (below).
+
+### Full control: build the components
+
+```python
+import pandas as pd
+from promptolution.llms import APILLM
+from promptolution.tasks import ClassificationTask
+from promptolution.predictors import MarkerBasedPredictor
+from promptolution.optimizers import CAPO
+from promptolution.utils import evaluate_prompts, dev_test_split
+
+# DataFrame with columns "x" (input) and "y" (label)
+df = pd.read_csv("your_data.csv")
+dev_df, test_df = dev_test_split(df, test_frac=0.2)
+
+llm = APILLM(
+    model_id="gpt-4o-mini",
+    api_url="https://api.openai.com/v1",
+    api_key="YOUR_API_KEY",
+)
+task = ClassificationTask(
+    dev_df, task_description="Classify each sentence as subjective or objective."
+)
+predictor = MarkerBasedPredictor(llm)
+optimizer = CAPO(
+    predictor=predictor,
+    meta_llm=llm,
+    task=task,
+    initial_prompts=["Classify the text as objective or subjective.", ...],
+)
+
+best_prompts = optimizer.optimize(n_steps=10)
+test_task = ClassificationTask(test_df, task_description=task.task_description)
+scores = evaluate_prompts(best_prompts, test_task, predictor)
+print(scores)  # DataFrame: prompt, score, evaluated on the held-out split, best first
+```
+
+The `initial_prompts` may be omitted, they are then generated from the `task_description`.
+
+### Experiments: config-driven runs & grids (Hydra)
+
+For reproducible research, config-driven runs and experiment grids (from YAML/CLI, locally or on
+SLURM, with result files and restart), use the `promptolution-experiment` CLI: see the
+[experiment guide](https://gepromptet.github.io/promptolution/guides/experiment/).
+
+Full tutorial: [Getting Started notebook](https://github.com/gepromptet/promptolution/blob/main/tutorials/getting_started.ipynb) · [Docs](https://gepromptet.github.io/promptolution/)
 
 ## 🧠 Featured Optimizers
 
-| **Name**      | **Paper**                                              | **Init prompts** | **Exploration** | **Costs** | **Parallelizable** | **Few-shot** |
-| ---- | ---- | ---- |----  |----  |  ----|----  |
-| `CAPO`        | [Zehle et al., 2025](https://openreview.net/forum?id=UweaRrg9D0) | required         | 👍              | 💲        | ✅                  | ✅            |
-| `EvoPromptDE` | [Guo et al., 2023](https://openreview.net/forum?id=ZG3RaNIsO8)   | required         | 👍              | 💲💲      | ✅                  | ❌            |
-| `EvoPromptGA` | [Guo et al., 2023](https://openreview.net/forum?id=ZG3RaNIsO8)   | required         | 👍              | 💲💲      | ✅                  | ❌            |
-| `OPRO`        | [Yang et al., 2023](https://openreview.net/forum?id=Bb4VGOWELI)  | optional         | 👎              | 💲💲      | ❌                  | ❌            |
-
+| **Name**      | **Paper**                                                        | **Init prompts** | **Exploration** | **Costs** | **Parallelizable** | **Few-shot** |
+| ------------- | ---------------------------------------------------------------- | ---------------- | --------------- | --------- | ------------------ | ------------ |
+| `CAPO`        | [Zehle et al., 2025](https://openreview.net/forum?id=UweaRrg9D0) | required         | 👍              | 💲        | ✅                 | ✅           |
+| `EvoPromptDE` | [Guo et al., 2023](https://openreview.net/forum?id=ZG3RaNIsO8)   | required         | 👍              | 💲💲      | ✅                 | ❌           |
+| `EvoPromptGA` | [Guo et al., 2023](https://openreview.net/forum?id=ZG3RaNIsO8)   | required         | 👍              | 💲💲      | ✅                 | ❌           |
+| `OPRO`        | [Yang et al., 2023](https://openreview.net/forum?id=Bb4VGOWELI)  | optional         | 👎              | 💲💲      | ❌                 | ❌           |
 
 ## 🏗 Components
 
-* **`Task`** – Manages the dataset, evaluation metrics, and subsampling.
-* **`Predictor`** – Defines how to extract the answer from the model's response.
-* **`LLM`** – A unified interface handling inference, token counting, and concurrency.
-* **`Optimizer`** – The core component that implements the algorithms that refine prompts.
-* **`ExperimentConfig`** – A configuration abstraction to streamline and parametrize large-scale scientific experiments.
+- **`Task`** – Manages the dataset, evaluation metrics, and subsampling.
+- **`Predictor`** – Defines how to extract the answer from the model's response.
+- **`LLM`** – A unified interface handling inference, token counting, and concurrency.
+- **`Optimizer`** – The core component that implements the algorithms that refine prompts.
 
 ## 🤝 Contributing
 
 Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for the workflow, code quality guidelines, and how to run tests.
-
 
 ## 📄 Citation
 
@@ -113,4 +158,4 @@ If you use Promptolution in your research, please cite:
 
 ---
 
-Developed    by **Timo Heiß**, **Moritz Schlager**, **Tom Zehle**, and **Henri Oberpaur** (LMU Munich, MCML, ELLIS, TUM, Uni Freiburg).
+Developed by **Timo Heiß**, **Moritz Schlager**, **Tom Zehle**, and **Henri Oberpaur** (LMU Munich, MCML, ELLIS, TUM, Uni Freiburg).

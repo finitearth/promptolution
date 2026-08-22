@@ -12,7 +12,6 @@ from promptolution.tasks.base_task import BaseTask
 
 if TYPE_CHECKING:  # pragma: no cover
     from promptolution.tasks.base_task import EvalStrategy
-    from promptolution.utils.config import ExperimentConfig
 
 
 class RewardTask(BaseTask):
@@ -33,7 +32,6 @@ class RewardTask(BaseTask):
         n_subsamples: int = 30,
         eval_strategy: "EvalStrategy" = "full",
         seed: int = 42,
-        config: Optional["ExperimentConfig"] = None,
     ) -> None:
         """Initialize the RewardTask.
 
@@ -47,7 +45,6 @@ class RewardTask(BaseTask):
             n_subsamples (int, optional): Number of subsamples to use. Defaults to 30.
             eval_strategy (str, optional): Subsampling strategy to use. Defaults to "full".
             seed (int, optional): Random seed for reproducibility. Defaults to 42.
-            config (ExperimentConfig, optional): Configuration for the task, overriding defaults.
         """
         self.reward_function = reward_function
         self.reward_columns = reward_columns or []
@@ -59,7 +56,6 @@ class RewardTask(BaseTask):
             n_subsamples=n_subsamples,
             eval_strategy=eval_strategy,
             seed=seed,
-            config=config,
         )
         self.task_type = "reward"
         # x -> kwargs to reward function

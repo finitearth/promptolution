@@ -6,7 +6,6 @@ from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING, Dict, List, Optional, Union
 
 if TYPE_CHECKING:  # pragma: no cover
-    from promptolution.utils.config import ExperimentConfig
     from transformers import PreTrainedTokenizer
 
 from promptolution.utils.logging import get_logger
@@ -19,27 +18,15 @@ class BaseLLM(ABC):
     """Abstract base class for Language Models in the promptolution library.
 
     This class defines the interface that all concrete LLM implementations should follow.
-    It's designed to track which configuration parameters are actually used.
 
     Attributes:
-        config (LLMModelConfig): Configuration for the language model.
         input_token_count (int): Count of input tokens processed.
         output_token_count (int): Count of output tokens generated.
         tokenizer (Optional[PreTrainedTokenizer]): The tokenizer for the model.
     """
 
-    def __init__(self, config: Optional["ExperimentConfig"] = None):
-        """Initialize the LLM with a configuration or direct parameters.
-
-        This constructor supports both config-based and direct parameter initialization
-        for backward compatibility.
-
-        Args:
-            config (ExperimentConfig, optional): Configuration for the LLM, overriding defaults.
-        """
-        if config is not None:
-            config.apply_to(self)
-        # Initialize token counters
+    def __init__(self) -> None:
+        """Initialize the token counters and tokenizer."""
         self.input_token_count = 0
         self.output_token_count = 0
         self.tokenizer: Optional["PreTrainedTokenizer"] = None

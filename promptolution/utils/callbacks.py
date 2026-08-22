@@ -4,11 +4,12 @@
 import os
 from abc import ABC
 from datetime import datetime
+from pathlib import Path
 
 import pandas as pd
 from tqdm import tqdm
 
-from typing import TYPE_CHECKING, Any, Literal, Optional, Tuple
+from typing import TYPE_CHECKING, Any, Literal, Optional, Tuple, Union
 
 if TYPE_CHECKING:
     from logging import Logger
@@ -25,10 +26,9 @@ class BaseCallback(ABC):
     """
 
     def __init__(self, **kwargs: Any) -> None:
-        """Initialize the callback with a configuration.
+        """Initialize the callback.
 
         Args:
-            config: Configuration for the callback.
             **kwargs: Additional keyword arguments.
         """
         pass
@@ -115,16 +115,16 @@ class FileOutputCallback(BaseCallback):
     This callback saves information about each step to a file.
 
     Attributes:
-        dir (str): Directory the file is saved to.
+        dir (Union[str, Path]): Directory the file is saved to.
         step (int): The current step number.
         file_type (str): The type of file to save the output to.
     """
 
-    def __init__(self, dir: str, file_type: Literal["parquet", "csv"] = "parquet") -> None:
+    def __init__(self, dir: Union[str, Path], file_type: Literal["parquet", "csv"] = "parquet") -> None:
         """Initialize the FileOutputCallback.
 
         Args:
-        dir (str): Directory the CSV file is saved to.
+        dir (Union[str, Path]): Directory the CSV file is saved to.
         file_type (str): The type of file to save the output to.
         """
         if not os.path.exists(dir):
@@ -140,36 +140,33 @@ class FileOutputCallback(BaseCallback):
             raise ValueError(f"File type {file_type} not supported.")
 
         self.step = 0
+        self.rows: list = []
 
     def on_step_end(self, optimizer: "BaseOptimizer") -> bool:
-        """Save prompts and scores to csv.
+        """Append this step's rows and rewrite the results file.
 
         Args:
         optimizer: The optimizer object that called the callback
         """
         self.step += 1
-        df = pd.DataFrame(
-            {
-                "step": [self.step] * len(optimizer.prompts),
-                "input_tokens": [optimizer.predictor.llm.input_token_count] * len(optimizer.prompts),
-                "output_tokens": [optimizer.predictor.llm.output_token_count] * len(optimizer.prompts),
-                "time": [datetime.now().timestamp()] * len(optimizer.prompts),
-                "score": optimizer.scores,
-                "prompt": [str(p) for p in optimizer.prompts],
-            }
-        )
-
+        ts = datetime.now().timestamp()
+        for score, prompt in zip(optimizer.scores, optimizer.prompts):
+            self.rows.append(
+                {
+                    "step": self.step,
+                    "input_tokens": optimizer.predictor.llm.input_token_count,
+                    "output_tokens": optimizer.predictor.llm.output_token_count,
+                    "time": ts,
+                    "score": score,
+                    "prompt": str(prompt),
+                }
+            )
+        # rewrite the whole file each step -> engine-agnostic (no fastparquet-only append)
+        df = pd.DataFrame(self.rows)
         if self.file_type == "parquet":
-            if self.step == 1:
-                df.to_parquet(self.path, index=False)
-            else:
-                df.to_parquet(self.path, mode="a", index=False)
-        elif self.file_type == "csv":
-            if self.step == 1:
-                df.to_csv(self.path, index=False)
-            else:
-                df.to_csv(self.path, mode="a", header=False, index=False)
-
+            df.to_parquet(self.path, index=False)
+        else:
+            df.to_csv(self.path, index=False)
         return True
 
 

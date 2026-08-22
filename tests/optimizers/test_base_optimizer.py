@@ -1,6 +1,5 @@
 import pytest
 
-from tests.mocks.dummy_config import DummyConfig
 from tests.mocks.mock_predictor import MockPredictor
 from tests.mocks.mock_task import MockTask
 
@@ -73,14 +72,3 @@ def test_base_optimizer_no_callbacks_continues(predictor: MockPredictor, task: M
     opt = SimpleOptimizer(predictor=predictor, task=task)
     opt.optimize(2)
     assert opt.steps == 2
-
-
-def test_base_optimizer_config_validate_and_template(predictor: MockPredictor, task: MockTask):
-    cfg = DummyConfig(task_description="override desc")
-    opt = SimpleOptimizer(predictor=predictor, task=task, config=cfg)
-    opt.optimize(1)
-    assert cfg.validated is True
-
-    templ = opt._initialize_meta_template("Hi <task_desc>")
-    assert "override desc" in templ
-    assert getattr(opt, "config_applied", True)

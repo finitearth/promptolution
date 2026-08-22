@@ -13,3 +13,9 @@ CLAUDE.md
 **/CLAUDE.local.md
 .mypy_cache/
 token.txt
+.coverage
+.env
+.env.local
+site/
+.pytest_cache/
+.ruff_cache/

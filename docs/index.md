@@ -21,7 +21,11 @@ pip install promptolution
 
 Or clone our GitHub repository:
 
-[https://github.com/finitearth/promptolution](https://github.com/finitearth/promptolution)
+[https://github.com/gepromptet/promptolution](https://github.com/gepromptet/promptolution)
+
+## Guides
+
+- [Running Experiments](guides/experiment.md)
 
 ## API Reference
 
@@ -29,6 +33,6 @@ Or clone our GitHub repository:
 - [Optimizers](api/optimizers.md)
 - [Predictors](api/predictors.md)
 - [Tasks](api/tasks.md)
-- [Helpers](api/helpers.md)
+- [Experiment](api/experiment.md)
 - [Utils](api/utils.md)
-- [Exemplar Selectors](api/examplar_selectors.md)
+- [Exemplar Selectors](api/exemplar_selectors.md)

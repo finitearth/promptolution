@@ -1,4 +1,3 @@
-from tests.mocks.dummy_config import DummyConfig
 from tests.mocks.mock_llm import MockLLM
 
 
@@ -20,13 +19,6 @@ def test_base_llm_default_and_list_system_prompts():
 
     res_multi = llm.get_response(["p1", "p2"], system_prompts=["s1", "s2"])
     assert res_multi == ["Mock response for: p1", "Mock response for: p2"]
-
-
-def test_base_llm_config_applied():
-    cfg = DummyConfig()
-    llm = MockLLM(predetermined_responses=["r1"], add_prompt_tags=False, config=cfg)
-    assert cfg.applied is True
-    assert getattr(llm, "applied") is True
 
 
 def test_base_llm_set_generation_seed():

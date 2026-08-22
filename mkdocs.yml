@@ -1,6 +1,6 @@
 site_name: Promptolution Documentation
-site_url: https://finitearth.github.io/promptolution/
-repo_url: https://github.com/finitearth/promptolution/
+site_url: https://gepromptet.github.io/promptolution/
+repo_url: https://github.com/gepromptet/promptolution/
 remote_branch: docs
 
 theme:
@@ -45,8 +45,11 @@ plugins:
 
 nav:
   - Home: index.md
+  - Guides:
+    - Running Experiments: guides/experiment.md
   - Release Notes:
     - Overview: release-notes.md
+    - v2.3.0: release-notes/v2.3.0.md
     - v2.2.3: release-notes/v2.2.3.md
     - v2.2.2: release-notes/v2.2.2.md
     - v2.2.1: release-notes/v2.2.1.md
@@ -72,7 +75,7 @@ nav:
     - Optimizers: api/optimizers.md
     - Predictors: api/predictors.md
     - Tasks: api/tasks.md
-    - Helpers: api/helpers.md
+    - Experiment: api/experiment.md
     - Utils: api/utils.md
     - Exemplar Selectors: api/exemplar_selectors.md
   - Tutorials:

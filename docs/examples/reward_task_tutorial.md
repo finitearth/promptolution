@@ -18,7 +18,7 @@ Install Promptolution with a single command
 
 
 ```python
-! pip install promptolution[api]
+! pip install promptolution
 ```
 
 ## Imports
@@ -37,7 +37,7 @@ nest_asyncio.apply()  # Required for notebook environments
       from .autonotebook import tqdm as notebook_tqdm
     
 
-## Setting Up Your Experiment
+## Setting Up Your Optimization
 
 ### Prepare the data
 
@@ -184,7 +184,7 @@ config = ExperimentConfig(
 - No need for labeled "correct" outputs - the reward function defines success
 - Completely customizable - change the reward function to optimize for anything!
 
-## Run Your Experiment
+## Optimize Your Prompts
 
 With everything configured, you're ready to optimize your prompts! The `run_experiment` function will run the optimization and evaluate on a holdout set. You can expect this cell to take a few minutes to run.
 

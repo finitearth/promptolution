@@ -1,0 +1,5 @@
+_target_: promptolution.llms.APILLM
+model_id: gpt-4o-mini
+api_url: null
+max_tokens: 4096
+max_concurrent_calls: 32

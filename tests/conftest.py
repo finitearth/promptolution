@@ -9,7 +9,6 @@ from mocks.mock_task import MockTask
 from promptolution.tasks import ClassificationTask
 from promptolution.tasks.judge_tasks import JudgeTask
 from promptolution.tasks.reward_tasks import RewardTask
-from promptolution.utils import ExperimentConfig
 
 
 @pytest.fixture
@@ -21,12 +20,6 @@ def initial_prompts():
         "Is the following text positive or negative?",
         "Analyze the sentiment of this text and categorize as positive or negative.",
     ]
-
-
-@pytest.fixture
-def experiment_config():
-    """Fixture providing a basic experiment configuration."""
-    return ExperimentConfig(optimizer_name="test_optimizer", n_steps=3, population_size=3, random_seed=42)
 
 
 @pytest.fixture

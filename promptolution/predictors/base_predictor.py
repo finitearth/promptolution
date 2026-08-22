@@ -3,13 +3,9 @@
 
 from abc import ABC, abstractmethod
 
-from typing import TYPE_CHECKING, List, Literal, Optional, Tuple, Union
+from typing import List, Literal, Optional, Tuple, Union
 
 from promptolution.llms.base_llm import BaseLLM
-
-if TYPE_CHECKING:  # pragma: no cover
-    from promptolution.utils.config import ExperimentConfig
-
 
 PredictorType = Literal["first_occurrence", "marker"]
 
@@ -20,17 +16,14 @@ class BasePredictor(ABC):
     This class defines the interface that all concrete predictor implementations should follow.
     """
 
-    def __init__(self, llm: "BaseLLM", config: Optional["ExperimentConfig"] = None) -> None:
-        """Initialize the predictor with a language model and configuration.
+    def __init__(self, llm: "BaseLLM") -> None:
+        """Initialize the predictor with a language model.
 
         Args:
             llm: Language model to use for prediction.
-            config: Configuration for the predictor.
         """
         self.llm = llm
         self.extraction_description = ""
-        if config is not None:
-            config.apply_to(self)
 
     def predict(
         self,
@@ -44,7 +37,6 @@ class BasePredictor(ABC):
             prompts: Prompt or list of prompts to use for prediction.
             xs: Array of input data.
             system_prompts: List of system prompts to use for the language model.
-            return_seq: Whether to return the generating sequence.
 
         Returns:
             Array of predictions, optionally with sequences.
